@@ -1,11 +1,11 @@
 <template>
 	<ion-app>
 		<ion-router-outlet />
-		<memories-page />
+		<indicator-collector></indicator-collector>
 	</ion-app>
 </template>
 
 <script setup lang="ts">
 import { IonApp, IonRouterOutlet } from '@ionic/vue';
-console.log('hello');
+import IndicatorCollector from './views/IndicatorCollector.vue';
 </script>
