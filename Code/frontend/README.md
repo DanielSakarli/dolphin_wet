@@ -8,7 +8,7 @@ It is recommended to use VSCode as editor and install [TypeScript Vue Plugin](ht
 
 Before you can run the frontend, you must have the following software installed on your computer:
 
-- Node.js and NPMSS
+- Node.js and NPM
 - Ionic CLI
 - Capacitor CLI
 
@@ -16,7 +16,7 @@ Before you can run the frontend, you must have the following software installed 
 
 1. Clone this repository to your local machine
 
-2.  In you terminal, first enter the frontend directory using:
+2. In you terminal, first enter the frontend directory using:
 
 ```bash
 cd tiergarten-nuernberg/Code/Frontend
