@@ -34,7 +34,7 @@ To start a development server, run `ionic serve`. This will start the developmen
 
 ```bash
 # In the folder Frontend, run
-npm install
+ionic serve
 ```
 
 ## Building
