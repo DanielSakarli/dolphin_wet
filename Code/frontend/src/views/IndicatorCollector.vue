@@ -16,13 +16,11 @@
 		<ion-footer>
 			<ion-toolbar>
 				<ion-button color="light" slot="start">
-					<ion-icon src="@/../public/icons/arrow-back-outline.svg"> </ion-icon>
+					<ion-icon src="/icons/arrow-back-outline.svg"> </ion-icon>
 					Previous
 				</ion-button>
 				<ion-button color="light" slot="end">
-					<ion-icon
-						src="@/../public/icons/arrow-forward-outline.svg"
-					></ion-icon>
+					<ion-icon src="/icons/arrow-forward-outline.svg"></ion-icon>
 					Next
 				</ion-button>
 			</ion-toolbar>
