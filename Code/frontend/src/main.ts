@@ -23,10 +23,18 @@ import '@ionic/vue/css/display.css';
 /* Theme variables */
 import './theme/variables.css';
 import './theme/core.css';
+import { createI18n } from 'vue-i18n';
+import { globalizationList } from './data/globalization';
 
 /* Global components */
+const i18n = createI18n({
+	locale: 'en', // set locale
+	fallbackLocale: 'en', // set fallback locale
+	messages: globalizationList, // set locale messages
+	preserveDirectiveContent: true,
+});
 
-const app = createApp(App).use(IonicVue).use(router);
+const app = createApp(App).use(IonicVue).use(router).use(i18n);
 
 // Register component
 

@@ -1,18 +1,18 @@
 <template>
 	<ion-card>
 		<ion-item lines="none">
-			<ion-checkbox justify="space-between" value="fulfilled"
-				>Fulfilled
+			<ion-checkbox justify="space-between" :value="fulfilled"
+				>{{ $t('fulfilled') }}
 			</ion-checkbox>
 		</ion-item>
 		<ion-item lines="none">
-			<ion-checkbox justify="space-between" value="no-tendency"
-				>No Tendency
+			<ion-checkbox justify="space-between" :value="noTendency"
+				>{{ $t('noTendency') }}
 			</ion-checkbox>
 		</ion-item>
 		<ion-item lines="none">
-			<ion-checkbox justify="space-between" value="not-fulfilled"
-				>Not Fulfilled
+			<ion-checkbox justify="space-between" :value="notFulfilled"
+				>{{ $t('notFulfilled') }}
 			</ion-checkbox>
 		</ion-item>
 	</ion-card>
@@ -26,6 +26,13 @@ export default {
 		IonCheckbox,
 		IonItem,
 		IonCard,
+	},
+	data() {
+		return {
+			fulfilled: this.$t('fulfilled'),
+			noTendency: this.$t('noTendency'),
+			notFulfilled: this.$t('notFulfilled'),
+		};
 	},
 };
 </script>

@@ -1,10 +1,10 @@
 <template>
 	<ion-item lines="none">
 		<ion-textarea
-			label="Comments"
+			:label="commentLabel"
 			placeholder="Type something here"
 			label-placement="floating"
-			helper-text="Enter comments of test"
+			:helper-text="helperTextComments"
 			:auto-grow="true"
 		></ion-textarea>
 	</ion-item>
@@ -16,6 +16,12 @@ export default {
 	components: {
 		IonItem,
 		IonTextarea,
+	},
+	data() {
+		return {
+			commentLabel: this.$t('comments'),
+			helperTextComments: this.$t('helperTextComments'),
+		};
 	},
 };
 </script>
