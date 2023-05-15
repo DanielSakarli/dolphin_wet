@@ -3,11 +3,19 @@
 	<ion-page>
 		<ion-header>
 			<ion-toolbar>
-				<ion-title>Good Health</ion-title>
+				<ion-title
+					><p>{{ $t('topic') }}</p></ion-title
+				>
 			</ion-toolbar>
 		</ion-header>
 
 		<ion-content>
+			<!--<ion-item>
+      			<ion-select @ionChange="changeLanguage($event)" value="en">
+        			<ion-select-option value="en">English</ion-select-option>
+        			<ion-select-option value="de">German</ion-select-option>
+      			</ion-select>
+    		</ion-item> -->
 			<CheckCriteriaSelector />
 			<CheckScoreField />
 			<CheckComments />
@@ -46,6 +54,12 @@ import CheckComments from '@/components/CheckComments.vue';
 import { defineComponent } from 'vue';
 
 export default defineComponent({
+	data() {
+		return {
+			language: 'en',
+		};
+	},
+
 	components: {
 		IonIcon,
 		IonFooter,
@@ -58,6 +72,11 @@ export default defineComponent({
 		CheckCriteriaSelector,
 		CheckScoreField,
 		CheckComments,
+	},
+	methods: {
+		changeLanguage($event: any) {
+			this.$i18n.locale = $event.detail.value;
+		},
 	},
 });
 </script>

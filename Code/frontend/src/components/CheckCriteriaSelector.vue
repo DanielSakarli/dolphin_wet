@@ -3,26 +3,38 @@
 	<ion-list>
 		<ion-item>
 			<ion-select
-				label="Criteria"
-				placeholder="Select Criteria"
-				okText="Choose Criteria"
-				cancelText="Cancel Choice"
+				:label="firstlabel"
+				:placeholder="firstplaceholder"
+				:okText="firstokText"
+				:cancelText="firstcancelText"
 			>
-				<ion-select-option value="apples">Apples</ion-select-option>
-				<ion-select-option value="oranges">Oranges</ion-select-option>
-				<ion-select-option value="bananas">Bananas</ion-select-option>
+				<ion-select-option :value="firstCriteria">{{
+					$t('firstCriteria')
+				}}</ion-select-option>
+				<ion-select-option :value="secondCriteria">{{
+					$t('secondCriteria')
+				}}</ion-select-option>
+				<ion-select-option :value="thirdCriteria">{{
+					$t('thirdCriteria')
+				}}</ion-select-option>
 			</ion-select>
 		</ion-item>
 		<ion-item>
 			<ion-select
-				label="Sub-Criteria"
-				placeholder="Select Sub-Criteria"
-				okText="Choose Sub-Criteria"
-				cancelText="Cancel Choice"
+				:label="secondlabel"
+				:placeholder="secondplaceholder"
+				:okText="secondokText"
+				:cancelText="firstcancelText"
 			>
-				<ion-select-option value="apples">Apples</ion-select-option>
-				<ion-select-option value="oranges">Oranges</ion-select-option>
-				<ion-select-option value="bananas">Bananas</ion-select-option>
+				<ion-select-option :value="firstCriteria">{{
+					$t('firstCriteria')
+				}}</ion-select-option>
+				<ion-select-option :value="secondCriteria">{{
+					$t('secondCriteria')
+				}}</ion-select-option>
+				<ion-select-option :value="thirdCriteria">{{
+					$t('thirdCriteria')
+				}}</ion-select-option>
 			</ion-select>
 		</ion-item>
 	</ion-list>
@@ -31,8 +43,12 @@
 	<!-- Description of Criteria -->
 	<ion-card>
 		<ion-card-header>
-			<ion-card-title>Card Title</ion-card-title>
-			<ion-card-subtitle>Card Subtitle</ion-card-subtitle>
+			<ion-card-title
+				><p>{{ $t('cardTitle') }}</p></ion-card-title
+			>
+			<ion-card-subtitle
+				><p>{{ $t('subcardTitle') }}</p></ion-card-subtitle
+			>
 		</ion-card-header>
 
 		<ion-card-content>
@@ -67,6 +83,20 @@ export default {
 		IonCardHeader,
 		IonCardTitle,
 		IonCardSubtitle,
+	},
+	data() {
+		return {
+			firstlabel: this.$t('criteria'),
+			firstplaceholder: this.$t('selectCriteria'),
+			firstokText: this.$t('chooseCriteria'),
+			firstcancelText: this.$t('cancelChoice'),
+			secondlabel: this.$t('subcriteria'),
+			secondplaceholder: this.$t('selectSubcriteria'),
+			secondokText: this.$t('chooseSubcriteria'),
+			firstCriteria: this.$t('firstCriteria'),
+			secondCriteria: this.$t('secondCriteria'),
+			thirdCriteria: this.$t('thirdCriteria'),
+		};
 	},
 };
 </script>
