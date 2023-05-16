@@ -1,16 +1,20 @@
 import { createRouter, createWebHistory } from '@ionic/vue-router';
 import { RouteRecordRaw } from 'vue-router';
-import IndicatorCollectorVue from '@/views/IndicatorCollector.vue';
+import EvaluationMenu from '@/views/EvaluationMenu.vue';
 
 const routes: Array<RouteRecordRaw> = [
 	{
 		path: '/',
-		redirect: '/test',
+		redirect: '/home',
 	},
 	{
-		path: '/test',
-		name: 'test',
-		component: IndicatorCollectorVue,
+		path: '/home',
+		component: EvaluationMenu
+	},
+	{
+		path: '/detail',
+		name: 'Detail',
+		component: () => import('@/views/IndicatorCollector.vue'),
 	},
 ];
 

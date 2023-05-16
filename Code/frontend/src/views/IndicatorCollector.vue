@@ -4,7 +4,7 @@
 		<ion-header>
 			<ion-toolbar>
 				<ion-title
-					><p>{{ $t('topic') }}</p></ion-title
+					>{{ $t('topic') }}</ion-title
 				>
 			</ion-toolbar>
 		</ion-header>

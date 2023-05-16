@@ -21,6 +21,7 @@
 		</ion-item>
 		<ion-item>
 			<ion-select
+
 				:label="secondlabel"
 				:placeholder="secondplaceholder"
 				:okText="secondokText"

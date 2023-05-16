@@ -34,7 +34,10 @@ const i18n = createI18n({
 	preserveDirectiveContent: true,
 });
 
-const app = createApp(App).use(IonicVue).use(router).use(i18n);
+const app = createApp(App)
+	.use(IonicVue)
+	.use(router)
+	.use(i18n);
 
 // Register component
 
