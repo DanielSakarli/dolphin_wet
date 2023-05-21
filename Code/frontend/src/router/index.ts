@@ -9,12 +9,13 @@ const routes: Array<RouteRecordRaw> = [
 	},
 	{
 		path: '/home',
+		name: 'Home',
 		component: EvaluationMenu
 	},
 	{
-		path: '/detail',
-		name: 'Detail',
-		component: () => import('@/views/IndicatorCollector.vue'),
+		path: '/detailHealth',
+		name: 'DetailHealth',
+		component: () => import('@/views/HealthIndicatorCollector.vue'),
 	},
 ];
 

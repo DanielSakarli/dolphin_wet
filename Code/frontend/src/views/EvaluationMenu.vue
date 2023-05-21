@@ -5,23 +5,13 @@
                 <ion-title>DoliMo - DolphinMonitoring</ion-title>
             </ion-toolbar>
         </ion-header>
-        <ion-list>
-            <ion-item>
-                <ion-label>Good Health</ion-label>
-            </ion-item>
-            <ion-item>
-                <ion-label>Behaviour</ion-label>
-            </ion-item>
-            <ion-item>
-                <ion-label>The Legend of Zelda</ion-label>
-            </ion-item>
-            <ion-item>
-                <ion-label>Pac-Man</ion-label>
-            </ion-item>
-            <ion-item>
-                <ion-label>Super Mario World</ion-label>
-            </ion-item>
-        </ion-list>
+        <ion-content>
+            <ion-button expand="block" size="large" router-link="/detailHealth">{{$t('principleHealth')}}</ion-button>    
+            <ion-button expand="block" size="large" router-link="/detail">{{$t('principleBehaviour')}}</ion-button>
+            <ion-button expand="block" size="large" router-link="/detail">{{$t('principleEmotionalState')}}</ion-button>
+            <ion-button expand="block" size="large" router-link="/detail">{{$t('principleFeeding')}}</ion-button>
+            <ion-button expand="block" size="large" router-link="/detail">{{$t('principleHousing')}}</ion-button>
+        </ion-content>
     </ion-page>
 </template>
 
@@ -32,7 +22,8 @@ IonHeader,
 IonToolbar,
 IonTitle,
 IonContent,
-IonList
+IonList,
+IonButton
 } from '@ionic/vue';
 
 export default {
@@ -47,7 +38,8 @@ export default {
         IonToolbar,
         IonTitle,
         IonContent,
-        IonList
+        IonList,
+        IonButton
     },
     methods: {
             changeLanguage($event: any) {
