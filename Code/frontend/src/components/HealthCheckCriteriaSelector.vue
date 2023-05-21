@@ -3,7 +3,6 @@
 	<ion-list>
 		<ion-item>
 			<ion-select
-				:value="criteria"
 				:label="firstlabel"
 				:placeholder="firstplaceholder"
 				okText="OK"
@@ -26,6 +25,7 @@
 		<ion-item>
 			<ion-select
 				:value="subcriteria"
+				@IonChange ="subcriteria=$event.target.value"
 				:label="secondlabel"
 				:placeholder="secondplaceholder"
 				okText="OK"
@@ -208,8 +208,7 @@ export default {
 	},
 	data() {
 		return {
-			language: 'de',
-			criteria: '',
+			language: 'en',
 			subcriteria: '',
 			firstlabel: this.$t('dolphin'),
 			firstplaceholder: this.$t('selectDolphin'),
