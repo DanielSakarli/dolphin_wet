@@ -1,11 +1,23 @@
 <template>
 	<ion-app>
-		<ion-router-outlet />
+		<ion-router-outlet></ion-router-outlet>
+		<ion-menu content-id="main-content">
+			<ion-header>
+      			<ion-toolbar>
+        			<ion-title>Menu</ion-title>
+      			</ion-toolbar>
+    		</ion-header>
+    		<ion-content class="ion-padding">
+				<ion-button expand="block" fill="clear">Evaluate</ion-button>
+				<ion-button expand="block" fill="clear">Dolphins</ion-button>
+				<ion-button expand="block" fill="clear">Datalog</ion-button>
+			</ion-content>
+    	</ion-menu>
 	</ion-app>
 </template>
 
 <script lang="ts">
-import { IonApp, IonRouterOutlet } from '@ionic/vue';
+import { IonApp, IonRouterOutlet, IonMenu, IonHeader, IonToolbar, IonTitle, IonContent, IonButton } from '@ionic/vue';
 import { defineComponent } from 'vue';
 import { Device, DevicePlugin } from '@capacitor/device';
 
@@ -25,7 +37,13 @@ export default defineComponent({
 	},
 	components: {
 		IonApp,
-		IonRouterOutlet,
+		IonRouterOutlet, 
+		IonMenu, 
+		IonHeader, 
+		IonToolbar, 
+		IonTitle,
+		IonContent, 
+		IonButton 
 	},
 });
 </script>

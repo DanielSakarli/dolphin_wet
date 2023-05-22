@@ -3,7 +3,7 @@
 	<ion-list>
 		<ion-item>
 			<ion-select
-				:label="firstlabel"
+				:label= "firstlabel"
 				:placeholder="firstplaceholder"
 				okText="OK"
 				:cancelText="firstcancelText"
@@ -85,91 +85,108 @@
       	</ion-header>
       	<ion-content class="ion-padding">
 			<p v-if=" subcriteria === 'firstSubcriteriaHealth'">
-				<h1>Normal floatability and locomotion test</h1>
-				1. underwater and out of water observation for 2 min  of the animal floating inactive keeping position on the water. Special attention to normal movement of both pectoral flippers, lack of organic restrictions or deformities (e.g.: scoliosis), lack of permanent inclination leaning on one side, lack of external wounds or scars potentially compromising movement, normal buoyancy.
-				2. underwater and out of water observation for 3 min of active swimming pattern and dynamic movements (requested on command) including free jumps, fast swims, etc.. Special attention to normal and fluid tail movements, normal movement of both pectoral flippers, normal maneuvering to both sides avoiding objects, walls and pool mates, lack of organic restrictions or deformities (e.g.: scoliosis), lack of permanent inclination leaning on one side, capacity to perform basic dynamic behaviors.
-				<h1>Records on previous incidents/diseases altering locomotion or floatability</h1>
+				<h3>Normal floatability and locomotion test</h3>
+				<ol>
+					<li> underwater and out of water observation for 2 min  of the animal floating inactive keeping position on the water. Special attention to normal movement of both pectoral flippers, lack of organic restrictions or deformities (e.g.: scoliosis), lack of permanent inclination leaning on one side, lack of external wounds or scars potentially compromising movement, normal buoyancy.</li>
+					<li> underwater and out of water observation for 3 min of active swimming pattern and dynamic movements (requested on command) including free jumps, fast swims, etc.. Special attention to normal and fluid tail movements, normal movement of both pectoral flippers, normal maneuvering to both sides avoiding objects, walls and pool mates, lack of organic restrictions or deformities (e.g.: scoliosis), lack of permanent inclination leaning on one side, capacity to perform basic dynamic behaviors.</li>
+				</ol>
+				<h3>Records on previous incidents/diseases altering locomotion or floatability</h3>
 				Verification with the team of trainers and veterinarians that there is no previous incident/disease altering locomotion or floatability during the previous 3 months .
 			</p>
 			<p v-if=" subcriteria === 'secondSubcriteriaHealth'">
-				<h1>Direct veterinary inspection</h1>
+				<h3>Direct veterinary inspection</h3>
 				Eyes are wide open, no opacities, corneal scars, changes in colour, etc. 
-				<h1>Normal responses on both eyes to visual cues from the trainer</h1>
+				<h3>Normal responses on both eyes to visual cues from the trainer</h3>
 
-				<h1>Records on previous eye lesions/incidents/diseases</h1>
+				<h3>Records on previous eye lesions/incidents/diseases</h3>
 				Verification with the team of trainers and veterinarians there are no previous eye lesions/incidents/diseases (altering vision or not) during the previous 3 months.
 			</p>
 			<p v-if=" subcriteria === 'thirdSubcriteriaHealth'">
-				Direct physical exam of mouth
+				<h3>Direct physical exam of mouth</h3>
 				Absence of oral lesions or painful areas in the mouth on direct inspection (excessive dental wear or fractures with pulp exposure, mucosal lesions, abnormal masses, changes in colour, etc.).
-				Please check:
-				-	Presence of teeth wearing, broken teeth, missing teeth
-				-	Presence of gingivitis
-				-	Tongue – presence of injuries, fungal lesions
-				-	Mucosae
-				Records on previous dental or oral lesions
+				<h3>Please check:</h3>
+				<ul>
+					<li> Presence of teeth wearing, broken teeth, missing teeth</li>
+					<li> Presence of gingivitis</li>
+					<li> Tongue – presence of injuries, fungal lesions</li>
+					<li> Mucosae</li>
+				</ul>
+				<h3>Records on previous dental or oral lesions</h3>
 				Verification with the team of trainers and veterinarians there have been no previous lesions/diseases/behaviors altering or reflecting alteration of oral health or associated feeding behaviour during the previous 3 months.
 			</p>
 			<p v-if=" subcriteria === 'fourthSubcriteriaHealth'">
-				Records of previous gastric/fecal abnormalities on records
+				<h3>Records of previous gastric/fecal abnormalities on records</h3>
 				Verification with the team of trainers and veterinarians there have been no previous lesions/diseases/behaviours reflecting or potentially causing alteration of gastrointestinal tract or associated feeding behaviour during the previous 3 months.
 			</p>
 			<p v-if=" subcriteria === 'fifthSubcriteriaHealth'">
-				Direct physical exam including blowhole visual evaluation, and respiration performance
+				<h3>Direct physical exam including blowhole visual evaluation, and respiration performance</h3>
 				Blowhole visual evaluation (movement, internal plaques, secretions, odor, discoloration/hyperpigmentation, etc.), auscultation (respiratory sounds), and apparent ventilation performance (respiratory noises, exhalation duration, ventilation relative volume, respiratory rate).
-				Please check:
-				-	Presence of foul odor
-				-	Presence of foam/mucus
-				-	Chuff without resulting in coughing
-				-	Abnormal respiratory rates
-				Forced expiration test
-				Records on previous respiratory diseases
+				<h3>Please check:</h3>
+				<ul>
+					<li> Presence of foul odor</li>
+					<li> Presence of foam/mucus</li>
+					<li> Chuff without resulting in coughing</li>
+					<li> Abnormal respiratory rates</li>
+				</ul>
+				<h3>Forced expiration test</h3>
+				<h3>Records on previous respiratory diseases</h3>
 				verification with the team of trainers and veterinarians there have been no previous signs/diseases/behaviors reflecting respiratory disease during the previous 3 months.
 			</p>
 			<p v-if=" subcriteria === 'sixthSubcriteriaHealth'">
-				Direct physical exam
+				<h3>Direct physical exam</h3>
 				Direct physical exam of on skin and other natural openings, including global skin condition (color, number and severity of viral lesions, major wounds, cracking, relative desquamation, scars, thermal ischemic necrosis, etc.), genital slit (exudates, mucosal colour, mucosal lesions), ears (exudates, pain to touch, bulging), rostrum (wounds, callosity).  
-				Please check:
-				Skin condition (general):
-				-	Presence of pox virus, mycobacterium, or papilloma like lesions. 
-				-	Presence of active traumatic lesions (especially at rostrum level and fins)
-				-	Presence of hematomas
-				-	Presence of abnormal coloration, blistering, etc. 
-				-	Coloration around eyes and blowhole
-				Genital area:
-				-	Presence of herpes/papilloma
-				Records on previous incidents
+				<h3>Please check:</h3>
+				<h4>Skin condition (general):</h4>
+				<ul>
+					<li> Presence of pox virus, mycobacterium, or papilloma like lesions</li>
+					<li> Presence of active traumatic lesions (especially at rostrum level and fins)</li>
+					<li> Presence of hematomas</li>
+					<li> Presence of abnormal coloration, blistering, etc.</li>
+					<li> Coloration around eyes and blowhole</li>
+				</ul>
+				<h4>Genital area:</h4>
+				<ul>
+					<li> Presence of herpes/papilloma</li>
+				</ul>
+				<h3>Records on previous incidents</h3>
 				Verification with the team of trainers and veterinarians there have been no other previous signs/diseases/behaviors on records (including complete blood works (including complete hematology, biochemistry, ESR and fibrinogen determinations as well as inflammatory markers such us TWBC, WBCdiff, %Bands, %Ret, Hb, ALKP, ALB, FIB, IRON, ESR), biological data, or complementary diagnostic techniques (ultrasound, radiography, endoscopy, thermography, CT, microbiology, hormonal analysis, molecular techniques, etc.) )
-				Complete blood profile methodology
+				<h3>Complete blood profile methodology</h3>
 				Perform a complete full blood profile of the dolphin within the previous 2 weeks of the welfare evaluation. Blood analysis should contain a complete panel on hematology, biochemistry, and coagulation parameters (30 in total), including most relevant markers or inflammation (see (Gulland, F. M., Dierauf, L. A., & Whitman, K. L. (Eds.). (2018). CRC Handbook of marine mammal medicine. CRC Press). 
-				Main inflammation markers:  
-				-	White blood cell count
-				-	Differential count 
-				-	Immature neutrophils (bands) 
-				-	Reticulocytes
-				-	Erythrocyte sedimentation rate
-				-	Fibrinogen
-				-	Albumin
-				-	Globulin
-				-	Total proteins
-				-	Alkaline Phosphatase (ALKP)
-				-	Iron
-				Additional markers to evaluate red blood cell series: 
-				-	Red blood cell count
-				-	Haematocrit
-				-	Haemoglobin
-				Additional markers for liver and kidney function evaluation: 
-				Alanine Amino Transferase (ALT), Gamma Glutamyl Transferase (GGT), Lactate Dehydrogenase (LDH), Triglycerides, Cholesterol, Total Bilirubin
+				<h3>Main inflammation markers:</h3>
+				<ul> 
+					<li> White blood cell count</li>
+					<li> Differential count </li>
+					<li> Immature neutrophils (bands) </li>
+					<li> Reticulocytes</li>
+					<li> Erythrocyte sedimentation rate</li>
+					<li> Fibrinogen</li>
+					<li> Albumin</li>
+					<li> Globulin</li>
+					<li> Total proteins</li>
+					<li> Alkaline Phosphatase (ALKP)</li>
+					<li> Iron</li>
+				</ul> 
+				<h3>Additional markers to evaluate red blood cell series:</h3>
+				<ul> 
+					<li> Red blood cell count</li>
+					<li> Haematocrit</li>
+					<li> Haemoglobin</li>
+				</ul>
+				<h3>Additional markers for liver and kidney function evaluation:</h3>
+				Alanine Amino Transferase (ALT), Gamma Glutamyl Transferase (GGT), Lactate Dehydrogenase (LDH), Triglycerides, Cholesterol, Total Bilirubin,
 				Blood Urea Nitrogen (BUN)/Urea, Creatinine
-				Other relevant markers and electrolytes: 
-				-	Glucose
-				-	Uric acid
-				-	Creatin Kinase
-				-	Sodium, potassium, chloride, calcium, and phosphate. 
+				<h3>Other relevant markers and electrolytes:</h3>
+				<ul>
+					<li> Glucose</li>
+					<li> Uric acid</li>
+					<li> Creatin Kinase</li>
+					<li> Sodium, potassium, chloride, calcium, and phosphate</li> 
+				</ul>
 				Ideally the blood should be collected from fasted animals, first time in the morning and under voluntary behaviour.
-				Criteria: 
-				All 30 parameters measured should remain in the normal range for the species (according to Appendix 1 @ Gulland, F. M., Dierauf, L. A., & Whitman, K. L. (Eds.). (2018). CRC handbook of marine mammal medicine. CRC Press. (Page 1003) and (if available) within the individual reference values/ranges according to previous analysis (at least including one year period and ideally more) under the same lab and technique.
+				<h3>Criteria:</h3> 
+				All 30 parameters measured should remain in the normal range for the species (according to Appendix 1 @ Gulland, F. M., Dierauf, L. A., & Whitman, K. L. (Eds.). (2018). CRC handbook of marine mammal medicine. CRC Press. (Page 1003)) and (if available) within the individual reference values/ranges according to previous analysis (at least including one year period and ideally more) under the same lab and technique.
 				In case of a relevant deviation of one or more parameters from normal average values or ranges, the veterinarian should further on study the individual in search of a potential disease that could compromise welfare.
+				<p>*</p>
 			</p>
       	</ion-content>
     </ion-modal>
@@ -189,7 +206,8 @@ import {
 	IonContent,
 	IonTitle,
 	IonButtons,
-	IonButton
+	IonButton,
+	IonText
 } from '@ionic/vue';
 export default {
 	components: {
@@ -204,7 +222,8 @@ export default {
 		IonContent,
 		IonTitle,
 		IonButtons,
-		IonButton
+		IonButton,
+		IonText
 	},
 	data() {
 		return {

@@ -4,7 +4,7 @@
 		<ion-header>
 			<ion-toolbar>
 				<ion-title
-					>{{ $t('topicHealth') }}</ion-title
+					>{{ $t('topicEmotionalState') }}</ion-title
 				>
 				<ion-buttons slot ="start">
                     <ion-back-button defaultHref="/home"></ion-back-button>
@@ -19,8 +19,8 @@
 						<ion-select-option value="de">German</ion-select-option>
 					</ion-select>
     			</ion-item> -->
-			<HealthCheckCriteriaSelector />
-			<HealthCheckScoreField />
+			<EmotionalStateCheckCriteriaSelector />
+			<EmotionalStateCheckScoreField />
 			<CheckComments />
 		</ion-content>
 
@@ -53,8 +53,8 @@ import {
 	IonBackButton
 } from '@ionic/vue';
 // Import customized components
-import HealthCheckCriteriaSelector from '@/components/HealthCheckCriteriaSelector.vue';
-import HealthCheckScoreField from '@/components/HealthCheckScoreField.vue';
+import EmotionalStateCheckCriteriaSelector from '@/components/EmotionalStateCheckCriteriaSelector.vue';
+import EmotionalStateCheckScoreField from '@/components/EmotionalStateCheckScoreField.vue';
 import CheckComments from '@/components/CheckComments.vue';
 import { defineComponent } from 'vue';
 
@@ -73,8 +73,8 @@ export default defineComponent({
 		IonContent,
 		IonPage,
 		IonButton,
-		HealthCheckCriteriaSelector,
-		HealthCheckScoreField,
+		EmotionalStateCheckCriteriaSelector,
+		EmotionalStateCheckScoreField,
 		CheckComments,
 		IonButtons,
 		IonBackButton
@@ -88,7 +88,7 @@ export default defineComponent({
       		const confirmed = confirm(this.$t('savingDataNext'));
      		if (confirmed) {
 				const currentPath = this.$route.path;
-        		const targetUrl = `/detailHealth`;
+        		const targetUrl = `/detailEmotionalState`;
         		window.location.href = targetUrl;
       		}
     }

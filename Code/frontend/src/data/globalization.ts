@@ -8,7 +8,7 @@ export const globalizationList = {
         principleFeeding: 'Futter',
         principleHousing: 'Wohnraum/Umfeld',
         //Translation Indicator Collector Health
-		topic: 'Gute Gesundheit',
+		topicHealth: 'Gesundheit',
 		cardTitle: 'Kartentitel',
 		dolphin: 'Delfin',
 		subcardTitle: 'Unterkartentitel',
@@ -35,8 +35,14 @@ export const globalizationList = {
 		helperTextComments: 'Kommentare hier einfügen',
         buttonPrevious: 'Zurück',
         buttonNext: 'Weiter',
-        //Translation UserManual
-        userManual: 'Benutzerhandbuch'
+        savingDataNext: 'Möchten Sie die Daten speichern und fortfahren?',
+        //Translation UserManual Health
+        userManual: 'Benutzerhandbuch',
+        //Translation Indicator Collector Emotional State
+        topicEmotionalState: 'Gefühlszustand',
+        firstSubcriteriaEmotionalState: 'Positive Tier-Personal Beziehung',
+        secondSubcriteriaEmotionalState: 'Positive Tier-Besucher Kontakte',
+        thirdSubcriteriaEmotionalState: 'Möglichkeit der Umweltkontrolle und Wahlmöglichkeiten',
 	},
 	en: {
         photo: 'Add photo',
@@ -47,7 +53,7 @@ export const globalizationList = {
         principleFeeding: 'Feeding',
         principleHousing: 'Housing/Environment',
         //Translation Indicator Collector Health
-		topic: 'Good Health',
+		topicHealth: 'Good Health',
 		cardTitle: 'Card Title',
 		dolphin: 'Dolphin',
 		subcardTitle: 'Subcard Title',
@@ -75,7 +81,13 @@ export const globalizationList = {
 		helperTextComments: 'Enter comments of test',
         buttonPrevious: 'Previous',
         buttonNext: 'Next',
-        //Translation UserManual
-        userManual: 'User Manual'
+        savingDataNext: 'Would you like to save the data and continue?',
+        //Translation UserManual Health
+        userManual: 'User Manual',
+        //Translation Indicator Collector Emotional State
+        topicEmotionalState: 'Emotional State',
+        firstSubcriteriaEmotionalState: 'Positive animal-staff relationship',
+        secondSubcriteriaEmotionalState: 'Positive animal-visitor contacts',
+        thirdSubcriteriaEmotionalState: 'Possibility of environmental control and choices',
 	},
 };
