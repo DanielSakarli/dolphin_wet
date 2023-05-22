@@ -8,7 +8,7 @@
       			</ion-toolbar>
     		</ion-header>
     		<ion-content class="ion-padding">
-				<ion-button expand="block" fill="clear">Evaluate</ion-button>
+				<ion-button expand="block" fill="clear">Evaluation</ion-button>
 				<ion-button expand="block" fill="clear">Dolphins</ion-button>
 				<ion-button expand="block" fill="clear">Datalog</ion-button>
 			</ion-content>
@@ -44,6 +44,11 @@ export default defineComponent({
 		IonTitle,
 		IonContent, 
 		IonButton 
+	},
+	methods: {
+            changeLanguage($event: any) {
+                this.$i18n.locale = $event.detail.value;
+            },
 	},
 });
 </script>

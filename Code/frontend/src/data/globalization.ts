@@ -1,6 +1,9 @@
 export const globalizationList = {
     de: {
         photo: 'Foto hinzufügen',
+        //Transaltion App Menu
+        menu: 'Menü',
+        evaluation: 'Evaluation',
         //Translation Evaluation Menu
         principleHealth: 'Gesundheitszustand',
         principleBehaviour: 'Verhalten',
@@ -46,6 +49,9 @@ export const globalizationList = {
 	},
 	en: {
         photo: 'Add photo',
+        //Transaltion App Menu
+        menu: 'Menu',
+        evaluation: 'Evaluation',
         //Translation Evaluation Menu
         principleHealth: 'Health',
         principleBehaviour: 'Behaviour',
