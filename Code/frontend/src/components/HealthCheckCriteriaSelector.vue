@@ -79,40 +79,40 @@
 					>{{$t('sixthSubcriteriaHealth')}}
 				</ion-title>
 				<ion-buttons slot="end">
-					<ion-button @click="setOpen(false)">Close</ion-button>
+					<ion-button @click="setOpen(false)">{{ $t('close')}}</ion-button>
 				</ion-buttons>
 			</ion-toolbar>
       	</ion-header>
       	<ion-content class="ion-padding">
 			<p v-if=" subcriteria === 'firstSubcriteriaHealth'">
-				<h3>Normal floatability and locomotion test</h3>
+				<h3>{{ $t('correctLocomotion1') }}</h3>
 				<ol>
-					<li> underwater and out of water observation for 2 min  of the animal floating inactive keeping position on the water. Special attention to normal movement of both pectoral flippers, lack of organic restrictions or deformities (e.g.: scoliosis), lack of permanent inclination leaning on one side, lack of external wounds or scars potentially compromising movement, normal buoyancy.</li>
-					<li> underwater and out of water observation for 3 min of active swimming pattern and dynamic movements (requested on command) including free jumps, fast swims, etc.. Special attention to normal and fluid tail movements, normal movement of both pectoral flippers, normal maneuvering to both sides avoiding objects, walls and pool mates, lack of organic restrictions or deformities (e.g.: scoliosis), lack of permanent inclination leaning on one side, capacity to perform basic dynamic behaviors.</li>
+					<li>{{ $t('correctLocomotion2') }}</li>
+					<li>{{ $t('correctLocomotion3') }}</li>
 				</ol>
-				<h3>Records on previous incidents/diseases altering locomotion or floatability</h3>
-				Verification with the team of trainers and veterinarians that there is no previous incident/disease altering locomotion or floatability during the previous 3 months .
+				<h3>{{ $t('correctLocomotion4') }}</h3>
+				{{ $t('correctLocomotion5') }}
 			</p>
 			<p v-if=" subcriteria === 'secondSubcriteriaHealth'">
-				<h3>Direct veterinary inspection</h3>
-				Eyes are wide open, no opacities, corneal scars, changes in colour, etc. 
-				<h3>Normal responses on both eyes to visual cues from the trainer</h3>
+				<h3>{{ $t('AbsenceOfEyeLesions1') }}</h3>
+				{{ $t('AbsenceOfEyeLesions2') }}
+				<h3>{{ $t('AbsenceOfEyeLesions3') }}</h3>
 
-				<h3>Records on previous eye lesions/incidents/diseases</h3>
-				Verification with the team of trainers and veterinarians there are no previous eye lesions/incidents/diseases (altering vision or not) during the previous 3 months.
+				<h3>{{ $t('AbsenceOfEyeLesions4') }}</h3>
+				{{ $t('AbsenceOfEyeLesions5') }}
 			</p>
 			<p v-if=" subcriteria === 'thirdSubcriteriaHealth'">
-				<h3>Direct physical exam of mouth</h3>
-				Absence of oral lesions or painful areas in the mouth on direct inspection (excessive dental wear or fractures with pulp exposure, mucosal lesions, abnormal masses, changes in colour, etc.).
-				<h3>Please check:</h3>
+				<h3>{{$t('GoodMouthCondition1')}}</h3>
+				{{$t('GoodMouthCondition2')}}
+				<h3>{{ $t('pleaseCheck') }}</h3>
 				<ul>
-					<li> Presence of teeth wearing, broken teeth, missing teeth</li>
-					<li> Presence of gingivitis</li>
-					<li> Tongue – presence of injuries, fungal lesions</li>
-					<li> Mucosae</li>
+					<li>{{$t('GoodMouthCondition3')}}</li>
+					<li>{{ $t('GoodMouthCondition4') }}</li>
+					<li> {{ $t('GoodMouthCondition5') }}</li>
+					<li>{{ $t('GoodMouthCondition6') }} </li>
 				</ul>
-				<h3>Records on previous dental or oral lesions</h3>
-				Verification with the team of trainers and veterinarians there have been no previous lesions/diseases/behaviors altering or reflecting alteration of oral health or associated feeding behaviour during the previous 3 months.
+				<h3>{{ $t('GoodMouthCondition7') }}</h3>
+				{{ $t('GoodMouthCondition8') }}
 			</p>
 			<p v-if=" subcriteria === 'fourthSubcriteriaHealth'">
 				<h3>Records of previous gastric/fecal abnormalities on records</h3>

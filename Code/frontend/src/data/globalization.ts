@@ -41,11 +41,40 @@ export const globalizationList = {
         savingDataNext: 'Möchten Sie die Daten speichern und fortfahren?',
         //Translation UserManual Health
         userManual: 'Benutzerhandbuch',
+        close: 'Schließen',
+        pleaseCheck: 'Bitte prüfen:',
+            //Test correct locomotion
+        correctLocomotion1: 'Prüfung der normalen Schwimmfähigkeit und Fortbewegung',
+        correctLocomotion2: 'Beobachtung des Tieres unter Wasser und außerhalb des Wassers für 2 Minuten in treibender, inaktiver Position auf dem Wasser. Besondere Aufmerksamkeit gilt der normalen Bewegung beider Brustflossen, dem Fehlen organischer Einschränkungen oder Deformationen (z. B. Skoliose), dem Fehlen einer ständigen Neigung zu einer Seite, dem Fehlen äußerer Wunden oder Narben, die die Bewegung beeinträchtigen könnten, und dem normalen Auftrieb.',
+        correctLocomotion3: '3 Minuten lang Beobachtung des aktiven Schwimmverhaltens und der dynamischen Bewegungen (auf Kommando) unter Wasser und außerhalb des Wassers, einschließlich freier Sprünge, schneller Schwimmzüge usw. Besonderes Augenmerk auf normale und flüssige Schwanzbewegungen, normale Bewegung beider Brustflossen, normales Manövrieren zu beiden Seiten unter Vermeidung von Gegenständen, Wänden und Mitschwimmern, Fehlen organischer Einschränkungen oder Deformationen (z. B. Skoliose), Fehlen einer ständigen Neigung zu einer Seite, Fähigkeit, grundlegende dynamische Verhaltensweisen auszuführen.',
+        correctLocomotion4: 'Aufzeichnungen über frühere Vorfälle/Krankheiten, die die Fortbewegung oder Schwimmfähigkeit beeinträchtigen',
+        correctLocomotion5: 'Überprüfung mit dem Team von Ausbildern und Tierärzten, dass es in den letzten 3 Monaten keine Vorfälle/Krankheiten gab, die die Fortbewegung oder die Schwimmfähigkeit beeinträchtigten.',
+            //Test Absence of eye lesions
+        AbsenceOfEyeLesions1: 'Direkte tierärztliche Kontrolle',
+        AbsenceOfEyeLesions2: 'Die Augen sind weit geöffnet, keine Trübungen, Hornhautnarben, Farbveränderungen usw.',
+        AbsenceOfEyeLesions3: 'Normale Reaktionen beider Augen auf visuelle Hinweise des Trainers',
+        AbsenceOfEyeLesions4: 'Aufzeichnungen über frühere Augenverletzungen/Unfälle/Krankheiten',
+        AbsenceOfEyeLesions5: 'Überprüfung mit dem Team von Ausbildern und Tierärzten, dass es in den letzten 3 Monaten keine früheren Augenverletzungen/Unfälle/Krankheiten (die das Sehvermögen beeinträchtigen oder nicht) gab.',
+            //Test Good mouth condition (teeth, tongue, mucosas)
+        GoodMouthCondition1: 'Direkte körperliche Untersuchung des Mundes', 
+        GoodMouthCondition2: 'Fehlen von oralen Läsionen oder schmerzhaften Bereichen im Mund bei direkter Inspektion (übermäßige Zahnabnutzung oder Frakturen mit freiliegender Pulpa, Schleimhautläsionen, abnorme Massen, Farbveränderungen usw.)', 
+        GoodMouthCondition3: 'Vorhandensein von abgenutzten Zähnen, abgebrochenen Zähnen, fehlenden Zähnen', 
+        GoodMouthCondition4: 'Vorhandensein einer Gingivitis', 
+        GoodMouthCondition5: 'Zunge - Vorhandensein von Verletzungen, Pilzläsionen', 
+        GoodMouthCondition6: 'Schleimhäute', 
+        GoodMouthCondition7: 'Aufzeichnungen über frühere Zahn- oder Mundverletzungen', 
+        GoodMouthCondition8: 'Überprüfung mit dem Team von Ausbildern und Tierärzten, dass in den letzten 3 Monaten keine früheren Läsionen/Krankheiten/Verhaltensweisen aufgetreten sind, die die Mundgesundheit oder das damit verbundene Fressverhalten verändert haben oder auf eine solche Veränderung hindeuten.', 
         //Translation Indicator Collector Emotional State
         topicEmotionalState: 'Gefühlszustand',
         firstSubcriteriaEmotionalState: 'Positive Tier-Personal Beziehung',
         secondSubcriteriaEmotionalState: 'Positive Tier-Besucher Kontakte',
         thirdSubcriteriaEmotionalState: 'Möglichkeit der Umweltkontrolle und Wahlmöglichkeiten',
+        //Translation Indicator Collector Feeding
+        topicFeeding: 'Futter',
+        firstSubcriteriaFeeding: 'Korrekte Menge des gegessenen Futters (kg Fisch bzw. Tier pro Woche)',
+        secondSubcriteriaFeeding: 'Der gesamte Wasser- und Nährstoffbedarf ist gedeckt',
+        thirdSubcriteriaFeeding: 'Analyse von Fisch, Haltbarkeit',
+        fourthSubcriteriaFeeding: 'Angemessen ALIMENTÄRE VARIABILITÄT',
 	},
 	en: {
         photo: 'Add photo',
@@ -90,10 +119,39 @@ export const globalizationList = {
         savingDataNext: 'Would you like to save the data and continue?',
         //Translation UserManual Health
         userManual: 'User Manual',
+        close: 'Close',
+        pleaseCheck: 'Please Check:',
+            //Test correct locomotion
+        correctLocomotion1: 'Normal floatability and locomotion test',
+        correctLocomotion2: 'underwater and out of water observation for 2 min  of the animal floating inactive keeping position on the water. Special attention to normal movement of both pectoral flippers, lack of organic restrictions or deformities (e.g.: scoliosis), lack of permanent inclination leaning on one side, lack of external wounds or scars potentially compromising movement, normal buoyancy.',
+        correctLocomotion3: 'underwater and out of water observation for 3 min of active swimming pattern and dynamic movements (requested on command) including free jumps, fast swims, etc.. Special attention to normal and fluid tail movements, normal movement of both pectoral flippers, normal maneuvering to both sides avoiding objects, walls and pool mates, lack of organic restrictions or deformities (e.g.: scoliosis), lack of permanent inclination leaning on one side, capacity to perform basic dynamic behaviors.',
+        correctLocomotion4: 'Records on previous incidents/diseases altering locomotion or floatability',
+        correctLocomotion5: 'Verification with the team of trainers and veterinarians that there is no previous incident/disease altering locomotion or floatability during the previous 3 months.',
+            //Test Absence of eye lesions
+        AbsenceOfEyeLesions1: 'Direct veterinary inspection',
+        AbsenceOfEyeLesions2: 'Eyes are wide open, no opacities, corneal scars, changes in colour, etc.',
+        AbsenceOfEyeLesions3: 'Normal responses on both eyes to visual cues from the trainer',
+        AbsenceOfEyeLesions4: 'Records on previous eye lesions/incidents/diseases',
+        AbsenceOfEyeLesions5: 'Verification with the team of trainers and veterinarians there are no previous eye lesions/incidents/diseases (altering vision or not) during the previous 3 months.',
+            //Test Good mouth condition (teeth, tongue, mucosas)
+        GoodMouthCondition1: 'Direct physical exam of mouth', 
+        GoodMouthCondition2: 'Absence of oral lesions or painful areas in the mouth on direct inspection (excessive dental wear or fractures with pulp exposure, mucosal lesions, abnormal masses, changes in colour, etc.).', 
+        GoodMouthCondition3: 'Presence of teeth wearing, broken teeth, missing teeth', 
+        GoodMouthCondition4: 'Presence of gingivitis', 
+        GoodMouthCondition5: 'Tongue – presence of injuries, fungal lesions', 
+        GoodMouthCondition6: 'Mucosae', 
+        GoodMouthCondition7: 'Records on previous dental or oral lesions', 
+        GoodMouthCondition8: 'Verification with the team of trainers and veterinarians there have been no previous lesions/diseases/behaviors altering or reflecting alteration of oral health or associated feeding behaviour during the previous 3 months.', 
         //Translation Indicator Collector Emotional State
         topicEmotionalState: 'Emotional State',
         firstSubcriteriaEmotionalState: 'Positive animal-staff relationship',
         secondSubcriteriaEmotionalState: 'Positive animal-visitor contacts',
         thirdSubcriteriaEmotionalState: 'Possibility of environmental control and choices',
+        //Translation Indicator Collector Feeding
+        topicFeeding: 'Feeding',
+        firstSubcriteriaFeeding: 'Correct amount of food eaten (weekly kg of fish/animal)',
+        secondSubcriteriaFeeding: 'All water and nutritional requirements are covered',
+        thirdSubcriteriaFeeding: 'Analysis of fish, shelf life',
+        fourthSubcriteriaFeeding: 'Adequate ALIMENTARY VARIABILITY',
 	},
 };

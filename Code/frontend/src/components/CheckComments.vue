@@ -26,8 +26,8 @@ export default {
 };
 </script>
 
-<style scoped>
+<!--<style scoped>
 ion-item {
 	margin: 0.5rem 2rem;
 }
-</style>
+</style>-->

@@ -5,7 +5,11 @@ import EvaluationMenu from '@/views/EvaluationMenu.vue';
 const routes: Array<RouteRecordRaw> = [
 	{
 		path: '/',
-		redirect: '/home',
+		redirect: '/folder/Evaluate',
+	},
+	{
+		path: '/folder/:id',
+		component: () => import ('../views/EvaluationMenu.vue')
 	},
 	{
 		path: '/home',
@@ -21,7 +25,12 @@ const routes: Array<RouteRecordRaw> = [
 		path: '/detailEmotionalState',
 		name: 'DetailEmotionalState',
 		component: () => import('@/views/EmotionalStateIndicatorCollector.vue')
-	}
+	},
+	{
+		path: '/detailFeeding',
+		name: 'DetailFeeding',
+		component: () => import('@/views/FeedingIndicatorCollector.vue')
+	},
 ];
 
 const router = createRouter({
