@@ -203,10 +203,6 @@
 			<ion-checkbox v-model="isChecked[1]" @click="handleClick(1)"></ion-checkbox>
 		</ion-item>
 		<ion-item>
-			<ion-label>Score 2</ion-label>
-			<ion-checkbox v-model="isChecked[2]" @click="handleClick(2)"></ion-checkbox>
-		</ion-item>
-		<ion-item>
 			<ion-label>Score 3</ion-label>
 			<ion-checkbox v-model="isChecked[3]" @click="handleClick(3)"></ion-checkbox>
 		</ion-item>
