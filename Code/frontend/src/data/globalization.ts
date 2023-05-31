@@ -93,10 +93,14 @@ export const globalizationList = {
         thirdSubcriteriaEmotionalState: 'Möglichkeit der Umweltkontrolle und Wahlmöglichkeiten',
         //Translation Indicator Collector Feeding
         topicFeeding: 'Futter',
-        firstSubcriteriaFeeding: 'Korrekte Menge des gegessenen Futters (kg Fisch bzw. Tier pro Woche)',
-        secondSubcriteriaFeeding: 'Der gesamte Wasser- und Nährstoffbedarf ist gedeckt',
-        thirdSubcriteriaFeeding: 'Analyse von Fisch, Haltbarkeit',
-        fourthSubcriteriaFeeding: 'Angemessen ALIMENTÄRE VARIABILITÄT',
+        firstSubcriteriaFeeding: 'Body Condition Score (BCS)',
+        secondSubcriteriaFeeding: 'Gewichtsschwankungen im Laufe des Jahres',
+        thirdSubcriteriaFeeding: 'Kcal',
+        fourthSubcriteriaFeeding: 'Blutparameter für eine angemessene Hydratation',
+        fifthSubcriteriaFeeding: 'Lebensmittelqualität Mikrobiologie, physikalisch-chemische Analyse',
+        sixthSubcriteriaFeeding: 'Lebensmittelvielfalt im Jahresverlauf',
+            //Translation Scoring Description
+        ScoringDescription: 'Scoring: Beschreibung',
 	},
 	en: {
         photo: 'Add photo',
@@ -192,9 +196,12 @@ export const globalizationList = {
         thirdSubcriteriaEmotionalState: 'Possibility of environmental control and choices',
         //Translation Indicator Collector Feeding
         topicFeeding: 'Feeding',
-        firstSubcriteriaFeeding: 'Correct amount of food eaten (weekly kg of fish/animal)',
-        secondSubcriteriaFeeding: 'All water and nutritional requirements are covered',
-        thirdSubcriteriaFeeding: 'Analysis of fish, shelf life',
-        fourthSubcriteriaFeeding: 'Adequate ALIMENTARY VARIABILITY',
+        firstSubcriteriaFeeding: 'Body Condition Score (BCS)',
+        secondSubcriteriaFeeding: 'Weigth oscillation during the year',
+        thirdSubcriteriaFeeding: 'Kcal',
+        fourthSubcriteriaFeeding: 'Blood parameters for adequate hydration',
+        fifthSubcriteriaFeeding: 'Food quality Microbiology, Physicochemical analysis',
+        sixthSubcriteriaFeeding: 'Food variety along the year',
+        ScoringDescription: 'Scoring Description',
 	},
 };

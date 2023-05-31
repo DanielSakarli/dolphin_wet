@@ -1,7 +1,7 @@
 import { createRouter, createWebHistory } from '@ionic/vue-router';
 import { RouteRecordRaw } from 'vue-router';
 import EvaluationMenu from '@/views/EvaluationMenu.vue';
-import DolphinEvaluationMenu from '@views/DolphinEvaluationMenu';
+//import DolphinEvaluationMenu from '@views/DolphinEvaluationMenu';
 
 const routes: Array<RouteRecordRaw> = [
 	{
@@ -10,7 +10,8 @@ const routes: Array<RouteRecordRaw> = [
 	},
 	{
 		path: '/folder/Evaluate',
-		component: () => import ('../views/EvaluationMenu.vue')
+		//component: () => import ('../views/EvaluationMenu.vue')
+		component: EvaluationMenu
 	},
 	{
 		path: '/folder/Dolphins',
@@ -19,11 +20,6 @@ const routes: Array<RouteRecordRaw> = [
 	{
 		path: '/folder/Data',
 		component: () => import ('../views/DolphinEvaluationMenu.vue')
-	},
-	{
-		path: '/home',
-		name: 'Home',
-		component: EvaluationMenu
 	},
 	{
 		path: '/detailHealth',
@@ -42,7 +38,7 @@ const routes: Array<RouteRecordRaw> = [
 	},
 	{
 		path: '/detailHousing',
-		name: 'DetailFeeding',
+		name: 'DetailHousing',
 		component: () => import('@/views/HousingIndicatorCollector.vue')
 	},
 ];
