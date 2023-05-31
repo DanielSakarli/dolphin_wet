@@ -3,23 +3,27 @@ import { RouteRecordRaw } from 'vue-router';
 import EvaluationMenu from '@/views/EvaluationMenu.vue';
 //import DolphinEvaluationMenu from '@views/DolphinEvaluationMenu';
 
+
 const routes: Array<RouteRecordRaw> = [
 	{
 		path: '/',
 		redirect: '/folder/Evaluate',
 	},
 	{
+		path: '/detail',
+		redirect: '/folder/Evaluate',
+	},
+	{
 		path: '/folder/Evaluate',
-		//component: () => import ('../views/EvaluationMenu.vue')
 		component: EvaluationMenu
 	},
 	{
 		path: '/folder/Dolphins',
-		component: () => import ('../views/DolphinEvaluationMenu.vue')
+		component: () => import ('@/views/DolphinEvaluationMenu.vue')
 	},
 	{
 		path: '/folder/Data',
-		component: () => import ('../views/DolphinEvaluationMenu.vue')
+		component: () => import ('@/views/DolphinEvaluationMenu.vue')
 	},
 	{
 		path: '/detailHealth',

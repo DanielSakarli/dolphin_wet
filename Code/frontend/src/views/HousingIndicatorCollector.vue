@@ -53,7 +53,7 @@ import {
 	IonBackButton
 } from '@ionic/vue';
 // Import customized components
-import HousingCheckCriteriaSelector from '@/components/HousingCheckSelectCriteria.vue';
+import HousingCheckCriteriaSelector from '@/components/HousingCheckCriteriaSelector.vue';
 import HousingCheckScoreField from '@/components/HousingCheckScoreField.vue';
 import CheckComments from '@/components/CheckComments.vue';
 import { defineComponent } from 'vue';
@@ -88,7 +88,7 @@ export default defineComponent({
       		const confirmed = confirm(this.$t('savingDataNext'));
      		if (confirmed) {
 				const currentPath = this.$route.path;
-        		const targetUrl = `/detailHealth`;
+        		const targetUrl = '/detailHealth';
         		window.location.href = targetUrl;
       		}
     }
