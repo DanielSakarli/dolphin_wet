@@ -53,7 +53,7 @@ import {
 	IonBackButton
 } from '@ionic/vue';
 // Import customized components
-import HousingCheckCriteriaSelector from '@/components/HousingCheckCriteriaSelector.vue';
+import HousingCheckCriteriaSelector from '@/components/HousingCheckSelectCriteria.vue';
 import HousingCheckScoreField from '@/components/HousingCheckScoreField.vue';
 import CheckComments from '@/components/CheckComments.vue';
 import { defineComponent } from 'vue';
