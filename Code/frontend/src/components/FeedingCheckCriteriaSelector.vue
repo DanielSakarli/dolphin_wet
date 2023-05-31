@@ -49,15 +49,21 @@
                 <ion-select-option value="fourthSubcriteriaFeeding">{{
 					$t('fourthSubcriteriaFeeding')
 				}}</ion-select-option>
+				<ion-select-option value="fifthSubcriteriaFeeding">{{
+					$t('fifthSubcriteriaFeeding')
+				}}</ion-select-option>
+				<ion-select-option value="sixthSubcriteriaFeeding">{{
+					$t('sixthSubcriteriaFeeding')
+				}}</ion-select-option>
 			</ion-select>
 		</ion-item>
 	</ion-list>
 	<!-- End of Criteria Selector -->
 
-	<!-- Description of Criteria -->
-	<ion-button fill ="outline" @click="setOpen(true)">{{ $t('userManual') }}</ion-button>
+	<!-- Description of Criteria (UserManual) -->
+	<ion-button fill ="outline" @click="setOpenManual(true)">{{ $t('userManual') }}</ion-button>
 
-    <ion-modal :is-open="isOpen">
+    <ion-modal :is-open="isOpenManual">
     	<ion-header>
 			<ion-toolbar>
 				<ion-title v-if=" subcriteria === 'firstSubcriteriaFeeding'"
@@ -72,13 +78,20 @@
                 <ion-title v-else-if=" subcriteria === 'fourthSubcriteriaFeeding'"
 					>{{$t('fourthSubcriteriaFeeding')}}
 				</ion-title>
+				<ion-title v-else-if=" subcriteria === 'fifthSubcriteriaFeeding'"
+					>{{$t('fifthSubcriteriaFeeding')}}
+				</ion-title>
+				<ion-title v-else-if=" subcriteria === 'sixthSubcriteriaFeeding'"
+					>{{$t('sixthSubcriteriaFeeding')}}
+				</ion-title>
 				<ion-buttons slot="end">
-					<ion-button @click="setOpen(false)">{{ $t('close')}}</ion-button>
+					<ion-button @click="setOpenManual(false)">{{ $t('close')}}</ion-button>
 				</ion-buttons>
 			</ion-toolbar>
       	</ion-header>
       	<ion-content class="ion-padding">
 			<p v-if=" subcriteria === 'firstSubcriteriaFeeding'">
+				blablabla
         	</p>
 			<p v-if=" subcriteria === 'secondSubcriteriaFeeding'">
 					</p>
@@ -86,9 +99,169 @@
             </p>
             <p v-if=" subcriteria === 'fourthSubcriteriaFeeding'">
             </p>
+			<p v-if=" subcriteria === 'fifthSubcriteriaFeeding'">
+            </p>
+			<p v-if=" subcriteria === 'sixthSubcriteriaFeeding'">
+            </p>
       	</ion-content>
     </ion-modal>
-	<!-- End of Description of Criteria -->
+	<!-- End of Description of Criteria (UserManual)-->
+	<!--Start of Scoring Description-->
+	<ion-button fill ="outline" @click="setOpenScoring(true)">{{ $t('ScoringDescription') }}</ion-button>
+
+    <ion-modal :is-open="isOpenScoring">
+    	<ion-header>
+			<ion-toolbar>
+				<ion-title v-if=" subcriteria === 'firstSubcriteriaFeeding'"
+					>{{$t('firstSubcriteriaFeeding')}}
+				</ion-title>
+				<ion-title v-else-if=" subcriteria === 'secondSubcriteriaFeeding'"
+					>{{$t('secondSubcriteriaFeeding')}}
+				</ion-title>
+				<ion-title v-else-if=" subcriteria === 'thirdSubcriteriaFeeding'"
+					>{{$t('thirdSubcriteriaFeeding')}}
+				</ion-title>
+                <ion-title v-else-if=" subcriteria === 'fourthSubcriteriaFeeding'"
+					>{{$t('fourthSubcriteriaFeeding')}}
+				</ion-title>
+				<ion-title v-else-if=" subcriteria === 'fifthSubcriteriaFeeding'"
+					>{{$t('fifthSubcriteriaFeeding')}}
+				</ion-title>
+				<ion-title v-else-if=" subcriteria === 'sixthSubcriteriaFeeding'"
+					>{{$t('sixthSubcriteriaFeeding')}}
+				</ion-title>
+				<ion-buttons slot="end">
+					<ion-button @click="setOpenScoring(false)">{{ $t('close')}}</ion-button>
+				</ion-buttons>
+			</ion-toolbar>
+      	</ion-header>
+      	<ion-content class="ion-padding">
+			<p v-if=" subcriteria === 'firstSubcriteriaFeeding'">
+				<h3>Score 1</h3>
+				BCS of 3 = adequate
+				<h3>Score 2</h3>
+				BCS of 2 (underweight) or 4(overweight)
+				<h3>Score 3</h3>
+				BCS of 1 (emaciated) or 5(obese)
+        	</p>
+			<p v-if=" subcriteria === 'secondSubcriteriaFeeding'">
+				<h3>Score 1</h3>
+				Body weight oscillation (BWOS): &le;13% along the year or &le;5% in a 3-month period  
+				<h3>Score 3</h3>
+				BWOS: &gt;13% along the year or &lt;5% in a 3-month period
+			</p>
+			<p v-if=" subcriteria === 'thirdSubcriteriaFeeding'">
+				<h3>Score 1</h3>
+				Diet designed on the basis of EAAM S&G
+				<h3>Score 3</h3>
+				Diet not designed on the basis of EAAM S&G
+            </p>
+            <p v-if=" subcriteria === 'fourthSubcriteriaFeeding'">
+				<h3>Score 1</h3>
+				Within the range
+				<h3>Score 2</h3>
+				10% out of range
+				<h3>Score 3</h3>
+				&gt;10% out of range
+            </p>
+			<p v-if=" subcriteria === 'fifthSubcriteriaFeeding'">
+				<h3>Score 1</h3>
+				Fulfilled according to EAAM S&G
+				<h3>Score 3</h3>
+				Not fulfilled according to EAAM S&G
+            </p>
+			<p v-if=" subcriteria === 'sixthSubcriteriaFeeding'">
+				<h3>Score 1</h3>
+				At least 5 species are fed throughout the year, 
+				each individual's diet is adapted to its individual nutritional needs and preferences, 
+				amount of food fed varies between sessions, 
+				part of the diet is given via enrichment
+				<h3>Score 2</h3>
+				At least 3, but no more than 5 species are fed throughout the year, 
+				each individual's diet is adapted to its individual nutritional needs, but the 
+				amount of food provided to the dolphins during each session is the same, 
+				favorite species/animal preferences are neglected
+				<h3>Score 3</h3>
+				Only 3 or less species of food are fed throughout the year, no variation along the year, 
+				diet is not adapted to individual preferences/specific need
+            </p>
+      	</ion-content>
+    </ion-modal>
+	<!--End of Scoring Description-->
+	<!-- Start of Checkboxes-->
+    <ion-list v-if=" subcriteria === 'firstSubcriteriaFeeding'">
+			<ion-item>
+				<ion-label>Score 1</ion-label>
+				<ion-checkbox v-model="isChecked[1]" @click="handleClick(1)"></ion-checkbox>
+			</ion-item>
+			<ion-item>
+				<ion-label>Score 2</ion-label>
+				<ion-checkbox v-model="isChecked[2]" @click="handleClick(2)"></ion-checkbox>
+			</ion-item>
+			<ion-item>
+				<ion-label>Score 3</ion-label>
+				<ion-checkbox v-model="isChecked[3]" @click="handleClick(3)"></ion-checkbox>
+			</ion-item>
+    </ion-list>
+	<ion-list v-if=" subcriteria === 'secondSubcriteriaFeeding'">
+		<ion-item>
+			<ion-label>Score 1</ion-label>
+			<ion-checkbox v-model="isChecked[1]" @click="handleClick(1)"></ion-checkbox>
+		</ion-item>
+		<ion-item>
+			<ion-label>Score 3</ion-label>
+			<ion-checkbox v-model="isChecked[3]" @click="handleClick(3)"></ion-checkbox>
+		</ion-item>
+    </ion-list>
+	<ion-list v-if=" subcriteria === 'thirdSubcriteriaFeeding'">
+		<ion-item>
+			<ion-label>Score 1</ion-label>
+			<ion-checkbox v-model="isChecked[1]" @click="handleClick(1)"></ion-checkbox>
+		</ion-item>
+		<ion-item>
+			<ion-label>Score 3</ion-label>
+			<ion-checkbox v-model="isChecked[3]" @click="handleClick(3)"></ion-checkbox>
+		</ion-item>
+    </ion-list>
+	<ion-list v-if=" subcriteria === 'fourthSubcriteriaFeeding'">
+		<ion-item>
+			<ion-label>Score 1</ion-label>
+			<ion-checkbox v-model="isChecked[1]" @click="handleClick(1)"></ion-checkbox>
+		</ion-item>
+		<ion-item>
+			<ion-label>Score 2</ion-label>
+			<ion-checkbox v-model="isChecked[2]" @click="handleClick(2)"></ion-checkbox>
+		</ion-item>
+		<ion-item>
+			<ion-label>Score 3</ion-label>
+			<ion-checkbox v-model="isChecked[3]" @click="handleClick(3)"></ion-checkbox>
+		</ion-item>
+    </ion-list>
+	<ion-list v-if=" subcriteria === 'fifthSubcriteriaFeeding'">
+		<ion-item>
+			<ion-label>Score 1</ion-label>
+			<ion-checkbox v-model="isChecked[1]" @click="handleClick(1)"></ion-checkbox>
+		</ion-item>
+		<ion-item>
+			<ion-label>Score 3</ion-label>
+			<ion-checkbox v-model="isChecked[3]" @click="handleClick(3)"></ion-checkbox>
+		</ion-item>
+    </ion-list>
+	<ion-list v-if=" subcriteria === 'sixthSubcriteriaFeeding'">
+		<ion-item>
+			<ion-label>Score 1</ion-label>
+			<ion-checkbox v-model="isChecked[1]" @click="handleClick(1)"></ion-checkbox>
+		</ion-item>
+		<ion-item>
+			<ion-label>Score 2</ion-label>
+			<ion-checkbox v-model="isChecked[2]" @click="handleClick(2)"></ion-checkbox>
+		</ion-item>
+		<ion-item>
+			<ion-label>Score 3</ion-label>
+			<ion-checkbox v-model="isChecked[3]" @click="handleClick(3)"></ion-checkbox>
+		</ion-item>
+    </ion-list>
+	<!-- End of Checkboxes-->
 </template>
 
 <script lang="ts">
@@ -105,7 +278,8 @@ import {
 	IonTitle,
 	IonButtons,
 	IonButton,
-	IonText
+	IonText,
+	IonCheckbox,
 } from '@ionic/vue';
 export default {
 	components: {
@@ -121,7 +295,8 @@ export default {
 		IonTitle,
 		IonButtons,
 		IonButton,
-		IonText
+		IonText,
+		IonCheckbox
 	},
 	data() {
 		return {
@@ -132,18 +307,35 @@ export default {
 			firstcancelText: this.$t('cancelChoice'),
 			secondlabel: this.$t('test'),
 			secondplaceholder: this.$t('selectTest'),
-			isOpen: false,
+			isOpenManual: false,
+			isOpenScoring: false,
+			selectedOption: undefined,
+			isChecked: {} as Record<number, boolean>,
+			Score1: this.$t('fulfilled'),
+			noTendency: this.$t('noTendency'),
+			notFulfilled: this.$t('notFulfilled'),
 		};
 	},
 	methods: {
-        setOpen(isOpen: boolean) {
-            this.isOpen = isOpen;
+        setOpenManual(isOpen: boolean) {
+            this.isOpenManual = isOpen;
         },
-        emitSubcriteriaUpdated() {
+		setOpenScoring(isOpen: boolean) {
+            this.isOpenScoring = isOpen;
+        },
+		handleClick(option: number) {
+      		if (this.isChecked[option]) {
+        // Wenn die gleiche Option erneut geklickt wird, wird sie zurückgesetzt
+        	this.isChecked = {};
+			} else {
+				this.isChecked = { [option]: true };
+		}
+    }
+        /*emitSubcriteriaUpdated() {
             const subcriteria = this.subcriteria;
             
             this.$emit('subcriteria-updated', subcriteria);
-        }
+        }*/
     }
 };
 </script>

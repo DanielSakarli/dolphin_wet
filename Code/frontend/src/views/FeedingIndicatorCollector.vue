@@ -7,7 +7,7 @@
 					>{{ $t('topicFeeding') }}</ion-title
 				>
 				<ion-buttons slot ="start">
-                    <ion-back-button defaultHref="/home"></ion-back-button>
+                    <ion-back-button defaultHref="/folder/Evaluate"></ion-back-button>
                 </ion-buttons>
 			</ion-toolbar>
 		</ion-header>
@@ -20,7 +20,6 @@
 					</ion-select>
     			</ion-item> -->
 			<FeedingCheckCriteriaSelector />
-			<FeedingCheckScoreField />
 			<CheckComments />
 		</ion-content>
 
@@ -54,7 +53,6 @@ import {
 } from '@ionic/vue';
 // Import customized components
 import FeedingCheckCriteriaSelector from '@/components/FeedingCheckCriteriaSelector.vue';
-import FeedingCheckScoreField from '@/components/FeedingCheckScoreField.vue';
 import CheckComments from '@/components/CheckComments.vue';
 import { defineComponent } from 'vue';
 
@@ -74,7 +72,6 @@ export default defineComponent({
 		IonPage,
 		IonButton,
 		FeedingCheckCriteriaSelector,
-		FeedingCheckScoreField,
 		CheckComments,
 		IonButtons,
 		IonBackButton
@@ -88,7 +85,7 @@ export default defineComponent({
       		const confirmed = confirm(this.$t('savingDataNext'));
      		if (confirmed) {
 				const currentPath = this.$route.path;
-        		const targetUrl = `/detailEmotionalState`;
+        		const targetUrl = `/detailFeeding`;
         		window.location.href = targetUrl;
       		}
     }

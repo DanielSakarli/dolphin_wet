@@ -1,6 +1,8 @@
 import { createRouter, createWebHistory } from '@ionic/vue-router';
 import { RouteRecordRaw } from 'vue-router';
 import EvaluationMenu from '@/views/EvaluationMenu.vue';
+//import DolphinEvaluationMenu from '@views/DolphinEvaluationMenu';
+
 
 const routes: Array<RouteRecordRaw> = [
 	{
@@ -13,7 +15,7 @@ const routes: Array<RouteRecordRaw> = [
 	},
 	{
 		path: '/folder/Evaluate',
-		component: () => import ('../views/EvaluationMenu.vue')
+		component: EvaluationMenu
 	},
 	{
 		path: '/folder/Dolphins',
@@ -22,11 +24,6 @@ const routes: Array<RouteRecordRaw> = [
 	{
 		path: '/folder/Data',
 		component: () => import ('@/views/DolphinEvaluationMenu.vue')
-	},
-	{
-		path: '/home',
-		name: 'Home',
-		component: EvaluationMenu
 	},
 	{
 		path: '/detailHealth',

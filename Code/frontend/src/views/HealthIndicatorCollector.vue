@@ -7,7 +7,7 @@
 					>{{ $t('topicHealth') }}</ion-title
 				>
 				<ion-buttons slot ="start">
-                    <ion-back-button defaultHref="/home"></ion-back-button>
+                    <ion-back-button defaultHref="/folder/Evaluate"></ion-back-button>
                 </ion-buttons>
 			</ion-toolbar>
 		</ion-header>

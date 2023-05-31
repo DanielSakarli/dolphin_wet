@@ -2,6 +2,9 @@
     <ion-page>
         <ion-header>
             <ion-toolbar>
+                <ion-buttons slot="start">
+                    <ion-menu-button></ion-menu-button>
+                </ion-buttons>
                 <ion-title>DoliMo - DolphinMonitoring</ion-title>
             </ion-toolbar>
         </ion-header>
@@ -24,7 +27,9 @@ IonToolbar,
 IonTitle,
 IonContent,
 IonList,
-IonButton
+IonButton,
+IonButtons,
+IonMenuButton
 } from '@ionic/vue';
 
 export default {
@@ -40,7 +45,9 @@ export default {
         IonTitle,
         IonContent,
         IonList,
-        IonButton
+        IonButton,
+        IonButtons,
+        IonMenuButton
     },
     methods: {
             changeLanguage($event: any) {
