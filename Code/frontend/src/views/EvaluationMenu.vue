@@ -13,7 +13,7 @@
             <ion-button expand="block" size="large" router-link="/detail">{{$t('principleBehaviour')}}</ion-button>
             <ion-button expand="block" size="large" router-link="/detailEmotionalState">{{$t('principleEmotionalState')}}</ion-button>
             <ion-button expand="block" size="large" router-link="/detailFeeding">{{$t('principleFeeding')}}</ion-button>
-            <ion-button expand="block" size="large" router-link="/detail">{{$t('principleHousing')}}</ion-button>
+            <ion-button expand="block" size="large" router-link="/detailHousing">{{$t('principleHousing')}}</ion-button>
         </ion-content>
     </ion-page>
 </template>

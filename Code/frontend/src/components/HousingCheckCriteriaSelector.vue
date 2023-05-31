@@ -9,28 +9,28 @@
 				okText="OK"
 				:cancelText="firstcancelText"
 			>
-				<ion-select-option value="SAFE ENVIRONMENT">{{
+				<ion-select-option value="safe_environment">{{
 					$t('safe_environment')
 				}}</ion-select-option>
-				<ion-select-option value="ADEQUATE SPATIAL REQUIREMENTS and POOL COMPLEXITY">{{
+				<ion-select-option value="adequate_spatial_requirements">{{
 					$t('adequate_spatial_requirements')
 				}}</ion-select-option>
-				<ion-select-option value="SOCIAL MANAGEMENT">{{
+				<ion-select-option value="social_management">{{
 					$t('social_management')
 				}}</ion-select-option>
-				<ion-select-option value="ADEQUATE WATER QUALITY">{{
+				<ion-select-option value="adequate_water_quality">{{
 					$t('adequate_water_quality')
 				}}</ion-select-option>
-				<ion-select-option value="THERMAL COMFORT">{{
+				<ion-select-option value="thermal_comfort">{{
 					$t('thermal_comfort')
 				}}</ion-select-option>
-				<ion-select-option value="VISUAL COMFORT">{{
+				<ion-select-option value="visual_comfort">{{
 					$t('visual_comfort')
 				}}</ion-select-option>
-				<ion-select-option value="ACOUSTIC  COMFORT">{{
+				<ion-select-option value="acoustic_comfort">{{
 					$t('acoustic_comfort')
 				}}</ion-select-option>
-				<ion-select-option value="RESTING COMFORT">{{
+				<ion-select-option value="resting_comfort">{{
 					$t('resting_comfort')
 				}}</ion-select-option>
 			</ion-select>
@@ -43,22 +43,22 @@
 				okText="OK"
 				:cancelText="firstcancelText"
 			>
-				<ion-select-option value="Health-related safety environmental design">{{
+				<ion-select-option value="firstSubcriteriaHousing">{{
 					$t('firstSubcriteriaHousing')
 				}}</ion-select-option>
-				<ion-select-option value="No foreign body ingestion">{{
+				<ion-select-option value="secondSubcriteriaHousing">{{
 					$t('secondSubcriteriaHousing')
 				}}</ion-select-option>
-				<ion-select-option value="Possibility to freely move between areas, resting place, enganging environment">{{
+				<ion-select-option value="thirdSubcriteriaHousing">{{
 					$t('thirdSubcriteriaHousing')
 				}}</ion-select-option>
-				<ion-select-option value="Posibility to perform desired behaviours, including fast swim, jump, social behaviours, syncronysed behaviour">{{
+				<ion-select-option value="fourthSubcriteriaHousing">{{
 					$t('fourthSubcriteriaHousing')
 				}}</ion-select-option>
-				<ion-select-option value="Possibility of escaping from conspecifics">{{
+				<ion-select-option value="fifthSubcriteriaHousing">{{
 					$t('fifthSubcriteriaHousing')
 				}}</ion-select-option>
-				<ion-select-option value="Absence of forced loneliness">{{
+				<ion-select-option value="sixthSubcriteriaHousing">{{
 					$t('sixthSubcriteriaHousing')
 				}}</ion-select-option>
 			</ion-select>
@@ -158,8 +158,8 @@ export default {
 			firstlabel: this.$t('criteria'),
 			firstplaceholder: this.$t('selectCriteria'),
 			firstcancelText: this.$t('cancelChoice'),
-			secondlabel: this.$t('subCriteria'),
-			secondplaceholder: this.$t('selectSubCriteria'),
+			secondlabel: this.$t('test'),
+			secondplaceholder: this.$t('selectTest'),
 			isOpen: false,
 		};
 	},

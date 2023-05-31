@@ -88,7 +88,7 @@ export default defineComponent({
       		const confirmed = confirm(this.$t('savingDataNext'));
      		if (confirmed) {
 				const currentPath = this.$route.path;
-        		const targetUrl = `/detailHealth`;
+        		const targetUrl = '/detailHealth';
         		window.location.href = targetUrl;
       		}
     }

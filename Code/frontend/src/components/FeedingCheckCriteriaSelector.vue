@@ -20,6 +20,12 @@
 				<ion-select-option value="dolphin4">{{
 					$t('dolphin4')
 				}}</ion-select-option>
+				<ion-select-option value="dolphin4">{{
+					$t('dolphin5')
+				}}</ion-select-option>
+				<ion-select-option value="dolphin4">{{
+					$t('dolphin6')
+				}}</ion-select-option>
 			</ion-select>
 		</ion-item>
 		<ion-item>
