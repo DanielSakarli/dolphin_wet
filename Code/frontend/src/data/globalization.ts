@@ -10,6 +10,12 @@ export const globalizationList = {
         principleEmotionalState: 'Gefühlszustand',
         principleFeeding: 'Futter',
         principleHousing: 'Wohnraum/Umfeld',
+        //General translations at evaluation pages
+        criteria: 'Kriterium',
+        selectCriteria: 'Kriterien auswählen',
+        subcriteria: 'Unterkriterium',
+		test: 'Test',
+		selectTest: 'Test auswählen',
         //Translation Indicator Collector Health
 		topicHealth: 'Gesundheit',
 		cardTitle: 'Kartentitel',
@@ -24,11 +30,7 @@ export const globalizationList = {
         dolphin5: 'Delfin 5',
         dolphin6: 'Delfin 6',
 		thirdCriteriaHealth: 'drittes Kriterium',
-        criteria: 'Kriterium',
-        selectCriteria: 'Kriterien auswählen',
-        subcriteria: 'Unterkriterium',
-		test: 'Test',
-		selectTest: 'Test auswählen',
+
         firstSubcriteriaHealth: 'Korrekte Fortbewegung',
         secondSubcriteriaHealth: 'Fehlen von Augenläsionen',
         thirdSubcriteriaHealth: 'Guter Zustand des Mundes (Zähne, Zunge, Schleimhäute)',
@@ -95,6 +97,10 @@ export const globalizationList = {
         thirdSubcriteriaEmotionalState: 'Möglichkeit der Umweltkontrolle und Wahlmöglichkeiten',
         //Translation Indicator Collector Feeding
         topicFeeding: 'Futter',
+        firstCriteriaFeeding: 'Fehlen von anhaltendem Hunger oder Durst',
+        secondCriteriaFeeding: 'Angemessene Ernährung',
+        thirdCriteriaFeeding: 'Angemessene Nahrungsmittelqualität',
+        fourthCriteriaFeeding: 'Angemessene Nahrungsmittelvielfalt',
         firstSubcriteriaFeeding: 'Body Condition Score (BCS)',
         secondSubcriteriaFeeding: 'Gewichtsschwankungen im Laufe des Jahres',
         thirdSubcriteriaFeeding: 'Kcal',
@@ -115,6 +121,12 @@ export const globalizationList = {
         principleEmotionalState: 'Emotional State',
         principleFeeding: 'Feeding',
         principleHousing: 'Housing/Environment',
+        //General translations at evaluation pages
+        criteria: 'Criteria',
+        selectCriteria: 'Select Criteria',
+        subcriteria: 'Subcriteria',
+        test: 'Test',
+		selectTest: 'Select Test',
         //Translation Indicator Collector Health
 		topicHealth: 'Good Health',
 		cardTitle: 'Card Title',
@@ -152,11 +164,7 @@ export const globalizationList = {
 		met: 'Met',
         notMet: 'Not Met',
         noTendency: 'No Tendency',
-        criteria: 'Criteria',
-        selectCriteria: 'Select Criteria',
-        subcriteria: 'Subcriteria',
-        test: 'Test',
-		selectTest: 'Select Test',
+        
         firstSubcriteriaHealth: 'Correct locomotion',
         secondSubcriteriaHealth: 'Absence of eye lesions',
         thirdSubcriteriaHealth: 'Good mouth condition (teeth, tongue, mucosas)',
@@ -203,6 +211,10 @@ export const globalizationList = {
         thirdSubcriteriaEmotionalState: 'Possibility of environmental control and choices',
         //Translation Indicator Collector Feeding
         topicFeeding: 'Feeding',
+        firstCriteriaFeeding: 'Absence of prolonged hunger or thirst',
+        secondCriteriaFeeding: 'Adequate diet',
+        thirdCriteriaFeeding: 'Adequate food quality',
+        fourthCriteriaFeeding: 'Adequate food variety',
         firstSubcriteriaFeeding: 'Body Condition Score (BCS)',
         secondSubcriteriaFeeding: 'Weigth oscillation during the year',
         thirdSubcriteriaFeeding: 'Kcal',

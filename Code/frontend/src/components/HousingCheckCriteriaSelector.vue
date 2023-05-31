@@ -118,6 +118,7 @@
       	</ion-content>
     </ion-modal>
 	<!-- End of Description of Criteria -->
+	
 </template>
 
 <script lang="ts">

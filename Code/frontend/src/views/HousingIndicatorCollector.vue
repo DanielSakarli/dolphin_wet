@@ -21,7 +21,7 @@
     			</ion-item> -->
 			<HousingCheckCriteriaSelector />
 			<HousingCheckScoreField />
-			<HousingComments />
+			<CheckComments />
 		</ion-content>
 
 		<ion-footer>

@@ -30,29 +30,52 @@
 		</ion-item>
 		<ion-item>
 			<ion-select
-				:value="subcriteria"
-				@IonChange ="subcriteria=$event.target.value"
+				:value="criteria"
+				@IonChange ="criteria=$event.target.value"
 				:label="secondlabel"
 				:placeholder="secondplaceholder"
 				okText="OK"
 				:cancelText="firstcancelText"
 			>
-				<ion-select-option value="firstSubcriteriaFeeding">{{
+				<ion-select-option value="firstCriteriaFeeding">{{
+					$t('firstCriteriaFeeding')
+				}}</ion-select-option>
+				<ion-select-option value="secondCriteriaFeeding">{{
+					$t('secondCriteriaFeeding')
+				}}</ion-select-option>
+				<ion-select-option value="thirdCriteriaFeeding">{{
+					$t('thirdCriteriaFeeding')
+				}}</ion-select-option>
+                <ion-select-option value="fourthCriteriaFeeding">{{
+					$t('fourthCriteriaFeeding')
+				}}</ion-select-option>
+			</ion-select>
+		</ion-item>
+		<ion-item>
+			<ion-select
+				:value="subcriteria"
+				@IonChange ="subcriteria=$event.target.value"
+				:label="thirdlabel"
+				:placeholder="thirdplaceholder"
+				okText="OK"
+				:cancelText="firstcancelText"
+			>
+				<ion-select-option v-if=" criteria === 'firstCriteriaFeeding'" value="firstSubcriteriaFeeding">{{
 					$t('firstSubcriteriaFeeding')
 				}}</ion-select-option>
-				<ion-select-option value="secondSubcriteriaFeeding">{{
+				<ion-select-option v-if=" criteria === 'firstCriteriaFeeding'" value="secondSubcriteriaFeeding">{{
 					$t('secondSubcriteriaFeeding')
 				}}</ion-select-option>
-				<ion-select-option value="thirdSubcriteriaFeeding">{{
+				<ion-select-option v-if=" criteria === 'secondCriteriaFeeding'" value="thirdSubcriteriaFeeding">{{
 					$t('thirdSubcriteriaFeeding')
 				}}</ion-select-option>
-                <ion-select-option value="fourthSubcriteriaFeeding">{{
+                <ion-select-option v-if=" criteria === 'secondCriteriaFeeding'" value="fourthSubcriteriaFeeding">{{
 					$t('fourthSubcriteriaFeeding')
 				}}</ion-select-option>
-				<ion-select-option value="fifthSubcriteriaFeeding">{{
+				<ion-select-option v-if=" criteria === 'thirdCriteriaFeeding'" value="fifthSubcriteriaFeeding">{{
 					$t('fifthSubcriteriaFeeding')
 				}}</ion-select-option>
-				<ion-select-option value="sixthSubcriteriaFeeding">{{
+				<ion-select-option v-if=" criteria === 'fourthCriteriaFeeding'" value="sixthSubcriteriaFeeding">{{
 					$t('sixthSubcriteriaFeeding')
 				}}</ion-select-option>
 			</ion-select>
@@ -301,12 +324,15 @@ export default {
 	data() {
 		return {
 			language: 'en',
+			criteria: '',
 			subcriteria: '',
 			firstlabel: this.$t('dolphin'),
 			firstplaceholder: this.$t('selectDolphin'),
 			firstcancelText: this.$t('cancelChoice'),
-			secondlabel: this.$t('test'),
-			secondplaceholder: this.$t('selectTest'),
+			secondlabel: this.$t('criteria'),
+			secondplaceholder: this.$t('selectCriteria'),
+			thirdlabel: this.$t('test'),
+			thirdplaceholder: this.$t('selectTest'),
 			isOpenManual: false,
 			isOpenScoring: false,
 			selectedOption: undefined,
