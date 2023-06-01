@@ -31,6 +31,11 @@ const routes: Array<RouteRecordRaw> = [
 		component: () => import('@/views/HealthIndicatorCollector.vue'),
 	},
 	{
+		path: '/detailBehaviour',
+		name: 'DetailBehaviour',
+		component: () => import('@/views/BehaviourIndicatorCollector.vue'),
+	},
+	{
 		path: '/detailEmotionalState',
 		name: 'DetailEmotionalState',
 		component: () => import('@/views/EmotionalStateIndicatorCollector.vue')
