@@ -1,6 +1,5 @@
 const express = require('express');
 const router = express.Router();
-const { v4: uuidv4 } = require('uuid');
 
 /**
  * Controllers
@@ -12,7 +11,6 @@ const {
 	updateDolphin,
 	deleteDolphin,
 } = require('../controllers/dolphins');
-console.log(uuidv4());
 
 /**
  * @swagger
@@ -24,6 +22,7 @@ console.log(uuidv4());
  *        - name
  *        - birthday
  *        - place_of_birth
+ *        - sex
  *       properties:
  *         name:
  *           type: string
@@ -34,6 +33,11 @@ console.log(uuidv4());
  *         place_of_birth:
  *           type: string
  *           description: The place of birth of dolphin
+ *         sex:
+ *           type: string
+ *           description: The sex of dolphin
+ *         on_site:
+ *           type: boolean
  *       example:
  *         name: John Doe
  *         birthday: 2010-01-01
@@ -41,7 +45,6 @@ console.log(uuidv4());
  *
  */
 
-// All dolphins
 /**
  * @swagger
  * tags:
@@ -57,7 +60,7 @@ console.log(uuidv4());
  *     tags: [dolphins]
  *     responses:
  *       200:
- *         description: this list of all dolphins
+ *         description: the list of all dolphins
  *       content:
  *         application/json:
  *           schema:
@@ -96,9 +99,62 @@ router.get('/', getAllDolphins);
 router.post('/', createDolphin);
 
 // Single dolphin
+/**
+ * @swagger
+ * /api/dolphins/{name}:
+ *   get:
+ *     summary: get one dolphin info using name
+ *     tags: [dolphins]
+ *     parameters:
+ *       - in: path
+ *         name: name
+ *         description: the name of dolphin
+ *         schema:
+ *           type: string
+ *         required: true
+ *     responses:
+ *       200:
+ *         description: get dolphin successfully
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#components/schemas/dolphins'
+ *       500:
+ *         description: some server error
+ *
+ */
 router.get('/:name', getSingleDolphin);
+
+/**
+ * @swagger
+ * /api/dolphins/{name}:
+ *   patch:
+ *     summary: update the info of a dolphin
+ *     tags: [dolphins]
+ *     parameters:
+ *       - in: path
+ *         name: name
+ *         description: the name of dolphin
+ *         schema:
+ *           type: string
+ *         required: true
+ */
 router.patch('/:name', updateDolphin);
+
+/**
+ * @swagger
+ * /api/dolphins/{name}:
+ *   delete:
+ *     summary: delete a dolphin in database
+ *     tags: [dolphins]
+ *     parameters:
+ *       - in: path
+ *         name: name
+ *         description: the name of dolphin
+ *         schema:
+ *           type: string
+ *         required: true
+ */
 router.delete('/:name', deleteDolphin);
-router.patch('/:name', updateDolphin);
 
 module.exports = router;
