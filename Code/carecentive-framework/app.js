@@ -28,6 +28,9 @@ var adminMeasurementsRouter = require('carecentive-core/routes/admin/measurement
 var activityRouter = require('./routes/activities');
 var exampleRouter = require('./routes/examples');
 
+// Dolphin wet routes
+const dolphins = require('./routes/dolphins');
+
 var app = express();
 
 // Swagger UI for api documentation
@@ -60,13 +63,13 @@ app.set('view engine', 'ejs');
  * Initialize ORM
  * Do not delete this line.
  */
-
 require('carecentive-core/models/ORM');
+const setupDevDb = require('./db-setup');
+setupDevDb();
 
 /**
  * Set up routes
  */
-
 app.use(httplogger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -89,14 +92,19 @@ app.use('/api/analytics', analyticsRouter);
 app.use('/api/settings', settingsRouter);
 
 /**
+ * Dolphin Wet Routes
+ */
+app.use('/api/dolphins', dolphins);
+
+/**
  * Custom routes
  */
 app.use('/api/activities', activityRouter);
 app.use('/api/examples', exampleRouter);
 
-app.use('*', (req, res) =>
-	res.sendFile(path.join(__dirname, 'public', 'index.html'))
-);
+// app.use('*', (req, res) =>
+// 	res.sendFile(path.join(__dirname, 'public', 'index.html'))
+// );
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
@@ -110,12 +118,12 @@ app.use(function (err, req, res, next) {
 	res.locals.error = req.app.get('env') === 'development' ? err : {};
 
 	// render the error page
-	res.status(err.status || 500);
-	res.render('error');
+	// res.render('error');
+	res.status(err.statusCode || 500).json({ error: err.message });
 });
 
-app.listen(process.env.HTTP_PORT, () => {
-	console.log(`server is listening on... ${process.env.HTTP_PORT}`);
-});
+// app.listen(process.env.HTTP_PORT, () => {
+// 	console.log(`server is listening on... ${process.env.HTTP_PORT}`);
+// });
 
 module.exports = app;
