@@ -15,9 +15,9 @@
 		"test": "jest --watch --runInBand --detectOpenHandles"
 	},
 	"dependencies": {
+		"@carecentive/carecentive-core": "^0.9.1",
 		"axios": "^0.21.1",
 		"bcryptjs": "^2.4.3",
-		"carecentive-core": "file:../carecentive-core",
 		"cookie-parser": "~1.4.4",
 		"crypto-js": "^4.1.1",
 		"debug": "~2.6.9",

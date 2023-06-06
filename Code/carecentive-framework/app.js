@@ -13,20 +13,37 @@ dotenv.config();
  * Prepare routers
  */
 
-var usersRouter = require('carecentive-core/routes/users');
-var questionnaireRouter = require('carecentive-core/routes/questionnaires');
-var measurementRouter = require('carecentive-core/routes/measurements');
-var fileRouter = require('carecentive-core/routes/files');
-var callbackRouter = require('carecentive-core/routes/callback');
-var withingsRouter = require('carecentive-core/routes/settings');
-var analyticsRouter = require('carecentive-core/routes/analytics');
-var settingsRouter = require('carecentive-core/routes/settings');
+// var usersRouter = require('carecentive-core/routes/users');
+// var usersRouter = require('carecentive-core/');
+// var questionnaireRouter = require('carecentive-core/routes/questionnaires');
+// var measurementRouter = require('carecentive-core/routes/measurements');
+// var fileRouter = require('carecentive-core/routes/files');
+// var callbackRouter = require('carecentive-core/routes/callback');
+// var withingsRouter = require('carecentive-core/routes/settings');
+// var analyticsRouter = require('carecentive-core/routes/analytics');
+// var settingsRouter = require('carecentive-core/routes/settings');
 
-var adminUsersRouter = require('carecentive-core/routes/admin/users');
-var adminMeasurementsRouter = require('carecentive-core/routes/admin/measurements');
+// var adminUsersRouter = require('carecentive-core/routes/admin/users');
+// var adminMeasurementsRouter = require('carecentive-core/routes/admin/measurements');
+
+// var activityRouter = require('./routes/activities');
+// var exampleRouter = require('./routes/examples');
+var usersRouter = require('@carecentive/carecentive-core/routes/users');
+var questionnaireRouter = require('@carecentive/carecentive-core/routes/questionnaires');
+var measurementRouter = require('@carecentive/carecentive-core/routes/measurements');
+var fileRouter = require('@carecentive/carecentive-core/routes/files');
+var callbackRouter = require('@carecentive/carecentive-core/routes/callback');
+var withingsRouter = require('@carecentive/carecentive-core/routes/settings');
+var analyticsRouter = require('@carecentive/carecentive-core/routes/analytics');
+var settingsRouter = require('@carecentive/carecentive-core/routes/settings');
+
+var adminUsersRouter = require('@carecentive/carecentive-core/routes/admin/users');
+var adminMeasurementsRouter = require('@carecentive/carecentive-core/routes/admin/measurements');
 
 var activityRouter = require('./routes/activities');
 var exampleRouter = require('./routes/examples');
+
+var app = express();
 
 // Dolphin wet routes
 const dolphins = require('./routes/dolphins');
@@ -50,7 +67,8 @@ const options = {
 			},
 		],
 	},
-	apis: ['./routes/*.js', '../carecentive-core/routes/*.js'],
+	// apis: ['./routes/*.js', '../carecentive-core/routes/*.js'],
+	apis: ['./routes/*.js'],
 };
 const specs = swaggerJsDoc(options);
 app.use('/api-docs', swaggerUI.serve, swaggerUI.setup(specs));
@@ -63,7 +81,7 @@ app.set('view engine', 'ejs');
  * Initialize ORM
  * Do not delete this line.
  */
-require('carecentive-core/models/ORM');
+require('@carecentive/carecentive-core/models/ORM');
 const setupDevDb = require('./db-setup');
 setupDevDb();
 
@@ -122,8 +140,8 @@ app.use(function (err, req, res, next) {
 	res.status(err.statusCode || 500).json({ error: err.message });
 });
 
-// app.listen(process.env.HTTP_PORT, () => {
-// 	console.log(`server is listening on... ${process.env.HTTP_PORT}`);
-// });
+app.listen(process.env.HTTP_PORT, () => {
+	console.log(`server is listening on... ${process.env.HTTP_PORT}`);
+});
 
 module.exports = app;

@@ -1,1 +1,0 @@
-CareCentive core package. Key functionalities are stored in this package, to ensure central updatability (and customizability) for custom applications. Please refer to carecentive-framework to create your application.

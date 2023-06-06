@@ -1,23 +1,25 @@
-const User = require('carecentive-core/models/User');
-const Questionnaire = require('carecentive-core/models/Questionnaire')
+const User = require('@carecentive/carecentive-core/models/User');
+const Questionnaire = require('@carecentive/carecentive-core/models/Questionnaire');
 
 class ActivityService {
+	static async getActivitiesForUser(userId) {
+		let user = await User.query().findById(userId);
 
-  static async getActivitiesForUser(userId) {
-    let user = await User.query().findById(userId)
-  
-    // Get all questionnaires of this user. Order by oldest first.
-    let userQuestionnaires = await Questionnaire.query().select('id', 'datetime', 'questionnaire').where({
-      user_id: userId
-    }).orderBy('datetime', 'ASC')
-  
-    // Prepare the output array
-    let userAvailableActivities = {activityState: "", activities: {}}
+		// Get all questionnaires of this user. Order by oldest first.
+		let userQuestionnaires = await Questionnaire.query()
+			.select('id', 'datetime', 'questionnaire')
+			.where({
+				user_id: userId,
+			})
+			.orderBy('datetime', 'ASC');
 
-    userAvailableActivities.activities.sampleQuestionnaire = true;
+		// Prepare the output array
+		let userAvailableActivities = { activityState: '', activities: {} };
 
-    return userAvailableActivities;
-  }
+		userAvailableActivities.activities.sampleQuestionnaire = true;
+
+		return userAvailableActivities;
+	}
 }
 
 module.exports = ActivityService;
