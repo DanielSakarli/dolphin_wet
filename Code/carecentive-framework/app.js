@@ -10,24 +10,8 @@ const dotenv = require('dotenv');
 dotenv.config();
 
 /**
- * Prepare routers
+ * Carecentive-core routers
  */
-
-// var usersRouter = require('carecentive-core/routes/users');
-// var usersRouter = require('carecentive-core/');
-// var questionnaireRouter = require('carecentive-core/routes/questionnaires');
-// var measurementRouter = require('carecentive-core/routes/measurements');
-// var fileRouter = require('carecentive-core/routes/files');
-// var callbackRouter = require('carecentive-core/routes/callback');
-// var withingsRouter = require('carecentive-core/routes/settings');
-// var analyticsRouter = require('carecentive-core/routes/analytics');
-// var settingsRouter = require('carecentive-core/routes/settings');
-
-// var adminUsersRouter = require('carecentive-core/routes/admin/users');
-// var adminMeasurementsRouter = require('carecentive-core/routes/admin/measurements');
-
-// var activityRouter = require('./routes/activities');
-// var exampleRouter = require('./routes/examples');
 var usersRouter = require('@carecentive/carecentive-core/routes/users');
 var questionnaireRouter = require('@carecentive/carecentive-core/routes/questionnaires');
 var measurementRouter = require('@carecentive/carecentive-core/routes/measurements');
@@ -36,21 +20,23 @@ var callbackRouter = require('@carecentive/carecentive-core/routes/callback');
 var withingsRouter = require('@carecentive/carecentive-core/routes/settings');
 var analyticsRouter = require('@carecentive/carecentive-core/routes/analytics');
 var settingsRouter = require('@carecentive/carecentive-core/routes/settings');
-
 var adminUsersRouter = require('@carecentive/carecentive-core/routes/admin/users');
 var adminMeasurementsRouter = require('@carecentive/carecentive-core/routes/admin/measurements');
-
 var activityRouter = require('./routes/activities');
 var exampleRouter = require('./routes/examples');
 
 var app = express();
 
-// Dolphin wet routes
+/**
+ * Dolphin Wet Routers
+ */
 const dolphins = require('./routes/dolphins');
+const good_feeding = require('./routes/good_feeding');
 
-var app = express();
 
-// Swagger UI for api documentation
+/** 
+ * Swagger UI for api documentation 
+ */
 const swaggerUI = require('swagger-ui-express');
 const swaggerJsDoc = require('swagger-jsdoc');
 const options = {
@@ -67,7 +53,6 @@ const options = {
 			},
 		],
 	},
-	// apis: ['./routes/*.js', '../carecentive-core/routes/*.js'],
 	apis: ['./routes/*.js'],
 };
 const specs = swaggerJsDoc(options);
@@ -82,11 +67,12 @@ app.set('view engine', 'ejs');
  * Do not delete this line.
  */
 require('@carecentive/carecentive-core/models/ORM');
+// set up development database.
 const setupDevDb = require('./db-setup');
 setupDevDb();
 
 /**
- * Set up routes
+ * Set up middleware
  */
 app.use(httplogger('dev'));
 app.use(express.json());
@@ -113,6 +99,7 @@ app.use('/api/settings', settingsRouter);
  * Dolphin Wet Routes
  */
 app.use('/api/dolphins', dolphins);
+app.use('/api/good_feeding', good_feeding);
 
 /**
  * Custom routes
