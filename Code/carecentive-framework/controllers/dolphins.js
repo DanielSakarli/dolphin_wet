@@ -64,7 +64,6 @@ async function updateDolphin(req, res, next) {
 		}
 		const dolphinName = req.params.name;
 		const updateInfo = req.body;
-		console.log(updateInfo);
 		const dolphinUpdated = await DolphinService.updateDolphin(
 			dolphinName,
 			updateInfo

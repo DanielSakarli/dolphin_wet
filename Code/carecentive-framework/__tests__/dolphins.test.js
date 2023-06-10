@@ -1,6 +1,18 @@
 const request = require('supertest');
 const app = require('../app');
 
+// CONSTANTS FOR TEST PURPOSE
+const userName = 'jest_test_user';
+const userEmail = 'jest_test@example.test';
+const userPassword = '123456789';
+const test_dolphin = {
+	name: 'post_dolphin_test',
+	sex: 1,
+	on_site: 1,
+	year_of_birth: 2010,
+	place_of_birth: 'Nuremberg',
+};
+
 function setupTestBd() {
 	const knexInstance = require('knex')({
 		client: 'mysql2',
@@ -15,7 +27,32 @@ function setupTestBd() {
 }
 const knexInstance = setupTestBd();
 
-beforeAll(() => {
+async function registerUser() {
+	// register a user
+	await request(app)
+		.post('/api/users/register')
+		.set('Content-Type', 'application/json')
+		.send({
+			name: userName,
+			email: userEmail,
+			password: userPassword,
+		});
+}
+async function loginUser() {
+	// login and get the jwt token
+	const userLogin = await request(app)
+		.post('/api/users/login')
+		.set('Content-Type', 'application/json')
+		.send({
+			username: userName,
+			password: userPassword,
+		});
+	const jwtToken = userLogin.body;
+	return jwtToken;
+}
+
+// Set up test database.
+beforeAll(async () => {
 	return knexInstance('dolphins')
 		.del()
 		.then(() => {
@@ -31,15 +68,21 @@ beforeAll(() => {
 					name: 'jest_dolphin2',
 					sex: 0,
 					on_site: 1,
-					year_of_birth: 2011,
+					year_of_birth: 2050,
 					place_of_birth: 'anywhere',
 				},
 			]);
 		});
 });
 
+// Clean database.
 afterAll(() => {
-	return knexInstance('dolphins')
+	knexInstance('dolphins')
+		.del()
+		.then(() => {
+			knexInstance.destroy();
+		});
+	return knexInstance('users')
 		.del()
 		.then(() => {
 			knexInstance.destroy();
@@ -81,44 +124,61 @@ describe('dolphins api test', () => {
 	});
 
 	describe('POST /api/dolphins', () => {
-		const test_dolphin = {
-			name: 'post_dolphin_test',
-			sex: 1,
-			on_site: 1,
-			year_of_birth: 2010,
-			place_of_birth: 'Nuremberg',
-		};
-		test('request with valid body should response with a json object containing the info of created dolphin ', async () => {
+		test('request without valid login token should response with 401 unauthorized', async () => {
 			const response = await request(app)
 				.post('/api/dolphins')
 				.set('Accept', 'application/json')
+				.send(test_dolphin);
+			expect(response.status).toEqual(401);
+		});
+
+		test('request with valid body should response with a json object containing the info of created dolphin ', async () => {
+			await registerUser();
+			const jwtTokenForTestUser = await loginUser();
+			const response = await request(app)
+				.post('/api/dolphins')
+				.set('Accept', 'application/json')
+				.set('Cookie', `token=${jwtTokenForTestUser}`)
 				.send(test_dolphin);
 			expect(response.header['content-type']).toMatch(/json/);
 			expect(response.status).toEqual(200);
 			expect(response.body.name).toEqual(test_dolphin.name);
 		});
-		test('request with invalid body should response with error', async () => {
+		test('request with invalid dolphin info body should response with error', async () => {
+			const jwtTokenForTestUser = await loginUser();
 			const { sex, ...test_dolphin_invalid } = test_dolphin;
 			const response = await request(app)
 				.post('/api/dolphins')
 				.set('Accept', 'application/json')
+				.set('Cookie', `token=${jwtTokenForTestUser}`)
 				.send(test_dolphin_invalid);
 			expect(response.status).toEqual(400);
 		});
 		test('request with the same dolphin name should response with error', async () => {
+			const jwtTokenForTestUser = await loginUser();
 			const response = await request(app)
 				.post('/api/dolphins')
 				.set('Accept', 'application/json')
+				.set('Cookie', `token=${jwtTokenForTestUser}`)
 				.send(test_dolphin);
 			expect(response.status).toEqual(409);
 		});
 	});
 
 	describe('PATCH /api/dolphins', () => {
-		test('request with valid body should response with a json object containing the info of updated dolphin', async () => {
+		test('request without login should response with 401 unauthorized', async () => {
 			const response = await request(app)
 				.patch('/api/dolphins/jest_dolphin1')
 				.set('Accept', 'application/json')
+				.send({ on_site: 0 });
+			expect(response.status).toEqual(401);
+		});
+		test('request with valid body should response with a json object containing the info of updated dolphin', async () => {
+			const jwtTokenForTestUser = await loginUser();
+			const response = await request(app)
+				.patch('/api/dolphins/jest_dolphin1')
+				.set('Accept', 'application/json')
+				.set('Cookie', `token=${jwtTokenForTestUser}`)
 				.send({ on_site: 0 });
 			expect(response.status).toEqual(200);
 			expect(response.header['content-type']).toMatch(/json/);
@@ -126,18 +186,28 @@ describe('dolphins api test', () => {
 			expect(response.body.on_site).toEqual(0);
 		});
 		test('request with invalid body should response with 400', async () => {
+			const jwtTokenForTestUser = await loginUser();
 			const response = await request(app)
 				.patch('/api/dolphins/jest_dolphin1')
 				.set('Accept', 'application/json')
+				.set('Cookie', `token=${jwtTokenForTestUser}`)
 				.send({ dolphin_id: 999 });
 			expect(response.status).toEqual(400);
 		});
 	});
 
 	describe('DELETE /api/dolphins', () => {
-		test('after delete the dolphin should not exist in database anymore', async () => {
+		test('request without login should response with 401 unauthorized', async () => {
 			const response = await request(app)
 				.delete('/api/dolphins/jest_dolphin2')
+				.send();
+			expect(response.status).toEqual(401);
+		});
+		test('after delete the dolphin should not exist in database anymore', async () => {
+			const jwtTokenForTestUser = await loginUser();
+			const response = await request(app)
+				.delete('/api/dolphins/jest_dolphin2')
+				.set('Cookie', `token=${jwtTokenForTestUser}`)
 				.send();
 			expect(response.status).toEqual(200);
 			request(app)

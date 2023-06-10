@@ -1,6 +1,9 @@
 const express = require('express');
 const router = express.Router();
 const { body } = require('express-validator');
+const {
+	authenticateToken,
+} = require('@carecentive/carecentive-core/source/Authentication');
 
 /**
  * Controllers
@@ -111,7 +114,7 @@ const validateRequestBody = [
 		.withMessage('Invalid year of birth'),
 	body('place_of_birth').notEmpty().withMessage('Place of birth is required'),
 ];
-router.post('/', validateRequestBody, createDolphin);
+router.post('/', authenticateToken, validateRequestBody, createDolphin);
 
 // Single dolphin
 /**
@@ -177,7 +180,12 @@ const patchDolphinValidationRules = [
 	}),
 ];
 
-router.patch('/:name', patchDolphinValidationRules, updateDolphin);
+router.patch(
+	'/:name',
+	authenticateToken,
+	patchDolphinValidationRules,
+	updateDolphin
+);
 
 /**
  * @swagger
@@ -193,6 +201,6 @@ router.patch('/:name', patchDolphinValidationRules, updateDolphin);
  *           type: string
  *         required: true
  */
-router.delete('/:name', deleteDolphin);
+router.delete('/:name', authenticateToken, deleteDolphin);
 
 module.exports = router;
