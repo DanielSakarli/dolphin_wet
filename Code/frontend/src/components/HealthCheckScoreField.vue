@@ -1,17 +1,12 @@
 <template>
 	<ion-item lines="none">
-		<ion-checkbox justify="space-between" :value="fulfilled"
-			>{{ $t('fulfilled') }}
+		<ion-checkbox justify="space-between" value="Score1"
+			>Score 1 (good)
 		</ion-checkbox>
 	</ion-item>
 	<ion-item lines="none">
-		<ion-checkbox justify="space-between" :value="noTendency"
-			>{{ $t('notFulfilled') }}
-		</ion-checkbox>
-	</ion-item>
-	<ion-item lines="none">
-		<ion-checkbox justify="space-between" :value="notFulfilled"
-			>{{ $t('noStatement') }}
+		<ion-checkbox justify="space-between" value="Score3"
+			>Score 3 (bad)
 		</ion-checkbox>
 	</ion-item>
 	<ion-item>
@@ -47,9 +42,6 @@ export default {
 	},
 	data() {
 		return {
-			fulfilled: this.$t('fulfilled'),
-			noTendency: this.$t('noTendency'),
-			notFulfilled: this.$t('notFulfilled'),
 			camera
 		};
 	},

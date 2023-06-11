@@ -285,6 +285,7 @@
 		</ion-item>
     </ion-list>
 	<!-- End of Checkboxes-->
+	<ion-range v-if=" subcriteria === 'fourthSubcriteriaFeeding'" aria-label="Dual Knobs Range" :dual-knobs="true" :value="{ lower: 20, upper: 80 }"></ion-range>
 </template>
 
 <script lang="ts">
@@ -303,6 +304,7 @@ import {
 	IonButton,
 	IonText,
 	IonCheckbox,
+	IonRange,
 } from '@ionic/vue';
 export default {
 	components: {
@@ -319,7 +321,8 @@ export default {
 		IonButtons,
 		IonButton,
 		IonText,
-		IonCheckbox
+		IonCheckbox,
+		IonRange
 	},
 	data() {
 		return {
@@ -352,7 +355,7 @@ export default {
 		handleClick(option: number) {
       		if (this.isChecked[option]) {
         // Wenn die gleiche Option erneut geklickt wird, wird sie zurückgesetzt
-        	this.isChecked = {};
+        		this.isChecked = {};
 			} else {
 				this.isChecked = { [option]: true };
 		}
