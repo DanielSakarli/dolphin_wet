@@ -38,7 +38,7 @@ exports.up = function (knex) {
 			table.tinyint('blood_hydration').unsigned(); //1, 2, 3
 			table.tinyint('fish_quality').unsigned(); //1, 3
 			table.tinyint('fish_variety').unsigned(); //1, 2, 3
-			table.timestamps(false, true); //Timestamp: created at, updated at
+			table.timestamps(true, true); //Timestamp: created at, updated at
 		}),
 	]);
 };

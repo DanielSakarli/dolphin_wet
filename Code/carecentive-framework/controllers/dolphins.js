@@ -46,7 +46,7 @@ async function createDolphin(req, res, next) {
 		}
 		const dolphinObj = req.body;
 		const dolphinCreated = await DolphinService.createDolphin(dolphinObj);
-		res.status(200).json(dolphinCreated);
+		res.status(201).json(dolphinCreated);
 	} catch (error) {
 		next(error);
 	}
@@ -77,8 +77,14 @@ async function updateDolphin(req, res, next) {
 /**
  * Delete a dolphin.
  */
-function deleteDolphin(req, res) {
-	res.send('delete dolphin');
+async function deleteDolphin(req, res, next) {
+	try {
+		const dolphinName = req.params.name;
+		await DolphinService.deleteDolphin(dolphinName);
+		res.sendStatus(204);
+	} catch (error) {
+		next(error);
+	}
 }
 
 module.exports = {

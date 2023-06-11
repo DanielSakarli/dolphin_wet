@@ -52,8 +52,8 @@
 		"coveragePathIgnorePatterns": [
 			"/node_modules/"
 		],
-		"modulePathIgnorePatterns": [
-			"/__test__/setupTestDb.js"
+		"testPathIgnorePatterns": [
+			"<rootDir>/__tests__/setup.js"
 		]
 	}
 }

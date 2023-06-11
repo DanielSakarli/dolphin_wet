@@ -16,7 +16,7 @@ class DolphinService {
 
 	/**
 	 * Get single dolphin based on name.
-	 * @params the name of dolphin.
+	 * @param {string} name - the name of dolphin.
 	 * @returns the info of dolphin in database.
 	 */
 	static async getOneDolphin(name) {
@@ -33,15 +33,16 @@ class DolphinService {
 
 	/**
 	 * Create a dolphin in the database
-	 * @param {name, sex, on_site, year_of_birth, place_of_birth} dolphinObj
+	 * @param {Object} dolphinObj - {name, sex, on_site, year_of_birth, place_of_birth}
 	 */
 	static async createDolphin(dolphinObj) {
 		try {
 			const { name, sex, on_site, year_of_birth, place_of_birth } = dolphinObj;
-			const dolphinExisted = await Dolphins.query()
+			const dolphinCountExisted = await Dolphins.query()
 				.select()
-				.where('name', '=', name);
-			if (dolphinExisted.length > 0) {
+				.where('name', '=', name)
+				.resultSize();
+			if (dolphinCountExisted > 0) {
 				const error = new Error(`Dolphin ${name} already existed!`);
 				error.statusCode = 409;
 				throw error;
@@ -61,8 +62,8 @@ class DolphinService {
 
 	/**
 	 * Update the information of the given dolphin in the database.
-	 * @param name the name of dolphin.
-	 * @param {*} updateInfo
+	 * @param {string} name - the name of dolphin.
+	 * @param {object} updateInfo - the information to be updated to a dolphin.
 	 */
 	static async updateDolphin(name, updateInfo) {
 		try {
@@ -74,6 +75,20 @@ class DolphinService {
 				.$query()
 				.patchAndFetch(updateInfo);
 			return updatedDolphin;
+		} catch (error) {
+			throw error;
+		}
+	}
+
+	/**
+	 * Delete the given dolphin in database.
+	 * @param {string} name - the name of dolphin.
+	 */
+	static async deleteDolphin(name) {
+		try {
+			const dolphinName = name.toLowerCase();
+			await Dolphins.query().delete().where('name', '=', dolphinName);
+			return;
 		} catch (error) {
 			throw error;
 		}

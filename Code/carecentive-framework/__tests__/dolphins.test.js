@@ -1,92 +1,44 @@
 const request = require('supertest');
 const app = require('../app');
+const {
+	setupTestBd,
+	loginUser,
+	registerUser,
+	test_dolphin,
+} = require('./setup');
 
-// CONSTANTS FOR TEST PURPOSE
-const userName = 'jest_test_user';
-const userEmail = 'jest_test@example.test';
-const userPassword = '123456789';
-const test_dolphin = {
-	name: 'post_dolphin_test',
-	sex: 1,
-	on_site: 1,
-	year_of_birth: 2010,
-	place_of_birth: 'Nuremberg',
-};
-
-function setupTestBd() {
-	const knexInstance = require('knex')({
-		client: 'mysql2',
-		connection: {
-			host: process.env.MYSQL_HOST,
-			database: process.env.MYSQL_DATABASE,
-			user: process.env.MYSQL_USER,
-			password: process.env.MYSQL_PASSWORD,
-		},
-	});
-	return knexInstance;
-}
 const knexInstance = setupTestBd();
-
-async function registerUser() {
-	// register a user
-	await request(app)
-		.post('/api/users/register')
-		.set('Content-Type', 'application/json')
-		.send({
-			name: userName,
-			email: userEmail,
-			password: userPassword,
-		});
-}
-async function loginUser() {
-	// login and get the jwt token
-	const userLogin = await request(app)
-		.post('/api/users/login')
-		.set('Content-Type', 'application/json')
-		.send({
-			username: userName,
-			password: userPassword,
-		});
-	const jwtToken = userLogin.body;
-	return jwtToken;
-}
 
 // Set up test database.
 beforeAll(async () => {
-	return knexInstance('dolphins')
-		.del()
-		.then(() => {
-			return knexInstance('dolphins').insert([
-				{
-					name: 'jest_dolphin1',
-					sex: 1,
-					on_site: 1,
-					year_of_birth: 2010,
-					place_of_birth: 'somewhere',
-				},
-				{
-					name: 'jest_dolphin2',
-					sex: 0,
-					on_site: 1,
-					year_of_birth: 2050,
-					place_of_birth: 'anywhere',
-				},
-			]);
-		});
+	await registerUser();
+	await knexInstance('dolphins').del();
+	return knexInstance('dolphins').insert([
+		{
+			name: 'jest_dolphin1',
+			sex: 1,
+			on_site: 1,
+			year_of_birth: 2010,
+			place_of_birth: 'somewhere',
+		},
+		{
+			name: 'jest_dolphin2',
+			sex: 0,
+			on_site: 1,
+			year_of_birth: 2050,
+			place_of_birth: 'anywhere',
+		},
+	]);
 });
 
 // Clean database.
 afterAll(() => {
-	knexInstance('dolphins')
-		.del()
-		.then(() => {
-			knexInstance.destroy();
-		});
-	return knexInstance('users')
-		.del()
-		.then(() => {
-			knexInstance.destroy();
-		});
+	return Promise.all([
+		knexInstance('dolphins').del(),
+		knexInstance('users').del(),
+	]).then(() => {
+		knexInstance.destroy();
+	});
 });
 
 /**
@@ -133,7 +85,6 @@ describe('dolphins api test', () => {
 		});
 
 		test('request with valid body should response with a json object containing the info of created dolphin ', async () => {
-			await registerUser();
 			const jwtTokenForTestUser = await loginUser();
 			const response = await request(app)
 				.post('/api/dolphins')
@@ -141,7 +92,7 @@ describe('dolphins api test', () => {
 				.set('Cookie', `token=${jwtTokenForTestUser}`)
 				.send(test_dolphin);
 			expect(response.header['content-type']).toMatch(/json/);
-			expect(response.status).toEqual(200);
+			expect(response.status).toEqual(201);
 			expect(response.body.name).toEqual(test_dolphin.name);
 		});
 		test('request with invalid dolphin info body should response with error', async () => {
@@ -209,7 +160,7 @@ describe('dolphins api test', () => {
 				.delete('/api/dolphins/jest_dolphin2')
 				.set('Cookie', `token=${jwtTokenForTestUser}`)
 				.send();
-			expect(response.status).toEqual(200);
+			expect(response.status).toEqual(204);
 			request(app)
 				.get('/api/dolphins/jest_dolphin2')
 				.set('Accept', 'application/json')
