@@ -15,6 +15,7 @@ async function loadDummyGoodFeeding(knex) {
 
 	const testGoodFeedingResult1 = {
 		dolphin_id: dolphin1_id,
+		user_id: 1,
 		body_condition_score: 3,
 		weight: 3,
 		weight_measured: 15.5,
@@ -25,6 +26,7 @@ async function loadDummyGoodFeeding(knex) {
 	};
 	const testGoodFeedingResult2 = {
 		dolphin_id: dolphin2_id,
+		user_id: 2,
 		body_condition_score: 3,
 		weight: 3,
 		weight_measured: 15.5,
@@ -35,6 +37,7 @@ async function loadDummyGoodFeeding(knex) {
 	};
 	const testGoodFeedingResult3 = {
 		dolphin_id: dolphin3_id,
+		user_id: 3,
 		body_condition_score: 3,
 		weight: 3,
 		weight_measured: 15.5,
