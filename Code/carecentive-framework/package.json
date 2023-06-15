@@ -4,7 +4,7 @@
 	"private": true,
 	"scripts": {
 		"start": "node ./bin/www",
-		"load-seed-data": "npx knex seed:run --knexfile ./knexfile.js",
+		"seed-dev": "npx knex seed:run --knexfile ./knexfile.js --specific=sample_data_dev.js",
 		"dev": "nodemon app.js",
 		"insmysql": "npm install mysql",
 		"core-migrate-all": "./node_modules/carecentive-core/npx knex migrate:latest",
