@@ -18,11 +18,7 @@ const {
  * Loads the test result of good_feeding.
  */
 const goodFeedingValidationRules = [
-	// body('user_id').isInt({ min: 1 }).withMessage('Invalid user ID'),
-	body('dolphin_id')
-		.notEmpty()
-		.isInt({ min: 1 })
-		.withMessage('Invalid dolphin ID'),
+	body('dolphin_name').notEmpty().isString().withMessage('Invalid dolphin name'),
 	body('body_condition_score')
 		.isIn([1, 2, 3])
 		.withMessage('Invalid body condition score'),

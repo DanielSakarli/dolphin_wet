@@ -24,7 +24,7 @@ exports.up = function (knex) {
 				.references('users.id')
 				.onDelete('SET NULL')
 				.onUpdate('CASCADE');
-			table.integer('dolphin_id').unsigned();
+			table.integer('dolphin_id').unsigned().notNullable();
 			// Foreign key constrains for dolphin_id.
 			table
 				.foreign('dolphin_id')
