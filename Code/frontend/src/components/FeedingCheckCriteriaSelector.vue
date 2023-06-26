@@ -228,13 +228,22 @@
     </ion-list>
 	<ion-list v-if=" subcriteria === 'secondSubcriteriaFeeding'">
 		<ion-item>
+			<ion-input label="Weekly weights:" placeholder="Enter weekly weights"> </ion-input>
+		</ion-item>
+		<ion-item>
+			<ion-input label="Target weight:" placeholder="Enter target weight"> </ion-input>
+		</ion-item>
+		<ion-item>
+      		<ion-input value="Score will be calculated automatically" :readonly="true"></ion-input>
+    	</ion-item>
+		<!--<ion-item>
 			<ion-label>Score 1</ion-label>
 			<ion-checkbox v-model="isChecked[1]" @click="handleClick(1)"></ion-checkbox>
 		</ion-item>
 		<ion-item>
 			<ion-label>Score 3</ion-label>
 			<ion-checkbox v-model="isChecked[3]" @click="handleClick(3)"></ion-checkbox>
-		</ion-item>
+		</ion-item>-->
     </ion-list>
 	<ion-list v-if=" subcriteria === 'thirdSubcriteriaFeeding'">
 		<ion-item>
@@ -304,7 +313,7 @@ import {
 	IonButton,
 	IonText,
 	IonCheckbox,
-	IonRange,
+	IonInput
 } from '@ionic/vue';
 export default {
 	components: {
@@ -322,7 +331,7 @@ export default {
 		IonButton,
 		IonText,
 		IonCheckbox,
-		IonRange
+		IonInput
 	},
 	data() {
 		return {

@@ -99,7 +99,7 @@ export default defineComponent({
 ion-menu ion-content{
 	--background: var(--ion-item-background, var(--ion-background-color, #fff));
 }
-on-menu.md ion-content {
+ion-menu.md ion-content {
   --padding-start: 8px;
   --padding-end: 8px;
   --padding-top: 20px;

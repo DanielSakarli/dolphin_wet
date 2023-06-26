@@ -385,9 +385,35 @@
       	</ion-content>
     </ion-modal>
 	<!--End of Scoring Description-->
+	<!--Start of Scoring-->
+	<ion-item lines="none">
+		<ion-checkbox justify="space-between" value="Score1"
+			>Score 1 (good)
+		</ion-checkbox>
+	</ion-item>
+	<ion-item lines="none">
+		<ion-checkbox justify="space-between" value="Score3"
+			>Score 3 (bad)
+		</ion-checkbox>
+	</ion-item>
+	<!--End of Scoring-->
+	<!--Start of photo section-->
+	<ion-item v-if=" subcriteria === 'thirdSubcriteriaHealth' || subcriteria === 'sixthSubcriteriaHealth' || subcriteria ==='twelfthSubcriteriaHealth'">
+		<ion-thumbnail slot="start">
+			<img :src = "previewImageUrl" />
+		</ion-thumbnail>
+		<ion-button type="button" fill="clear" @click="takePhoto">
+			<ion-icon slot="start" :icon="camera"></ion-icon>
+			{{ $t('photo') }}
+		</ion-button>
+	</ion-item>
+	<!--End of photo section-->
 </template>
 
 <script lang="ts">
+import {camera} from 'ionicons/icons';
+import {Camera, CameraResultType, CameraSource} from '@capacitor/camera';
+
 import {
 	IonItem,
 	IonList,
@@ -401,8 +427,12 @@ import {
 	IonTitle,
 	IonButtons,
 	IonButton,
-	IonText
+	IonText,
+	IonThumbnail,
+	IonIcon,
+	IonCheckbox
 } from '@ionic/vue';
+
 export default {
 	components: {
 		IonItem,
@@ -417,7 +447,10 @@ export default {
 		IonTitle,
 		IonButtons,
 		IonButton,
-		IonText
+		IonText,
+		IonThumbnail,
+		IonIcon,
+		IonCheckbox
 	},
 	data() {
 		return {
@@ -439,6 +472,8 @@ export default {
 			Score1: this.$t('fulfilled'),
 			noTendency: this.$t('noTendency'),
 			notFulfilled: this.$t('notFulfilled'),
+			camera,
+			previewImageUrl: '',
 		};
 	},
 	methods: {
@@ -454,8 +489,18 @@ export default {
         		this.isChecked = {};
 			} else {
 				this.isChecked = { [option]: true };
+			}
+   		},
+		async takePhoto(){
+			const photo = await Camera.getPhoto({
+				resultType: CameraResultType.Uri,
+				source: CameraSource.Camera,
+				quality: 60
+			});
+			if (photo.webPath !== undefined) {
+				this.previewImageUrl = photo.webPath;
+			}	
 		}
-    }
         /*emitSubcriteriaUpdated() {
             const subcriteria = this.subcriteria;
             
