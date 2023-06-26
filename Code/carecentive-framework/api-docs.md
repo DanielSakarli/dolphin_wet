@@ -1,12 +1,10 @@
 # Dolphin Wet APIs documentation
 
-
-
 ## Before we start
 
 You can access the apis here: [server_url]: http://88395-17112.pph-server.de or [server_ip]: 45.131.109.222
 
-!!! Before you dive into to use the apis, it is recommended to have some basic knowledge of [Axios](https://axios-http.com/docs/intro), https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise, [JWT authentication](https://jwt.io/introduction).
+!!! Before you dive into to use the apis, it is recommended to have some basic knowledge of [Axios](https://axios-http.com/docs/intro), [Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise), [JWT authentication](https://jwt.io/introduction).
 
 **Some video tutorial**:
 
@@ -18,10 +16,6 @@ JavaScript Nuggets is a series of JavaScript tutorial to teach you the important
 [Javascript Nuggets - Promises](https://www.youtube.com/watch?v=IBjmTlShf6U&list=PLnHJACx3NwAfRUcuKaYhZ6T5NRIpzgNGJ&index=15)
 
 [What is JWT authorization really about - Java Brains](https://www.youtube.com/watch?v=soGRyl9ztjI)
-
-
-
-
 
 ## API Usage
 
@@ -170,28 +164,28 @@ To change the password of the user, you will need to attach the JWT token of thi
   // Change the token with the current user!!!
   // This token is just a example, it won't work!!!
   const token =
-  	'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxLCJuYW1lIjoiam9obiBkb2UiLCJpYXQiOjE2ODY4NTU0NTUsImV4cCI6MTY4Njg5ODY1NX0.4moQ1iDnCYbbU0tSME3VfNMygXLgQ3A2FfvUXhQjQZI';
+      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxLCJuYW1lIjoiam9obiBkb2UiLCJpYXQiOjE2ODY4NTU0NTUsImV4cCI6MTY4Njg5ODY1NX0.4moQ1iDnCYbbU0tSME3VfNMygXLgQ3A2FfvUXhQjQZI';
   
   // Set up request config.
   const config = {
-  	headers: {
-  		'Cookie': `token=${token}`,
-  	},
+      headers: {
+          'Cookie': `token=${token}`,
+      },
   };
   const requestBody = {
-  	newPassword: 'new_secret_password',
+      newPassword: 'new_secret_password',
   };
   
   axios
-  	.post(url, requestBody, config)
-  	.then((response) => {
-  		console.log('HTTP status:', response.status);
-  		console.log('Response:', response.data);
-  	})
-  	.catch((error) => {
-  		console.error(error.response.status);
-  		console.error(error.response.data);
-  	});
+      .post(url, requestBody, config)
+      .then((response) => {
+          console.log('HTTP status:', response.status);
+          console.log('Response:', response.data);
+      })
+      .catch((error) => {
+          console.error(error.response.status);
+          console.error(error.response.data);
+      });
   ```
 
 **User Logout**
@@ -414,9 +408,6 @@ So if user want to send any data, he or she has to login again.
       }
       ```
 
-
-
-
 - example:
   
   ```javascript
@@ -499,11 +490,7 @@ So if user want to send any data, he or she has to login again.
 
 **Update the info for one dolphin**
 
-
-
 **Delete one dolphin**
-
-
 
 ### Good Feeding API
 

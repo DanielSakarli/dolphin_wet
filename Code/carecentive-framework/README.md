@@ -16,7 +16,6 @@
    ```shell
    cd carecentive-framework
    ```
-   
 
 3. Install the dependencies:
    
