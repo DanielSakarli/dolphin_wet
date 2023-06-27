@@ -4,6 +4,8 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var httplogger = require('morgan');
+// Middleware for cross-origin policy
+const cors = require('cors');
 
 setup.setup();
 const dotenv = require('dotenv');
@@ -33,9 +35,8 @@ var app = express();
 const dolphins = require('./routes/dolphins');
 const good_feeding = require('./routes/good_feeding');
 
-
-/** 
- * Swagger UI for api documentation 
+/**
+ * Swagger UI for api documentation
  */
 // const swaggerUI = require('swagger-ui-express');
 // const swaggerJsDoc = require('swagger-jsdoc');
@@ -79,6 +80,14 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+
+//By default, the cors middleware will allow requests from all origins (*).
+// However, for security purposes, it's recommended to specify the allowed origins explicitly.
+app.use(cors());
+const corsOptions = {
+	origin: 'http://localhost:8100', // Replace with your frontend app's origin
+};
+app.use(cors(corsOptions));
 
 /**
  * Core routes
