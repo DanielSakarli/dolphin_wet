@@ -25,6 +25,11 @@ import './theme/variables.css';
 import './theme/core.css';
 import { createI18n } from 'vue-i18n';
 import { globalizationList } from './data/globalization';
+import axios from 'axios';
+import BaseLayout from './views/BaseLayout.vue';
+//import VueAxios from 'vue-axios';
+
+
 
 /* Global components */
 const i18n = createI18n({
@@ -37,7 +42,11 @@ const i18n = createI18n({
 const app = createApp(App)
 	.use(IonicVue)
 	.use(router)
-	.use(i18n);
+	.use(i18n)
+	app.component('base-layout', BaseLayout)
+	//app.use(VueAxios, axios)
+	//app.provide('axios', app.config.globalProperties.axios)  // provide 'axios'
+	//app.mount('#app')
 
 // Register component
 

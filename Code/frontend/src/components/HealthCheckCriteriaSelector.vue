@@ -7,19 +7,11 @@
 				:placeholder="firstplaceholder"
 				okText="OK"
 				:cancelText="firstcancelText"
+				v-on:click="showDolphins"
 			>
-				<ion-select-option value="dolphin1">{{
-					$t('dolphin1')
-				}}</ion-select-option>
-				<ion-select-option value="dolphin2">{{
-					$t('dolphin2')
-				}}</ion-select-option>
-						<ion-select-option value="dolphin3">{{
-					$t('dolphin3')
-				}}</ion-select-option>
-				<ion-select-option value="dolphin4">{{
-					$t('dolphin4')
-				}}</ion-select-option>
+				<ion-select-option v-for="dolphin in dolphinList" v-bind:key="dolphin.id">
+					{{dolphin.name}}
+				</ion-select-option>
 			</ion-select>
 		</ion-item>
 		<ion-item>
@@ -433,6 +425,9 @@ import {
 	IonCheckbox
 } from '@ionic/vue';
 
+import axios from 'axios';
+const url = 'http://88395-17112.pph-server.de/api/dolphins';
+
 export default {
 	components: {
 		IonItem,
@@ -474,9 +469,24 @@ export default {
 			notFulfilled: this.$t('notFulfilled'),
 			camera,
 			previewImageUrl: '',
+			dolphinList: [ { id: 1, name: 'Dolphin 1' },
+						{ id: 2, name: 'Dolphin 2' },
+						{ id: 3, name: 'Dolphin 3' },],
 		};
 	},
+
 	methods: {
+		async showDolphins() {
+			console.log("Someone wants to selct a dolphin")
+			await axios.get(url)
+				.then ((response) => {
+        		console.log('Response:', response.data);
+				this.dolphinList = response.data;
+    			})
+			 	.catch ((e) => {
+				console.error(e);
+				});
+		},
         setOpenManual(isOpen: boolean) {
             this.isOpenManual = isOpen;
         },
@@ -508,6 +518,7 @@ export default {
         }*/
     }
 };
+
 </script>
 
 <style scoped>
