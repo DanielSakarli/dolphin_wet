@@ -61,15 +61,15 @@ const url = 'http://88395-17112.pph-server.de/api/good_feeding';
 
 // Change the token with the current user!!!
 // This token is just a example, it won't work!!!
-const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxLCJuYW1lIjoiam9obiBkb2UxIiwiaWF0IjoxNjg3ODk3NDM2LCJleHAiOjE2ODc5NDA2MzZ9.GJ6oHugDa8Y8nvheGdk0K8JKJFzlzk6lvz-D9DhEg10';
-// Set up request config.
-const config = {
-    headers: {
-        'Cookie': `token=${token}`,
-    },
-};
+// const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxLCJuYW1lIjoiam9obiBkb2UxIiwiaWF0IjoxNjg3ODk3NDM2LCJleHAiOjE2ODc5NDA2MzZ9.GJ6oHugDa8Y8nvheGdk0K8JKJFzlzk6lvz-D9DhEg10';
+// // Set up request config.
+// const config = {
+//     headers: {
+//         'Cookie': `token=${token}`,
+//     },
+// };
 const requestBody = {
-				dolphin_name: 'Dolly',
+				dolphin_name: 'test_dolphin1',
 				body_condition_score:3,
 				weight: 3,
 				weight_measured: 15.5,
@@ -106,7 +106,7 @@ export default defineComponent({
      		if (confirmed) {
 				console.log("Data is stored")
 				await axios
-						.post(url, requestBody, config)
+						.post(url, requestBody)
 						.then((response) => {
 							console.log('Response:', response.data);
 							this.confirmRefresh();
