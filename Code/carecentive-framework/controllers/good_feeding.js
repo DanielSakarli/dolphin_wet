@@ -15,7 +15,8 @@ async function setResult(req, res, next) {
 		}
 		// After gone through the authenticateToken middleware
 		// the data of user is in the req.authData
-		const { user_id } = req.authData;
+		// const { user_id } = req.authData;
+		const user_id = 1;
 
 		const {
 			dolphin_name,
