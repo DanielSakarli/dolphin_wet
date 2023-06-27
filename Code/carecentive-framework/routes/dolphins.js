@@ -114,7 +114,8 @@ const validateRequestBody = [
 		.withMessage('Invalid year of birth'),
 	body('place_of_birth').notEmpty().withMessage('Place of birth is required'),
 ];
-router.post('/', authenticateToken, validateRequestBody, createDolphin);
+// router.post('/', authenticateToken, validateRequestBody, createDolphin);
+router.post('/', validateRequestBody, createDolphin);
 
 // Single dolphin
 /**
@@ -180,12 +181,13 @@ const patchDolphinValidationRules = [
 	}),
 ];
 
-router.patch(
-	'/:name',
-	authenticateToken,
-	patchDolphinValidationRules,
-	updateDolphin
-);
+// router.patch(
+// 	'/:name',
+// 	authenticateToken,
+// 	patchDolphinValidationRules,
+// 	updateDolphin
+// );
+router.patch('/:name', patchDolphinValidationRules, updateDolphin);
 
 /**
  * @swagger
@@ -201,6 +203,7 @@ router.patch(
  *           type: string
  *         required: true
  */
-router.delete('/:name', authenticateToken, deleteDolphin);
+// router.delete('/:name', authenticateToken, deleteDolphin);
+router.delete('/:name', deleteDolphin);
 
 module.exports = router;

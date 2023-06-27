@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const { body, query } = require('express-validator');
+const { body } = require('express-validator');
 const {
 	authenticateToken,
 } = require('@carecentive/carecentive-core/source/Authentication');
@@ -18,7 +18,10 @@ const {
  * Loads the test result of good_feeding.
  */
 const goodFeedingValidationRules = [
-	body('dolphin_name').notEmpty().isString().withMessage('Invalid dolphin name'),
+	body('dolphin_name')
+		.notEmpty()
+		.isString()
+		.withMessage('Invalid dolphin name'),
 	body('body_condition_score')
 		.isIn([1, 2, 3])
 		.withMessage('Invalid body condition score'),
@@ -35,11 +38,13 @@ const goodFeedingValidationRules = [
 	body('fish_quality').isIn([1, 3]).withMessage('Invalid fish quality'),
 	body('fish_variety').isIn([1, 2, 3]).withMessage('Invalid fish variety'),
 ];
-router.post('/', authenticateToken, goodFeedingValidationRules, setResult);
+// router.post('/', authenticateToken, goodFeedingValidationRules, setResult);
+router.post('/', goodFeedingValidationRules, setResult);
 
 /**
  * Gets the test result of given day.
  */
-router.get('/', validateDateQueryParam, getResultWithTheDate);
+// router.get('/', validateDateQueryParam, getResultWithTheDate);
+router.get('/', getResultWithTheDate);
 
 module.exports = router;
