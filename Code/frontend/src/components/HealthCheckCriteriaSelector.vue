@@ -9,7 +9,7 @@
 				:cancelText="firstcancelText"
 				v-on:click="showDolphins"
 			>
-				<ion-select-option v-for="dolphin in dolphinList" v-bind:key="dolphin.id">
+				<ion-select-option v-for="dolphin in dolphinList" v-bind:key="dolphin.name">
 					{{dolphin.name}}
 				</ion-select-option>
 			</ion-select>
@@ -469,9 +469,7 @@ export default {
 			notFulfilled: this.$t('notFulfilled'),
 			camera,
 			previewImageUrl: '',
-			dolphinList: [ { id: 1, name: 'Dolphin 1' },
-						{ id: 2, name: 'Dolphin 2' },
-						{ id: 3, name: 'Dolphin 3' },],
+			dolphinList: [] as {name: string}[],
 		};
 	},
 

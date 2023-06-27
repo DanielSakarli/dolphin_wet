@@ -7,25 +7,12 @@
 				:placeholder="firstplaceholder"
 				okText="OK"
 				:cancelText="firstcancelText"
-			>
-				<ion-select-option value="dolphin1">{{
-					$t('dolphin1')
-				}}</ion-select-option>
-				<ion-select-option value="dolphin2">{{
-					$t('dolphin2')
-				}}</ion-select-option>
-						<ion-select-option value="dolphin3">{{
-					$t('dolphin3')
-				}}</ion-select-option>
-				<ion-select-option value="dolphin4">{{
-					$t('dolphin4')
-				}}</ion-select-option>
-				<ion-select-option value="dolphin4">{{
-					$t('dolphin5')
-				}}</ion-select-option>
-				<ion-select-option value="dolphin4">{{
-					$t('dolphin6')
-				}}</ion-select-option>
+				v-on:click="showDolphins"
+				v-model= "selectedDolphin"
+				>
+				<ion-select-option v-for="dolphin in dolphinList" v-bind:key="dolphin.name">
+					{{dolphin.name}}
+				</ion-select-option>
 			</ion-select>
 		</ion-item>
 		<ion-item>
@@ -59,6 +46,7 @@
 				:placeholder="thirdplaceholder"
 				okText="OK"
 				:cancelText="firstcancelText"
+				v-model="selectedTest"
 			>
 				<ion-select-option v-if=" criteria === 'firstCriteriaFeeding'" value="firstSubcriteriaFeeding">{{
 					$t('firstSubcriteriaFeeding')
@@ -313,8 +301,11 @@ import {
 	IonButton,
 	IonText,
 	IonCheckbox,
-	IonInput
+	IonInput,
+	IonRange
 } from '@ionic/vue';
+import axios from 'axios';
+
 export default {
 	components: {
 		IonItem,
@@ -331,7 +322,8 @@ export default {
 		IonButton,
 		IonText,
 		IonCheckbox,
-		IonInput
+		IonInput,
+		IonRange
 	},
 	data() {
 		return {
@@ -352,9 +344,24 @@ export default {
 			Score1: this.$t('fulfilled'),
 			noTendency: this.$t('noTendency'),
 			notFulfilled: this.$t('notFulfilled'),
+			dolphinList: [] as {name: string}[],
+			url: 'http://88395-17112.pph-server.de/api/dolphins',
+			selectedDolphin: '',
+			selectedTest: '',
 		};
 	},
 	methods: {
+		async showDolphins() {
+			console.log("Someone wants to selct a dolphin")
+			await axios.get(this.url)
+				.then ((response) => {
+        		console.log('Response:', response.data);
+				this.dolphinList = response.data;
+    			})
+			 	.catch ((e) => {
+				console.error(e);
+				});
+		},
         setOpenManual(isOpen: boolean) {
             this.isOpenManual = isOpen;
         },
@@ -367,8 +374,8 @@ export default {
         		this.isChecked = {};
 			} else {
 				this.isChecked = { [option]: true };
-		}
-    }
+			}
+    	},
         /*emitSubcriteriaUpdated() {
             const subcriteria = this.subcriteria;
             
