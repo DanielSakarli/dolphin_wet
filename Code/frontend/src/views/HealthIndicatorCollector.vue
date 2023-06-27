@@ -20,16 +20,11 @@
 					</ion-select>
     			</ion-item> -->
 			<HealthCheckCriteriaSelector />
-			<HealthCheckScoreField />
 			<CheckComments />
 		</ion-content>
 
 		<ion-footer>
 			<ion-toolbar>
-				<!--<ion-button color="light" slot="start">
-					<ion-icon src="/icons/arrow-back-outline.svg"> </ion-icon>
-					{{$t('buttonPrevious')}}
-				</ion-button>-->
 				<ion-button color="light" slot="end" @click="confirmRefresh">
 					<ion-icon src="/icons/arrow-forward-outline.svg"></ion-icon>
 					{{$t('buttonNext')}}
@@ -54,7 +49,6 @@ import {
 } from '@ionic/vue';
 // Import customized components
 import HealthCheckCriteriaSelector from '@/components/HealthCheckCriteriaSelector.vue';
-import HealthCheckScoreField from '@/components/HealthCheckScoreField.vue';
 import CheckComments from '@/components/CheckComments.vue';
 import { defineComponent } from 'vue';
 
@@ -74,7 +68,6 @@ export default defineComponent({
 		IonPage,
 		IonButton,
 		HealthCheckCriteriaSelector,
-		HealthCheckScoreField,
 		CheckComments,
 		IonButtons,
 		IonBackButton

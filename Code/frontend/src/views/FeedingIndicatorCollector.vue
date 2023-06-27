@@ -4,8 +4,8 @@
 		<ion-header>
 			<ion-toolbar>
 				<ion-title
-					>{{ $t('topicFeeding') }}</ion-title
-				>
+					>{{ $t('topicFeeding') }}
+				</ion-title>
 				<ion-buttons slot ="start">
                     <ion-back-button defaultHref="/folder/Evaluate"></ion-back-button>
                 </ion-buttons>
@@ -29,7 +29,7 @@
 					<ion-icon src="/icons/arrow-back-outline.svg"> </ion-icon>
 					{{$t('buttonPrevious')}}
 				</ion-button>-->
-				<ion-button color="light" slot="end" @click="confirmRefresh">
+				<ion-button color="light" slot="end" @click="confirmRefresh" >
 					<ion-icon src="/icons/arrow-forward-outline.svg"></ion-icon>
 					{{$t('buttonNext')}}
 				</ion-button>
@@ -91,6 +91,7 @@ export default defineComponent({
     }
 	},
 });
+
 </script>
 
 <style scoped>

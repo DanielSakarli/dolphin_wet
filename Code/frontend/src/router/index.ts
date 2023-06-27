@@ -1,17 +1,28 @@
 import { createRouter, createWebHistory } from '@ionic/vue-router';
 import { RouteRecordRaw } from 'vue-router';
 import EvaluationMenu from '@/views/EvaluationMenu.vue';
-//import DolphinEvaluationMenu from '@views/DolphinEvaluationMenu';
 
 
 const routes: Array<RouteRecordRaw> = [
 	{
 		path: '/',
-		redirect: '/folder/Evaluate',
+		redirect: '/home',
 	},
 	{
 		path: '/detail',
 		redirect: '/folder/Evaluate',
+	},
+	{
+		path: '/home',
+		component: () => import ('@/views/LoginPage.vue')
+	},
+	{
+		path: '/login',
+		component: () => import ('@/views/LoginFormPage.vue')
+	},
+	{
+		path: '/signup',
+		component: () => import ('@/views/SignupPage.vue')
 	},
 	{
 		path: '/folder/Evaluate',

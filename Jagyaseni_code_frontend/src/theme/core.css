@@ -1,0 +1,11 @@
+ion-toolbar{
+    --background: var(--ion-color-tertiary);
+    --color: var(--ion-color-primary-contrast)
+}
+ion-content.background{
+    --background: url(../back.jpg) 0 0/100% 100% no-repeat;
+}
+
+ion-back-button {
+    --color: var{--ion-color-step-950}
+}
