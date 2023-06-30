@@ -20,7 +20,6 @@
 					</ion-select>
     			</ion-item> -->
 			<FeedingCheckCriteriaSelector />
-			<CheckComments />
 		</ion-content>
 
 		<ion-footer>
@@ -53,7 +52,7 @@ import {
 } from '@ionic/vue';
 // Import customized components
 import FeedingCheckCriteriaSelector from '@/components/FeedingCheckCriteriaSelector.vue';
-import CheckComments from '@/components/CheckComments.vue';
+import selectedDolphin from '@/components/FeedingCheckCriteriaSelector.vue';
 import { defineComponent } from 'vue';
 import axios from 'axios';
 const url = 'http://88395-17112.pph-server.de/api/good_feeding';
@@ -61,7 +60,7 @@ const url = 'http://88395-17112.pph-server.de/api/good_feeding';
 
 // Change the token with the current user!!!
 // This token is just a example, it won't work!!!
-const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxLCJuYW1lIjoiam9obiBkb2UxIiwiaWF0IjoxNjg3ODk3NDM2LCJleHAiOjE2ODc5NDA2MzZ9.GJ6oHugDa8Y8nvheGdk0K8JKJFzlzk6lvz-D9DhEg10';
+const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxLCJuYW1lIjoiam9obiBkb2UxIiwiaWF0IjoxNjg4MTU4NTc2LCJleHAiOjE2ODgyMDE3NzZ9.Q_cEGGNZ_UeJ8kOczjATpR-Yb9PULYlQnJ_ZoKPUuVg"
 // Set up request config.
 const config = {
     headers: {
@@ -69,7 +68,7 @@ const config = {
     },
 };
 const requestBody = {
-				dolphin_name: 'Dolly',
+				dolphin_name: 'test_dolphin2',
 				body_condition_score:3,
 				weight: 3,
 				weight_measured: 15.5,
@@ -95,7 +94,6 @@ export default defineComponent({
 		IonPage,
 		IonButton,
 		FeedingCheckCriteriaSelector,
-		CheckComments,
 		IonButtons,
 		IonBackButton
 	},
