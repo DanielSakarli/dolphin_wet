@@ -4,6 +4,7 @@
 
 exports.up = function (knex) {
 	return Promise.all([
+		// Dolphins table
 		knex.schema.createTable('dolphins', function (table) {
 			table.increments('dolphin_id').primary();
 			table.string('name');
@@ -15,6 +16,7 @@ exports.up = function (knex) {
 			table.timestamps(false, true); //Timestamp: created at, updated at
 		}),
 
+		// good_feeding table
 		knex.schema.createTable('good_feeding', function (table) {
 			table.increments('feeding_record_id').primary();
 			table.integer('user_id').unsigned();
@@ -39,6 +41,66 @@ exports.up = function (knex) {
 			table.tinyint('fish_quality').unsigned(); //1, 3
 			table.tinyint('fish_variety').unsigned(); //1, 2, 3
 			table.timestamps(true, true); //Timestamp: created at, updated at
+		}),
+
+		// good_health table
+		knex.schema.createTable('good_health', function (table) {
+			table.increments('health_record_id').primary();
+			table
+				.integer('user_id')
+				.references('users.id')
+				.onDelete('SET NULL')
+				.onUpdate('CASCADE');
+			table
+				.integer('dolphin_id')
+				.references('dolphins.dolphin_id')
+				.onDelete('CASCADE')
+				.onUpdate('CASCADE');
+
+			table.tinyint('normal_floatability'); //1, 3
+			table.tinyint('eye_lesions'); //1, 3
+			table.tinyint('visual_cues'); //1, 3
+			table.tinyint('mouth_exam'); //1, 3
+			table.tinyint('respiratory_disease'); //1, 3
+			table.tinyint('force_expiration'); //1, 3
+			table.tinyint('external_disease_signs'); //1, 3
+			table.string('eye_photo_path');
+			table.string('teeth_photo_path');
+			table.timestamps(false, true); //Timestamp: created at, updated at
+		}),
+
+		// good_housing table
+		knex.schema.createTable('good_housing', function (table) {
+			table.increments('housing_record_id').primary();
+
+			table
+				.integer('user_id')
+				.references('users.id')
+				.onDelete('SET NULL')
+				.onUpdate('CASCADE');
+			table
+				.integer('dolphin_id')
+				.references('dolphins.dolphin_id')
+				.onDelete('CASCADE')
+				.onUpdate('CASCADE');
+
+			table.integer('enclosure_barrier_safety'); //1, 3
+
+			table.integer('foreign_body_ingestion'); //1, 3
+
+			table.integer('pool_design'); //1, 3
+
+			table.integer('forced_loneliness'); //1, 3
+
+			table.integer('water_quality'); //1, 3
+
+			table.integer('water_temperature'); //1, 3
+
+			table.integer('sufficient_shade'); //1, 3
+
+			table.integer('acoustic_comfort'); //1, 3
+
+			table.timestamps(false, true); //Timestamp: created at, updated at
 		}),
 	]);
 };
