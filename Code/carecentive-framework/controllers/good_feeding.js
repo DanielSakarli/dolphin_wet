@@ -1,6 +1,10 @@
 const DolphinService = require('../services/DolphinService');
 const GoodFeedingService = require('../services/GoodFeedingService');
 const { validationResult } = require('express-validator');
+const isUserAuth = require('./authSwitch');
+const {
+	authenticateToken,
+} = require('@carecentive/carecentive-core/source/Authentication');
 
 /**
  * Controller of post request of /api/good_feeding.
@@ -8,6 +12,9 @@ const { validationResult } = require('express-validator');
  */
 async function setResult(req, res, next) {
 	try {
+		if (isUserAuth) {
+			authenticateToken(req, res, next);
+		}
 		const errors = validationResult(req);
 		if (!errors.isEmpty()) {
 			// Handle validation errors

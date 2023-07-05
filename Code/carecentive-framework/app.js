@@ -35,30 +35,6 @@ var app = express();
 const dolphins = require('./routes/dolphins');
 const good_feeding = require('./routes/good_feeding');
 
-/**
- * Swagger UI for api documentation
- */
-// const swaggerUI = require('swagger-ui-express');
-// const swaggerJsDoc = require('swagger-jsdoc');
-// const options = {
-// 	definition: {
-// 		openapi: '3.0.0',
-// 		info: {
-// 			title: 'Dolphin Wet API',
-// 			version: '0.0.1',
-// 			description: 'Dolphin Wet is about dolphin welfare',
-// 		},
-// 		servers: [
-// 			{
-// 				url: `http://localhost:${process.env.HTTP_PORT}`,
-// 			},
-// 		],
-// 	},
-// 	apis: ['./routes/*.js'],
-// };
-// const specs = swaggerJsDoc(options);
-// app.use('/api-docs', swaggerUI.serve, swaggerUI.setup(specs));
-
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
@@ -81,8 +57,11 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-//By default, the cors middleware will allow requests from all origins (*).
-// However, for security purposes, it's recommended to specify the allowed origins explicitly.
+/**
+ * Set up cors policy
+ * By default, the cors middleware will allow requests from all origins (*).
+ * However, for security purposes, it's recommended to specify the allowed origins explicitly.
+ */
 app.use(cors());
 const corsOptions = {
 	origin: 'http://localhost:8100', // Replace with your frontend app's origin
