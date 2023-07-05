@@ -65,7 +65,7 @@ describe('DolphinDAO tests', () => {
 		expect(dolphinByName.name).toBe(dolphinName);
 	});
 
-	test('getDolphinByName: get dolphin by name which is not in database should return undefined', async () => {
+	test('getDolphinByName: get dolphin by name which is not in database should should return undefined', async () => {
 		const myDolphinDao = new dolphinDAO();
 		const dolphinByName = await myDolphinDao.getDolphinByName('imagination');
 		expect(dolphinByName).toBeFalsy();

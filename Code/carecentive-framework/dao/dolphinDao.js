@@ -49,9 +49,9 @@ class DolphinDAO {
 
 			// throws error if there is no dolphin with given name.
 			// 404: not found
-			if (!dolphin) {
-				throw new DolphinError(`Dolphin "${name} not found"`, 404);
-			}
+			// if (!dolphin) {
+			// 	throw new DolphinError(`Dolphin "${name} not found"`, 404);
+			// }
 
 			return dolphin;
 		} catch (error) {
@@ -73,11 +73,7 @@ class DolphinDAO {
 		try {
 			const lowerCaseName = this.sanitizeName(dolphin.name);
 
-			const dolphinData = await this.#dataModel
-				.query()
-				.select()
-				.where('name', '=', lowerCaseName)
-				.first();
+			const dolphinData = await this.getDolphinByName(lowerCaseName);
 
 			// throws error when the given dolphin name already exists in database.
 			// 409: conflict
@@ -106,6 +102,12 @@ class DolphinDAO {
 		try {
 			const dolphinName = this.sanitizeName(name);
 			const dolphinToBeUpdate = await this.getDolphinByName(dolphinName);
+
+			// If the given dolphin doesn't exist in database,
+			// 404: not found
+			if (!dolphinToBeUpdate) {
+				throw new DolphinError(`Dolphin "${dolphinName}" not found`, 404);
+			}
 
 			const updatedDolphin = await dolphinToBeUpdate
 				.$query()

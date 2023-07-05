@@ -53,7 +53,8 @@
 		],
 		"testPathIgnorePatterns": [
 			"<rootDir>/__tests__/setup.js",
-			"<rootDir>/__tests__/good_feeding.test.js"
+			"<rootDir>/__tests__/dolphins.test.js",
+			"<rootDir>/__tests__/dolphinDao.test.js"
 		]
 	}
 }

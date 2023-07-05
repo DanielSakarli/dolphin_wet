@@ -2,9 +2,6 @@ const DolphinService = require('../services/DolphinService');
 const GoodFeedingService = require('../services/GoodFeedingService');
 const { validationResult } = require('express-validator');
 const isUserAuth = require('./authSwitch');
-const {
-	authenticateToken,
-} = require('@carecentive/carecentive-core/source/Authentication');
 
 /**
  * Controller of post request of /api/good_feeding.
@@ -12,18 +9,21 @@ const {
  */
 async function setResult(req, res, next) {
 	try {
-		if (isUserAuth) {
-			authenticateToken(req, res, next);
-		}
 		const errors = validationResult(req);
 		if (!errors.isEmpty()) {
 			// Handle validation errors
 			return res.status(400).json({ error: errors.array() });
 		}
+
 		// After gone through the authenticateToken middleware
 		// the data of user is in the req.authData
-		// const { user_id } = req.authData;
-		const user_id = 1;
+		let userID;
+		if (isUserAuth) {
+			const { user_id } = req.authData;
+			userID = user_id;
+		} else {
+			userID = 1;
+		}
 
 		const {
 			dolphin_name,
@@ -36,16 +36,18 @@ async function setResult(req, res, next) {
 			fish_variety,
 		} = req.body;
 
-		// const { dolphin_id } = await DolphinService.getOneDolphin(dolphin_name);
-		const dolphin_obj = await DolphinService.getOneDolphin(dolphin_name);
-		const dolphin_id = dolphin_obj[0].dolphin_id;
-
-		if (!dolphin_id) {
+		// If dolphin is not existed in database,
+		// 400: bad request
+		if (!DolphinService.isDolphinExisted(dolphin_name)) {
 			return res.status(400).json({ error: 'dolphin not exists in database!' });
 		}
 
+		// Gets dolphin_id for test result.
+		const dolphin_obj = await DolphinService.getOneDolphin(dolphin_name);
+		const dolphin_id = dolphin_obj.dolphin_id;
+
 		const testResult = {
-			user_id,
+			user_id: userID,
 			dolphin_id,
 			body_condition_score,
 			weight,
@@ -57,7 +59,7 @@ async function setResult(req, res, next) {
 		};
 		const testResultAdded = await GoodFeedingService.loadTestResult(testResult);
 
-		res.status(201).json(testResultAdded);
+		res.status(201).json({ dolphin_name, ...testResultAdded });
 	} catch (error) {
 		next(error);
 	}

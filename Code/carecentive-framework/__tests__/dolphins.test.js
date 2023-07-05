@@ -2,6 +2,7 @@ const request = require('supertest');
 const app = require('../app');
 const { setupTestDb, testUser, testDolphin } = require('./setup');
 const isUserAuth = require('../controllers/authSwitch');
+const DolphinService = require('../services/DolphinService');
 
 const knexInstance = setupTestDb();
 
@@ -38,6 +39,15 @@ describe('dolphins api test', () => {
 		year_of_birth: 2000,
 		place_of_birth: 'test',
 	};
+
+	describe('DolphinService', () => {
+		test('DolphinService.isDolphinExisted', async () => {
+			const a = await DolphinService.isDolphinExisted(testDolphins[0].name);
+			expect(a).toBe(true);
+			const b = await DolphinService.isDolphinExisted('imagination');
+			expect(b).toBe(false);
+		});
+	});
 
 	describe('GET /api/dolphins', () => {
 		test('should response with a list of json object containing the dolphin info', async () => {
@@ -118,7 +128,7 @@ describe('dolphins api test', () => {
 	describe('PATCH /api/dolphins', () => {
 		test('request without login should response with 401 unauthorized', async () => {
 			const response = await request(app)
-				.patch(`/api/dolphins/${testDolphins[1]}`)
+				.patch(`/api/dolphins/${testDolphins[1].name}`)
 				.set('Accept', 'application/json')
 				.send({ on_site: 0 });
 			expect(response.status).toEqual(401);
@@ -146,25 +156,25 @@ describe('dolphins api test', () => {
 		});
 	});
 
-	// describe('DELETE /api/dolphins', () => {
-	// 	test('request without login should response with 401 unauthorized', async () => {
-	// 		const response = await request(app)
-	// 			.delete('/api/dolphins/jest_dolphin2')
-	// 			.send();
-	// 		expect(response.status).toEqual(401);
-	// 	});
-	// 	test('after delete the dolphin should not exist in database anymore', async () => {
-	// 		const jwtTokenForTestUser = await loginUser();
-	// 		const response = await request(app)
-	// 			.delete('/api/dolphins/jest_dolphin2')
-	// 			.set('Cookie', `token=${jwtTokenForTestUser}`)
-	// 			.send();
-	// 		expect(response.status).toEqual(204);
-	// 		request(app)
-	// 			.get('/api/dolphins/jest_dolphin2')
-	// 			.set('Accept', 'application/json')
-	// 			.send()
-	// 			.expect(404);
-	// 	});
-	// });
+	describe('DELETE /api/dolphins', () => {
+		test('request without login should response with 401 unauthorized', async () => {
+			const response = await request(app)
+				.delete(`/api/dolphins/${testDolphins[0].name}`)
+				.send();
+			expect(response.status).toEqual(401);
+		});
+		test('after delete the dolphin should not exist in database anymore', async () => {
+			const jwtTokenForTestUser = await testUser().loginUser();
+			const response = await request(app)
+				.delete(`/api/dolphins/${testDolphins[0].name}`)
+				.set('Cookie', `token=${jwtTokenForTestUser}`)
+				.send();
+			expect(response.status).toEqual(204);
+			request(app)
+				.get(`/api/dolphins/${testDolphins[0].name}`)
+				.set('Accept', 'application/json')
+				.send()
+				.expect(404);
+		});
+	});
 });

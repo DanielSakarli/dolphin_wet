@@ -3,6 +3,25 @@ const { DolphinError } = require('../source/Errors');
 
 class DolphinService {
 	/**
+	 * Determines whether a dolphin with given name is in database.
+	 * @param {String} name
+	 * @returns {Promise<Boolean>} whether the dolphin with given name is in database.
+	 */
+	static async isDolphinExisted(name) {
+		try {
+			const myDolphinDao = new DolphinDAO();
+			const dolphin = await myDolphinDao.getDolphinByName(name);
+			if (dolphin) {
+				return true;
+			} else {
+				return false;
+			}
+		} catch (error) {
+			throw error;
+		}
+	}
+
+	/**
 	 * Get all dolphins info from database.
 	 * @returns {Promise<Array>} an array of all dolphin info in the database.
 	 */
@@ -24,8 +43,14 @@ class DolphinService {
 	static async getOneDolphin(name) {
 		try {
 			const myDolphinDao = new DolphinDAO();
-			// DolphinDAO will handle 404 error.
 			const dolphin = await myDolphinDao.getDolphinByName(name);
+
+			// If dolphin with given name doesn't exist in database,
+			// 404: not found
+			if (!dolphin) {
+				throw new DolphinError(`Dolphin "${name}" not found`, 404);
+			}
+
 			return dolphin;
 		} catch (error) {
 			throw error;

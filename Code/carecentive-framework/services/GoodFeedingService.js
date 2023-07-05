@@ -8,27 +8,8 @@ class GoodFeedingService {
 	 */
 	static async loadTestResult(result) {
 		try {
-			const {
-				user_id,
-				dolphin_id,
-				body_condition_score,
-				weight,
-				weight_measured,
-				kcal_calculations,
-				blood_hydration,
-				fish_quality,
-				fish_variety,
-			} = result;
 			const testResult = await GoodFeeding.query().insert({
-				user_id,
-				dolphin_id,
-				body_condition_score,
-				weight,
-				weight_measured,
-				kcal_calculations,
-				blood_hydration,
-				fish_quality,
-				fish_variety,
+				...result,
 			});
 			return testResult;
 		} catch (error) {

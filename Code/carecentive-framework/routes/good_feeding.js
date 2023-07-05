@@ -3,6 +3,8 @@ const router = express.Router();
 const {
 	goodFeedingPostValidateRequestBody,
 } = require('../validators/dolphinWetValidators');
+const { validateDateQueryParam } = require('../validators/dateValidators');
+const { authenticateTokenWithSwitch } = require('../controllers/authSwitch');
 
 /**
  * Controllers
@@ -15,11 +17,16 @@ const {
 /**
  * Loads the test result of good_feeding.
  */
-router.post('/', goodFeedingPostValidateRequestBody, setResult);
+router.post(
+	'/',
+	authenticateTokenWithSwitch,
+	goodFeedingPostValidateRequestBody,
+	setResult
+);
 
 /**
  * Gets the test result of given day.
  */
-router.get('/', getResultWithTheDate);
+router.get('/', validateDateQueryParam, getResultWithTheDate);
 
 module.exports = router;
