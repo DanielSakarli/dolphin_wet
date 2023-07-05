@@ -47,23 +47,17 @@
     <ion-modal :is-open="isOpenManual">
     	<ion-header>
 			<ion-toolbar>
-				<ion-title v-if=" subcriteria === 'body_condition_score'"
-					>{{$t('body_condition_score')}}
+				<ion-title v-if=" criteria === 'firstCriteriaFeeding'"
+					>{{$t('firstCriteriaFeeding')}}
 				</ion-title>
-				<ion-title v-else-if=" subcriteria === 'weight_measured'"
-					>{{$t('weight_measured')}}
+				<ion-title v-else-if=" criteria === 'secondCriteriaFeeding'"
+					>{{$t('secondCriteriaFeeding')}}
 				</ion-title>
-				<ion-title v-else-if=" subcriteria === 'kcal_calculations'"
-					>{{$t('kcal_calculations')}}
+				<ion-title v-else-if=" criteria === 'thirdCriteriaFeeding'"
+					>{{$t('thirdCriteriaFeeding')}}
 				</ion-title>
-                <ion-title v-else-if=" subcriteria === 'fourthSubcriteriaFeeding'"
-					>{{$t('fourthSubcriteriaFeeding')}}
-				</ion-title>
-				<ion-title v-else-if=" subcriteria === 'fifthSubcriteriaFeeding'"
-					>{{$t('fifthSubcriteriaFeeding')}}
-				</ion-title>
-				<ion-title v-else-if=" subcriteria === 'sixthSubcriteriaFeeding'"
-					>{{$t('sixthSubcriteriaFeeding')}}
+                <ion-title v-else-if=" criteria === 'fourthCriteriaFeeding'"
+					>{{$t('fourthCriteriaFeeding')}}
 				</ion-title>
 				<ion-buttons slot="end">
 					<ion-button @click="setOpenManual(false)">{{ $t('close')}}</ion-button>
@@ -71,17 +65,17 @@
 			</ion-toolbar>
       	</ion-header>
       	<ion-content class="ion-padding">
-			<p v-if=" subcriteria === 'body_condition_score'">
+			<p v-if=" criteria === 'firstCriteriaFeeding'">
+				{{ $t('userManualHungerThirst') }}
         	</p>
-			<p v-if=" subcriteria === 'weight_measured'">
-					</p>
-			<p v-if=" subcriteria === 'kcal_calculations'">
+			<p v-if=" criteria === 'secondCriteriaFeeding'">
+				{{ $t('userManualAdequateDiet') }}
+			</p>
+			<p v-if=" criteria === 'thirdCriteriaFeeding'">
+				{{ $t('userManualFoodQuality') }}
             </p>
-            <p v-if=" subcriteria === 'fourthSubcriteriaFeeding'">
-            </p>
-			<p v-if=" subcriteria === 'fifthSubcriteriaFeeding'">
-            </p>
-			<p v-if=" subcriteria === 'sixthSubcriteriaFeeding'">
+            <p v-if=" criteria === 'fourthCriteriaFeeding'">
+				{{ $t('userManualFoodVariety') }}
             </p>
       	</ion-content>
     </ion-modal>
@@ -169,13 +163,13 @@
 		<ion-card-title>{{$t('body_condition_score')}}</ion-card-title>
 		<ion-list >
 				<ion-item>
-					<ion-checkbox v-model="isChecked[1]" @click="handleClick(1)">Score 1</ion-checkbox>
+					<ion-checkbox v-model="CheckboxArray[0][0]" @click="handleClick(0,0)">Score 1</ion-checkbox>
 				</ion-item>
 				<ion-item>
-					<ion-checkbox v-model="isChecked[2]" @click="handleClick(2)">Score 2</ion-checkbox>
+					<ion-checkbox v-model="CheckboxArray[0][1]" @click="handleClick(0,1)">Score 2</ion-checkbox>
 				</ion-item>
 				<ion-item>
-					<ion-checkbox v-model="isChecked[3]" @click="handleClick(3)">Score 3</ion-checkbox>
+					<ion-checkbox v-model="CheckboxArray[0][2]" @click="handleClick(0,2)">Score 3</ion-checkbox>
 				</ion-item>
 				<CheckComments />
 		</ion-list>
@@ -199,26 +193,25 @@
 		<ion-card-title>{{$t('kcal_calculations')}}</ion-card-title>
 		<ion-list>
 			<ion-item>
-				<ion-checkbox v-model="isChecked[1]" @click="handleClick(1)">Score 1</ion-checkbox>
+				<ion-checkbox v-model="CheckboxArray[1][0]" @click="handleClick(1,0)">Score 1</ion-checkbox>
 			</ion-item>
 			<ion-item>
-				<ion-checkbox v-model="isChecked[3]" @click="handleClick(3)">Score 3</ion-checkbox>
+				<ion-checkbox v-model="CheckboxArray[1][2]" @click="handleClick(1,1)">Score 3</ion-checkbox>
 			</ion-item>
 			<CheckComments />
 		</ion-list>
-
 	</ion-card>
 	<ion-card v-if=" criteria === 'secondCriteriaFeeding'">
 		<ion-card-title>{{$t('fourthSubcriteriaFeeding')}}</ion-card-title>		
 		<ion-list>
 			<ion-item>
-				<ion-checkbox v-model="isChecked[4]" @click="handleClick(1)">Score 1</ion-checkbox>
+				<ion-checkbox v-model="CheckboxArray[2][0]" @click="handleClick(2,0)">Score 1</ion-checkbox>
 			</ion-item>
 			<ion-item>
-				<ion-checkbox v-model="isChecked[2]" @click="handleClick(2)">Score 2</ion-checkbox>
+				<ion-checkbox v-model="CheckboxArray[2][1]" @click="handleClick(2,1)">Score 2</ion-checkbox>
 			</ion-item>
 			<ion-item>
-				<ion-checkbox v-model="isChecked[5]" @click="handleClick(3)">Score 3</ion-checkbox>
+				<ion-checkbox v-model="CheckboxArray[2][2]" @click="handleClick(2,2)">Score 3</ion-checkbox>
 			</ion-item>
 			<CheckComments />
 		</ion-list>
@@ -227,10 +220,10 @@
 		<ion-card-title>{{$t('fifthSubcriteriaFeeding')}}</ion-card-title>		
 		<ion-list >
 			<ion-item>
-				<ion-checkbox v-model="isChecked[1]" @click="handleClick(1)">Score 1</ion-checkbox>
+				<ion-checkbox v-model="CheckboxArray[3][0]" @click="handleClick(3,0)">Score 1</ion-checkbox>
 			</ion-item>
 			<ion-item>
-				<ion-checkbox v-model="isChecked[3]" @click="handleClick(3)">Score 3</ion-checkbox>
+				<ion-checkbox v-model="CheckboxArray[3][2]" @click="handleClick(3,1)">Score 3</ion-checkbox>
 			</ion-item>
 			<CheckComments />
 		</ion-list>
@@ -239,69 +232,53 @@
 		<ion-card-title>{{$t('sixthSubcriteriaFeeding')}}</ion-card-title>	
 		<ion-list>
 			<ion-item>
-				<ion-checkbox v-model="isChecked[1]" @click="handleClick(1)">Score 1</ion-checkbox>
+				<ion-checkbox v-model="CheckboxArray[4][0]" @click="handleClick(4,0)">Score 1</ion-checkbox>
 			</ion-item>
 			<ion-item>
-				<ion-checkbox v-model="isChecked[2]" @click="handleClick(2)">Score 2</ion-checkbox>
+				<ion-checkbox v-model="CheckboxArray[4][1]" @click="handleClick(4,1)">Score 2</ion-checkbox>
 			</ion-item>
 			<ion-item>
-				<ion-checkbox v-model="isChecked[3]" @click="handleClick(3)">Score 3</ion-checkbox>
+				<ion-checkbox v-model="CheckboxArray[4][2]" @click="handleClick(4,2)">Score 3</ion-checkbox>
 			</ion-item>
 			<CheckComments />
 		</ion-list>
 	</ion-card>
 	<!-- End of Checkboxes-->
+	<ion-footer>
+			<ion-toolbar>
+				<ion-button color="light" slot="start" router-link="/folder/Evaluate" @click="storeData">
+					Finish
+				</ion-button>
+				<ion-button color="light" slot="end" @click="confirmRefresh">
+					<ion-icon src="/icons/arrow-forward-outline.svg"></ion-icon>
+					{{$t('buttonNext')}}
+				</ion-button>
+			</ion-toolbar>
+		</ion-footer>
+
 	<!--<ion-range v-if=" subcriteria === 'fourthSubcriteriaFeeding'" aria-label="Dual Knobs Range" :dual-knobs="true" :value="{ lower: 20, upper: 80 }"></ion-range>-->
 </template>
 
 <script lang="ts">
-import {
-	IonItem,
-	IonList,
-	IonSelect,
-	IonSelectOption,
-	IonLabel,
-	IonModal,
-	IonHeader,
-	IonToolbar,
-	IonContent,
-	IonTitle,
-	IonButtons,
-	IonButton,
-	IonText,
-	IonCheckbox,
-	IonInput,
-	IonRange,
-	IonCard,
-	IonCardTitle
+import {IonItem, IonList, IonSelect, IonSelectOption, IonLabel, IonModal,
+	IonHeader, IonToolbar, IonContent, IonTitle, IonButtons, IonButton,
+	IonText, IonCheckbox, IonInput, IonRange, IonCard, IonCardTitle, IonFooter,
+	IonIcon
 } from '@ionic/vue';
 import axios from 'axios';
 import CheckComments from '@/components/CheckComments.vue';
 
+
 export default {
 	components: {
-    IonItem,
-    IonList,
-    IonSelect,
-    IonSelectOption,
-    IonLabel,
-    IonModal,
-    IonHeader,
-    IonToolbar,
-    IonContent,
-    IonTitle,
-    IonButtons,
-    IonButton,
-    IonText,
-    IonCheckbox,
-    IonInput,
-    IonRange,
-    IonCard,
-	IonCardTitle,
-	CheckComments
-},
+		// needed Vue components:
+		IonItem, IonList, IonSelect, IonSelectOption, IonLabel, IonModal, IonHeader,
+		IonToolbar, IonContent, IonTitle, IonButtons, IonButton, IonText, IonCheckbox,
+		IonInput, IonRange, IonCard, IonCardTitle, CheckComments, IonFooter, IonIcon
+	},
 	data() {
 		return {
+			// Variables:
 			language: 'en',
 			criteria: '',
 			subcriteria: '',
@@ -316,19 +293,29 @@ export default {
 			isOpenScoring: false,
 			selectedOption: undefined,
 			isChecked: {} as Record<number, boolean>,
-			Score1: this.$t('fulfilled'),
-			noTendency: this.$t('noTendency'),
-			notFulfilled: this.$t('notFulfilled'),
+			CheckboxArray: Array.from({ length: 5 }, () => Array(3).fill(false)),
 			dolphinList: [] as {name: string}[],
-			url: 'http://88395-17112.pph-server.de/api/dolphins',
+			urlDolphins: 'http://88395-17112.pph-server.de/api/dolphins',
 			selectedDolphin: '',
 			selectedTest: '',
+			urlPost: 'http://88395-17112.pph-server.de/api/good_feeding',
+			// Body for posting of data
+			requestBody: {
+				dolphin_name: this.selectedDolphin,
+				body_condition_score: null as number | null,
+				weight_measured: '',
+				kcal_calculations: null as number | null,
+				blood_hydration: null as number | null,
+				fish_quality: null as number | null,
+				fish_variety: null as number | null
+				// ... Weitere Eigenschaften basierend auf den Checkboxes
+      		},
 		};
 	},
 	methods: {
 		async showDolphins() {
 			console.log("Someone wants to selct a dolphin")
-			await axios.get(this.url)
+			await axios.get(this.urlDolphins)
 				.then ((response) => {
         		console.log('Response:', response.data);
 				this.dolphinList = response.data;
@@ -343,19 +330,56 @@ export default {
 		setOpenScoring(isOpen: boolean) {
             this.isOpenScoring = isOpen;
         },
-		handleClick(option: number) {
-      		if (this.isChecked[option]) {
-        // Wenn die gleiche Option erneut geklickt wird, wird sie zurückgesetzt
-        		this.isChecked = {};
-			} else {
-				this.isChecked = { [option]: true };
+		handleClick(row: number, column: number) {
+			if (this.CheckboxArray[row][column]){
+				this.CheckboxArray[row][column] = false;
+			}else{
+				this.CheckboxArray[row][column] = true;
+			}
+			for(let i = 0; i < 3; i++){
+				if (i != column){
+					this.CheckboxArray[row][i] = false;
+				}
 			}
     	},
-        /*emitSubcriteriaUpdated() {
-            const subcriteria = this.subcriteria;
-            
-            this.$emit('subcriteria-updated', subcriteria);
-        }*/
+		// Methode zum Sammeln der ausgewählten Checkbox-Werte und Zuweisen der Scores
+		storeCheckedValues() {
+			for(let i = 0; i < 4; i++){
+				for(let j = 0; j < 3; j++){
+					if (this.CheckboxArray[i][j] == true && i == 0){
+						this.requestBody.body_condition_score = j + 1;
+					}else if (this.CheckboxArray[i][j] == true && i == 1){
+						this.requestBody.kcal_calculations = j + 1;
+					}else if (this.CheckboxArray[i][j] == true && i == 2){
+						this.requestBody.blood_hydration = j + 1;
+					}else if (this.CheckboxArray[i][j] == true && i == 3){
+						this.requestBody.fish_quality = j + 1;
+					}else if (this.CheckboxArray[i][j] == true && i == 4){
+						this.requestBody.fish_variety = j + 1;
+					}
+				}
+			}
+		},
+
+		async storeData() {
+			const confirmed = confirm(this.$t('savingDataNext'));
+     		if (confirmed) {
+				console.log("Data is stored")
+				await axios
+						.post(this.urlPost, this.requestBody)
+						.then((response) => {
+							console.log('Response:', response.data);
+						})
+						.catch((error) => {
+							console.error('Error:', error.response.data)
+						});
+			}
+		},
+		confirmRefresh() {
+				const currentPath = this.$route.path;
+        		const targetUrl = `/detailFeeding`;
+        		window.location.href = targetUrl;
+    	},
     }
 };
 </script>

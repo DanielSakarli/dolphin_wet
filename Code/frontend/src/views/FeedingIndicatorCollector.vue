@@ -22,18 +22,18 @@
 			<FeedingCheckCriteriaSelector />
 		</ion-content>
 
-		<ion-footer>
+		<!--<ion-footer>
 			<ion-toolbar>
-				<!--<ion-button color="light" slot="start">
+				<ion-button color="light" slot="start">
 					<ion-icon src="/icons/arrow-back-outline.svg"> </ion-icon>
 					{{$t('buttonPrevious')}}
-				</ion-button>-->
+				</ion-button>
 				<ion-button color="light" slot="end" @click="storeData" >
 					<ion-icon src="/icons/arrow-forward-outline.svg"></ion-icon>
 					{{$t('buttonNext')}}
 				</ion-button>
 			</ion-toolbar>
-		</ion-footer>
+		</ion-footer>-->
 	</ion-page>
 </template>
 
@@ -64,7 +64,7 @@ const url = 'http://88395-17112.pph-server.de/api/good_feeding';
 //     },
 // };
 const requestBody = {
-				dolphin_name: 'test_dolphin1',
+				dolphin_name: selectedDolphin,
 				body_condition_score:3,
 				weight: 3,
 				weight_measured: 15.5,
