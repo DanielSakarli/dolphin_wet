@@ -49,6 +49,7 @@ async function setResult(req, res, next) {
 		const testResult = {
 			user_id: userID,
 			dolphin_id,
+			dolphin_name,
 			body_condition_score,
 			weight,
 			weight_measured,
@@ -59,7 +60,7 @@ async function setResult(req, res, next) {
 		};
 		const testResultAdded = await GoodFeedingService.loadTestResult(testResult);
 
-		res.status(201).json({ dolphin_name, ...testResultAdded });
+		res.status(201).json(testResultAdded);
 	} catch (error) {
 		next(error);
 	}

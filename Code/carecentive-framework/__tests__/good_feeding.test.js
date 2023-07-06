@@ -58,6 +58,7 @@ describe('good_feeding api tests', () => {
 				.set('Accept', 'application/json')
 				.send(testGoodFeedingResult);
 			expect(response.status).toEqual(201);
+
 			const userQueryResult = await knexInstance('users')
 				.select('id')
 				.where('name', 'jest_test_user');
@@ -83,6 +84,31 @@ describe('good_feeding api tests', () => {
 				.set('Accept', 'application/json')
 				.send({});
 			expect(response.status).toEqual(400);
+		});
+
+		test('request without values that are optional should response with 201', async () => {
+			const jwtTokenForTestUser = await testUser().loginUser();
+			const dolphinQueryResult = await knexInstance('dolphins')
+				.select('dolphin_id')
+				.where('name', dolphin_test.name);
+			const dolphinId = dolphinQueryResult[0].dolphin_id;
+			const testGoodFeedingResult = {
+				// user_id: userId,
+				dolphin_name: dolphin_test.name,
+				body_condition_score: 3,
+				// weight: 3,
+				// weight_measured: 15.5,
+				kcal_calculations: 3,
+				blood_hydration: 1,
+				fish_quality: 3,
+				fish_variety: 3,
+			};
+			const response = await request(app)
+				.post('/api/good_feeding')
+				.set('Cookie', `token=${jwtTokenForTestUser}`)
+				.set('Accept', 'application/json')
+				.send(testGoodFeedingResult);
+			expect(response.status).toEqual(201);
 		});
 	});
 
