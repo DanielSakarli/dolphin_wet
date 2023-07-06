@@ -5,7 +5,7 @@ const {
 /**
  * This file contains a flag of whether applying user auth to all controllers.
  */
-const isUserAuth = true;
+const isUserAuth = false;
 
 /**
  * Wraps the authenticateToken middleware provided by carecentive with a isUserAuth parameter.
