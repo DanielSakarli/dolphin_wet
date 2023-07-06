@@ -92,6 +92,29 @@ const goodFeedingPostValidateRequestBody = [
  * Good health validation rules.
  */
 const goodHealthPostValidateRequestBody = [
+	body().custom((value) => {
+		const allowedFields = [
+			'dolphin_name',
+			'normal_floatability',
+			'eye_lesions',
+			'visual_cues',
+			'mouth_exam',
+			'respiratory_disease',
+			'force_expiration',
+			'external_disease_signs',
+		];
+		const keys = Object.keys(value);
+
+		// Check if any key is not allowed
+		const disallowedKeys = keys.filter((key) => !allowedFields.includes(key));
+		if (disallowedKeys.length > 0) {
+			throw new Error(
+				`Invalid good_housing fields: ${disallowedKeys.join(', ')}`
+			);
+		}
+
+		return true;
+	}),
 	body('dolphin_name')
 		.notEmpty()
 		.isString()
@@ -140,6 +163,29 @@ const goodHealthPostValidateRequestBody = [
  * Good housing validation rules.
  */
 const goodHousingPostValidateRequestBody = [
+	body().custom((value) => {
+		const allowedFields = [
+			'dolphin_name',
+			'enclosure_barrier_safety',
+			'foreign_body_ingestion',
+			'pool_design',
+			'forced_loneliness',
+			'water_quality',
+			'sufficient_shade',
+			'acoustic_comfort',
+		];
+		const keys = Object.keys(value);
+
+		// Check if any key is not allowed
+		const disallowedKeys = keys.filter((key) => !allowedFields.includes(key));
+		if (disallowedKeys.length > 0) {
+			throw new Error(
+				`Invalid good_housing fields: ${disallowedKeys.join(', ')}`
+			);
+		}
+
+		return true;
+	}),
 	body('dolphin_name')
 		.notEmpty()
 		.isString()
