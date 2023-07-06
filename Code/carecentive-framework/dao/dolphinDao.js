@@ -47,12 +47,6 @@ class DolphinDAO {
 				.where('name', '=', lowerCaseName)
 				.first();
 
-			// throws error if there is no dolphin with given name.
-			// 404: not found
-			// if (!dolphin) {
-			// 	throw new DolphinError(`Dolphin "${name} not found"`, 404);
-			// }
-
 			return dolphin;
 		} catch (error) {
 			throw error;
@@ -79,7 +73,7 @@ class DolphinDAO {
 			// 409: conflict
 			if (dolphinData) {
 				throw new DolphinError(
-					`Dolphin "${lowerCaseName}" already exists in database`,
+					`Dolphin ${lowerCaseName} already exists in database`,
 					409
 				);
 			}
@@ -106,7 +100,7 @@ class DolphinDAO {
 			// If the given dolphin doesn't exist in database,
 			// 404: not found
 			if (!dolphinToBeUpdate) {
-				throw new DolphinError(`Dolphin "${dolphinName}" not found`, 404);
+				throw new DolphinError(`Dolphin ${dolphinName} not found`, 404);
 			}
 
 			const updatedDolphin = await dolphinToBeUpdate

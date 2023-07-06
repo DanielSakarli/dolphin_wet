@@ -48,7 +48,7 @@ class DolphinService {
 			// If dolphin with given name doesn't exist in database,
 			// 404: not found
 			if (!dolphin) {
-				throw new DolphinError(`Dolphin "${name}" not found`, 404);
+				throw new DolphinError(`Dolphin ${name} doesn't exist`, 404);
 			}
 
 			return dolphin;

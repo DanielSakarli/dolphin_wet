@@ -38,8 +38,11 @@ async function setResult(req, res, next) {
 
 		// If dolphin is not existed in database,
 		// 400: bad request
-		if (!DolphinService.isDolphinExisted(dolphin_name)) {
-			return res.status(400).json({ error: 'dolphin not exists in database!' });
+		const isDolphinExisted = await DolphinService.isDolphinExisted(
+			dolphin_name
+		);
+		if (!isDolphinExisted) {
+			res.status(400).json({ error: `Dolphin ${dolphin_name} does not exist` });
 		}
 
 		// Gets dolphin_id for test result.
