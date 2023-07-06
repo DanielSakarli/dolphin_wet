@@ -1,12 +1,12 @@
 const { Model } = require('objection');
 
-class GoodFeeding extends Model {
+class GoodHousing extends Model {
 	static get tableName() {
-		return 'good_feeding';
+		return 'good_housing';
 	}
 
 	static get idColumn() {
-		return 'feeding_record_id';
+		return 'housing_record_id';
 	}
 
 	// static get relationMappings() {
@@ -18,15 +18,16 @@ class GoodFeeding extends Model {
 	// 			relation: Model.BelongsToOneRelation,
 	// 			modelClass: User,
 	// 			join: {
-	// 				from: 'good_feeding.feeding_record_id',
+	// 				from: 'good_housing.housing_record_id',
 	// 				to: 'User.id',
 	// 			},
 	// 		},
 	// 		Dolphin: {
 	// 			relation: Model.BelongsToOneRelation,
 	// 			modelClass: Dolphin,
+	// 			to: 'User.id',
 	// 			join: {
-	// 				from: 'good_feeding.feeding_record_id',
+	// 				from: 'good_housing.housing_record_id',
 	// 				to: 'Dolphin.Dolphin_id',
 	// 			},
 	// 		},
@@ -34,4 +35,4 @@ class GoodFeeding extends Model {
 	// }
 }
 
-module.exports = GoodFeeding;
+module.exports = GoodHousing;

@@ -22,13 +22,10 @@ async function getSingleDolphin(req, res, next) {
 	try {
 		// Get the dolphin name in the router param.
 		const dolphinName = req.params.name;
+
 		const dolphin = await DolphinService.getOneDolphin(dolphinName);
-		if (dolphin.length === 0) {
-			const error = new Error(`No dolphin named ${dolphinName}`);
-			error.statusCode = 404;
-			throw error;
-		}
-		res.status(200).json(dolphin[0]);
+
+		res.status(200).json(dolphin);
 	} catch (error) {
 		next(error);
 	}
@@ -39,11 +36,13 @@ async function getSingleDolphin(req, res, next) {
  */
 async function createDolphin(req, res, next) {
 	try {
+		// Validates request body.
 		const errors = validationResult(req);
 		if (!errors.isEmpty()) {
 			// Handle validation errors
 			return res.status(400).json({ errors: errors.array() });
 		}
+
 		const dolphinObj = req.body;
 		const dolphinCreated = await DolphinService.createDolphin(dolphinObj);
 		res.status(201).json(dolphinCreated);
@@ -57,11 +56,13 @@ async function createDolphin(req, res, next) {
  */
 async function updateDolphin(req, res, next) {
 	try {
+		// Validates request body.
 		const errors = validationResult(req);
 		if (!errors.isEmpty()) {
 			// Handle validation errors
 			return res.status(400).json({ errors: errors.array() });
 		}
+
 		const dolphinName = req.params.name;
 		const updateInfo = req.body;
 		const dolphinUpdated = await DolphinService.updateDolphin(

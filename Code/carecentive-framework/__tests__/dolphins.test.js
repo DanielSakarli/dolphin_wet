@@ -1,50 +1,54 @@
 const request = require('supertest');
 const app = require('../app');
-const {
-	setupTestBd,
-	loginUser,
-	registerUser,
-	test_dolphin,
-} = require('./setup');
+const { setupTestDb, testUser, testDolphin } = require('./setup');
+const isUserAuth = require('../controllers/authSwitch');
+const DolphinService = require('../services/DolphinService');
 
-const knexInstance = setupTestBd();
+const knexInstance = setupTestDb();
 
 // Set up test database.
 beforeAll(async () => {
-	await registerUser();
-	await knexInstance('dolphins').del();
-	return knexInstance('dolphins').insert([
-		{
-			name: 'jest_dolphin1',
-			sex: 1,
-			on_site: 1,
-			year_of_birth: 2010,
-			place_of_birth: 'somewhere',
-		},
-		{
-			name: 'jest_dolphin2',
-			sex: 0,
-			on_site: 1,
-			year_of_birth: 2050,
-			place_of_birth: 'anywhere',
-		},
-	]);
+	await testUser(knexInstance).registerUser();
+	await testDolphin(knexInstance).deleteDolphins();
+	await testDolphin(knexInstance).setDolphins();
 });
 
 // Clean database.
-afterAll(() => {
-	return Promise.all([
-		knexInstance('dolphins').del(),
-		knexInstance('users').del(),
-	]).then(() => {
-		knexInstance.destroy();
-	});
+afterAll(async () => {
+	await testUser(knexInstance).deleteUser();
+	await testDolphin(knexInstance).deleteDolphins();
+	await knexInstance.destroy();
 });
 
 /**
  * Test dolphin api endpoint
  */
 describe('dolphins api test', () => {
+	const testDolphins = testDolphin(knexInstance).getAllTestDolphins();
+	const apiTestDolphin = {
+		name: 'api_test',
+		sex: 1,
+		on_site: 1,
+		year_of_birth: 2000,
+		place_of_birth: 'test',
+	};
+	const apiTestDolphinInvalid = {
+		name: 'api_test_invalid',
+		sex: 2,
+		on_site: 1,
+		year_of_birth: 2000,
+		place_of_birth: 'test',
+	};
+
+	describe('DolphinService', () => {
+		test('DolphinService.isDolphinExisted', async () => {
+			const a = await DolphinService.isDolphinExisted(testDolphins[0].name);
+			expect(a).toBe(true);
+			const b = await DolphinService.isDolphinExisted('imagination');
+			expect(b).toBe(false);
+		});
+	});
+
 	describe('GET /api/dolphins', () => {
 		test('should response with a list of json object containing the dolphin info', async () => {
 			const response = await request(app)
@@ -52,19 +56,20 @@ describe('dolphins api test', () => {
 				.set('Accept', 'application/json');
 			expect(response.headers['content-type']).toMatch(/json/);
 			expect(response.status).toEqual(200);
-			expect(response.body[0].name).toEqual('jest_dolphin1');
-			expect(response.body[1].name).toEqual('jest_dolphin2');
+			expect(response.body[0].name).toEqual(testDolphins[0].name);
+			expect(response.body[1].name).toEqual(testDolphins[1].name);
+			expect(response.body[2].name).toEqual(testDolphins[2].name);
 		});
 	});
 
 	describe('GET /api/dolphin/:name', () => {
 		test('should response with a json object containing the info of the given dolphin name', async () => {
 			const response = await request(app)
-				.get('/api/dolphins/jest_dolphin1')
+				.get(`/api/dolphins/${testDolphins[0].name}`)
 				.set('Accept', 'application/json');
 			expect(response.headers['content-type']).toMatch(/json/);
 			expect(response.status).toEqual(200);
-			expect(response.body.name).toEqual('jest_dolphin1');
+			expect(response.body.name).toEqual(testDolphins[0].name);
 		});
 		test('should response 404 when the dolphin does not exist in database', async () => {
 			const response = await request(app)
@@ -77,41 +82,45 @@ describe('dolphins api test', () => {
 
 	describe('POST /api/dolphins', () => {
 		test('request without valid login token should response with 401 unauthorized', async () => {
-			const response = await request(app)
-				.post('/api/dolphins')
-				.set('Accept', 'application/json')
-				.send(test_dolphin);
-			expect(response.status).toEqual(401);
+			// only test it when user auth sets to true.
+			if (isUserAuth) {
+				const response = await request(app)
+					.post('/api/dolphins')
+					.set('Accept', 'application/json')
+					.send(testDolphins[0]);
+				expect(response.status).toEqual(401);
+			} else {
+				expect(true).toBe(true);
+			}
 		});
 
 		test('request with valid body should response with a json object containing the info of created dolphin ', async () => {
-			const jwtTokenForTestUser = await loginUser();
+			const jwtTokenForTestUser = await testUser().loginUser();
 			const response = await request(app)
 				.post('/api/dolphins')
 				.set('Accept', 'application/json')
 				.set('Cookie', `token=${jwtTokenForTestUser}`)
-				.send(test_dolphin);
+				.send(apiTestDolphin);
 			expect(response.header['content-type']).toMatch(/json/);
 			expect(response.status).toEqual(201);
-			expect(response.body.name).toEqual(test_dolphin.name);
+			expect(response.body.name).toEqual(apiTestDolphin.name);
 		});
 		test('request with invalid dolphin info body should response with error', async () => {
-			const jwtTokenForTestUser = await loginUser();
-			const { sex, ...test_dolphin_invalid } = test_dolphin;
+			const jwtTokenForTestUser = await testUser().loginUser();
 			const response = await request(app)
 				.post('/api/dolphins')
 				.set('Accept', 'application/json')
 				.set('Cookie', `token=${jwtTokenForTestUser}`)
-				.send(test_dolphin_invalid);
+				.send(apiTestDolphinInvalid);
 			expect(response.status).toEqual(400);
 		});
 		test('request with the same dolphin name should response with error', async () => {
-			const jwtTokenForTestUser = await loginUser();
+			const jwtTokenForTestUser = await testUser().loginUser();
 			const response = await request(app)
 				.post('/api/dolphins')
 				.set('Accept', 'application/json')
 				.set('Cookie', `token=${jwtTokenForTestUser}`)
-				.send(test_dolphin);
+				.send(testDolphins[0]);
 			expect(response.status).toEqual(409);
 		});
 	});
@@ -119,27 +128,27 @@ describe('dolphins api test', () => {
 	describe('PATCH /api/dolphins', () => {
 		test('request without login should response with 401 unauthorized', async () => {
 			const response = await request(app)
-				.patch('/api/dolphins/jest_dolphin1')
+				.patch(`/api/dolphins/${testDolphins[1].name}`)
 				.set('Accept', 'application/json')
 				.send({ on_site: 0 });
 			expect(response.status).toEqual(401);
 		});
 		test('request with valid body should response with a json object containing the info of updated dolphin', async () => {
-			const jwtTokenForTestUser = await loginUser();
+			const jwtTokenForTestUser = await testUser().loginUser();
 			const response = await request(app)
-				.patch('/api/dolphins/jest_dolphin1')
+				.patch(`/api/dolphins/${testDolphins[1].name}`)
 				.set('Accept', 'application/json')
 				.set('Cookie', `token=${jwtTokenForTestUser}`)
 				.send({ on_site: 0 });
 			expect(response.status).toEqual(200);
 			expect(response.header['content-type']).toMatch(/json/);
-			expect(response.body.name).toEqual('jest_dolphin1');
+			expect(response.body.name).toEqual(testDolphins[1].name);
 			expect(response.body.on_site).toEqual(0);
 		});
 		test('request with invalid body should response with 400', async () => {
-			const jwtTokenForTestUser = await loginUser();
+			const jwtTokenForTestUser = await testUser().loginUser();
 			const response = await request(app)
-				.patch('/api/dolphins/jest_dolphin1')
+				.patch(`/api/dolphins/${testDolphins[1]}`)
 				.set('Accept', 'application/json')
 				.set('Cookie', `token=${jwtTokenForTestUser}`)
 				.send({ dolphin_id: 999 });
@@ -150,19 +159,19 @@ describe('dolphins api test', () => {
 	describe('DELETE /api/dolphins', () => {
 		test('request without login should response with 401 unauthorized', async () => {
 			const response = await request(app)
-				.delete('/api/dolphins/jest_dolphin2')
+				.delete(`/api/dolphins/${testDolphins[0].name}`)
 				.send();
 			expect(response.status).toEqual(401);
 		});
 		test('after delete the dolphin should not exist in database anymore', async () => {
-			const jwtTokenForTestUser = await loginUser();
+			const jwtTokenForTestUser = await testUser().loginUser();
 			const response = await request(app)
-				.delete('/api/dolphins/jest_dolphin2')
+				.delete(`/api/dolphins/${testDolphins[0].name}`)
 				.set('Cookie', `token=${jwtTokenForTestUser}`)
 				.send();
 			expect(response.status).toEqual(204);
 			request(app)
-				.get('/api/dolphins/jest_dolphin2')
+				.get(`/api/dolphins/${testDolphins[0].name}`)
 				.set('Accept', 'application/json')
 				.send()
 				.expect(404);

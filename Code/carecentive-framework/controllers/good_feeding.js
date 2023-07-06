@@ -1,6 +1,7 @@
 const DolphinService = require('../services/DolphinService');
 const GoodFeedingService = require('../services/GoodFeedingService');
 const { validationResult } = require('express-validator');
+const { isUserAuth } = require('./authSwitch');
 
 /**
  * Controller of post request of /api/good_feeding.
@@ -13,9 +14,16 @@ async function setResult(req, res, next) {
 			// Handle validation errors
 			return res.status(400).json({ error: errors.array() });
 		}
+
 		// After gone through the authenticateToken middleware
 		// the data of user is in the req.authData
-		const { user_id } = req.authData;
+		let userID;
+		if (isUserAuth) {
+			const { user_id } = req.authData;
+			userID = user_id;
+		} else {
+			userID = 1;
+		}
 
 		const {
 			dolphin_name,
@@ -28,17 +36,23 @@ async function setResult(req, res, next) {
 			fish_variety,
 		} = req.body;
 
-		// const { dolphin_id } = await DolphinService.getOneDolphin(dolphin_name);
-		const dolphin_obj = await DolphinService.getOneDolphin(dolphin_name);
-		const dolphin_id = dolphin_obj[0].dolphin_id;
-
-		if (!dolphin_id) {
-			return res.status(400).json({ error: 'dolphin not exists in database!' });
+		// If dolphin is not existed in database,
+		// 400: bad request
+		const isDolphinExisted = await DolphinService.isDolphinExisted(
+			dolphin_name
+		);
+		if (!isDolphinExisted) {
+			res.status(400).json({ error: `Dolphin ${dolphin_name} does not exist` });
 		}
 
+		// Gets dolphin_id for test result.
+		const dolphin_obj = await DolphinService.getOneDolphin(dolphin_name);
+		const dolphin_id = dolphin_obj.dolphin_id;
+
 		const testResult = {
-			user_id,
+			user_id: userID,
 			dolphin_id,
+			dolphin_name,
 			body_condition_score,
 			weight,
 			weight_measured,
