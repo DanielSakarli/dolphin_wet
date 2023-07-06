@@ -3,7 +3,7 @@ const isUserAuth = require('./authSwitch');
 const GoodHousingService = require('../services/GoodHousingService');
 
 /**
- * Controller of post request of /api/good_health.
+ * Controller of post request of /api/good_housing.
  * Loads the result into the database and response with the given result if it's valid.
  * @returns {Object} The inserted test result
  */

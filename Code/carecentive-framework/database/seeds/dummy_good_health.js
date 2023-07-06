@@ -50,7 +50,7 @@ async function loadDummyGoodHealth(knex) {
 		external_disease_signs: 1,
 	};
 
-	return knex('good_feeding').insert([
+	return knex('good_health').insert([
 		testGoodHealthResult1,
 		testGoodHealthResult2,
 		testGoodHealthResult3,

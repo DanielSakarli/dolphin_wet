@@ -51,6 +51,29 @@ const dolphinPatchValidateRequestBody = [
  * Good feeding validation rules.
  */
 const goodFeedingPostValidateRequestBody = [
+	body().custom((value) => {
+		const allowedFields = [
+			'dolphin_name',
+			'body_condition_score',
+			'weight',
+			'weight_measured',
+			'kcal_calculations',
+			'blood_hydration',
+			'fish_quality',
+			'fish_variety',
+		];
+		const keys = Object.keys(value);
+
+		// Check if any key is not allowed
+		const disallowedKeys = keys.filter((key) => !allowedFields.includes(key));
+		if (disallowedKeys.length > 0) {
+			throw new Error(
+				`Invalid good_housing fields: ${disallowedKeys.join(', ')}`
+			);
+		}
+
+		return true;
+	}),
 	body('dolphin_name')
 		.notEmpty()
 		.isString()
@@ -58,30 +81,37 @@ const goodFeedingPostValidateRequestBody = [
 	body('body_condition_score')
 		.optional({ values: 'null' })
 		.isIn([1, 2, 3])
+		.toInt()
 		.withMessage('Invalid body condition score'),
 	body('weight')
 		.optional({ values: 'null' })
 		.isIn([1, 3])
+		.toInt()
 		.withMessage('Invalid weight'),
 	body('weight_measured')
 		.optional({ values: 'null' })
 		.isFloat({ min: 0 })
+		.toFloat()
 		.withMessage('Invalid measured weight'),
 	body('kcal_calculations')
 		.optional({ values: 'null' })
 		.isIn([1, 3])
+		.toInt()
 		.withMessage('Invalid kcal calculations'),
 	body('blood_hydration')
 		.optional({ values: 'null' })
 		.isIn([1, 2, 3])
+		.toInt()
 		.withMessage('Invalid blood hydration'),
 	body('fish_quality')
 		.optional({ values: 'null' })
 		.isIn([1, 3])
+		.toInt()
 		.withMessage('Invalid fish quality'),
 	body('fish_variety')
 		.optional({ values: 'null' })
 		.isIn([1, 2, 3])
+		.toInt()
 		.withMessage('Invalid fish variety'),
 ];
 /**
@@ -231,6 +261,37 @@ const goodHousingPostValidateRequestBody = [
  * Behavior validation rules.
  */
 const behaviorPostValidateRequestBody = [
+	body().custom((value) => {
+		const allowedFields = [
+			'dolphin_name',
+			'environmental_enrichment',
+			'affiliative_behaviour',
+			'play_behaviour',
+			'socio_sexual_behaviour',
+			'maternal_behaviour',
+			'displacement_behaviour',
+			'oral_stereotypic_behaviour',
+			'repetitive_body_movement',
+			'self_grooming_behaviour',
+			'regurgitation_reingestion',
+			'rake_marks',
+			'displaying_aggressive_behaviour',
+			'receiving_aggressive_behaviour',
+			'social_isolation',
+			'avoidance_pool_areas',
+		];
+		const keys = Object.keys(value);
+
+		// Check if any key is not allowed
+		const disallowedKeys = keys.filter((key) => !allowedFields.includes(key));
+		if (disallowedKeys.length > 0) {
+			throw new Error(
+				`Invalid good_housing fields: ${disallowedKeys.join(', ')}`
+			);
+		}
+
+		return true;
+	}),
 	body('dolphin_name')
 		.notEmpty()
 		.isString()

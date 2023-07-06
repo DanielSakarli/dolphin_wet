@@ -36,6 +36,7 @@ const dolphins = require('./routes/dolphins');
 const good_feeding = require('./routes/good_feeding');
 const good_health = require('./routes/good_health');
 const good_housing = require('./routes/good_housing');
+const behaviour = require('./routes/behabvior');
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -92,6 +93,7 @@ app.use('/api/dolphins', dolphins);
 app.use('/api/good_feeding', good_feeding);
 app.use('/api/good_health', good_health);
 app.use('/api/good_housing', good_housing);
+app.use('/api/behaviour', behaviour);
 
 /**
  * Custom routes

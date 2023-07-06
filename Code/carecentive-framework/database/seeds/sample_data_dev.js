@@ -11,5 +11,5 @@ exports.seed = async function (knex) {
 	// Insert dummy good_feeding data.
 	await loadDummyGoodFeeding(knex);
 	// Insert dummy good_health data.
-	await loadDummyGoodHealth(knex1);
+	await loadDummyGoodHealth(knex);
 };
