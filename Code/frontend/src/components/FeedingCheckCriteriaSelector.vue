@@ -8,7 +8,7 @@
 				okText="OK"
 				:cancelText="firstcancelText"
 				v-on:click="showDolphins"
-				v-model= "selectedDolphin"
+				v-model= "dolphinSelect"
 				>
 				<ion-select-option v-for="dolphin in dolphinList" v-bind:key="dolphin.name">
 					{{dolphin.name}}
@@ -178,7 +178,7 @@
 		<ion-card-title>{{$t('weight_measured')}}</ion-card-title>
 		<ion-list >
 			<ion-item>
-				<ion-input label="Weekly weights:" placeholder="Enter weekly weights"> </ion-input>
+				<ion-input :label="weightLabel" :placeholder="weightPlaceholder" v-model="weight"> </ion-input>
 			</ion-item>
 			<ion-item>
 				<ion-input label="Target weight:" placeholder="Enter target weight"> </ion-input>
@@ -280,7 +280,8 @@ export default {
 		return {
 			// Variables:
 			language: 'en',
-			criteria: '',
+			dolphinSelect: null as string | null,
+			criteria: null as string | null,
 			subcriteria: '',
 			firstlabel: this.$t('dolphin'),
 			firstplaceholder: this.$t('selectDolphin'),
@@ -291,24 +292,24 @@ export default {
 			thirdplaceholder: this.$t('selectTest'),
 			isOpenManual: false,
 			isOpenScoring: false,
-			selectedOption: undefined,
-			isChecked: {} as Record<number, boolean>,
+			weightLabel: this.$t('weightLabel'),
+			weightPlaceholder: this.$t('weightPlaceholder'),
+			weight: '',
 			CheckboxArray: Array.from({ length: 5 }, () => Array(3).fill(false)),
+			originalCheckboxValues: Array.from({length: 5}, () => Array(3).fill(false)),
 			dolphinList: [] as {name: string}[],
 			urlDolphins: 'http://88395-17112.pph-server.de/api/dolphins',
-			selectedDolphin: '',
-			selectedTest: '',
 			urlPost: 'http://88395-17112.pph-server.de/api/good_feeding',
 			// Body for posting of data
 			requestBody: {
-				dolphin_name: this.selectedDolphin,
+				dolphin_name: null as string | null,
 				body_condition_score: null as number | null,
-				weight_measured: '',
+				weight: 3,
+				weight_measured: null as number | null,
 				kcal_calculations: null as number | null,
 				blood_hydration: null as number | null,
 				fish_quality: null as number | null,
 				fish_variety: null as number | null
-				// ... Weitere Eigenschaften basierend auf den Checkboxes
       		},
 		};
 	},
@@ -344,7 +345,9 @@ export default {
     	},
 		// Methode zum Sammeln der ausgewählten Checkbox-Werte und Zuweisen der Scores
 		storeCheckedValues() {
-			for(let i = 0; i < 4; i++){
+			this.requestBody.dolphin_name = this.dolphinSelect;
+			this.requestBody.weight_measured = parseFloat(this.weight);
+			for(let i = 0; i <= 4; i++){
 				for(let j = 0; j < 3; j++){
 					if (this.CheckboxArray[i][j] == true && i == 0){
 						this.requestBody.body_condition_score = j + 1;
@@ -364,7 +367,9 @@ export default {
 		async storeData() {
 			const confirmed = confirm(this.$t('savingDataNext'));
      		if (confirmed) {
-				console.log("Data is stored")
+				this.storeCheckedValues();
+				console.log(this.requestBody);
+				console.log(this.CheckboxArray);
 				await axios
 						.post(this.urlPost, this.requestBody)
 						.then((response) => {
@@ -376,11 +381,19 @@ export default {
 			}
 		},
 		confirmRefresh() {
+			const confirmed = confirm(this.$t('savingDataNext'));
+     		if (confirmed) {
+				this.storeCheckedValues();
+				console.log(this.requestBody);
+				this.dolphinSelect = null;
+				this.criteria = null;
 				const currentPath = this.$route.path;
-        		const targetUrl = `/detailFeeding`;
-        		window.location.href = targetUrl;
+				const targetUrl = `/detailFeeding`;
+				this.$router.push(targetUrl);
+			}	
     	},
-    }
+	}
+
 };
 </script>
 
