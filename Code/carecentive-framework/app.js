@@ -34,6 +34,7 @@ var app = express();
  */
 const dolphins = require('./routes/dolphins');
 const good_feeding = require('./routes/good_feeding');
+const good_health = require('./routes/good_health');
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -88,6 +89,7 @@ app.use('/api/settings', settingsRouter);
  */
 app.use('/api/dolphins', dolphins);
 app.use('/api/good_feeding', good_feeding);
+app.use('/api/good_health', good_health);
 
 /**
  * Custom routes
@@ -115,8 +117,8 @@ app.use(function (err, req, res, next) {
 	res.status(err.statusCode || 500).json({ error: err.message });
 });
 
-// app.listen(process.env.HTTP_PORT, () => {
-// 	console.log(`server is listening on... ${process.env.HTTP_PORT}`);
-// });
+app.listen(process.env.HTTP_PORT, () => {
+	// 	console.log(`server is listening on... ${process.env.HTTP_PORT}`);
+});
 
 module.exports = app;
