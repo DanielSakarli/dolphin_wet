@@ -121,8 +121,8 @@ app.use(function (err, req, res, next) {
 	res.status(err.statusCode || 500).json({ error: err.message });
 });
 
-app.listen(process.env.HTTP_PORT, () => {
-		console.log(`server is listening on... ${process.env.HTTP_PORT}`);
-});
+// app.listen(process.env.HTTP_PORT, () => {
+// 		console.log(`server is listening on... ${process.env.HTTP_PORT}`);
+// });
 
 module.exports = app;
