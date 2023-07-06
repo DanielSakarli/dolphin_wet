@@ -1,5 +1,5 @@
 const { validationResult } = require('express-validator');
-const isUserAuth = require('./authSwitch');
+const { isUserAuth } = require('./authSwitch');
 const GoodHousingService = require('../services/GoodHousingService');
 
 /**

@@ -1,7 +1,7 @@
 const DolphinService = require('../services/DolphinService');
 const GoodFeedingService = require('../services/GoodFeedingService');
 const { validationResult } = require('express-validator');
-const isUserAuth = require('./authSwitch');
+const { isUserAuth } = require('./authSwitch');
 
 /**
  * Controller of post request of /api/good_feeding.
