@@ -1,60 +1,77 @@
-const Dolphins = require('../models/Dolphins');
+const DolphinDAO = require('../dao/dolphinDao');
+const { DolphinError } = require('../source/Errors');
 
 class DolphinService {
 	/**
+	 * Determines whether a dolphin with given name is in database.
+	 * @param {String} name
+	 * @returns {Promise<Boolean>} whether the dolphin with given name is in database.
+	 */
+	static async isDolphinExisted(name) {
+		try {
+			const myDolphinDao = new DolphinDAO();
+			const dolphin = await myDolphinDao.getDolphinByName(name);
+			if (dolphin) {
+				return true;
+			} else {
+				return false;
+			}
+		} catch (error) {
+			throw error;
+		}
+	}
+
+	/**
 	 * Get all dolphins info from database.
-	 * @returns a list of all dolphin info in the database.
+	 * @returns {Promise<Array>} an array of all dolphin info in the database.
 	 */
 	static async getAllDolphins() {
 		try {
-			const dolphins = await Dolphins.query();
+			const myDolphinDao = new DolphinDAO();
+			const dolphins = await myDolphinDao.getAllDolphins();
 			return dolphins;
 		} catch (error) {
-			throw new Error('Error when getting all dolphins from database');
+			throw error;
 		}
 	}
 
 	/**
 	 * Get single dolphin based on name.
-	 * @param {string} name - the name of dolphin.
-	 * @returns the info of dolphin in database.
+	 * @param {String} name - the name of dolphin.
+	 * @returns {Promise<Object>} the info of dolphin in database.
 	 */
 	static async getOneDolphin(name) {
 		try {
-			const lowerName = name.toLowerCase();
-			const dolphin = await Dolphins.query()
-				.select()
-				.where('name', '=', lowerName);
+			const myDolphinDao = new DolphinDAO();
+			const dolphin = await myDolphinDao.getDolphinByName(name);
+
+			// If dolphin with given name doesn't exist in database,
+			// 404: not found
+			if (!dolphin) {
+				throw new DolphinError(`Dolphin ${name} doesn't exist`, 404);
+			}
+
 			return dolphin;
 		} catch (error) {
-			throw new Error(`Error when getting dolphin ${name}`);
+			throw error;
 		}
 	}
 
 	/**
 	 * Create a dolphin in the database
-	 * @param {Object} dolphinObj - {name, sex, on_site, year_of_birth, place_of_birth}
+	 * @param {Object} 	dolphin  			the object contains all dolphin information
+	 * @param {String}	dolphin.name	The name of dolphin
+	 * @param {Integer}	dolphin.sex		The sex of dolphin, 1 stands for female, 0 for male
+	 * @param {Integer}	dolphin.on_site	Whether the dolphin is on site, 1 stands for yes, 0 for no
+	 * @param {Integer} dolphin.year_of_birth	The birth year of dolphin
+	 * @param {String}	dolphin.place_of_birth	The birth place of dolphin
+	 * @returns {Promise<Object>} Inserted dolphin object
 	 */
-	static async createDolphin(dolphinObj) {
+	static async createDolphin(dolphin) {
 		try {
-			const { name, sex, on_site, year_of_birth, place_of_birth } = dolphinObj;
-			const dolphinCountExisted = await Dolphins.query()
-				.select()
-				.where('name', '=', name)
-				.resultSize();
-			if (dolphinCountExisted > 0) {
-				const error = new Error(`Dolphin ${name} already existed!`);
-				error.statusCode = 409;
-				throw error;
-			}
-			const dolphin = await Dolphins.query().insert({
-				name,
-				sex,
-				on_site,
-				year_of_birth,
-				place_of_birth,
-			});
-			return dolphin;
+			const myDolphinDao = new DolphinDAO();
+			const dolphinCreated = await myDolphinDao.createDolphin(dolphin);
+			return dolphinCreated;
 		} catch (error) {
 			throw error;
 		}
@@ -62,19 +79,18 @@ class DolphinService {
 
 	/**
 	 * Update the information of the given dolphin in the database.
-	 * @param {string} name - the name of dolphin.
-	 * @param {object} updateInfo - the information to be updated to a dolphin.
+	 * @param {String} name - the name of dolphin.
+	 * @param {Object} updateInfo - the information to be updated to a dolphin.
+	 * @returns {Promise<Object>} updated dolphin object
 	 */
 	static async updateDolphin(name, updateInfo) {
 		try {
-			const dolphinName = name.toLowerCase();
-			const dolphinToBeUpdate = await Dolphins.query().findOne({
-				name: dolphinName,
-			});
-			const updatedDolphin = await dolphinToBeUpdate
-				.$query()
-				.patchAndFetch(updateInfo);
-			return updatedDolphin;
+			const myDolphinDao = new DolphinDAO();
+			const dolphinUpdated = await myDolphinDao.updateDolphinByName(
+				name,
+				updateInfo
+			);
+			return dolphinUpdated;
 		} catch (error) {
 			throw error;
 		}
@@ -82,12 +98,12 @@ class DolphinService {
 
 	/**
 	 * Delete the given dolphin in database.
-	 * @param {string} name - the name of dolphin.
+	 * @param {String} name - the name of dolphin.
 	 */
 	static async deleteDolphin(name) {
 		try {
-			const dolphinName = name.toLowerCase();
-			await Dolphins.query().delete().where('name', '=', dolphinName);
+			const myDolphinDao = new DolphinDAO();
+			await myDolphinDao.deleteDolphinByName(name);
 			return;
 		} catch (error) {
 			throw error;

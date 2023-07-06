@@ -4,6 +4,8 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var httplogger = require('morgan');
+// Middleware for cross-origin policy
+const cors = require('cors');
 
 setup.setup();
 const dotenv = require('dotenv');
@@ -32,31 +34,9 @@ var app = express();
  */
 const dolphins = require('./routes/dolphins');
 const good_feeding = require('./routes/good_feeding');
-
-
-/** 
- * Swagger UI for api documentation 
- */
-// const swaggerUI = require('swagger-ui-express');
-// const swaggerJsDoc = require('swagger-jsdoc');
-// const options = {
-// 	definition: {
-// 		openapi: '3.0.0',
-// 		info: {
-// 			title: 'Dolphin Wet API',
-// 			version: '0.0.1',
-// 			description: 'Dolphin Wet is about dolphin welfare',
-// 		},
-// 		servers: [
-// 			{
-// 				url: `http://localhost:${process.env.HTTP_PORT}`,
-// 			},
-// 		],
-// 	},
-// 	apis: ['./routes/*.js'],
-// };
-// const specs = swaggerJsDoc(options);
-// app.use('/api-docs', swaggerUI.serve, swaggerUI.setup(specs));
+const good_health = require('./routes/good_health');
+const good_housing = require('./routes/good_housing');
+const behaviour = require('./routes/behabvior');
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -81,6 +61,17 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 /**
+ * Set up cors policy
+ * By default, the cors middleware will allow requests from all origins (*).
+ * However, for security purposes, it's recommended to specify the allowed origins explicitly.
+ */
+app.use(cors());
+const corsOptions = {
+	origin: 'http://localhost:8100', // Replace with your frontend app's origin
+};
+app.use(cors(corsOptions));
+
+/**
  * Core routes
  */
 app.use('/api/admin/users', adminUsersRouter);
@@ -100,6 +91,9 @@ app.use('/api/settings', settingsRouter);
  */
 app.use('/api/dolphins', dolphins);
 app.use('/api/good_feeding', good_feeding);
+app.use('/api/good_health', good_health);
+app.use('/api/good_housing', good_housing);
+app.use('/api/behaviour', behaviour);
 
 /**
  * Custom routes
@@ -128,7 +122,7 @@ app.use(function (err, req, res, next) {
 });
 
 // app.listen(process.env.HTTP_PORT, () => {
-// 	console.log(`server is listening on... ${process.env.HTTP_PORT}`);
+// 		console.log(`server is listening on... ${process.env.HTTP_PORT}`);
 // });
 
 module.exports = app;

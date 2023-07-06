@@ -17,11 +17,55 @@ JavaScript Nuggets is a series of JavaScript tutorial to teach you the important
 
 [What is JWT authorization really about - Java Brains](https://www.youtube.com/watch?v=soGRyl9ztjI)
 
+
+
+### Catalog
+
+[User API](#user-api)
+
+    [Register user](#register-user)
+
+    [Login user](#login-user)
+
+    [Change password](#change-password)
+
+    [User logout](#user-logout)
+
+[Dolphins API](#dolphins-api)
+
+    [Create a dolphin](#create-a-dolphin)
+
+    [Get all dolphins](#get-all-dolphins)
+
+    [Get single dolphin by name](#get-single-dolphin-by-name)
+
+[Good Feeding API](#good-feeding-api)
+
+    [Upload the result of good feeding test](#upload-the-result-of-good-feeding-test)
+
+    [Get a test result by date](#get-a-test-result-by-date)
+
+[Good Health API](#good-health-api)
+
+    [Upload the result of good health test](#upload-the-result-of-good-health-test)
+
+[Good Housing API](#good-housing-api)
+
+    [Upload the result of good housing test](#upload-the-result-of-good-housing-test)
+
+[Appropriate Behaviour API](#appropriate-behaviour-api)
+
+    [Upload the result of behaviour test](#upload-the-result-of-behaviour-test)
+
+---
+
+ 
+
 ## API Usage
 
 ### User API
 
-**Register User**
+#### Register User
 
 - address: http://88395-17112.pph-server.de/api/users/register
 
@@ -71,7 +115,7 @@ JavaScript Nuggets is a series of JavaScript tutorial to teach you the important
       });
   ```
 
-**Login User**
+#### Login User
 
 !!! WHENEVER you want to send a POST or a PATCH request which will change the data in the database, there has to be a user login, and you attach the token in the request header. It will be shown how to do that later in this document.
 
@@ -126,7 +170,7 @@ JavaScript Nuggets is a series of JavaScript tutorial to teach you the important
       });
   ```
 
-**Change Password**
+#### Change Password
 
 To change the password of the user, you will need to attach the JWT token of this user in the request header.
 
@@ -188,7 +232,7 @@ To change the password of the user, you will need to attach the JWT token of thi
       });
   ```
 
-**User Logout**
+#### User Logout
 
 After logout a user, the JWT token for this user will be cleared on the server.
 
@@ -239,9 +283,11 @@ So if user want to send any data, he or she has to login again.
       });
   ```
 
+
+
 ### Dolphins API
 
-**Create a dolphin**
+#### Create a dolphin
 
 - address: http://88395-17112.pph-server.de/api/dolphins
 
@@ -343,7 +389,7 @@ So if user want to send any data, he or she has to login again.
       });
   ```
 
-**Get all dolphins**
+#### Get all dolphins
 
 - address: http://88395-17112.pph-server.de/api/dolphins
 
@@ -424,7 +470,7 @@ So if user want to send any data, he or she has to login again.
       });
   ```
 
-**Get single dolphin by name**
+#### Get single dolphin by name
 
 - address: http://88395-17112.pph-server.de/api/dolphins/:name
 
@@ -492,9 +538,11 @@ So if user want to send any data, he or she has to login again.
 
 **Delete one dolphin**
 
+
+
 ### Good Feeding API
 
-**Upload the result of good feeding test**
+#### Upload the result of good feeding test
 
 - address: http://88395-17112.pph-server.de/api/good_feeding
 
@@ -598,7 +646,7 @@ So if user want to send any data, he or she has to login again.
       });
   ```
 
-**Get a test result by date**
+#### Get a test result by date
 
 - address: http://88395-17112.pph-server.de/api/good_feeding?date=[yyyy-mm-dd]
 
@@ -682,3 +730,233 @@ So if user want to send any data, he or she has to login again.
           console.error('Error:', error.response.data)
       });
   ```
+
+
+
+### Good Health API
+
+#### Upload the result of good health test
+
+- address: http://88395-17112.pph-server.de/api/good_health
+
+- method: POST
+
+- request body:
+  
+  ```json
+  // The type of the indicators can be string, it's fine.
+  {
+      "dolphin_name": "test_dolphin1",
+      "normal_floatability": 1,
+      "eye_lesions": null, // null is allowed, when there is no data, just use null
+      "visual_cues": 1,
+      "mouth_exam": 1,
+      "respiratory_disease": 1,
+      "force_expiration": 1,
+      "external_disease_signs":1
+  }
+  ```
+
+- response:
+  
+  - request successful
+    
+    HTTP status: 201
+    
+    The response body will be the good health object that has been inserted to database.
+    
+    ```json
+    // This is a example
+    {
+        "dolphin_id": 4,
+        "user_id": 4,
+        "dolphin_name": "test1",
+        "normal_floatability": 1,
+        "eye_lesions": null,
+        "visual_cues": 1,
+        "mouth_exam": 1,
+        "respiratory_disease": 1,
+        "force_expiration": 1,
+        "external_disease_signs": 1,
+        "health_record_id": 4
+    }
+    ```
+  
+  - request failed
+    
+    HTTP status > 400
+    
+    - Bad request body:
+      
+      HTTP status: 400
+    
+    - Internal server error:
+      
+      HTTP status: 500
+      
+      Error message here varies based on the error, e.g when there is a typo in the dolphin name, the error message is `dolphin not exists in database!` with HTTP status 400
+      
+      ```json
+      {
+          "error": "some error message"
+      }
+      ```
+
+
+
+### Good Housing API
+
+#### Upload the result of good housing test
+
+- address: http://88395-17112.pph-server.de/api/good_housing
+
+- method: POST
+
+- request body:
+  
+  ```json
+  // The type of the indicators can be string, it's fine.
+  {
+      "dolphin_name": "test1",
+      "enclosure_barrier_safety": 1,
+      "foreign_body_ingestion": null, // null is allowed, when there is no data, just use null
+      "pool_design": 1,
+      "forced_loneliness": 1,
+      "water_quality": 1,
+      "sufficient_shade": 1,
+      "acoustic_comfort":1
+  } 
+  
+  ```
+
+- response:
+  
+  - request successful
+    
+    HTTP status: 201
+    
+    The response body will be the good health object that has been inserted to database.
+    
+    ```json
+    // This is a example
+    {
+        "dolphin_id": 4,
+        "user_id": 4,
+        "dolphin_name": "test1",
+        "enclosure_barrier_safety": 1,
+        "foreign_body_ingestion": null,
+        "pool_design": 1,
+        "forced_loneliness": 1,
+        "water_quality": 1,
+        "sufficient_shade": 1,
+        "acoustic_comfort": 1,
+        "housing_record_id": 1
+    }
+    ```
+  
+  - request failed
+    
+    HTTP status > 400
+    
+    - Bad request body:
+      
+      HTTP status: 400
+    
+    - Internal server error:
+      
+      HTTP status: 500
+      
+      Error message here varies based on the error, e.g when there is a typo in the dolphin name, the error message is `dolphin not exists in database!` with HTTP status 400
+      
+      ```json
+      {
+          "error": "some error message"
+      }
+      ```
+
+
+
+### Appropriate Behaviour API
+
+#### Upload the result of behaviour test
+
+- address: http://88395-17112.pph-server.de/api/behaviour
+
+- method: POST
+
+- request body:
+  
+  ```json
+  // The type of the indicators can be string, it's fine.
+  {
+      "dolphin_name":"test1",
+  	"environmental_enrichment":"3", // string is fine
+  	"affiliative_behaviour":1,
+  	"play_behaviour":1,
+  	"socio_sexual_behaviour":1,
+  	"maternal_behaviour":1,
+  	"displacement_behaviour":1,
+  	"oral_stereotypic_behaviour":1,
+  	"repetitive_body_movement":1,
+  	"self_grooming_behaviour":1,
+  	"regurgitation_reingestion":1,
+  	"rake_marks":1,
+  	"displaying_aggressive_behaviour":1,
+  	"receiving_aggressive_behaviour":1,
+  	"social_isolation":1,
+  	"avoidance_pool_areas":1
+  }
+  ```
+
+- response:
+  
+  - request successful
+    
+    HTTP status: 201
+    
+    The response body will be the good health object that has been inserted to database.
+    
+    ```json
+    // This is a example
+    {
+        "dolphin_id": 4,
+        "user_id": 4,
+        "dolphin_name": "test1",
+        "environmental_enrichment": 3,
+        "affiliative_behaviour": 1,
+        "play_behaviour": 1,
+        "socio_sexual_behaviour": 1,
+        "maternal_behaviour": 1,
+        "displacement_behaviour": 1,
+        "oral_stereotypic_behaviour": 1,
+        "repetitive_body_movement": 1,
+        "self_grooming_behaviour": 1,
+        "regurgitation_reingestion": 1,
+        "rake_marks": 1,
+        "displaying_aggressive_behaviour": 1,
+        "receiving_aggressive_behaviour": 1,
+        "social_isolation": 1,
+        "avoidance_pool_areas": 1,
+        "behaviour_record_id": 1
+    }
+    ```
+  
+  - request failed
+    
+    HTTP status > 400
+    
+    - Bad request body:
+      
+      HTTP status: 400
+    
+    - Internal server error:
+      
+      HTTP status: 500
+      
+      Error message here varies based on the error, e.g when there is a typo in the dolphin name, the error message is `dolphin not exists in database!` with HTTP status 400
+      
+      ```json
+      {
+          "error": "some error message"
+      }
+      ```
