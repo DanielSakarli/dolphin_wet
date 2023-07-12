@@ -14,7 +14,7 @@
                 <ion-label>{{ dolphin.name }} (Born: {{ dolphin.year_of_birth }})</ion-label>
             </ion-item>
         </ion-list>
-        
+        <!-- Edit Dolphin Button -->
         <ion-modal :is-open="editModalOpen">
             <ion-header>
             <ion-toolbar>
@@ -36,7 +36,7 @@
             </form>
             </ion-content>
         </ion-modal>
-    
+        <!-- Card content of each dolphin -->
         <ion-card v-if="currentDolphin">
             <ion-card-title>{{ currentDolphin.name }}</ion-card-title>
             <ion-item>
@@ -55,10 +55,10 @@
             <ion-label>Place of Birth:</ion-label>
             <ion-text>{{ currentDolphin.place_of_birth }}</ion-text>
             </ion-item>
-            <!-- ... -->
             <ion-button @click="openEditModal">Edit</ion-button>
         </ion-card>
         </ion-content>
+        
         <ion-footer>
         <ion-toolbar>
             <ion-buttons slot="start">
@@ -67,16 +67,34 @@
             </ion-button>
             </ion-buttons>
             <ion-buttons slot="end">
-            <ion-button @click="nextDolphin" :disabled="!nextDolphinAvailable">
+                <ion-button @click="openAddModal">Add</ion-button>
+                <ion-button @click="nextDolphin" :disabled="!nextDolphinAvailable">
                 Next
-            </ion-button>
+                </ion-button>
             </ion-buttons>
         </ion-toolbar>
-        <!-- <ion-toolbar>
-            <ion-buttons slot="end">
-            <ion-button @click="goToAddDolphin">Add</ion-button>
-            </ion-buttons>
-        </ion-toolbar> -->
+
+        <ion-modal :is-open="addModalOpen">
+            <ion-header>
+            <ion-toolbar>
+                <ion-title>Add Dolphin</ion-title>
+                <ion-buttons slot="end">
+                <ion-button @click="closeAddModal">Close</ion-button>
+                </ion-buttons>
+            </ion-toolbar>
+            </ion-header>
+            <ion-content>
+            <form @submit.prevent="submitAdd">
+                <ion-list v-for="(value, key) in newDolphin" :key="key+'Add'">
+                <ion-item>
+                    <ion-label position="stacked">{{ key }}</ion-label>
+                    <ion-input v-model="newDolphin![key]" :id="key+'Add'" :placeholder="key"></ion-input>
+                </ion-item>
+                </ion-list>
+                <ion-button expand="full" type="submit">Add Dolphin</ion-button>
+            </form>
+            </ion-content>
+        </ion-modal>
         </ion-footer>
     </ion-page>
 </template>
@@ -154,7 +172,7 @@ setup() {
     // Fetch all dolphins when component is created
     const fetchDolphins = async () => {
       try {
-        const response = await axios.get('/api/dolphins');
+        const response = await axios.get('http://88395-17112.pph-server.de/api/dolphins');
         dolphins.value = response.data;
       } catch (error) {
         errorMessage.value = 'Error fetching dolphins.';
@@ -214,6 +232,40 @@ setup() {
         }
       }
     };
+    //Adding a new dolphin
+    const addModalOpen = ref<boolean>(false);
+    const newDolphin = ref<Dolphin | null>(null);
+
+    const openAddModal = () => {
+        addModalOpen.value = true;
+        newDolphin.value = {
+            dolphin_id: 0,
+            name: '',
+            sex: 0,
+            on_site: 0,
+            year_of_birth: new Date().getFullYear(),
+            place_of_birth: '',
+            created_at: '',
+            updated_at: '',
+        };
+    };
+    //Model and form for adding a dolphin
+    const closeAddModal = () => {
+      addModalOpen.value = false;
+    };
+
+    const submitAdd = async (event: Event) => {
+      event.preventDefault();
+      if (newDolphin.value) {
+        try {
+          await axios.post(`http://88395-17112.pph-server.de/api/dolphins`, newDolphin.value);
+          closeAddModal();
+          fetchDolphins();
+        } catch (error) {
+          errorMessage.value = 'Error adding dolphin.';
+        }
+      }
+    };
 
     return {
       dolphins,
@@ -229,7 +281,11 @@ setup() {
       currentDolphinValues,
       submitEdit,
       editModalOpen,
-      //goToAddDolphin,
+      openAddModal,
+      closeAddModal,
+      addModalOpen,
+      newDolphin,
+      submitAdd,
     };
   }
 };
