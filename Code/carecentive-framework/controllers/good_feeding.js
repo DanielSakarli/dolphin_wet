@@ -34,6 +34,7 @@ async function setResult(req, res, next) {
 			blood_hydration,
 			fish_quality,
 			fish_variety,
+			comments,
 		} = req.body;
 
 		// If dolphin is not existed in database,
@@ -60,6 +61,7 @@ async function setResult(req, res, next) {
 			blood_hydration,
 			fish_quality,
 			fish_variety,
+			comments,
 		};
 		const testResultAdded = await GoodFeedingService.loadTestResult(testResult);
 

@@ -61,6 +61,7 @@ const goodFeedingPostValidateRequestBody = [
 			'blood_hydration',
 			'fish_quality',
 			'fish_variety',
+			'comments',
 		];
 		const keys = Object.keys(value);
 
@@ -113,6 +114,10 @@ const goodFeedingPostValidateRequestBody = [
 		.isIn([1, 2, 3])
 		.toInt()
 		.withMessage('Invalid fish variety'),
+	body('comments')
+		.optional({ values: 'null' })
+		.isString()
+		.withMessage('Invalid comments type'),
 ];
 /**
  * End of Good feeding validation rules.
@@ -132,6 +137,7 @@ const goodHealthPostValidateRequestBody = [
 			'respiratory_disease',
 			'force_expiration',
 			'external_disease_signs',
+			'comments',
 		];
 		const keys = Object.keys(value);
 
@@ -184,6 +190,10 @@ const goodHealthPostValidateRequestBody = [
 		.isInt({ min: 1, max: 3 })
 		.toInt()
 		.withMessage('Invalid external disease signs value'),
+	body('comments')
+		.optional({ values: 'null' })
+		.isString()
+		.withMessage('Invalid comments type'),
 ];
 /**
  * End of Good health validation rules.
@@ -203,6 +213,7 @@ const goodHousingPostValidateRequestBody = [
 			'water_quality',
 			'sufficient_shade',
 			'acoustic_comfort',
+			'comments',
 		];
 		const keys = Object.keys(value);
 
@@ -252,6 +263,10 @@ const goodHousingPostValidateRequestBody = [
 		.optional({ values: 'null' })
 		.isInt({ min: 1, max: 3 })
 		.toInt(),
+	body('comments')
+		.optional({ values: 'null' })
+		.isString()
+		.withMessage('Invalid comments type'),
 ];
 /**
  * End of good housing validation rules.
@@ -279,6 +294,7 @@ const behaviorPostValidateRequestBody = [
 			'receiving_aggressive_behaviour',
 			'social_isolation',
 			'avoidance_pool_areas',
+			'comments',
 		];
 		const keys = Object.keys(value);
 
@@ -356,6 +372,10 @@ const behaviorPostValidateRequestBody = [
 		.optional({ values: 'null' })
 		.isInt({ min: 1, max: 3 })
 		.toInt(),
+	body('comments')
+		.optional({ values: 'null' })
+		.isString()
+		.withMessage('Invalid comments type'),
 ];
 /**
  * End of behavior validation rules.
