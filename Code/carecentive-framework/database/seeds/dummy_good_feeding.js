@@ -13,8 +13,13 @@ async function loadDummyGoodFeeding(knex) {
 	const dolphin2_id = dolphinQueryResult2[0].dolphin_id;
 	const dolphin3_id = dolphinQueryResult3[0].dolphin_id;
 
+	const dolphin1_name = dolphinQueryResult1[0].name;
+	const dolphin2_name = dolphinQueryResult2[0].name;
+	const dolphin3_name = dolphinQueryResult3[0].name;
+
 	const testGoodFeedingResult1 = {
 		dolphin_id: dolphin1_id,
+		dolphin_name: dolphin1_name,
 		user_id: 1,
 		body_condition_score: 3,
 		weight: 3,
@@ -26,6 +31,7 @@ async function loadDummyGoodFeeding(knex) {
 	};
 	const testGoodFeedingResult2 = {
 		dolphin_id: dolphin2_id,
+		dolphin_name: dolphin2_name,
 		user_id: 2,
 		body_condition_score: 3,
 		weight: 3,
@@ -37,6 +43,7 @@ async function loadDummyGoodFeeding(knex) {
 	};
 	const testGoodFeedingResult3 = {
 		dolphin_id: dolphin3_id,
+		dolphin_name: dolphin3_name,
 		user_id: 3,
 		body_condition_score: 3,
 		weight: 3,

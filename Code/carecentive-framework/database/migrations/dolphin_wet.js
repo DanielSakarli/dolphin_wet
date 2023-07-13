@@ -33,7 +33,7 @@ exports.up = function (knex) {
 				.references('dolphins.dolphin_id')
 				.onDelete('CASCADE')
 				.onUpdate('CASCADE');
-			table.string('dolphin_name')
+			table.string('dolphin_name');
 			table.tinyint('body_condition_score').unsigned(); //1, 2, 3
 			table.tinyint('weight').unsigned(); //1, 3
 			table.double('weight_measured'); //weekly measured weight of dolphin
@@ -41,6 +41,7 @@ exports.up = function (knex) {
 			table.tinyint('blood_hydration').unsigned(); //1, 2, 3
 			table.tinyint('fish_quality').unsigned(); //1, 3
 			table.tinyint('fish_variety').unsigned(); //1, 2, 3
+			table.string('comments'); // comments for this category
 			table.timestamps(true, true); //Timestamp: created at, updated at
 		}),
 
@@ -61,7 +62,7 @@ exports.up = function (knex) {
 				.references('dolphins.dolphin_id')
 				.onDelete('CASCADE')
 				.onUpdate('CASCADE');
-			table.string('dolphin_name')
+			table.string('dolphin_name');
 
 			table.tinyint('normal_floatability').unsigned(); //1, 3
 			table.tinyint('eye_lesions').unsigned(); //1, 3
@@ -72,6 +73,7 @@ exports.up = function (knex) {
 			table.tinyint('external_disease_signs').unsigned(); //1, 3
 			table.string('eye_photo_path');
 			table.string('teeth_photo_path');
+			table.string('comments'); // comments for this category
 			table.timestamps(true, true); //Timestamp: created at, updated at
 		}),
 
@@ -92,7 +94,7 @@ exports.up = function (knex) {
 				.references('dolphins.dolphin_id')
 				.onDelete('CASCADE')
 				.onUpdate('CASCADE');
-			table.string('dolphin_name')
+			table.string('dolphin_name');
 
 			table.tinyint('enclosure_barrier_safety').unsigned(); //1, 3
 			table.tinyint('foreign_body_ingestion').unsigned(); //1, 3
@@ -102,6 +104,7 @@ exports.up = function (knex) {
 			table.tinyint('water_temperature').unsigned(); //1, 3
 			table.tinyint('sufficient_shade').unsigned(); //1, 3
 			table.tinyint('acoustic_comfort').unsigned(); //1, 3
+			table.string('comments'); // comments for this category
 			table.timestamps(true, true); //Timestamp: created at, updated at
 		}),
 
@@ -122,7 +125,7 @@ exports.up = function (knex) {
 				.references('dolphins.dolphin_id')
 				.onDelete('CASCADE')
 				.onUpdate('CASCADE');
-			table.string('dolphin_name')
+			table.string('dolphin_name');
 
 			table.tinyint('environmental_enrichment').unsigned(); //1, 2, 3
 			table.tinyint('affiliative_behaviour').unsigned(); //1, 3
@@ -140,6 +143,7 @@ exports.up = function (knex) {
 			table.tinyint('receiving_aggressive_behaviour').unsigned(); //1, 3
 			table.tinyint('social_isolation').unsigned(); //1, 3
 			table.tinyint('avoidance_pool_areas').unsigned(); //1, 2, 3
+			table.string('comments'); // comments for this category
 
 			table.timestamps(true, true); //Timestamp: created at, updated at
 		}),
