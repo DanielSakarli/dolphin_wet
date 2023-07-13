@@ -1,0 +1,32 @@
+[
+    {
+        "dolphin_name": "test_dolphin1",
+        "body_condition_score": 0,
+        "weight": 3,
+        "weight_measured": 0,
+        "kcal_calculations": 0,
+        "blood_hydration": 0,
+        "fish_quality": 0,
+        "fish_variety": 0
+    },
+    {
+        "dolphin_name": "test_dolphin2",
+        "body_condition_score": 0,
+        "weight": 3,
+        "weight_measured": 0,
+        "kcal_calculations": 0,
+        "blood_hydration": 0,
+        "fish_quality": 0,
+        "fish_variety": 0
+    },
+    {
+        "dolphin_name": "test_dolphin3",
+        "body_condition_score": 0,
+        "weight": 3,
+        "weight_measured": 0,
+        "kcal_calculations": 0,
+        "blood_hydration": 0,
+        "fish_quality": 0,
+        "fish_variety": 0
+    }
+]

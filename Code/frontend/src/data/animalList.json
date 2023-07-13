@@ -1,0 +1,23 @@
+[
+    {
+        "dolphin_id": 1,
+        "name": "test_dolphin1",
+        "sex": 1,
+        "on_site": 1,
+        "year_of_birth": "2010"
+    },
+    {
+        "dolphin_id": 2,
+        "name": "test_dolphin2",
+        "sex": 0,
+        "on_site": 1,
+        "year_of_birth": "2011"
+    },
+    {
+        "dolphin_id": 3,
+        "name": "test_dolphin3",
+        "sex": 1,
+        "on_site": 1,
+        "year_of_birth": "2015"
+    }
+]

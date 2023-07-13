@@ -35,7 +35,7 @@ import {
 import { defineComponent } from 'vue';
 import { ref } from 'vue';
 import { Device, DevicePlugin } from '@capacitor/device';
-import { inject } from 'vue'
+import { inject } from 'vue';
 
 export default defineComponent({
 	
