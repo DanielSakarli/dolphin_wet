@@ -9,11 +9,11 @@
             </ion-toolbar>
         </ion-header>
         <ion-content>
+            <ion-button expand="block" size="large" router-link="/detailFeeding">{{$t('principleFeeding')}}</ion-button>
+            <ion-button expand="block" size="large" router-link="/detailHousing">{{$t('principleHousing')}}</ion-button>
             <ion-button expand="block" size="large" router-link="/detailHealth">{{$t('principleHealth')}}</ion-button>    
             <ion-button expand="block" size="large" router-link="/detailBehaviour">{{$t('principleBehaviour')}}</ion-button>
             <ion-button expand="block" size="large" router-link="/detailEmotionalState">{{$t('principleEmotionalState')}}</ion-button>
-            <ion-button expand="block" size="large" router-link="/detailFeeding">{{$t('principleFeeding')}}</ion-button>
-            <ion-button expand="block" size="large" router-link="/detailHousing">{{$t('principleHousing')}}</ion-button>
         </ion-content>
         <ion-button fill="clear" size="large" @click="showDolphins">
             Download List of Dolphins
