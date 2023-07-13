@@ -254,8 +254,6 @@
 				</ion-button>
 			</ion-toolbar>
 		</ion-footer>
-
-	<!--<ion-range v-if=" subcriteria === 'fourthSubcriteriaFeeding'" aria-label="Dual Knobs Range" :dual-knobs="true" :value="{ lower: 20, upper: 80 }"></ion-range>-->
 </template>
 
 <script lang="ts">
@@ -268,6 +266,7 @@ import axios from 'axios';
 import CheckComments from '@/components/CheckComments.vue';
 import { useDolphinsStore }from '@/store/dolphinsStore';
 import { useEvaluationFeedingStore }from '@/store/evaluationFeedingStore';
+import { chevronCollapseSharp } from 'ionicons/icons';
 
 const dolphinsStore = useDolphinsStore();
 const evaluationFeedingStore = useEvaluationFeedingStore();
@@ -288,7 +287,6 @@ export default {
 			//dolphinsStore: useDolphinsStore(),
 			dolphinsStore: dolphinsStore,
 			dolphinSelect: null as string | null,
-			//dolphinSelect: "",
 			criteria: null as string | null,
 			subcriteria: '',
 			firstlabel: this.$t('dolphin'),
@@ -320,38 +318,9 @@ export default {
 				fish_quality: null as number | null,
 				fish_variety: null as number | null
       		},*/
-			  requestBody: {
-				dolphin_name: "",
-				body_condition_score: 0,
-				weight: 3,
-				weight_measured: 0,
-				kcal_calculations: 0,
-				blood_hydration: 0,
-				fish_quality: 0,
-				fish_variety: 0
-      		},
-			//API Store calls
-			//evaluationFeedingStore: evaluationFeedingStore,
 		};
 	},
 	methods: {
-		//Method to get the Dolphins
-		showDolphins(){
-			//this.dolphins = this.dolphinsStore.dolphinList;
-			//console.log(this.dolphinsStore.dolphinList);
-			//console.log(this.dolphins);
-			//console.log(evaluationFeedingStore.requestBodiesFeeding);
-		},
-		/*async showDolphins() {
-			await axios.get(this.urlDolphins)
-				.then ((response) => {
-        		//console.log('Response:', response.data);
-				this.dolphinList = response.data;
-    			})
-			 	.catch ((e) => {
-				console.error(e);
-				});
-		},*/
 		//Method to open the manual
         setOpenManual(isOpen: boolean) {
             this.isOpenManual = isOpen;
@@ -375,28 +344,27 @@ export default {
     	},
 		// Method to collect the checked checkboxes and give request Body the scores
 		storeCheckedValues() {
-			if (this.dolphinSelect!== null){
-				this.requestBody.dolphin_name = this.dolphinSelect;
-			}
-			this.requestBody.weight_measured = parseFloat(this.weight);
-			for(let i = 0; i <= 4; i++){
-				for(let j = 0; j < 3; j++){
-					if (this.CheckboxArray[i][j] === true && i === 0){
-						this.requestBody.body_condition_score = j + 1;
-					}else if (this.CheckboxArray[i][j] === true && i === 1){
-						this.requestBody.kcal_calculations = j + 1;
-					}else if (this.CheckboxArray[i][j] === true && i === 2){
-						this.requestBody.blood_hydration = j + 1;
-					}else if (this.CheckboxArray[i][j] === true && i === 3){
-						this.requestBody.fish_quality = j + 1;
-					}else if (this.CheckboxArray[i][j] === true && i === 4){
-						this.requestBody.fish_variety = j + 1;
+			for(let k = 0; k < evaluationFeedingStore.requestBodiesFeeding.length; k++){
+				if(this.dolphinSelect === evaluationFeedingStore.requestBodiesFeeding[k]["dolphin_name"]) {
+					if (this.dolphinSelect!== null){
+						evaluationFeedingStore.requestBodiesFeeding[k]["dolphin_name"] = this.dolphinSelect;
 					}
-				}
-			}
-			for(let i = 0; i < evaluationFeedingStore.requestBodiesFeeding.length; i++){
-				if(this.dolphinSelect === evaluationFeedingStore.requestBodiesFeeding[i]["dolphin_name"]) {
-					evaluationFeedingStore.requestBodiesFeeding[i] = this.requestBody;
+					evaluationFeedingStore.requestBodiesFeeding[k]["weight_measured"] = parseFloat(this.weight);
+					for(let i = 0; i < this.CheckboxArray.length; i++){
+						for(let j = 0; j < this.CheckboxArray[i].length; j++){
+							if (this.CheckboxArray[i][j] === true && i === 0){
+								evaluationFeedingStore.requestBodiesFeeding[k]["body_condition_score"] = j + 1;
+							}else if (this.CheckboxArray[i][j] === true && i === 1){
+								evaluationFeedingStore.requestBodiesFeeding[k]["kcal_calculations"] = j + 1;
+							}else if (this.CheckboxArray[i][j] === true && i === 2){
+								evaluationFeedingStore.requestBodiesFeeding[k]["blood_hydration"] = j + 1;
+							}else if (this.CheckboxArray[i][j] === true && i === 3){
+								evaluationFeedingStore.requestBodiesFeeding[k]["fish_quality"] = j + 1;
+							}else if (this.CheckboxArray[i][j] === true && i === 4){
+								evaluationFeedingStore.requestBodiesFeeding[k]["fish_variety"] = j + 1;
+							}
+						}
+					}
 				}
 			}
 			for(let i = 0; i <= 4; i++){
@@ -412,28 +380,13 @@ export default {
 			const confirmed = confirm(this.$t('savingDataNext'));
      		if (confirmed) {
 				this.storeCheckedValues();
-				console.log(this.requestBody);
 				console.log(this.CheckboxArray);
-				/*await axios
-							.post(this.urlPost, this.requestBody)
-							.then((response) => {
-								console.log('Response:', response.data);
-								const targetUrl = '/folder/Evaluate';
-								this.$router.push(targetUrl);
-								this.dolphinSelect = null;
-								this.criteria = null;
-							})
-							.catch((error) => {
-								console.error('Error:', error.response.data);
-								const targetUrl = `/detailFeeding`;
-								this.$router.push(targetUrl);
-							});*/
 				for(let i = 0; i < evaluationFeedingStore.requestBodiesFeeding.length; i++){
 					await axios
 							.post(this.urlPost, evaluationFeedingStore.requestBodiesFeeding[i])
 							.then((response) => {
 								console.log('Response:', response.data);
-								if (i === 2){
+								if (i === evaluationFeedingStore.requestBodiesFeeding.length - 1){
 									const targetUrl = '/folder/Evaluate';
 									this.$router.push(targetUrl);
 									//dolphinsStore.$reset();
@@ -453,7 +406,6 @@ export default {
 			const confirmed = confirm(this.$t('savingDataNext'));
      		if (confirmed) {
 				this.storeCheckedValues();
-				console.log(this.requestBody);
 				console.log(evaluationFeedingStore.requestBodiesFeeding)
 				this.dolphinSelect = null;
 				this.criteria = null;
@@ -462,6 +414,23 @@ export default {
 				this.$router.push(targetUrl);
 			}	
     	},
+		//Method to get the Dolphins
+		showDolphins(){
+			//this.dolphins = this.dolphinsStore.dolphinList;
+			//console.log(this.dolphinsStore.dolphinList);
+			//console.log(this.dolphins);
+			//console.log(evaluationFeedingStore.requestBodiesFeeding);
+		},
+		/*async showDolphins() {
+			await axios.get(this.urlDolphins)
+				.then ((response) => {
+        		//console.log('Response:', response.data);
+				this.dolphinList = response.data;
+    			})
+			 	.catch ((e) => {
+				console.error(e);
+				});
+		},*/
 	}
 
 };
