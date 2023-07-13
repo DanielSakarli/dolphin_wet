@@ -389,7 +389,7 @@ export default {
 								if (i === evaluationFeedingStore.requestBodiesFeeding.length - 1){
 									const targetUrl = '/folder/Evaluate';
 									this.$router.push(targetUrl);
-									//dolphinsStore.$reset();
+									evaluationFeedingStore.resetBodies();
 									this.dolphinSelect = null;
 									this.criteria = null;
 								}
