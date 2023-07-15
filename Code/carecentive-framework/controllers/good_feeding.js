@@ -28,7 +28,7 @@ async function setResult(req, res, next) {
 		const {
 			dolphin_name,
 			body_condition_score,
-			weight,
+			// weight,
 			weight_measured,
 			kcal_calculations,
 			blood_hydration,
@@ -55,7 +55,7 @@ async function setResult(req, res, next) {
 			dolphin_id,
 			dolphin_name,
 			body_condition_score,
-			weight,
+			// weight,
 			weight_measured,
 			kcal_calculations,
 			blood_hydration,

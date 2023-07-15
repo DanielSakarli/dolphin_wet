@@ -3,7 +3,6 @@ const router = express.Router();
 const {
 	goodFeedingPostValidateRequestBody,
 } = require('../validators/dolphinWetValidators');
-const { validateDateQueryParam } = require('../validators/dateValidators');
 const { authenticateTokenWithSwitch } = require('../controllers/authSwitch');
 
 /**
