@@ -41,7 +41,7 @@ JavaScript Nuggets is a series of JavaScript tutorial to teach you the important
 
     [Upload the result of good feeding test](#upload-the-result-of-good-feeding-test)
 
-    [Get a test result by date](#get-a-test-result-by-date)
+    [Get a test result by dolphin name](#get-a-test-result-by-dolphin-name)
 
 [Good Health API](#good-health-api)
 
@@ -548,7 +548,6 @@ So if user want to send any data, he or she has to login again.
   {
       "dolphin_name":"test", // name of dolphin
       "body_condition_score":3, // 1, 2, 3
-      "weight": 3, // 1, 3
       "weight_measured": 15.5, // weekly measured weight of dolphin
       "kcal_calculations": 3, // 1, 3
       "blood_hydration":3, // 1, 2, 3
@@ -571,7 +570,6 @@ So if user want to send any data, he or she has to login again.
         "user_id": 1,
         "dolphin_id": 1,
         "body_condition_score": 3,
-        "weight": 3,
         "weight_measured": 15.5,
         "kcal_calculations": 3,
         "blood_hydration": 3,
@@ -610,7 +608,6 @@ So if user want to send any data, he or she has to login again.
   const requestBody = {
       dolphin_name:"test1",
       body_condition_score:3,
-      weight: 3,
       weight_measured: 15.5,
       kcal_calculations: 3,
       blood_hydration:3,
@@ -640,9 +637,9 @@ So if user want to send any data, he or she has to login again.
       });
   ```
 
-#### Get a test result by date
+#### Get a test result by dolphin name
 
-- address: http://88395-17112.pph-server.de/api/good_feeding?date=[yyyy-mm-dd]
+- address: http://88395-17112.pph-server.de/api/good_feeding?name=
 
 - method: GET
 
@@ -652,40 +649,30 @@ So if user want to send any data, he or she has to login again.
     
     HTTP status: 200
     
-    The response body will be a list of good_feeding test object created by the given date.
+    By default this API returns the test results of last 3 months of the given dolphin.
     
     ```json
-    // This is a example
-    [
-        {
-            "feeding_record_id": 51,
-            "user_id": 47,
-            "dolphin_id": 55,
-            "body_condition_score": 3,
-            "weight": 3,
-            "weight_measured": 15.5,
-            "kcal_calculations": 3,
-            "blood_hydration": 3,
-            "fish_quality": 3,
-            "fish_variety": 3,
-            "created_at": "2023-06-15T20:45:49.000Z",
-            "updated_at": "2023-06-15T20:45:49.000Z"
-        },
-        {
-            "feeding_record_id": 52,
-            "user_id": 47,
-            "dolphin_id": 56,
-            "body_condition_score": 3,
-            "weight": 3,
-            "weight_measured": 15.5,
-            "kcal_calculations": 3,
-            "blood_hydration": 3,
-            "fish_quality": 3,
-            "fish_variety": 3,
-            "created_at": "2023-06-15T21:16:17.000Z",
-            "updated_at": "2023-06-15T21:16:17.000Z"
-        }
-    ]
+    {
+        "2023-7": [
+            {
+                "feeding_record_id": 6,
+                "user_id": 2,
+                "dolphin_id": 6,
+                "dolphin_name": "Sunny",
+                "body_condition_score": 1,
+                "weight_measured": 161,
+                "kcal_calculations": 1,
+                "blood_hydration": 1,
+                "fish_quality": 1,
+                "fish_variety": 1,
+                "comments": null,
+                "created_at": "2023-07-15T22:59:31.000Z",
+                "updated_at": "2023-07-15T22:59:31.000Z"
+            }
+        ],
+        "2023-6": [],
+        "2023-5": []
+    }
     ```
   
   - request failed
@@ -700,7 +687,7 @@ So if user want to send any data, he or she has to login again.
       
       HTTP status: 500
       
-      Error message here varies based on the error, e.g when the query parameter is not in the format of yyyy-mm-dd, the error message is `Invalid date format. Please provide a date in the format yyyy-mm-dd` with HTTP status 400
+      Error message here varies based on the error.
       
       ```json
       {
@@ -712,8 +699,7 @@ So if user want to send any data, he or she has to login again.
   
   ```javascript
   import axios from 'axios';
-  const date = '2023-06-15'
-  const url = `http://88395-17112.pph-server.de/api/good_feeding?${date}`;
+  const url = `http://88395-17112.pph-server.de/api/good_feeding?name=sunny`;
   
   axios
       .post(url, requestBody)
@@ -724,6 +710,8 @@ So if user want to send any data, he or she has to login again.
           console.error('Error:', error.response.data)
       });
   ```
+
+
 
 ### Good Health API
 
@@ -954,8 +942,6 @@ So if user want to send any data, he or she has to login again.
       }
       ```
 
-
-
 ### Photo Uploading API
 
 Uploading a photo for a test.
@@ -971,32 +957,31 @@ Uploading a photo for a test.
 ```html
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<title>Dolphin Wet test picture uploading</title>
-		<link rel="stylesheet" href="./style.css" />
-	</head>
-	<body>
-		<div class="container">
-			<h1>File Upload</h1>
-			<form id="form">
-				<div class="input-group">
-					<label for="name">Your name</label>
-					<input name="name" id="name" placeholder="Enter your name" />
-				</div>
-				<div class="input-group">
-					<label for="files">Select files</label>
-					<input id="files" name="files" type="file" multiple />
-				</div>
-				<button class="submit-btn" type="submit">Upload</button>
-			</form>
-		</div>
-		<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-		<script src="./app.js"></script>
-	</body>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Dolphin Wet test picture uploading</title>
+        <link rel="stylesheet" href="./style.css" />
+    </head>
+    <body>
+        <div class="container">
+            <h1>File Upload</h1>
+            <form id="form">
+                <div class="input-group">
+                    <label for="name">Your name</label>
+                    <input name="name" id="name" placeholder="Enter your name" />
+                </div>
+                <div class="input-group">
+                    <label for="files">Select files</label>
+                    <input id="files" name="files" type="file" multiple />
+                </div>
+                <button class="submit-btn" type="submit">Upload</button>
+            </form>
+        </div>
+        <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+        <script src="./app.js"></script>
+    </body>
 </html>
-
 ```
 
 ```js
@@ -1008,56 +993,55 @@ form.addEventListener('submit', submitForm);
  * Submit the format with given data attached photo to server.
  * @param {String} date - The test date in the format of yyyy-mm-dd. This is very important!
  * @param {String} test_name - The test name, based on the detailed checkbox document,
- * 												it is either 'eye_lesions', 'mouth_condition', 
+ *                                                 it is either 'eye_lesions', 'mouth_condition', 
  */
 function submitForm(e, test_date, test_name) {
-	// prevents the default behavior of the browser, which is to perform a full page reload.
-	// I have no idea wether you need this in ionic.
-	e.preventDefault();
+    // prevents the default behavior of the browser, which is to perform a full page reload.
+    // I have no idea wether you need this in ionic.
+    e.preventDefault();
 
-	// gets the form input html element.
-	const files = document.getElementById('files');
+    // gets the form input html element.
+    const files = document.getElementById('files');
 
     // !!! The code above is needed for plain HTML and JS,
     // Maybe in Ionic you can also do it but I'm not sure...
     // Please use corresponding methods in Ionic.
 
-	// create a new FormData object, you can learn more here
-	// https://developer.mozilla.org/en-US/docs/Web/API/FormData/FormData
-	const formData = new FormData();
+    // create a new FormData object, you can learn more here
+    // https://developer.mozilla.org/en-US/docs/Web/API/FormData/FormData
+    const formData = new FormData();
 
-	// in case of multiple photos, use a loop here to add all photos.
+    // in case of multiple photos, use a loop here to add all photos.
     // files.files: first files is the html element,
     // second files is the name for that html element
     // The html element is like: 
     // <input id="files" name="files" type="file" multiple />
-	for (let i = 0; i < files.files.length; i++) {
-		formData.append('files', files.files[i]);
-	}
-    
-    // Give test_date and test_name for this picture!
-	formData.append('test_date', test_date);
-	formData.append('test_name', test_name);
+    for (let i = 0; i < files.files.length; i++) {
+        formData.append('files', files.files[i]);
+    }
 
-	axios
-		.post('http://88395-17112.pph-server.de/api/photo', formData, {
-			headers: {
+    // Give test_date and test_name for this picture!
+    formData.append('test_date', test_date);
+    formData.append('test_name', test_name);
+
+    axios
+        .post('http://88395-17112.pph-server.de/api/photo', formData, {
+            headers: {
                 // !!! The content-type must be multipart/form-date
                 // otherwise errors arise
-				'Content-Type': 'multipart/form-data',
-			},
-		})
-		.then((response) => {
-			console.log(response);
-			if (response.status === 201) {
-				// do something after uploading successfully
-				console.log('success!');
-			}
-		})
-		.catch((error) => {
-			// error handling here
-			console.log(error);
-		});
+                'Content-Type': 'multipart/form-data',
+            },
+        })
+        .then((response) => {
+            console.log(response);
+            if (response.status === 201) {
+                // do something after uploading successfully
+                console.log('success!');
+            }
+        })
+        .catch((error) => {
+            // error handling here
+            console.log(error);
+        });
 }
-
 ```
