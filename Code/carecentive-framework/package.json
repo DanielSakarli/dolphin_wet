@@ -12,7 +12,8 @@
 		"rollback-all": "npx knex migrate:rollback --all",
 		"poll-data": "node scripts/pollData.js",
 		"test-push": "node scripts/WebPush.js",
-		"test": "jest --watch --runInBand --detectOpenHandles"
+		"test": "jest --watch --runInBand --detectOpenHandles",
+		"install-deployment-dependency": "npm ci"
 	},
 	"dependencies": {
 		"@carecentive/carecentive-core": "^0.9.1",
@@ -55,7 +56,8 @@
 		"testPathIgnorePatterns": [
 			"<rootDir>/__tests__/setup.js",
 			"<rootDir>/__tests__/dolphins.test.js",
-			"<rootDir>/__tests__/dolphinDao.test.js"
+			"<rootDir>/__tests__/dolphinDao.test.js",
+			"<rootDir>/__tests__/good_feeding.test.js"
 		]
 	}
 }

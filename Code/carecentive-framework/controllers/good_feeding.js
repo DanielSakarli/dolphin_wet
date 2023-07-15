@@ -72,22 +72,23 @@ async function setResult(req, res, next) {
 }
 
 /**
- * Controller of get request of /api/good_feeding?date.
- * Gets the test result in the database with the given day in format `yyyy-mm-dd`.
+ * Controller of get request of /api/good_feeding?name.
+ * Gets the test result in the database.
+ * By default it returns the test results of last three months of the given dolphin.
  */
-async function getResultWithTheDate(req, res, next) {
+async function getTestResult(req, res, next) {
 	try {
-		const errors = validationResult(req);
-		if (!errors.isEmpty()) {
-			// Handle validation errors
-			return res.status(400).json({ errors: errors.array() });
-		}
-		const { date } = req.query;
-		const queryResult = await GoodFeedingService.getTestResultWithDate(date);
+		// const errors = validationResult(req);
+		// if (!errors.isEmpty()) {
+		// 	// Handle validation errors
+		// 	return res.status(400).json({ errors: errors.array() });
+		// }
+		const { name } = req.query;
+		const queryResult = await GoodFeedingService.getTestResultThreeMonths(name);
 		res.status(200).json(queryResult);
 	} catch (error) {
 		next(error);
 	}
 }
 
-module.exports = { setResult, getResultWithTheDate };
+module.exports = { setResult, getTestResult };

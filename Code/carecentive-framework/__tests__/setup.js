@@ -126,6 +126,27 @@ function testUser(knexInstance) {
 	return { registerUser, loginUser, deleteUser };
 }
 
+/**
+ * Good feeding test data.
+ */
+async function testGoodFeeding(knexInstance) {
+	const testDolphins = testDolphin(knexInstance).getAllTestDolphins();
+
+	// get the id for every test dolphin here
+	const testDolphinIds = [];
+	for (let testDolphin of testDolphins) {
+		testDolphinIds.push(
+			await knexInstance()
+				.select('dolphin_id')
+				.from('dolphins')
+				.where('name', '=', testDolphin)
+		);
+	}
+
+	// generate good_feeding test data
+	
+}
+
 module.exports = {
 	setupTestDb,
 	testDolphin,

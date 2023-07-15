@@ -9,10 +9,7 @@ const { authenticateTokenWithSwitch } = require('../controllers/authSwitch');
 /**
  * Controllers
  */
-const {
-	setResult,
-	getResultWithTheDate,
-} = require('../controllers/good_feeding');
+const { setResult, getTestResult } = require('../controllers/good_feeding');
 
 /**
  * Loads the test result of good_feeding.
@@ -25,8 +22,8 @@ router.post(
 );
 
 /**
- * Gets the test result of given day.
+ * Gets the test result based on given query params.
  */
-router.get('/', validateDateQueryParam, getResultWithTheDate);
+router.get('/', getTestResult);
 
 module.exports = router;

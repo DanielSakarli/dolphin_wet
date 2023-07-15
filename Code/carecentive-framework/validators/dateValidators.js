@@ -7,8 +7,7 @@ const { query } = require('express-validator');
  */
 const validateDateQueryParam = [
 	query('date')
-		.exists()
-		.withMessage('Date parameter is required')
+		.optional({ values: 'undefined' })
 		.matches(/^\d{4}-\d{2}-\d{2}$/) // regex of yyyy-mm-dd
 		.withMessage(
 			'Invalid date format. Please provide a date in the format yyyy-mm-dd'

@@ -17,8 +17,6 @@ JavaScript Nuggets is a series of JavaScript tutorial to teach you the important
 
 [What is JWT authorization really about - Java Brains](https://www.youtube.com/watch?v=soGRyl9ztjI)
 
-
-
 ### Catalog
 
 [User API](#user-api)
@@ -57,9 +55,9 @@ JavaScript Nuggets is a series of JavaScript tutorial to teach you the important
 
     [Upload the result of behaviour test](#upload-the-result-of-behaviour-test)
 
----
+[Photo Uploading API](#photo-uploading-api)
 
- 
+---
 
 ## API Usage
 
@@ -282,8 +280,6 @@ So if user want to send any data, he or she has to login again.
           console.error(error.response.data);
       });
   ```
-
-
 
 ### Dolphins API
 
@@ -538,8 +534,6 @@ So if user want to send any data, he or she has to login again.
 
 **Delete one dolphin**
 
-
-
 ### Good Feeding API
 
 #### Upload the result of good feeding test
@@ -731,8 +725,6 @@ So if user want to send any data, he or she has to login again.
       });
   ```
 
-
-
 ### Good Health API
 
 #### Upload the result of good health test
@@ -753,7 +745,8 @@ So if user want to send any data, he or she has to login again.
       "mouth_exam": 1,
       "respiratory_disease": 1,
       "force_expiration": 1,
-      "external_disease_signs":1
+      "external_disease_signs":1,
+      "comments": null
   }
   ```
 
@@ -778,7 +771,8 @@ So if user want to send any data, he or she has to login again.
         "respiratory_disease": 1,
         "force_expiration": 1,
         "external_disease_signs": 1,
-        "health_record_id": 4
+        "health_record_id": 4,
+        "comments":null
     }
     ```
   
@@ -801,8 +795,6 @@ So if user want to send any data, he or she has to login again.
           "error": "some error message"
       }
       ```
-
-
 
 ### Good Housing API
 
@@ -824,9 +816,9 @@ So if user want to send any data, he or she has to login again.
       "forced_loneliness": 1,
       "water_quality": 1,
       "sufficient_shade": 1,
-      "acoustic_comfort":1
+      "acoustic_comfort":1,
+      "comments": null
   } 
-  
   ```
 
 - response:
@@ -835,7 +827,7 @@ So if user want to send any data, he or she has to login again.
     
     HTTP status: 201
     
-    The response body will be the good health object that has been inserted to database.
+    The response body will be the good housing object that has been inserted to database.
     
     ```json
     // This is a example
@@ -850,7 +842,8 @@ So if user want to send any data, he or she has to login again.
         "water_quality": 1,
         "sufficient_shade": 1,
         "acoustic_comfort": 1,
-        "housing_record_id": 1
+        "housing_record_id": 1,
+        "comments": null
     }
     ```
   
@@ -874,8 +867,6 @@ So if user want to send any data, he or she has to login again.
       }
       ```
 
-
-
 ### Appropriate Behaviour API
 
 #### Upload the result of behaviour test
@@ -890,21 +881,22 @@ So if user want to send any data, he or she has to login again.
   // The type of the indicators can be string, it's fine.
   {
       "dolphin_name":"test1",
-  	"environmental_enrichment":"3", // string is fine
-  	"affiliative_behaviour":1,
-  	"play_behaviour":1,
-  	"socio_sexual_behaviour":1,
-  	"maternal_behaviour":1,
-  	"displacement_behaviour":1,
-  	"oral_stereotypic_behaviour":1,
-  	"repetitive_body_movement":1,
-  	"self_grooming_behaviour":1,
-  	"regurgitation_reingestion":1,
-  	"rake_marks":1,
-  	"displaying_aggressive_behaviour":1,
-  	"receiving_aggressive_behaviour":1,
-  	"social_isolation":1,
-  	"avoidance_pool_areas":1
+      "environmental_enrichment":"3", // string is fine
+      "affiliative_behaviour":1,
+      "play_behaviour":1,
+      "socio_sexual_behaviour":1,
+      "maternal_behaviour":1,
+      "displacement_behaviour":1,
+      "oral_stereotypic_behaviour":1,
+      "repetitive_body_movement":1,
+      "self_grooming_behaviour":1,
+      "regurgitation_reingestion":1,
+      "rake_marks":1,
+      "displaying_aggressive_behaviour":1,
+      "receiving_aggressive_behaviour":1,
+      "social_isolation":1,
+      "avoidance_pool_areas":1,
+      "comments": null
   }
   ```
 
@@ -914,7 +906,7 @@ So if user want to send any data, he or she has to login again.
     
     HTTP status: 201
     
-    The response body will be the good health object that has been inserted to database.
+    The response body will be the behaviour data object that has been inserted to database.
     
     ```json
     // This is a example
@@ -937,7 +929,8 @@ So if user want to send any data, he or she has to login again.
         "receiving_aggressive_behaviour": 1,
         "social_isolation": 1,
         "avoidance_pool_areas": 1,
-        "behaviour_record_id": 1
+        "behaviour_record_id": 1,
+        "comments": null
     }
     ```
   
@@ -960,3 +953,111 @@ So if user want to send any data, he or she has to login again.
           "error": "some error message"
       }
       ```
+
+
+
+### Photo Uploading API
+
+Uploading a photo for a test.
+
+- address: http://88395-17112.pph-server.de/api/photo
+
+- method: POST
+
+- example:
+  
+  to show you how to use it, I created a minimum demo in raw HTML and JavaScript.        
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Dolphin Wet test picture uploading</title>
+		<link rel="stylesheet" href="./style.css" />
+	</head>
+	<body>
+		<div class="container">
+			<h1>File Upload</h1>
+			<form id="form">
+				<div class="input-group">
+					<label for="name">Your name</label>
+					<input name="name" id="name" placeholder="Enter your name" />
+				</div>
+				<div class="input-group">
+					<label for="files">Select files</label>
+					<input id="files" name="files" type="file" multiple />
+				</div>
+				<button class="submit-btn" type="submit">Upload</button>
+			</form>
+		</div>
+		<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+		<script src="./app.js"></script>
+	</body>
+</html>
+
+```
+
+```js
+const form = document.getElementById('form');
+
+form.addEventListener('submit', submitForm);
+
+/**
+ * Submit the format with given data attached photo to server.
+ * @param {String} date - The test date in the format of yyyy-mm-dd. This is very important!
+ * @param {String} test_name - The test name, based on the detailed checkbox document,
+ * 												it is either 'eye_lesions', 'mouth_condition', 
+ */
+function submitForm(e, test_date, test_name) {
+	// prevents the default behavior of the browser, which is to perform a full page reload.
+	// I have no idea wether you need this in ionic.
+	e.preventDefault();
+
+	// gets the form input html element.
+	const files = document.getElementById('files');
+
+    // !!! The code above is needed for plain HTML and JS,
+    // Maybe in Ionic you can also do it but I'm not sure...
+    // Please use corresponding methods in Ionic.
+
+	// create a new FormData object, you can learn more here
+	// https://developer.mozilla.org/en-US/docs/Web/API/FormData/FormData
+	const formData = new FormData();
+
+	// in case of multiple photos, use a loop here to add all photos.
+    // files.files: first files is the html element,
+    // second files is the name for that html element
+    // The html element is like: 
+    // <input id="files" name="files" type="file" multiple />
+	for (let i = 0; i < files.files.length; i++) {
+		formData.append('files', files.files[i]);
+	}
+    
+    // Give test_date and test_name for this picture!
+	formData.append('test_date', test_date);
+	formData.append('test_name', test_name);
+
+	axios
+		.post('http://88395-17112.pph-server.de/api/photo', formData, {
+			headers: {
+                // !!! The content-type must be multipart/form-date
+                // otherwise errors arise
+				'Content-Type': 'multipart/form-data',
+			},
+		})
+		.then((response) => {
+			console.log(response);
+			if (response.status === 201) {
+				// do something after uploading successfully
+				console.log('success!');
+			}
+		})
+		.catch((error) => {
+			// error handling here
+			console.log(error);
+		});
+}
+
+```
