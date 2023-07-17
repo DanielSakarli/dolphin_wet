@@ -35,18 +35,18 @@ exports.up = function (knex) {
 				.onUpdate('CASCADE');
 			table.string('dolphin_name');
 			table.tinyint('body_condition_score').unsigned(); //1, 2, 3
-			table.string('body_condition_score_comments').unsigned(); //1, 2, 3
+			table.string('body_condition_score_comments'); //1, 2, 3
 			// table.tinyint('weight').unsigned(); //1, 3
 			table.double('weight_measured'); //weekly measured weight of dolphin
 			table.string('weight_measured_string');
 			table.tinyint('kcal_calculations').unsigned(); //1, 3
-			table.string('kcal_calculations_comments').unsigned(); //1, 3
+			table.string('kcal_calculations_comments'); //1, 3
 			table.tinyint('blood_hydration').unsigned(); //1, 2, 3
-			table.string('blood_hydration_comments').unsigned(); //1, 2, 3
+			table.string('blood_hydration_comments'); //1, 2, 3
 			table.tinyint('fish_quality').unsigned(); //1, 3
-			table.string('fish_quality_comments').unsigned(); //1, 3
+			table.string('fish_quality_comments'); //1, 3
 			table.tinyint('fish_variety').unsigned(); //1, 2, 3
-			table.string('fish_variety_comments').unsigned(); //1, 2, 3
+			table.string('fish_variety_comments'); //1, 2, 3
 			table.timestamps(true, true); //Timestamp: created at, updated at
 		}),
 
