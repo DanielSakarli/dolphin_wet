@@ -38,7 +38,7 @@ exports.up = function (knex) {
 			table.string('body_condition_score_comments'); //1, 2, 3
 			// table.tinyint('weight').unsigned(); //1, 3
 			table.double('weight_measured'); //weekly measured weight of dolphin
-			table.string('weight_measured_string');
+			table.string('weight_measured_comments');
 			table.tinyint('kcal_calculations').unsigned(); //1, 3
 			table.string('kcal_calculations_comments'); //1, 3
 			table.tinyint('blood_hydration').unsigned(); //1, 2, 3
