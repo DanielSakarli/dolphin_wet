@@ -55,13 +55,18 @@ const goodFeedingPostValidateRequestBody = [
 		const allowedFields = [
 			'dolphin_name',
 			'body_condition_score',
-			'weight',
+			'body_condition_score_comments',
 			'weight_measured',
+			'weight_measured_comments',
 			'kcal_calculations',
+			'kcal_calculations_comments',
 			'blood_hydration',
+			'blood_hydration_comments',
 			'fish_quality',
+			'fish_quality_comments',
 			'fish_variety',
-			'comments',
+			'fish_variety_comments',
+			'weight',
 		];
 		const keys = Object.keys(value);
 
@@ -84,40 +89,55 @@ const goodFeedingPostValidateRequestBody = [
 		.isIn([1, 2, 3])
 		.toInt()
 		.withMessage('Invalid body condition score'),
-	body('weight')
+	body('body_condition_score_comments')
 		.optional({ values: 'null' })
-		.isIn([1, 3])
-		.toInt()
-		.withMessage('Invalid weight'),
+		.isString()
+		.withMessage('Invalid comments for body condition score'),
 	body('weight_measured')
 		.optional({ values: 'null' })
 		.isFloat({ min: 0 })
 		.toFloat()
 		.withMessage('Invalid measured weight'),
+	body('weight_measured_comments')
+		.optional({ values: 'null' })
+		.isString()
+		.withMessage('Invalid comments for body measured weight'),
 	body('kcal_calculations')
 		.optional({ values: 'null' })
-		.isIn([1, 3])
+		.isIn([1, 2, 3])
 		.toInt()
 		.withMessage('Invalid kcal calculations'),
+	body('kcal_calculations_comments')
+		.optional({ values: 'null' })
+		.isString()
+		.withMessage('Invalid comments for kal calculations'),
 	body('blood_hydration')
 		.optional({ values: 'null' })
 		.isIn([1, 2, 3])
 		.toInt()
 		.withMessage('Invalid blood hydration'),
+	body('blood_hydration_comments')
+		.optional({ values: 'null' })
+		.isString()
+		.withMessage('Invalid comments for blood hydration'),
 	body('fish_quality')
 		.optional({ values: 'null' })
-		.isIn([1, 3])
+		.isIn([1, 2, 3])
 		.toInt()
 		.withMessage('Invalid fish quality'),
+	body('fish_quality_comments')
+		.optional({ values: 'null' })
+		.isString()
+		.withMessage('Invalid comments for fish quality'),
 	body('fish_variety')
 		.optional({ values: 'null' })
 		.isIn([1, 2, 3])
 		.toInt()
 		.withMessage('Invalid fish variety'),
-	body('comments')
+	body('fish_variety_comments')
 		.optional({ values: 'null' })
 		.isString()
-		.withMessage('Invalid comments type'),
+		.withMessage('Invalid comments for fish variety'),
 ];
 /**
  * End of Good feeding validation rules.

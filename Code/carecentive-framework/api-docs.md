@@ -21,39 +21,39 @@ JavaScript Nuggets is a series of JavaScript tutorial to teach you the important
 
 [User API](#user-api)
 
-    [Register user](#register-user)
+[Register user](#register-user)
 
-    [Login user](#login-user)
+[Login user](#login-user)
 
-    [Change password](#change-password)
+[Change password](#change-password)
 
-    [User logout](#user-logout)
+[User logout](#user-logout)
 
 [Dolphins API](#dolphins-api)
 
-    [Create a dolphin](#create-a-dolphin)
+[Create a dolphin](#create-a-dolphin)
 
-    [Get all dolphins](#get-all-dolphins)
+[Get all dolphins](#get-all-dolphins)
 
-    [Get single dolphin by name](#get-single-dolphin-by-name)
+[Get single dolphin by name](#get-single-dolphin-by-name)
 
 [Good Feeding API](#good-feeding-api)
 
-    [Upload the result of good feeding test](#upload-the-result-of-good-feeding-test)
+[Upload the result of good feeding test](#upload-the-result-of-good-feeding-test)
 
-    [Get a test result by dolphin name](#get-a-test-result-by-dolphin-name)
+[Get a test result by dolphin name](#get-a-test-result-by-dolphin-name)
 
 [Good Health API](#good-health-api)
 
-    [Upload the result of good health test](#upload-the-result-of-good-health-test)
+[Upload the result of good health test](#upload-the-result-of-good-health-test)
 
 [Good Housing API](#good-housing-api)
 
-    [Upload the result of good housing test](#upload-the-result-of-good-housing-test)
+[Upload the result of good housing test](#upload-the-result-of-good-housing-test)
 
 [Appropriate Behaviour API](#appropriate-behaviour-api)
 
-    [Upload the result of behaviour test](#upload-the-result-of-behaviour-test)
+[Upload the result of behaviour test](#upload-the-result-of-behaviour-test)
 
 [Photo Uploading API](#photo-uploading-api)
 
@@ -70,47 +70,47 @@ JavaScript Nuggets is a series of JavaScript tutorial to teach you the important
 - method: POST
 
 - response:
-  
+
   - request successful
-    
+
     HTTP status: 200
-    
+
     ```textile
     OK
     ```
-  
+
   - request failed
-    
+
     HTTP status > 400
-    
+
     Error message here varies based on the error, e.g when the user name already exists in database, the error message will be `USER_ALREDY_EXISTS`
-    
+
     ```json
     {
-        "error": "some error message"
+    	"error": "some error message"
     }
     ```
 
 - example:
-  
+
   ```javascript
   import axios from 'axios';
   const url = 'http://88395-17112.pph-server.de/api/users/register';
-  
+
   const requestBody = {
-      name: 'john doe',
-      email: 'john.doe@example.mail',
-      password: 'secret_password',
+  	name: 'john doe',
+  	email: 'john.doe@example.mail',
+  	password: 'secret_password',
   };
-  
+
   axios
-      .post(url, requestBody)
-      .then((response) => {
-          console.log('Response:', response.data);
-      })
-      .catch((error) => {
-          console.error('Error:', error.response.data);
-      });
+  	.post(url, requestBody)
+  	.then((response) => {
+  		console.log('Response:', response.data);
+  	})
+  	.catch((error) => {
+  		console.error('Error:', error.response.data);
+  	});
   ```
 
 #### Login User
@@ -124,48 +124,48 @@ JavaScript Nuggets is a series of JavaScript tutorial to teach you the important
 - method: POST
 
 - response:
-  
+
   - request successful
-    
+
     HTTP status: 200
-    
+
     JWT Token is something like this:
-    
+
     ```textile
     eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c
     ```
-  
+
   - request failed
-    
+
     HTTP status > 400
-    
+
     Error message here varies based on the error, e.g when the user name or passport is wrong, the error message will be `INVALID_NAME_OR_PASSWORD`
-    
+
     ```json
     {
-        "error": "some error message"
+    	"error": "some error message"
     }
     ```
 
 - example:
-  
+
   ```javascript
   import axios from 'axios';
   const url = 'http://88395-17112.pph-server.de/api/users/login';
-  
+
   const requestBody = {
-      username: 'john doe', // notice here is username not name!
-      password: 'secret_password',
+  	username: 'john doe', // notice here is username not name!
+  	password: 'secret_password',
   };
-  
+
   axios
-      .post(url, requestBody)
-      .then((response) => {
-          console.log('Response:', response.data);
-      })
-      .catch((error) => {
-          console.error('Error:', error.response.data);
-      });
+  	.post(url, requestBody)
+  	.then((response) => {
+  		console.log('Response:', response.data);
+  	})
+  	.catch((error) => {
+  		console.error('Error:', error.response.data);
+  	});
   ```
 
 #### Change Password
@@ -177,57 +177,57 @@ To change the password of the user, you will need to attach the JWT token of thi
 - method: POST
 
 - response:
-  
+
   - request successful:
-    
+
     HTTP status: 200
-    
+
     ```textile
     # There is no reponse provided by carecentive by default
     ```
-  
+
   - request failed:
-    
+
     HTTP status > 400
-    
+
     ```json
     {
-        "error": "some error message"
+    	"error": "some error message"
     }
     ```
 
 - example:
-  
+
   ```javascript
   import axios from 'axios';
-  
+
   const url = 'http://88395-17112.pph-server.de/api/users/changePassword';
-  
+
   // Change the token with the current user!!!
   // This token is just a example, it won't work!!!
   const token =
-      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxLCJuYW1lIjoiam9obiBkb2UiLCJpYXQiOjE2ODY4NTU0NTUsImV4cCI6MTY4Njg5ODY1NX0.4moQ1iDnCYbbU0tSME3VfNMygXLgQ3A2FfvUXhQjQZI';
-  
+  	'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxLCJuYW1lIjoiam9obiBkb2UiLCJpYXQiOjE2ODY4NTU0NTUsImV4cCI6MTY4Njg5ODY1NX0.4moQ1iDnCYbbU0tSME3VfNMygXLgQ3A2FfvUXhQjQZI';
+
   // Set up request config.
   const config = {
-      headers: {
-          'Cookie': `token=${token}`,
-      },
+  	headers: {
+  		Cookie: `token=${token}`,
+  	},
   };
   const requestBody = {
-      newPassword: 'new_secret_password',
+  	newPassword: 'new_secret_password',
   };
-  
+
   axios
-      .post(url, requestBody, config)
-      .then((response) => {
-          console.log('HTTP status:', response.status);
-          console.log('Response:', response.data);
-      })
-      .catch((error) => {
-          console.error(error.response.status);
-          console.error(error.response.data);
-      });
+  	.post(url, requestBody, config)
+  	.then((response) => {
+  		console.log('HTTP status:', response.status);
+  		console.log('Response:', response.data);
+  	})
+  	.catch((error) => {
+  		console.error(error.response.status);
+  		console.error(error.response.data);
+  	});
   ```
 
 #### User Logout
@@ -241,44 +241,44 @@ So if user want to send any data, he or she has to login again.
 - method: GET
 
 - response:
-  
+
   - request successful:
-    
+
     HTTP status: 200
-    
+
     ```textile
     # There is no reponse provided by carecentive by default
     ```
 
 - example:
-  
+
   ```javascript
   import axios from 'axios';
-  
+
   const url = 'http://88395-17112.pph-server.de/api/users/logout';
-  
+
   // Change the token with the current user!!!
   // This token is just a example, it won't work!!!
   const token =
-      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxLCJuYW1lIjoiam9obiBkb2UiLCJpYXQiOjE2ODY4NTU0NTUsImV4cCI6MTY4Njg5ODY1NX0.4moQ1iDnCYbbU0tSME3VfNMygXLgQ3A2FfvUXhQjQZI';
-  
+  	'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxLCJuYW1lIjoiam9obiBkb2UiLCJpYXQiOjE2ODY4NTU0NTUsImV4cCI6MTY4Njg5ODY1NX0.4moQ1iDnCYbbU0tSME3VfNMygXLgQ3A2FfvUXhQjQZI';
+
   // Set up request config.
   const config = {
-      headers: {
-          'Cookie': `token=${token}`,
-      },
+  	headers: {
+  		Cookie: `token=${token}`,
+  	},
   };
-  
+
   axios
-      .get(url, config)
-      .then((response) => {
-          console.log('HTTP status:', response.status);
-          console.log('Response:', response.data);
-      })
-      .catch((error) => {
-          console.error(error.response.status);
-          console.error(error.response.data);
-      });
+  	.get(url, config)
+  	.then((response) => {
+  		console.log('HTTP status:', response.status);
+  		console.log('Response:', response.data);
+  	})
+  	.catch((error) => {
+  		console.error(error.response.status);
+  		console.error(error.response.data);
+  	});
   ```
 
 ### Dolphins API
@@ -290,7 +290,7 @@ So if user want to send any data, he or she has to login again.
 - method: POST
 
 - Request body:
-  
+
   ```json
   {
       "name": // name of dolphin,
@@ -302,87 +302,87 @@ So if user want to send any data, he or she has to login again.
   ```
 
 - response:
-  
+
   - request successful
-    
+
     HTTP status: 201
-    
+
     The response body will contain all information you send to the server.
-    
+
     ```json
     {
         "name": "test",
-        "sex": 1, 
-        "on_site": 1, 
+        "sex": 1,
+        "on_site": 1,
         "year_of_birth": 2010,
-        "place_of_birth": 
-        "dolphin_id": 1 // id is generated by database, 
+        "place_of_birth":
+        "dolphin_id": 1 // id is generated by database,
                         //  you don't have to include it
     }
     ```
-  
+
   - request failed
-    
+
     HTTP status > 400
-    
+
     - The request body is invalid:
-      
+
       HTTP status: 400
-    
+
     - Without valid JWT token attached:
-      
+
       HTTP status: 401
-    
+
     - Dolphin to create already exists:
-      
+
       HTTP status: 409
-    
+
     - Internal server error:
-      
+
       HTTP status: 500
-    
-    Error message here varies based on the error, e.g when the dolphin to create already exists in database, the error is  `Dolphin [name_here] already existed!` with HTTP status 409.
-    
+
+    Error message here varies based on the error, e.g when the dolphin to create already exists in database, the error is `Dolphin [name_here] already existed!` with HTTP status 409.
+
     ```json
     {
-        "error": "some error message"
+    	"error": "some error message"
     }
     ```
 
 - example:
-  
+
   ```javascript
   import axios from 'axios';
   const url = 'http://88395-17112.pph-server.de/api/dolphins';
-  
+
   const requestBody = {
-      name: "test dolphin",
-      sex: 1,
-      on_site: 1,
-      year_of_birth: 2010,
-      place_of_birth: "Erlangen"
+  	name: 'test dolphin',
+  	sex: 1,
+  	on_site: 1,
+  	year_of_birth: 2010,
+  	place_of_birth: 'Erlangen',
   };
-  
+
   // Change the token with the current user!!!
   // This token is just a example, it won't work!!!
   const token =
-      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxLCJuYW1lIjoiam9obiBkb2UiLCJpYXQiOjE2ODY4NTU0NTUsImV4cCI6MTY4Njg5ODY1NX0.4moQ1iDnCYbbU0tSME3VfNMygXLgQ3A2FfvUXhQjQZI';
-  
+  	'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxLCJuYW1lIjoiam9obiBkb2UiLCJpYXQiOjE2ODY4NTU0NTUsImV4cCI6MTY4Njg5ODY1NX0.4moQ1iDnCYbbU0tSME3VfNMygXLgQ3A2FfvUXhQjQZI';
+
   // Set up request config.
   const config = {
-      headers: {
-          'Cookie': `token=${token}`,
-      },
+  	headers: {
+  		Cookie: `token=${token}`,
+  	},
   };
-  
+
   axios
-      .post(url, requestBody, config)
-      .then((response) => {
-          console.log('Response:', response.data);
-      })
-      .catch((error) => {
-          console.error('Error:', error.response.data)
-      });
+  	.post(url, requestBody, config)
+  	.then((response) => {
+  		console.log('Response:', response.data);
+  	})
+  	.catch((error) => {
+  		console.error('Error:', error.response.data);
+  	});
   ```
 
 #### Get all dolphins
@@ -392,78 +392,78 @@ So if user want to send any data, he or she has to login again.
 - method: GET
 
 - response:
-  
+
   - request successful
-    
+
     HTTP status: 200
-    
+
     The response body will be an array of dolphin information objects.
-    
+
     ```json
     [
-      {
-        dolphin_id: 1,
-        name: 'test dolphin',
-        sex: 1,
-        on_site: 1,
-        year_of_birth: 2010,
-        place_of_birth: 'Erlangen',
-        created_at: '2023-06-15T19:58:32.000Z',
-        updated_at: '2023-06-15T19:58:32.000Z'
-      },
-      {
-        dolphin_id: 2,
-        name: 'test dolphin',
-        sex: 1,
-        on_site: 1,
-        year_of_birth: 2010,
-        place_of_birth: 'Erlangen',
-        created_at: '2023-06-15T19:59:32.000Z',
-        updated_at: '2023-06-15T19:59:32.000Z'
-      },
-      {
-        dolphin_id: 3,
-        name: 'test dolphin',
-        sex: 1,
-        on_site: 1,
-        year_of_birth: 2010,
-        place_of_birth: 'Erlangen',
-        created_at: '2023-06-15T19:58:32.000Z',
-        updated_at: '2023-06-15T19:58:32.000Z'
-      }
+    	{
+    		"dolphin_id": 1,
+    		"name": "test dolphin",
+    		"sex": 1,
+    		"on_site": 1,
+    		"year_of_birth": 2010,
+    		"place_of_birth": "Erlangen",
+    		"created_at": "2023-06-15T19:58:32.000Z",
+    		"updated_at": "2023-06-15T19:58:32.000Z"
+    	},
+    	{
+    		"dolphin_id": 2,
+    		"name": "test dolphin",
+    		"sex": 1,
+    		"on_site": 1,
+    		"year_of_birth": 2010,
+    		"place_of_birth": "Erlangen",
+    		"created_at": "2023-06-15T19:59:32.000Z",
+    		"updated_at": "2023-06-15T19:59:32.000Z"
+    	},
+    	{
+    		"dolphin_id": 3,
+    		"name": "test dolphin",
+    		"sex": 1,
+    		"on_site": 1,
+    		"year_of_birth": 2010,
+    		"place_of_birth": "Erlangen",
+    		"created_at": "2023-06-15T19:58:32.000Z",
+    		"updated_at": "2023-06-15T19:58:32.000Z"
+    	}
     ]
     ```
-  
+
   - request failed
-    
+
     HTTP status > 400
-    
+
     - Internal server error:
-      
+
       HTTP status: 500
-      
+
       Error message here varies based on the error.
-      
+
       ```json
       {
-          "error": "some error message"
+      	"error": "some error message"
       }
       ```
 
 - example:
-  
+
   ```javascript
   import axios from 'axios';
   const url = 'http://88395-17112.pph-server.de/api/dolphins';
-  
+
   axios
-      .get(url)
-      .then((response) => {
-          console.log('Response:', response.data);
-      })
-      .catch((error) => {
-          console.error('Error:', error.response.data)
-      });
+  	.get(url)
+  	.then((response) => {
+  		console.log('Response:', response.data);
+  	})
+  	.catch((error) => {
+  		console.error('Error:', error.response.data);
+  	});
   ```
 
 #### Get single dolphin by name
@@ -473,13 +473,13 @@ So if user want to send any data, he or she has to login again.
 - method: GET
 
 - response:
-  
+
   - request successful
-    
+
     HTTP status: 200
-    
+
     The response body will be an array of dolphin information object.
-    
+
     ```json
     {
         dolphin_id: 1,
@@ -492,42 +492,42 @@ So if user want to send any data, he or she has to login again.
         updated_at: '2023-06-15T19:58:32.000Z'
      },
     ```
-  
+
   - request failed
-    
+
     HTTP status > 400
-    
+
     - Dolphin not fount:
-      
+
       HTTP status: 404
-    
+
     - Internal server error:
-      
+
       HTTP status: 500
-      
+
       Error message here varies based on the error, e.g when the dolphin to query is not in database, the error is `No dolphin named [dolphin_name]` with HTTP status 404.
-      
+
       ```json
       {
-          "error": "some error message"
+      	"error": "some error message"
       }
       ```
 
 - example:
-  
+
   ```javascript
   import axios from 'axios';
   // here you need to put the name of dolphin at the end of url
   const url = 'http://88395-17112.pph-server.de/api/dolphins/test1';
-  
+
   axios
-      .get(url)
-      .then((response) => {
-          console.log('Response:', response.data);
-      })
-      .catch((error) => {
-          console.error('Error:', error.response.data)
-      });
+  	.get(url)
+  	.then((response) => {
+  		console.log('Response:', response.data);
+  	})
+  	.catch((error) => {
+  		console.error('Error:', error.response.data);
+  	});
   ```
 
 **Update the info for one dolphin**
@@ -543,98 +543,109 @@ So if user want to send any data, he or she has to login again.
 - method: POST
 
 - request body:
-  
+
   ```json
+  // The sequence of results doesn't matter.
   {
-      "dolphin_name":"test", // name of dolphin
-      "body_condition_score":3, // 1, 2, 3
-      "weight_measured": 15.5, // weekly measured weight of dolphin
-      "kcal_calculations": 3, // 1, 3
-      "blood_hydration":3, // 1, 2, 3
-      "fish_quality":3, // 1, 3 
-      "fish_variety":3 // 1, 2, 3
+  	"dolphin_name": "test", // name of dolphin
+  	"body_condition_score": 3, // 1, 2, 3
+  	"body_condition_score_comments": null,
+  	"weight_measured": 155, // weekly measured weight of dolphin
+  	"weight_measured_comments": 155,
+  	"kcal_calculations": 3, // 1, 3
+  	"kcal_calculations_comments": null,
+  	"blood_hydration": 3, // 1, 2, 3
+  	"blood_hydration_comments": null, // 1, 2, 3
+  	"fish_quality": 3, // 1, 3
+  	"fish_quality_comments": null, // 1, 3
+  	"fish_variety": 3, // 1, 2, 3
+  	"fish_variety_comments": null // 1, 2, 3
   }
   ```
 
 - response:
-  
+
   - request successful
-    
+
     HTTP status: 201
-    
+
     The response body will be the good feeding object that has been inserted to database.
-    
+
     ```json
     // This is a example
     {
-        "user_id": 1,
-        "dolphin_id": 1,
-        "body_condition_score": 3,
-        "weight_measured": 15.5,
-        "kcal_calculations": 3,
-        "blood_hydration": 3,
-        "fish_quality": 3,
-        "fish_variety": 3,
-        "feeding_record_id": 52
+    	"user_id": 1,
+    	"dolphin_id": 1,
+    	"body_condition_score_comments": null,
+    	"weight_measured": 155,
+    	"weight_measured_comments": 155,
+    	"kcal_calculations": 3,
+    	"kcal_calculations_comments": null,
+    	"blood_hydration": 3,
+    	"blood_hydration_comments": null,
+    	"fish_quality": 3,
+    	"fish_quality_comments": null,
+    	"fish_variety": 3,
+    	"fish_variety_comments": null
     }
     ```
-  
+
   - request failed
-    
+
     HTTP status > 400
-    
+
     - Bad request body:
-      
+
       HTTP status: 400
-    
+
     - Internal server error:
-      
+
       HTTP status: 500
-      
+
       Error message here varies based on the error, e.g when there is a typo in the dolphin name, the error message is `dolphin not exists in database!` with HTTP status 400
-      
+
       ```json
       {
-          "error": "some error message"
+      	"error": "some error message"
       }
       ```
 
 - example:
-  
+
   ```javascript
   import axios from 'axios';
   const url = 'http://88395-17112.pph-server.de/api/good_feeding';
-  
+
   const requestBody = {
-      dolphin_name:"test1",
-      body_condition_score:3,
-      weight_measured: 15.5,
-      kcal_calculations: 3,
-      blood_hydration:3,
-      fish_quality:3,
-      fish_variety:3
-  }
-  
+  	dolphin_name: 'test1',
+  	body_condition_score: 3,
+  	weight_measured: 15.5,
+  	kcal_calculations: 3,
+  	blood_hydration: 3,
+  	fish_quality: 3,
+  	fish_variety: 3,
+  };
+
   // Change the token with the current user!!!
   // This token is just a example, it won't work!!!
   const token =
-      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxLCJuYW1lIjoiam9obiBkb2UiLCJpYXQiOjE2ODY4NTU0NTUsImV4cCI6MTY4Njg5ODY1NX0.4moQ1iDnCYbbU0tSME3VfNMygXLgQ3A2FfvUXhQjQZI';
-  
+  	'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxLCJuYW1lIjoiam9obiBkb2UiLCJpYXQiOjE2ODY4NTU0NTUsImV4cCI6MTY4Njg5ODY1NX0.4moQ1iDnCYbbU0tSME3VfNMygXLgQ3A2FfvUXhQjQZI';
+
   // Set up request config.
   const config = {
-      headers: {
-          'Cookie': `token=${token}`,
-      },
+  	headers: {
+  		Cookie: `token=${token}`,
+  	},
   };
-  
+
   axios
-      .post(url, requestBody, config)
-      .then((response) => {
-          console.log('Response:', response.data);
-      })
-      .catch((error) => {
-          console.error('Error:', error.response.data)
-      });
+  	.post(url, requestBody, config)
+  	.then((response) => {
+  		console.log('Response:', response.data);
+  	})
+  	.catch((error) => {
+  		console.error('Error:', error.response.data);
+  	});
   ```
 
 #### Get a test result by dolphin name
@@ -644,74 +655,72 @@ So if user want to send any data, he or she has to login again.
 - method: GET
 
 - response:
-  
+
   - request successful
-    
+
     HTTP status: 200
-    
+
     By default this API returns the test results of last 3 months of the given dolphin.
-    
+
     ```json
     {
-        "2023-7": [
-            {
-                "feeding_record_id": 6,
-                "user_id": 2,
-                "dolphin_id": 6,
-                "dolphin_name": "Sunny",
-                "body_condition_score": 1,
-                "weight_measured": 161,
-                "kcal_calculations": 1,
-                "blood_hydration": 1,
-                "fish_quality": 1,
-                "fish_variety": 1,
-                "comments": null,
-                "created_at": "2023-07-15T22:59:31.000Z",
-                "updated_at": "2023-07-15T22:59:31.000Z"
-            }
-        ],
-        "2023-6": [],
-        "2023-5": []
+    	"2023-7": [
+    		{
+    			"feeding_record_id": 6,
+    			"user_id": 2,
+    			"dolphin_id": 6,
+    			"dolphin_name": "Sunny",
+    			"body_condition_score": 1,
+    			"weight_measured": 161,
+    			"kcal_calculations": 1,
+    			"blood_hydration": 1,
+    			"fish_quality": 1,
+    			"fish_variety": 1,
+    			"comments": null,
+    			"created_at": "2023-07-15T22:59:31.000Z",
+    			"updated_at": "2023-07-15T22:59:31.000Z"
+    		}
+    	],
+    	"2023-6": [],
+    	"2023-5": []
     }
     ```
-  
+
   - request failed
-    
+
     HTTP status > 400
-    
+
     - Bad request body:
-      
+
       HTTP status: 400
-    
+
     - Internal server error:
-      
+
       HTTP status: 500
-      
+
       Error message here varies based on the error.
-      
+
       ```json
       {
-          "error": "some error message"
+      	"error": "some error message"
       }
       ```
 
 - example:
-  
+
   ```javascript
   import axios from 'axios';
   const url = `http://88395-17112.pph-server.de/api/good_feeding?name=sunny`;
-  
+
   axios
-      .post(url, requestBody)
-      .then((response) => {
-          console.log('Response:', response.data);
-      })
-      .catch((error) => {
-          console.error('Error:', error.response.data)
-      });
+  	.post(url, requestBody)
+  	.then((response) => {
+  		console.log('Response:', response.data);
+  	})
+  	.catch((error) => {
+  		console.error('Error:', error.response.data);
+  	});
   ```
-
-
 
 ### Good Health API
 
@@ -722,65 +731,65 @@ So if user want to send any data, he or she has to login again.
 - method: POST
 
 - request body:
-  
+
   ```json
   // The type of the indicators can be string, it's fine.
   {
-      "dolphin_name": "test_dolphin1",
-      "normal_floatability": 1,
-      "eye_lesions": null, // null is allowed, when there is no data, just use null
-      "visual_cues": 1,
-      "mouth_exam": 1,
-      "respiratory_disease": 1,
-      "force_expiration": 1,
-      "external_disease_signs":1,
-      "comments": null
+  	"dolphin_name": "test_dolphin1",
+  	"normal_floatability": 1,
+  	"eye_lesions": null, // null is allowed, when there is no data, just use null
+  	"visual_cues": 1,
+  	"mouth_exam": 1,
+  	"respiratory_disease": 1,
+  	"force_expiration": 1,
+  	"external_disease_signs": 1,
+  	"comments": null
   }
   ```
 
 - response:
-  
+
   - request successful
-    
+
     HTTP status: 201
-    
+
     The response body will be the good health object that has been inserted to database.
-    
+
     ```json
     // This is a example
     {
-        "dolphin_id": 4,
-        "user_id": 4,
-        "dolphin_name": "test1",
-        "normal_floatability": 1,
-        "eye_lesions": null,
-        "visual_cues": 1,
-        "mouth_exam": 1,
-        "respiratory_disease": 1,
-        "force_expiration": 1,
-        "external_disease_signs": 1,
-        "health_record_id": 4,
-        "comments":null
+    	"dolphin_id": 4,
+    	"user_id": 4,
+    	"dolphin_name": "test1",
+    	"normal_floatability": 1,
+    	"eye_lesions": null,
+    	"visual_cues": 1,
+    	"mouth_exam": 1,
+    	"respiratory_disease": 1,
+    	"force_expiration": 1,
+    	"external_disease_signs": 1,
+    	"health_record_id": 4,
+    	"comments": null
     }
     ```
-  
+
   - request failed
-    
+
     HTTP status > 400
-    
+
     - Bad request body:
-      
+
       HTTP status: 400
-    
+
     - Internal server error:
-      
+
       HTTP status: 500
-      
+
       Error message here varies based on the error, e.g when there is a typo in the dolphin name, the error message is `dolphin not exists in database!` with HTTP status 400
-      
+
       ```json
       {
-          "error": "some error message"
+      	"error": "some error message"
       }
       ```
 
@@ -793,65 +802,65 @@ So if user want to send any data, he or she has to login again.
 - method: POST
 
 - request body:
-  
+
   ```json
   // The type of the indicators can be string, it's fine.
   {
-      "dolphin_name": "test1",
-      "enclosure_barrier_safety": 1,
-      "foreign_body_ingestion": null, // null is allowed, when there is no data, just use null
-      "pool_design": 1,
-      "forced_loneliness": 1,
-      "water_quality": 1,
-      "sufficient_shade": 1,
-      "acoustic_comfort":1,
-      "comments": null
-  } 
+  	"dolphin_name": "test1",
+  	"enclosure_barrier_safety": 1,
+  	"foreign_body_ingestion": null, // null is allowed, when there is no data, just use null
+  	"pool_design": 1,
+  	"forced_loneliness": 1,
+  	"water_quality": 1,
+  	"sufficient_shade": 1,
+  	"acoustic_comfort": 1,
+  	"comments": null
+  }
   ```
 
 - response:
-  
+
   - request successful
-    
+
     HTTP status: 201
-    
+
     The response body will be the good housing object that has been inserted to database.
-    
+
     ```json
     // This is a example
     {
-        "dolphin_id": 4,
-        "user_id": 4,
-        "dolphin_name": "test1",
-        "enclosure_barrier_safety": 1,
-        "foreign_body_ingestion": null,
-        "pool_design": 1,
-        "forced_loneliness": 1,
-        "water_quality": 1,
-        "sufficient_shade": 1,
-        "acoustic_comfort": 1,
-        "housing_record_id": 1,
-        "comments": null
+    	"dolphin_id": 4,
+    	"user_id": 4,
+    	"dolphin_name": "test1",
+    	"enclosure_barrier_safety": 1,
+    	"foreign_body_ingestion": null,
+    	"pool_design": 1,
+    	"forced_loneliness": 1,
+    	"water_quality": 1,
+    	"sufficient_shade": 1,
+    	"acoustic_comfort": 1,
+    	"housing_record_id": 1,
+    	"comments": null
     }
     ```
-  
+
   - request failed
-    
+
     HTTP status > 400
-    
+
     - Bad request body:
-      
+
       HTTP status: 400
-    
+
     - Internal server error:
-      
+
       HTTP status: 500
-      
+
       Error message here varies based on the error, e.g when there is a typo in the dolphin name, the error message is `dolphin not exists in database!` with HTTP status 400
-      
+
       ```json
       {
-          "error": "some error message"
+      	"error": "some error message"
       }
       ```
 
@@ -864,81 +873,81 @@ So if user want to send any data, he or she has to login again.
 - method: POST
 
 - request body:
-  
+
   ```json
   // The type of the indicators can be string, it's fine.
   {
-      "dolphin_name":"test1",
-      "environmental_enrichment":"3", // string is fine
-      "affiliative_behaviour":1,
-      "play_behaviour":1,
-      "socio_sexual_behaviour":1,
-      "maternal_behaviour":1,
-      "displacement_behaviour":1,
-      "oral_stereotypic_behaviour":1,
-      "repetitive_body_movement":1,
-      "self_grooming_behaviour":1,
-      "regurgitation_reingestion":1,
-      "rake_marks":1,
-      "displaying_aggressive_behaviour":1,
-      "receiving_aggressive_behaviour":1,
-      "social_isolation":1,
-      "avoidance_pool_areas":1,
-      "comments": null
+  	"dolphin_name": "test1",
+  	"environmental_enrichment": "3", // string is fine
+  	"affiliative_behaviour": 1,
+  	"play_behaviour": 1,
+  	"socio_sexual_behaviour": 1,
+  	"maternal_behaviour": 1,
+  	"displacement_behaviour": 1,
+  	"oral_stereotypic_behaviour": 1,
+  	"repetitive_body_movement": 1,
+  	"self_grooming_behaviour": 1,
+  	"regurgitation_reingestion": 1,
+  	"rake_marks": 1,
+  	"displaying_aggressive_behaviour": 1,
+  	"receiving_aggressive_behaviour": 1,
+  	"social_isolation": 1,
+  	"avoidance_pool_areas": 1,
+  	"comments": null
   }
   ```
 
 - response:
-  
+
   - request successful
-    
+
     HTTP status: 201
-    
+
     The response body will be the behaviour data object that has been inserted to database.
-    
+
     ```json
     // This is a example
     {
-        "dolphin_id": 4,
-        "user_id": 4,
-        "dolphin_name": "test1",
-        "environmental_enrichment": 3,
-        "affiliative_behaviour": 1,
-        "play_behaviour": 1,
-        "socio_sexual_behaviour": 1,
-        "maternal_behaviour": 1,
-        "displacement_behaviour": 1,
-        "oral_stereotypic_behaviour": 1,
-        "repetitive_body_movement": 1,
-        "self_grooming_behaviour": 1,
-        "regurgitation_reingestion": 1,
-        "rake_marks": 1,
-        "displaying_aggressive_behaviour": 1,
-        "receiving_aggressive_behaviour": 1,
-        "social_isolation": 1,
-        "avoidance_pool_areas": 1,
-        "behaviour_record_id": 1,
-        "comments": null
+    	"dolphin_id": 4,
+    	"user_id": 4,
+    	"dolphin_name": "test1",
+    	"environmental_enrichment": 3,
+    	"affiliative_behaviour": 1,
+    	"play_behaviour": 1,
+    	"socio_sexual_behaviour": 1,
+    	"maternal_behaviour": 1,
+    	"displacement_behaviour": 1,
+    	"oral_stereotypic_behaviour": 1,
+    	"repetitive_body_movement": 1,
+    	"self_grooming_behaviour": 1,
+    	"regurgitation_reingestion": 1,
+    	"rake_marks": 1,
+    	"displaying_aggressive_behaviour": 1,
+    	"receiving_aggressive_behaviour": 1,
+    	"social_isolation": 1,
+    	"avoidance_pool_areas": 1,
+    	"behaviour_record_id": 1,
+    	"comments": null
     }
     ```
-  
+
   - request failed
-    
+
     HTTP status > 400
-    
+
     - Bad request body:
-      
+
       HTTP status: 400
-    
+
     - Internal server error:
-      
+
       HTTP status: 500
-      
+
       Error message here varies based on the error, e.g when there is a typo in the dolphin name, the error message is `dolphin not exists in database!` with HTTP status 400
-      
+
       ```json
       {
-          "error": "some error message"
+      	"error": "some error message"
       }
       ```
 
@@ -951,36 +960,36 @@ Uploading a photo for a test.
 - method: POST
 
 - example:
-  
-  to show you how to use it, I created a minimum demo in raw HTML and JavaScript.        
+
+  to show you how to use it, I created a minimum demo in raw HTML and JavaScript.
 
 ```html
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Dolphin Wet test picture uploading</title>
-        <link rel="stylesheet" href="./style.css" />
-    </head>
-    <body>
-        <div class="container">
-            <h1>File Upload</h1>
-            <form id="form">
-                <div class="input-group">
-                    <label for="name">Your name</label>
-                    <input name="name" id="name" placeholder="Enter your name" />
-                </div>
-                <div class="input-group">
-                    <label for="files">Select files</label>
-                    <input id="files" name="files" type="file" multiple />
-                </div>
-                <button class="submit-btn" type="submit">Upload</button>
-            </form>
-        </div>
-        <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-        <script src="./app.js"></script>
-    </body>
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Dolphin Wet test picture uploading</title>
+		<link rel="stylesheet" href="./style.css" />
+	</head>
+	<body>
+		<div class="container">
+			<h1>File Upload</h1>
+			<form id="form">
+				<div class="input-group">
+					<label for="name">Your name</label>
+					<input name="name" id="name" placeholder="Enter your name" />
+				</div>
+				<div class="input-group">
+					<label for="files">Select files</label>
+					<input id="files" name="files" type="file" multiple />
+				</div>
+				<button class="submit-btn" type="submit">Upload</button>
+			</form>
+		</div>
+		<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+		<script src="./app.js"></script>
+	</body>
 </html>
 ```
 
@@ -993,55 +1002,55 @@ form.addEventListener('submit', submitForm);
  * Submit the format with given data attached photo to server.
  * @param {String} date - The test date in the format of yyyy-mm-dd. This is very important!
  * @param {String} test_name - The test name, based on the detailed checkbox document,
- *                                                 it is either 'eye_lesions', 'mouth_condition', 
+ *                                                 it is either 'eye_lesions', 'mouth_condition',
  */
 function submitForm(e, test_date, test_name) {
-    // prevents the default behavior of the browser, which is to perform a full page reload.
-    // I have no idea wether you need this in ionic.
-    e.preventDefault();
+	// prevents the default behavior of the browser, which is to perform a full page reload.
+	// I have no idea wether you need this in ionic.
+	e.preventDefault();
 
-    // gets the form input html element.
-    const files = document.getElementById('files');
+	// gets the form input html element.
+	const files = document.getElementById('files');
 
-    // !!! The code above is needed for plain HTML and JS,
-    // Maybe in Ionic you can also do it but I'm not sure...
-    // Please use corresponding methods in Ionic.
+	// !!! The code above is needed for plain HTML and JS,
+	// Maybe in Ionic you can also do it but I'm not sure...
+	// Please use corresponding methods in Ionic.
 
-    // create a new FormData object, you can learn more here
-    // https://developer.mozilla.org/en-US/docs/Web/API/FormData/FormData
-    const formData = new FormData();
+	// create a new FormData object, you can learn more here
+	// https://developer.mozilla.org/en-US/docs/Web/API/FormData/FormData
+	const formData = new FormData();
 
-    // in case of multiple photos, use a loop here to add all photos.
-    // files.files: first files is the html element,
-    // second files is the name for that html element
-    // The html element is like: 
-    // <input id="files" name="files" type="file" multiple />
-    for (let i = 0; i < files.files.length; i++) {
-        formData.append('files', files.files[i]);
-    }
+	// in case of multiple photos, use a loop here to add all photos.
+	// files.files: first files is the html element,
+	// second files is the name for that html element
+	// The html element is like:
+	// <input id="files" name="files" type="file" multiple />
+	for (let i = 0; i < files.files.length; i++) {
+		formData.append('files', files.files[i]);
+	}
 
-    // Give test_date and test_name for this picture!
-    formData.append('test_date', test_date);
-    formData.append('test_name', test_name);
+	// Give test_date and test_name for this picture!
+	formData.append('test_date', test_date);
+	formData.append('test_name', test_name);
 
-    axios
-        .post('http://88395-17112.pph-server.de/api/photo', formData, {
-            headers: {
-                // !!! The content-type must be multipart/form-date
-                // otherwise errors arise
-                'Content-Type': 'multipart/form-data',
-            },
-        })
-        .then((response) => {
-            console.log(response);
-            if (response.status === 201) {
-                // do something after uploading successfully
-                console.log('success!');
-            }
-        })
-        .catch((error) => {
-            // error handling here
-            console.log(error);
-        });
+	axios
+		.post('http://88395-17112.pph-server.de/api/photo', formData, {
+			headers: {
+				// !!! The content-type must be multipart/form-date
+				// otherwise errors arise
+				'Content-Type': 'multipart/form-data',
+			},
+		})
+		.then((response) => {
+			console.log(response);
+			if (response.status === 201) {
+				// do something after uploading successfully
+				console.log('success!');
+			}
+		})
+		.catch((error) => {
+			// error handling here
+			console.log(error);
+		});
 }
 ```
