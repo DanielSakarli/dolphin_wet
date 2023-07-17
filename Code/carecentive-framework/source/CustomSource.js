@@ -76,10 +76,34 @@ function getOneMonthBefore(year, month) {
 	};
 }
 
+/**
+ * Returns an array of objects representing the last N months.
+ * Each object contains the year and month of the respective month.
+ *
+ * @param {number} numMonths - The number of months to include in the result.
+ * @returns {Array<Object>} An array of objects representing the last three months.
+ */
+function getLastNMonths(numMonths) {
+	const currentDate = new Date();
+	const months = [];
+
+	for (let i = 0; i < numMonths; i++) {
+		const year = currentDate.getFullYear();
+		const month = currentDate.getMonth() + 1;
+
+		months.push({ year: year, month: month });
+
+		currentDate.setMonth(currentDate.getMonth() - 1);
+	}
+
+	return months;
+}
+
 module.exports = {
 	dateToTimestamp,
 	getLatestSubmissionByQuestionnaire,
 	getRandomIntegerBetween,
 	getCurrentDate,
 	getOneMonthBefore,
+	getLastNMonths,
 };

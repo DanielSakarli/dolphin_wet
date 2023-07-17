@@ -1,6 +1,10 @@
 const GoodFeeding = require('../models/GoodFeeding');
 const { raw } = require('objection');
-const { getCurrentDate, getOneMonthBefore } = require('../source/CustomSource');
+const {
+	getCurrentDate,
+	getOneMonthBefore,
+	getLastNMonths,
+} = require('../source/CustomSource');
 const DolphinDAO = require('../dao/dolphinDao');
 const { DolphinError } = require('../source/Errors');
 
@@ -85,9 +89,10 @@ class GoodFeedingService {
 	/**
 	 * Gets the test result of last three month of given dolphin.
 	 * @param {string} name - The name of dolphin
+	 * @param {number} numMonths - The number of past months to include in the result.
 	 * @returns {Promise<Array>} list of query result
 	 */
-	static async getTestResultThreeMonths(name) {
+	static async getTestResultThreeMonths(name, numMonths = 3) {
 		const myDolphinDAO = new DolphinDAO();
 
 		// if this dolphin is not in database,
@@ -96,53 +101,35 @@ class GoodFeedingService {
 			throw new DolphinError(`Dolphin ${name} doesn't exist!`, 404);
 		}
 
-		// gets current date in yyyy-mm-dd format.
-		const currentDate = getCurrentDate();
+		// Gets the year and month numbers of last numMonths months
+		const lastNMonths = getLastNMonths(numMonths);
+		const allResultsPromises = [];
 
-		// gets year and month integer out of currentDate.
-		const currentYearInt = parseInt(currentDate.substring(0, 4), 10);
-		const currentMonthInt = parseInt(currentDate.substring(5, 7), 10);
-
-		// gets test results in current month.
-		const currentMonthResult =
-			GoodFeedingService.getTestResultByDolphinAndMonth(
-				name,
-				currentYearInt,
-				currentMonthInt
+		// Gets all test results in pending promise
+		// Stores them in allResultsPromises array
+		for (let i = 0; i < lastNMonths.length; i++) {
+			allResultsPromises.push(
+				GoodFeedingService.getTestResultByDolphinAndMonth(
+					name,
+					lastNMonths[i].year,
+					lastNMonths[i].month
+				)
 			);
+		}
 
-		// gets test results of last month.
-		const lastMonthObj = getOneMonthBefore(currentYearInt, currentMonthInt);
-		const lastMonthResult = GoodFeedingService.getTestResultByDolphinAndMonth(
-			name,
-			lastMonthObj.year,
-			lastMonthObj.month
-		);
+		// Uses Promise.all([]) to resolve them concurrently.
+		const allResults = await Promise.all(allResultsPromises);
 
-		// gets test result of the month before the last.
-		const monthBeforeLastObj = getOneMonthBefore(
-			lastMonthObj.year,
-			lastMonthObj.month
-		);
-		const monthBeforeLastResult =
-			GoodFeedingService.getTestResultByDolphinAndMonth(
-				name,
-				monthBeforeLastObj.year,
-				monthBeforeLastObj.month
-			);
+		// final return value
+		const returnedResults = {};
 
-		// use Promise.all([]) to resolve them concurrently.
-		const allResults = await Promise.all([
-			currentMonthResult,
-			lastMonthResult,
-			monthBeforeLastResult,
-		]);
+		// Sets up the returned result
+		for (let i = 0; i < allResults.length; i++) {
+			returnedResults[`${lastNMonths[i].year}-${lastNMonths[i].month}`] =
+				allResults[i];
+		}
 
-		return {
-			[`${currentYearInt}-${currentMonthInt}`]: allResults[0],
-			[`${lastMonthObj.year}-${lastMonthObj.month}`]: allResults[1],
-			[`${monthBeforeLastObj.year}-${monthBeforeLastObj.month}`]: allResults[2],
-		};
+		return returnedResults;
 	}
 }
 
