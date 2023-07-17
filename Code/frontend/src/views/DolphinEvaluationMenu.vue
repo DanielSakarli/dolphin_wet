@@ -100,7 +100,7 @@
 </template>
 
 <script lang="ts">
-import { IonPage, IonButton, IonCard, IonCardTitle, IonContent, IonFooter, IonHeader, IonInput, IonItem, IonLabel, IonList, IonModal, IonToolbar, IonText, IonButtons, IonTitle } from '@ionic/vue';
+import { IonPage, IonButton, IonCard, IonCardTitle, IonContent, IonFooter, IonHeader, IonInput, IonItem, IonLabel, IonList, IonModal, IonToolbar, IonText, IonButtons, IonTitle, IonMenuButton } from '@ionic/vue';
 import { ref, computed, onMounted } from 'vue';
 import axios from 'axios';
 import { useRouter } from 'vue-router';
@@ -133,7 +133,8 @@ components: {
     IonToolbar,
     IonText,
     IonButtons,
-    IonTitle
+    IonTitle,
+    IonMenuButton
 },
 methods: {
             changeLanguage($event: any) {
