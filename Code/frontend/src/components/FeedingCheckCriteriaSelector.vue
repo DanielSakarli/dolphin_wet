@@ -240,7 +240,7 @@
 				<CheckComments />
 			</ion-list>
 		</ion-card>
-		<ion-button @click="showDolphins">Hallo</ion-button>
+		<!--<ion-button @click="showDolphins">Hallo</ion-button>-->
 	</ion-content>
 	<!-- End of Checkboxes-->
 	<ion-footer>
@@ -382,6 +382,9 @@ export default {
 				this.storeCheckedValues();
 				console.log(this.CheckboxArray);
 				for(let i = 0; i < evaluationFeedingStore.requestBodiesFeeding.length; i++){
+					/*for(const data in evaluationFeedingStore.requestBodiesFeeding[i]){
+						if(evaluationFeedingStore.requestBodiesFeeding[i].content(data)){}
+					}*/
 					await axios
 							.post(this.urlPost, evaluationFeedingStore.requestBodiesFeeding[i])
 							.then((response) => {
