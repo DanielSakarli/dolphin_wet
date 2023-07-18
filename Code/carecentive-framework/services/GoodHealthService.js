@@ -47,7 +47,7 @@ class GoodHealthService {
 	}
 
 	/**
-	 * Gets all good_feeding test results by given dolphin and month.
+	 * Gets all good_health test results by given dolphin and month.
 	 * @param {string} name - The name of dolphin
 	 * @param {number} year - Year
 	 * @param {number} month - Month

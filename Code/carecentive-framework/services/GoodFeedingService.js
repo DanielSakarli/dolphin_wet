@@ -1,8 +1,6 @@
 const GoodFeeding = require('../models/GoodFeeding');
 const { raw } = require('objection');
-const {
-	getLastNMonths,
-} = require('../source/CustomSource');
+const { getLastNMonths } = require('../source/CustomSource');
 const DolphinDAO = require('../dao/dolphinDao');
 const { DolphinError } = require('../source/Errors');
 
