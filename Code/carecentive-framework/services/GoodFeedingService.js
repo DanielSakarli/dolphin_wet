@@ -1,8 +1,6 @@
 const GoodFeeding = require('../models/GoodFeeding');
 const { raw } = require('objection');
 const {
-	getCurrentDate,
-	getOneMonthBefore,
 	getLastNMonths,
 } = require('../source/CustomSource');
 const DolphinDAO = require('../dao/dolphinDao');
@@ -87,12 +85,12 @@ class GoodFeedingService {
 	}
 
 	/**
-	 * Gets the test result of last three month of given dolphin.
+	 * Gets the test result of last N month of given dolphin. The default value of month is 3.
 	 * @param {string} name - The name of dolphin
 	 * @param {number} numMonths - The number of past months to include in the result.
 	 * @returns {Promise<Array>} list of query result
 	 */
-	static async getTestResultThreeMonths(name, numMonths = 3) {
+	static async getTestResultNMonths(name, numMonths = 3) {
 		const myDolphinDAO = new DolphinDAO();
 
 		// if this dolphin is not in database,

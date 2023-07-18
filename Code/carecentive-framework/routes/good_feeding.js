@@ -4,6 +4,7 @@ const {
 	goodFeedingPostValidateRequestBody,
 } = require('../validators/dolphinWetValidators');
 const { authenticateTokenWithSwitch } = require('../controllers/authSwitch');
+const { query } = require('express-validator');
 
 /**
  * Controllers
@@ -23,6 +24,10 @@ router.post(
 /**
  * Gets the test result based on given query params.
  */
-router.get('/', getTestResult);
+router.get(
+	'/',
+	[query('name').notEmpty().isString().withMessage('Name can not be empty!')],
+	getTestResult
+);
 
 module.exports = router;

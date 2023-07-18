@@ -78,13 +78,17 @@ async function setResult(req, res, next) {
  */
 async function getTestResult(req, res, next) {
 	try {
-		// const errors = validationResult(req);
-		// if (!errors.isEmpty()) {
-		// 	// Handle validation errors
-		// 	return res.status(400).json({ errors: errors.array() });
-		// }
+		const errors = validationResult(req);
+		if (!errors.isEmpty()) {
+			// Handle validation errors
+			return res.status(400).json({ errors: errors.array() });
+		}
+
+		// Gets the dolphin name
 		const { name } = req.query;
-		const queryResult = await GoodFeedingService.getTestResultThreeMonths(name);
+
+		const queryResult = await GoodFeedingService.getTestResultNMonths(name);
+
 		res.status(200).json(queryResult);
 	} catch (error) {
 		next(error);
