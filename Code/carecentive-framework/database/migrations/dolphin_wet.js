@@ -70,15 +70,22 @@ exports.up = function (knex) {
 			table.string('dolphin_name');
 
 			table.tinyint('normal_floatability').unsigned(); //1, 3
+			table.string('normal_floatability_comments');
 			table.tinyint('eye_lesions').unsigned(); //1, 3
+			table.string('eye_lesions_comments');
 			table.tinyint('visual_cues').unsigned(); //1, 3
+			table.string('visual_cues_comments');
 			table.tinyint('mouth_exam').unsigned(); //1, 3
+			table.string('mouth_exam_comments');
 			table.tinyint('respiratory_disease').unsigned(); //1, 3
+			table.string('respiratory_disease_comments');
 			table.tinyint('force_expiration').unsigned(); //1, 3
+			table.string('force_expiration_comments');
 			table.tinyint('external_disease_signs').unsigned(); //1, 3
+			table.string('external_disease_signs_comments');
+
 			table.string('eye_photo_path');
 			table.string('teeth_photo_path');
-			table.string('comments'); // comments for this category
 			table.timestamps(true, true); //Timestamp: created at, updated at
 		}),
 
@@ -102,14 +109,24 @@ exports.up = function (knex) {
 			table.string('dolphin_name');
 
 			table.tinyint('enclosure_barrier_safety').unsigned(); //1, 3
+			table.string('enclosure_barrier_safety_comments');
 			table.tinyint('foreign_body_ingestion').unsigned(); //1, 3
+			table.string('foreign_body_ingestion_comments');
 			table.tinyint('pool_design').unsigned(); //1, 3
+			table.string('pool_design_comments');
 			table.tinyint('forced_loneliness').unsigned(); //1, 3
+			table.string('forced_loneliness_comments');
 			table.tinyint('water_quality').unsigned(); //1, 3
+			table.string('water_quality_comments');
 			table.tinyint('water_temperature').unsigned(); //1, 3
+			table.string('water_temperature_comments');
 			table.tinyint('sufficient_shade').unsigned(); //1, 3
+			table.string('sufficient_shade_comments');
 			table.tinyint('acoustic_comfort').unsigned(); //1, 3
-			table.string('comments'); // comments for this category
+			table.string('acoustic_comfort_comments');
+
+			// Comments columns
+
 			table.timestamps(true, true); //Timestamp: created at, updated at
 		}),
 
@@ -133,22 +150,36 @@ exports.up = function (knex) {
 			table.string('dolphin_name');
 
 			table.tinyint('environmental_enrichment').unsigned(); //1, 2, 3
+			table.string('environmental_enrichment_comments');
 			table.tinyint('affiliative_behaviour').unsigned(); //1, 3
+			table.string('affiliative_behaviour_comments');
 			table.tinyint('play_behaviour').unsigned(); //1, 3
+			table.string('play_behaviour_comments');
 			table.tinyint('socio_sexual_behaviour').unsigned(); //1, 3
+			table.string('socio_sexual_behaviour_comments');
 			table.tinyint('maternal_behaviour').unsigned(); //1, 3
+			table.string('maternal_behaviour_comments');
 			table.tinyint('displacement_behaviour').unsigned(); //1, 3
+			table.string('displacement_behaviour_comments');
 			table.tinyint('oral_stereotypic_behaviour').unsigned(); //1, 3
+			table.string('oral_stereotypic_behaviour_comments');
 			table.tinyint('repetitive_body_movement').unsigned(); //1, 3
+			table.string('repetitive_body_movement_comments');
 			table.tinyint('self_grooming_behaviour').unsigned(); //1, 3
+			table.string('self_grooming_behaviour_comments');
 			table.tinyint('regurgitation_reingestion').unsigned(); //1, 3
+			table.string('regurgitation_reingestion_comments');
 			table.tinyint('rake_marks').unsigned(); //1, 2, 3
+			table.string('rake_marks_comments');
 			//And a photo for the rake_marks!
 			table.tinyint('displaying_aggressive_behaviour').unsigned(); //1, 3
+			table.string('displaying_aggressive_behaviour_comments');
 			table.tinyint('receiving_aggressive_behaviour').unsigned(); //1, 3
+			table.string('receiving_aggressive_behaviour_comments');
 			table.tinyint('social_isolation').unsigned(); //1, 3
+			table.string('social_isolation_comments');
 			table.tinyint('avoidance_pool_areas').unsigned(); //1, 2, 3
-			table.string('comments'); // comments for this category
+			table.string('avoidance_pool_areas_comments');
 
 			table.timestamps(true, true); //Timestamp: created at, updated at
 		}),

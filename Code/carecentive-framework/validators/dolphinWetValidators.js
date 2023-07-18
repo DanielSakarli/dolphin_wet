@@ -157,7 +157,14 @@ const goodHealthPostValidateRequestBody = [
 			'respiratory_disease',
 			'force_expiration',
 			'external_disease_signs',
-			'comments',
+			// comments
+			'normal_floatability_comments',
+			'eye_lesions_comments',
+			'visual_cues_comments',
+			'mouth_exam_comments',
+			'respiratory_disease_comments',
+			'force_expiration_comments',
+			'external_disease_signs_comments',
 		];
 		const keys = Object.keys(value);
 
@@ -210,10 +217,6 @@ const goodHealthPostValidateRequestBody = [
 		.isInt({ min: 1, max: 3 })
 		.toInt()
 		.withMessage('Invalid external disease signs value'),
-	body('comments')
-		.optional({ values: 'null' })
-		.isString()
-		.withMessage('Invalid comments type'),
 ];
 /**
  * End of Good health validation rules.
@@ -233,7 +236,13 @@ const goodHousingPostValidateRequestBody = [
 			'water_quality',
 			'sufficient_shade',
 			'acoustic_comfort',
-			'comments',
+			'enclosure_barrier_safety_comments',
+			'foreign_body_ingestion_comments',
+			'pool_design_comments',
+			'forced_loneliness_comments',
+			'water_quality_comments',
+			'sufficient_shade_comments',
+			'acoustic_comfort_comments',
 		];
 		const keys = Object.keys(value);
 
@@ -283,10 +292,6 @@ const goodHousingPostValidateRequestBody = [
 		.optional({ values: 'null' })
 		.isInt({ min: 1, max: 3 })
 		.toInt(),
-	body('comments')
-		.optional({ values: 'null' })
-		.isString()
-		.withMessage('Invalid comments type'),
 ];
 /**
  * End of good housing validation rules.
@@ -314,7 +319,21 @@ const behaviorPostValidateRequestBody = [
 			'receiving_aggressive_behaviour',
 			'social_isolation',
 			'avoidance_pool_areas',
-			'comments',
+			'environmental_enrichment_comments',
+			'affiliative_behaviour_comments',
+			'play_behaviour_comments',
+			'socio_sexual_behaviour_comments',
+			'maternal_behaviour_comments',
+			'displacement_behaviour_comments',
+			'oral_stereotypic_behaviour_comments',
+			'repetitive_body_movement_comments',
+			'self_grooming_behaviour_comments',
+			'regurgitation_reingestion_comments',
+			'rake_marks_comments',
+			'displaying_aggressive_behaviour_comments',
+			'receiving_aggressive_behaviour_comments',
+			'social_isolation_comments',
+			'avoidance_pool_areas_comments',
 		];
 		const keys = Object.keys(value);
 
@@ -392,10 +411,6 @@ const behaviorPostValidateRequestBody = [
 		.optional({ values: 'null' })
 		.isInt({ min: 1, max: 3 })
 		.toInt(),
-	body('comments')
-		.optional({ values: 'null' })
-		.isString()
-		.withMessage('Invalid comments type'),
 ];
 /**
  * End of behavior validation rules.
