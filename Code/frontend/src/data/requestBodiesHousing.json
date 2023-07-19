@@ -1,0 +1,80 @@
+[
+    {
+        "dolphin_name": "Dolly",
+        "enclosure_barrier_safety": 0,
+        "foreign_body_ingestion": 0, 
+        "pool_design": 0,
+        "forced_loneliness": 0,
+        "water_quality": 0,
+        "sufficient_shade": 0,
+        "acoustic_comfort":0,
+        "comments": null
+    
+    },
+    {
+        "dolphin_name": "Donna",
+        "enclosure_barrier_safety": 0,
+        "foreign_body_ingestion": 0, 
+        "pool_design": 0,
+        "forced_loneliness": 0,
+        "water_quality": 0,
+        "sufficient_shade": 0,
+        "acoustic_comfort":0,
+        "comments": null
+    },
+    {
+        "dolphin_name": "Jenny",
+        "enclosure_barrier_safety": 0,
+        "foreign_body_ingestion": 0, 
+        "pool_design": 0,
+        "forced_loneliness": 0,
+        "water_quality": 0,
+        "sufficient_shade": 0,
+        "acoustic_comfort":0,
+        "comments": null
+    },    
+    {
+        "dolphin_name": "Nami",
+        "enclosure_barrier_safety": 0,
+        "foreign_body_ingestion": 0, 
+        "pool_design": 0,
+        "forced_loneliness": 0,
+        "water_quality": 0,
+        "sufficient_shade": 0,
+        "acoustic_comfort":0,
+        "comments": null
+    },
+    {
+        "dolphin_name": "Nynke",
+        "enclosure_barrier_safety": 0,
+        "foreign_body_ingestion": 0, 
+        "pool_design": 0,
+        "forced_loneliness": 0,
+        "water_quality": 0,
+        "sufficient_shade": 0,
+        "acoustic_comfort":0,
+        "comments": null
+    },
+    {
+        "dolphin_name": "Sunny",
+        "enclosure_barrier_safety": 0,
+        "foreign_body_ingestion": 0, 
+        "pool_design": 0,
+        "forced_loneliness": 0,
+        "water_quality": 0,
+        "sufficient_shade": 0,
+        "acoustic_comfort":0,
+        "comments": null
+    },
+    {
+        "dolphin_name": "Dörte",
+        "enclosure_barrier_safety": 0,
+        "foreign_body_ingestion": 0, 
+        "pool_design": 0,
+        "forced_loneliness": 0,
+        "water_quality": 0,
+        "sufficient_shade": 0,
+        "acoustic_comfort":0,
+        "comments": null
+    }
+]

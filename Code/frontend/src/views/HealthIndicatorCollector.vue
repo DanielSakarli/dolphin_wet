@@ -11,26 +11,13 @@
                 </ion-buttons>
 			</ion-toolbar>
 		</ion-header>
-
-		<ion-content>
 			<!--<ion-item slot ="end">
 					<ion-select @ionChange="changeLanguage($event)" value="en">
 						<ion-select-option value="en">English</ion-select-option>
 						<ion-select-option value="de">German</ion-select-option>
 					</ion-select>
     			</ion-item> -->
-			<HealthCheckCriteriaSelector />
-			<CheckComments />
-		</ion-content>
-
-		<ion-footer>
-			<ion-toolbar>
-				<ion-button color="light" slot="end" @click="confirmRefresh">
-					<ion-icon src="/icons/arrow-forward-outline.svg"></ion-icon>
-					{{$t('buttonNext')}}
-				</ion-button>
-			</ion-toolbar>
-		</ion-footer>
+		<HealthCheckCriteriaSelector />
 	</ion-page>
 </template>
 
@@ -49,7 +36,6 @@ import {
 } from '@ionic/vue';
 // Import customized components
 import HealthCheckCriteriaSelector from '@/components/HealthCheckCriteriaSelector.vue';
-import CheckComments from '@/components/CheckComments.vue';
 import { defineComponent } from 'vue';
 
 export default defineComponent({
@@ -68,7 +54,6 @@ export default defineComponent({
 		IonPage,
 		IonButton,
 		HealthCheckCriteriaSelector,
-		CheckComments,
 		IonButtons,
 		IonBackButton
 	},

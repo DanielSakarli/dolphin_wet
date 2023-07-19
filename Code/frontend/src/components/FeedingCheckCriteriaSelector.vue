@@ -240,7 +240,6 @@
 				<CheckComments />
 			</ion-list>
 		</ion-card>
-		<ion-button @click="showDolphins">Hallo</ion-button>
 	</ion-content>
 	<!-- End of Checkboxes-->
 	<ion-footer>
@@ -253,7 +252,7 @@
 					{{$t('buttonNext')}}
 				</ion-button>
 			</ion-toolbar>
-		</ion-footer>
+	</ion-footer>
 </template>
 
 <script lang="ts">
@@ -294,15 +293,13 @@ export default {
 			firstcancelText: this.$t('cancelChoice'),
 			secondlabel: this.$t('criteria'),
 			secondplaceholder: this.$t('selectCriteria'),
-			thirdlabel: this.$t('test'),
-			thirdplaceholder: this.$t('selectTest'),
 			isOpenManual: false,
 			isOpenScoring: false,
 			weightLabel: this.$t('weightLabel'),
 			weightPlaceholder: this.$t('weightPlaceholder'),
 			weight: '',
 			CheckboxArray: Array.from({ length: 5 }, () => Array(3).fill(false)),
-			originalCheckboxValues: Array.from({length: 5}, () => Array(3).fill(false)),
+			//originalCheckboxValues: Array.from({length: 5}, () => Array(3).fill(false)),
 			//dolphins: EvaluationMenu.dolphinList,
 			//dolphinList: [] as {name: string}[],
 			urlDolphins: 'http://88395-17112.pph-server.de/api/dolphins',
