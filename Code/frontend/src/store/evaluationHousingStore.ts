@@ -9,14 +9,14 @@ export const useEvaluationHousingStore = defineStore("evaluationHousingStore" , 
     },
     actions: {
         resetBodies(){
-            for(let i =0; i < requestBodiesHousing.length; i++){
-                requestBodiesHousing[i]["enclosure_barrier_safety"] = 0;
-                requestBodiesHousing[i]["foreign_body_ingestion"] = 0;
-                requestBodiesHousing[i]["pool_design"] = 0;
-                requestBodiesHousing[i]["forced_loneliness"] = 0;
-                requestBodiesHousing[i]["water_quality"] = 0;
-                requestBodiesHousing[i]["sufficient_shade"] = 0;
-                requestBodiesHousing[i]["acoustic_comfort"] = 0;
+            for(let i = 0; i < requestBodiesHousing.length; i++){
+                requestBodiesHousing[i]["enclosure_barrier_safety"] = null;
+                requestBodiesHousing[i]["foreign_body_ingestion"] = null;
+                requestBodiesHousing[i]["pool_design"] = null;
+                requestBodiesHousing[i]["forced_loneliness"] = null;
+                requestBodiesHousing[i]["water_quality"] = null;
+                requestBodiesHousing[i]["sufficient_shade"] = null;
+                requestBodiesHousing[i]["acoustic_comfort"] = null;
                 requestBodiesHousing[i]["comments"] = null;
             }
         }

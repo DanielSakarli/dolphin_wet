@@ -436,7 +436,7 @@ export default {
 							})
 							.catch((error) => {
 								console.error('Error:', error.response.data);
-								const targetUrl = `/detailFeeding`;
+								const targetUrl = `/detailHousing`;
 								this.$router.push(targetUrl);
 							});
 				}
@@ -450,7 +450,7 @@ export default {
 				this.dolphinSelect = null;
 				this.criteria = null;
 				const currentPath = this.$route.path;
-				const targetUrl = `/detailFeeding`;
+				const targetUrl = `/detailHousing`;
 				this.$router.push(targetUrl);
 			}	
     	},
