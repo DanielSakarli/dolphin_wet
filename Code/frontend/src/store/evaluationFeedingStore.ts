@@ -10,12 +10,12 @@ export const useEvaluationFeedingStore = defineStore("evaluationFeedingStore" , 
     actions: {
         resetBodies(){
             for(let i =0; i < requestBodiesFeeding.length; i++){
-                requestBodiesFeeding[i]["body_condition_score"] = null;
-                requestBodiesFeeding[i]["blood_hydration"] = null;
-                requestBodiesFeeding[i]["weight_measured"] = null;
-                requestBodiesFeeding[i]["kcal_calculations"] = null;
-                requestBodiesFeeding[i]["fish_quality"] = null;
-                requestBodiesFeeding[i]["fish_variety"] = null;
+                requestBodiesFeeding[i]["body_condition_score"] = 0;
+                requestBodiesFeeding[i]["blood_hydration"] = 0;
+                requestBodiesFeeding[i]["weight_measured"] = 0;
+                requestBodiesFeeding[i]["kcal_calculations"] = 0;
+                requestBodiesFeeding[i]["fish_quality"] = 0;
+                requestBodiesFeeding[i]["fish_variety"] = 0;
             }
         }
     }

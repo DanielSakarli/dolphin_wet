@@ -261,11 +261,11 @@ export const globalizationList = {
         //Subcriteria Housing
         topicHousing: 'Housing/Environment',
         firstSubcriteriaHousing: 'Health-related safety environmental design',
-        secondSubcriteriaHousing: 'No foreign body ingestion',
-        thirdSubcriteriaHousing: 'Posibility to perform desired behaviours, including fast swim, jump, social behaviours, syncronysed behaviour',
-        fourthSubcriteriaHousing: 'Posibility to perform desired behaviours, including fast swim, jump, social behaviours, syncronysed behaviour',
-        fifthSubcriteriaHousing: 'Possibility of escaping from conspecifics',
-        sixthSubcriteriaHousing: 'Absence of forced loneliness',
-        seventhSubcriteriaHousing: 'Adequate water PH',
+        secondSubcriteriaHousing: 'Possibility to freely move between areas, resting place, engaging environment. Possibility to perform desired behaviors, including fast swim, jump, social behaviors, synchronized behavior. Possibility of escaping from conspecifics',
+        thirdSubcriteriaHousing: 'Absence of forced loneliness',
+        fourthSubcriteriaHousing: 'Adequate water PH, Adequate water OR P levels, Absence of  toxic water levels of total chlorine, free chlorine, and combined chlorine, Absence of abnormal water levels of coliformes, Absence of abnormal water levels of E.coli, Adequate salinity',
+        fifthSubcriteriaHousing: 'Adequate water temperature',
+        sixthSubcriteriaHousing: 'Presence of/Access to shaded areas',
+        seventhSubcriteriaHousing: 'Adequate degree of  underwater noise',
 	},
 };
