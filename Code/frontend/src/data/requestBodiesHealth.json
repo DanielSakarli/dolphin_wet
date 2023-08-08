@@ -1,0 +1,80 @@
+[
+    {
+        "dolphin_name": "Dolly",
+        "normal_floatability": 2,
+        "eye_lesions": 2, 
+        "visual_cues": 2,
+        "mouth_exam": 2,
+        "respiratory_disease": 2,
+        "force_expiration": 2,
+        "external_disease_signs":2,
+        "comments": null
+    },
+    {
+        "dolphin_name": "Donna",
+        "normal_floatability": 2,
+        "eye_lesions": 2, 
+        "visual_cues": 2,
+        "mouth_exam": 2,
+        "respiratory_disease": 2,
+        "force_expiration": 2,
+        "external_disease_signs":2,
+        "comments": null
+    
+    },
+    {
+        "dolphin_name": "Jenny",
+        "normal_floatability": 2,
+        "eye_lesions": 2, 
+        "visual_cues": 2,
+        "mouth_exam": 2,
+        "respiratory_disease": 2,
+        "force_expiration": 2,
+        "external_disease_signs":2,
+        "comments": null
+    },    
+    {
+        "dolphin_name": "Nami",
+        "normal_floatability": 2,
+        "eye_lesions": 2, 
+        "visual_cues": 2,
+        "mouth_exam": 2,
+        "respiratory_disease": 2,
+        "force_expiration": 2,
+        "external_disease_signs":2,
+        "comments": null
+    },
+    {
+        "dolphin_name": "Nynke",
+        "normal_floatability": 2,
+        "eye_lesions": 2, 
+        "visual_cues": 2,
+        "mouth_exam": 2,
+        "respiratory_disease": 2,
+        "force_expiration": 2,
+        "external_disease_signs":2,
+        "comments": null
+    },
+    {
+        "dolphin_name": "Sunny",
+        "normal_floatability": 2,
+        "eye_lesions": 2, 
+        "visual_cues": 2,
+        "mouth_exam": 2,
+        "respiratory_disease": 2,
+        "force_expiration": 2,
+        "external_disease_signs":2,
+        "comments": null
+    },
+    {
+        "dolphin_name": "Dörte",
+        "normal_floatability": 2,
+        "eye_lesions": 2, 
+        "visual_cues": 2,
+        "mouth_exam": 2,
+        "respiratory_disease": 2,
+        "force_expiration": 2,
+        "external_disease_signs":2,
+        "comments": null
+    }
+]

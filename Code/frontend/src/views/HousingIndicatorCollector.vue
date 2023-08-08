@@ -11,8 +11,6 @@
                 </ion-buttons>
 			</ion-toolbar>
 		</ion-header>
-
-		<ion-content>
 			<!--<ion-item slot ="end">
 					<ion-select @ionChange="changeLanguage($event)" value="en">
 						<ion-select-option value="en">English</ion-select-option>
@@ -20,22 +18,6 @@
 					</ion-select>
     			</ion-item> -->
 			<HousingCheckCriteriaSelector />
-			<HousingCheckScoreField />
-			<CheckComments />
-		</ion-content>
-
-		<ion-footer>
-			<ion-toolbar>
-				<!--<ion-button color="light" slot="start">
-					<ion-icon src="/icons/arrow-back-outline.svg"> </ion-icon>
-					{{$t('buttonPrevious')}}
-				</ion-button>-->
-				<ion-button color="light" slot="end" @click="confirmRefresh">
-					<ion-icon src="/icons/arrow-forward-outline.svg"></ion-icon>
-					{{$t('buttonNext')}}
-				</ion-button>
-			</ion-toolbar>
-		</ion-footer>
 	</ion-page>
 </template>
 
