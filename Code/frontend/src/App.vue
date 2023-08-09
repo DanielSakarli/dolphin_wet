@@ -35,8 +35,10 @@ import {
 import { defineComponent } from 'vue';
 import { ref } from 'vue';
 import { Device, DevicePlugin } from '@capacitor/device';
+import { inject } from 'vue';
 
 export default defineComponent({
+	
 	name: 'App',
 	mounted() {
 		const device: DevicePlugin = Device;
@@ -87,11 +89,15 @@ export default defineComponent({
 				{
 					title: 'View Data',
 					url: '/folder/Data',
-				}
+				},
+				{
+					title: 'Logout',
+					url: '/home',
+				},
 			],
 
 		}
-	}
+	},
 });
 </script>
 

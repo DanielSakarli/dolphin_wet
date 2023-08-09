@@ -34,7 +34,7 @@ const routes: Array<RouteRecordRaw> = [
 	},
 	{
 		path: '/folder/Data',
-		component: () => import ('@/views/DolphinEvaluationMenu.vue')
+		component: () => import ('@/views/ViewData.vue')
 	},
 	{
 		path: '/detailHealth',

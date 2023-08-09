@@ -52,9 +52,58 @@ function getCurrentDate() {
 	return formattedDate;
 }
 
+/**
+ * Get the year and month corresponding to one month before the given month.
+ *
+ * @param {number} year - The year value.
+ * @param {number} month - The month value (1 to 12).
+ * @returns {Object} An object with `year` and `month` properties representing one month before the given month.
+ */
+function getOneMonthBefore(year, month) {
+	// Subtract 1 from the given month
+	let newMonth = month - 1;
+
+	// Adjust the year if necessary
+	let newYear = year;
+	if (newMonth < 1) {
+		newMonth = 12;
+		newYear -= 1;
+	}
+
+	return {
+		year: newYear,
+		month: newMonth,
+	};
+}
+
+/**
+ * Returns an array of objects representing the last N months.
+ * Each object contains the year and month of the respective month.
+ *
+ * @param {number} numMonths - The number of months to include in the result.
+ * @returns {Array<Object>} An array of objects representing the last three months.
+ */
+function getLastNMonths(numMonths) {
+	const currentDate = new Date();
+	const months = [];
+
+	for (let i = 0; i < numMonths; i++) {
+		const year = currentDate.getFullYear();
+		const month = currentDate.getMonth() + 1;
+
+		months.push({ year: year, month: month });
+
+		currentDate.setMonth(currentDate.getMonth() - 1);
+	}
+
+	return months;
+}
+
 module.exports = {
 	dateToTimestamp,
 	getLatestSubmissionByQuestionnaire,
 	getRandomIntegerBetween,
 	getCurrentDate,
+	getOneMonthBefore,
+	getLastNMonths,
 };

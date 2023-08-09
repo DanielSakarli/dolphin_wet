@@ -2,6 +2,8 @@ const loadDummyUser = require('./dummy_users');
 const loadDummyDolphins = require('./dummy_dolphins');
 const loadDummyGoodFeeding = require('./dummy_good_feeding');
 const loadDummyGoodHealth = require('./dummy_good_health');
+const loadDummyGoodHousing = require('./dummy_good_housing');
+const loadDummyBehaviour = require('./dummy_behaviour');
 
 exports.seed = async function (knex) {
 	// Insert dummy users.
@@ -12,4 +14,8 @@ exports.seed = async function (knex) {
 	await loadDummyGoodFeeding(knex);
 	// Insert dummy good_health data.
 	await loadDummyGoodHealth(knex);
+	// Insert dummy good_housing data.
+	await loadDummyGoodHousing(knex);
+	// Insert dummy behaviour data.
+	await loadDummyBehaviour(knex);
 };

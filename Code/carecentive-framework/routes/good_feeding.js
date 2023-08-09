@@ -3,16 +3,13 @@ const router = express.Router();
 const {
 	goodFeedingPostValidateRequestBody,
 } = require('../validators/dolphinWetValidators');
-const { validateDateQueryParam } = require('../validators/dateValidators');
 const { authenticateTokenWithSwitch } = require('../controllers/authSwitch');
+const { query } = require('express-validator');
 
 /**
  * Controllers
  */
-const {
-	setResult,
-	getResultWithTheDate,
-} = require('../controllers/good_feeding');
+const { setResult, getTestResult } = require('../controllers/good_feeding');
 
 /**
  * Loads the test result of good_feeding.
@@ -25,8 +22,12 @@ router.post(
 );
 
 /**
- * Gets the test result of given day.
+ * Gets the test result based on given query params.
  */
-router.get('/', validateDateQueryParam, getResultWithTheDate);
+router.get(
+	'/',
+	[query('name').notEmpty().isString().withMessage('Name can not be empty!')],
+	getTestResult
+);
 
 module.exports = router;
