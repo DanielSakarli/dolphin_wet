@@ -1,46 +1,109 @@
 async function loadDummyGoodHealth(knex) {
-	const dolphinQueryResult1 = await knex('dolphins')
+	const dollyID = await knex('dolphins')
 		.select('dolphin_id')
-		.where('name', 'test_dolphin1');
-	const dolphinQueryResult2 = await knex('dolphins')
+		.where('name', 'Dolly')
+		.first();
+	const donnaID = await knex('dolphins')
 		.select('dolphin_id')
-		.where('name', 'test_dolphin2');
-	const dolphinQueryResult3 = await knex('dolphins')
+		.where('name', 'Donna')
+		.first();
+	const jennyID = await knex('dolphins')
 		.select('dolphin_id')
-		.where('name', 'test_dolphin3');
-
-	const dolphin1_id = dolphinQueryResult1[0].dolphin_id;
-	const dolphin2_id = dolphinQueryResult2[0].dolphin_id;
-	const dolphin3_id = dolphinQueryResult3[0].dolphin_id;
+		.where('name', 'Jenny')
+		.first();
+	const namiID = await knex('dolphins')
+		.select('dolphin_id')
+		.where('name', 'Nami')
+		.first();
+	const NynkeID = await knex('dolphins')
+		.select('dolphin_id')
+		.where('name', 'Nynke')
+		.first();
+	const SunnyID = await knex('dolphins')
+		.select('dolphin_id')
+		.where('name', 'Sunny')
+		.first();
+	const dörteID = await knex('dolphins')
+		.select('dolphin_id')
+		.where('name', 'Dörte')
+		.first();
 
 	const testGoodHealthResult1 = {
-		dolphin_id: dolphin1_id,
-		dolphin_name: 'test_dolphin1',
+		dolphin_id: dollyID.dolphin_id,
+		dolphin_name: 'Dolly',
 		user_id: 1,
 		normal_floatability: 1,
-		eye_lesions: null,
+		eye_lesions: 1,
 		visual_cues: 1,
 		mouth_exam: 1,
-		respiratory_disease: null,
+		respiratory_disease: 2,
 		force_expiration: 1,
 		external_disease_signs: 1,
 	};
 	const testGoodHealthResult2 = {
-		dolphin_id: dolphin2_id,
-		dolphin_name: 'test_dolphin2',
+		dolphin_id: donnaID.dolphin_id,
+		dolphin_name: 'Donna',
 		user_id: 2,
 		normal_floatability: 1,
 		eye_lesions: 2,
 		visual_cues: 1,
 		mouth_exam: 1,
-		respiratory_disease: null,
+		respiratory_disease: 1,
 		force_expiration: 1,
-		external_disease_signs: null,
+		external_disease_signs: 1,
 	};
 	const testGoodHealthResult3 = {
-		dolphin_id: dolphin3_id,
-		dolphin_name: 'test_dolphin3',
+		dolphin_id: jennyID.dolphin_id,
+		dolphin_name: 'Jenny',
 		user_id: 3,
+		normal_floatability: 1,
+		eye_lesions: 1,
+		visual_cues: 1,
+		mouth_exam: 1,
+		respiratory_disease: 2,
+		force_expiration: 1,
+		external_disease_signs: 1,
+	};
+	const testGoodHealthResult4 = {
+		dolphin_id: namiID.dolphin_id,
+		dolphin_name: 'Nami',
+		user_id: 1,
+		normal_floatability: 1,
+		eye_lesions: 1,
+		visual_cues: 1,
+		mouth_exam: 1,
+		respiratory_disease: 2,
+		force_expiration: 1,
+		external_disease_signs: 1,
+	};
+	const testGoodHealthResult5 = {
+		dolphin_id: NynkeID.dolphin_id,
+		dolphin_name: 'Nynke',
+		user_id: 2,
+		normal_floatability: 1,
+		eye_lesions: 1,
+		visual_cues: 1,
+		mouth_exam: 1,
+		respiratory_disease: 2,
+		force_expiration: 1,
+		external_disease_signs: 1,
+	};
+	const testGoodHealthResult6 = {
+		dolphin_id: SunnyID.dolphin_id,
+		dolphin_name: 'Sunny',
+		user_id: 3,
+		normal_floatability: 1,
+		eye_lesions: 1,
+		visual_cues: 1,
+		mouth_exam: 1,
+		respiratory_disease: 2,
+		force_expiration: 1,
+		external_disease_signs: 1,
+	};
+	const testGoodHealthResult7 = {
+		dolphin_id: dörteID.dolphin_id,
+		dolphin_name: 'Dörte',
+		user_id: 1,
 		normal_floatability: 1,
 		eye_lesions: 1,
 		visual_cues: 1,
@@ -54,6 +117,10 @@ async function loadDummyGoodHealth(knex) {
 		testGoodHealthResult1,
 		testGoodHealthResult2,
 		testGoodHealthResult3,
+		testGoodHealthResult4,
+		testGoodHealthResult5,
+		testGoodHealthResult6,
+		testGoodHealthResult7,
 	]);
 }
 

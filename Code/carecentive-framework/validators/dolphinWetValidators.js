@@ -55,12 +55,18 @@ const goodFeedingPostValidateRequestBody = [
 		const allowedFields = [
 			'dolphin_name',
 			'body_condition_score',
-			'weight',
+			'body_condition_score_comments',
 			'weight_measured',
+			'weight_measured_comments',
 			'kcal_calculations',
+			'kcal_calculations_comments',
 			'blood_hydration',
+			'blood_hydration_comments',
 			'fish_quality',
+			'fish_quality_comments',
 			'fish_variety',
+			'fish_variety_comments',
+			'weight',
 		];
 		const keys = Object.keys(value);
 
@@ -83,36 +89,55 @@ const goodFeedingPostValidateRequestBody = [
 		.isIn([1, 2, 3])
 		.toInt()
 		.withMessage('Invalid body condition score'),
-	body('weight')
+	body('body_condition_score_comments')
 		.optional({ values: 'null' })
-		.isIn([1, 3])
-		.toInt()
-		.withMessage('Invalid weight'),
+		.isString()
+		.withMessage('Invalid comments for body condition score'),
 	body('weight_measured')
 		.optional({ values: 'null' })
 		.isFloat({ min: 0 })
 		.toFloat()
 		.withMessage('Invalid measured weight'),
+	body('weight_measured_comments')
+		.optional({ values: 'null' })
+		.isString()
+		.withMessage('Invalid comments for body measured weight'),
 	body('kcal_calculations')
 		.optional({ values: 'null' })
-		.isIn([1, 3])
+		.isIn([1, 2, 3])
 		.toInt()
 		.withMessage('Invalid kcal calculations'),
+	body('kcal_calculations_comments')
+		.optional({ values: 'null' })
+		.isString()
+		.withMessage('Invalid comments for kal calculations'),
 	body('blood_hydration')
 		.optional({ values: 'null' })
 		.isIn([1, 2, 3])
 		.toInt()
 		.withMessage('Invalid blood hydration'),
+	body('blood_hydration_comments')
+		.optional({ values: 'null' })
+		.isString()
+		.withMessage('Invalid comments for blood hydration'),
 	body('fish_quality')
 		.optional({ values: 'null' })
-		.isIn([1, 3])
+		.isIn([1, 2, 3])
 		.toInt()
 		.withMessage('Invalid fish quality'),
+	body('fish_quality_comments')
+		.optional({ values: 'null' })
+		.isString()
+		.withMessage('Invalid comments for fish quality'),
 	body('fish_variety')
 		.optional({ values: 'null' })
 		.isIn([1, 2, 3])
 		.toInt()
 		.withMessage('Invalid fish variety'),
+	body('fish_variety_comments')
+		.optional({ values: 'null' })
+		.isString()
+		.withMessage('Invalid comments for fish variety'),
 ];
 /**
  * End of Good feeding validation rules.
@@ -132,6 +157,14 @@ const goodHealthPostValidateRequestBody = [
 			'respiratory_disease',
 			'force_expiration',
 			'external_disease_signs',
+			// comments
+			'normal_floatability_comments',
+			'eye_lesions_comments',
+			'visual_cues_comments',
+			'mouth_exam_comments',
+			'respiratory_disease_comments',
+			'force_expiration_comments',
+			'external_disease_signs_comments',
 		];
 		const keys = Object.keys(value);
 
@@ -203,6 +236,13 @@ const goodHousingPostValidateRequestBody = [
 			'water_quality',
 			'sufficient_shade',
 			'acoustic_comfort',
+			'enclosure_barrier_safety_comments',
+			'foreign_body_ingestion_comments',
+			'pool_design_comments',
+			'forced_loneliness_comments',
+			'water_quality_comments',
+			'sufficient_shade_comments',
+			'acoustic_comfort_comments',
 		];
 		const keys = Object.keys(value);
 
@@ -279,6 +319,21 @@ const behaviorPostValidateRequestBody = [
 			'receiving_aggressive_behaviour',
 			'social_isolation',
 			'avoidance_pool_areas',
+			'environmental_enrichment_comments',
+			'affiliative_behaviour_comments',
+			'play_behaviour_comments',
+			'socio_sexual_behaviour_comments',
+			'maternal_behaviour_comments',
+			'displacement_behaviour_comments',
+			'oral_stereotypic_behaviour_comments',
+			'repetitive_body_movement_comments',
+			'self_grooming_behaviour_comments',
+			'regurgitation_reingestion_comments',
+			'rake_marks_comments',
+			'displaying_aggressive_behaviour_comments',
+			'receiving_aggressive_behaviour_comments',
+			'social_isolation_comments',
+			'avoidance_pool_areas_comments',
 		];
 		const keys = Object.keys(value);
 

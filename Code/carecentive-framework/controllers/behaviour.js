@@ -35,4 +35,28 @@ async function setResult(req, res, next) {
 	}
 }
 
-module.exports = { setResult };
+/**
+ * Controller of get request of /api/behaviour?name.
+ * Gets the test result in the database.
+ * By default it returns the test results of last three months of the given dolphin.
+ */
+async function getTestResult(req, res, next) {
+	try {
+		const errors = validationResult(req);
+		if (!errors.isEmpty()) {
+			// Handle validation errors
+			return res.status(400).json({ errors: errors.array() });
+		}
+
+		// Gets the dolphin name
+		const { name } = req.query;
+
+		const queryResult = await BehaviourService.getTestResultNMonths(name);
+
+		res.status(200).json(queryResult);
+	} catch (error) {
+		next(error);
+	}
+}
+
+module.exports = { setResult, getTestResult };
