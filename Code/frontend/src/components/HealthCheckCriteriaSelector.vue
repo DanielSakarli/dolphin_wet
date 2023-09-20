@@ -4,42 +4,44 @@
 		<ion-list>
 			<ion-item>
 					<ion-select
-						:label= "firstlabel"
+						:label="firstlabel"
 						:placeholder="firstplaceholder"
 						okText="OK"
 						:cancelText="firstcancelText"		
-						v-model= "dolphinSelect"
+						v-model="dolphinSelect"
 						>
 						<ion-select-option v-for="dolphin in dolphinsStore.dolphinList" v-bind:key="dolphin.name">
 							{{dolphin.name}}
 						</ion-select-option>
 					</ion-select>
-				</ion-item>
+			</ion-item>
 			<ion-item>
+				
 				<ion-select
 					:value="criteria"
-					@IonChange ="criteria=$event.target.value"
+					@IonChange="criteria=$event.target.value"
 					:label="secondlabel"
 					:placeholder="secondplaceholder"
 					okText="OK"
 					:cancelText="firstcancelText"
+					interfaceOptions="{cssClass: 'my-class'}"
 				>
-					<ion-select-option value="firstCriteriaHealth">{{
+					<ion-select-option class="my-class" value="firstCriteriaHealth">{{
 						$t('firstCriteriaHealth')
 					}}</ion-select-option>
-					<ion-select-option value="secondCriteriaHealth">{{
+					<ion-select-option class="my-class" value="secondCriteriaHealth">{{
 						$t('secondCriteriaHealth')
 					}}</ion-select-option>
-					<ion-select-option value="thirdCriteriaHealth">{{
+					<ion-select-option class="my-class" value="thirdCriteriaHealth">{{
 						$t('thirdCriteriaHealth')
 					}}</ion-select-option>
-					<ion-select-option value="fourthCriteriaHealth">{{
+					<ion-select-option class="my-class" value="fourthCriteriaHealth">{{
 						$t('fourthCriteriaHealth')
 					}}</ion-select-option>
-					<ion-select-option value="fifthCriteriaHealth">{{
+					<ion-select-option class="my-class" value="fifthCriteriaHealth">{{
 						$t('fifthCriteriaHealth')
 					}}</ion-select-option>
-					<ion-select-option value="sixthCriteriaHealth">{{
+					<ion-select-option class="my-class" value="sixthCriteriaHealth">{{
 						$t('sixthCriteriaHealth')
 					}}</ion-select-option>
 				</ion-select>
@@ -98,7 +100,7 @@
 		<!-- End of Criteria Selector -->
 
 		<!-- Description of Criteria (User Manual)-->
-		<ion-button fill ="outline" @click="setOpenManual(true)">{{ $t('userManual') }}</ion-button>
+		<ion-button fill="outline" @click="setOpenManual(true)">{{ $t('userManual') }}</ion-button>
 
 		<ion-modal :is-open="isOpenManual">
 			<ion-header>
@@ -235,7 +237,7 @@
 		</ion-modal>
 		<!-- End of Description of Criteria (User Manual) -->
 		<!--Start of Scoring Description-->
-		<ion-button fill ="outline" @click="setOpenScoring(true)">{{ $t('ScoringDescription') }}</ion-button>
+		<ion-button fill="outline" @click="setOpenScoring(true)">{{ $t('ScoringDescription') }}</ion-button>
 
 		<ion-modal :is-open="isOpenScoring">
 			<ion-header>
@@ -648,9 +650,9 @@ export default {
 								evaluationHealthStore.requestBodiesHealth[k]["mouth_exam"] = j + 1;
 							}else if (this.CheckboxArray[i][j] === true && i === 4){
 								evaluationHealthStore.requestBodiesHealth[k]["respiratory_disease"] = j + 1;
-							}else if (this.CheckboxArray[i][j] === true && i === 4){
+							}else if (this.CheckboxArray[i][j] === true && i === 5){
 								evaluationHealthStore.requestBodiesHealth[k]["force_expiration"] = j + 1;
-							}else if (this.CheckboxArray[i][j] === true && i === 4){
+							}else if (this.CheckboxArray[i][j] === true && i === 6){
 								evaluationHealthStore.requestBodiesHealth[k]["external_disease_signs"] = j + 1;
 							}
 						}
@@ -731,4 +733,13 @@ ion-item {
 ion-card {
 	margin: 5px 15px;
 }
+
+/* Daniel: This is a workaround to make the ion-select full width 
+.sc-ion-alert-md-h {
+	--width: 500px;
+}*/
+.my-class {
+    width: 600px !important;
+}
 </style>
+```

@@ -11,7 +11,7 @@
 	</ion-item>
 	<ion-item>
 		<ion-thumbnail slot="start">
-			<img src = "" />
+			<img src="" />
 		</ion-thumbnail>
 		<ion-button fill="clear">
 			<ion-icon slot="start" :icon="camera"></ion-icon>
@@ -21,15 +21,15 @@
 </template>
 
 <script lang="ts">
-import { 
-	IonCheckbox, 
-	IonItem, 
-	IonCard, 
-	IonThumbnail, 
-	IonButton, 
-	IonIcon 
+import {
+	IonCheckbox,
+	IonItem,
+	IonCard,
+	IonThumbnail,
+	IonButton,
+	IonIcon,
 } from '@ionic/vue';
-import {camera} from 'ionicons/icons';
+import { camera } from 'ionicons/icons';
 
 export default {
 	components: {
@@ -38,11 +38,11 @@ export default {
 		IonCard,
 		IonThumbnail,
 		IonButton,
-		IonIcon
+		IonIcon,
 	},
 	data() {
 		return {
-			camera
+			camera,
 		};
 	},
 };

@@ -2,7 +2,7 @@ import { createApp } from 'vue';
 import App from './App.vue';
 import router from './router';
 import { IonicVue } from '@ionic/vue';
-import { createPinia } from 'pinia'
+import { createPinia } from 'pinia';
 
 /* Core CSS required for Ionic components to work properly */
 import '@ionic/vue/css/core.css';
@@ -29,8 +29,6 @@ import axios from 'axios';
 import BaseLayout from './views/BaseLayout.vue';
 //import VueAxios from 'vue-axios';
 
-
-
 /* Global components */
 const i18n = createI18n({
 	locale: 'en', // set locale
@@ -38,16 +36,13 @@ const i18n = createI18n({
 	messages: globalizationList, // set locale messages
 	preserveDirectiveContent: true,
 });
-const pinia = createPinia()
+const pinia = createPinia();
 
-const app = createApp(App)
-	.use(IonicVue)
-	.use(router)
-	.use(i18n)
-	app.component('base-layout', BaseLayout)
-	app.use(pinia)
-	//app.use(VueAxios, axios)
-	//app.provide('axios', app.config.globalProperties.axios)  // provide 'axios'
+const app = createApp(App).use(IonicVue).use(router).use(i18n);
+app.component('base-layout', BaseLayout);
+app.use(pinia);
+//app.use(VueAxios, axios)
+//app.provide('axios', app.config.globalProperties.axios)  // provide 'axios'
 //app.mount('#app')
 
 // Register component

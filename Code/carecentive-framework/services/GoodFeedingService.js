@@ -1,5 +1,5 @@
 const GoodFeeding = require('../models/GoodFeeding');
-const { raw } = require('objection');
+const { raw } = require('objection'); //What does the function raw do? It allows us to use SQL functions in our queries. In this case, we are using the SQL function DATE() to extract the date from the created_at column. We are then comparing it to the date passed in as a parameter.
 const { getLastNMonths } = require('../source/CustomSource');
 const DolphinDAO = require('../dao/dolphinDao');
 const { DolphinError } = require('../source/Errors');
@@ -71,7 +71,7 @@ class GoodFeedingService {
 			const result = await GoodFeeding.query()
 				.where('dolphin_name', '=', name)
 				.where(
-					raw(
+					raw( 
 						`EXTRACT(MONTH FROM created_at) = ? AND EXTRACT(YEAR FROM created_at) = ?`,
 						[month, year]
 					)

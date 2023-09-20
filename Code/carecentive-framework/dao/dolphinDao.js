@@ -12,7 +12,7 @@ class DolphinDAO {
 	/**
 	 * Sanitizes the dolphin name.
 	 * @param {String} name
-	 * @returns the lowercase string of dolphin name
+	 * @returns the lowercase string of dolphin name //@: JSDoc tag.
 	 */
 	sanitizeName(name) {
 		return name.toLowerCase();
@@ -25,7 +25,8 @@ class DolphinDAO {
 	 */
 	async getAllDolphins() {
 		try {
-			const dolphins = await this.#dataModel.query();
+			//https://vincit.github.io/objection.js/guide/query-examples.html#basic-queries
+			const dolphins = await this.#dataModel.query(); 
 			return dolphins;
 		} catch (error) {
 			throw error;
@@ -45,7 +46,7 @@ class DolphinDAO {
 				.query()
 				.select()
 				.where('name', '=', lowerCaseName)
-				.first();
+				.first(); 
 
 			return dolphin;
 		} catch (error) {

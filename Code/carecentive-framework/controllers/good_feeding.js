@@ -72,7 +72,7 @@ async function setResult(req, res, next) {
 }
 
 /**
- * Controller of get request of /api/good_feeding?name.
+ * Controller of get request of /api/good_feeding?name.   //Where is the route '/api/good_feeding?name' defined/used?
  * Gets the test result in the database.
  * By default it returns the test results of last three months of the given dolphin.
  */
@@ -85,7 +85,7 @@ async function getTestResult(req, res, next) {
 		}
 
 		// Gets the dolphin name
-		const { name } = req.query;
+		const { name } = req.query; 
 
 		const queryResult = await GoodFeedingService.getTestResultNMonths(name);
 

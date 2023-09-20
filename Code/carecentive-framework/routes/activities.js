@@ -8,7 +8,7 @@ const authentication = require('@carecentive/carecentive-core/source/Authenticat
 router.get(
 	'/',
 	authentication.authenticateToken,
-	async function (req, res, next) {
+	async function (req, res, next) { 
 		try {
 			userId = req.authData.user_id;
 			let userActivities = await ActivityService.getActivitiesForUser(userId);
@@ -19,5 +19,7 @@ router.get(
 		}
 	}
 );
+
+
 
 module.exports = router;

@@ -2,7 +2,6 @@ import { createRouter, createWebHistory } from '@ionic/vue-router';
 import { RouteRecordRaw } from 'vue-router';
 import EvaluationMenu from '@/views/EvaluationMenu.vue';
 
-
 const routes: Array<RouteRecordRaw> = [
 	{
 		path: '/',
@@ -14,27 +13,27 @@ const routes: Array<RouteRecordRaw> = [
 	},
 	{
 		path: '/home',
-		component: () => import ('@/views/LoginPage.vue')
+		component: () => import('@/views/LoginPage.vue'),
 	},
 	{
 		path: '/login',
-		component: () => import ('@/views/LoginFormPage.vue')
+		component: () => import('@/views/LoginFormPage.vue'),
 	},
 	{
 		path: '/signup',
-		component: () => import ('@/views/SignupPage.vue')
+		component: () => import('@/views/SignupPage.vue'),
 	},
 	{
 		path: '/folder/Evaluate',
-		component: EvaluationMenu
+		component: EvaluationMenu,
 	},
 	{
 		path: '/folder/Dolphins',
-		component: () => import ('@/views/DolphinEvaluationMenu.vue')
+		component: () => import('@/views/DolphinEvaluationMenu.vue'),
 	},
 	{
 		path: '/folder/Data',
-		component: () => import ('@/views/ViewData.vue')
+		component: () => import('@/views/ViewData.vue'),
 	},
 	{
 		path: '/detailHealth',
@@ -49,17 +48,17 @@ const routes: Array<RouteRecordRaw> = [
 	{
 		path: '/detailEmotionalState',
 		name: 'DetailEmotionalState',
-		component: () => import('@/views/EmotionalStateIndicatorCollector.vue')
+		component: () => import('@/views/EmotionalStateIndicatorCollector.vue'),
 	},
 	{
 		path: '/detailFeeding',
 		name: 'DetailFeeding',
-		component: () => import('@/views/FeedingIndicatorCollector.vue')
+		component: () => import('@/views/FeedingIndicatorCollector.vue'),
 	},
 	{
 		path: '/detailHousing',
 		name: 'DetailHousing',
-		component: () => import('@/views/HousingIndicatorCollector.vue')
+		component: () => import('@/views/HousingIndicatorCollector.vue'),
 	},
 ];
 

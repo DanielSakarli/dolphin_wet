@@ -3,6 +3,7 @@ const router = express.Router();
 const {
 	behaviorPostValidateRequestBody,
 } = require('../validators/dolphinWetValidators');
+
 const { authenticateTokenWithSwitch } = require('../controllers/authSwitch');
 const { query } = require('express-validator');
 

@@ -4,11 +4,11 @@
 		<ion-list>
 			<ion-item>
 					<ion-select
-						:label= "firstlabel"
+						:label="firstlabel"
 						:placeholder="firstplaceholder"
 						okText="OK"
 						:cancelText="firstcancelText"		
-						v-model= "dolphinSelect"
+						v-model="dolphinSelect"
 						>
 						<ion-select-option v-for="dolphin in dolphinsStore.dolphinList" v-bind:key="dolphin.name">
 							{{dolphin.name}}
@@ -18,7 +18,7 @@
 			<ion-item>
 				<ion-select
 					:value="criteria"
-					@IonChange ="criteria=$event.target.value"
+					@IonChange="criteria=$event.target.value"
 					:label="secondlabel"
 					:placeholder="secondplaceholder"
 					okText="OK"
@@ -53,7 +53,7 @@
 			<ion-item>
 				<ion-select
 					:value="subcriteria"
-					@IonChange ="subcriteria=$event.target.value"
+					@IonChange="subcriteria=$event.target.value"
 					:label="thirdlabel"
 					:placeholder="thirdplaceholder"
 					okText="OK"
@@ -110,7 +110,7 @@
 		<!-- End of Criteria Selector -->
 
 		<!-- Description of Criteria (UserManual) -->
-		<ion-button fill ="outline" @click="setOpenManual(true)">{{ $t('userManual') }}</ion-button>
+		<ion-button fill="outline" @click="setOpenManual(true)">{{ $t('userManual') }}</ion-button>
 
 		<ion-modal :is-open="isOpenManual">
 			<ion-header>
@@ -232,7 +232,7 @@
 		</ion-modal>
 		<!-- End of Description of Criteria (UserManual)-->
 		<!--Start of Scoring Description-->
-		<ion-button fill ="outline" @click="setOpenScoring(true)">{{ $t('ScoringDescription') }}</ion-button>
+		<ion-button fill="outline" @click="setOpenScoring(true)">{{ $t('ScoringDescription') }}</ion-button>
 
 		<ion-modal :is-open="isOpenScoring">
 			<ion-header>

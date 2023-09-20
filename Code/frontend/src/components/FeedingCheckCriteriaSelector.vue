@@ -4,12 +4,12 @@
 		<ion-list>
 			<ion-item>
 				<ion-select
-					:label= "firstlabel"
+					:label="firstlabel"
 					:placeholder="firstplaceholder"
 					okText="OK"
 					:cancelText="firstcancelText"		
-					v-model= "dolphinSelect"
-					>
+					v-model="dolphinSelect"
+					> 
 					<ion-select-option v-for="dolphin in dolphinsStore.dolphinList" v-bind:key="dolphin.name">
 						{{dolphin.name}}
 					</ion-select-option>
@@ -18,7 +18,7 @@
 			<ion-item>
 				<ion-select
 					:value="criteria"
-					@IonChange ="criteria=$event.target.value"
+					@IonChange="criteria=$event.target.value"
 					:label="secondlabel"
 					:placeholder="secondplaceholder"
 					okText="OK"
@@ -42,7 +42,7 @@
 		<!-- End of Criteria Selector -->
 
 		<!-- Description of Criteria (UserManual) -->
-		<ion-button fill ="outline" @click="setOpenManual(true)">{{ $t('userManual') }}</ion-button>
+		<ion-button fill="outline" @click="setOpenManual(true)">{{ $t('userManual') }}</ion-button>
 
 		<ion-modal :is-open="isOpenManual">
 			<ion-header>
@@ -81,7 +81,7 @@
 		</ion-modal>
 		<!-- End of Description of Criteria (UserManual)-->
 		<!--Start of Scoring Description-->
-		<ion-button fill ="outline" @click="setOpenScoring(true)">{{ $t('ScoringDescription') }}</ion-button>
+		<ion-button fill="outline" @click="setOpenScoring(true)">{{ $t('ScoringDescription') }}</ion-button>
 
 		<ion-modal :is-open="isOpenScoring">
 			<ion-header>
@@ -302,7 +302,7 @@ export default {
 			//originalCheckboxValues: Array.from({length: 5}, () => Array(3).fill(false)),
 			//dolphins: EvaluationMenu.dolphinList,
 			//dolphinList: [] as {name: string}[],
-			urlDolphins: 'http://88395-17112.pph-server.de/api/dolphins',
+			urlDolphins: 'http://88395-17112.pph-server.de/api/dolphins', //the api route to get the dolphins
 			urlPost: 'http://88395-17112.pph-server.de/api/good_feeding',
 			// Body for posting of data
 			/*requestBody: {
@@ -342,6 +342,7 @@ export default {
 		// Method to collect the checked checkboxes and give request Body the scores
 		storeCheckedValues() {
 			for(let k = 0; k < evaluationFeedingStore.requestBodiesFeeding.length; k++){
+				//k stands for the different dolphins. It iterates through the array of dolphins in requestBodiesFeeding.json
 				if(this.dolphinSelect === evaluationFeedingStore.requestBodiesFeeding[k]["dolphin_name"]) {
 					if (this.dolphinSelect!== null){
 						evaluationFeedingStore.requestBodiesFeeding[k]["dolphin_name"] = this.dolphinSelect;
@@ -374,7 +375,7 @@ export default {
 		},
 		//Method to send the data to database
 		async storeData() {
-			const confirmed = confirm(this.$t('savingDataNext'));
+			const confirmed = confirm(this.$t('savingDataNext')); //Where is the variable savingDataNext initialized and what does it do?
      		if (confirmed) {
 				this.storeCheckedValues();
 				console.log(this.CheckboxArray);

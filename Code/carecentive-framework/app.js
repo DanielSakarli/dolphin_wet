@@ -41,10 +41,10 @@ const photo = require('./routes/photoUpload');
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'ejs');
+app.set('view engine', 'ejs'); // https://ejs.co/
 
 /**
- * Initialize ORM
+ * Initialize ORM // https://en.wikipedia.org/wiki/Object-relational_mapping
  * Do not delete this line.
  */
 require('@carecentive/carecentive-core/models/ORM');
@@ -62,7 +62,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 /**
- * Set up cors policy
+ * Set up cors policy //https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS
  * By default, the cors middleware will allow requests from all origins (*).
  * However, for security purposes, it's recommended to specify the allowed origins explicitly.
  */

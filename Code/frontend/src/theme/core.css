@@ -6,3 +6,7 @@ ion-toolbar {
 ion-item {
 	--detail-icon-font-size: 40px;
 }
+
+ion-select {
+    --width: 400px; 
+}
