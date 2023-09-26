@@ -46,7 +46,7 @@ class DolphinDAO {
 				.query()
 				.select()
 				.where('name', '=', lowerCaseName)
-				.first(); 
+				.first(); //https://vincit.github.io/objection.js/guide/query-examples.html#basic-queries
 
 			return dolphin;
 		} catch (error) {
