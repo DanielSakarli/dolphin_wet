@@ -3,7 +3,7 @@
 	<ion-list>
 		<ion-item>
 			<ion-select
-				:label= "firstlabel"
+				:label="firstlabel"
 				:placeholder="firstplaceholder"
 				okText="OK"
 				:cancelText="firstcancelText"
@@ -14,7 +14,7 @@
 				<ion-select-option value="dolphin2">{{
 					$t('dolphin2')
 				}}</ion-select-option>
-						<ion-select-option value="dolphin3">{{
+				<ion-select-option value="dolphin3">{{
 					$t('dolphin3')
 				}}</ion-select-option>
 				<ion-select-option value="dolphin4">{{
@@ -31,7 +31,7 @@
 		<ion-item>
 			<ion-select
 				:value="subcriteria"
-				@IonChange ="subcriteria=$event.target.value"
+				@IonChange="subcriteria = $event.target.value"
 				:label="secondlabel"
 				:placeholder="secondplaceholder"
 				okText="OK"
@@ -52,34 +52,33 @@
 	<!-- End of Criteria Selector -->
 
 	<!-- Description of Criteria -->
-	<ion-button fill ="outline" @click="setOpen(true)">{{ $t('userManual') }}</ion-button>
+	<ion-button fill="outline" @click="setOpen(true)">{{
+		$t('userManual')
+	}}</ion-button>
 
-    <ion-modal :is-open="isOpen">
-    	<ion-header>
+	<ion-modal :is-open="isOpen">
+		<ion-header>
 			<ion-toolbar>
-				<ion-title v-if=" subcriteria === 'firstSubcriteriaEmotionalState'"
-					>{{$t('firstSubcriteriaEmotionalState')}}
+				<ion-title v-if="subcriteria === 'firstSubcriteriaEmotionalState'"
+					>{{ $t('firstSubcriteriaEmotionalState') }}
 				</ion-title>
-				<ion-title v-else-if=" subcriteria === 'secondSubcriteriaEmotionalState'"
-					>{{$t('secondSubcriteriaEmotionalState')}}
+				<ion-title v-else-if="subcriteria === 'secondSubcriteriaEmotionalState'"
+					>{{ $t('secondSubcriteriaEmotionalState') }}
 				</ion-title>
-				<ion-title v-else-if=" subcriteria === 'thirdSubcriteriaEmotionalState'"
-					>{{$t('thirdSubcriteriaEmotionalState')}}
+				<ion-title v-else-if="subcriteria === 'thirdSubcriteriaEmotionalState'"
+					>{{ $t('thirdSubcriteriaEmotionalState') }}
 				</ion-title>
 				<ion-buttons slot="end">
 					<ion-button @click="setOpen(false)">Close</ion-button>
 				</ion-buttons>
 			</ion-toolbar>
-      	</ion-header>
-      	<ion-content class="ion-padding">
-			<p v-if=" subcriteria === 'firstSubcriteriaEmotionalState'">
-        	</p>
-			<p v-if=" subcriteria === 'secondSubcriteriaEmotionalState'">
-					</p>
-			<p v-if=" subcriteria === 'thirdSubcriteriaEmotionalState'">
-            </p>
-      	</ion-content>
-    </ion-modal>
+		</ion-header>
+		<ion-content class="ion-padding">
+			<p v-if="subcriteria === 'firstSubcriteriaEmotionalState'"></p>
+			<p v-if="subcriteria === 'secondSubcriteriaEmotionalState'"></p>
+			<p v-if="subcriteria === 'thirdSubcriteriaEmotionalState'"></p>
+		</ion-content>
+	</ion-modal>
 	<!-- End of Description of Criteria -->
 </template>
 
@@ -97,7 +96,7 @@ import {
 	IonTitle,
 	IonButtons,
 	IonButton,
-	IonText
+	IonText,
 } from '@ionic/vue';
 export default {
 	components: {
@@ -113,7 +112,7 @@ export default {
 		IonTitle,
 		IonButtons,
 		IonButton,
-		IonText
+		IonText,
 	},
 	data() {
 		return {
@@ -128,10 +127,10 @@ export default {
 		};
 	},
 	methods: {
-      setOpen(isOpen: boolean) {
-        this.isOpen = isOpen;
-      },
-    },
+		setOpen(isOpen: boolean) {
+			this.isOpen = isOpen;
+		},
+	},
 };
 </script>
 

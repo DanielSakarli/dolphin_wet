@@ -9,17 +9,30 @@ export const useDolphinsStore = defineStore('dolphinsStore', {
 			dolphinList,
 		};
 	},
+
 	/* actions: {
+
         async fill(){
+
             this.dolphinList = dolphinList;
+
             //(await import("@/views/EvaluationMenu.vue")).default
+
             await axios.get('http://88395-17112.pph-server.de/api/dolphins')
+
                 .then ((response) => {
+
                     this.dolphinList = response.data;
+
                 })
+
                 .catch ((e) => {
+
                 console.error(e);
+
                 });
+
         }
+
     }*/
 });

@@ -1,6 +1,6 @@
 import { createRouter, createWebHistory } from '@ionic/vue-router';
 import { RouteRecordRaw } from 'vue-router';
-import EvaluationMenu from '@/views/EvaluationMenu.vue';
+// import EvaluationMenu from '@/views/EvaluationMenu.vue';
 
 const routes: Array<RouteRecordRaw> = [
 	{
@@ -25,7 +25,7 @@ const routes: Array<RouteRecordRaw> = [
 	},
 	{
 		path: '/folder/Evaluate',
-		component: EvaluationMenu,
+		component: () => import('@/views/EvaluationMenu.vue'), //EvaluationMenu,
 	},
 	{
 		path: '/folder/Dolphins',
@@ -63,7 +63,7 @@ const routes: Array<RouteRecordRaw> = [
 ];
 
 const router = createRouter({
-	history: createWebHistory(import.meta.env.BASE_URL),
+	history: createWebHistory(import.meta.env.BASE_URL), //Creates a history object that keeps track of the url history
 	routes,
 });
 

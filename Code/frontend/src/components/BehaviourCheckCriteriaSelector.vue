@@ -552,6 +552,7 @@ import CheckComments from '@/components/CheckComments.vue';
 import axios from 'axios';
 import { useDolphinsStore }from '@/store/dolphinsStore';
 import { useEvaluationBehaviourStore }from '@/store/evaluationBehaviourStore';
+import { baseUrl } from '@/utils/baseUrl';
 
 const dolphinsStore = useDolphinsStore();
 const evaluationBehaviourStore = useEvaluationBehaviourStore();
@@ -582,7 +583,7 @@ export default {
 			isChecked: {} as Record<number, boolean>,
 			CheckboxArray: Array.from({ length: 15 }, () => Array(3).fill(false)),
 			Score1: this.$t('fulfilled'),
-			urlPost: 'http://88395-17112.pph-server.de/api/behaviour',
+			urlPost: baseUrl + '/api/behaviour',//'http://88395-17112.pph-server.de/api/behaviour',
 		};
 	},
 	methods: {
@@ -594,6 +595,8 @@ export default {
         },
 		//Method uses boolean array. So no multiple checking for one test is possible. --> Every test can have one checked Checkbox
 		handleClick(row: number, column: number) {
+			console.log(this.CheckboxArray[row][column], row, column); //log on console if Checkbox is checked or not
+
 			if (this.CheckboxArray[row][column]){
 				this.CheckboxArray[row][column] = false;
 			}else{

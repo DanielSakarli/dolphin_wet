@@ -1,3 +1,4 @@
+<!-- eslint-disable vue/no-unused-components -->
 <template>
 	<!-- Criteria Selector v-on:click="showDolphins" @click="showDolphins"-->
 	<ion-content>
@@ -172,6 +173,7 @@
 						<ion-checkbox v-model="CheckboxArray[0][2]" @click="handleClick(0,2)">Score 3</ion-checkbox>
 					</ion-item>
 					<CheckComments />
+					<!--<input v-model="userComment" />-->
 			</ion-list>
 		</ion-card>
 		<ion-card v-if=" criteria === 'firstCriteriaFeeding'">
@@ -265,6 +267,7 @@ import axios from 'axios';
 import CheckComments from '@/components/CheckComments.vue';
 import { useDolphinsStore }from '@/store/dolphinsStore';
 import { useEvaluationFeedingStore }from '@/store/evaluationFeedingStore';
+import { baseUrl } from '@/utils/baseUrl';
 import { chevronCollapseSharp } from 'ionicons/icons';
 
 const dolphinsStore = useDolphinsStore();
@@ -278,6 +281,12 @@ export default {
 		IonToolbar, IonContent, IonTitle, IonButtons, IonButton, IonText, IonCheckbox,
 		IonInput, IonRange, IonCard, IonCardTitle, CheckComments, IonFooter, IonIcon, 
 	},
+	/*props: {
+		userComment: {
+			type: String,
+			default: '',
+		}
+	},*/
 	data() {
 		return {
 			// Variables:
@@ -302,8 +311,8 @@ export default {
 			//originalCheckboxValues: Array.from({length: 5}, () => Array(3).fill(false)),
 			//dolphins: EvaluationMenu.dolphinList,
 			//dolphinList: [] as {name: string}[],
-			urlDolphins: 'http://88395-17112.pph-server.de/api/dolphins', //the api route to get the dolphins
-			urlPost: 'http://88395-17112.pph-server.de/api/good_feeding',
+			urlDolphins: baseUrl + '/api/dolphins', //'http://88395-17112.pph-server.de/api/dolphins', //the api route to get the dolphins
+			urlPost: baseUrl + '/api/good_feeding', //'http://88395-17112.pph-server.de/api/good_feeding',
 			// Body for posting of data
 			/*requestBody: {
 				dolphin_name: null as string | null,
@@ -328,6 +337,8 @@ export default {
         },
 		//Method uses boolean array. So no multiple checking for one test is possible. --> Every test can have one checked Checkbox
 		handleClick(row: number, column: number) {
+		console.log(this.CheckboxArray, row, column);
+
 			if (this.CheckboxArray[row][column]){
 				this.CheckboxArray[row][column] = false;
 			}else{

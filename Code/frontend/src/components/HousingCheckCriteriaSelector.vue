@@ -116,7 +116,7 @@
 
 		<!-- End of Description of Criteria -->
 		<!--Start of Scoring Description-->
-		<ion-button fill ="outline" @click="setOpenScoring(true)">{{ $t('ScoringDescription') }}</ion-button>
+		<ion-button fill="outline" @click="setOpenScoring(true)">{{ $t('ScoringDescription') }}</ion-button>
 
 		<ion-modal :is-open="isOpenScoring">
 			<ion-header>
@@ -329,6 +329,7 @@ import axios from 'axios';
 import CheckComments from '@/components/CheckComments.vue';
 import { useDolphinsStore }from '@/store/dolphinsStore';
 import { useEvaluationHousingStore }from '@/store/evaluationHousingStore';
+import { baseUrl } from '@/utils/baseUrl';
 
 const dolphinsStore = useDolphinsStore();
 const evaluationHousingStore = useEvaluationHousingStore();
@@ -354,7 +355,7 @@ export default {
 			isOpenManual: false,
 			isOpenScoring: false,
 			CheckboxArray: Array.from({ length: 7 }, () => Array(3).fill(false)),
-			urlPost: 'http://88395-17112.pph-server.de/api/good_housing',
+			urlPost: baseUrl + '/api/good_housing', //'http://88395-17112.pph-server.de/api/good_housing',
 		};
 	},
 	methods: {

@@ -1,15 +1,18 @@
 [
     {
-        "dolphin_name": "Dolly",
-        "enclosure_barrier_safety": null,
-        "foreign_body_ingestion": null, 
-        "pool_design": null,
-        "forced_loneliness": null,
-        "water_quality": null,
-        "sufficient_shade": null,
-        "acoustic_comfort":null,
-        "comments": null
-    
+        "type": "object",
+        "properties": {
+          "dolphin_name": { "type": "string", "default": "Dolly" },
+          "enclosure_barrier_safety": { "type": "null", "default": null },
+          "foreign_body_ingestion": { "type": "null", "default": null },
+          "pool_design": { "type": "null", "default": null },
+          "forced_loneliness": { "type": "null", "default": null },
+          "water_quality": { "type": "null", "default": null },
+          "sufficient_shade": { "type": "null", "default": null },
+          "acoustic_comfort": { "type": "null", "default": null },
+          "comments": { "type": ["string", "null"], "default": null }
+        },
+        "required": ["dolphin_name"]
     },
     {
         "dolphin_name": "Donna",

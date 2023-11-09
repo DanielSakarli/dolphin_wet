@@ -3,12 +3,10 @@
 	<ion-page>
 		<ion-header>
 			<ion-toolbar>
-				<ion-title
-					>{{ $t('topicEmotionalState') }}</ion-title
-				>
-				<ion-buttons slot ="start">
-                    <ion-back-button defaultHref="/folder/Evaluate"></ion-back-button>
-                </ion-buttons>
+				<ion-title>{{ $t('topicEmotionalState') }}</ion-title>
+				<ion-buttons slot="start">
+					<ion-back-button defaultHref="/folder/Evaluate"></ion-back-button>
+				</ion-buttons>
 			</ion-toolbar>
 		</ion-header>
 
@@ -32,7 +30,7 @@
 				</ion-button>-->
 				<ion-button color="light" slot="end" @click="confirmRefresh">
 					<ion-icon src="/icons/arrow-forward-outline.svg"></ion-icon>
-					{{$t('buttonNext')}}
+					{{ $t('buttonNext') }}
 				</ion-button>
 			</ion-toolbar>
 		</ion-footer>
@@ -50,7 +48,7 @@ import {
 	IonIcon,
 	IonButton,
 	IonButtons,
-	IonBackButton
+	IonBackButton,
 } from '@ionic/vue';
 // Import customized components
 import EmotionalStateCheckCriteriaSelector from '@/components/EmotionalStateCheckCriteriaSelector.vue';
@@ -77,7 +75,7 @@ export default defineComponent({
 		EmotionalStateCheckScoreField,
 		CheckComments,
 		IonButtons,
-		IonBackButton
+		IonBackButton,
 	},
 
 	methods: {
@@ -85,13 +83,13 @@ export default defineComponent({
 			this.$i18n.locale = $event.detail.value;
 		},
 		confirmRefresh() {
-      		const confirmed = confirm(this.$t('savingDataNext'));
-     		if (confirmed) {
+			const confirmed = confirm(this.$t('savingDataNext'));
+			if (confirmed) {
 				const currentPath = this.$route.path;
-        		const targetUrl = `/detailEmotionalState`;
-        		window.location.href = targetUrl;
-      		}
-    }
+				const targetUrl = `/detailEmotionalState`;
+				window.location.href = targetUrl;
+			}
+		},
 	},
 });
 </script>

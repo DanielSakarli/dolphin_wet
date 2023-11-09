@@ -3,15 +3,13 @@
 	<ion-page>
 		<ion-header>
 			<ion-toolbar>
-				<ion-title
-					>{{ $t('topicHealth') }}</ion-title
-				>
-				<ion-buttons slot ="start">
-                    <ion-back-button defaultHref="/folder/Evaluate"></ion-back-button>
-                </ion-buttons>
+				<ion-title>{{ $t('topicHealth') }}</ion-title>
+				<ion-buttons slot="start">
+					<ion-back-button defaultHref="/folder/Evaluate"></ion-back-button>
+				</ion-buttons>
 			</ion-toolbar>
 		</ion-header>
-			<!--<ion-item slot ="end">
+		<!--<ion-item slot ="end">
 					<ion-select @ionChange="changeLanguage($event)" value="en">
 						<ion-select-option value="en">English</ion-select-option>
 						<ion-select-option value="de">German</ion-select-option>
@@ -32,7 +30,7 @@ import {
 	IonIcon,
 	IonButton,
 	IonButtons,
-	IonBackButton
+	IonBackButton,
 } from '@ionic/vue';
 // Import customized components
 import HealthCheckCriteriaSelector from '@/components/HealthCheckCriteriaSelector.vue';
@@ -55,7 +53,7 @@ export default defineComponent({
 		IonButton,
 		HealthCheckCriteriaSelector,
 		IonButtons,
-		IonBackButton
+		IonBackButton,
 	},
 
 	methods: {
@@ -63,13 +61,13 @@ export default defineComponent({
 			this.$i18n.locale = $event.detail.value;
 		},
 		confirmRefresh() {
-      		const confirmed = confirm(this.$t('savingDataNext'));
-     		if (confirmed) {
+			const confirmed = confirm(this.$t('savingDataNext'));
+			if (confirmed) {
 				const currentPath = this.$route.path;
-        		const targetUrl = `/detailHealth`;
-        		window.location.href = targetUrl;
-      		}
-    }
+				const targetUrl = `/detailHealth`;
+				window.location.href = targetUrl;
+			}
+		},
 	},
 });
 </script>

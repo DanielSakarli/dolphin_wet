@@ -567,6 +567,7 @@ import axios from 'axios';
 import CheckComments from '@/components/CheckComments.vue';
 import { useDolphinsStore }from '@/store/dolphinsStore';
 import { useEvaluationHealthStore }from '@/store/evaluationHealthStore';
+import { baseUrl } from '@/utils/baseUrl';
 
 const dolphinsStore = useDolphinsStore();
 const evaluationHealthStore = useEvaluationHealthStore();
@@ -607,7 +608,7 @@ export default {
 			camera,
 			previewImageUrl: '',
 			dolphinList: [] as {name: string}[],
-			urlHealth: 'http://88395-17112.pph-server.de/api/good_health',
+			urlHealth: baseUrl + '/api/good_health', //'http://88395-17112.pph-server.de/api/good_health',
 		};
 	},
 
