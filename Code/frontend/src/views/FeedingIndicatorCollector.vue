@@ -54,7 +54,6 @@ import axios from 'axios';
 import { baseUrl } from '@/utils/baseUrl';
 
 const url = baseUrl + '/api/good_feeding';
-//const url = 'http://88395-17112.pph-server.de/api/good_feeding';
 
 const requestBody = {
 	dolphin_name: selectedDolphin,
@@ -65,6 +64,12 @@ const requestBody = {
 	blood_hydration: 3,
 	fish_quality: 3,
 	fish_variety: 3,
+	body_condition_score_comments: '',
+	weight_measured_comments: '',
+	kcal_calculations_comments: '',
+	blood_hydration_comments: '',
+	fish_quality_comments: '',
+	fish_variety_comments: '',
 };
 
 export default defineComponent({

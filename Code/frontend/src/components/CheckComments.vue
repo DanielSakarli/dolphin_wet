@@ -8,27 +8,29 @@
 			:auto-grow="true"
 		></ion-textarea>
 	</ion-item>
-	<!--<FeedingCheckCriteriaSelector :user-comment="userComment" />-->
+	<FeedingCheckCriteriaSelector :user-comment="userComment" />
 </template>
 
 <script lang="ts">
 import { IonItem, IonTextarea } from '@ionic/vue';
+import { defineComponent } from 'vue';
 import FeedingCheckCriteriaSelector from './FeedingCheckCriteriaSelector.vue';
 
-export default {
+export default defineComponent({
 	components: {
 		IonItem,
 		IonTextarea,
 		//FeedingCheckCriteriaSelector,
+		//TEST GIT BRANCHES
 	},
 	data() {
 		return {
 			commentLabel: this.$t('comments'),
 			helperTextComments: this.$t('helperTextComments'),
-			//userComment: '', //data property that will be updated whenever the user types into the textarea --> bind it with v-model in FeedingCheckCriteriaSelector.vue
+			userComment: '', //data property that will be updated whenever the user types into the textarea --> bind it with v-model in FeedingCheckCriteriaSelector.vue
 		};
 	},
-};
+});
 </script>
 
 <!--<style scoped>

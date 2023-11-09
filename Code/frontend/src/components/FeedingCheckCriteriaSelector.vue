@@ -173,7 +173,7 @@
 						<ion-checkbox v-model="CheckboxArray[0][2]" @click="handleClick(0,2)">Score 3</ion-checkbox>
 					</ion-item>
 					<CheckComments />
-					<!--<input v-model="userComment" />-->
+					<input v-model="userComment" />
 			</ion-list>
 		</ion-card>
 		<ion-card v-if=" criteria === 'firstCriteriaFeeding'">
@@ -374,6 +374,8 @@ export default {
 							}
 						}
 					}
+					// Code here the comments into the request body
+					
 				}
 			}
 			for(let i = 0; i <= 4; i++){
