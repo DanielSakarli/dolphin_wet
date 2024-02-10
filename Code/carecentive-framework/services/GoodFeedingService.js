@@ -17,6 +17,12 @@ class GoodFeedingService {
 	 * @param {Number} result.blood_hydration
 	 * @param {Number} result.fish_quality
 	 * @param {Number} result.fish_variety
+	 * @param {String} result.body_condition_score_comments
+	 * @param {String} result.weight_measured_comments
+	 * @param {String} result.kcal_calculations_comments
+	 * @param {String} result.blood_hydration_comments
+	 * @param {String} result.fish_quality_comments
+	 * @param {String} result.fish_variety_comments
 	 * @returns {Object} Inserted result in database
 	 */
 	static async loadTestResult(result) {

@@ -66,7 +66,7 @@ const goodFeedingPostValidateRequestBody = [
 			'fish_quality_comments',
 			'fish_variety',
 			'fish_variety_comments',
-			'weight',
+			//'weight',
 		];
 		const keys = Object.keys(value);
 
@@ -292,6 +292,34 @@ const goodHousingPostValidateRequestBody = [
 		.optional({ values: 'null' })
 		.isInt({ min: 1, max: 3 })
 		.toInt(),
+	body('enclosure_barrier_safety_comments')
+		.optional({ values: 'null' })
+		.isString()
+		.withMessage('Invalid comments for fish variety'),
+	body('foreign_body_ingestion_comments')
+		.optional({ values: 'null' })
+		.isString()
+		.withMessage('Invalid comments for fish variety'),
+	body('pool_design_comments')
+		.optional({ values: 'null' })
+		.isString()
+		.withMessage('Invalid comments for fish variety'),
+	body('forced_loneliness_comments')
+		.optional({ values: 'null' })
+		.isString()
+		.withMessage('Invalid comments for fish variety'),
+	body('water_quality_comments')
+		.optional({ values: 'null' })
+		.isString()
+		.withMessage('Invalid comments for fish variety'),
+	body('sufficient_shade_comments')
+		.optional({ values: 'null' })
+		.isString()
+		.withMessage('Invalid comments for fish variety'),
+	body('acoustic_comfort_comments')
+		.optional({ values: 'null' })
+		.isString()
+		.withMessage('Invalid comments for fish variety'),
 ];
 /**
  * End of good housing validation rules.
