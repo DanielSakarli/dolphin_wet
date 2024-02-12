@@ -52,13 +52,14 @@ import selectedDolphin from '@/components/FeedingCheckCriteriaSelector.vue';
 import { defineComponent } from 'vue';
 import axios from 'axios';
 import { baseUrl } from '@/utils/baseUrl';
+import { mapActions } from 'vuex';
 
 const url = baseUrl + '/api/good_feeding';
 
 const requestBody = {
 	dolphin_name: selectedDolphin,
 	body_condition_score: 3,
-	weight: 3,
+	//weight: 3,
 	weight_measured: 15.5,
 	kcal_calculations: 3,
 	blood_hydration: 3,
@@ -76,6 +77,7 @@ export default defineComponent({
 	data() {
 		return {
 			language: 'de',
+			userComment: '',
 		};
 	},
 	components: {
@@ -93,6 +95,12 @@ export default defineComponent({
 	},
 
 	methods: {
+		...mapActions(['updateUserComment']),
+		updateUserComment(event: any) {
+			this.userComment = event.target.value;
+			this.updateUserComment(this.userComment);
+			console.log('userComment: ', this.userComment);
+		},
 		async storeData() {
 			const confirmed = confirm(this.$t('savingDataNext'));
 			if (confirmed) {

@@ -172,20 +172,20 @@
 					<ion-item>
 						<ion-checkbox v-model="CheckboxArray[0][2]" @click="handleClick(0,2)">Score 3</ion-checkbox>
 					</ion-item>
-					<CheckComments />
-					<input v-model="userComment" />
+					<CheckComments @update-comment="updateBodyConditionScoreComments" />
+					<!--<input v-model="userComment" />  TRY THIS HERE LATER FOR COMMENTS-->
 			</ion-list>
 		</ion-card>
 		<ion-card v-if=" criteria === 'firstCriteriaFeeding'">
 			<ion-card-title>{{$t('weight_measured')}}</ion-card-title>
 			<ion-list >
 				<ion-item>
-					<ion-input :label="weightLabel" :placeholder="weightPlaceholder" v-model="weight"> </ion-input>
+					<ion-input :label="weightLabel" :placeholder="weightPlaceholder" v-model="weight_measured"> </ion-input>
 				</ion-item>
 				<ion-item>
 					<ion-input value="Score will be calculated automatically" :readonly="true"></ion-input>
 				</ion-item>
-				<CheckComments />
+				<CheckComments @update-comment="updateWeightMeasuredComments" />
 			</ion-list>
 		</ion-card>
 		<ion-card v-if=" criteria === 'secondCriteriaFeeding'">
@@ -197,7 +197,7 @@
 				<ion-item>
 					<ion-checkbox v-model="CheckboxArray[1][2]" @click="handleClick(1,1)">Score 3</ion-checkbox>
 				</ion-item>
-				<CheckComments />
+				<CheckComments @update-comment="updateKcalCalculationsComments" />
 			</ion-list>
 		</ion-card>
 		<ion-card v-if=" criteria === 'secondCriteriaFeeding'">
@@ -212,7 +212,7 @@
 				<ion-item>
 					<ion-checkbox v-model="CheckboxArray[2][2]" @click="handleClick(2,2)">Score 3</ion-checkbox>
 				</ion-item>
-				<CheckComments />
+				<CheckComments @update-comment="updateBloodHydrationComments" />
 			</ion-list>
 		</ion-card>
 		<ion-card v-if=" criteria === 'thirdCriteriaFeeding'">
@@ -224,7 +224,7 @@
 				<ion-item>
 					<ion-checkbox v-model="CheckboxArray[3][2]" @click="handleClick(3,1)">Score 3</ion-checkbox>
 				</ion-item>
-				<CheckComments />
+				<CheckComments @update-comment="updateFishQualityComments" />
 			</ion-list>
 		</ion-card>
 		<ion-card v-if=" criteria === 'fourthCriteriaFeeding'">
@@ -239,7 +239,7 @@
 				<ion-item>
 					<ion-checkbox v-model="CheckboxArray[4][2]" @click="handleClick(4,2)">Score 3</ion-checkbox>
 				</ion-item>
-				<CheckComments />
+				<CheckComments @update-comment="updateFishVarietyComments" />
 			</ion-list>
 		</ion-card>
 	</ion-content>
@@ -306,7 +306,7 @@ export default {
 			isOpenScoring: false,
 			weightLabel: this.$t('weightLabel'),
 			weightPlaceholder: this.$t('weightPlaceholder'),
-			weight: '',
+			//weight: '',
 			CheckboxArray: Array.from({ length: 5 }, () => Array(3).fill(false)),
 			//originalCheckboxValues: Array.from({length: 5}, () => Array(3).fill(false)),
 			//dolphins: EvaluationMenu.dolphinList,
@@ -324,6 +324,13 @@ export default {
 				fish_quality: null as number | null,
 				fish_variety: null as number | null
       		},*/
+			//userComment: ''
+			body_condition_score_comments: '',
+			weight_measured_comments: '',
+			kcal_calculations_comments: '',
+			blood_hydration_comments: '',
+			fish_quality_comments: '',
+			fish_variety_comments: '',
 		};
 	},
 	methods: {
@@ -358,7 +365,7 @@ export default {
 					if (this.dolphinSelect!== null){
 						evaluationFeedingStore.requestBodiesFeeding[k]["dolphin_name"] = this.dolphinSelect;
 					}
-					evaluationFeedingStore.requestBodiesFeeding[k]["weight_measured"] = parseFloat(this.weight);
+					evaluationFeedingStore.requestBodiesFeeding[k]["weight_measured"] = parseFloat(this.weight_measured);
 					for(let i = 0; i < this.CheckboxArray.length; i++){
 						for(let j = 0; j < this.CheckboxArray[i].length; j++){
 							if (this.CheckboxArray[i][j] === true && i === 0){
@@ -375,7 +382,12 @@ export default {
 						}
 					}
 					// Code here the comments into the request body
-					
+					evaluationFeedingStore.requestBodiesFeeding[k]["body_condition_score_comments"] = this.body_condition_score_comments;
+					evaluationFeedingStore.requestBodiesFeeding[k]["weight_measured_comments"] = this.weight_measured_comments;
+					evaluationFeedingStore.requestBodiesFeeding[k]["kcal_calculations_comments"] = this.kcal_calculations_comments;
+					evaluationFeedingStore.requestBodiesFeeding[k]["blood_hydration_comments"] = this.blood_hydration_comments;
+					evaluationFeedingStore.requestBodiesFeeding[k]["fish_quality_comments"] = this.fish_quality_comments;
+					evaluationFeedingStore.requestBodiesFeeding[k]["fish_variety_comments"] = this.fish_variety_comments;
 				}
 			}
 			for(let i = 0; i <= 4; i++){
@@ -386,6 +398,27 @@ export default {
 				}
 			}
 		},
+		
+		//Methods to update the comments
+		updateBodyConditionScoreComments(comment: string) {
+      		this.body_condition_score_comments = comment;
+    	},
+		updateWeightMeasuredComments(comment: string) {
+	  		this.weight_measured_comments = comment;
+		},
+		updateKcalCalculationsComments(comment: string) {
+	  		this.kcal_calculations_comments = comment;
+		},
+		updateBloodHydrationComments(comment: string) {
+	  		this.blood_hydration_comments = comment;
+		},
+		updateFishQualityComments(comment: string) {
+	  		this.fish_quality_comments = comment;
+		},
+		updateFishVarietyComments(comment: string) {
+	  		this.fish_variety_comments = comment;
+		},
+
 		//Method to send the data to database
 		async storeData() {
 			const confirmed = confirm(this.$t('savingDataNext')); //Where is the variable savingDataNext initialized and what does it do?

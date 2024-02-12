@@ -5,7 +5,7 @@
 				<ion-buttons slot="start">
 					<ion-menu-button></ion-menu-button>
 				</ion-buttons>
-				<ion-title>DoliMo - DolphinMonitoring</ion-title>
+				<ion-title>Dolphin WET - Welfare Evaluation Tool</ion-title>
 			</ion-toolbar>
 		</ion-header>
 		<ion-content>
@@ -54,6 +54,7 @@
 								>
 									<ion-label>
 										<p>Dolphin Name: {{ feedingRecord.dolphin_name }}</p>
+										<p>User ID: {{ feedingRecord.user_id }}</p>
 										<p>
 											Body Condition Score:
 											{{ feedingRecord.body_condition_score }}
@@ -67,9 +68,32 @@
 										<p>Blood Hydration: {{ feedingRecord.blood_hydration }}</p>
 										<p>Fish Quality: {{ feedingRecord.fish_quality }}</p>
 										<p>Fish Variety: {{ feedingRecord.fish_variety }}</p>
-										<p>Comments: {{ feedingRecord.comments || 'N/A' }}</p>
+										<p>
+											Body Condition Score comments:
+											{{ feedingRecord.body_condition_score_comments || 'N/A' }}
+										</p>
+										<p>
+											Weight measured comments:
+											{{ feedingRecord.weight_measured_comments || 'N/A' }}
+										</p>
+										<p>
+											Kcal calculation comments:
+											{{ feedingRecord.kcal_calculations_comments || 'N/A' }}
+										</p>
+										<p>
+											Blood hydration comments:
+											{{ feedingRecord.blood_hydration_comments || 'N/A' }}
+										</p>
+										<p>
+											Fish quality comments:
+											{{ feedingRecord.fish_quality_comments || 'N/A' }}
+										</p>
+										<p>
+											Fish variety comments:
+											{{ feedingRecord.fish_variety_comments || 'N/A' }}
+										</p>
 										<p>Created At: {{ feedingRecord.created_at }}</p>
-										<p>Updated At: {{ feedingRecord.updated_at }}</p>
+										<!--<p>Updated At: {{ feedingRecord.updated_at }}</p>-->
 									</ion-label>
 								</ion-item>
 							</ion-list>
@@ -284,7 +308,13 @@ interface FeedingRecord {
 	blood_hydration: number;
 	fish_quality: number;
 	fish_variety: number;
-	comments: string | null;
+	//comments: string | null;
+	body_condition_score_comments: string | null;
+	weight_measured_comments: string | null;
+	kcal_calculations_comments: string | null;
+	blood_hydration_comments: string | null;
+	fish_quality_comments: string | null;
+	fish_variety_comments: string | null;
 	created_at: string;
 	updated_at: string;
 }

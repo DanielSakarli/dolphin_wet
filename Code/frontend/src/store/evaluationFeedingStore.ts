@@ -23,6 +23,18 @@ export const useEvaluationFeedingStore = defineStore('evaluationFeedingStore', {
 				requestBodiesFeeding[i]['fish_quality'] = null;
 
 				requestBodiesFeeding[i]['fish_variety'] = null;
+
+				requestBodiesFeeding[i]['body_condition_score_comments'] = '';
+
+				requestBodiesFeeding[i]['weight_measured_comments'] = '';
+
+				requestBodiesFeeding[i]['kcal_calculations_comments'] = '';
+
+				requestBodiesFeeding[i]['blood_hydration_comments'] = '';
+
+				requestBodiesFeeding[i]['fish_quality_comments'] = '';
+
+				requestBodiesFeeding[i]['fish_variety_comments'] = '';
 			}
 		},
 	},
