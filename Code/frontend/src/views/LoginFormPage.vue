@@ -22,14 +22,12 @@
 				<ion-card-content>
 					<ion-input
 						ref="input"
-						type="email"
 						fill="solid"
-						label="Email"
+						label="Username"
 						label-placement="floating"
-						helper-text="Enter a valid email"
-						className="form-input"
-						id="e-mail"
-						v-model="email"
+						helper-text="Enter a valid username"
+						id="username"
+						v-model="username"
 					></ion-input>
 					<ion-input
 						ref="input"
@@ -38,6 +36,7 @@
 						label="Password"
 						label-placement="floating"
 						helper-text="Enter your password"
+						id="password"
 						v-model="password"
 					></ion-input>
 					<h5
@@ -50,13 +49,11 @@
 					>
 						Forget Passowrd?
 					</h5>
-					<ion-button
-						color="primary"
-						expand="block"
-						router-link="/folder/Evaluate"
-						@click="login"
-						>Log in</ion-button
+					<ion-button color="primary" expand="block" @click="login"
+						>Login</ion-button
 					>
+					<!-- Error message, displayed in case username or password is wrong -->
+					<p v-if="errorMessage" class="error">{{ errorMessage }}</p>
 					<p style="text-align: center">
 						----------------- or -------------------
 					</p>
@@ -83,34 +80,46 @@ import { defineComponent } from 'vue';
 import { IonIcon, IonButton, IonCard, IonCardContent } from '@ionic/vue';
 import axios from 'axios';
 import { baseUrl } from '@/utils/baseUrl';
+// import router from '@/router';
+//import { link } from 'ionicons/icons';
 
 export default defineComponent({
 	components: { IonInput, IonIcon, IonButton, IonCard, IonCardContent },
 	data() {
 		return {
-			email: '',
+			username: '',
 			password: '',
+			errorMessage: '',
 		};
 	},
 	methods: {
 		login() {
 			const url = baseUrl + '/api/users/login';
-			//const url = 'http://88395-17112.pph-server.de/api/users/login';
-
+			// Reset the error message at the beginning of each login attempt
+			this.errorMessage = '';
 			const requestBody = {
-				username: this.email,
+				username: this.username,
 				password: this.password,
 			};
-			console.log(this.email, this.password);
+			//console.log(this.username, this.password);
 			axios
 				.post(url, requestBody)
 				.then((response) => {
+					this.$router.push('/folder/Evaluate'); //Go to Evaluation Page if Login was succesfull
 					console.log('Response:', response.data);
 				})
 				.catch((error) => {
+					this.errorMessage = 'Invalid username or password.';
+					//router.push('/login');
 					console.error('Error:', error.response.data);
 				});
 		},
 	},
 });
 </script>
+
+<style scoped>
+.error {
+	color: red;
+}
+</style>

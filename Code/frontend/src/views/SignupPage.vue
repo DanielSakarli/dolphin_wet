@@ -1,5 +1,5 @@
 <template>
-	<base-layout pageTitle="Sign up Form">
+	<base-layout pageTitle="Sign up form">
 		<h2
 			style="
 				position: fixed;
@@ -21,6 +21,7 @@
 				<ion-icon name="heart" aria-hidden="true"></ion-icon>
 				<ion-card-content>
 					<ion-input
+						v-model="username"
 						ref="input"
 						type="text"
 						fill="solid"
@@ -29,6 +30,7 @@
 						helper-text="Enter Your Name"
 					></ion-input>
 					<ion-input
+						v-model="email"
 						ref="input"
 						type="email"
 						fill="solid"
@@ -37,6 +39,7 @@
 						helper-text="Enter a valid email"
 					></ion-input>
 					<ion-input
+						v-model="password"
 						ref="input"
 						type="password"
 						fill="solid"
@@ -44,11 +47,13 @@
 						label-placement="floating"
 						helper-text="Enter your password"
 					></ion-input>
-					<ion-button color="primary" expand="block">Sign up</ion-button>
+					<ion-button @click="registerUser" color="primary" expand="block"
+						>Sign up</ion-button
+					>
 					<p style="text-align: center">
 						----------------- or -------------------
 					</p>
-					<router-link to="/loginform"
+					<router-link to="/login"
 						><ion-button
 							color="light"
 							style="
@@ -68,10 +73,38 @@
 
 <script lang="ts">
 import { IonInput } from '@ionic/vue';
-import { defineComponent } from 'vue';
+//import { defineComponent } from 'vue';
 import { IonIcon } from '@ionic/vue';
+import axios from 'axios';
+import { baseUrl } from '@/utils/baseUrl';
 
-export default defineComponent({
+const url = baseUrl + '/api/users/register';
+
+export default {
 	components: { IonInput, IonIcon },
-});
+	data() {
+		return {
+			username: '',
+			email: '',
+			password: '',
+		};
+	},
+	methods: {
+		async registerUser() {
+			const requestBody = {
+				name: this.username,
+				email: this.email,
+				password: this.password,
+			};
+			axios
+				.post(url, requestBody)
+				.then((response) => {
+					console.log('Response:', response.data);
+				})
+				.catch((error) => {
+					console.error('Error:', error.response.data);
+				});
+		},
+	},
+};
 </script>
