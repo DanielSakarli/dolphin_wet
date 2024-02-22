@@ -273,6 +273,20 @@ import { chevronCollapseSharp } from 'ionicons/icons';
 const dolphinsStore = useDolphinsStore();
 const evaluationFeedingStore = useEvaluationFeedingStore();
 //dolphinsStore.fill();
+const token = localStorage.getItem('token'); //Get current JWT token of the user
+console.log('Token accessed from localStorage: ', token);
+
+document.cookie = token ?? '';
+console.log('This token is set in a cookie (client-side): ', document.cookie);
+
+// Set up request config
+const config = {
+	headers: {
+		Cookie: document.cookie,
+	},
+};
+
+
 
 export default {
 	components: {
@@ -421,6 +435,7 @@ export default {
 
 		//Method to send the data to database
 		async storeData() {
+			//console.log('config', config);
 			const confirmed = confirm(this.$t('savingDataNext')); //Where is the variable savingDataNext initialized and what does it do?
      		if (confirmed) {
 				this.storeCheckedValues();
@@ -430,7 +445,7 @@ export default {
 						if(evaluationFeedingStore.requestBodiesFeeding[i].content(data)){}
 					}*/
 					await axios
-							.post(this.urlPost, evaluationFeedingStore.requestBodiesFeeding[i])
+							.post(this.urlPost, evaluationFeedingStore.requestBodiesFeeding[i], config)
 							.then((response) => {
 								console.log('Response:', response.data);
 								if (i === evaluationFeedingStore.requestBodiesFeeding.length - 1){

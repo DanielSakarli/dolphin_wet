@@ -106,7 +106,15 @@ export default defineComponent({
 				.post(url, requestBody)
 				.then((response) => {
 					this.$router.push('/folder/Evaluate'); //Go to Evaluation Page if Login was succesfull
-					console.log('Response:', response.data);
+					//console.log('Response:', response.data);
+					const token = response.data;
+					localStorage.setItem('token', token);
+					console.log(
+						'This token is saved in the local storage: ',
+						localStorage.getItem('token')
+					);
+					//console.log('This is svaed in the local variable, not local storage: ', token);
+					// Save user JWT token in local storage; can be accessed later on in different Vue files
 				})
 				.catch((error) => {
 					this.errorMessage = 'Invalid username or password.';

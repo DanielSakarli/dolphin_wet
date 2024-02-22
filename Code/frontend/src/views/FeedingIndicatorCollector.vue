@@ -55,11 +55,22 @@ import { baseUrl } from '@/utils/baseUrl';
 import { mapActions } from 'vuex';
 
 const url = baseUrl + '/api/good_feeding';
+const token = localStorage.getItem('token'); //Get current JWT token of the user
+
+document.cookie = token;
+console.log('This token is set in cookie (client-side): ', document.cookie);
+
+// Set up request config
+/*const config = {
+	headers: {
+		Cookie: document.cookie,
+	},
+};*/
+
 
 const requestBody = {
 	dolphin_name: selectedDolphin,
 	body_condition_score: 3,
-	//weight: 3,
 	weight_measured: 15.5,
 	kcal_calculations: 3,
 	blood_hydration: 3,
@@ -103,6 +114,9 @@ export default defineComponent({
 		},
 		async storeData() {
 			const confirmed = confirm(this.$t('savingDataNext'));
+			// Check in console if token is correct
+			console.log('this is the token that is sent to backend: ', token);
+
 			if (confirmed) {
 				console.log('Data is stored');
 				await axios
