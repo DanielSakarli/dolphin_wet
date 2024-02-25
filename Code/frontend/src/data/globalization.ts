@@ -30,7 +30,20 @@ export const globalizationList = {
 		subcardTitle: 'Unterkartentitel',
 		selectDolphin: 'Delfin auswählen',
 		cancelChoice: 'Abbrechen',
-		thirdCriteriaHealth: 'drittes Kriterium',
+		firstCriteriaHealth: 'Fortbewegung',
+		secondCriteriaHealth: 'Augenläsionen',
+		thirdCriteriaHealth: 'Mundzustand',
+		fourthCriteriaHealth: 'GIT-Erkrankung',
+		fifthCriteriaHealth: 'Atemwegserkrankungen',
+		sixthCriteriaHealth: 'Generische, systemische oder andere Krankheiten',
+		firstSubCriteriaHealth: 'Korrekte Fortbewegung und Schwimmfähigkeitstest',
+		secondSubCriteriaHealth: 'Fehlen von Augenläsionen',
+		thirdSubCriteriaHealth: 'Normale Reaktionen beider Augen auf visuelle Hinweise',
+		fourthSubCriteriaHealth: 'Fehlen von dentalen Läsionen',
+		fifthSubCriteriaHealth: 'Vorherige respiratorische Läsionen',
+		sixthSubCriteriaHealth: 'Erzwungener Ausatmungstest',
+		seventhSubCriteriaHealth: 'Fehlen von externen Wunden oder Narben',
+		/*thirdCriteriaHealth: 'drittes Kriterium',
 		firstSubcriteriaHealth: 'Korrekte Fortbewegung',
 		secondSubcriteriaHealth: 'Fehlen von Augenläsionen',
 		thirdSubcriteriaHealth:
@@ -38,7 +51,7 @@ export const globalizationList = {
 		fourthSubcriteriaHealth: 'Fehlen einer GIT-Erkrankung',
 		fifthSubcriteriaHealth: 'Fehlen von Atemwegserkrankungen',
 		sixthSubcriteriaHealth:
-			'Fehlen von allgemeinen, systemischen oder anderen Krankheiten',
+			'Fehlen von allgemeinen, systemischen oder anderen Krankheiten',*/
 		//Translation UserManual Health
 		userManual: 'Benutzerhandbuch',
 		close: 'Schließen',
@@ -109,25 +122,29 @@ export const globalizationList = {
 			'Wild lebende Delfine ernähren sich von einer Vielzahl von Fischarten und variieren ihre Ernährung je nach Jahreszeit, Verfügbarkeit und Qualität der Beute und anderen Faktoren (Gannon & Waples 2004). Die Fütterung einer großen Vielfalt von Fischarten (sechster Indikator) an Tiere in menschlicher Obhut trägt wahrscheinlich dazu bei, die Tiere mit allen notwendigen Nährstoffen zu versorgen, ihre natürliche Ernährung besser nachzuahmen und ihren Appetit effektiver zu erhalten. Abhängig von der Anzahl der gefütterten Arten, der Anpassung an die individuellen Bedürfnisse und der Anreicherung des Futters wird eine 3-Punkte-Bewertung verwendet.',
 		//Translation Scoring Description
 		ScoringDescription: 'Scoring: Beschreibung',
+
 		//Criteria Housing
-		safe_environment: 'Sichere Umgebung',
-		adequate_spatial_requirements:
-			'Adequate Spacial Requirements and Pool ComplexityAngemessener Platzbedarf und Poolkomplexität',
-		social_management: 'Soziales Management',
-		adequate_water_quality: 'Angemessene Wasserqualität',
-		thermal_comfort: 'Thermischer Komfort',
-		visual_comfort: 'Visueller Komfort',
-		acoustic_comfort: 'Akustischer Komfort',
-		resting_Comfort: 'Ausruhender Komfort',
-		//Subcriteria  Housing
 		topicHousing: 'Wohnen',
-		firstSubcriteriaHousing: 'Gesundheitliche Sicherheit und Umweltdesign',
-		secondSubcriteriaHousing: 'Kein Verschlucken von Fremdkörpern',
-		thirdSubcriteriaHousing:
-			'Möglichkeit, sich frei zwischen den Bereichen zu bewegen, Ruheplatz, einladende Umgebung',
-		fourthSubcriteriaHousing: 'Möglichkeit, vor Artgenossen zu fliehen',
-		fifthSubcriteriaHousing: 'Fehlen von erzwungener Einsamkeit',
-		sixthSubcriteriaHousing: 'Angemessener Wasser PH',
+		firstCriteriaHousing: 'Sichere Umgebung',
+		secondCriteriaHousing: 'Becken Design',
+		thirdCriteriaHousing: 'Erzwungene Einsamkeit',
+		fourthCriteriaHousing: 'Wasserqualität',
+		fifthCriteriaHousing: 'Wasstemperatur',
+		sixthCriteriaHousing: 'Ausreichender Schatten',
+		seventhCriteriaHousing: 'Akustischer Komfort',
+		//Subcriteria Housing
+		firstSubCriteriaHousing: 'Sicherheit von Gehegen/Barrieren und Wartung',
+		secondSubCriteriaHousing: 'Kein Verschlucken von Fremdkörpern',
+		thirdSubCriteriaHousing:
+			'Beckendimension, Beckendesign, Anzahl der Becken, verfügbare Zugänge zu den Becken & Gruppenmanagement',
+		fourthSubCriteriaHousing: 'Fehlen erzwungener Einsamkeit',
+		fifthSubCriteriaHousing:
+			'Angemessener Wasser PH, Angemessene Wasser OR P-Werte, Fehlen von toxischen Wasserwerten von Gesamtchlor, freiem Chlor und gebundenem Chlor, Fehlen von abnormen Wasserwerten von Coliformen, Fehlen von abnormen Wasserwerten von E.coli, Angemessene Salinität',
+		sixthSubCriteriaHousing: 'Angemessene Wassertemperatur',
+		seventhSubCriteriaHousing:
+			'Vorhandensein von/Zugang zu schattigen Bereichen',
+		eighthSubCriteriaHousing:
+			'Angemessener Grad an Unterwasserlärm (40 dB über der Hörschwelle)',
 		fulfilled: 'Erfüllt',
 		notFulfilled: 'Nicht erfüllt',
 		noStatement: 'Keine Aussage möglich',
@@ -175,31 +192,38 @@ export const globalizationList = {
 		met: 'Met',
 		notMet: 'Not Met',
 		noTendency: 'No Tendency',
-		firstCriteriaHealth: 'Correct locomotion',
-		secondCriteriaHealth: 'Absence of eye lesions',
-		thirdCriteriaHealth: 'Good mouth condition (teeth, tongue, mucosas)',
-		fourthCriteriaHealth: 'Absence of GIT disease',
-		fifthCriteriaHealth: 'Absence of respiratory diseases',
-		sixthCriteriaHealth: 'Absence of generic, systemic or other diseases',
-		firstSubcriteriaHealth:
-			'Normal floatability and displacement movement test',
-		secondSubcriteriaHealth:
+		firstCriteriaHealth: 'Locomotion',
+		secondCriteriaHealth: 'Eye lesions',
+		thirdCriteriaHealth: 'Mouth condition',
+		fourthCriteriaHealth: 'Respiratory diseases',
+		fifthCriteriaHealth: 'GIT disease',
+		sixthCriteriaHealth: 'Generic, systemic or other diseases',
+		// Subcriteria Health
+		firstSubCriteriaHealth: 'Normal floatability and displacement movement test',
+		secondSubCriteriaHealth: 'Absence of eye lesions',
+		thirdSubCriteriaHealth: 'Normal responses on both eyes to visual cues',
+		fourthSubCriteriaHealth: 'Absence of dental lesions',
+		fifthSubCriteriaHealth: 'Previous respiratory lesions',
+		sixthSubCriteriaHealth: 'Forced expiration test',
+		seventhSubCriteriaHealth: 'Previous gastric/faecal abnormalities',
+		eigthSubCriteriaHealth: 'Absence of external wounds or scars',
+		/*secondSubCriteriaHealth:
 			'Records on previous incidents/diseases altering locomotion or floatability',
-		thirdSubcriteriaHealth: 'Direct veterinary inspection',
-		fourthSubcriteriaHealth: 'Normal responses on both eyes to visual cues',
-		fifthSubcriteriaHealth:
+		thirdSubCriteriaHealth: 'Direct veterinary inspection',
+		fourthSubCriteriaHealth: 'Normal responses on both eyes to visual cues',
+		fifthSubCriteriaHealth:
 			'Records on previous eye lesions/incidents/diseases',
-		sixthSubcriteriaHealth: 'Direct physical exam of mouth',
-		seventhSubcriteriaHealth: 'Records on previous dental or oral lesions',
-		eigthSubcriteriaHealth:
+		sixthSubCriteriaHealth: 'Direct physical exam of mouth',
+		seventhSubCriteriaHealth: 'Records on previous dental or oral lesions',
+		eigthSubCriteriaHealth:
 			'Records of previous gastric/faecal abnormalities on records',
-		ninthSubcriteriaHealth:
+		ninthSubCriteriaHealth:
 			'Direct physical exam including blowhole visual evaluation, and respiration performance',
-		tenthSubcriteriaHealth: 'Forced expiration test',
-		eleventhSubcriteriaHealth:
+		tenthSubCriteriaHealth: 'Forced expiration test',
+		eleventhSubCriteriaHealth:
 			'Records on previous respiratory lesions/incidents/diseases',
-		twelfthSubcriteriaHealth: 'Direct physical exam',
-		thirteenthSubcriteriaHealth: 'Records (complete blood works*)',
+		twelfthSubCriteriaHealth: 'Direct physical exam',
+		thirteenthSubCriteriaHealth: 'Records (complete blood works*)',*/
 		fulfilled: 'Fulfilled',
 		notFulfilled: 'Not fulfilled',
 		noStatement: 'No statement possible',
@@ -306,25 +330,25 @@ export const globalizationList = {
 		fifteenthSubcriteriaBehaviour:
 			'Active avoidance of certain pool areas during the last three months based on trainer interviews',
 		//Criteria Housing
-		safe_environment: 'Safe Environment',
-		adequate_spatial_requirements:
-			'Adequate Spacial Requirements and Pool Complexity',
-		social_management: 'Social Management',
-		adequate_water_quality: 'Adequate Water Quality',
-		thermal_comfort: 'Thermal Comfort',
-		visual_comfort: 'Visual Comfort',
-		acoustic_comfort: 'Acoustic Comfort',
-		resting_comfort: 'Resting Comfort',
-		//Subcriteria Housing
 		topicHousing: 'Housing/Environment',
-		firstSubcriteriaHousing: 'Health-related safety environmental design',
-		secondSubcriteriaHousing:
-			'Possibility to freely move between areas, resting place, engaging environment. Possibility to perform desired behaviors, including fast swim, jump, social behaviors, synchronized behavior. Possibility of escaping from conspecifics',
-		thirdSubcriteriaHousing: 'Absence of forced loneliness',
-		fourthSubcriteriaHousing:
+		firstCriteriaHousing: 'Safe Environment',
+		secondCriteriaHousing: 'Pool Design',
+		thirdCriteriaHousing: 'Forced Loneliness',
+		fourthCriteriaHousing: 'Water Quality',
+		fifthCriteriaHousing: 'Water Temperature',
+		sixthCriteriaHousing: 'Sufficient Shade',
+		seventhCriteriaHousing: 'Acoustic Comfort',
+		//Subcriteria Housing
+		firstSubCriteriaHousing: 'Enclosures/Barriers safety and maintenance',
+		secondSubCriteriaHousing: 'Absence of foreign body ingestion',
+		thirdSubCriteriaHousing:
+			'Pool dimension, pool design, number of pools, available access to pools & group management',
+		fourthSubCriteriaHousing: 'Absence of forced loneliness',
+		fifthSubCriteriaHousing:
 			'Adequate water PH, Adequate water OR P levels, Absence of  toxic water levels of total chlorine, free chlorine, and combined chlorine, Absence of abnormal water levels of coliformes, Absence of abnormal water levels of E.coli, Adequate salinity',
-		fifthSubcriteriaHousing: 'Adequate water temperature',
-		sixthSubcriteriaHousing: 'Presence of/Access to shaded areas',
-		seventhSubcriteriaHousing: 'Adequate degree of  underwater noise',
+		sixthSubCriteriaHousing: 'Adequate water temperature',
+		seventhSubCriteriaHousing: 'Presence of/Access to shaded areas',
+		eighthSubCriteriaHousing:
+			'Adequate degree of  underwater noise (40dB above hearing threshold)',
 	},
 };

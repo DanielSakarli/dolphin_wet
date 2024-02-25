@@ -135,7 +135,42 @@
 										<p>
 											Acoustic Comfort: {{ HousingRecord.acoustic_comfort }}
 										</p>
-										<p>Comments: {{ HousingRecord.comments || 'N/A' }}</p>
+										<p>
+											Enclosure/Barrier Safety Comments:
+											{{
+												HousingRecord.enclosure_barrier_safety_comments || 'N/A'
+											}}
+										</p>
+										<p>
+											Foreign Body Ingestion Comments:
+											{{
+												HousingRecord.foreign_body_ingestion_comments || 'N/A'
+											}}
+										</p>
+										<p>
+											Pool Design Comments:
+											{{ HousingRecord.pool_design_comments || 'N/A' }}
+										</p>
+										<p>
+											Forced Loneliness Comments:
+											{{ HousingRecord.forced_loneliness_comments || 'N/A' }}
+										</p>
+										<p>
+											Water Quality Comments:
+											{{ HousingRecord.water_quality_comments || 'N/A' }}
+										</p>
+										<p>
+											Water Temperature Comments:
+											{{ HousingRecord.water_temperature_comments || 'N/A' }}
+										</p>
+										<p>
+											Sufficient Shade Comments:
+											{{ HousingRecord.sufficient_shade_comments || 'N/A' }}
+										</p>
+										<p>
+											Acoustic Comfort Comments:
+											{{ HousingRecord.acoustic_comfort_comments || 'N/A' }}
+										</p>
 										<p>Created At: {{ HousingRecord.created_at }}</p>
 										<p>Updated At: {{ HousingRecord.updated_at }}</p>
 									</ion-label>
@@ -173,10 +208,45 @@
 										</p>
 										<p>Force Expiration: {{ HealthRecord.force_expiration }}</p>
 										<p>
+											Gastric Abnormality:
+											{{ HealthRecord.gastric_abnormality }}
+										</p>
+										<p>
 											External Disease Signs:
 											{{ HealthRecord.external_disease_signs }}
 										</p>
-										<p>Comments: {{ HealthRecord.comments || 'N/A' }}</p>
+										<p>
+											Normal Floatability Comments:
+											{{ HealthRecord.normal_floatability_comments || 'N/A' }}
+										</p>
+										<p>
+											Eye Lesions Comments:
+											{{ HealthRecord.eye_lesions_comments || 'N/A' }}
+										</p>
+										<p>
+											Visual Cues Comments: {{ HealthRecord.visual_cues_comments || 'N/A' }}
+										</p>
+										<p>
+											Mouth Exam Comments: {{ HealthRecord.mouth_exam_comments || 'N/A' }}
+										</p>
+										<p>
+											Respiratory Disease Comments:
+											{{ HealthRecord.respiratory_disease_comments || 'N/A' }}
+										</p>
+										<p>
+											Force Expiration Comments:
+											{{ HealthRecord.force_expiration_comments || 'N/A' }}
+										</p>
+										<p>
+											Gastric Abnormality Comments:
+											{{ HealthRecord.gastric_abnormality_comments || 'N/A' }}
+										</p>
+										<p>
+											External Disease Signs Comments:
+											{{
+												HealthRecord.external_disease_signs_comments || 'N/A'
+											}}
+										</p>
 										<p>Created At: {{ HealthRecord.created_at }}</p>
 										<p>Updated At: {{ HealthRecord.updated_at }}</p>
 									</ion-label>
@@ -331,9 +401,18 @@ interface HousingRecord {
 	pool_design: number;
 	forced_loneliness: number;
 	water_quality: number;
+	water_temperature: number;
 	sufficient_shade: number;
 	acoustic_comfort: number;
-	comments: null;
+	//comments: null;
+	enclosure_barrier_safety_comments: string | null;
+	foreign_body_ingestion_comments: string | null;
+	pool_design_comments: string | null;
+	forced_loneliness_comments: string | null;
+	water_quality_comments: string | null;
+	water_temperature_comments: string | null;
+	sufficient_shade_comments: string | null;
+	acoustic_comfort_comments: string | null;
 	created_at: string;
 	updated_at: string;
 }
@@ -351,8 +430,17 @@ interface HealthRecord {
 	mouth_exam: number;
 	respiratory_disease: number;
 	force_expiration: number;
+	gastric_abnormality: number;
 	external_disease_signs: number;
-	comments: null;
+	//comments: null;
+	normal_floatability_comments: string | null;
+	eye_lesions_comments: string | null;
+	visual_cues_comments: string | null;
+	mouth_exam_comments: string | null;
+	respiratory_disease_comments: string | null;
+	force_expiration_comments: string | null;
+	gastric_abnormality_comments: string | null;
+	external_disease_signs_comments: string | null;
 	created_at: string;
 	updated_at: string;
 }

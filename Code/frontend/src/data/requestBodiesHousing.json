@@ -1,18 +1,22 @@
 [
     {
-        "type": "object",
-        "properties": {
-          "dolphin_name": { "type": "string", "default": "Dolly" },
-          "enclosure_barrier_safety": { "type": "null", "default": null },
-          "foreign_body_ingestion": { "type": "null", "default": null },
-          "pool_design": { "type": "null", "default": null },
-          "forced_loneliness": { "type": "null", "default": null },
-          "water_quality": { "type": "null", "default": null },
-          "sufficient_shade": { "type": "null", "default": null },
-          "acoustic_comfort": { "type": "null", "default": null },
-          "comments": { "type": ["string", "null"], "default": null }
-        },
-        "required": ["dolphin_name"]
+        "dolphin_name": "Dolly",
+        "enclosure_barrier_safety": null,
+        "foreign_body_ingestion": null, 
+        "pool_design": null,
+        "forced_loneliness": null,
+        "water_quality": null,
+        "water_temperature": null,
+        "sufficient_shade": null,
+        "acoustic_comfort":null,
+        "enclosure_barrier_safety_comments": "",
+        "foreign_body_ingestion_comments": "",
+        "pool_design_comments": "",
+        "forced_loneliness_comments": "",
+        "water_quality_comments": "",
+        "water_temperature_comments": "",
+        "sufficient_shade_comments": "",
+        "acoustic_comfort_comments": ""
     },
     {
         "dolphin_name": "Donna",
@@ -21,9 +25,17 @@
         "pool_design": null,
         "forced_loneliness": null,
         "water_quality": null,
+        "water_temperature": null,
         "sufficient_shade": null,
         "acoustic_comfort":null,
-        "comments": null
+        "enclosure_barrier_safety_comments": "",
+        "foreign_body_ingestion_comments": "",
+        "pool_design_comments": "",
+        "forced_loneliness_comments": "",
+        "water_quality_comments": "",
+        "water_temperature_comments": "",
+        "sufficient_shade_comments": "",
+        "acoustic_comfort_comments": ""
     },
     {
         "dolphin_name": "Jenny",
@@ -32,9 +44,17 @@
         "pool_design": null,
         "forced_loneliness": null,
         "water_quality": null,
+        "water_temperature": null,
         "sufficient_shade": null,
         "acoustic_comfort":null,
-        "comments": null
+        "enclosure_barrier_safety_comments": "",
+        "foreign_body_ingestion_comments": "",
+        "pool_design_comments": "",
+        "forced_loneliness_comments": "",
+        "water_quality_comments": "",
+        "water_temperature_comments": "",
+        "sufficient_shade_comments": "",
+        "acoustic_comfort_comments": ""
     },    
     {
         "dolphin_name": "Nami",
@@ -43,9 +63,17 @@
         "pool_design": null,
         "forced_loneliness": null,
         "water_quality": null,
+        "water_temperature": null,
         "sufficient_shade": null,
         "acoustic_comfort":null,
-        "comments": null
+        "enclosure_barrier_safety_comments": "",
+        "foreign_body_ingestion_comments": "",
+        "pool_design_comments": "",
+        "forced_loneliness_comments": "",
+        "water_quality_comments": "",
+        "water_temperature_comments": "",
+        "sufficient_shade_comments": "",
+        "acoustic_comfort_comments": ""
     },
     {
         "dolphin_name": "Nynke",
@@ -54,9 +82,17 @@
         "pool_design": null,
         "forced_loneliness": null,
         "water_quality": null,
+        "water_temperature": null,
         "sufficient_shade": null,
         "acoustic_comfort":null,
-        "comments": null
+        "enclosure_barrier_safety_comments": "",
+        "foreign_body_ingestion_comments": "",
+        "pool_design_comments": "",
+        "forced_loneliness_comments": "",
+        "water_quality_comments": "",
+        "water_temperature_comments": "",
+        "sufficient_shade_comments": "",
+        "acoustic_comfort_comments": ""
     },
     {
         "dolphin_name": "Sunny",
@@ -65,9 +101,17 @@
         "pool_design": null,
         "forced_loneliness": null,
         "water_quality": null,
+        "water_temperature": null,
         "sufficient_shade": null,
         "acoustic_comfort":null,
-        "comments": null
+        "enclosure_barrier_safety_comments": "",
+        "foreign_body_ingestion_comments": "",
+        "pool_design_comments": "",
+        "forced_loneliness_comments": "",
+        "water_quality_comments": "",
+        "water_temperature_comments": "",
+        "sufficient_shade_comments": "",
+        "acoustic_comfort_comments": ""
     },
     {
         "dolphin_name": "Dörte",
@@ -76,8 +120,16 @@
         "pool_design": null,
         "forced_loneliness": null,
         "water_quality": null,
+        "water_temperature": null,
         "sufficient_shade": null,
         "acoustic_comfort":null,
-        "comments": null
+        "enclosure_barrier_safety_comments": "",
+        "foreign_body_ingestion_comments": "",
+        "pool_design_comments": "",
+        "forced_loneliness_comments": "",
+        "water_quality_comments": "",
+        "water_temperature_comments": "",
+        "sufficient_shade_comments": "",
+        "acoustic_comfort_comments": ""
     }
 ]

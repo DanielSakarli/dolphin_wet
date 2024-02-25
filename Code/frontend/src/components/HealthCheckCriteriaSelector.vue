@@ -24,75 +24,74 @@
 					:placeholder="secondplaceholder"
 					okText="OK"
 					:cancelText="firstcancelText"
-					interfaceOptions="{cssClass: 'my-class'}"
 				>
-					<ion-select-option class="my-class" value="firstCriteriaHealth">{{
+					<ion-select-option value="firstCriteriaHealth">{{
 						$t('firstCriteriaHealth')
 					}}</ion-select-option>
-					<ion-select-option class="my-class" value="secondCriteriaHealth">{{
+					<ion-select-option value="secondCriteriaHealth">{{
 						$t('secondCriteriaHealth')
 					}}</ion-select-option>
-					<ion-select-option class="my-class" value="thirdCriteriaHealth">{{
+					<ion-select-option value="thirdCriteriaHealth">{{
 						$t('thirdCriteriaHealth')
 					}}</ion-select-option>
-					<ion-select-option class="my-class" value="fourthCriteriaHealth">{{
+					<ion-select-option value="fourthCriteriaHealth">{{
 						$t('fourthCriteriaHealth')
 					}}</ion-select-option>
-					<ion-select-option class="my-class" value="fifthCriteriaHealth">{{
+					<ion-select-option value="fifthCriteriaHealth">{{
 						$t('fifthCriteriaHealth')
 					}}</ion-select-option>
-					<ion-select-option class="my-class" value="sixthCriteriaHealth">{{
+					<ion-select-option value="sixthCriteriaHealth">{{
 						$t('sixthCriteriaHealth')
 					}}</ion-select-option>
 				</ion-select>
 			</ion-item>
 			<!--<ion-item>
 				<ion-select
-					:value="Subcriteria"
-					@IonChange ="Subcriteria=$event.target.value"
+					:value="SubCriteria"
+					@IonChange ="SubCriteria=$event.target.value"
 					:label="thirdlabel"
 					:placeholder="thirdplaceholder"
 					okText="OK"
 					:cancelText="firstcancelText"
 				>
-					<ion-select-option v-if=" criteria === 'firstCriteriaHealth'" value="firstSubcriteriaHealth">{{
-						$t('firstSubcriteriaHealth')
+					<ion-select-option v-if=" criteria === 'firstCriteriaHealth'" value="firstSubCriteriaHealth">{{
+						$t('firstSubCriteriaHealth')
 					}}</ion-select-option>
-					<ion-select-option v-if=" criteria === 'firstCriteriaHealth'" value="secondSubcriteriaHealth">{{
-						$t('secondSubcriteriaHealth')
+					<ion-select-option v-if=" criteria === 'firstCriteriaHealth'" value="secondSubCriteriaHealth">{{
+						$t('secondSubCriteriaHealth')
 					}}</ion-select-option>
-					<ion-select-option v-if=" criteria === 'secondCriteriaHealth'" value="thirdSubcriteriaHealth">{{
-						$t('thirdSubcriteriaHealth')
+					<ion-select-option v-if=" criteria === 'secondCriteriaHealth'" value="thirdSubCriteriaHealth">{{
+						$t('thirdSubCriteriaHealth')
 					}}</ion-select-option>
-					<ion-select-option v-if=" criteria === 'secondCriteriaHealth'" value="fourthSubcriteriaHealth">{{
-						$t('fourthSubcriteriaHealth')
+					<ion-select-option v-if=" criteria === 'secondCriteriaHealth'" value="fourthSubCriteriaHealth">{{
+						$t('fourthSubCriteriaHealth')
 					}}</ion-select-option>
-					<ion-select-option v-if=" criteria === 'secondCriteriaHealth'" value="fifthSubcriteriaHealth">{{
-						$t('fifthSubcriteriaHealth')
+					<ion-select-option v-if=" criteria === 'secondCriteriaHealth'" value="fifthSubCriteriaHealth">{{
+						$t('fifthSubCriteriaHealth')
 					}}</ion-select-option>
-					<ion-select-option v-if=" criteria === 'thirdCriteriaHealth'" value="sixthSubcriteriaHealth">{{
-						$t('sixthSubcriteriaHealth')
+					<ion-select-option v-if=" criteria === 'thirdCriteriaHealth'" value="sixthSubCriteriaHealth">{{
+						$t('sixthSubCriteriaHealth')
 					}}</ion-select-option>
-					<ion-select-option v-if=" criteria === 'thirdCriteriaHealth'" value="seventhSubcriteriaHealth">{{
-						$t('seventhSubcriteriaHealth')
+					<ion-select-option v-if=" criteria === 'thirdCriteriaHealth'" value="seventhSubCriteriaHealth">{{
+						$t('seventhSubCriteriaHealth')
 					}}</ion-select-option>
-					<ion-select-option v-if=" criteria === 'fourthCriteriaHealth'" value="eigthSubcriteriaHealth">{{
-						$t('eigthSubcriteriaHealth')
+					<ion-select-option v-if=" criteria === 'fourthCriteriaHealth'" value="eigthSubCriteriaHealth">{{
+						$t('eigthSubCriteriaHealth')
 					}}</ion-select-option>
-					<ion-select-option v-if=" criteria === 'fifthCriteriaHealth'" value="ninthSubcriteriaHealth">{{
-						$t('ninthSubcriteriaHealth')
+					<ion-select-option v-if=" criteria === 'fifthCriteriaHealth'" value="ninthSubCriteriaHealth">{{
+						$t('ninthSubCriteriaHealth')
 					}}</ion-select-option>
-					<ion-select-option v-if=" criteria === 'fifthCriteriaHealth'" value="tenthSubcriteriaHealth">{{
-						$t('tenthSubcriteriaHealth')
+					<ion-select-option v-if=" criteria === 'fifthCriteriaHealth'" value="tenthSubCriteriaHealth">{{
+						$t('tenthSubCriteriaHealth')
 					}}</ion-select-option>
-					<ion-select-option v-if=" criteria === 'fifthCriteriaHealth'" value="eleventhSubcriteriaHealth">{{
-						$t('eleventhSubcriteriaHealth')
+					<ion-select-option v-if=" criteria === 'fifthCriteriaHealth'" value="eleventhSubCriteriaHealth">{{
+						$t('eleventhSubCriteriaHealth')
 					}}</ion-select-option>
-					<ion-select-option v-if=" criteria === 'sixthCriteriaHealth'" value="twelfthSubcriteriaHealth">{{
-						$t('twelfthSubcriteriaHealth')
+					<ion-select-option v-if=" criteria === 'sixthCriteriaHealth'" value="twelfthSubCriteriaHealth">{{
+						$t('twelfthSubCriteriaHealth')
 					}}</ion-select-option>
-					<ion-select-option v-if=" criteria === 'sixthCriteriaHealth'" value="thirteenthSubcriteriaHealth">{{
-						$t('thirteenthSubcriteriaHealth')
+					<ion-select-option v-if=" criteria === 'sixthCriteriaHealth'" value="thirteenthSubCriteriaHealth">{{
+						$t('thirteenthSubCriteriaHealth')
 					}}</ion-select-option>
 				</ion-select>
 			</ion-item>-->
@@ -112,7 +111,7 @@
 						>{{$t('secondCriteriaHealth')}}
 					</ion-title>
 					<ion-title v-else-if=" criteria === 'thirdCriteriaHealth'"
-						>{{$t('thirdSubcriteriaHealth')}}
+						>{{$t('thirdSubCriteriaHealth')}}
 					</ion-title>
 					<ion-title  v-else-if=" criteria === 'fourthCriteriaHealth'"
 						>{{$t('fourthCriteriaHealth')}}
@@ -120,7 +119,7 @@
 					<ion-title v-else-if=" criteria === 'fifthCriteriaHealth'"
 						>{{$t('fifthCriteriaHealth')}}
 					</ion-title>
-					<ion-title v-else-if=" Subcriteria === 'sixthCriteriaHealth'"
+					<ion-title v-else-if=" SubCriteria === 'sixthCriteriaHealth'"
 						>{{$t('sixthCriteriaHealth')}}
 					</ion-title>
 					<ion-buttons slot="end">
@@ -245,41 +244,20 @@
 					<ion-title v-if=" criteria === 'firstCriteriaHealth'"
 						>{{$t('firstCriteriaHealth')}}
 					</ion-title>
-					<ion-title v-else-if=" Subcriteria === 'secondSubcriteriaHealth'"
-						>{{$t('secondSubcriteriaHealth')}}
+					<ion-title v-else-if=" SubCriteria === 'secondCriteriaHealth'"
+						>{{$t('secondCriteriaHealth')}}
 					</ion-title>
-					<ion-title v-else-if=" Subcriteria === 'thirdSubcriteriaHealth'"
-						>{{$t('thirdSubcriteriaHealth')}}
+					<ion-title v-else-if=" SubCriteria === 'thirdCriteriaHealth'"
+						>{{$t('thirdCriteriaHealth')}}
 					</ion-title>
-					<ion-title v-else-if=" Subcriteria === 'fourthSubcriteriaHealth'"
-						>{{$t('fourthSubcriteriaHealth')}}
+					<ion-title v-else-if=" SubCriteria === 'fourthCriteriaHealth'"
+						>{{$t('fourthCriteriaHealth')}}
 					</ion-title>
-					<ion-title v-else-if=" Subcriteria === 'fifthSubcriteriaHealth'"
-						>{{$t('fifthSubcriteriaHealth')}}
+					<ion-title v-else-if=" SubCriteria === 'fifthCriteriaHealth'"
+						>{{$t('fifthCriteriaHealth')}}
 					</ion-title>
-					<ion-title v-else-if=" Subcriteria === 'sixthSubcriteriaHealth'"
-						>{{$t('sixthSubcriteriaHealth')}}
-					</ion-title>
-					<ion-title v-else-if=" Subcriteria === 'seventhSubcriteriaHealth'"
-						>{{$t('seventhSubcriteriaHealth')}}
-					</ion-title>
-					<ion-title v-else-if=" Subcriteria === 'eigthSubcriteriaHealth'"
-						>{{$t('eigthSubcriteriaHealth')}}
-					</ion-title>
-					<ion-title v-else-if=" Subcriteria === 'ninthSubcriteriaHealth'"
-						>{{$t('ninthSubcriteriaHealth')}}
-					</ion-title>
-					<ion-title v-else-if=" Subcriteria === 'tenthSubcriteriaHealth'"
-						>{{$t('tenthSubcriteriaHealth')}}
-					</ion-title>
-					<ion-title v-else-if=" Subcriteria === 'eleventhSubcriteriaHealth'"
-						>{{$t('eleventhSubcriteriaHealth')}}
-					</ion-title>
-					<ion-title v-else-if=" Subcriteria === 'twelfthSubcriteriaHealth'"
-						>{{$t('twelfthSubcriteriaHealth')}}
-					</ion-title>
-					<ion-title v-else-if=" Subcriteria === 'thirteenthSubcriteriaHealth'"
-						>{{$t('thirteenthSubcriteriaHealth')}}
+					<ion-title v-else-if=" SubCriteria === 'sixthCriteriaHealth'"
+						>{{$t('sixthCriteriaHealth')}}
 					</ion-title>
 					<ion-buttons slot="end">
 						<ion-button @click="setOpenScoring(false)">{{ $t('close')}}</ion-button>
@@ -288,73 +266,84 @@
 			</ion-header>
 			<ion-content class="ion-padding">
 				<p v-if=" criteria === 'firstCriteriaHealth'">
-					<h2>{{ $t('firstSubcriteriaHealth') }}</h2>
+					<h2>{{ $t('firstSubCriteriaHealth') }}</h2>
 					<h3>Score 1</h3>
 					Verification of normal movements
 					<h3>Score 3</h3>
 					Evidence of any locomotive/floating abnormalities
-					<h2>{{ $t('secondSubcriteriaHealth') }}</h2>
-					<h3>Score 1</h3>
-					No evidence of any locomotive/floating abnormalities on records  
-					<h3>Score 3</h3>
-					Evidence of any locomotion/floating abnormalities on records
 				</p>
 				<p v-if=" criteria === 'secondCriteriaHealth'">
-					<h2>{{ $t('thirdSubcriteriaHealth') }}</h2>
+					<h2>{{ $t('secondSubCriteriaHealth') }}</h2>
 					<h3>Score 1</h3>
 					Absence of eye lesions 
 					<h3>Score 3</h3>
 					Presence of eye lesions
-					<h2>{{ $t('fourthSubcriteriaHealth') }}</h2>
+					<h2>{{ $t('thirdSubCriteriaHealth') }}</h2>
 					<h3>Score 1</h3>
 					Normal response
 					<h3>Score 3</h3>
 					Evidence of any abnormalities
-					<h2>{{ $t('fifthSubcriteriaHealth') }}</h2>
-					<h3>Score 1</h3>
-					Absence of previous incidents on records during last three months
-					<h3>Score 3</h3>
-					Evidence of previous incidents on records during last three months
 				</p>
 				<p v-if=" criteria === 'thirdCriteriaHealth'">
-					<h2>{{ $t('sixthSubcriteriaHealth') }}</h2>
+					<h2>{{ $t('fourthSubCriteriaHealth') }}</h2>
 					<h3>Score 1</h3>
 					Absence of oral lesions or painful areas in the mouth (including teeth)
 					on direct physical exam
 					<h3>Score 3</h3>
 					Presence of oral lesions or painful areas in the mouth (including teeth)
-					<h2>{{ $t('seventhSubcriteriaHealth') }}</h2>
-					<h3>Score 1</h3>
-					Absence of previous incidents on records during last three months 
-					<h3>Score 3</h3>
-					Evidence of previous incidents on records during last three months 
 				</p>
 				<p v-if=" criteria === 'fourthCriteriaHealth'">
-					<h2>{{ $t('eigthSubcriteriaHealth') }}</h2>
+					<h2>{{ $t('fifthSubCriteriaHealth') }}</h2>
+					<h3>Score 1</h3>
+					Absence of previous incidents on records during last three months
+					<h3>Score 3</h3>
+					Evidence of previous incidents on records during last three months
+				</p>
+				<p v-if=" criteria === 'fifthCriteriaHealth'">
+					<h2>{{ $t('sixthSubCriteriaHealth') }}</h2>
+					<h3>Score 1</h3>
+					Absence of any signs or evidence of respiratory disease during direct physical exam
+					<h3>Score 3</h3>
+					Presence or signs of respiratory disease during direct physical exam
+					<h2>{{ $t('seventhSubCriteriaHealth') }}</h2>
+					<h3>Score 1</h3>
+					 
+					<h3>Score 3</h3>
+					 
+				</p>
+				<p v-if=" criteria === 'sixthCriteriaHealth'">
+					<h2>{{ $t('eigthSubCriteriaHealth') }}</h2>
+					<h3>Score 1</h3>
+					Absence of previous incidents on records during last three months
+					<h3>Score 3</h3>
+					Evidence of previous incidents on records during last three months
+				</p>
+					<!--<p v-if=" criteria === 'fourthCriteriaHealth'">
+					<h2>{{ $t('eigthSubCriteriaHealth') }}</h2>
 					<h3>Score 1</h3>
 					Absence of previous incidents on records during last three months 
 					<h3>Score 3</h3>
 					Evidence of previous incidents on records during last three months 
 				</p>
 				<p v-if=" criteria === 'fifthCriteriaHealth'">
-					<h2>{{ $t('ninthSubcriteriaHealth') }}</h2>
+					<h2>{{ $t('ninthSubCriteriaHealth') }}</h2>
 					<h3>Score 1</h3>
 					Absence of any signs or evidence of respiratory disease during direct physical exam
 					<h3>Score 3</h3>
 					Presence or signs of respiratory disease during direct physical exam
-					<h2>{{ $t('tenthSubcriteriaHealth') }}</h2>
+					<h2>{{ $t('tenthSubCriteriaHealth') }}</h2>
 					<h3>Score 1</h3>
 					Absence of abnormalities
 					<h3>Score 3</h3>
 					Evidence of any abnormalities 
-					<h2>{{ $t('eleventhSubcriteriaHealth') }}</h2>
+					<h2>{{ $t('eleventhSubCriteriaHealth') }}</h2>
 					<h3>Score 1</h3>
 					Absence of previous incidents on records during last three months
 					<h3>Score 3</h3>
 					Evidence of previous incidents on records during last three months 
 				</p>
-				<p v-if=" Subcriteria === 'sixthSubcriteriaHealth'">
-					<h2>{{ $t('twelfthSubcriteriaHealth') }}</h2>
+				<p v-if=" SubCriteria === 'sixthSubCriteriaHealth'">
+					<h2>{{ $t('twelfthSubCriteriaHealth') }}</h2>
 					<h3>Score 1</h3>
 					Absence of external active signs of disease on skin or other natural openings on direct physical exam
 					including global skin condition (colour, number and severity of viral lesions, major wounds, cracking,
@@ -365,7 +354,7 @@
 					including global skin condition (colour, number and severity of viral lesions, major wounds, cracking,
 					relative desquamation, scars, thermal ischemic necrosis, etc. excluding rake marks), genital slit
 					(exudates, mucosal colour, mucosal lesions), ears (exudates, pain to touch, bulging), rostrum (wounds, callosity).
-					<h2>{{ $t('thirteenthSubcriteriaHealth') }}</h2>
+					<h2>{{ $t('thirteenthSubCriteriaHealth') }}</h2>
 					Including complete haematology, biochemistry, ESR and fibrinogen
 					determinations as well as inflammatory markers such us TWBC, WBCdiff,
 					%Bands, %Ret, Hb, ALKP, ALB, FIB, IRON, ESR), biological data, or
@@ -375,13 +364,13 @@
 					Absence of previous signs/diseases on records during last three month
 					<h3>Score 3</h3>
 					Evidence of previous signs/diseases on records during last three months
-				</p>
+				</p>-->
 			</ion-content>
 		</ion-modal>
 		<!--End of Scoring Description-->
 		<!-- Start of Checkboxes-->
 		<ion-card v-if=" criteria === 'firstCriteriaHealth'">
-			<ion-card-title>{{$t('firstSubcriteriaHealth')}}</ion-card-title>
+			<ion-card-title>{{$t('firstSubCriteriaHealth')}}</ion-card-title>
 			<ion-list >
 					<ion-item>
 						<ion-checkbox v-model="CheckboxArray[0][0]" @click="handleClick(0,0)">Score 1</ion-checkbox>
@@ -389,33 +378,23 @@
 					<ion-item>
 						<ion-checkbox v-model="CheckboxArray[0][2]" @click="handleClick(0,2)">Score 3</ion-checkbox>
 					</ion-item>
-					<CheckComments />
+					<CheckComments @update-comment="updateNormalFloatabilityComments"/>
 			</ion-list>
 		</ion-card>
-		<ion-card v-if=" criteria === 'firstCriteriaHealth'">
-			<ion-card-title>{{$t('secondSubcriteriaHealth')}}</ion-card-title>
-				<ion-item>
-					<ion-checkbox v-model="CheckboxArray[7][0]" @click="handleClick(7,0)">Score 1</ion-checkbox>
-				</ion-item>
-				<ion-item>
-					<ion-checkbox v-model="CheckboxArray[7][2]" @click="handleClick(7,2)">Score 3</ion-checkbox>
-				</ion-item>
-				<CheckComments />
-		</ion-card>
 		<ion-card v-if=" criteria === 'secondCriteriaHealth'">
-			<ion-card-title>{{$t('thirdSubcriteriaHealth')}}</ion-card-title>
+			<ion-card-title>{{$t('secondSubCriteriaHealth')}}</ion-card-title>
 			<ion-list>
 				<ion-item>
 					<ion-checkbox v-model="CheckboxArray[1][0]" @click="handleClick(1,0)">Score 1</ion-checkbox>
 				</ion-item>
 				<ion-item>
-					<ion-checkbox v-model="CheckboxArray[1][2]" @click="handleClick(1,1)">Score 3</ion-checkbox>
+					<ion-checkbox v-model="CheckboxArray[1][2]" @click="handleClick(1,2)">Score 3</ion-checkbox>
 				</ion-item>
-				<CheckComments />
+				<CheckComments @update-comment="updateEyeLesionsComments"/>
 			</ion-list>
 		</ion-card>
 		<ion-card v-if=" criteria === 'secondCriteriaHealth'">
-			<ion-card-title>{{$t('fourthSubcriteriaHealth')}}</ion-card-title>		
+			<ion-card-title>{{$t('thirdSubCriteriaHealth')}}</ion-card-title>		
 			<ion-list>
 				<ion-item>
 					<ion-checkbox v-model="CheckboxArray[2][0]" @click="handleClick(2,0)">Score 1</ion-checkbox>
@@ -423,59 +402,23 @@
 				<ion-item>
 					<ion-checkbox v-model="CheckboxArray[2][2]" @click="handleClick(2,2)">Score 3</ion-checkbox>
 				</ion-item>
-				<CheckComments />
-			</ion-list>
-		</ion-card>
-		<ion-card v-if=" criteria === 'secondCriteriaHealth'">
-			<ion-card-title>{{$t('fifthSubcriteriaHealth')}}</ion-card-title>		
-			<ion-list >
-				<ion-item>
-					<ion-checkbox v-model="CheckboxArray[8][0]" @click="handleClick(8,0)">Score 1</ion-checkbox>
-				</ion-item>
-				<ion-item>
-					<ion-checkbox v-model="CheckboxArray[8][2]" @click="handleClick(8,1)">Score 3</ion-checkbox>
-				</ion-item>
-				<CheckComments />
+				<CheckComments @update-comment="updateVisualCuesComments"/>
 			</ion-list>
 		</ion-card>
 		<ion-card v-if=" criteria === 'thirdCriteriaHealth'">
-			<ion-card-title>{{$t('sixthSubcriteriaHealth')}}</ion-card-title>	
-			<ion-list>
+			<ion-card-title>{{$t('fourthSubCriteriaHealth')}}</ion-card-title>		
+			<ion-list >
 				<ion-item>
 					<ion-checkbox v-model="CheckboxArray[3][0]" @click="handleClick(3,0)">Score 1</ion-checkbox>
 				</ion-item>
 				<ion-item>
 					<ion-checkbox v-model="CheckboxArray[3][2]" @click="handleClick(3,2)">Score 3</ion-checkbox>
 				</ion-item>
-				<CheckComments />
-			</ion-list>
-		</ion-card>
-		<ion-card v-if=" criteria === 'thirdCriteriaHealth'">
-			<ion-card-title>{{$t('seventhSubcriteriaHealth')}}</ion-card-title>	
-			<ion-list>
-				<ion-item>
-					<ion-checkbox v-model="CheckboxArray[9][0]" @click="handleClick(9,0)">Score 1</ion-checkbox>
-				</ion-item>
-				<ion-item>
-					<ion-checkbox v-model="CheckboxArray[9][2]" @click="handleClick(9,2)">Score 3</ion-checkbox>
-				</ion-item>
-				<CheckComments />
+				<CheckComments @update-comment="updateMouthExamComments"/>
 			</ion-list>
 		</ion-card>
 		<ion-card v-if=" criteria === 'fourthCriteriaHealth'">
-			<ion-card-title>{{$t('eigthSubcriteriaHealth')}}</ion-card-title>	
-			<ion-list>
-				<ion-item>
-					<ion-checkbox v-model="CheckboxArray[10][0]" @click="handleClick(10,0)">Score 1</ion-checkbox>
-				</ion-item>
-				<ion-item>
-					<ion-checkbox v-model="CheckboxArray[10][2]" @click="handleClick(10,2)">Score 3</ion-checkbox>
-				</ion-item>
-				<CheckComments />
-			</ion-list>
-		</ion-card>
-		<ion-card v-if=" criteria === 'fifthCriteriaHealth'">
-			<ion-card-title>{{$t('ninthSubcriteriaHealth')}}</ion-card-title>	
+			<ion-card-title>{{$t('fifthSubCriteriaHealth')}}</ion-card-title>	
 			<ion-list>
 				<ion-item>
 					<ion-checkbox v-model="CheckboxArray[4][0]" @click="handleClick(4,0)">Score 1</ion-checkbox>
@@ -483,11 +426,11 @@
 				<ion-item>
 					<ion-checkbox v-model="CheckboxArray[4][2]" @click="handleClick(4,2)">Score 3</ion-checkbox>
 				</ion-item>
-				<CheckComments />
+				<CheckComments @update-comment="updateRespiratoryDiseaseComments"/>
 			</ion-list>
 		</ion-card>
 		<ion-card v-if=" criteria === 'fifthCriteriaHealth'">
-			<ion-card-title>{{$t('tenthSubcriteriaHealth')}}</ion-card-title>	
+			<ion-card-title>{{$t('sixthSubCriteriaHealth')}}</ion-card-title>	
 			<ion-list>
 				<ion-item>
 					<ion-checkbox v-model="CheckboxArray[5][0]" @click="handleClick(5,0)">Score 1</ion-checkbox>
@@ -495,23 +438,11 @@
 				<ion-item>
 					<ion-checkbox v-model="CheckboxArray[5][2]" @click="handleClick(5,2)">Score 3</ion-checkbox>
 				</ion-item>
-				<CheckComments />
+				<CheckComments @update-comment="updateForceExpirationComments"/>
 			</ion-list>
 		</ion-card>
 		<ion-card v-if=" criteria === 'fifthCriteriaHealth'">
-			<ion-card-title>{{$t('eleventhSubcriteriaHealth')}}</ion-card-title>	
-			<ion-list>
-				<ion-item>
-					<ion-checkbox v-model="CheckboxArray[11][0]" @click="handleClick(11,0)">Score 1</ion-checkbox>
-				</ion-item>
-				<ion-item>
-					<ion-checkbox v-model="CheckboxArray[11][2]" @click="handleClick(11,2)">Score 3</ion-checkbox>
-				</ion-item>
-				<CheckComments />
-			</ion-list>
-		</ion-card>
-		<ion-card v-if=" criteria === 'sixthCriteriaHealth'">
-			<ion-card-title>{{$t('twelfthSubcriteriaHealth')}}</ion-card-title>	
+			<ion-card-title>{{$t('seventhSubCriteriaHealth')}}</ion-card-title>	
 			<ion-list>
 				<ion-item>
 					<ion-checkbox v-model="CheckboxArray[6][0]" @click="handleClick(6,0)">Score 1</ion-checkbox>
@@ -519,25 +450,25 @@
 				<ion-item>
 					<ion-checkbox v-model="CheckboxArray[6][2]" @click="handleClick(6,2)">Score 3</ion-checkbox>
 				</ion-item>
-				<CheckComments />
+				<CheckComments @update-comment="updateGastricAbnormalityComments"/>
 			</ion-list>
 		</ion-card>
 		<ion-card v-if=" criteria === 'sixthCriteriaHealth'">
-			<ion-card-title>{{$t('thirteenthSubcriteriaHealth')}}</ion-card-title>	
+			<ion-card-title>{{$t('eigthSubCriteriaHealth')}}</ion-card-title>	
 			<ion-list>
 				<ion-item>
-					<ion-checkbox v-model="CheckboxArray[12][0]" @click="handleClick(12,0)">Score 1</ion-checkbox>
+					<ion-checkbox v-model="CheckboxArray[7][0]" @click="handleClick(7,0)">Score 1</ion-checkbox>
 				</ion-item>
 				<ion-item>
-					<ion-checkbox v-model="CheckboxArray[12][2]" @click="handleClick(12,2)">Score 3</ion-checkbox>
+					<ion-checkbox v-model="CheckboxArray[7][2]" @click="handleClick(7,2)">Score 3</ion-checkbox>
 				</ion-item>
-				<CheckComments />
+				<CheckComments @update-comment="updateExternalDiseaseComments"/>
 			</ion-list>
 		</ion-card>
 	</ion-content>
 	<!-- End of Checkboxes-->
 	<!--Start of photo section-->
-	<!--<ion-item v-if=" Subcriteria === 'thirdSubcriteriaHealth' || Subcriteria === 'sixthSubcriteriaHealth' || Subcriteria ==='twelfthSubcriteriaHealth'">
+	<!--<ion-item v-if=" SubCriteria === 'thirdSubCriteriaHealth' || SubCriteria === 'sixthSubCriteriaHealth' || SubCriteria ==='twelfthSubCriteriaHealth'">
 		<ion-thumbnail slot="start">
 			<img :src = "previewImageUrl" />
 		</ion-thumbnail>
@@ -593,7 +524,7 @@ export default {
 			dolphinsStore: dolphinsStore,
 			dolphinSelect: null as string | null,
 			criteria: null as string | null,
-			Subcriteria: '',
+			SubCriteria: '',
 			firstlabel: this.$t('dolphin'),
 			firstplaceholder: this.$t('selectDolphin'),
 			firstcancelText: this.$t('cancelChoice'),
@@ -604,11 +535,19 @@ export default {
 			isOpenManual: false,
 			isOpenScoring: false,
 			selectedOption: undefined,
-			CheckboxArray: Array.from({ length: 12 }, () => Array(3).fill(false)),
+			CheckboxArray: Array.from({ length: 8 }, () => Array(3).fill(false)),
 			camera,
 			previewImageUrl: '',
 			dolphinList: [] as {name: string}[],
-			urlHealth: baseUrl + '/api/good_health', //'http://88395-17112.pph-server.de/api/good_health',
+			urlPost: baseUrl + '/api/good_health',
+			normal_floatability_comments: '',
+			eye_lesions_comments: '',
+			visual_cues_comments: '',
+			mouth_exam_comments: '',
+			respiratory_disease_comments: '',
+			force_expiration_comments: '',
+			gastric_abnormality_comments: '',
+			external_disease_signs_comments: ''
 		};
 	},
 
@@ -654,10 +593,20 @@ export default {
 							}else if (this.CheckboxArray[i][j] === true && i === 5){
 								evaluationHealthStore.requestBodiesHealth[k]["force_expiration"] = j + 1;
 							}else if (this.CheckboxArray[i][j] === true && i === 6){
+								evaluationHealthStore.requestBodiesHealth[k]["gastric_abnormality"] = j + 1;
+							}else if (this.CheckboxArray[i][j] === true && i === 7){
 								evaluationHealthStore.requestBodiesHealth[k]["external_disease_signs"] = j + 1;
 							}
 						}
 					}
+					evaluationHealthStore.requestBodiesHealth[k]["normal_floatability_comments"] = this.normal_floatability_comments;
+					evaluationHealthStore.requestBodiesHealth[k]["eye_lesions_comments"] = this.eye_lesions_comments;
+					evaluationHealthStore.requestBodiesHealth[k]["visual_cues_comments"] = this.visual_cues_comments;
+					evaluationHealthStore.requestBodiesHealth[k]["mouth_exam_comments"] = this.mouth_exam_comments;
+					evaluationHealthStore.requestBodiesHealth[k]["respiratory_disease_comments"] = this.respiratory_disease_comments;
+					evaluationHealthStore.requestBodiesHealth[k]["force_expiration_comments"] = this.force_expiration_comments;
+					evaluationHealthStore.requestBodiesHealth[k]["gastric_abnormality_comments"] = this.gastric_abnormality_comments;
+					evaluationHealthStore.requestBodiesHealth[k]["external_disease_signs_comments"] = this.external_disease_signs_comments;
 				}
 			}
 			for(let i = 0; i <= 4; i++){
@@ -668,6 +617,31 @@ export default {
 				}
 			}
 		},
+		//Methods to update the comments
+		updateNormalFloatabilityComments(comment: string) {
+			this.normal_floatability_comments = comment;
+		},
+		updateEyeLesionsComments(comment: string) {
+			this.eye_lesions_comments = comment;
+		},
+		updateVisualCuesComments(comment: string) {
+			this.visual_cues_comments = comment;
+		},
+		updateMouthExamComments(comment: string) {
+			this.mouth_exam_comments = comment;
+		},
+		updateRespiratoryDiseaseComments(comment: string) {
+			this.respiratory_disease_comments = comment;
+		},
+		updateForceExpirationComments(comment: string) {
+			this.force_expiration_comments = comment;
+		},
+		updateGastricAbnormalityComments(comment: string) {
+			this.gastric_abnormality_comments = comment;
+		},
+		updateExternalDiseaseComments(comment: string) {
+			this.external_disease_signs_comments = comment;
+		},
 		//Method to send the data to database
 		async storeData() {
 			const confirmed = confirm(this.$t('savingDataNext'));
@@ -676,11 +650,11 @@ export default {
 				console.log(this.CheckboxArray);
 				for(let i = 0; i < evaluationHealthStore.requestBodiesHealth.length; i++){
 					await axios
-							.post(this.urlHealth, evaluationHealthStore.requestBodiesHealth[i])
+							.post(this.urlPost, evaluationHealthStore.requestBodiesHealth[i])
 							.then((response) => {
 								console.log('Response:', response.data);
 								if (i === evaluationHealthStore.requestBodiesHealth.length - 1){
-									const targetUrl = '/folder/Evaluate';
+									const targetUrl = '/detailHealth'; //'/folder/Evaluate';
 									this.$router.push(targetUrl);
 									evaluationHealthStore.resetBodies();
 									this.dolphinSelect = null;
@@ -717,10 +691,10 @@ export default {
 				this.previewImageUrl = photo.webPath;
 			}	
 		}
-        /*emitSubcriteriaUpdated() {
-            const Subcriteria = this.Subcriteria;
+        /*emitSubCriteriaUpdated() {
+            const SubCriteria = this.SubCriteria;
             
-            this.$emit('Subcriteria-updated', Subcriteria);
+            this.$emit('SubCriteria-updated', SubCriteria);
         }*/
     }
 };

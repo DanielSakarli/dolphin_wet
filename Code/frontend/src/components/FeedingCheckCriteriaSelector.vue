@@ -173,7 +173,6 @@
 						<ion-checkbox v-model="CheckboxArray[0][2]" @click="handleClick(0,2)">Score 3</ion-checkbox>
 					</ion-item>
 					<CheckComments @update-comment="updateBodyConditionScoreComments" />
-					<!--<input v-model="userComment" />  TRY THIS HERE LATER FOR COMMENTS-->
 			</ion-list>
 		</ion-card>
 		<ion-card v-if=" criteria === 'firstCriteriaFeeding'">
@@ -449,7 +448,7 @@ export default {
 							.then((response) => {
 								console.log('Response:', response.data);
 								if (i === evaluationFeedingStore.requestBodiesFeeding.length - 1){
-									const targetUrl = '/folder/Evaluate';
+									const targetUrl = '/detailFeeding'; //'/folder/Evaluate';
 									this.$router.push(targetUrl);
 									evaluationFeedingStore.resetBodies();
 									this.dolphinSelect = null;
