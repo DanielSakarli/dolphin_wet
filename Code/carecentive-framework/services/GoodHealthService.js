@@ -16,7 +16,16 @@ class GoodHealthService {
 	 * @param {Number} result.mouth_exam
 	 * @param {Number} result.respiratory_disease
 	 * @param {Number} result.force_expiration
+	 * @param {Number} result.gastric_abnormality
 	 * @param {Number} result.external_disease_signs
+	 * @param {String} result.normal_floatability_comments
+	 * @param {String} result.eye_lesions_comments
+	 * @param {String} result.visual_cues_comments
+	 * @param {String} result.mouth_exam_comments
+	 * @param {String} result.respiratory_disease_comments
+	 * @param {String} result.force_expiration_comments
+	 * @param {String} result.gastric_abnormality_comments
+	 * @param {String} result.external_disease_signs_comments
 	 * @returns {Object} The inserted test data
 	 */
 	static async loadTestResult(result) {
@@ -71,6 +80,8 @@ class GoodHealthService {
 					'mouth_exam_comments',
 					'respiratory_disease',
 					'respiratory_disease_comments',
+					'gastric_abnormality',
+					'gastric_abnormality_comments',
 					'force_expiration',
 					'force_expiration_comments',
 					'external_disease_signs',

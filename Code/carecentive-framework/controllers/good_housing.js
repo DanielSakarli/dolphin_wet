@@ -40,7 +40,14 @@ async function setResult(req, res, next) {
 			water_temperature,
 			sufficient_shade,
 			acoustic_comfort,
-			comments,
+			enclosure_barrier_safety_comments,
+			foreign_body_ingestion_comments,
+			pool_design_comments,
+			forced_loneliness_comments,
+			water_quality_comments,
+			water_temperature_comments,
+			sufficient_shade_comments,
+			acoustic_comfort_comments,
 		} = req.body;		
 		////////////////////////////////////////		
 		//let test_result = req.body;
@@ -73,7 +80,14 @@ async function setResult(req, res, next) {
 			water_temperature,
 			sufficient_shade,
 			acoustic_comfort,
-			comments,
+			enclosure_barrier_safety_comments,
+			foreign_body_ingestion_comments,
+			pool_design_comments,
+			forced_loneliness_comments,
+			water_quality_comments,
+			water_temperature_comments,
+			sufficient_shade_comments,
+			acoustic_comfort_comments,
 		};
 		const testResultAdded = await GoodHousingService.loadTestResult(testResult);
 

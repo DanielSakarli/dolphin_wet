@@ -34,6 +34,7 @@ exports.up = function (knex) {
 				.onDelete('CASCADE')
 				.onUpdate('CASCADE');
 			table.string('dolphin_name');
+
 			table.tinyint('body_condition_score').unsigned(); //1, 2, 3
 			table.string('body_condition_score_comments'); //1, 2, 3
 			// table.tinyint('weight').unsigned(); //1, 3
@@ -77,6 +78,8 @@ exports.up = function (knex) {
 			table.string('visual_cues_comments');
 			table.tinyint('mouth_exam').unsigned(); //1, 3
 			table.string('mouth_exam_comments');
+			table.tinyint('gastric_abnormality').unsigned(); //1, 3
+			table.string('gastric_abnormality_comments');
 			table.tinyint('respiratory_disease').unsigned(); //1, 3
 			table.string('respiratory_disease_comments');
 			table.tinyint('force_expiration').unsigned(); //1, 3

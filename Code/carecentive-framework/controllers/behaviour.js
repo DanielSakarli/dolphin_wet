@@ -25,6 +25,7 @@ async function setResult(req, res, next) {
 		}
 
 		// attach user_id to test result in req.body
+		// when the user JWT authentication works add also the user_name, not only the user_id
 		let test_result = req.body;
 		test_result = { user_id, ...test_result };
 

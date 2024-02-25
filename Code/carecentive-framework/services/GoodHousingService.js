@@ -17,6 +17,13 @@ class GoodHousingService {
 	 * @param {Number} result.water_quality
 	 * @param {Number} result.sufficient_shade
 	 * @param {Number} result.acoustic_comfort
+	 * @param {String} result.enclosure_barrier_safety_comments
+	 * @param {String} result.foreign_body_ingestion_comments
+	 * @param {String} result.pool_design_comments
+	 * @param {String} result.forced_loneliness_comments
+	 * @param {String} result.water_quality_comments
+	 * @param {String} result.sufficient_shade_comments
+	 * @param {String} result.acoustic_comfort_comments
 	 * @returns {Object} The inserted test data
 	 */
 	static async loadTestResult(result) {

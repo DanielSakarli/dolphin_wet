@@ -156,14 +156,15 @@ const goodHealthPostValidateRequestBody = [
 			'mouth_exam',
 			'respiratory_disease',
 			'force_expiration',
+			'gastric_abnormality',
 			'external_disease_signs',
-			// comments
 			'normal_floatability_comments',
 			'eye_lesions_comments',
 			'visual_cues_comments',
 			'mouth_exam_comments',
 			'respiratory_disease_comments',
 			'force_expiration_comments',
+			'gastric_abnormality_comments',
 			'external_disease_signs_comments',
 		];
 		const keys = Object.keys(value);
@@ -212,11 +213,48 @@ const goodHealthPostValidateRequestBody = [
 		.isInt({ min: 1, max: 3 })
 		.toInt()
 		.withMessage('Invalid force expiration value'),
+	body('gastric_abnormality')
+		.optional({ values: 'null' })
+		.isInt({ min: 1, max: 3 })
+		.toInt()
+		.withMessage('Invalid gastric abnormality value'),
 	body('external_disease_signs')
 		.optional({ values: 'null' })
 		.isInt({ min: 1, max: 3 })
 		.toInt()
 		.withMessage('Invalid external disease signs value'),
+	body('normal_floatability_comments')
+		.optional({ values: 'null' })
+		.isString()
+		.withMessage('Invalid comments for normal floatability'),
+	body('eye_lesions_comments')
+		.optional({ values: 'null' })
+		.isString()
+		.withMessage('Invalid comments for eye lesions'),
+	body('visual_cues_comments')
+		.optional({ values: 'null' })
+		.isString()
+		.withMessage('Invalid comments for visual cues'),
+	body('mouth_exam_comments')
+		.optional({ values: 'null' })
+		.isString()
+		.withMessage('Invalid comments for mouth exam'),
+	body('respiratory_disease_comments')
+		.optional({ values: 'null' })
+		.isString()
+		.withMessage('Invalid comments for respiratory disease'),
+	body('force_expiration_comments')
+		.optional({ values: 'null' })
+		.isString()
+		.withMessage('Invalid comments for force expiration'),
+	body('gastric_abnormality_comments')
+		.optional({ values: 'null' })
+		.isString()
+		.withMessage('Invalid comments for force expiration'),
+	body('external_disease_signs_comments')
+		.optional({ values: 'null' })
+		.isString()
+		.withMessage('Invalid comments for external disease signs'),
 ];
 /**
  * End of Good health validation rules.
@@ -234,6 +272,7 @@ const goodHousingPostValidateRequestBody = [
 			'pool_design',
 			'forced_loneliness',
 			'water_quality',
+			'water_temperature',
 			'sufficient_shade',
 			'acoustic_comfort',
 			'enclosure_barrier_safety_comments',
@@ -241,6 +280,7 @@ const goodHousingPostValidateRequestBody = [
 			'pool_design_comments',
 			'forced_loneliness_comments',
 			'water_quality_comments',
+			'water_temperature_comments',
 			'sufficient_shade_comments',
 			'acoustic_comfort_comments',
 		];
@@ -264,62 +304,58 @@ const goodHousingPostValidateRequestBody = [
 		.optional({ values: 'null' })
 		.isInt({ min: 1, max: 3 })
 		.toInt(),
+	body('enclosure_barrier_safety_comments')
+		.optional({ values: 'null' })
+		.isString()
+		.withMessage('Invalid comments for enclosure barrier safety'),
 	body('foreign_body_ingestion')
 		.optional({ values: 'null' })
 		.isInt({ min: 1, max: 3 })
 		.toInt(),
+	body('foreign_body_ingestion_comments')
+		.optional({ values: 'null' })
+		.isString()
+		.withMessage('Invalid comments for foreign body ingestion'),
 	body('pool_design')
 		.optional({ values: 'null' })
 		.isInt({ min: 1, max: 3 })
 		.toInt(),
+	body('pool_design_comments')
+		.optional({ values: 'null' })
+		.isString()
+		.withMessage('Invalid comments for pool design'),
 	body('forced_loneliness')
 		.optional({ values: 'null' })
 		.isInt({ min: 1, max: 3 })
 		.toInt(),
+	body('forced_loneliness_comments')
+		.optional({ values: 'null' })
+		.isString()
+		.withMessage('Invalid comments for forced loneliness'),
 	body('water_quality')
 		.optional({ values: 'null' })
 		.isInt({ min: 1, max: 3 })
 		.toInt(),
+	body('water_quality_comments')
+		.optional({ values: 'null' })
+		.isString()
+		.withMessage('Invalid comments for water quality'),
 	body('water_temperature')
 		.optional({ values: 'null' })
 		.isInt({ min: 1, max: 3 })
 		.toInt(),
+	body('water_temperature_comments')
+		.optional({ values: 'null' })
+		.isString()
+		.withMessage('Invalid comments for water temperature'),
 	body('sufficient_shade')
 		.optional({ values: 'null' })
 		.isInt({ min: 1, max: 3 })
 		.toInt(),
-	body('acoustic_comfort')
-		.optional({ values: 'null' })
-		.isInt({ min: 1, max: 3 })
-		.toInt(),
-	body('enclosure_barrier_safety_comments')
-		.optional({ values: 'null' })
-		.isString()
-		.withMessage('Invalid comments for fish variety'),
-	body('foreign_body_ingestion_comments')
-		.optional({ values: 'null' })
-		.isString()
-		.withMessage('Invalid comments for fish variety'),
-	body('pool_design_comments')
-		.optional({ values: 'null' })
-		.isString()
-		.withMessage('Invalid comments for fish variety'),
-	body('forced_loneliness_comments')
-		.optional({ values: 'null' })
-		.isString()
-		.withMessage('Invalid comments for fish variety'),
-	body('water_quality_comments')
-		.optional({ values: 'null' })
-		.isString()
-		.withMessage('Invalid comments for fish variety'),
 	body('sufficient_shade_comments')
 		.optional({ values: 'null' })
 		.isString()
-		.withMessage('Invalid comments for fish variety'),
-	body('acoustic_comfort_comments')
-		.optional({ values: 'null' })
-		.isString()
-		.withMessage('Invalid comments for fish variety'),
+		.withMessage('Invalid comments for sufficient shade'),
 ];
 /**
  * End of good housing validation rules.
