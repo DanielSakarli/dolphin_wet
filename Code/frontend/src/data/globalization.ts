@@ -122,7 +122,7 @@ export const globalizationList = {
 			'Wild lebende Delfine ernähren sich von einer Vielzahl von Fischarten und variieren ihre Ernährung je nach Jahreszeit, Verfügbarkeit und Qualität der Beute und anderen Faktoren (Gannon & Waples 2004). Die Fütterung einer großen Vielfalt von Fischarten (sechster Indikator) an Tiere in menschlicher Obhut trägt wahrscheinlich dazu bei, die Tiere mit allen notwendigen Nährstoffen zu versorgen, ihre natürliche Ernährung besser nachzuahmen und ihren Appetit effektiver zu erhalten. Abhängig von der Anzahl der gefütterten Arten, der Anpassung an die individuellen Bedürfnisse und der Anreicherung des Futters wird eine 3-Punkte-Bewertung verwendet.',
 		//Translation Scoring Description
 		ScoringDescription: 'Scoring: Beschreibung',
-
+		ReferenceArea: 'Referenzbereich',
 		//Criteria Housing
 		topicHousing: 'Wohnen',
 		firstCriteriaHousing: 'Sichere Umgebung',
@@ -288,6 +288,7 @@ export const globalizationList = {
 			'Food quality Microbiology, Physicochemical analysis',
 		sixthSubcriteriaFeeding: 'Food variety along the year',
 		ScoringDescription: 'Scoring Description',
+		ReferenceArea: 'Reference Area',
 		weightLabel: 'Weight [kg]:',
 		weightPlaceholder: 'Enter weight in kg',
 		//Translation User Manual Feeding

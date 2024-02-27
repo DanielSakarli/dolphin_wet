@@ -57,8 +57,8 @@ import { mapActions } from 'vuex';
 const url = baseUrl + '/api/good_feeding';
 const token = localStorage.getItem('token'); //Get current JWT token of the user
 
-document.cookie = token;
-console.log('This token is set in cookie (client-side): ', document.cookie);
+// document.cookie = token;
+// console.log('This token is set in cookie (client-side): ', document.cookie);
 
 // Set up request config
 /*const config = {
@@ -66,7 +66,6 @@ console.log('This token is set in cookie (client-side): ', document.cookie);
 		Cookie: document.cookie,
 	},
 };*/
-
 
 const requestBody = {
 	dolphin_name: selectedDolphin,

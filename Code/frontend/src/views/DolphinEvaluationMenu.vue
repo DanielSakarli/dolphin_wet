@@ -5,7 +5,7 @@
 				<ion-buttons slot="start">
 					<ion-menu-button></ion-menu-button>
 				</ion-buttons>
-				<ion-title>DoliMo - DolphinMonitoring</ion-title>
+				<ion-title>Dolphin WET - Welfare Evaluation Tool</ion-title>
 			</ion-toolbar>
 		</ion-header>
 		<ion-content>

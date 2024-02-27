@@ -159,6 +159,51 @@
 			</ion-content>
 		</ion-modal>
 		<!--End of Scoring Description-->
+		<!--Start of Reference Area-->
+		<ion-button fill="outline" @click="setOpenReferenceArea(true)">{{ $t('ReferenceArea') }}</ion-button>
+
+		<ion-modal :is-open="isOpenReferenceArea">
+			<ion-header>
+				<ion-toolbar>
+					<ion-title>
+						{{$t('ReferenceArea')}}
+					</ion-title>
+					<ion-buttons slot="end">
+						<ion-button @click="setOpenReferenceArea(false)">{{ $t('close')}}</ion-button>
+					</ion-buttons>
+				</ion-toolbar>
+			</ion-header>
+
+			<ion-content class="ion-padding">
+				<p v-if=" criteria === 'firstCriteriaFeeding'">
+					<!--Here are the values of reference area-->
+					<h3>Body Condition Score:</h3>
+					<div v-if="dolphinSelect">
+						{{ 
+							(dolphinsStore.dolphinList.find(
+								(dolphin) => dolphin.name === dolphinSelect
+							  )?.ref_area_body_condition_score) ?? null
+						}}
+					</div>
+					<!--
+						This here shows the first dolphin's ref_area_body_condition_score
+						{{dolphinsStore.dolphinList[0].ref_area_body_condition_score}}
+					-->
+				</p>
+				<p v-if=" criteria === 'secondCriteriaFeeding'">
+					<!--Here are the values of reference area-->
+					<h3>Kcal calculations</h3>
+					<div v-if="dolphinSelect">
+						{{ 
+							(dolphinsStore.dolphinList.find(
+								(dolphin) => dolphin.name === dolphinSelect
+							  )?.ref_area_kcal_calculations) ?? null
+						}}
+					</div>
+				</p>
+			</ion-content>
+		</ion-modal>
+		<!--End of Reference Area-->
 		<!-- Start of Checkboxes-->
 		<ion-card v-if=" criteria === 'firstCriteriaFeeding'">
 			<ion-card-title>{{$t('body_condition_score')}}</ion-card-title>
@@ -317,6 +362,7 @@ export default {
 			secondplaceholder: this.$t('selectCriteria'),
 			isOpenManual: false,
 			isOpenScoring: false,
+			isOpenReferenceArea: false,
 			weightLabel: this.$t('weightLabel'),
 			weightPlaceholder: this.$t('weightPlaceholder'),
 			//weight: '',
@@ -355,6 +401,10 @@ export default {
 		setOpenScoring(isOpen: boolean) {
             this.isOpenScoring = isOpen;
         },
+		//Method to open reference area
+		setOpenReferenceArea(isOpen: boolean) {
+			this.isOpenReferenceArea = isOpen;
+		},
 		//Method uses boolean array. So no multiple checking for one test is possible. --> Every test can have one checked Checkbox
 		handleClick(row: number, column: number) {
 		console.log(this.CheckboxArray, row, column);
