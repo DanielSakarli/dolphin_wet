@@ -80,7 +80,7 @@ async function setResult(req, res, next) {
 }
 
 /**
- * Controller of get request of /api/good_feeding?name.   //Where is the route '/api/good_feeding?name' defined/used?
+ * Controller of get request of /api/good_feeding?name=...&numMonths=...
  * Gets the test result in the database.
  * By default it returns the test results of last three months of the given dolphin.
  */
@@ -92,11 +92,16 @@ async function getTestResult(req, res, next) {
 			return res.status(400).json({ errors: errors.array() });
 		}
 
-		// Gets the dolphin name
-		const { name } = req.query; 
+		// Gets the dolphin name and the number of months from query params
+		const { name, numMonths } = req.query; 
+		
+		// If numMonths is 10, return all results, not just past 10 months
+		if(numMonths === 10) {
+			const queryAllResults = await GoodFeedingService.getTestResultByDolphin(name);
+			res.status(200).json(queryAllResults);
+		}
 
-		const queryResult = await GoodFeedingService.getTestResultNMonths(name);
-
+		const queryResult = await GoodFeedingService.getTestResultNMonths(name, numMonths);;
 		res.status(200).json(queryResult);
 	} catch (error) {
 		next(error);

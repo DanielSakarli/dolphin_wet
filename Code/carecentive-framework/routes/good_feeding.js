@@ -26,7 +26,10 @@ router.post(
  */
 router.get(
 	'/',
-	[query('name').notEmpty().isString().withMessage('Name can not be empty!')],
+	[
+		query('name').notEmpty().isString().withMessage('Name can not be empty!'),
+		query('numMonths').optional().isInt().withMessage('numMonths must be an integer!')
+	],
 	getTestResult
 );
 

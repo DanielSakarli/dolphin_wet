@@ -49,10 +49,15 @@ async function getTestResult(req, res, next) {
 		}
 
 		// Gets the dolphin name
-		const { name } = req.query;
+		const { name, numMonths } = req.query;
 
-		const queryResult = await GoodHealthService.getTestResultNMonths(name);
+		// If numMonths is 10, return all results, not just past 10 months
+		if(numMonths===10){
+			const queryAllResults = await GoodHealthService.getTestResultByDolphin(name);
+			res.status(200).json(queryAllResults);
+		}
 
+		const queryResult = await GoodHealthService.getTestResultNMonths(name, numMonths);
 		res.status(200).json(queryResult);
 	} catch (error) {
 		next(error);

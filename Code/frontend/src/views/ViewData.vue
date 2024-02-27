@@ -38,6 +38,22 @@
 						}}</ion-select-option>
 					</ion-select>
 				</ion-item>
+				<!--Put here the button for choosing how long ago the data should be displayed (1, 2, 3, ... months and so on)-->
+				<ion-item>
+					<ion-select
+						label="Time Period"
+						placeholder="select Time Period"
+						okText="OK"
+						cancelText="Cancel"
+						v-model="numMonths"
+					>
+						<ion-select-option value="1">1 month</ion-select-option>
+						<ion-select-option value="2">2 months</ion-select-option>
+						<ion-select-option value="3">3 months</ion-select-option>
+						<!--If numMonths === 10, all data is send from backend to frontend-->
+						<ion-select-option value="10">All data</ion-select-option>
+					</ion-select>
+				</ion-item>
 			</ion-list>
 			<ion-button expand="block" @click="showData">
 				<ion-icon slot="start" :icon="reload"></ion-icon>Show Data</ion-button
@@ -224,10 +240,12 @@
 											{{ HealthRecord.eye_lesions_comments || 'N/A' }}
 										</p>
 										<p>
-											Visual Cues Comments: {{ HealthRecord.visual_cues_comments || 'N/A' }}
+											Visual Cues Comments:
+											{{ HealthRecord.visual_cues_comments || 'N/A' }}
 										</p>
 										<p>
-											Mouth Exam Comments: {{ HealthRecord.mouth_exam_comments || 'N/A' }}
+											Mouth Exam Comments:
+											{{ HealthRecord.mouth_exam_comments || 'N/A' }}
 										</p>
 										<p>
 											Respiratory Disease Comments:
@@ -378,7 +396,6 @@ interface FeedingRecord {
 	blood_hydration: number;
 	fish_quality: number;
 	fish_variety: number;
-	//comments: string | null;
 	body_condition_score_comments: string | null;
 	weight_measured_comments: string | null;
 	kcal_calculations_comments: string | null;
@@ -404,7 +421,6 @@ interface HousingRecord {
 	water_temperature: number;
 	sufficient_shade: number;
 	acoustic_comfort: number;
-	//comments: null;
 	enclosure_barrier_safety_comments: string | null;
 	foreign_body_ingestion_comments: string | null;
 	pool_design_comments: string | null;
@@ -432,7 +448,6 @@ interface HealthRecord {
 	force_expiration: number;
 	gastric_abnormality: number;
 	external_disease_signs: number;
-	//comments: null;
 	normal_floatability_comments: string | null;
 	eye_lesions_comments: string | null;
 	visual_cues_comments: string | null;
@@ -494,9 +509,10 @@ export default {
 			dataBehaviour: null as DataBehaviour | null,
 			dataHealth: null as DataHealth | null,
 			urlFeeding: baseUrl + '/api/good_feeding?name=', //'http://88395-17112.pph-server.de/api/good_feeding?name=',
-			urlHousing: baseUrl + '/api/good_housing?name=', //http://88395-17112.pph-server.de/api/good_housing?name=',
-			urlBehaviour: baseUrl + '/api/behaviour?name=', //http://88395-17112.pph-server.de/api/behaviour?name=',
-			urlHealth: baseUrl + '/api/good_health?name=', //http://88395-17112.pph-server.de/api/good_health?name=',
+			urlHousing: baseUrl + '/api/good_housing?name=',
+			urlBehaviour: baseUrl + '/api/behaviour?name=',
+			urlHealth: baseUrl + '/api/good_health?name=',
+			numMonths: '3', //default value for view data is 3 months
 		};
 	},
 	components: {
@@ -525,48 +541,63 @@ export default {
 			this.dataBehaviour = null;
 			this.dataHealth = null;
 			if (this.principleSelect === 'Feeding') {
-				console.log(this.urlFeeding + this.dolphinSelect);
+				this.urlFeeding =
+					this.urlFeeding + this.dolphinSelect + '&numMonths=' + this.numMonths; //default value numMonths=3
 				await axios
-					.get(this.urlFeeding + this.dolphinSelect)
+					.get(this.urlFeeding)
 					.then((response) => {
 						this.dataFeeding = response.data;
 						console.log('Response:', response.data);
+						this.urlFeeding = baseUrl + '/api/good_feeding?name='; //reset the url
 					})
 					.catch((e) => {
 						console.error(e);
+						this.urlFeeding = baseUrl + '/api/good_feeding?name='; //reset the url
 					});
 			} else if (this.principleSelect === 'Housing/Environment') {
-				console.log(this.urlHousing + this.dolphinSelect);
+				this.urlHousing =
+					this.urlHousing + this.dolphinSelect + '&numMonths=' + this.numMonths; //default value numMonths=3
 				await axios
-					.get(this.urlHousing + this.dolphinSelect)
+					.get(this.urlHousing)
 					.then((response) => {
 						this.dataHousing = response.data;
 						console.log('Response:', response.data);
+						this.urlHousing = baseUrl + '/api/good_housing?name='; //reset the url
 					})
 					.catch((e) => {
 						console.error(e);
+						this.urlHousing = baseUrl + '/api/good_housing?name='; //reset the url
 					});
 			} else if (this.principleSelect === 'Behaviour') {
-				console.log(this.urlBehaviour + this.dolphinSelect);
+				this.urlBehaviour =
+					this.urlBehaviour +
+					this.dolphinSelect +
+					'&numMonths=' +
+					this.numMonths; //default value numMonths=3
 				await axios
-					.get(this.urlBehaviour + this.dolphinSelect)
+					.get(this.urlBehaviour)
 					.then((response) => {
 						this.dataHousing = response.data;
 						console.log('Response:', response.data);
+						this.urlBehaviour = baseUrl + '/api/behaviour?name='; //reset the url
 					})
 					.catch((e) => {
 						console.error(e);
+						this.urlBehaviour = baseUrl + '/api/behaviour?name='; //reset the url
 					});
 			} else if (this.principleSelect === 'Health') {
-				console.log(this.urlHealth + this.dolphinSelect);
+				this.urlHealth =
+					this.urlHealth + this.dolphinSelect + '&numMonths=' + this.numMonths; //default value numMonths=3
 				await axios
-					.get(this.urlHealth + this.dolphinSelect)
+					.get(this.urlHealth)
 					.then((response) => {
 						this.dataHealth = response.data;
 						console.log('Response:', response.data);
+						this.urlHealth = baseUrl + '/api/good_health?name='; //reset the url
 					})
 					.catch((e) => {
 						console.error(e);
+						this.urlHealth = baseUrl + '/api/good_health?name='; //reset the url
 					});
 			}
 		},
