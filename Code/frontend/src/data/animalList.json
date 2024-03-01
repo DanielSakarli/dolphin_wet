@@ -5,8 +5,11 @@
         "sex": 0,
         "on_site": 1,
         "year_of_birth": "2007",
-        "ref_area_body_condition_score": [13, 18],
-        "ref_area_kcal_calculations": [4200, 4700]
+        "place_of_birth": "Duisburg Zoo",
+        "min_body_condition_score": 13,
+        "max_body_condition_score": 18,
+        "min_kcal_calculations": 4200,
+        "max_kcal_calculations": 4700
     },
     {
         "dolphin_id": 2,
@@ -14,8 +17,11 @@
         "sex": 0,
         "on_site": 1,
         "year_of_birth": "2007",
-        "ref_area_body_condition_score": [15, 19],
-        "ref_area_kcal_calculations": [4600, 4800]
+        "place_of_birth": "Duisburg Zoo",
+        "min_body_condition_score": 15,
+        "max_body_condition_score": 19,
+        "min_kcal_calculations": 4600,
+        "max_kcal_calculations": 4800
     },
     {
         "dolphin_id": 3,
@@ -23,8 +29,11 @@
         "sex": 0,
         "on_site": 1,
         "year_of_birth": "1987",
-        "ref_area_body_condition_score": [13, 16],
-        "ref_area_kcal_calculations": [4200, 4400]
+        "place_of_birth": "Wild Born",
+        "min_body_condition_score": 13,
+        "max_body_condition_score": 16,
+        "min_kcal_calculations": 4200,
+        "max_kcal_calculations": 4400
     },
     {
         "dolphin_id": 4,
@@ -32,8 +41,11 @@
         "sex": 0,
         "on_site": 1,
         "year_of_birth": "2014",
-        "ref_area_body_condition_score": [15, 18],
-        "ref_area_kcal_calculations": [4600, 4800]
+        "place_of_birth": "Nuremburg Zoo",
+        "min_body_condition_score": 15,
+        "max_body_condition_score": 18,
+        "min_kcal_calculations": 4600,
+        "max_kcal_calculations": 4800
     },
     {
         "dolphin_id": 5,
@@ -41,8 +53,11 @@
         "sex": 0,
         "on_site": 1,
         "year_of_birth": "1983",
-        "ref_area_body_condition_score": [18, 20],
-        "ref_area_kcal_calculations": [4800, 5000]
+        "place_of_birth": "Wild Born",
+        "min_body_condition_score": 18,
+        "max_body_condition_score": 20,
+        "min_kcal_calculations": 4800,
+        "max_kcal_calculations": 5000
     },
     {
         "dolphin_id": 6,
@@ -50,8 +65,11 @@
         "sex": 0,
         "on_site": 1,
         "year_of_birth": "1999",
-        "ref_area_body_condition_score": [11, 13],
-        "ref_area_kcal_calculations": [2900, 3000]
+        "place_of_birth": "Heidepark Soltau",
+        "min_body_condition_score": 15,
+        "max_body_condition_score": 18,
+        "min_kcal_calculations": 4600,
+        "max_kcal_calculations": 4800
     },
     {
         "dolphin_id": 7,
@@ -59,7 +77,10 @@
         "sex": 0,
         "on_site": 1,
         "year_of_birth": "2011",
-        "ref_area_body_condition_score": [15, 17],
-        "ref_area_kcal_calculations": [3200, 3900]
+        "place_of_birth": "Duisburg Zoo",
+        "min_body_condition_score": 15,
+        "max_body_condition_score": 17,
+        "min_kcal_calculations": 3200,
+        "max_kcal_calculations": 3900
     }
 ]

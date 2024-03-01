@@ -62,6 +62,10 @@ class DolphinDAO {
 	 * @param {Integer}	dolphin.on_site	Whether the dolphin is on site, 1 stands for yes, 0 for no
 	 * @param {Integer} dolphin.year_of_birth	The birth year of dolphin
 	 * @param {String}	dolphin.place_of_birth	The birth place of dolphin
+	 * @param {Integer}	dolphin.min_body_condition_score The minimum body condition score of dolphin
+	 * @param {Integer}	dolphin.max_body_condition_score The maximum body condition score of dolphin
+	 * @param {Integer}	dolphin.min_kcal_calculations The minimum kcal calculations of dolphin
+	 * @param {Integer}	dolphin.max_kcal_calculations The maximum kcal calculations of dolphin
 	 * @returns {Promise<Object>} Inserted dolphin object
 	 */
 	async createDolphin(dolphin) {

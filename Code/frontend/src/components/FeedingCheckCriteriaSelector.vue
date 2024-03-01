@@ -179,26 +179,44 @@
 					<!--Here are the values of reference area-->
 					<h3>Body Condition Score:</h3>
 					<div v-if="dolphinSelect">
-						{{ 
+						<p>
+						  Minimum: 
+						  {{ 
 							(dolphinsStore.dolphinList.find(
-								(dolphin) => dolphin.name === dolphinSelect
-							  )?.ref_area_body_condition_score) ?? null
-						}}
-					</div>
-					<!--
-						This here shows the first dolphin's ref_area_body_condition_score
-						{{dolphinsStore.dolphinList[0].ref_area_body_condition_score}}
-					-->
+							  (dolphin) => dolphin.name === dolphinSelect
+							)?.min_body_condition_score) ?? null
+						  }}
+						</p>
+						<p>
+						  Maximum: 
+						  {{ 
+							(dolphinsStore.dolphinList.find(
+							  (dolphin) => dolphin.name === dolphinSelect
+							)?.max_body_condition_score) ?? null
+						  }}
+						</p>
+					  </div>
 				</p>
 				<p v-if=" criteria === 'secondCriteriaFeeding'">
 					<!--Here are the values of reference area-->
 					<h3>Kcal calculations</h3>
 					<div v-if="dolphinSelect">
-						{{ 
+						<p>
+							Minimum: 
+						  {{ 
 							(dolphinsStore.dolphinList.find(
-								(dolphin) => dolphin.name === dolphinSelect
-							  )?.ref_area_kcal_calculations) ?? null
-						}}
+							  (dolphin) => dolphin.name === dolphinSelect
+							)?.min_kcal_calculations) ?? null
+						  }}
+						</p>
+						<p>
+						  Maximum: 
+						  {{ 
+							(dolphinsStore.dolphinList.find(
+							  (dolphin) => dolphin.name === dolphinSelect
+							)?.max_kcal_calculations) ?? null
+						  }}
+						</p>
 					</div>
 				</p>
 			</ion-content>
@@ -338,6 +356,12 @@ export default {
 		IonItem, IonList, IonSelect, IonSelectOption, IonLabel, IonModal, IonHeader,
 		IonToolbar, IonContent, IonTitle, IonButtons, IonButton, IonText, IonCheckbox,
 		IonInput, IonRange, IonCard, IonCardTitle, CheckComments, IonFooter, IonIcon, 
+	},
+	async mounted()  {
+		// This makes sure that the reference areas are updated while the component is
+		// mounted. But only if there is internet connectivity. If not, the displayed
+		// reference areas are the ones from the animalList.json
+   		await dolphinsStore.fill();
 	},
 	/*props: {
 		userComment: {

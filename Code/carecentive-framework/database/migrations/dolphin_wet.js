@@ -2,6 +2,7 @@
  * Migration file of Dolphin Wet
  */
 
+
 exports.up = function (knex) {
 	return Promise.all([
 		// Dolphins table
@@ -12,6 +13,12 @@ exports.up = function (knex) {
 			table.boolean('on_site'); //1: yes, 0: no
 			table.smallint('year_of_birth').unsigned();
 			table.string('place_of_birth');
+			
+			// Reference areas for the dolphins
+			table.tinyint('min_body_condition_score').unsigned();
+			table.tinyint('max_body_condition_score').unsigned();
+			table.tinyint('min_kcal_calculations').unsigned();
+			table.tinyint('max_kcal_calculations').unsigned();
 
 			table.timestamps(false, true); //Timestamp: created at, updated at
 		}),

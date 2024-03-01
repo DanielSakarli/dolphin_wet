@@ -7,6 +7,7 @@ const {
  */
 const isUserAuth = false;
 
+
 /**
  * Wraps the authenticateToken middleware provided by carecentive with a isUserAuth parameter.
  * So that I can control whether do user auth in this middleware.
@@ -15,6 +16,7 @@ const isUserAuth = false;
  * @param {*} next
  */
 function authenticateTokenWithSwitch(req, res, next) {
+	console.log('This is the cookie in our authenticateTokenWithSwitch() method: ', req.cookies);
 	if (isUserAuth) {
 		authenticateToken(req, res, next);
 	} else {

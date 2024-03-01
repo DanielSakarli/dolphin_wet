@@ -65,6 +65,7 @@ class DolphinService {
 	 * @param {Integer}	dolphin.on_site	Whether the dolphin is on site, 1 stands for yes, 0 for no
 	 * @param {Integer} dolphin.year_of_birth	The birth year of dolphin
 	 * @param {String}	dolphin.place_of_birth	The birth place of dolphin
+	 * @param {Array}	dolphin.ref_area_body_condition_score  The body condition score of dolphin
 	 * @returns {Promise<Object>} Inserted dolphin object
 	 */
 	static async createDolphin(dolphin) {

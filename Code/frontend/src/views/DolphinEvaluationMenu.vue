@@ -43,7 +43,9 @@
 								></ion-input>
 							</ion-item>
 						</ion-list>
-						<ion-button expand="full" type="submit">Save Changes</ion-button>
+						<ion-button expand="full" type="submit" @click="submitEdit">
+							Save Changes
+						</ion-button>
 					</form>
 				</ion-content>
 			</ion-modal>
@@ -66,6 +68,22 @@
 					<ion-label>Place of Birth:</ion-label>
 					<ion-text>{{ currentDolphin.place_of_birth }}</ion-text>
 				</ion-item>
+				<ion-item>
+					<ion-label>Minimum Body Condition Score:</ion-label>
+					<ion-text>{{ currentDolphin.min_body_condition_score }}</ion-text>
+				</ion-item>
+				<ion-item>
+					<ion-label>Maximum Body Condition Score:</ion-label>
+					<ion-text>{{ currentDolphin.max_body_condition_score }}</ion-text>
+				</ion-item>
+				<ion-item>
+					<ion-label>Minimum Kcal Calculations:</ion-label>
+					<ion-text>{{ currentDolphin.min_kcal_calculations }}</ion-text>
+				</ion-item>
+				<ion-item>
+					<ion-label>Maximum Kcal Calculations:</ion-label>
+					<ion-text>{{ currentDolphin.max_kcal_calculations }}</ion-text>
+				</ion-item>
 				<ion-button @click="openEditModal">Edit</ion-button>
 			</ion-card>
 		</ion-content>
@@ -78,6 +96,7 @@
 					</ion-button>
 				</ion-buttons>
 				<ion-buttons slot="end">
+					<ion-button @click="reloadDolphins">Reload Data</ion-button>
 					<ion-button @click="openAddModal">Add</ion-button>
 					<ion-button @click="nextDolphin" :disabled="!nextDolphinAvailable">
 						Next
@@ -138,6 +157,9 @@ import { ref, computed, onMounted } from 'vue';
 import axios from 'axios';
 import { useRouter } from 'vue-router';
 import { baseUrl } from '@/utils/baseUrl';
+import { useDolphinsStore } from '@/store/dolphinsStore';
+
+const dolphinsStore = useDolphinsStore();
 
 interface Dolphin {
 	dolphin_id: number;
@@ -146,6 +168,10 @@ interface Dolphin {
 	on_site: number;
 	year_of_birth: number;
 	place_of_birth: string;
+	min_body_condition_score: number;
+	max_body_condition_score: number;
+	min_kcal_calculations: number;
+	max_kcal_calculations: number;
 	created_at: string;
 	updated_at: string;
 }
@@ -175,6 +201,46 @@ export default {
 			this.$i18n.locale = $event.detail.value;
 		},
 	},
+	data() {
+		return {
+			currentDolphinValues: {
+				dolphin_id: null,
+				name: '',
+				sex: null,
+				on_site: null,
+				year_of_birth: null,
+				place_of_birth: '',
+				min_body_condition_score: null,
+				max_body_condition_score: null,
+				min_kcal_calculations: null,
+				max_kcal_calculations: null,
+			},
+			/*currentDolphin: {
+				dolphin_id: null,
+				name: '',
+				sex: null,
+				on_site: null,
+				year_of_birth: null,
+				place_of_birth: '',
+				min_body_condition_score: null,
+				max_body_condition_score: null,
+				min_kcal_calculations: null,
+				max_kcal_calculations: null,
+			},*/
+			/*dolphins: {
+				dolphin_id: null,
+				name: '',
+				sex: null,
+				on_site: null,
+				year_of_birth: null,
+				place_of_birth: '',
+				min_body_condition_score: null,
+				max_body_condition_score: null,
+				min_kcal_calculations: null,
+				max_kcal_calculations: null,
+			},*/
+		};
+	},
 	setup() {
 		const dolphins = ref<Dolphin[]>([]);
 		const currentDolphin = ref<Dolphin | null>(null);
@@ -182,6 +248,10 @@ export default {
 		const errorMessage = ref<string | null>(null);
 		const editModalOpen = ref<boolean>(false);
 		const currentDolphinValues = ref<Dolphin | null>(null);
+
+		// For editing the dolphin
+		// const dolphinValues = dolphinsStore.dolphinList;
+
 		const isLoading = ref<boolean>(false);
 		const router = useRouter();
 
@@ -256,7 +326,6 @@ export default {
 		const prevDolphinAvailable = computed(
 			() => currentDolphinIndex.value !== null && currentDolphinIndex.value > 0
 		);
-
 		// Open the edit modal
 		const openEditModal = () => {
 			editModalOpen.value = true;
@@ -270,22 +339,55 @@ export default {
 		// Submit edited dolphin values
 		const submitEdit = async (event: Event) => {
 			event.preventDefault();
+
 			if (currentDolphinValues.value) {
-				try {
-					await axios.put(
-						`/api/dolphins/${currentDolphinValues.value.dolphin_id}`,
-						currentDolphinValues.value
-					);
+				console.log('Current values: ', currentDolphinValues.value);
+			}
+			let dolphinCopy = {
+				...dolphinsStore.dolphinList.find(
+					(dolphin) => dolphin.name === currentDolphinValues.value?.name
+				),
+			}; // Copies data so I can remove the id later on
+			dolphinCopy = {
+				name: currentDolphinValues.value?.name,
+				sex: currentDolphinValues.value?.sex,
+				on_site: currentDolphinValues.value?.on_site,
+				year_of_birth: currentDolphinValues.value?.year_of_birth.toString(),
+				place_of_birth: currentDolphinValues.value?.place_of_birth.toString(),
+				min_body_condition_score:
+					currentDolphinValues.value?.min_body_condition_score,
+				max_body_condition_score:
+					currentDolphinValues.value?.max_body_condition_score,
+				min_kcal_calculations:
+					currentDolphinValues.value?.min_kcal_calculations,
+				max_kcal_calculations:
+					currentDolphinValues.value?.max_kcal_calculations,
+			};
+
+			if (dolphinCopy?.dolphin_id) {
+				delete dolphinCopy.dolphin_id;
+			} //delete dolphin_id since it is not allowed to be changed or be in the request body during a patch request
+			console.log('This is sent to backend: ', dolphinCopy);
+			const urlPatch =
+				baseUrl + `/api/dolphins/${currentDolphinValues.value.name}`;
+			await axios
+				.patch(urlPatch, dolphinCopy)
+				.then((response) => {
+					console.log('Response:', response.data);
 					closeEditModal();
 					fetchDolphins();
-				} catch (error) {
-					errorMessage.value = 'Error editing dolphin.';
-				}
-			}
+				})
+				.catch((error) => {
+					console.error('Error:', error.response.data);
+				});
 		};
 		//Adding a new dolphin
 		const addModalOpen = ref<boolean>(false);
 		const newDolphin = ref<Dolphin | null>(null);
+
+		const reloadDolphins = () => {
+			fetchDolphins();
+		};
 
 		const openAddModal = () => {
 			addModalOpen.value = true;
@@ -296,6 +398,10 @@ export default {
 				on_site: 0,
 				year_of_birth: new Date().getFullYear(),
 				place_of_birth: '',
+				min_body_condition_score: 0,
+				max_body_condition_score: 0,
+				min_kcal_calculations: 0,
+				max_kcal_calculations: 0,
 				created_at: '',
 				updated_at: '',
 			};
@@ -309,10 +415,7 @@ export default {
 			event.preventDefault();
 			if (newDolphin.value) {
 				try {
-					await axios.post(
-						baseUrl + '/api/dolphins', //`http://88395-17112.pph-server.de/api/dolphins`,
-						newDolphin.value
-					);
+					await axios.post(baseUrl + '/api/dolphins', newDolphin.value);
 					closeAddModal();
 					fetchDolphins();
 				} catch (error) {
@@ -335,6 +438,7 @@ export default {
 			currentDolphinValues,
 			submitEdit,
 			editModalOpen,
+			reloadDolphins,
 			openAddModal,
 			closeAddModal,
 			addModalOpen,

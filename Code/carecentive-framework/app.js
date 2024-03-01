@@ -11,6 +11,7 @@ setup.setup();
 const dotenv = require('dotenv');
 dotenv.config();
 
+
 /**
  * Carecentive-core routers
  */
@@ -61,6 +62,35 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+
+
+
+// Trying to update db with new data for dolphins reference area
+/* app.post('/update', (req, res) => {
+	const { dolphin_name, sex } = req.body;
+		exports.up = function (knex) {
+			return Promise.all([
+		knex('dolphins')
+		  .where('name', dolphin_name)
+		  .update(sex)
+		  .then(() => res.send('Update successful'))
+		  .catch((e) => {
+			console.error(e);
+			res.status(500).send('An error occurred');
+
+		  })
+		]);
+	  }
+	  
+	exports.down = function (knex) {
+		return Promise.all([
+			knex.schema.dropTable('dolphins'),
+		]);
+	};
+	}
+); */
+	
+
 /**
  * Set up cors policy //https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS
  * By default, the cors middleware will allow requests from all origins (*).
@@ -107,6 +137,8 @@ app.use('/api/examples', exampleRouter);
 // app.use('*', (req, res) =>
 // 	res.sendFile(path.join(__dirname, 'public', 'index.html'))
 // );
+
+
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
