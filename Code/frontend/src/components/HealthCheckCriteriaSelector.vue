@@ -415,6 +415,9 @@
 					<ion-checkbox v-model="CheckboxArray[3][2]" @click="handleClick(3,2)">Score 3</ion-checkbox>
 				</ion-item>
 				<CheckComments @update-comment="updateMouthExamComments"/>
+				<ion-item>
+				<PhotoUpload/>
+				</ion-item>
 			</ion-list>
 		</ion-card>
 		<ion-card v-if=" criteria === 'fourthCriteriaHealth'">
@@ -467,10 +470,11 @@
 		</ion-card>
 	</ion-content>
 	<!-- End of Checkboxes-->
+
 	<!--Start of photo section-->
 	<!--<ion-item v-if=" SubCriteria === 'thirdSubCriteriaHealth' || SubCriteria === 'sixthSubCriteriaHealth' || SubCriteria ==='twelfthSubCriteriaHealth'">
 		<ion-thumbnail slot="start">
-			<img :src = "previewImageUrl" />
+			<img :src="previewImageUrl" />
 		</ion-thumbnail>
 		<ion-button type="button" fill="clear" @click="takePhoto">
 			<ion-icon slot="start" :icon="camera"></ion-icon>
@@ -478,6 +482,7 @@
 		</ion-button>
 	</ion-item>-->
 	<!--End of photo section-->
+
 	<ion-footer>
 			<ion-toolbar>
 				<ion-button color="light" slot="start"  @click="storeData">
@@ -496,6 +501,7 @@ import {camera} from 'ionicons/icons';
 import {Camera, CameraResultType, CameraSource} from '@capacitor/camera';
 import axios from 'axios';
 import CheckComments from '@/components/CheckComments.vue';
+import PhotoUpload from '@/components/PhotoUpload.vue';
 import { useDolphinsStore }from '@/store/dolphinsStore';
 import { useEvaluationHealthStore }from '@/store/evaluationHealthStore';
 import { baseUrl } from '@/utils/baseUrl';
@@ -515,7 +521,7 @@ export default {
 	components: {
 		IonItem, IonList, IonSelect, IonSelectOption, IonFooter,
 		IonLabel, IonModal, IonHeader, IonToolbar, IonContent,
-		IonTitle, IonButtons, IonButton, IonText, CheckComments,
+		IonTitle, IonButtons, IonButton, IonText, CheckComments, PhotoUpload,
 		IonThumbnail, IonIcon, IonCheckbox, IonCard, IonCardTitle
 	},
 	data() {

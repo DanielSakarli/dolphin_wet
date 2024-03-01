@@ -38,7 +38,8 @@ const good_feeding = require('./routes/good_feeding');
 const good_health = require('./routes/good_health');
 const good_housing = require('./routes/good_housing');
 const behaviour = require('./routes/behabvior');
-const photo = require('./routes/photoUpload');
+//const photo = require('./routes/photoUpload');
+const uploadPhoto = require('./photoUpload');
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -51,6 +52,7 @@ app.set('view engine', 'ejs'); // https://ejs.co/
 require('@carecentive/carecentive-core/models/ORM');
 // set up development database.
 const setupDevDb = require('./db-setup');
+const { error } = require('console');
 setupDevDb();
 
 /**
@@ -126,7 +128,46 @@ app.use('/api/good_feeding', good_feeding);
 app.use('/api/good_health', good_health);
 app.use('/api/good_housing', good_housing);
 app.use('/api/behaviour', behaviour);
-app.use('/api/photo', photo);
+//app.use('/api/photo', photo);
+app.post('/api/photo', uploadPhoto);
+
+
+//////////////////////////////////////////////////
+// Test Photo Upload
+/*
+const multer = require('multer');
+// set storage engine
+const storage = multer.diskStorage({
+	destination: (req, file, cb) => {
+		cb(null, './uploads/')
+	},
+	filename: (req, file, cb) => {
+		console.log(file.originalname);
+		const { test_date, test_name } = req.body;
+		const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1e9);
+		console.log(req.body.test_date);
+		cb(
+			null, // currently no error handling
+			`${test_date}%${test_name}%${uniqueSuffix}${path.extname(
+				file.originalname
+			)}`
+		);
+	},
+});
+
+// init upload
+const upload = multer({
+	storage: storage
+	// set the size limit of picture
+	// limits: { fileSize: 10000000 },
+});
+
+/*
+app.post('/api/photo', upload.single("file"), (req, res) => {
+	res.send('File uploaded at: ' + req.file.path); //Access the file with req.file
+});*/
+///////////////////////////////////////////////////
+
 
 /**
  * Custom routes
