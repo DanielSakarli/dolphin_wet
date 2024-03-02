@@ -1,6 +1,8 @@
 var setup = require('./source/setup');
 var createError = require('http-errors');
-var express = require('express');
+const express = require('express');
+const session = require('express-session');
+const store = new session.MemoryStore();
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var httplogger = require('morgan');
@@ -30,6 +32,15 @@ var exampleRouter = require('./routes/examples');
 
 var app = express();
 
+// Try setting up a session storage for the photo path of the picture upload
+app.use(session({
+	secret: 'secret',
+  	cookie: { maxAge: 1800000000 }, //300 minutes = 6 hours expiring of session cookie
+	saveUninitialized: true,
+	store: store,
+	resave: true
+}));
+
 /**
  * Dolphin Wet Routers
  */
@@ -38,8 +49,9 @@ const good_feeding = require('./routes/good_feeding');
 const good_health = require('./routes/good_health');
 const good_housing = require('./routes/good_housing');
 const behaviour = require('./routes/behabvior');
-//const photo = require('./routes/photoUpload');
+//const photoPath = require('./routes/photoPath');
 const uploadPhoto = require('./photoUpload');
+const uploadPhotoPath = require('./photoUpload');
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -128,9 +140,9 @@ app.use('/api/good_feeding', good_feeding);
 app.use('/api/good_health', good_health);
 app.use('/api/good_housing', good_housing);
 app.use('/api/behaviour', behaviour);
-//app.use('/api/photo', photo);
 app.post('/api/photo', uploadPhoto);
-
+app.use('/api/photo', uploadPhotoPath);
+//app.use('/api/photo', photoPath);
 
 //////////////////////////////////////////////////
 // Test Photo Upload
@@ -166,6 +178,21 @@ const upload = multer({
 app.post('/api/photo', upload.single("file"), (req, res) => {
 	res.send('File uploaded at: ' + req.file.path); //Access the file with req.file
 });*/
+///////////////////////////////////////////////////
+
+
+///////////////////////////////////////////////////
+// Session storage
+app.post('/api/photoPath', (req, res) => {
+	const photo_path = req.body;
+	req.session.photo_path = photo_path;
+	res.json(req.session);
+});
+
+app.get('/api/photoPath', (req, res) => {
+	// Responds with all the session storage
+	res.json(req.session);
+  });
 ///////////////////////////////////////////////////
 
 

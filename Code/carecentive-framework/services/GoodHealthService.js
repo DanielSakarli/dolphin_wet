@@ -26,6 +26,8 @@ class GoodHealthService {
 	 * @param {String} result.force_expiration_comments
 	 * @param {String} result.gastric_abnormality_comments
 	 * @param {String} result.external_disease_signs_comments
+	 * @param {String} result.eye_photo_path
+	 * @param {String} result.teeth_photo_path
 	 * @returns {Object} The inserted test data
 	 */
 	static async loadTestResult(result) {
@@ -86,6 +88,8 @@ class GoodHealthService {
 					'force_expiration_comments',
 					'external_disease_signs',
 					'external_disease_signs_comments',
+					'eye_photo_path',
+					'teeth_photo_path',
 					'created_at',
 					'updated_at'
 				)

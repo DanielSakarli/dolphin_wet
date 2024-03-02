@@ -1,4 +1,4 @@
-const DolphinDAO = require('../dao/dolphinDao');
+/*const DolphinDAO = require('../dao/dolphinDao');
 const { DolphinError } = require('../source/Errors');
 const Photo = require('../models/Photo');
 const { getLastNMonths } = require('../source/CustomSource');
@@ -14,7 +14,7 @@ class PhotoService {
      * @param {String} result.teeth_photo_path The path of teeth photo
 	 * @returns {Object} The inserted test data
 	 */
-	static async loadTestResult(result) {
+	/*static async loadTestResult(result) {
 		try {
 			// Get the id of current dolphin by name
 			const myDolphinDao = new DolphinDAO();
@@ -48,7 +48,7 @@ class PhotoService {
 	 * @param {number} month - Month
 	 * @returns {Promise<Array>} list of query result
 	 */
-	static async getTestResultByDolphinAndMonth(name, year, month) {
+	/*static async getTestResultByDolphinAndMonth(name, year, month) {
 		try {
 			const result = await Photo.query()
 				.select(
@@ -80,7 +80,7 @@ class PhotoService {
 	 * @param {number} numMonths - The number of past months to include in the result.
 	 * @returns {Promise<Array>} list of query result
 	 */
-	static async getTestResultNMonths(name, numMonths = 3) {
+	/*static async getTestResultNMonths(name, numMonths = 3) {
 		const myDolphinDAO = new DolphinDAO();
 
 		// if this dolphin is not in database,
@@ -121,4 +121,4 @@ class PhotoService {
 	}
 }
 
-module.exports = PhotoService;
+module.exports = PhotoService;*/

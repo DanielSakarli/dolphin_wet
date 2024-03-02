@@ -1,6 +1,6 @@
-const { Model } = require('objection');
+//const { Model } = require('objection');
 
-class Photo extends Model {
+/*class Photo extends Model {
 	static get tableName() {
 		return 'good_health'; //Here the photo paths are saved
 	}
@@ -11,4 +11,4 @@ class Photo extends Model {
 
 }
 
-module.exports = Photo;
+module.exports = Photo;*/

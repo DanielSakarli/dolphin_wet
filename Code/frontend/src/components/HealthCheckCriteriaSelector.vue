@@ -673,9 +673,76 @@ export default {
 								this.$router.push(targetUrl);
 							});
 				}
+				////////////////////////////////////////////////////////////////
+				// TEST for the photo upload: Can a single button click call two
+				// different axios calls with different api routes and different
+				// req.headers?
+				// call function submitForm which handles the photo upload
+				//submitForm();
 			}
 		},
-		confirmRefresh() {
+		
+/*
+	submitForm(e, test_date, test_name) {
+		// prevents the default behavior of the browser, which is to perform a full page reload.
+		// I have no idea wether you need this in ionic.
+		e.preventDefault();
+
+		// gets the form input html element.
+		const files = document.getElementById('files');
+
+		// !!! The code above is needed for plain HTML and JS,
+		// Maybe in Ionic you can also do it but I'm not sure...
+		// Please use corresponding methods in Ionic.
+
+		// create a new FormData object, you can learn more here
+		// https://developer.mozilla.org/en-US/docs/Web/API/FormData/FormData
+		const formData = new FormData();
+
+		// in case of multiple photos, use a loop here to add all photos.
+		// files.files: first files is the html element,
+		// second files is the name for that html element
+		// The html element is like:
+		// <input id="files" name="files" type="file" multiple />
+		for (let i = 0; i < files.files.length; i++) {
+			formData.append('files', files.files[i]);
+		}
+
+		// Give test_date and test_name for this picture!
+		formData.append('test_date', test_date);
+		formData.append('test_name', test_name);
+
+		axios
+			.post(baseUrl + '/api/photo', formData, {
+				headers: {
+					// !!! The content-type must be multipart/form-date
+					// otherwise errors arise
+					'Content-Type': 'multipart/form-data',
+				},
+			})
+			.then((response) => {
+				console.log(response);
+				if (response.status === 201) {
+					// do something after uploading successfully
+					console.log('success!');
+				}
+			})
+			.catch((error) => {
+				// error handling here
+				console.log(error);
+			});
+	},*/
+
+//	
+// End of TEST for photo upload
+////////////////////////////////////////////////////////////////////////
+
+
+
+
+
+
+	confirmRefresh() {
 			const confirmed = confirm(this.$t('savingDataNext'));
      		if (confirmed) {
 				this.storeCheckedValues();

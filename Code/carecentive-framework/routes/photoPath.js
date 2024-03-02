@@ -1,4 +1,4 @@
-const express = require('express');
+/*const express = require('express');
 const router = express.Router();
 /*const {
 	photoPostValidateRequestBody,
@@ -8,16 +8,16 @@ const router = express.Router();
 /**
  * Controllers
  */
-const { handlePhotoUpload } = require('../controllers/photoUpload');
+/*const { handlePhotoPath } = require('../controllers/photoPath');
 
 /**
  * Loads photos
  */
-router.post(
+/*router.post(
 	'/',
 	//authenticateTokenWithSwitch,
 	//photoPostValidateRequestBody, //Commented out to allow for testing
-	handlePhotoUpload
+	handlePhotoPath
 );
 
-module.exports = router;
+module.exports = router;*/

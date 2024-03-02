@@ -5,7 +5,7 @@ const {
 /**
  * This file contains a flag of whether applying user auth to all controllers.
  */
-const isUserAuth = false;
+const isUserAuth = true;
 
 
 /**

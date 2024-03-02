@@ -183,6 +183,8 @@ const goodHealthPostValidateRequestBody = [
 			'force_expiration_comments',
 			'gastric_abnormality_comments',
 			'external_disease_signs_comments',
+			'eye_photo_path',
+			'teeth_photo_path',
 		];
 		const keys = Object.keys(value);
 
@@ -272,6 +274,14 @@ const goodHealthPostValidateRequestBody = [
 		.optional({ values: 'null' })
 		.isString()
 		.withMessage('Invalid comments for external disease signs'),
+	body('eye_photo_path')
+		.optional({ values: 'null' })
+		.isString()
+		.withMessage('Invalid eye photo path'),
+	body('teeth_photo_path')
+		.optional({ values: 'null' })
+		.isString()
+		.withMessage('Invalid teeth photo path'),
 ];
 /**
  * End of Good health validation rules.
