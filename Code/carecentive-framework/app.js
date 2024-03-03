@@ -41,17 +41,7 @@ app.use(session({
 	resave: true
 }));
 
-/**
- * Dolphin Wet Routers
- */
-const dolphins = require('./routes/dolphins');
-const good_feeding = require('./routes/good_feeding');
-const good_health = require('./routes/good_health');
-const good_housing = require('./routes/good_housing');
-const behaviour = require('./routes/behabvior');
-//const photoPath = require('./routes/photoPath');
-const uploadPhoto = require('./photoUpload');
-//const uploadPhotoPath = require('./photoUpload');
+
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -76,6 +66,46 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+
+
+
+
+///////////////////////////////////////////////////
+// Session storage
+app.post('/api/good_health', (req, res, next) => {
+	try {
+		const { eye_photo_path, teeth_photo_path } = req.body;
+		req.session.photo_path = {
+		eye_photo_path,
+		teeth_photo_path
+		};
+		console.log('App.post Photo_path in session storage')
+		next();
+	} catch(e) {
+		console.log('Error occured while setting photo_path in session storage');
+		next();
+	}
+	//res.json(req.session);
+});
+/*app.get('/api/photoPath', (req, res) => {
+	// Responds with all the session storage
+	res.json(req.session);
+  });*/
+///////////////////////////////////////////////////
+
+
+
+/**
+ * Dolphin Wet Routers
+ */
+const dolphins = require('./routes/dolphins');
+const good_feeding = require('./routes/good_feeding');
+const good_health = require('./routes/good_health');
+const good_housing = require('./routes/good_housing');
+const behaviour = require('./routes/behabvior');
+//const photoPath = require('./routes/photoPath');
+const uploadPhoto = require('./photoUpload');
+//const uploadPhotoPath = require('./photoUpload');
 
 
 
@@ -181,26 +211,6 @@ app.post('/api/photo', upload.single("file"), (req, res) => {
 ///////////////////////////////////////////////////
 
 
-///////////////////////////////////////////////////
-// Session storage
-app.post('/api/good_health', (req, res) => {
-	try {
-		const { eye_photo_path, teeth_photo_path } = req.body;
-		req.session.photo_path = {
-		eye_photo_path,
-		teeth_photo_path
-		};
-		console.log('Photo_path in session storage')
-	} catch(e) {
-		console.log('Error occured while setting photo_path in session storage');
-	}
-	//res.json(req.session);
-});
-/*app.get('/api/photoPath', (req, res) => {
-	// Responds with all the session storage
-	res.json(req.session);
-  });*/
-///////////////////////////////////////////////////
 
 
 /**
