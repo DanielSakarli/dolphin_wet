@@ -29,12 +29,17 @@ async function setResult(req, res, next) {
 		test_result = { user_id, ...test_result };
 
 		///////////////////////////////////////////////////////////////////////////
-		// insert the photo paths into the session storage
+		// Insert the photo paths into the session storage
 		console.log(test_result);
 		if(test_result.eye_photo_path)
 			{
 			console.log('eye_photo_path: ' + test_result.eye_photo_path);
-			req.session.photo_path.eye_photo_path = test_result.eye_photo_path.toString();
+			let eyePhotoPaths = test_result.eye_photo_path.split(',');
+			
+			console.log('eyePhotoPaths: ' + eyePhotoPaths[0]);
+			req.session.photo_path.eye_photo_path = eyePhotoPaths;
+
+			//req.session.photo_path.eye_photo_path = test_result.eye_photo_path.toString();
 			console.log('App.use Photo_path in session storage: ' + req.session.photo_path.eye_photo_path.toString());
 			}
 		if(test_result.teeth_photo_path)
