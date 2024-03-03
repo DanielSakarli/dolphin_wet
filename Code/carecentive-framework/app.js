@@ -67,32 +67,6 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 
-
-
-
-///////////////////////////////////////////////////
-// Session storage
-app.post('/api/good_health', (req, res, next) => {
-	try {
-		const { eye_photo_path, teeth_photo_path } = req.body;
-		req.session.photo_path = {
-		eye_photo_path,
-		teeth_photo_path
-		};
-		console.log('App.post Photo_path in session storage')
-		next();
-	} catch(e) {
-		console.log('Error occured while setting photo_path in session storage');
-		next();
-	}
-	//res.json(req.session);
-});
-/*app.get('/api/photoPath', (req, res) => {
-	// Responds with all the session storage
-	res.json(req.session);
-  });*/
-///////////////////////////////////////////////////
-
 /**
  * Dolphin Wet Routers
  */
@@ -209,6 +183,30 @@ app.post('/api/photo', upload.single("file"), (req, res) => {
 ///////////////////////////////////////////////////
 
 
+
+///////////////////////////////////////////////////
+// Session storage
+app.post('/api/setup_session_storage', (req, res, next) => {
+	try {
+		const { photo_type, eye_photo_path, teeth_photo_path, dolphin_name } = req.body;
+		req.session.photo_type = photo_type; // Either 'eye' or 'teeth'
+		req.session.dolphin_name = dolphin_name;
+		req.session.photo_path = {
+			eye_photo_path,
+			teeth_photo_path
+		};
+		console.log('Session storage initialized')
+		res.sendStatus(201);
+	} catch(e) {
+		console.log('Error occured while initializing session storage');
+		res.sendStatus(500);
+	}
+});
+/*app.get('/api/photoPath', (req, res) => {
+	// Responds with all the session storage
+	res.json(req.session);
+  });*/
+///////////////////////////////////////////////////
 
 
 /**

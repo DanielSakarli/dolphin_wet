@@ -29,21 +29,19 @@ async function setResult(req, res, next) {
 		test_result = { user_id, ...test_result };
 
 		///////////////////////////////////////////////////////////////////////////
-		// Insert the photo paths into the session storage
+		// Get the photo paths from the session storage
 		// Reset the photo_path in session storage, so no duplicate photo paths
-		req.session.photo_path = {};
-		console.log('App.use Photo_path in session storage: ' + req.session.photo_path);
-		if(test_result.eye_photo_path)
+		//req.session.photo_path = {};
+		//console.log('App.use Photo_path in session storage: ' + req.session.photo_path);
+		if(req.session.photo_path.eye_photo_path != '')
 			{
-			let eyePhotoPaths = test_result.eye_photo_path.split(',');
-			req.session.photo_path.eye_photo_path = eyePhotoPaths;
-			console.log('App.use Photo_path in session storage: ' + req.session.photo_path.eye_photo_path.toString());
+			test_result.eye_photo_path = req.session.photo_path.eye_photo_path;
+			console.log(test_result.eye_photo_path.toString());
 			}
-		if(test_result.teeth_photo_path)
+		if(req.session.photo_path.teeth_photo_path != '')
 			{
-			let teethPhotoPaths = test_result.teeth_photo_path.split(',');
-			req.session.photo_path.teeth_photo_path = teethPhotoPaths;
-			console.log('App.use Photo_path in session storage: ' + req.session.photo_path.teeth_photo_path.toString());
+			test_result.teeth_photo_path = req.session.photo_path.teeth_photo_path;
+			console.log(test_result.teeth_photo_path.toString());
 			}
 		///////////////////////////////////////////////////////////////////////////
 		

@@ -1,19 +1,16 @@
 <template>
 	<ion-content>
 		<div class="container">
-			<h1>File Upload</h1>
+			<h2>File Upload</h2>
 			<form id="form">
 				<div class="input-group">
-					<label for="filename">Filename</label>
-					<input name="filename" id="filename" placeholder="Enter your name" />
-				</div>
-				<div class="input-group">
-					<label for="file">Select file</label>
+					<label for="files">Select file(s)</label>
 					<input
-						id="file"
-						name="file"
+						id="files"
+						name="files"
 						type="file"
-						v-on:change="(e: Event) => submitForm(e as SubmitEvent)"
+						multiple
+						v-on:change="submitForm"
 					/>
 				</div>
 				<!--<button class="submit-btn" type="submit">Upload</button>-->
@@ -49,12 +46,10 @@ export default defineComponent({
 			const form = document.getElementById('form');
 
 			if (form) {
-				// gets the form input html element.
-				const file = document.getElementById('file');
-
-				// !!! The code above is needed for plain HTML and JS,
-				// Maybe in Ionic you can also do it but I'm not sure...
-				// Please use corresponding methods in Ionic.
+				console.log('submitForm in photoUpload.vue');
+				// get the files from the input form
+				const filesInput = document.getElementById('files');
+				const files = filesInput.files;
 
 				// create a new FormData object, you can learn more here
 				// https://developer.mozilla.org/en-US/docs/Web/API/FormData/FormData
@@ -65,13 +60,35 @@ export default defineComponent({
 				// second file is the name for that html element
 				// The html element is like:
 				// <input id="file" name="file" type="file" multiple />
-				if (file) {
-					for (let i = 0; i < (file as HTMLInputElement).files.length; i++) {
-						formData.append('files', (file as HTMLInputElement).files[i]);
+				if (files) {
+					console.log('Number of pictures: ' + files.length);
+
+					for (let i = 0; i < files.length; i++) {
+						console.log(files[i]);
+						formData.append('files', files[i], files[i].name.toString());
 					}
+					for (let [key, value] of formData.entries()) {
+						console.log(key, value);
+					}
+					//console.log('access second picture: ' + formData.get('files', files[1].file));
 				}
-				console.log(formData);
-				console.log(file);
+
+				/*
+				if (files) {
+					console.log(
+						'Number of pictures: ' + (files as HTMLInputElement).files.length
+					);
+					formData.append('files', (files as HTMLInputElement).files);
+					console.log(formData.get('files'));
+
+					//for (let i = 0; i < (files as HTMLInputElement).files.length; i++) {
+
+					//(files as HTMLInputElement).files[i]);
+					//formData.append('files', (files as HTMLInputElement).files[i]);
+					//}
+				}*/
+				console.log(formData.get('files'));
+				//console.log(file);
 
 				this.$emit('form-submitted', formData);
 				/*
