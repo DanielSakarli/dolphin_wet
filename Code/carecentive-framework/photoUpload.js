@@ -6,31 +6,24 @@ let currentIndex = 0;
 // set storage engine
 const storage = multer.diskStorage({
 	destination: (req, file, cb) => {
-		cb(null, './uploads/')
+		  cb(null, './uploads/')
 	},
 	filename: (req, file, cb) => {
-    //for(let i = 0; i < req.session.photo_path.eye_photo_path.length; i++)
-    //{
-      console.log('filename called');
+      if(req.session.photo_path.eye_photo_path) {
       photo_path = req.session.photo_path.eye_photo_path[currentIndex];
       console.log(photo_path);
-      /*console.log(file.originalname);
-      const { test_date, test_name } = req.body;
-      console.log('current date: ' +Date.now());
-      const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1e9);
-      console.log(req.body.test_date);*/
+      }
+      if(req.session.photo_path.teeth_photo_path) {
+      photo_path = req.session.photo_path.teeth_photo_path[currentIndex];
+      console.log(photo_path);
+      }
       cb(
         null, // currently no error handling
         `${photo_path}${path.extname(
           file.originalname
         )}`
-        /*`${test_date}%${test_name}%${uniqueSuffix}${path.extname(
-          file.originalname
-        )}`*/
       );
-
       currentIndex++; //increment the index to get the next photo filename
-    //}
 	},
 });
 
@@ -41,7 +34,6 @@ const upload = multer({
 	// limits: { fileSize: 10000000 },
 });
 
-//const uploadSingle = upload.single('file');
 const uploadMultiple = upload.array('files');
 
 async function uploadPhoto(req, res, next) {
