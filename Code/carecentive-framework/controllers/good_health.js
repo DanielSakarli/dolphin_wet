@@ -29,7 +29,10 @@ async function setResult(req, res, next) {
 		test_result = { user_id, ...test_result };
 
 		const insertedResult = await GoodHealthService.loadTestResult(test_result);
+		next();
 		res.status(201).json(insertedResult);
+
+
 	} catch (error) {
 		next(error);
 	}
@@ -54,10 +57,12 @@ async function getTestResult(req, res, next) {
 		// If numMonths is 10, return all results, not just past 10 months
 		if(numMonths===10){
 			const queryAllResults = await GoodHealthService.getTestResultByDolphin(name);
+			next();
 			res.status(200).json(queryAllResults);
 		}
 
 		const queryResult = await GoodHealthService.getTestResultNMonths(name, numMonths);
+		next();
 		res.status(200).json(queryResult);
 	} catch (error) {
 		next(error);
