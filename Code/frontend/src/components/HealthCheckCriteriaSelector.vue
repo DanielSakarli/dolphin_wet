@@ -416,7 +416,7 @@
 				</ion-item>
 				<CheckComments @update-comment="updateMouthExamComments"/>
 				<ion-item>
-				<PhotoUpload/>
+				<PhotoUpload @form-submitted="handleFormSubmitted"/>
 				</ion-item>
 			</ion-list>
 		</ion-card>
@@ -546,6 +546,7 @@ export default {
 			previewImageUrl: '',
 			dolphinList: [] as {name: string}[],
 			urlPost: baseUrl + '/api/good_health',
+			urlPostPhoto: baseUrl + '/api/photo',
 			normal_floatability_comments: '',
 			eye_lesions_comments: '',
 			visual_cues_comments: '',
@@ -577,6 +578,11 @@ export default {
 				}
 			}
     	},
+		handleFormSubmitted(formData: object) {
+			console.log('Form Data accessed in HealthCheckCriteriaSelector.vue: ', formData);
+			const formDataCopy = formData;
+
+		},
 		// Method to collect the checked checkboxes and give request Body the scores
 		storeCheckedValues() {
 			for(let k = 0; k < evaluationHealthStore.requestBodiesHealth.length; k++){
