@@ -92,7 +92,7 @@ export default defineComponent({
 				//console.log(formData.get('files'));
 				//console.log(file);
 
-				this.$emit('form-submitted', formData);
+				this.$emit('form-submitted', files);
 				/*
 				axios
 					.post(baseUrl + '/api/photo', formData, {

@@ -581,32 +581,32 @@ export default {
 				}
 			}
     	},
-		async handleFormSubmittedEyePhoto(formData: object) {
+		async handleFormSubmittedEyePhoto(files) {
+		if (files) {
+			
 			const setupSessionStorage = {
 				photo_type: '',
 				eye_photo_path: '',
 				teeth_photo_path: '',
 				dolphin_name: '',
 			};
-
-
 			console.log('Form Data accessed in HealthCheckCriteriaSelector.vue:');
-			const formDataCopy = new FormData();
+			const formData = new FormData();
 			if(this.dolphinSelect != ''){
-				formDataCopy.append('dolphin_name', this.dolphinSelect || ''); // Append the dolphin name with a default value of an empty string
+				formData.append('dolphin_name', this.dolphinSelect || ''); // Append the dolphin name with a default value of an empty string
 			}
-			formDataCopy.append('photo_type', 'eye'); //Append the photo type
+			formData.append('photo_type', 'eye'); //Append the photo type
 			// Then append the rest of the fields
-			console.log('Form Data Copy in Health vue file');
-			console.log('I am here');
-			//formData.length();
-			const numKeys = Array.from(formData.keys()).length;
-			console.log('Number of files/keys in formData:', numKeys);
-			for (let i = 0; i < numKeys; i++) {
-				formDataCopy.append('files', formData.get('files'));
+
+			
+			console.log('Number of pictures: ' + files.length);
+
+			for (let i = 0; i < files.length; i++) {
+				console.log(files[i]);
+				formData.append('files', files[i]);
 			}
-			console.log('Appended formData: ');
-			console.log(...formDataCopy);
+			console.log(...formData);
+					
 			
 			// Setup the session storage
 			await axios
@@ -619,7 +619,7 @@ export default {
 				});
 			// Send the photo to the server
 			await axios
-				.post(this.urlPostPhoto, formDataCopy, {
+				.post(this.urlPostPhoto, formData, {
 					headers: {
 						'Content-Type': 'multipart/form-data',
 					},
@@ -630,6 +630,7 @@ export default {
 				.catch((error) => {
 					console.error('Error:', error);
 				});
+			}
 		},
 		async handleFormSubmittedTeethPhoto(formData) {
 			const setupSessionStorage = {
@@ -652,9 +653,14 @@ export default {
 			//formData.length();
 			const numKeys = Array.from(formData.keys()).length;
 			console.log('Number of keys in formData:', numKeys);
-			for (let i = 0; i < numKeys; i++) {
-				formDataCopy.append('files', formData.get('files'));
+			formDataCopy.append('files', formData.entries());
+			/*for (let i = 0; i < numKeys; i++) {
+				formDataCopy.append('files', formData.entries());
 			}
+			/* Doesn´t work like that because there is only one key
+			for (let [key, value] of formData.entries()) {
+				formDataCopy.set(key, value);
+			}*/
 			console.log('Appended formData: ');
 			console.log(...formDataCopy);
 			
