@@ -33,6 +33,8 @@ async function setResult(req, res, next) {
 		// Reset the photo_path in session storage, so no duplicate photo paths
 		//req.session.photo_path = {};
 		//console.log('App.use Photo_path in session storage: ' + req.session.photo_path);
+		if(req.session.photo_path) {
+		//First check if session storage exists at all	
 		if(req.session.photo_path.eye_photo_path != '')
 			{
 			test_result.eye_photo_path = req.session.photo_path.eye_photo_path;
@@ -43,6 +45,7 @@ async function setResult(req, res, next) {
 			test_result.teeth_photo_path = req.session.photo_path.teeth_photo_path;
 			console.log(test_result.teeth_photo_path.toString());
 			}
+		}
 		///////////////////////////////////////////////////////////////////////////
 		
 		const insertedResult = await GoodHealthService.loadTestResult(test_result);

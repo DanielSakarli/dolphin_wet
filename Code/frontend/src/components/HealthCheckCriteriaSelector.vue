@@ -590,21 +590,24 @@ export default {
 			};
 
 
-			console.log('Form Data accessed in HealthCheckCriteriaSelector.vue: ', formData[2]);
+			console.log('Form Data accessed in HealthCheckCriteriaSelector.vue:');
 			const formDataCopy = new FormData();
 			if(this.dolphinSelect != ''){
 				formDataCopy.append('dolphin_name', this.dolphinSelect || ''); // Append the dolphin name with a default value of an empty string
 			}
 			formDataCopy.append('photo_type', 'eye'); //Append the photo type
 			// Then append the rest of the fields
-			for (let [key, value] of Object.entries(formData)) {
-				formDataCopy.append(key, value);
-				console.log(files, value);
+			console.log('Form Data Copy in Health vue file');
+			console.log('I am here');
+			//formData.length();
+			const numKeys = Array.from(formData.keys()).length;
+			console.log('Number of files/keys in formData:', numKeys);
+			for (let i = 0; i < numKeys; i++) {
+				formDataCopy.append('files', formData.get('files'));
 			}
-			/*for (let [files, value] of formDataCopy.entries()) {
-				console.log('Health vue file: ');
-						console.log(files, value);
-					}*/
+			console.log('Appended formData: ');
+			console.log(...formDataCopy);
+			
 			// Setup the session storage
 			await axios
 				.post(baseUrl + '/api/setup_session_storage', setupSessionStorage)
@@ -637,19 +640,24 @@ export default {
 			};
 
 
-			console.log('Form Data accessed in HealthCheckCriteriaSelector.vue: ', formData.get('files'));
+			console.log('Form Data accessed in HealthCheckCriteriaSelector.vue:' + formData);
 			const formDataCopy = new FormData();
 			if(this.dolphinSelect != ''){
 				formDataCopy.append('dolphin_name', this.dolphinSelect || ''); // Append the dolphin name with a default value of an empty string
 			}
 			formDataCopy.append('photo_type', 'teeth'); //Append the photo type
 			// Then append the rest of the fields
-			formDataCopy.append('files', formData.get('files'));
-			/*for (let [key, value] of Object.entries(formData)) {
-				formDataCopy.append(key, value);
-			}*/
-			console.log('photo_type variable in copied FormData: ' + formDataCopy.get('photo_type'));
-			console.log('files in copied FormData: ' + formDataCopy.get('files'));
+			console.log('Form Data Copy in Health vue file');
+			console.log('I am here');
+			//formData.length();
+			const numKeys = Array.from(formData.keys()).length;
+			console.log('Number of keys in formData:', numKeys);
+			for (let i = 0; i < numKeys; i++) {
+				formDataCopy.append('files', formData.get('files'));
+			}
+			console.log('Appended formData: ');
+			console.log(...formDataCopy);
+			
 			// Setup the session storage
 			await axios
 				.post(baseUrl + '/api/setup_session_storage', setupSessionStorage)
@@ -686,7 +694,6 @@ export default {
 								evaluationHealthStore.requestBodiesHealth[k]["normal_floatability"] = j + 1;
 							}else if (this.CheckboxArray[i][j] === true && i === 1){
 								evaluationHealthStore.requestBodiesHealth[k]["eye_lesions"] = j + 1;
-								//this.handleFormSubmitted(formData);
 							}else if (this.CheckboxArray[i][j] === true && i === 2){
 								evaluationHealthStore.requestBodiesHealth[k]["visual_cues"] = j + 1;
 							}else if (this.CheckboxArray[i][j] === true && i === 3){

@@ -65,11 +65,13 @@ export default defineComponent({
 
 					for (let i = 0; i < files.length; i++) {
 						console.log(files[i]);
-						formData.append('files', files[i], files[i].name.toString());
+						formData.append('files', files[i]);
 					}
+					console.log(...formData);
+					/*
 					for (let [key, value] of formData.entries()) {
 						console.log(key, value);
-					}
+					}*/
 					//console.log('access second picture: ' + formData.get('files', files[1].file));
 				}
 
@@ -87,7 +89,7 @@ export default defineComponent({
 					//formData.append('files', (files as HTMLInputElement).files[i]);
 					//}
 				}*/
-				console.log(formData.get('files'));
+				//console.log(formData.get('files'));
 				//console.log(file);
 
 				this.$emit('form-submitted', formData);
