@@ -722,7 +722,7 @@ export default {
 				console.log(this.CheckboxArray);
 				for(let i = 0; i < evaluationHealthStore.requestBodiesHealth.length; i++){
 					await axios
-							.post(this.urlPost, evaluationHealthStore.requestBodiesHealth[i])
+							.post(this.urlPost, evaluationHealthStore.requestBodiesHealth[i], { withCredentials: true })
 							.then((response) => {
 								console.log('Response:', response.data);
 								if (i === evaluationHealthStore.requestBodiesHealth.length - 1){
@@ -825,7 +825,7 @@ export default {
 			// Setup the session storage
 			console.log(...this.formData);
 			await axios
-				.post(baseUrl + '/api/setup_session_storage', this.setupSessionStorage)
+				.post(baseUrl + '/api/setup_session_storage', this.setupSessionStorage, { withCredentials: true })
 				.then((response) => {
 					console.log('Response:', response.data);
 				})
@@ -838,6 +838,7 @@ export default {
 					headers: {
 						'Content-Type': 'multipart/form-data',
 					},
+					withCredentials: true,
 				})
 				.then((response) => {
 					console.log('Response:', response.data);

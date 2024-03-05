@@ -342,11 +342,11 @@ document.cookie = token ?? '';
 console.log('This token is set in a cookie (client-side): ', document.cookie);
 
 // Set up request config
-const config = {
+/*const config = {
 	headers: {
 		Cookie: document.cookie,
 	},
-};
+};*/
 
 
 
@@ -518,7 +518,7 @@ export default {
 						if(evaluationFeedingStore.requestBodiesFeeding[i].content(data)){}
 					}*/
 					await axios
-							.post(this.urlPost, evaluationFeedingStore.requestBodiesFeeding[i], config)
+							.post(this.urlPost, evaluationFeedingStore.requestBodiesFeeding[i], { withCredentials: true })
 							.then((response) => {
 								console.log('Response:', response.data);
 								if (i === evaluationFeedingStore.requestBodiesFeeding.length - 1){

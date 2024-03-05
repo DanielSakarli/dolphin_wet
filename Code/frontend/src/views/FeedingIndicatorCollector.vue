@@ -119,7 +119,7 @@ export default defineComponent({
 			if (confirmed) {
 				console.log('Data is stored');
 				await axios
-					.post(url, requestBody)
+					.post(url, requestBody, { withCredentials: true })
 					.then((response) => {
 						console.log('Response:', response.data);
 						this.confirmRefresh();

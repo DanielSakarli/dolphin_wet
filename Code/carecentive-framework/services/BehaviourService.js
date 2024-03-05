@@ -9,6 +9,7 @@ class BehaviourService {
 	 * Loading the test result of good health to database.
 	 * @param {Object} result The test result object of good health
 	 * @param {Number} result.user_id The id of user
+	 * @param {String} result.user_name The name of user
 	 * @param {String} result.dolphin_name The name of dolphin
 	 * @param {Number} result.environmental_enrichment
 	 * @param {Number} result.affiliative_behaviour

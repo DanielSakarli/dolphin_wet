@@ -260,7 +260,8 @@ export default {
 			errorMessage.value = '';
 			try {
 				const response = await axios.get(
-					baseUrl + '/api/dolphins' //'http://88395-17112.pph-server.de/api/dolphins'
+					baseUrl + '/api/dolphins', //'http://88395-17112.pph-server.de/api/dolphins'
+					{ withCredentials: true }
 				);
 				dolphins.value = response.data;
 			} catch (error) {
@@ -281,7 +282,8 @@ export default {
 		const fetchDolphins = async () => {
 			try {
 				const response = await axios.get(
-					baseUrl + '/api/dolphins' //'http://88395-17112.pph-server.de/api/dolphins'
+					baseUrl + '/api/dolphins', //'http://88395-17112.pph-server.de/api/dolphins'
+					{ withCredentials: true }
 				);
 				dolphins.value = response.data;
 			} catch (error) {
@@ -371,7 +373,7 @@ export default {
 			const urlPatch =
 				baseUrl + `/api/dolphins/${currentDolphinValues.value.name}`;
 			await axios
-				.patch(urlPatch, dolphinCopy)
+				.patch(urlPatch, dolphinCopy, { withCredentials: true })
 				.then((response) => {
 					console.log('Response:', response.data);
 					closeEditModal();
@@ -415,7 +417,9 @@ export default {
 			event.preventDefault();
 			if (newDolphin.value) {
 				try {
-					await axios.post(baseUrl + '/api/dolphins', newDolphin.value);
+					await axios.post(baseUrl + '/api/dolphins', newDolphin.value, {
+						withCredentials: true,
+					});
 					closeAddModal();
 					fetchDolphins();
 				} catch (error) {

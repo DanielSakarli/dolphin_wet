@@ -668,7 +668,7 @@ export default {
 				console.log(this.CheckboxArray);
 				for(let i = 0; i < evaluationBehaviourStore.requestBodiesBehaviour.length; i++){
 					await axios
-							.post(this.urlPost, evaluationBehaviourStore.requestBodiesBehaviour[i])
+							.post(this.urlPost, evaluationBehaviourStore.requestBodiesBehaviour[i], { withCredentials: true })
 							.then((response) => {
 								console.log('Response:', response.data);
 								if (i === evaluationBehaviourStore.requestBodiesBehaviour.length - 1){

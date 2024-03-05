@@ -23,8 +23,8 @@
 <script lang="ts">
 import { IonContent } from '@ionic/vue';
 import { defineComponent } from 'vue';
-import { baseUrl } from '@/utils/baseUrl';
-import axios from 'axios';
+//import { baseUrl } from '@/utils/baseUrl';
+//import axios from 'axios';
 
 export default defineComponent({
 	components: {

@@ -9,6 +9,7 @@ class GoodHealthService {
 	 * Loading the test result of good health to database.
 	 * @param {Object} result The test result object of good health
 	 * @param {Number} result.user_id The id of user
+	 * @param {String} result.user_name The name of user
 	 * @param {String} result.dolphin_name The name of dolphin
 	 * @param {Number} result.normal_floatability
 	 * @param {Number} result.eye_lesions
@@ -70,6 +71,7 @@ class GoodHealthService {
 				.select(
 					'health_record_id',
 					'user_id',
+					'user_name',
 					'dolphin_id',
 					'dolphin_name',
 					'normal_floatability',

@@ -79,7 +79,7 @@ export default {
 	methods: {
 		async showDolphins() {
 			await axios
-				.get(this.urlDolphins)
+				.get(this.urlDolphins, { withCredentials: true })
 				.then((response) => {
 					this.dolphinList = response.data;
 					console.log('Response:', this.dolphinList);

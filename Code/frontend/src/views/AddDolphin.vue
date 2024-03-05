@@ -55,7 +55,8 @@ export default {
 			try {
 				await axios.post(
 					baseUrl + '/api/dolphins', // http://88395-17112.pph-server.de/api/dolphins',
-					dolphin.value
+					dolphin.value,
+					{ withCredentials: true }
 				);
 			} catch (error) {
 				if (axios.isAxiosError(error)) {

@@ -17,16 +17,20 @@ async function setResult(req, res, next) {
 
 		// After gone through the authenticateToken middleware
 		// the data of user is in the req.authData
-		let user_id;
+		let userID;
+		let userName;
 		if (isUserAuth) {
-			user_id = req.authData.user_id;
+			const { user_id, name } = req.authData;
+			//console.log('authdata: ', req.authData);
+			userID = user_id;
+			userName = name;
 		} else {
-			user_id = 1;
+			userID = 1;
 		}
 
-		// attach user_id to test result in req.body
+		// attach userID to test result in req.body
 		let test_result = req.body;
-		test_result = { user_id, ...test_result };
+		test_result = { userID, user_name: userName, ...test_result };
 
 		///////////////////////////////////////////////////////////////////////////
 		// Get the photo paths from the session storage
@@ -37,9 +41,9 @@ async function setResult(req, res, next) {
 		console.log('Photo path in req.session in good_health.js: ' + req.session.photo_path.teeth_photo_path);
 			
 		if(req.session.photo_path) {
-			// attach user_id to test result in req.body
+			// attach userID to test result in req.body
 			let test_result = req.body;
-			test_result = { user_id, ...test_result };
+			test_result = { userID, user_name: userName, ...test_result };
 
 			console.log('Photo path in req.session in good_health.js: ' + req.session.photo_path.eye_photo_path);
 			console.log('Photo path in req.session in good_health.js: ' + req.session.photo_path.teeth_photo_path);	
@@ -78,9 +82,9 @@ async function setResult(req, res, next) {
 		} else {
 		///////////////////////////////////////////////////////////////////////////
 		// No photo path to upload
-		// attach user_id to test result in req.body
+		// attach userID to test result in req.body
 			let test_result = req.body;
-			test_result = { user_id, ...test_result };
+			test_result = { userID, user_name: userName, ...test_result };
 			const insertedResult = await GoodHealthService.loadTestResult(test_result);
 			//next();
 			res.status(201).json(insertedResult);

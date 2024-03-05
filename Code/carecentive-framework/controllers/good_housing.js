@@ -19,13 +19,14 @@ async function setResult(req, res, next) {
 		// After gone through the authenticateToken middleware
 		// the data of user is in the req.authData
 		let userID;
+		let userName;
 		if (isUserAuth) {
-			const { user_id } = req.authData;
+			const { user_id, name } = req.authData;
 			userID = user_id;
+			userName = name;
 		} else {
 			userID = 1;
 		}
-
 		// attach user_id to test result in req.body
 		
 		////////////////////////////////////////
@@ -70,6 +71,7 @@ async function setResult(req, res, next) {
 
 		const testResult = {
 			user_id: userID,
+			user_name: userName,
 			dolphin_id,
 			dolphin_name,
 			enclosure_barrier_safety,

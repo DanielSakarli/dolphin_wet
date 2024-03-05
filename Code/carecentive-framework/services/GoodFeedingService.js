@@ -9,6 +9,7 @@ class GoodFeedingService {
 	 * Load the good feeding test result to the database.
 	 * @param {Object} result - The result object of good feeding test in object format.
 	 * @param {Number} result.user_id The id of user(test conductor)
+	 * @param {String} result.user_name The name of user(test conductor)
 	 * @param {String} result.dolphin_name The name of dolphin
 	 * @param {Number} result.body_condition_score
 	 * @param {Number} result.weight

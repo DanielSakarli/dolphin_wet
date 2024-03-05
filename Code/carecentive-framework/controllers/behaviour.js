@@ -17,17 +17,20 @@ async function setResult(req, res, next) {
 
 		// After gone through the authenticateToken middleware
 		// the data of user is in the req.authData
-		let user_id;
+		let userID;
+		let userName;
 		if (isUserAuth) {
-			user_id = req.authData.user_id;
+			const { user_id, name } = req.authData;
+			userID = user_id;
+			userName = name;
 		} else {
-			user_id = 1;
+			userID = 1;
 		}
 
 		// attach user_id to test result in req.body
 		// when the user JWT authentication works add also the user_name, not only the user_id
 		let test_result = req.body;
-		test_result = { user_id, ...test_result };
+		test_result = { user_id, user_name: userName, ...test_result };
 
 		const insertedResult = await BehaviourService.loadTestResult(test_result);
 		res.status(201).json(insertedResult);

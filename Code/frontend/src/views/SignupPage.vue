@@ -97,7 +97,7 @@ export default {
 				password: this.password,
 			};
 			axios
-				.post(url, requestBody)
+				.post(url, requestBody, { withCredentials: true })
 				.then((response) => {
 					console.log('Response:', response.data);
 				})

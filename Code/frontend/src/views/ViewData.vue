@@ -544,7 +544,7 @@ export default {
 				this.urlFeeding =
 					this.urlFeeding + this.dolphinSelect + '&numMonths=' + this.numMonths; //default value numMonths=3
 				await axios
-					.get(this.urlFeeding)
+					.get(this.urlFeeding, { withCredentials: true })
 					.then((response) => {
 						this.dataFeeding = response.data;
 						console.log('Response:', response.data);
@@ -558,7 +558,7 @@ export default {
 				this.urlHousing =
 					this.urlHousing + this.dolphinSelect + '&numMonths=' + this.numMonths; //default value numMonths=3
 				await axios
-					.get(this.urlHousing)
+					.get(this.urlHousing, { withCredentials: true })
 					.then((response) => {
 						this.dataHousing = response.data;
 						console.log('Response:', response.data);
@@ -575,7 +575,7 @@ export default {
 					'&numMonths=' +
 					this.numMonths; //default value numMonths=3
 				await axios
-					.get(this.urlBehaviour)
+					.get(this.urlBehaviour, { withCredentials: true })
 					.then((response) => {
 						this.dataHousing = response.data;
 						console.log('Response:', response.data);
@@ -589,7 +589,7 @@ export default {
 				this.urlHealth =
 					this.urlHealth + this.dolphinSelect + '&numMonths=' + this.numMonths; //default value numMonths=3
 				await axios
-					.get(this.urlHealth)
+					.get(this.urlHealth, { withCredentials: true })
 					.then((response) => {
 						this.dataHealth = response.data;
 						console.log('Response:', response.data);
