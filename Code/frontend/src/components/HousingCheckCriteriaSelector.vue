@@ -470,7 +470,7 @@ export default {
 				console.log(this.CheckboxArray);
 				for(let i = 0; i < evaluationHousingStore.requestBodiesHousing.length; i++){
 					await axios
-							.post(this.urlPost, evaluationHousingStore.requestBodiesHousing[i])
+							.post(this.urlPost, evaluationHousingStore.requestBodiesHousing[i], { withCredentials: true })
 							.then((response) => {
 								console.log('Response:', response.data);
 								if (i === evaluationHousingStore.requestBodiesHousing.length - 1){

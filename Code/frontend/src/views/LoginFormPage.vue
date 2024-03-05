@@ -103,7 +103,7 @@ export default defineComponent({
 			};
 			//console.log(this.username, this.password);
 			axios
-				.post(url, requestBody)
+				.post(url, requestBody, { withCredentials: true })
 				.then((response) => {
 					this.$router.push('/folder/Evaluate'); //Go to Evaluation Page if Login was succesfull
 					const token = response.data;

@@ -33,25 +33,58 @@ async function setResult(req, res, next) {
 		// Reset the photo_path in session storage, so no duplicate photo paths
 		//req.session.photo_path = {};
 		//console.log('App.use Photo_path in session storage: ' + req.session.photo_path);
+		console.log('Photo path in req.session in good_health.js: ' + req.session.photo_path.eye_photo_path);
+		console.log('Photo path in req.session in good_health.js: ' + req.session.photo_path.teeth_photo_path);
+			
 		if(req.session.photo_path) {
-		//First check if session storage exists at all	
-		if(req.session.photo_path.eye_photo_path != '')
-			{
-			test_result.eye_photo_path = req.session.photo_path.eye_photo_path;
-			console.log(test_result.eye_photo_path.toString());
-			}
-		if(req.session.photo_path.teeth_photo_path != '')
-			{
-			test_result.teeth_photo_path = req.session.photo_path.teeth_photo_path;
-			console.log(test_result.teeth_photo_path.toString());
-			}
-		}
-		///////////////////////////////////////////////////////////////////////////
-		
-		const insertedResult = await GoodHealthService.loadTestResult(test_result);
-		//next();
-		res.status(201).json(insertedResult);
+			// attach user_id to test result in req.body
+			let test_result = req.body;
+			test_result = { user_id, ...test_result };
 
+			console.log('Photo path in req.session in good_health.js: ' + req.session.photo_path.eye_photo_path);
+			console.log('Photo path in req.session in good_health.js: ' + req.session.photo_path.teeth_photo_path);	
+
+			//First check if session storage exists at all	
+			if(req.session.photo_path.eye_photo_path != '')
+				{
+					console.log('Photo path in req.session in good_health.js: ' + req.session.photo_path.eye_photo_path);
+				// Iterate over the arrays in test_result
+				
+					// Check if the dolphin_name in the array is 'Dolly'
+					if (test_result.dolphin_name === req.session.dolphin_name) {
+					// Append teeth_photo_path to the array
+					test_result.teeth_photo_path = req.session.photo_path.eye_photo_path.toString();
+					}
+				
+				}
+
+			if(req.session.photo_path.teeth_photo_path != '')
+				{
+					console.log('Photo path in req.session in good_health.js: ' + req.session.photo_path.teeth_photo_path);
+				// Iterate over the arrays in test_result
+				
+					// Check if the dolphin_name in the array is 'Dolly'
+					if (test_result.dolphin_name === req.session.dolphin_name) {
+					// Append teeth_photo_path to the array
+					test_result.teeth_photo_path = req.session.photo_path.teeth_photo_path.toString();
+					}
+				
+				}
+				
+
+			
+				const insertedResult = await GoodHealthService.loadTestResult(test_result);
+				res.status(201).json(insertedResult);
+		} else {
+		///////////////////////////////////////////////////////////////////////////
+		// No photo path to upload
+		// attach user_id to test result in req.body
+			let test_result = req.body;
+			test_result = { user_id, ...test_result };
+			const insertedResult = await GoodHealthService.loadTestResult(test_result);
+			//next();
+			res.status(201).json(insertedResult);
+		}
 
 	} catch (error) {
 		next(error);

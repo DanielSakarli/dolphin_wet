@@ -112,10 +112,11 @@ const uploadPhoto = require('./photoUpload');
  * By default, the cors middleware will allow requests from all origins (*).
  * However, for security purposes, it's recommended to specify the allowed origins explicitly.
  */
-app.use(cors());
+//app.use(cors());
 const corsOptions = {
-	// origin: 'http://localhost:8100', // Replace with your frontend app's origin
-	origin: '*',
+	origin: 'http://localhost:8100', // Replace with your frontend app's origin
+	//origin: '*',
+	credentials: true,
 };
 app.use(cors(corsOptions));
 

@@ -716,9 +716,8 @@ export default {
 		async storeData() {
 			const confirmed = confirm(this.$t('savingDataNext'));
      		if (confirmed) {
-				// Upload photos if there are any in formData
 				this.photoUpload();
-
+				
 				this.storeCheckedValues();
 				console.log(this.CheckboxArray);
 				for(let i = 0; i < evaluationHealthStore.requestBodiesHealth.length; i++){
@@ -803,7 +802,7 @@ export default {
 //	
 // End of TEST for photo upload
 ////////////////////////////////////////////////////////////////////////
-
+		
 	async confirmRefresh() {
 		const confirmed = confirm(this.$t('savingDataNext'));
      	if (confirmed) {
