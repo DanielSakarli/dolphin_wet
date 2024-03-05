@@ -405,7 +405,7 @@
 				<CheckComments @update-comment="updateVisualCuesComments"/>
 				<ion-item>
 					<PhotoUpload @form-submitted="handleFormSubmittedEyePhoto"/>
-					</ion-item>
+				</ion-item>
 			</ion-list>
 		</ion-card>
 		<ion-card v-if=" criteria === 'thirdCriteriaHealth'">
@@ -557,7 +557,14 @@ export default {
 			respiratory_disease_comments: '',
 			force_expiration_comments: '',
 			gastric_abnormality_comments: '',
-			external_disease_signs_comments: ''
+			external_disease_signs_comments: '',
+			formData: null,
+			setupSessionStorage: {
+				photo_type: '',
+				eye_photo_path: '',
+				teeth_photo_path: '',
+				dolphin_name: '',
+			},
 		};
 	},
 
@@ -581,8 +588,35 @@ export default {
 				}
 			}
     	},
-		async handleFormSubmittedEyePhoto(files) {
-		if (files) {
+		async handleFormSubmittedEyePhoto(files: File[]) {
+		if (files && this.dolphinSelect != '') {
+			
+			this.setupSessionStorage = {
+				photo_type: '',
+				eye_photo_path: '',
+				teeth_photo_path: '',
+				dolphin_name: '',
+			};
+			console.log('Form Data accessed in HealthCheckCriteriaSelector.vue:');
+			this.formData = new FormData();
+			if(this.dolphinSelect != ''){
+				this.formData.append('dolphin_name', this.dolphinSelect || ''); // Append the dolphin name with a default value of an empty string
+			}
+			this.formData.append('photo_type', 'eye'); //Append the photo type
+			// Then append the rest of the fields
+
+			
+			console.log('Number of pictures: ' + files.length);
+
+			for (let i = 0; i < files.length; i++) {
+				console.log(files[i]);
+				this.formData.append('files', files[i]);
+			}
+			console.log(...this.formData);
+			}
+		},
+		async handleFormSubmittedTeethPhoto(files: File[]) {
+			if (files && this.dolphinSelect != '') {
 			
 			const setupSessionStorage = {
 				photo_type: '',
@@ -595,9 +629,8 @@ export default {
 			if(this.dolphinSelect != ''){
 				formData.append('dolphin_name', this.dolphinSelect || ''); // Append the dolphin name with a default value of an empty string
 			}
-			formData.append('photo_type', 'eye'); //Append the photo type
+			formData.append('photo_type', 'teeth'); //Append the photo type
 			// Then append the rest of the fields
-
 			
 			console.log('Number of pictures: ' + files.length);
 
@@ -606,86 +639,7 @@ export default {
 				formData.append('files', files[i]);
 			}
 			console.log(...formData);
-					
-			
-			// Setup the session storage
-			await axios
-				.post(baseUrl + '/api/setup_session_storage', setupSessionStorage)
-				.then((response) => {
-					console.log('Response:', response.data);
-				})
-				.catch((error) => {
-					console.error('Error:', error);
-				});
-			// Send the photo to the server
-			await axios
-				.post(this.urlPostPhoto, formData, {
-					headers: {
-						'Content-Type': 'multipart/form-data',
-					},
-				})
-				.then((response) => {
-					console.log('Response:', response.data);
-				})
-				.catch((error) => {
-					console.error('Error:', error);
-				});
 			}
-		},
-		async handleFormSubmittedTeethPhoto(formData) {
-			const setupSessionStorage = {
-				photo_type: '',
-				eye_photo_path: '',
-				teeth_photo_path: '',
-				dolphin_name: '',
-			};
-
-
-			console.log('Form Data accessed in HealthCheckCriteriaSelector.vue:' + formData);
-			const formDataCopy = new FormData();
-			if(this.dolphinSelect != ''){
-				formDataCopy.append('dolphin_name', this.dolphinSelect || ''); // Append the dolphin name with a default value of an empty string
-			}
-			formDataCopy.append('photo_type', 'teeth'); //Append the photo type
-			// Then append the rest of the fields
-			console.log('Form Data Copy in Health vue file');
-			console.log('I am here');
-			//formData.length();
-			const numKeys = Array.from(formData.keys()).length;
-			console.log('Number of keys in formData:', numKeys);
-			formDataCopy.append('files', formData.entries());
-			/*for (let i = 0; i < numKeys; i++) {
-				formDataCopy.append('files', formData.entries());
-			}
-			/* Doesn´t work like that because there is only one key
-			for (let [key, value] of formData.entries()) {
-				formDataCopy.set(key, value);
-			}*/
-			console.log('Appended formData: ');
-			console.log(...formDataCopy);
-			
-			// Setup the session storage
-			await axios
-				.post(baseUrl + '/api/setup_session_storage', setupSessionStorage)
-				.then((response) => {
-					console.log('Response:', response.data);
-				})
-				.catch((error) => {
-					console.error('Error:', error);
-				});
-			// Send the photo to the server
-			await axios
-				.post(this.urlPostPhoto, formDataCopy, {
-					headers: {
-						'Content-Type': 'multipart/form-data',
-					},
-				})
-				.then((response) => {
-					console.log('Response:', response.data);
-				})
-				.catch((error) => {
-					console.error('Error:', error);
-				});
 		},
 		// Method to collect the checked checkboxes and give request Body the scores
 		storeCheckedValues() {
@@ -762,6 +716,9 @@ export default {
 		async storeData() {
 			const confirmed = confirm(this.$t('savingDataNext'));
      		if (confirmed) {
+				// Upload photos if there are any in formData
+				this.photoUpload();
+
 				this.storeCheckedValues();
 				console.log(this.CheckboxArray);
 				for(let i = 0; i < evaluationHealthStore.requestBodiesHealth.length; i++){
@@ -847,26 +804,54 @@ export default {
 // End of TEST for photo upload
 ////////////////////////////////////////////////////////////////////////
 
+	async confirmRefresh() {
+		const confirmed = confirm(this.$t('savingDataNext'));
+     	if (confirmed) {
+			// Upload photos if there are any in formData
+			this.photoUpload();
 
-
-
-
-
-	confirmRefresh() {
-			const confirmed = confirm(this.$t('savingDataNext'));
-     		if (confirmed) {
-				if(formData) {
-					this.handleFormSubmitted(formData);
-				}
-				this.storeCheckedValues();
-				console.log(evaluationHealthStore.requestBodiesHealth)
-				this.dolphinSelect = null;
-				this.criteria = null;
-				const currentPath = this.$route.path;
-				const targetUrl = `/detailHealth`;
-				this.$router.push(targetUrl);
+			// Store the checked scoring values
+			this.storeCheckedValues();
+			console.log(evaluationHealthStore.requestBodiesHealth)
+			this.dolphinSelect = null;
+			this.criteria = null;
+			const currentPath = this.$route.path;
+			const targetUrl = `/detailHealth`;
+			this.$router.push(targetUrl);
 			}	
     	},
+		async photoUpload() {
+		// Check if there is a photo to upload
+		if(this.formData != null) {
+			// Setup the session storage
+			console.log(...this.formData);
+			await axios
+				.post(baseUrl + '/api/setup_session_storage', this.setupSessionStorage)
+				.then((response) => {
+					console.log('Response:', response.data);
+				})
+				.catch((error) => {
+					console.error('Error:', error);
+				});
+			// Send the photo to the server
+			await axios
+				.post(this.urlPostPhoto, this.formData, {
+					headers: {
+						'Content-Type': 'multipart/form-data',
+					},
+				})
+				.then((response) => {
+					console.log('Response:', response.data);
+				})
+				.catch((error) => {
+					console.error('Error:', error);
+				});
+		
+			//Reset the form data
+			this.formData = null; 
+			console.log('Resetted form data: '+ this.formData);
+		}
+		},
 		/*
 		async takePhoto(){
 			const photo = await Camera.getPhoto({
@@ -900,8 +885,8 @@ ion-card {
 .sc-ion-alert-md-h {
 	--width: 500px;
 }*/
-.my-class {
+/*.my-class {
     width: 600px !important;
-}
+}*/
 </style>
 ```

@@ -1,15 +1,16 @@
 <template>
 	<ion-content>
 		<div class="container">
-			<h2>File Upload</h2>
+			<!--<h2>File Upload</h2>-->
 			<form id="form">
 				<div class="input-group">
-					<label for="files">Select file(s)</label>
+					<label for="files"> </label>
 					<input
 						id="files"
 						name="files"
 						type="file"
 						multiple
+						accept="image/*"
 						v-on:change="submitForm"
 					/>
 				</div>
@@ -119,3 +120,28 @@ export default defineComponent({
 	},
 });
 </script>
+
+<style scoped>
+.content {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	height: 100vh; /* Adjust as needed */
+	overflow: visible;
+}
+
+.container {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: center;
+	height: auto;
+	overflow: visible;
+}
+/*
+ion-content {
+	height: 100px;
+}*/
+</style>
+```
