@@ -210,6 +210,39 @@ app.post('/api/setup_session_storage', (req, res, next) => {
 ///////////////////////////////////////////////////
 
 
+///////////////////////////////////////////////////
+// Test CSV file creation for data export
+const createCsvWriter = require('csv-writer').createObjectCsvWriter;
+
+// Sample data
+const data = [
+	{ id: 1, name: 'John Doe', email: 'john@example.com' },
+	{ id: 2, name: 'Jane Smith', email: 'jane@example.com' },
+	// Add more data as needed
+  ];
+
+app.get('/api/export-csv', (req, res) => {
+	const csvWriter = createCsvWriter({
+		path: 'out.csv',
+		header: [
+			{id: 'id', title: 'ID'},
+			{id: 'name', title: 'Name'},
+			{id: 'email', title: 'Email'},
+		]
+	});
+	
+	csvWriter
+		.writeRecords(data)
+		.then(() => {
+			console.log('...Done');
+			res.download('out.csv');
+		})
+		.catch(error => {
+			console.log(error);
+			res.sendStatus(500);
+		});
+});
+
 /**
  * Custom routes
  */

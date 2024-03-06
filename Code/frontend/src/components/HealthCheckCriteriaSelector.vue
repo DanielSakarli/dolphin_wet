@@ -588,7 +588,7 @@ export default {
 				}
 			}
     	},
-		async handleFormSubmittedEyePhoto(files: File[]) {
+		handleFormSubmittedEyePhoto(files: File[]) {
 		if (files && this.dolphinSelect != '') {
 			
 			this.setupSessionStorage = {
@@ -615,7 +615,7 @@ export default {
 			console.log(...this.formData);
 			}
 		},
-		async handleFormSubmittedTeethPhoto(files: File[]) {
+		handleFormSubmittedTeethPhoto(files: File[]) {
 			if (files && this.dolphinSelect != '') {
 			
 			const setupSessionStorage = {
@@ -713,7 +713,7 @@ export default {
 			this.external_disease_signs_comments = comment;
 		},
 		//Method to send the data to database
-		async storeData() {
+		storeData() {
 			const confirmed = confirm(this.$t('savingDataNext'));
      		if (confirmed) {
 				this.photoUpload();
@@ -721,7 +721,7 @@ export default {
 				this.storeCheckedValues();
 				console.log(this.CheckboxArray);
 				for(let i = 0; i < evaluationHealthStore.requestBodiesHealth.length; i++){
-					await axios
+					axios
 							.post(this.urlPost, evaluationHealthStore.requestBodiesHealth[i], { withCredentials: true })
 							.then((response) => {
 								console.log('Response:', response.data);
@@ -803,7 +803,7 @@ export default {
 // End of TEST for photo upload
 ////////////////////////////////////////////////////////////////////////
 		
-	async confirmRefresh() {
+	confirmRefresh() {
 		const confirmed = confirm(this.$t('savingDataNext'));
      	if (confirmed) {
 			// Upload photos if there are any in formData
@@ -819,12 +819,12 @@ export default {
 			this.$router.push(targetUrl);
 			}	
     	},
-		async photoUpload() {
+		photoUpload() {
 		// Check if there is a photo to upload
 		if(this.formData != null) {
 			// Setup the session storage
 			console.log(...this.formData);
-			await axios
+			axios
 				.post(baseUrl + '/api/setup_session_storage', this.setupSessionStorage, { withCredentials: true })
 				.then((response) => {
 					console.log('Response:', response.data);
@@ -833,7 +833,7 @@ export default {
 					console.error('Error:', error);
 				});
 			// Send the photo to the server
-			await axios
+			axios
 				.post(this.urlPostPhoto, this.formData, {
 					headers: {
 						'Content-Type': 'multipart/form-data',
