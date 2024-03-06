@@ -77,6 +77,7 @@ const good_housing = require('./routes/good_housing');
 const behaviour = require('./routes/behabvior');
 //const photoPath = require('./routes/photoPath');
 const uploadPhoto = require('./photoUpload');
+const csvWriter = require('./controllers/csvWriter');
 //const uploadPhotoPath = require('./photoUpload');
 
 
@@ -144,49 +145,11 @@ app.use('/api/good_health', good_health);
 app.use('/api/good_housing', good_housing);
 app.use('/api/behaviour', behaviour);
 app.post('/api/photo', uploadPhoto);
-//app.use('/api/photo', uploadPhotoPath);
-//app.use('/api/photo', photoPath);
-
-//////////////////////////////////////////////////
-// Test Photo Upload
-/*
-const multer = require('multer');
-// set storage engine
-const storage = multer.diskStorage({
-	destination: (req, file, cb) => {
-		cb(null, './uploads/')
-	},
-	filename: (req, file, cb) => {
-		console.log(file.originalname);
-		const { test_date, test_name } = req.body;
-		const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1e9);
-		console.log(req.body.test_date);
-		cb(
-			null, // currently no error handling
-			`${test_date}%${test_name}%${uniqueSuffix}${path.extname(
-				file.originalname
-			)}`
-		);
-	},
-});
-
-// init upload
-const upload = multer({
-	storage: storage
-	// set the size limit of picture
-	// limits: { fileSize: 10000000 },
-});
-
-/*
-app.post('/api/photo', upload.single("file"), (req, res) => {
-	res.send('File uploaded at: ' + req.file.path); //Access the file with req.file
-});*/
-///////////////////////////////////////////////////
-
+app.get('/api/export-csv', csvWriter);
 
 
 ///////////////////////////////////////////////////
-// Session storage
+// Set up the session storage
 app.post('/api/setup_session_storage', (req, res, next) => {
 	try {
 		const { photo_type, eye_photo_path, teeth_photo_path, dolphin_name } = req.body;
@@ -203,45 +166,7 @@ app.post('/api/setup_session_storage', (req, res, next) => {
 		res.sendStatus(500);
 	}
 });
-/*app.get('/api/photoPath', (req, res) => {
-	// Responds with all the session storage
-	res.json(req.session);
-  });*/
 ///////////////////////////////////////////////////
-
-
-///////////////////////////////////////////////////
-// Test CSV file creation for data export
-const createCsvWriter = require('csv-writer').createObjectCsvWriter;
-
-// Sample data
-const data = [
-	{ id: 1, name: 'John Doe', email: 'john@example.com' },
-	{ id: 2, name: 'Jane Smith', email: 'jane@example.com' },
-	// Add more data as needed
-  ];
-
-app.get('/api/export-csv', (req, res) => {
-	const csvWriter = createCsvWriter({
-		path: 'out.csv',
-		header: [
-			{id: 'id', title: 'ID'},
-			{id: 'name', title: 'Name'},
-			{id: 'email', title: 'Email'},
-		]
-	});
-	
-	csvWriter
-		.writeRecords(data)
-		.then(() => {
-			console.log('...Done');
-			res.download('out.csv');
-		})
-		.catch(error => {
-			console.log(error);
-			res.sendStatus(500);
-		});
-});
 
 /**
  * Custom routes
