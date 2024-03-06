@@ -5,7 +5,7 @@ const GoodFeedingService = require('../services/GoodFeedingService');
 const GoodHousingService = require('../services/GoodHousingService');
 const GoodHealthService = require('../services/GoodHealthService');
 const BehaviourService = require('../services/BehaviourService');
-
+const { isUserAuth } = require('./authSwitch');
 const { validationResult } = require('express-validator');
 
 
@@ -24,14 +24,54 @@ async function csvWriter(req, res, next) {
 		return res.status(400).json({ errors: errors.array() });
 	}
 
-	const { dolphin_name, numMonths } = req.body;
-	const resultFeeding = await GoodFeedingService.getTestResultNMonths(dolphin_name, numMonths);
-	console.log('resultFeeding: ', resultFeeding);
-	const data = [];
-  	for (const month in resultFeeding) {
-    	data.push(...resultFeeding[month]);
-  	}
-    const csvWriter = createCsvWriter({
+	if (isUserAuth) {
+		const { user_id, name } = req.authData;
+		console.log('authdata: ', req.authData);
+		userID = user_id;
+		userName = name;
+		console.log('user name: ', userName);
+	} else {
+		userID = 1;
+	}
+	
+	let data = [];
+	let resultFeeding;
+	let resultHousing;
+	let resultHealth;
+	let resultBehaviour;
+	let resultEmotions;
+	let csvWriter;
+	let { dolphin_name, numMonths, section } = req.body;
+	
+	if(section === 'feeding') {
+	if (numMonths != '') {
+		if(dolphin_name != ''){
+			// Data of a specific dolphin_name and specific numMonths
+			resultFeeding = await GoodFeedingService.getTestResultNMonths(dolphin_name, numMonths);
+		} else {
+			// Data of all dolphins and specific numMonths
+			resultFeeding = await GoodFeedingService.getAllTestResultNMonths(numMonths);
+		}
+
+		// Save resultFeeding in data
+		for (const month in resultFeeding) {
+			data.push(...resultFeeding[month]);
+		}
+		resultFeeding = null; //reset feeding results
+	} else {
+		if(dolphin_name != '')
+		{
+			resultFeeding = await GoodFeedingService.getTestResultByDolphin(dolphin_name);
+		} else {
+			resultFeeding = await GoodFeedingService.getAllTestResults();
+		}
+
+		//console.log('result feeding: ', resultFeeding);
+		data = resultFeeding; //save the results of feeding tests in data
+		resultFeeding = null; //reset feedig results
+	}
+
+	csvWriter = createCsvWriter({
 		path: 'out2.csv',
 		header: [
 			{id: 'feeding_record_id', title: 'Feeding Record ID'},
@@ -55,7 +95,8 @@ async function csvWriter(req, res, next) {
 			{id: 'updated_at', title: 'Updated At'}
 		]
 	});
-	
+	}
+
 	csvWriter
 		.writeRecords(data)
 		.then(() => {
