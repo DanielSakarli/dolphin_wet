@@ -532,7 +532,7 @@
 	<ion-footer>
 			<ion-toolbar>
 				<ion-button color="light" slot="start"  @click="storeData">
-					Finish
+					{{$t('buttonFinish')}}
 				</ion-button>
 				<ion-button color="light" slot="end" @click="confirmRefresh">
 					<ion-icon src="/icons/arrow-forward-outline.svg"></ion-icon>

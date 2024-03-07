@@ -9,14 +9,6 @@ const { isUserAuth } = require('./authSwitch');
 const { validationResult } = require('express-validator');
 
 
-// Sample data
-const data = [
-	{ id: 1, name: 'John Doe', email: 'john@example.com' },
-	{ id: 2, name: 'Jane Smith', email: 'jane@example.com' },
-	// Add more data as needed
-  ];
-
-
 async function csvWriter(req, res, next) {
 	const errors = validationResult(req);
 	if (!errors.isEmpty()) {
@@ -96,6 +88,114 @@ async function csvWriter(req, res, next) {
 		]
 	});
 	}
+
+
+	if(section === 'housing') {
+		if (numMonths != '') {
+			if(dolphin_name != ''){
+				// Data of a specific dolphin_name and specific numMonths
+				resultHousing = await GoodHousingService.getTestResultNMonths(dolphin_name, numMonths);
+			} else {
+				// Data of all dolphins and specific numMonths
+				resultHousing = await GoodHousingService.getAllTestResultNMonths(numMonths);
+			}
+	
+			// Save resultFeeding in data
+			for (const month in resultHousing) {
+				data.push(...resultHousing[month]);
+			}
+			resultHousing = null; //reset feeding results
+		} else {
+			if(dolphin_name != '')
+			{
+				resultHousing = await GoodHousingService.getTestResultByDolphin(dolphin_name);
+			} else {
+				resultHousing = await GoodHousingService.getAllTestResults();
+			}
+	
+			//console.log('result feeding: ', resultFeeding);
+			data = resultHousing; //save the results of feeding tests in data
+			resultHousing = null; //reset feedig results
+		}
+	
+		csvWriter = createCsvWriter({
+			path: 'out2.csv',
+			header: [
+				{id: 'housing_record_id', title: 'Housing Record ID'},
+				{id: 'user_id', title: 'User ID'},
+				{id: 'user_name', title: 'User Name'},
+				{id: 'dolphin_id', title: 'Dolphin ID'},
+				{id: 'dolphin_name', title: 'Dolphin Name'},
+				{id: 'enclosure_barrier_safety', title: 'Enclosure Barrier Safety'},
+				{id: 'foreign_body_ingestion', title: 'Foreign Body Ingestion'},
+				{id: 'pool_design', title: 'Pool Design'},
+				{id: 'forced_loneliness', title: 'Forced Loneliness'},
+				{id: 'water_quality', title: 'Water Quality'},
+				{id: 'water_temperature', title: 'Water Temperature'},
+				{id: 'sufficient_shade', title: 'Sufficient Shade'},
+				{id: 'acoustic_comfort', title: 'Acoustic Comfort'},
+				//Comments
+				{id: 'enclosure_barrier_safety_comments', title: 'Enclosure Barrier Safety Comments'},
+				{id: 'foreign_body_ingestion_comments', title: 'Foreign Body Ingestion Comments'},
+				{id: 'pool_design_comments', title: 'Pool Design Comments'},
+				{id: 'forced_loneliness_comments', title: 'Forced Loneliness Comments'},
+				{id: 'water_quality_comments', title: 'Water Quality Comments'},
+				{id: 'water_temperature_comments', title: 'Water Temperature Comments'},
+				{id: 'sufficient_shade_comments', title: 'Sufficient Shade Comments'},
+				{id: 'acoustic_comfort_comments', title: 'Acoustic Comfort Comments'},
+				{id: 'created_at', title: 'Created At'},
+				{id: 'updated_at', title: 'Updated At'}
+			]
+		});
+		}
+
+		
+
+
+		if(section === 'health') {
+			if (numMonths != '') {
+				if(dolphin_name != ''){
+					// Data of a specific dolphin_name and specific numMonths
+					resultHealth = await GoodHealthService.getTestResultNMonths(dolphin_name, numMonths);
+				} else {
+					// Data of all dolphins and specific numMonths
+					resultHealth = await GoodHealthService.getAllTestResultNMonths(numMonths);
+				}
+		
+				// Save resultHealth in data
+				for (const month in resultHealth) {
+					data.push(...resultHealth[month]);
+				}
+				resultHealth = null; //reset health results
+			} else {
+				if(dolphin_name != '')
+				{
+					resultHealth = await GoodHealthService.getTestResultByDolphin(dolphin_name);
+				} else {
+					resultHealth = await GoodHealthService.getAllTestResults();
+				}
+		
+				//console.log('result feeding: ', resultFeeding);
+				data = resultHealth; //save the results of feeding tests in data
+				resultHealth = null; //reset feedig results
+			}
+		
+			csvWriter = createCsvWriter({
+				path: 'out2.csv',
+				header: [
+					{id: 'health_record_id', title: 'Health Record ID'},
+					{id: 'user_id', title: 'User ID'},
+					{id: 'user_name', title: 'User Name'},
+					{id: 'dolphin_id', title: 'Dolphin ID'},
+					{id: 'dolphin_name', title: 'Dolphin Name'},
+					
+					{id: 'created_at', title: 'Created At'},
+					{id: 'updated_at', title: 'Updated At'}
+				]
+			});
+			}
+		
+
 
 	csvWriter
 		.writeRecords(data)

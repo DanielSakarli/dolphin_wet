@@ -107,7 +107,7 @@ class DolphinDAO {
 			if (!dolphinToBeUpdate) {
 				throw new DolphinError(`Dolphin ${dolphinName} not found`, 404);
 			}
-
+			
 			const updatedDolphin = await dolphinToBeUpdate
 				.$query()
 				.patchAndFetch(updateInfo);
