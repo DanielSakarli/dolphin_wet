@@ -51,7 +51,7 @@
 		<!-- End of Criteria Selector -->
 
 		<!-- Description of Criteria -->
-		<ion-button fill="outline" @click="setOpenManual(true)">{{ $t('userManual') }}</ion-button>
+		<ion-button v-if="criteria" fill="outline" @click="setOpenManual(true)">{{ $t('userManual') }}</ion-button>
 
 		<ion-modal :is-open="isOpenManual">
 			<ion-header>
@@ -120,7 +120,7 @@
 
 		<!-- End of Description of Criteria -->
 		<!--Start of Scoring Description-->
-		<ion-button fill="outline" @click="setOpenScoring(true)">{{ $t('ScoringDescription') }}</ion-button>
+		<ion-button v-if="criteria" fill="outline" @click="setOpenScoring(true)">{{ $t('ScoringDescription') }}</ion-button>
 
 		<ion-modal :is-open="isOpenScoring">
 			<ion-header>
@@ -333,6 +333,8 @@ import CheckComments from '@/components/CheckComments.vue';
 import { useDolphinsStore }from '@/store/dolphinsStore';
 import { useEvaluationHousingStore }from '@/store/evaluationHousingStore';
 import { baseUrl } from '@/utils/baseUrl';
+import { toast } from 'vue3-toastify';
+import 'vue3-toastify/dist/index.css';
 
 const dolphinsStore = useDolphinsStore();
 const evaluationHousingStore = useEvaluationHousingStore();
@@ -475,7 +477,13 @@ export default {
 								console.log('Response:', response.data);
 								if (i === evaluationHousingStore.requestBodiesHousing.length - 1){
 									const targetUrl = '/detailHousing'; //'/folder/Evaluate';
-									this.$router.push(targetUrl);
+									toast.success('Data uploaded successfully', {
+										autoClose: 1000,
+									});
+									setTimeout(() => {
+										this.$router.push(targetUrl);
+									}, 2000);
+									//this.$router.push(targetUrl);
 									evaluationHousingStore.resetBodies();
 									this.dolphinSelect = null;
 									this.criteria = null;
@@ -484,7 +492,13 @@ export default {
 							.catch((error) => {
 								console.error('Error:', error.response.data);
 								const targetUrl = `/detailHousing`;
-								this.$router.push(targetUrl);
+								toast.error('Data upload failed! Check internet connectivity.', {
+										autoClose: 2000,
+									});
+									setTimeout(() => {
+										this.$router.push(targetUrl);
+									}, 3000);
+								//this.$router.push(targetUrl);
 							});
 				}
 			}

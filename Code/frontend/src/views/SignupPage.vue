@@ -77,6 +77,8 @@ import { IonInput } from '@ionic/vue';
 import { IonIcon } from '@ionic/vue';
 import axios from 'axios';
 import { baseUrl } from '@/utils/baseUrl';
+import { toast } from 'vue3-toastify';
+import 'vue3-toastify/dist/index.css';
 
 const url = baseUrl + '/api/users/register';
 
@@ -100,6 +102,12 @@ export default {
 				.post(url, requestBody, { withCredentials: true })
 				.then((response) => {
 					console.log('Response:', response.data);
+					toast.success('User registered successfully', {
+						autoClose: 1000,
+					});
+					setTimeout(() => {
+						this.$router.push('/login');
+					}, 2000);
 				})
 				.catch((error) => {
 					console.error('Error:', error.response.data);

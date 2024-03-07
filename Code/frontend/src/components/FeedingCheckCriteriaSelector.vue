@@ -43,7 +43,7 @@
 		<!-- End of Criteria Selector -->
 
 		<!-- Description of Criteria (UserManual) -->
-		<ion-button fill="outline" @click="setOpenManual(true)">{{ $t('userManual') }}</ion-button>
+		<ion-button v-if="criteria" fill="outline" @click="setOpenManual(true)">{{ $t('userManual') }}</ion-button>
 
 		<ion-modal :is-open="isOpenManual">
 			<ion-header>
@@ -82,7 +82,7 @@
 		</ion-modal>
 		<!-- End of Description of Criteria (UserManual)-->
 		<!--Start of Scoring Description-->
-		<ion-button fill="outline" @click="setOpenScoring(true)">{{ $t('ScoringDescription') }}</ion-button>
+		<ion-button v-if="criteria" fill="outline" @click="setOpenScoring(true)">{{ $t('ScoringDescription') }}</ion-button>
 
 		<ion-modal :is-open="isOpenScoring">
 			<ion-header>
@@ -160,7 +160,7 @@
 		</ion-modal>
 		<!--End of Scoring Description-->
 		<!--Start of Reference Area-->
-		<ion-button fill="outline" @click="setOpenReferenceArea(true)">{{ $t('ReferenceArea') }}</ion-button>
+		<ion-button v-if="criteria" fill="outline" @click="setOpenReferenceArea(true)">{{ $t('ReferenceArea') }}</ion-button>
 
 		<ion-modal :is-open="isOpenReferenceArea">
 			<ion-header>
@@ -331,6 +331,8 @@ import { useDolphinsStore }from '@/store/dolphinsStore';
 import { useEvaluationFeedingStore }from '@/store/evaluationFeedingStore';
 import { baseUrl } from '@/utils/baseUrl';
 import { chevronCollapseSharp } from 'ionicons/icons';
+import { toast } from 'vue3-toastify';
+import 'vue3-toastify/dist/index.css';
 
 const dolphinsStore = useDolphinsStore();
 const evaluationFeedingStore = useEvaluationFeedingStore();
@@ -523,7 +525,12 @@ export default {
 								console.log('Response:', response.data);
 								if (i === evaluationFeedingStore.requestBodiesFeeding.length - 1){
 									const targetUrl = '/detailFeeding'; //'/folder/Evaluate';
-									this.$router.push(targetUrl);
+									toast.success('Data uploaded successfully', {
+										autoClose: 1000,
+									});
+									setTimeout(() => {
+										this.$router.push(targetUrl);
+									}, 2000);
 									evaluationFeedingStore.resetBodies();
 									this.dolphinSelect = null;
 									this.criteria = null;
@@ -532,7 +539,14 @@ export default {
 							.catch((error) => {
 								console.error('Error:', error.response.data);
 								const targetUrl = `/detailFeeding`;
-								this.$router.push(targetUrl);
+								toast.error('Data upload failed! Check internet connectivity.', {
+										autoClose: 2000,
+									});
+									setTimeout(() => {
+										this.$router.push(targetUrl);
+									}, 3000);
+
+								//this.$router.push(targetUrl);
 							});
 				}
 			}

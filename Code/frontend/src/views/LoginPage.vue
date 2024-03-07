@@ -56,6 +56,14 @@ export default {
 			logo,
 		};
 	},
+	mounted() {
+		// When user loads the page /home the token is removed from the local storage
+		// So user has to log in again, otherwise he can´t navigate between the routes
+		// Route protection coded in index.ts. The localStorage setter is coded in LoginFormPage.vue
+		if (localStorage.getItem('token')) {
+			localStorage.removeItem('token');
+		}
+	},
 	methods: {
 		async loginUser() {
 			const requestBody = {

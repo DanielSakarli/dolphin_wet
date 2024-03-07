@@ -20,54 +20,56 @@
 			<ion-card>
 				<ion-icon name="heart" aria-hidden="true"></ion-icon>
 				<ion-card-content>
-					<ion-input
-						ref="input"
-						fill="solid"
-						label="Username"
-						label-placement="floating"
-						helper-text="Enter a valid username"
-						id="username"
-						v-model="username"
-					></ion-input>
-					<ion-input
-						ref="input"
-						type="password"
-						fill="solid"
-						label="Password"
-						label-placement="floating"
-						helper-text="Enter your password"
-						id="password"
-						v-model="password"
-					></ion-input>
-					<h5
-						style="
-							text-align: right;
-							color: #6370ff;
-							margin-bottom: 10px;
-							font-weight: 700;
-						"
-					>
-						Forget Passowrd?
-					</h5>
-					<ion-button color="primary" expand="block" @click="login"
-						>Login</ion-button
-					>
-					<!-- Error message, displayed in case username or password is wrong -->
-					<p v-if="errorMessage" class="error">{{ errorMessage }}</p>
-					<p style="text-align: center">
-						----------------- or -------------------
-					</p>
-					<ion-button
-						color="light"
-						style="
-							border: 1px solid gray;
-							border-radius: 15px;
-							margin-top: 10px;
-						"
-						expand="block"
-						router-link="/signup"
-						>Sign up</ion-button
-					>
+					<form @submit.prevent="login">
+						<ion-input
+							ref="input"
+							fill="solid"
+							label="Username"
+							label-placement="floating"
+							helper-text="Enter a valid username"
+							id="username"
+							v-model="username"
+						></ion-input>
+						<ion-input
+							ref="input"
+							type="password"
+							fill="solid"
+							label="Password"
+							label-placement="floating"
+							helper-text="Enter your password"
+							id="password"
+							v-model="password"
+						></ion-input>
+						<h5
+							style="
+								text-align: right;
+								color: #6370ff;
+								margin-bottom: 10px;
+								font-weight: 700;
+							"
+						>
+							Forget Password?
+						</h5>
+						<ion-button color="primary" expand="block" type="submit"
+							>Login</ion-button
+						>
+						<!-- Error message, displayed in case username or password is wrong -->
+						<p v-if="errorMessage" class="error">{{ errorMessage }}</p>
+						<p style="text-align: center">
+							----------------- or -------------------
+						</p>
+						<ion-button
+							color="light"
+							style="
+								border: 1px solid gray;
+								border-radius: 15px;
+								margin-top: 10px;
+							"
+							expand="block"
+							router-link="/signup"
+							>Sign up</ion-button
+						>
+					</form>
 				</ion-card-content>
 			</ion-card>
 		</div>
@@ -110,6 +112,11 @@ export default defineComponent({
 					console.log(
 						'Token that I get as a response from the server when I log in: ',
 						token
+					);
+					localStorage.setItem('token', token);
+					console.log(
+						'Saved in local storage: ',
+						localStorage.getItem('token')
 					);
 				})
 				.catch((error) => {

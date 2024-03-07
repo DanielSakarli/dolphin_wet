@@ -4,7 +4,7 @@
 			<ion-menu content-id="main-content" type="overlay">
 				<ion-content>
 					<ion-list id="page-list">
-						<ion-list-header>DoliMo</ion-list-header>
+						<ion-list-header>Dolphin WET</ion-list-header>
 						<ion-menu-toggle
 							:auto-hide="false"
 							v-for="(p, i) in appPages"
@@ -82,6 +82,17 @@ export default defineComponent({
 		IonMenuToggle,
 		IonSplitPane,
 	},
+	computed: {
+		isLoggedIn() {
+			console.log('token: ', localStorage.getItem('token'));
+			return !!this.token;
+		},
+	},
+	watch: {
+		token() {
+			this.token = localStorage.getItem('token');
+		},
+	},
 	methods: {
 		changeLanguage($event: any) {
 			this.$i18n.locale = $event.detail.value;
@@ -90,6 +101,7 @@ export default defineComponent({
 	data() {
 		return {
 			selectedIndex: 0,
+			token: localStorage.getItem('token'),
 			appPages: [
 				{
 					title: 'Evaluate',

@@ -110,7 +110,7 @@
 		<!-- End of Criteria Selector -->
 
 		<!-- Description of Criteria (UserManual) -->
-		<ion-button fill="outline" @click="setOpenManual(true)">{{ $t('userManual') }}</ion-button>
+		<ion-button v-if="criteria" fill="outline" @click="setOpenManual(true)">{{ $t('userManual') }}</ion-button>
 
 		<ion-modal :is-open="isOpenManual">
 			<ion-header>
@@ -232,7 +232,7 @@
 		</ion-modal>
 		<!-- End of Description of Criteria (UserManual)-->
 		<!--Start of Scoring Description-->
-		<ion-button fill="outline" @click="setOpenScoring(true)">{{ $t('ScoringDescription') }}</ion-button>
+		<ion-button v-if="criteria" fill="outline" @click="setOpenScoring(true)">{{ $t('ScoringDescription') }}</ion-button>
 
 		<ion-modal :is-open="isOpenScoring">
 			<ion-header>
@@ -553,6 +553,8 @@ import axios from 'axios';
 import { useDolphinsStore }from '@/store/dolphinsStore';
 import { useEvaluationBehaviourStore }from '@/store/evaluationBehaviourStore';
 import { baseUrl } from '@/utils/baseUrl';
+import { toast } from 'vue3-toastify';
+import 'vue3-toastify/dist/index.css';
 
 const dolphinsStore = useDolphinsStore();
 const evaluationBehaviourStore = useEvaluationBehaviourStore();
@@ -673,7 +675,14 @@ export default {
 								console.log('Response:', response.data);
 								if (i === evaluationBehaviourStore.requestBodiesBehaviour.length - 1){
 									const targetUrl = '/folder/Evaluate';
-									this.$router.push(targetUrl);
+									toast.success('Data uploaded successfully', {
+										autoClose: 1000,
+									});
+									setTimeout(() => {
+										this.$router.push(targetUrl);
+									}, 2000);
+
+									//this.$router.push(targetUrl);
 									evaluationBehaviourStore.resetBodies();
 									this.dolphinSelect = null;
 									this.criteria = null;
@@ -682,7 +691,13 @@ export default {
 							.catch((error) => {
 								console.error('Error:', error.response.data);
 								const targetUrl = `/detailBehaviour`;
-								this.$router.push(targetUrl);
+								toast.error('Data upload failed! Check internet connectivity.', {
+										autoClose: 2000,
+									});
+									setTimeout(() => {
+										this.$router.push(targetUrl);
+									}, 3000);
+								//this.$router.push(targetUrl);
 							});
 				}
 			}

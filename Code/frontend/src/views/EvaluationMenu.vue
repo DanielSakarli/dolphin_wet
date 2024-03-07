@@ -5,7 +5,7 @@
 				<ion-buttons slot="start">
 					<ion-menu-button></ion-menu-button>
 				</ion-buttons>
-				<ion-title>DoliMo - DolphinMonitoring</ion-title>
+				<ion-title>Dolphin WET</ion-title>
 			</ion-toolbar>
 		</ion-header>
 		<ion-content>
@@ -87,6 +87,12 @@ export default {
 				.catch((e) => {
 					console.error(e);
 				});
+		},
+		isLoggedIn() {
+			if (sessionStorage.getItem('token')) {
+				return true;
+			}
+			return false;
 		},
 		changeLanguage($event: any) {
 			this.$i18n.locale = $event.detail.value;
