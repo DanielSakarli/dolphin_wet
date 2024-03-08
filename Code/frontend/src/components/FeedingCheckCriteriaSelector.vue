@@ -451,9 +451,9 @@ export default {
 			for(let k = 0; k < evaluationFeedingStore.requestBodiesFeeding.length; k++){
 				//k stands for the different dolphins. It iterates through the array of dolphins in requestBodiesFeeding.json
 				if(this.dolphinSelect === evaluationFeedingStore.requestBodiesFeeding[k]["dolphin_name"]) {
-					if (this.dolphinSelect!== null){
+					/*if (this.dolphinSelect!== null){
 						evaluationFeedingStore.requestBodiesFeeding[k]["dolphin_name"] = this.dolphinSelect;
-					}
+					}*/
 					evaluationFeedingStore.requestBodiesFeeding[k]["weight_measured"] = parseFloat(this.weight_measured);
 					for(let i = 0; i < this.CheckboxArray.length; i++){
 						for(let j = 0; j < this.CheckboxArray[i].length; j++){
