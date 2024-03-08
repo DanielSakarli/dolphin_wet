@@ -10,7 +10,10 @@
 					okText="OK"
 					:cancelText="firstcancelText"		
 					v-model="dolphinSelect"
+					multiple
+					@ionChange="checkAllDolphinsSelected"
 					> 
+					<ion-select-option value="all">All dolphins</ion-select-option>
 					<ion-select-option v-for="dolphin in dolphinsStore.dolphinList" v-bind:key="dolphin.name">
 						{{dolphin.name}}
 					</ion-select-option>
@@ -378,7 +381,7 @@ export default {
 			//dolphins: [] as {name: string}[],
 			//dolphinsStore: useDolphinsStore(),
 			dolphinsStore: dolphinsStore,
-			dolphinSelect: null as string | null,
+			dolphinSelect: [] as string[], //null as string | null,
 			criteria: null as string | null,
 			subcriteria: '',
 			firstlabel: this.$t('dolphin'),
@@ -398,18 +401,6 @@ export default {
 			//dolphinList: [] as {name: string}[],
 			urlDolphins: baseUrl + '/api/dolphins', //'http://88395-17112.pph-server.de/api/dolphins', //the api route to get the dolphins
 			urlPost: baseUrl + '/api/good_feeding', //'http://88395-17112.pph-server.de/api/good_feeding',
-			// Body for posting of data
-			/*requestBody: {
-				dolphin_name: null as string | null,
-				body_condition_score: null as number | null,
-				weight: 3,
-				weight_measured: null as number | null,
-				kcal_calculations: null as number | null,
-				blood_hydration: null as number | null,
-				fish_quality: null as number | null,
-				fish_variety: null as number | null
-      		},*/
-			//userComment: ''
 			body_condition_score_comments: '',
 			weight_measured_comments: '',
 			kcal_calculations_comments: '',
@@ -431,6 +422,12 @@ export default {
 		setOpenReferenceArea(isOpen: boolean) {
 			this.isOpenReferenceArea = isOpen;
 		},
+		// ion-select method to check if all dolphins are selected
+		checkAllDolphinsSelected() {
+			if (this.dolphinSelect.includes('all')) {
+				this.dolphinSelect = this.dolphinsStore.dolphinList.map(dolphin => dolphin.name);
+			}
+		},
 		//Method uses boolean array. So no multiple checking for one test is possible. --> Every test can have one checked Checkbox
 		handleClick(row: number, column: number) {
 		console.log(this.CheckboxArray, row, column);
@@ -450,7 +447,8 @@ export default {
 		storeCheckedValues() {
 			for(let k = 0; k < evaluationFeedingStore.requestBodiesFeeding.length; k++){
 				//k stands for the different dolphins. It iterates through the array of dolphins in requestBodiesFeeding.json
-				if(this.dolphinSelect === evaluationFeedingStore.requestBodiesFeeding[k]["dolphin_name"]) {
+				//if(this.dolphinSelect === evaluationFeedingStore.requestBodiesFeeding[k]["dolphin_name"]) {
+					if(this.dolphinSelect.includes(evaluationFeedingStore.requestBodiesFeeding[k]["dolphin_name"])) {
 					/*if (this.dolphinSelect!== null){
 						evaluationFeedingStore.requestBodiesFeeding[k]["dolphin_name"] = this.dolphinSelect;
 					}*/
