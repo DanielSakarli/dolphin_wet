@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory } from '@ionic/vue-router';
 import { RouteRecordRaw } from 'vue-router';
+
 // import EvaluationMenu from '@/views/EvaluationMenu.vue';
 
 const routes: Array<RouteRecordRaw> = [
@@ -42,26 +43,31 @@ const routes: Array<RouteRecordRaw> = [
 		path: '/detailHealth',
 		name: 'DetailHealth',
 		component: () => import('@/views/HealthIndicatorCollector.vue'),
+		meta: { requiresAuth: false },
 	},
 	{
 		path: '/detailBehaviour',
 		name: 'DetailBehaviour',
 		component: () => import('@/views/BehaviourIndicatorCollector.vue'),
+		meta: { requiresAuth: false },
 	},
 	{
 		path: '/detailEmotionalState',
 		name: 'DetailEmotionalState',
 		component: () => import('@/views/EmotionalStateIndicatorCollector.vue'),
+		meta: { requiresAuth: false },
 	},
 	{
 		path: '/detailFeeding',
 		name: 'DetailFeeding',
 		component: () => import('@/views/FeedingIndicatorCollector.vue'),
+		meta: { requiresAuth: false },
 	},
 	{
 		path: '/detailHousing',
 		name: 'DetailHousing',
 		component: () => import('@/views/HousingIndicatorCollector.vue'),
+		meta: { requiresAuth: false },
 	},
 ];
 
@@ -74,21 +80,38 @@ const router = createRouter({
 // then the user is redirected to the login page if he clicks
 // on the Evaluate, Dolphins, or View Data button of the menu
 // If login successful, the token is stored in the localStorage
-router.beforeEach((to, from, next) => {
+/*router.beforeEach((to, from, next) => {
 	// Check if the route requires authentication
 	if (to.matched.some((record) => record.meta.requiresAuth)) {
 		// Check if the user is not logged in
-		if (!localStorage.getItem('token')) {
-			// Redirect to the login page
-			next({ path: '/login' });
+
+		// Check if dataInBody is present in localStorage
+		// dataInBody is a flag that indicates if the user
+		// has unsaved data in the CheckCriteriaSelector
+		// vue files.
+		if (localStorage.getItem('dataInBody') === 'true') {
+			// Show a warning message to the user
+
+			if (
+				window.confirm(
+					'Warning: You have unsaved data. Are you sure you want to leave?'
+				)
+			) {
+				// If the user confirms, proceed to the route
+				localStorage.setItem('dataInBody', 'false');
+				next();
+			} else {
+				// If the user cancels, stop navigation
+				next(false);
+			}
 		} else {
-			// Proceed to the route
+			// If dataInBody is not present in localStorage, proceed to the route
 			next();
 		}
 	} else {
 		// If the route does not require authentication, proceed to the route
 		next();
 	}
-});
+});*/
 
 export default router;

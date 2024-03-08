@@ -329,11 +329,12 @@
 </template>
 
 <script lang="ts">
-import {IonItem, IonList, IonSelect, IonSelectOption, IonLabel, IonModal,
+import {IonAlert, IonItem, IonList, IonSelect, IonSelectOption, IonLabel, IonModal,
 	IonHeader, IonToolbar, IonContent, IonTitle, IonButtons, IonButton,
 	IonText, IonCheckbox, IonInput, IonRange, IonCard, IonCardTitle, IonFooter,
 	IonIcon
 } from '@ionic/vue';
+import { alertController } from '@ionic/vue';
 import axios from 'axios';
 import CheckComments from '@/components/CheckComments.vue';
 import { useDolphinsStore }from '@/store/dolphinsStore';
@@ -343,9 +344,13 @@ import { chevronCollapseSharp } from 'ionicons/icons';
 import { toast } from 'vue3-toastify';
 import 'vue3-toastify/dist/index.css';
 
+
+
+
 const dolphinsStore = useDolphinsStore();
 const evaluationFeedingStore = useEvaluationFeedingStore();
 //dolphinsStore.fill();
+let dataInBody; //Variable which gets saved in localstorage with either true or false, depending if data is in checkboxes or evaluationFeedingStore
 const token = localStorage.getItem('token'); //Get current JWT token of the user
 console.log('Token accessed from localStorage: ', token);
 
@@ -362,9 +367,21 @@ console.log('This token is set in a cookie (client-side): ', document.cookie);
 
 
 export default {
+	
+	beforeRouteLeave(to, from, next) {
+		console.log('I am here');
+		next(false);
+    /*this.showAlert().then(() => {
+      // If the user confirmed the dialog, continue navigation
+      next();
+    }).catch(() => {
+      // If the user cancelled the dialog, cancel navigation
+      next(false);
+    });*/
+  },
 	components: {
 		// needed Vue components:
-		IonItem, IonList, IonSelect, IonSelectOption, IonLabel, IonModal, IonHeader,
+		IonAlert, IonItem, IonList, IonSelect, IonSelectOption, IonLabel, IonModal, IonHeader,
 		IonToolbar, IonContent, IonTitle, IonButtons, IonButton, IonText, IonCheckbox,
 		IonInput, IonRange, IonCard, IonCardTitle, CheckComments, IonFooter, IonIcon, 
 	},
@@ -373,6 +390,8 @@ export default {
 		// mounted. But only if there is internet connectivity. If not, the displayed
 		// reference areas are the ones from the animalList.json
    		await dolphinsStore.fill();
+		// Call showAlert method when the component is mounted
+		this.showAlert();
 	},
 	/*props: {
 		userComment: {
@@ -384,6 +403,7 @@ export default {
 		return {
 			// Variables:
 			language: 'en',
+			dialog: false,
 			//dolphins: [] as {name: string}[],
 			//dolphinsStore: useDolphinsStore(),
 			dolphinsStore: dolphinsStore,
@@ -416,6 +436,39 @@ export default {
 		};
 	},
 	methods: {
+		async showAlert() {
+      
+			const alert = await alertController.create({
+			header: 'Confirmation',
+			message: 'Are you sure you want to proceed?',
+			buttons: [
+			{
+			text: 'Cancel',
+			role: 'cancel',
+			cssClass: 'secondary',
+			handler: () => {
+				//Code here what should happen when 'Cancel' is clicked
+			console.log('Cancel clicked');
+			}
+			}, {
+			text: 'OK',
+			handler: () => {
+				//Code here what should happen when 'OK' is clicked
+			console.log('Confirm Okay');
+			// Put your logic here for what should happen when 'OK' is clicked
+			}
+			}
+			]
+			});
+				/*const alert = await alertController
+			.create({
+			header: 'Alert',
+			subHeader: 'Subtitle',
+			message: 'This is an alert message.',
+			buttons: ['OK']
+			});*/
+			return alert.present();
+    	},
 		//Method to open the manual
         setOpenManual(isOpen: boolean) {
             this.isOpenManual = isOpen;
@@ -437,6 +490,8 @@ export default {
 		//Method uses boolean array. So no multiple checking for one test is possible. --> Every test can have one checked Checkbox
 		handleClick(row: number, column: number) {
 		console.log(this.CheckboxArray, row, column);
+		
+
 
 			if (this.CheckboxArray[row][column]){
 				this.CheckboxArray[row][column] = false;
@@ -448,6 +503,8 @@ export default {
 					this.CheckboxArray[row][i] = false;
 				}
 			}
+		dataInBody = true;
+		localStorage.setItem('dataInBody', dataInBody.toString());
     	},
 		// Method to collect the checked checkboxes and give request Body the scores
 		storeCheckedValues() {
@@ -489,6 +546,8 @@ export default {
 					}
 				}
 			}
+			dataInBody = true;
+			localStorage.setItem('dataInBody', dataInBody.toString());
 		},
 		
 		//Methods to update the comments
@@ -532,6 +591,10 @@ export default {
 										autoClose: 1000,
 									});
 									setTimeout(() => {
+										// Set flag to false, so if user wants to go to another route he can
+										// without losing data, because data is now successfully uploaded
+										dataInBody = false;
+										localStorage.setItem('dataInBody', dataInBody.toString());
 										this.$router.push(targetUrl);
 									}, 2000);
 									evaluationFeedingStore.resetBodies();
@@ -546,10 +609,10 @@ export default {
 										autoClose: 2000,
 									});
 									setTimeout(() => {
+										dataInBody = false;
+										localStorage.setItem('dataInBody', dataInBody.toString());
 										this.$router.push(targetUrl);
 									}, 3000);
-
-								//this.$router.push(targetUrl);
 							});
 				}
 			}
@@ -561,8 +624,10 @@ export default {
 				console.log(evaluationFeedingStore.requestBodiesFeeding)
 				this.dolphinSelect = null;
 				this.criteria = null;
-				const currentPath = this.$route.path;
+				//const currentPath = this.$route.path;
 				const targetUrl = `/detailFeeding`;
+				// No need to check if dataInBody true or false, because /detailFeeding doesn´t
+				// need to be protected from losing data
 				this.$router.push(targetUrl);
 			}	
     	},
@@ -583,8 +648,7 @@ export default {
 				console.error(e);
 				});
 		},*/
-	}
-
+	},
 };
 </script>
 

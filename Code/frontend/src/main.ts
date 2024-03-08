@@ -46,6 +46,11 @@ const app = createApp(App).use(IonicVue).use(router).use(i18n);
 app.component('base-layout', BaseLayout);
 app.use(pinia);
 
+///////////////////////////////////////////////////
+import Vue3ConfirmDialog from 'vue3-confirm-dialog';
+import 'vue3-confirm-dialog/style';
+app.use(Vue3ConfirmDialog);
+app.component('vue3-confirm-dialog', Vue3ConfirmDialog.default)
 //app.use(VueAxios, axios)
 //app.provide('axios', app.config.globalProperties.axios)  // provide 'axios'
 //app.mount('#app')

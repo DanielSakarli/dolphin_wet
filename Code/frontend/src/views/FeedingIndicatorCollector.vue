@@ -5,7 +5,8 @@
 			<ion-toolbar>
 				<ion-title>{{ $t('topicFeeding') }} </ion-title>
 				<ion-buttons slot="start">
-					<ion-back-button defaultHref="/folder/Evaluate"></ion-back-button>
+					<!--<ion-back-button defaultHref="/folder/Evaluate"></ion-back-button>-->
+					<ion-back-button @click="handleBackButtonClick"></ion-back-button>
 				</ion-buttons>
 			</ion-toolbar>
 		</ion-header>
@@ -45,6 +46,7 @@ import {
 	IonButton,
 	IonButtons,
 	IonBackButton,
+	alertController,
 } from '@ionic/vue';
 // Import customized components
 import FeedingCheckCriteriaSelector from '@/components/FeedingCheckCriteriaSelector.vue';
@@ -111,6 +113,41 @@ export default defineComponent({
 			this.updateUserComment(this.userComment);
 			console.log('userComment: ', this.userComment);
 		},
+		async handleBackButtonClick() {
+			//Call here the showAlert()
+			console.log('Back button clicked');
+			await this.showAlert();
+			this.$router.back();
+		},
+		async showAlert() {
+			return new Promise(async (resolve, reject) => {
+				const alert = await alertController.create({
+					header: 'Confirmation',
+					message: 'Are you sure you want to proceed?',
+					buttons: [
+						{
+							text: 'Cancel',
+							role: 'cancel',
+							cssClass: 'secondary',
+							handler: () => {
+								console.log('Cancel clicked');
+								reject();
+							},
+						},
+						{
+							text: 'OK',
+							handler: () => {
+								console.log('Confirm Okay');
+								resolve(void 0);
+							},
+						},
+					],
+				});
+
+				return alert.present();
+			});
+		},
+
 		async storeData() {
 			const confirmed = confirm(this.$t('savingDataNext'));
 			// Check in console if token is correct
