@@ -180,7 +180,7 @@
 			<ion-content class="ion-padding">
 				<p v-if=" criteria === 'firstCriteriaFeeding'">
 					<!--Here are the values of reference area-->
-					<h3>Body Condition Score:</h3>
+					<h3>Wanted weight area:</h3>
 					<div v-if="dolphinSelect">
 						<div v-for="selectedDolphin in dolphinSelect" :key="selectedDolphin">
 							<h4>{{ selectedDolphin }}</h4>
@@ -189,7 +189,7 @@
 							  {{ 
 								(dolphinsStore.dolphinList.find(
 								  (dolphin) => dolphin.name === selectedDolphin
-								)?.min_body_condition_score) ?? null
+								)?.min_weight_measured) ?? null
 							  }}
 							</p>
 							<p>
@@ -197,7 +197,7 @@
 							  {{ 
 								(dolphinsStore.dolphinList.find(
 								  (dolphin) => dolphin.name === selectedDolphin
-								)?.max_body_condition_score) ?? null
+								)?.max_weight_measured) ?? null
 							  }}
 							</p>
 						  </div>

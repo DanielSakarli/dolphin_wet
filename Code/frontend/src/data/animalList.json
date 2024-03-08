@@ -18,8 +18,8 @@
         "on_site": 1,
         "year_of_birth": "2007",
         "place_of_birth": "Duisburg Zoo",
-        "min_body_condition_score": 15,
-        "max_body_condition_score": 19,
+        "min_weight_measured": 15,
+        "max_weight_measured": 19,
         "min_kcal_calculations": 4600,
         "max_kcal_calculations": 4800
     },
@@ -30,8 +30,8 @@
         "on_site": 1,
         "year_of_birth": "1987",
         "place_of_birth": "Wild Born",
-        "min_body_condition_score": 13,
-        "max_body_condition_score": 16,
+        "min_weight_measured": 13,
+        "max_weight_measured": 16,
         "min_kcal_calculations": 4200,
         "max_kcal_calculations": 4400
     },
@@ -42,8 +42,8 @@
         "on_site": 1,
         "year_of_birth": "2014",
         "place_of_birth": "Nuremburg Zoo",
-        "min_body_condition_score": 15,
-        "max_body_condition_score": 18,
+        "min_weight_measured": 15,
+        "max_weight_measured": 18,
         "min_kcal_calculations": 4600,
         "max_kcal_calculations": 4800
     },
@@ -54,8 +54,8 @@
         "on_site": 1,
         "year_of_birth": "1983",
         "place_of_birth": "Wild Born",
-        "min_body_condition_score": 18,
-        "max_body_condition_score": 20,
+        "min_weight_measured": 18,
+        "max_weight_measured": 20,
         "min_kcal_calculations": 4800,
         "max_kcal_calculations": 5000
     },
@@ -66,8 +66,8 @@
         "on_site": 1,
         "year_of_birth": "1999",
         "place_of_birth": "Heidepark Soltau",
-        "min_body_condition_score": 15,
-        "max_body_condition_score": 18,
+        "min_weight_measured": 15,
+        "max_weight_measured": 18,
         "min_kcal_calculations": 4600,
         "max_kcal_calculations": 4800
     },
@@ -78,8 +78,8 @@
         "on_site": 1,
         "year_of_birth": "2011",
         "place_of_birth": "Duisburg Zoo",
-        "min_body_condition_score": 15,
-        "max_body_condition_score": 17,
+        "min_weight_measured": 15,
+        "max_weight_measured": 17,
         "min_kcal_calculations": 3200,
         "max_kcal_calculations": 3900
     }

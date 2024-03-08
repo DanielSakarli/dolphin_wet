@@ -19,18 +19,18 @@ const dolphinPostValidateRequestBody = [
 		.isInt({ min: 1900, max: new Date().getFullYear() })
 		.withMessage('Invalid year of birth'),
 	body('place_of_birth').notEmpty().withMessage('Place of birth is required'),
-	body('min_body_condition_score')
-		.isInt({ min: 0, max: 100 })
-		.withMessage('Invalid min body condition score'),
-	body('max_body_condition_score')
-		.isInt({ min: 0, max: 100 })
-		.withMessage('Invalid max body condition score'),
+	body('min_weight_measured')
+		.isInt({ min: 0, max: 1000 })
+		.withMessage('Invalid minimum wanted weight'),
+	body('max_weight_measured')
+		.isInt({ min: 0, max: 1000 })
+		.withMessage('Invalid maximum wanted weight'),
 	body('min_kcal_calculations')
-		.isInt({ min: 0, max: 20000 })
-		.withMessage('Invalid min kcal calculations'),
+		.isInt({ min: 0, max: 30000 })
+		.withMessage('Invalid minimum kcal calculations'),
 	body('max_kcal_calculations')
-		.isInt({ min: 0, max: 20000 })
-		.withMessage('Invalid max kcal calculations'),
+		.isInt({ min: 0, max: 30000 })
+		.withMessage('Invalid maximum kcal calculations'),
 
 ];
 
@@ -44,8 +44,8 @@ const dolphinPatchValidateRequestBody = [
 			'sex',
 			'year_of_birth',
 			'place_of_birth',
-			'min_body_condition_score',
-			'max_body_condition_score',
+			'min_weight_measured',
+			'max_weight_measured',
 			'min_kcal_calculations',
 			'max_kcal_calculations',
 		];

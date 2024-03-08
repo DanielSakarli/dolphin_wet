@@ -15,10 +15,10 @@ exports.up = function (knex) {
 			table.string('place_of_birth');
 			
 			// Reference areas for the dolphins
-			table.tinyint('min_body_condition_score').unsigned();
-			table.tinyint('max_body_condition_score').unsigned();
-			table.tinyint('min_kcal_calculations').unsigned();
-			table.tinyint('max_kcal_calculations').unsigned();
+			table.smallint('min_weight_measured').unsigned();
+			table.smallint('max_weight_measured').unsigned();
+			table.smallint('min_kcal_calculations').unsigned();
+			table.smallint('max_kcal_calculations').unsigned();
 
 			table.timestamps(false, true); //Timestamp: created at, updated at
 		}),

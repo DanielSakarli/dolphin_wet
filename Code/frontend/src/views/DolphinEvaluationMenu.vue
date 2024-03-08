@@ -5,7 +5,7 @@
 				<ion-buttons slot="start">
 					<ion-menu-button></ion-menu-button>
 				</ion-buttons>
-				<ion-title>Dolphin WET - Welfare Evaluation Tool</ion-title>
+				<ion-title>Dolphin WET</ion-title>
 			</ion-toolbar>
 		</ion-header>
 		<ion-content>
@@ -33,16 +33,82 @@
 				</ion-header>
 				<ion-content>
 					<form @submit.prevent="submitEdit">
-						<ion-list v-for="(value, key) in currentDolphinValues" :key="key">
-							<ion-item>
-								<ion-label position="stacked">{{ key }}</ion-label>
-								<ion-input
-									v-model="currentDolphinValues![key]"
-									:id="key"
-									:placeholder="key"
-								></ion-input>
-							</ion-item>
-						</ion-list>
+						<ion-item>
+							<ion-label position="stacked">Name</ion-label>
+							<ion-input
+								v-model="currentDolphinValues.name"
+								id="name"
+								placeholder="Enter name"
+							></ion-input>
+						</ion-item>
+						<ion-item>
+							<ion-label position="stacked">Sex</ion-label>
+							<ion-input
+								v-model="currentDolphinValues.sex"
+								id="sex"
+								placeholder="Enter sex"
+							></ion-input>
+						</ion-item>
+						<ion-item>
+							<ion-label position="stacked">On Site</ion-label>
+							<ion-input
+								v-model="currentDolphinValues.on_site"
+								id="on_site"
+								placeholder="Enter status (1: on-site, 0: not on-site)"
+							></ion-input>
+						</ion-item>
+						<ion-item>
+							<ion-label position="stacked">Year of Birth</ion-label>
+							<ion-input
+								v-model="currentDolphinValues.year_of_birth"
+								id="year_of_birth"
+								placeholder="Enter year of birth"
+							></ion-input>
+						</ion-item>
+						<ion-item>
+							<ion-label position="stacked">Place of Birth</ion-label>
+							<ion-input
+								v-model="currentDolphinValues.place_of_birth"
+								id="place_of_birth"
+								placeholder="Enter place of birth"
+							></ion-input>
+						</ion-item>
+						<ion-item>
+							<ion-label position="stacked">Minimum Wanted Weight</ion-label>
+							<ion-input
+								v-model="currentDolphinValues.min_weight_measured"
+								id="min_weight_measured"
+								placeholder="Enter minimum wanted weight"
+							></ion-input>
+						</ion-item>
+						<ion-item>
+							<ion-label position="stacked">Maximum Wanted Weight</ion-label>
+							<ion-input
+								v-model="currentDolphinValues.max_weight_measured"
+								id="max_weight_measured"
+								placeholder="Enter maximum wanted weight"
+							></ion-input>
+						</ion-item>
+						<ion-item>
+							<ion-label position="stacked"
+								>Minimum Kcal Calculations</ion-label
+							>
+							<ion-input
+								v-model="currentDolphinValues.min_kcal_calculations"
+								id="min_kcal_calculations"
+								placeholder="Enter minimum kcal calculations"
+							></ion-input>
+						</ion-item>
+						<ion-item>
+							<ion-label position="stacked"
+								>Maximum Kcal Calculations</ion-label
+							>
+							<ion-input
+								v-model="currentDolphinValues.max_kcal_calculations"
+								id="max_kcal_calculations"
+								placeholder="Enter maximum kcal calculations"
+							></ion-input>
+						</ion-item>
 						<ion-button expand="full" type="submit" @click="submitEdit">
 							Save Changes
 						</ion-button>
@@ -50,7 +116,7 @@
 				</ion-content>
 			</ion-modal>
 			<!-- Card content of each dolphin -->
-			<ion-card v-if="currentDolphin">
+			<ion-card v-if="currentDolphin?.name">
 				<ion-card-title>{{ currentDolphin.name }}</ion-card-title>
 				<ion-item>
 					<ion-label>Sex:</ion-label>
@@ -69,12 +135,12 @@
 					<ion-text>{{ currentDolphin.place_of_birth }}</ion-text>
 				</ion-item>
 				<ion-item>
-					<ion-label>Minimum Body Condition Score:</ion-label>
-					<ion-text>{{ currentDolphin.min_body_condition_score }}</ion-text>
+					<ion-label>Minimum Wanted Weight:</ion-label>
+					<ion-text>{{ currentDolphin.min_weight_measured }}</ion-text>
 				</ion-item>
 				<ion-item>
-					<ion-label>Maximum Body Condition Score:</ion-label>
-					<ion-text>{{ currentDolphin.max_body_condition_score }}</ion-text>
+					<ion-label>Maximum Wanted Weight:</ion-label>
+					<ion-text>{{ currentDolphin.max_weight_measured }}</ion-text>
 				</ion-item>
 				<ion-item>
 					<ion-label>Minimum Kcal Calculations:</ion-label>
@@ -168,8 +234,8 @@ interface Dolphin {
 	on_site: number;
 	year_of_birth: number;
 	place_of_birth: string;
-	min_body_condition_score: number;
-	max_body_condition_score: number;
+	min_weight_measured: number;
+	max_weight_measured: number;
 	min_kcal_calculations: number;
 	max_kcal_calculations: number;
 	created_at: string;
@@ -201,6 +267,34 @@ export default {
 			this.$i18n.locale = $event.detail.value;
 		},
 	},
+	shouldDisplayKey(key) {
+		const keysToDisplay = [
+			'name',
+			'sex',
+			'on_site',
+			'year_of_birth',
+			'place_of_birth',
+			'min_weight_measured',
+			'max_weight_measured',
+			'min_kcal_calculations',
+			'max_kcal_calculations',
+		];
+		return keysToDisplay.includes(key);
+	},
+	getPlaceholder(key) {
+		const placeholders = {
+			name: 'Enter name',
+			sex: 'Enter sex',
+			on_site: 'Enter status (1: on-site, 0: not on-site)',
+			year_of_birth: 'Enter year of birth',
+			place_of_birth: 'Enter place of birth',
+			min_weight_measured: 'Enter minimum wanted weight',
+			max_weight_measured: 'Enter maximum wanted weight',
+			min_kcal_calculations: 'Enter minimum kcal calculations',
+			max_kcal_calculations: 'Enter maximum kcal calculations',
+		};
+		return placeholders[key] || key;
+	},
 	data() {
 		return {
 			currentDolphinValues: {
@@ -210,8 +304,8 @@ export default {
 				on_site: null,
 				year_of_birth: null,
 				place_of_birth: '',
-				min_body_condition_score: null,
-				max_body_condition_score: null,
+				min_weight_measured: null,
+				max_weight_measured: null,
 				min_kcal_calculations: null,
 				max_kcal_calculations: null,
 			},
@@ -356,10 +450,8 @@ export default {
 				on_site: currentDolphinValues.value?.on_site,
 				year_of_birth: currentDolphinValues.value?.year_of_birth.toString(),
 				place_of_birth: currentDolphinValues.value?.place_of_birth.toString(),
-				min_body_condition_score:
-					currentDolphinValues.value?.min_body_condition_score,
-				max_body_condition_score:
-					currentDolphinValues.value?.max_body_condition_score,
+				min_weight_measured: currentDolphinValues.value?.min_weight_measured,
+				max_weight_measured: currentDolphinValues.value?.max_weight_measured,
 				min_kcal_calculations:
 					currentDolphinValues.value?.min_kcal_calculations,
 				max_kcal_calculations:
@@ -377,7 +469,13 @@ export default {
 				.then((response) => {
 					console.log('Response:', response.data);
 					closeEditModal();
+					console.log('Current dolphin: ', currentDolphin.value?.name);
 					fetchDolphins();
+					// Set current dolphin name to null and then again to name
+					// Because than the ion-card with the new dolphin data will be updated
+					if (currentDolphin.value !== null) {
+						currentDolphin.value.name = null; //closes the ion-card
+					}
 				})
 				.catch((error) => {
 					console.error('Error:', error.response.data);
@@ -400,8 +498,8 @@ export default {
 				on_site: 0,
 				year_of_birth: new Date().getFullYear(),
 				place_of_birth: '',
-				min_body_condition_score: 0,
-				max_body_condition_score: 0,
+				min_weight_measured: 0,
+				max_weight_measured: 0,
 				min_kcal_calculations: 0,
 				max_kcal_calculations: 0,
 				created_at: '',
