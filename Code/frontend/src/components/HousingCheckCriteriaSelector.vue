@@ -3,17 +3,20 @@
 		<!-- Criteria Selector -->
 		<ion-list>
 			<ion-item>
-					<ion-select
-						:label="firstlabel"
-						:placeholder="firstplaceholder"
-						okText="OK"
-						:cancelText="firstcancelText"		
-						v-model="dolphinSelect"
-						>
-						<ion-select-option v-for="dolphin in dolphinsStore.dolphinList" v-bind:key="dolphin.name">
-							{{dolphin.name}}
-						</ion-select-option>
-					</ion-select>
+				<ion-select
+					:label="firstlabel"
+					:placeholder="firstplaceholder"
+					okText="OK"
+					:cancelText="firstcancelText"		
+					v-model="dolphinSelect"
+					multiple
+					@ionChange="checkAllDolphinsSelected"
+					> 
+					<ion-select-option value="all">All dolphins</ion-select-option>
+					<ion-select-option v-for="dolphin in dolphinsStore.dolphinList" v-bind:key="dolphin.name">
+						{{dolphin.name}}
+					</ion-select-option>
+				</ion-select>
 			</ion-item>
 			<ion-item>
 				<ion-select
@@ -350,7 +353,7 @@ export default {
 		return {
 			language: 'en',
 			dolphinsStore: dolphinsStore,
-			dolphinSelect: null as string | null,
+			dolphinSelect: [] as string[], //null as string | null,
 			criteria: null as string | null,
 			firstlabel: this.$t('dolphin'),
 			firstplaceholder: this.$t('selectDolphin'),
@@ -393,13 +396,19 @@ export default {
 				}
 			}
     	},
+		// ion-select method to check if all dolphins are selected
+		checkAllDolphinsSelected() {
+			if (this.dolphinSelect.includes('all')) {
+				this.dolphinSelect = this.dolphinsStore.dolphinList.map(dolphin => dolphin.name);
+			}
+		},
 		// Method to collect the checked checkboxes and give request Body the scores
 		storeCheckedValues() {
 			for(let k = 0; k < evaluationHousingStore.requestBodiesHousing.length; k++){
-				if(this.dolphinSelect === evaluationHousingStore.requestBodiesHousing[k]["dolphin_name"]) {
-					if (this.dolphinSelect!== null){
+				if(this.dolphinSelect.includes(evaluationHousingStore.requestBodiesHousing[k]["dolphin_name"])) {
+					/*if (this.dolphinSelect!== null){
 						evaluationHousingStore.requestBodiesHousing[k]["dolphin_name"] = this.dolphinSelect;
-					}
+					}*/
 					for(let i = 0; i < this.CheckboxArray.length; i++){
 						for(let j = 0; j < this.CheckboxArray[i].length; j++){
 							if (this.CheckboxArray[i][j] === true && i === 0){

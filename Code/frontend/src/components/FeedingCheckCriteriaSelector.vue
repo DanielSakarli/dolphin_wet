@@ -182,44 +182,50 @@
 					<!--Here are the values of reference area-->
 					<h3>Body Condition Score:</h3>
 					<div v-if="dolphinSelect">
-						<p>
-						  Minimum: 
-						  {{ 
-							(dolphinsStore.dolphinList.find(
-							  (dolphin) => dolphin.name === dolphinSelect
-							)?.min_body_condition_score) ?? null
-						  }}
-						</p>
-						<p>
-						  Maximum: 
-						  {{ 
-							(dolphinsStore.dolphinList.find(
-							  (dolphin) => dolphin.name === dolphinSelect
-							)?.max_body_condition_score) ?? null
-						  }}
-						</p>
+						<div v-for="selectedDolphin in dolphinSelect" :key="selectedDolphin">
+							<h4>{{ selectedDolphin }}</h4>
+							<p>
+							  Minimum: 
+							  {{ 
+								(dolphinsStore.dolphinList.find(
+								  (dolphin) => dolphin.name === selectedDolphin
+								)?.min_body_condition_score) ?? null
+							  }}
+							</p>
+							<p>
+							  Maximum: 
+							  {{ 
+								(dolphinsStore.dolphinList.find(
+								  (dolphin) => dolphin.name === selectedDolphin
+								)?.max_body_condition_score) ?? null
+							  }}
+							</p>
+						  </div>
 					  </div>
 				</p>
 				<p v-if=" criteria === 'secondCriteriaFeeding'">
 					<!--Here are the values of reference area-->
 					<h3>Kcal calculations</h3>
 					<div v-if="dolphinSelect">
-						<p>
-							Minimum: 
-						  {{ 
-							(dolphinsStore.dolphinList.find(
-							  (dolphin) => dolphin.name === dolphinSelect
-							)?.min_kcal_calculations) ?? null
-						  }}
-						</p>
-						<p>
-						  Maximum: 
-						  {{ 
-							(dolphinsStore.dolphinList.find(
-							  (dolphin) => dolphin.name === dolphinSelect
-							)?.max_kcal_calculations) ?? null
-						  }}
-						</p>
+						<div v-for="selectedDolphin in dolphinSelect" :key="selectedDolphin">
+							<h4>{{ selectedDolphin }}</h4>
+							<p>
+							  Minimum: 
+							  {{ 
+								(dolphinsStore.dolphinList.find(
+								  (dolphin) => dolphin.name === selectedDolphin
+								)?.min_kcal_calculations) ?? null
+							  }}
+							</p>
+							<p>
+							  Maximum: 
+							  {{ 
+								(dolphinsStore.dolphinList.find(
+								  (dolphin) => dolphin.name === selectedDolphin
+								)?.max_kcal_calculations) ?? null
+							  }}
+							</p>
+						</div>
 					</div>
 				</p>
 			</ion-content>
@@ -447,8 +453,7 @@ export default {
 		storeCheckedValues() {
 			for(let k = 0; k < evaluationFeedingStore.requestBodiesFeeding.length; k++){
 				//k stands for the different dolphins. It iterates through the array of dolphins in requestBodiesFeeding.json
-				//if(this.dolphinSelect === evaluationFeedingStore.requestBodiesFeeding[k]["dolphin_name"]) {
-					if(this.dolphinSelect.includes(evaluationFeedingStore.requestBodiesFeeding[k]["dolphin_name"])) {
+				if(this.dolphinSelect.includes(evaluationFeedingStore.requestBodiesFeeding[k]["dolphin_name"])) {
 					/*if (this.dolphinSelect!== null){
 						evaluationFeedingStore.requestBodiesFeeding[k]["dolphin_name"] = this.dolphinSelect;
 					}*/
