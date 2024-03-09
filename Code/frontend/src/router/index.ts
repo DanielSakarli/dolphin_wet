@@ -80,16 +80,22 @@ const router = createRouter({
 // then the user is redirected to the login page if he clicks
 // on the Evaluate, Dolphins, or View Data button of the menu
 // If login successful, the token is stored in the localStorage
-/*router.beforeEach((to, from, next) => {
+router.beforeEach((to, from, next) => {
 	// Check if the route requires authentication
 	if (to.matched.some((record) => record.meta.requiresAuth)) {
 		// Check if the user is not logged in
-
+		if (!localStorage.getItem('token')) {
+			// Redirect to the login page
+			next('/login');
+		} else {
+			// If the user is logged in, proceed to the route
+			next();
+		}
 		// Check if dataInBody is present in localStorage
 		// dataInBody is a flag that indicates if the user
 		// has unsaved data in the CheckCriteriaSelector
 		// vue files.
-		if (localStorage.getItem('dataInBody') === 'true') {
+		/*if (localStorage.getItem('dataInBody') === 'true') {
 			// Show a warning message to the user
 
 			if (
@@ -107,11 +113,11 @@ const router = createRouter({
 		} else {
 			// If dataInBody is not present in localStorage, proceed to the route
 			next();
-		}
+		}*/
 	} else {
 		// If the route does not require authentication, proceed to the route
 		next();
 	}
-});*/
+});
 
 export default router;

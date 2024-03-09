@@ -116,8 +116,12 @@ export default defineComponent({
 		async handleBackButtonClick() {
 			//Call here the showAlert()
 			console.log('Back button clicked');
-			await this.showAlert();
-			this.$router.back();
+			if (localStorage.getItem('dataInBody') === 'true') {
+				await this.showAlert();
+			}
+			if (localStorage.getItem('dataInBody') === 'false') {
+				this.$router.back();
+			}
 		},
 		async showAlert() {
 			return new Promise(async (resolve, reject) => {
@@ -126,7 +130,7 @@ export default defineComponent({
 					message: 'Are you sure you want to proceed?',
 					buttons: [
 						{
-							text: 'Cancel',
+							text: 'Stay on Page',
 							role: 'cancel',
 							cssClass: 'secondary',
 							handler: () => {
@@ -135,9 +139,10 @@ export default defineComponent({
 							},
 						},
 						{
-							text: 'OK',
+							text: 'Lose Data',
 							handler: () => {
 								console.log('Confirm Okay');
+								this.$router.back();
 								resolve(void 0);
 							},
 						},

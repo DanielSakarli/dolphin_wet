@@ -334,7 +334,6 @@ import {IonAlert, IonItem, IonList, IonSelect, IonSelectOption, IonLabel, IonMod
 	IonText, IonCheckbox, IonInput, IonRange, IonCard, IonCardTitle, IonFooter,
 	IonIcon
 } from '@ionic/vue';
-import { alertController } from '@ionic/vue';
 import axios from 'axios';
 import CheckComments from '@/components/CheckComments.vue';
 import { useDolphinsStore }from '@/store/dolphinsStore';
@@ -367,18 +366,6 @@ console.log('This token is set in a cookie (client-side): ', document.cookie);
 
 
 export default {
-	
-	beforeRouteLeave(to, from, next) {
-		console.log('I am here');
-		next(false);
-    /*this.showAlert().then(() => {
-      // If the user confirmed the dialog, continue navigation
-      next();
-    }).catch(() => {
-      // If the user cancelled the dialog, cancel navigation
-      next(false);
-    });*/
-  },
 	components: {
 		// needed Vue components:
 		IonAlert, IonItem, IonList, IonSelect, IonSelectOption, IonLabel, IonModal, IonHeader,
@@ -390,8 +377,10 @@ export default {
 		// mounted. But only if there is internet connectivity. If not, the displayed
 		// reference areas are the ones from the animalList.json
    		await dolphinsStore.fill();
-		// Call showAlert method when the component is mounted
-		this.showAlert();
+		
+		// Reset here data while page is mounted
+		localStorage.setItem('dataInBody', 'false');
+		evaluationFeedingStore.resetBodies();
 	},
 	/*props: {
 		userComment: {
@@ -436,39 +425,6 @@ export default {
 		};
 	},
 	methods: {
-		async showAlert() {
-      
-			const alert = await alertController.create({
-			header: 'Confirmation',
-			message: 'Are you sure you want to proceed?',
-			buttons: [
-			{
-			text: 'Cancel',
-			role: 'cancel',
-			cssClass: 'secondary',
-			handler: () => {
-				//Code here what should happen when 'Cancel' is clicked
-			console.log('Cancel clicked');
-			}
-			}, {
-			text: 'OK',
-			handler: () => {
-				//Code here what should happen when 'OK' is clicked
-			console.log('Confirm Okay');
-			// Put your logic here for what should happen when 'OK' is clicked
-			}
-			}
-			]
-			});
-				/*const alert = await alertController
-			.create({
-			header: 'Alert',
-			subHeader: 'Subtitle',
-			message: 'This is an alert message.',
-			buttons: ['OK']
-			});*/
-			return alert.present();
-    	},
 		//Method to open the manual
         setOpenManual(isOpen: boolean) {
             this.isOpenManual = isOpen;
