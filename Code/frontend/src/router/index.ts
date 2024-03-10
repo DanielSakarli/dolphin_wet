@@ -15,14 +15,17 @@ const routes: Array<RouteRecordRaw> = [
 	{
 		path: '/home',
 		component: () => import('@/views/LoginPage.vue'),
+		meta: { requiresAuth: false },
 	},
 	{
 		path: '/login',
 		component: () => import('@/views/LoginFormPage.vue'),
+		meta: { requiresAuth: false },
 	},
 	{
 		path: '/signup',
 		component: () => import('@/views/SignupPage.vue'),
+		meta: { requiresAuth: false },
 	},
 	{
 		path: '/folder/Evaluate',
@@ -89,31 +92,43 @@ router.beforeEach((to, from, next) => {
 			next('/login');
 		} else {
 			// If the user is logged in, proceed to the route
-			next();
-		}
-		// Check if dataInBody is present in localStorage
-		// dataInBody is a flag that indicates if the user
-		// has unsaved data in the CheckCriteriaSelector
-		// vue files.
-		/*if (localStorage.getItem('dataInBody') === 'true') {
-			// Show a warning message to the user
+			//next();
 
+			// Check if dataInBody is present in localStorage
+			// dataInBody is a flag that indicates if the user
+			// has unsaved data in the CheckCriteriaSelector
+			// vue files.
 			if (
-				window.confirm(
-					'Warning: You have unsaved data. Are you sure you want to leave?'
-				)
+				localStorage.getItem('dataInBody') === 'true' &&
+				localStorage.getItem('backButtonClicked') === 'false'
 			) {
-				// If the user confirms, proceed to the route
-				localStorage.setItem('dataInBody', 'false');
+				// Show a warning message to the user
+				if (
+					window.confirm(
+						'Warning: You have unsaved data. Are you sure you want to leave?'
+					)
+				) {
+					// If the user confirms, proceed to the route
+					localStorage.setItem('dataInBody', 'false');
+					next();
+				} else {
+					// If the user cancels, stop navigation
+					next(false);
+				}
+			} /*else {
+				// If dataInBody is not present in localStorage, proceed to the route
 				next();
-			} else {
-				// If the user cancels, stop navigation
-				next(false);
+			}*/
+			if (localStorage.getItem('dataInBody') === 'false') {
+				next();
 			}
-		} else {
-			// If dataInBody is not present in localStorage, proceed to the route
-			next();
-		}*/
+			if (
+				localStorage.getItem('dataInBody') === 'true' &&
+				localStorage.getItem('backButtonClicked') === 'true'
+			) {
+				next();
+			}
+		}
 	} else {
 		// If the route does not require authentication, proceed to the route
 		next();

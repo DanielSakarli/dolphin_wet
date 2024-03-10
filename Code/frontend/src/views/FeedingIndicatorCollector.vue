@@ -116,6 +116,7 @@ export default defineComponent({
 		async handleBackButtonClick() {
 			//Call here the showAlert()
 			console.log('Back button clicked');
+			localStorage.setItem('backButtonClicked', 'true');
 			if (localStorage.getItem('dataInBody') === 'true') {
 				await this.showAlert();
 			}
