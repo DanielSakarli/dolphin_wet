@@ -11,6 +11,13 @@
 							:key="i"
 						>
 							<ion-item
+								@click="navigateTo(p.url, i)"
+								lines="none"
+								:detail="false"
+								class="hydrated"
+								:class="{ selected: selectedIndex === i }"
+							>
+								<!--<ion-item
 								@click="selectedIndex = i"
 								router-direction="root"
 								:router-link="p.url"
@@ -18,7 +25,7 @@
 								:detail="false"
 								class="hydrated"
 								:class="{ selected: selectedIndex === i }"
-							>
+							>-->
 								<ion-label>{{ p.title }}</ion-label>
 							</ion-item>
 						</ion-menu-toggle>
@@ -43,11 +50,13 @@ import {
 	IonList,
 	IonMenuToggle,
 	IonSplitPane,
+	alertController,
 } from '@ionic/vue';
 import { defineComponent } from 'vue';
 import { ref } from 'vue';
 import { Device, DevicePlugin } from '@capacitor/device';
 import { inject } from 'vue';
+import { useRouter } from 'vue-router';
 
 export default defineComponent({
 	name: 'App',
@@ -68,6 +77,58 @@ export default defineComponent({
 				(page) => page.title.toLowerCase() === path.toLowerCase()
 			);
 		}
+	},
+	setup() {
+		// Handles the navigation to other routes
+		const selectedIndex = ref(0); // Create a reactive variable
+		const router = useRouter();
+
+		const showAlert = async () => {
+			return new Promise(async (resolve, reject) => {
+				const alert = await alertController.create({
+					header: 'Confirmation',
+					message: 'Are you sure you want to proceed?',
+					buttons: [
+						{
+							text: 'Stay on Page',
+							role: 'cancel',
+							cssClass: 'secondary',
+							handler: () => {
+								console.log('Cancel clicked');
+								reject();
+							},
+						},
+						{
+							text: 'Lose Data',
+							handler: () => {
+								console.log('Confirm Okay');
+								router.back();
+								resolve(void 0);
+							},
+						},
+					],
+				});
+
+				return alert.present();
+			});
+		};
+
+		const navigateTo = (url, index) => {
+			if (localStorage.getItem('dataInBody') === 'true') {
+				showAlert();
+				//selectedIndex.value = index; // Use .value to access or modify the value of a ref
+				//router.push(url);
+			} else {
+				selectedIndex.value = index; // Use .value to access or modify the value of a ref
+				router.push(url);
+			}
+		};
+
+		return {
+			showAlert,
+			navigateTo,
+			selectedIndex, // Make selectedIndex available in the template
+		};
 	},
 	components: {
 		IonApp,

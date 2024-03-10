@@ -511,6 +511,7 @@ import { baseUrl } from '@/utils/baseUrl';
 import { toast } from 'vue3-toastify';
 import 'vue3-toastify/dist/index.css';
 
+let dataInBody; //Variable which gets saved in localstorage with either true or false, depending if data is in checkboxes or evaluationFeedingStore
 const dolphinsStore = useDolphinsStore();
 const evaluationHealthStore = useEvaluationHealthStore();
 
@@ -528,6 +529,16 @@ export default {
 		IonLabel, IonModal, IonHeader, IonToolbar, IonContent,
 		IonTitle, IonButtons, IonButton, IonText, CheckComments, PhotoUpload,
 		IonThumbnail, IonIcon, IonCheckbox, IonCard, IonCardTitle
+	},
+	async mounted() {
+		// This makes sure that the reference areas are updated while the component is
+		// mounted. But only if there is internet connectivity. If not, the displayed
+		// reference areas are the ones from the animalList.json
+		await dolphinsStore.fill();
+		
+		// Reset here data while page is mounted
+		localStorage.setItem('dataInBody', 'false');
+		evaluationHealthStore.resetBodies();
 	},
 	data() {
 		return {
@@ -589,6 +600,8 @@ export default {
 					this.CheckboxArray[row][i] = false;
 				}
 			}
+			dataInBody = true;
+			localStorage.setItem('dataInBody', dataInBody.toString());
     	},
 		handleFormSubmittedEyePhoto(files: File[]) {
 		if (files && this.dolphinSelect != '') {
@@ -688,6 +701,8 @@ export default {
 					}
 				}
 			}
+			dataInBody = true;
+			localStorage.setItem('dataInBody', dataInBody.toString());
 		},
 		//Methods to update the comments
 		updateNormalFloatabilityComments(comment: string) {
@@ -733,9 +748,12 @@ export default {
 										autoClose: 1000,
 									});
 									setTimeout(() => {
+										// Set flag to false, so if user wants to go to another route he can
+										// without losing data, because data is now successfully uploaded
+										dataInBody = false;
+										localStorage.setItem('dataInBody', dataInBody.toString());
 										this.$router.push(targetUrl);
 									}, 2000);
-									//this.$router.push(targetUrl);
 									evaluationHealthStore.resetBodies();
 									this.dolphinSelect = null;
 									this.criteria = null;
@@ -748,9 +766,10 @@ export default {
 										autoClose: 2000,
 									});
 									setTimeout(() => {
+										dataInBody = false;
+										localStorage.setItem('dataInBody', dataInBody.toString());
 										this.$router.push(targetUrl);
 									}, 3000);
-								//this.$router.push(targetUrl);
 							});
 				}
 				////////////////////////////////////////////////////////////////

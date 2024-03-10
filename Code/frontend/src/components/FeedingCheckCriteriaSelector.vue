@@ -353,8 +353,8 @@ let dataInBody; //Variable which gets saved in localstorage with either true or 
 const token = localStorage.getItem('token'); //Get current JWT token of the user
 console.log('Token accessed from localStorage: ', token);
 
-document.cookie = token ?? '';
-console.log('This token is set in a cookie (client-side): ', document.cookie);
+//document.cookie = token ?? '';
+//console.log('This token is set in a cookie (client-side): ', document.cookie);
 
 // Set up request config
 /*const config = {
@@ -377,7 +377,7 @@ export default {
 		// mounted. But only if there is internet connectivity. If not, the displayed
 		// reference areas are the ones from the animalList.json
    		await dolphinsStore.fill();
-		
+
 		// Reset here data while page is mounted
 		localStorage.setItem('dataInBody', 'false');
 		evaluationFeedingStore.resetBodies();
@@ -554,7 +554,7 @@ export default {
 										this.$router.push(targetUrl);
 									}, 2000);
 									evaluationFeedingStore.resetBodies();
-									this.dolphinSelect = null;
+									this.dolphinSelect = [];
 									this.criteria = null;
 								}
 							})
@@ -578,7 +578,7 @@ export default {
      		if (confirmed) {
 				this.storeCheckedValues();
 				console.log(evaluationFeedingStore.requestBodiesFeeding)
-				this.dolphinSelect = null;
+				this.dolphinSelect = [];
 				this.criteria = null;
 				//const currentPath = this.$route.path;
 				const targetUrl = `/detailFeeding`;

@@ -5,7 +5,8 @@
 			<ion-toolbar>
 				<ion-title>{{ $t('topicBehaviour') }}</ion-title>
 				<ion-buttons slot="start">
-					<ion-back-button defaultHref="/folder/Evaluate"></ion-back-button>
+					<ion-back-button @click="handleBackButtonClick"></ion-back-button>
+					<!--<ion-back-button defaultHref="/folder/Evaluate"></ion-back-button>-->
 				</ion-buttons>
 			</ion-toolbar>
 		</ion-header>
@@ -30,6 +31,7 @@ import {
 	IonButton,
 	IonButtons,
 	IonBackButton,
+	alertController,
 } from '@ionic/vue';
 // Import customized components
 import FeedingCheckCriteriaSelector from '@/components/BehaviourCheckCriteriaSelector.vue';
@@ -59,6 +61,45 @@ export default defineComponent({
 	methods: {
 		changeLanguage($event: any) {
 			this.$i18n.locale = $event.detail.value;
+		},
+		async handleBackButtonClick() {
+			//Call here the showAlert()
+			console.log('Back button clicked');
+			if (localStorage.getItem('dataInBody') === 'true') {
+				await this.showAlert();
+			}
+			if (localStorage.getItem('dataInBody') === 'false') {
+				this.$router.back();
+			}
+		},
+		async showAlert() {
+			return new Promise(async (resolve, reject) => {
+				const alert = await alertController.create({
+					header: 'Confirmation',
+					message: 'Are you sure you want to proceed?',
+					buttons: [
+						{
+							text: 'Stay on Page',
+							role: 'cancel',
+							cssClass: 'secondary',
+							handler: () => {
+								console.log('Cancel clicked');
+								reject();
+							},
+						},
+						{
+							text: 'Lose Data',
+							handler: () => {
+								console.log('Confirm Okay');
+								this.$router.back();
+								resolve(void 0);
+							},
+						},
+					],
+				});
+
+				return alert.present();
+			});
 		},
 		confirmRefresh() {
 			const confirmed = confirm(this.$t('savingDataNext'));

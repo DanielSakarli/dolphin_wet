@@ -341,6 +341,7 @@ import 'vue3-toastify/dist/index.css';
 
 const dolphinsStore = useDolphinsStore();
 const evaluationHousingStore = useEvaluationHousingStore();
+let dataInBody; //Variable which gets saved in localstorage with either true or false, depending if data is in checkboxes or evaluationHousingStore
 
 export default {
 	components: {
@@ -348,6 +349,16 @@ export default {
 		IonLabel, IonModal, IonHeader, IonToolbar, IonIcon,
 		IonContent, IonTitle, CheckComments, IonFooter,
 		IonButtons, IonButton, IonCheckbox, IonCard, IonCardTitle
+	},
+	async mounted()  {
+		// This makes sure that the reference areas are updated while the component is
+		// mounted. But only if there is internet connectivity. If not, the displayed
+		// reference areas are the ones from the animalList.json
+   		await dolphinsStore.fill();
+
+		// Reset here data while page is mounted
+		localStorage.setItem('dataInBody', 'false');
+		evaluationHousingStore.resetBodies();
 	},
 	data() {
 		return {
@@ -383,8 +394,8 @@ export default {
 		setOpenScoring(isOpen: boolean) {
             this.isOpenScoring = isOpen;
         },
-				//Method uses boolean array. So no multiple checking for one test is possible. --> Every test can have one checked Checkbox
-				handleClick(row: number, column: number) {
+		//Method uses boolean array. So no multiple checking for one test is possible. --> Every test can have one checked Checkbox
+		handleClick(row: number, column: number) {
 			if (this.CheckboxArray[row][column]){
 				this.CheckboxArray[row][column] = false;
 			}else{
@@ -395,6 +406,8 @@ export default {
 					this.CheckboxArray[row][i] = false;
 				}
 			}
+			dataInBody = true;
+			localStorage.setItem('dataInBody', dataInBody.toString());
     	},
 		// ion-select method to check if all dolphins are selected
 		checkAllDolphinsSelected() {
@@ -447,6 +460,8 @@ export default {
 					}
 				}
 			}
+			dataInBody = true;
+			localStorage.setItem('dataInBody', dataInBody.toString());
 		},
 		//Methods to update the comments
 		updateEnclosureSafetyComments(comment: string) {
@@ -490,11 +505,14 @@ export default {
 										autoClose: 1000,
 									});
 									setTimeout(() => {
+										// Set flag to false, so if user wants to go to another route he can
+										// without losing data, because data is now successfully uploaded
+										dataInBody = false;
+										localStorage.setItem('dataInBody', dataInBody.toString());
 										this.$router.push(targetUrl);
 									}, 2000);
-									//this.$router.push(targetUrl);
 									evaluationHousingStore.resetBodies();
-									this.dolphinSelect = null;
+									this.dolphinSelect = [];
 									this.criteria = null;
 								}
 							})
@@ -505,9 +523,10 @@ export default {
 										autoClose: 2000,
 									});
 									setTimeout(() => {
+										dataInBody = false;
+										localStorage.setItem('dataInBody', dataInBody.toString());
 										this.$router.push(targetUrl);
 									}, 3000);
-								//this.$router.push(targetUrl);
 							});
 				}
 			}
