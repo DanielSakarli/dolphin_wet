@@ -58,6 +58,10 @@
 			<ion-button expand="block" @click="showData">
 				<ion-icon slot="start" :icon="reload"></ion-icon>Show Data</ion-button
 			>
+			<ion-button expand="block" @click="sendCSV">
+				<ion-icon slot="start" :icon="mailOutline"></ion-icon>Send csv File via
+				E-Mail</ion-button
+			>
 			<ion-card v-if="dataFeeding">
 				<ion-list>
 					<ion-item v-for="(data, monthYear) in dataFeeding" :key="monthYear">
@@ -378,7 +382,7 @@ import {
 	IonCard,
 	IonLabel,
 } from '@ionic/vue';
-import { reload } from 'ionicons/icons';
+import { reload, mailOutline } from 'ionicons/icons';
 import axios from 'axios';
 import { useDolphinsStore } from '@/store/dolphinsStore';
 import { baseUrl } from '@/utils/baseUrl';
@@ -494,6 +498,7 @@ export default {
 	data() {
 		return {
 			reload,
+			mailOutline,
 			dolphinsStore: dolphinsStore,
 			dolphinSelect: null as string | null,
 			principleSelect: null as string | null,
@@ -600,6 +605,10 @@ export default {
 						this.urlHealth = baseUrl + '/api/good_health?name='; //reset the url
 					});
 			}
+		},
+
+		async sendCSV() {
+			//do a get request to backend
 		},
 
 		changeLanguage($event: any) {
