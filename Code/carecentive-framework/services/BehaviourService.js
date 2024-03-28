@@ -26,6 +26,7 @@ class BehaviourService {
 	 * @param {Number} result.receiving_aggressive_behaviour
 	 * @param {Number} result.social_isolation
 	 * @param {Number} result.avoidance_pool_areas
+	 * @param {String} result.created_at The date of test result
 	 * @returns {Object} The inserted test data
 	 */
 	static async loadTestResult(result) {
@@ -44,12 +45,22 @@ class BehaviourService {
 			}
 
 			const { dolphin_id } = dolphin_data;
-			// Inserts data into database.
-			const insertedResult = await Behaviour.query().insert({
-				dolphin_id,
-				...result,
-			});
-			return insertedResult;
+			// Inserts data into database.			
+			if (result.created_at !== "") {
+				const insertedResult = await Behaviour.query().insert({
+					dolphin_id,
+					...result,
+					created_at: new Date(result.created_at),
+				});
+				return insertedResult;
+			} else {
+				const insertedResult = await Behaviour.query().insert({
+					dolphin_id,
+					...result,
+					created_at: new Date().toISOString().split('.')[0],
+				});
+				return insertedResult;
+			}
 		} catch (error) {
 			throw error;
 		}

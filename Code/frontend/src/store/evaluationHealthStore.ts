@@ -26,6 +26,7 @@ export const useEvaluationHealthStore = defineStore('evaluationHealthStore', {
 				requestBodiesHealth[i]['force_expiration_comments'] = '';
 				requestBodiesHealth[i]['gastric_abnormality_comments'] = '';
 				requestBodiesHealth[i]['external_disease_signs_comments'] = '';
+				requestBodiesHealth[i]['created_at'] = '';
 			}
 		},
 	},

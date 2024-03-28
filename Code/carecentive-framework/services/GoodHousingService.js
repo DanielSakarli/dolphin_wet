@@ -42,12 +42,23 @@ class GoodHousingService {
 			}
 
 			const { dolphin_id } = dolphin_data;
-			// Inserts data into database.
-			const insertedResult = await GoodHousing.query().insert({
-				dolphin_id,
-				...result,
-			});
-			return insertedResult;
+			// Inserts data into database.			
+			if (result.created_at !== "") {
+				const insertedResult = await GoodHousing.query().insert({
+					dolphin_id,
+					...result,
+					created_at: new Date(result.created_at),
+				});
+				return insertedResult;
+			} else {
+				const insertedResult = await GoodHousing.query().insert({
+					dolphin_id,
+					...result,
+					created_at: new Date().toISOString().split('.')[0],
+				});
+				return insertedResult;
+			}
+
 		} catch (error) {
 			throw error;
 		}

@@ -519,7 +519,7 @@ import {
 	IonItem, IonList, IonSelect, IonCard, IonCardTitle,
 	IonSelectOption, IonLabel, IonModal, IonHeader,
 	IonToolbar, IonContent, IonTitle, IonButtons, IonFooter,
-	IonButton, IonText, IonThumbnail, IonIcon, IonCheckbox
+	IonButton, IonText, IonThumbnail, IonIcon, IonCheckbox, alertController
 } from '@ionic/vue';
 
 
@@ -538,6 +538,7 @@ export default {
 		
 		// Reset here data while page is mounted
 		localStorage.setItem('dataInBody', 'false');
+		localStorage.setItem('created_at', '');
 		evaluationHealthStore.resetBodies();
 	},
 	data() {
@@ -692,6 +693,10 @@ export default {
 					evaluationHealthStore.requestBodiesHealth[k]["force_expiration_comments"] = this.force_expiration_comments;
 					evaluationHealthStore.requestBodiesHealth[k]["gastric_abnormality_comments"] = this.gastric_abnormality_comments;
 					evaluationHealthStore.requestBodiesHealth[k]["external_disease_signs_comments"] = this.external_disease_signs_comments;
+					
+					if(localStorage.getItem('created_at') !== "") {
+						evaluationHealthStore.requestBodiesHealth[k]["created_at"] = localStorage.getItem('created_at') as string;
+					}
 				}
 			}
 			for(let i = 0; i <= 4; i++){
@@ -729,12 +734,89 @@ export default {
 		updateExternalDiseaseComments(comment: string) {
 			this.external_disease_signs_comments = comment;
 		},
+		async confirmTestDate() {
+		return new Promise(async (resolve, reject) => {
+			const alert = await alertController.create({
+			header: 'Confirmation',
+			message: 'Is the data you entered current?',
+			buttons: [
+				{
+				text: 'Yes',
+				role: 'cancel',
+				cssClass: 'secondary',
+				handler: () => {
+					console.log('Yes clicked');
+					resolve(void 0);
+				},
+				},
+				{
+				text: 'No',
+				handler: () => {
+					(async () => {
+						await this.showDateInputAlert();
+						resolve(void 0);	
+					})();
+					
+					
+				},
+				},
+			],
+			});
+
+			return alert.present();
+		});
+},
+
+async showDateInputAlert() {
+  return new Promise(async (resolve, reject) => {
+    const alert = await alertController.create({
+      header: 'Enter Date',
+      inputs: [
+        {
+          name: 'date',
+          type: 'date',
+        },
+      ],
+      buttons: [
+        {
+          text: 'Cancel',
+          role: '',
+          cssClass: 'secondary',
+          handler: () => {
+            console.log('Cancel clicked');
+            reject();
+            this.storeData();
+          },
+        },
+        {
+          text: 'Confirm',
+          handler: (data) => {
+            console.log('Test date changed');
+            // Convert the date to dd/mm/yyyy format
+            const dateParts = data.date.split('-');
+            //const formattedDate = `${dateParts[2]}/${dateParts[1]}/${dateParts[0]}`;
+            // Convert the date to dd/mm/yyyy format
+			const formattedDate = `${dateParts[0]}-${dateParts[1]}-${dateParts[2]}T00:00:00Z`;
+            
+			localStorage.setItem('created_at', formattedDate);
+            localStorage.setItem('dataInBody', 'false');
+            resolve(void 0);
+			},
+			},
+		],
+		});
+
+		return alert.present();
+  		});
+		},
+
 		//Method to send the data to database
-		storeData() {
-			const confirmed = confirm(this.$t('savingDataNext'));
-     		if (confirmed) {
+		async storeData() {
+			//const confirmed = confirm(this.$t('savingDataNext'));
+     		const confirmed = true;
+			if (confirmed) {
 				this.photoUpload();
-				
+				await this.confirmTestDate();
 				this.storeCheckedValues();
 				console.log(this.CheckboxArray);
 				for(let i = 0; i < evaluationHealthStore.requestBodiesHealth.length; i++){
@@ -757,6 +839,7 @@ export default {
 									evaluationHealthStore.resetBodies();
 									this.dolphinSelect = null;
 									this.criteria = null;
+									localStorage.setItem('created_at', '');
 								}
 							})
 							.catch((error) => {
@@ -768,6 +851,7 @@ export default {
 									setTimeout(() => {
 										dataInBody = false;
 										localStorage.setItem('dataInBody', dataInBody.toString());
+										localStorage.setItem('created_at', '');
 										this.$router.push(targetUrl);
 									}, 3000);
 							});

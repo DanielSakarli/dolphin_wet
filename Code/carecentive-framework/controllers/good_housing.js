@@ -49,6 +49,7 @@ async function setResult(req, res, next) {
 			water_temperature_comments,
 			sufficient_shade_comments,
 			acoustic_comfort_comments,
+			created_at,
 		} = req.body;		
 		////////////////////////////////////////		
 		//let test_result = req.body;
@@ -90,6 +91,7 @@ async function setResult(req, res, next) {
 			water_temperature_comments,
 			sufficient_shade_comments,
 			acoustic_comfort_comments,
+			created_at,
 		};
 		const testResultAdded = await GoodHousingService.loadTestResult(testResult);
 

@@ -26,6 +26,7 @@ export const useEvaluationHousingStore = defineStore('evaluationHousingStore', {
 				requestBodiesHousing[i]['water_temperature_comments'] = '';
 				requestBodiesHousing[i]['sufficient_shade_comments'] = '';
 				requestBodiesHousing[i]['acoustic_comfort_comments'] = '';
+				requestBodiesHousing[i]['created_at'] = '';
 			}
 		},
 	},

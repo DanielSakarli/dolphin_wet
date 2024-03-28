@@ -329,7 +329,7 @@ import {
 	IonItem, IonList, IonSelect, IonSelectOption,
 	IonLabel, IonModal, IonHeader, IonFooter,
 	IonToolbar, IonContent, IonTitle, IonCardTitle,
-	IonButtons, IonButton, IonCheckbox, IonCard, IonIcon
+	IonButtons, IonButton, IonCheckbox, IonCard, IonIcon, alertController
 } from '@ionic/vue';
 import axios from 'axios';
 import CheckComments from '@/components/CheckComments.vue';
@@ -358,6 +358,7 @@ export default {
 
 		// Reset here data while page is mounted
 		localStorage.setItem('dataInBody', 'false');
+		localStorage.setItem('created_at', '');
 		evaluationHousingStore.resetBodies();
 	},
 	data() {
@@ -451,6 +452,10 @@ export default {
 					evaluationHousingStore.requestBodiesHousing[k]["water_temperature_comments"] = this.water_temperature_comments;
 					evaluationHousingStore.requestBodiesHousing[k]["sufficient_shade_comments"] = this.sufficient_shade_comments;
 					evaluationHousingStore.requestBodiesHousing[k]["acoustic_comfort_comments"] = this.acoustic_comfort_comments;
+					
+					if(localStorage.getItem('created_at') !== "") {
+						evaluationHousingStore.requestBodiesHousing[k]["created_at"] = localStorage.getItem('created_at') as string;
+					}
 				}
 			}
 			for(let i = 0; i <= 4; i++){
@@ -488,6 +493,83 @@ export default {
 		updateAcousticComfortComments(comment: string) {
 			this.acoustic_comfort_comments = comment;
 		},
+		async confirmTestDate() {
+		return new Promise(async (resolve, reject) => {
+			const alert = await alertController.create({
+			header: 'Confirmation',
+			message: 'Is the data you entered current?',
+			buttons: [
+				{
+				text: 'Yes',
+				role: 'cancel',
+				cssClass: 'secondary',
+				handler: () => {
+					console.log('Yes clicked');
+					resolve(void 0);
+				},
+				},
+				{
+				text: 'No',
+				handler: () => {
+					(async () => {
+						await this.showDateInputAlert();
+						resolve(void 0);	
+					})();
+					
+					
+				},
+				},
+			],
+			});
+
+			return alert.present();
+		});
+},
+
+async showDateInputAlert() {
+  return new Promise(async (resolve, reject) => {
+    const alert = await alertController.create({
+      header: 'Enter Date',
+      inputs: [
+        {
+          name: 'date',
+          type: 'date',
+        },
+      ],
+      buttons: [
+        {
+          text: 'Cancel',
+          role: '',
+          cssClass: 'secondary',
+          handler: () => {
+            console.log('Cancel clicked');
+            reject();
+            this.storeData();
+          },
+        },
+        {
+          text: 'Confirm',
+          handler: (data) => {
+            console.log('Test date changed');
+            // Convert the date to dd/mm/yyyy format
+            const dateParts = data.date.split('-');
+            //const formattedDate = `${dateParts[2]}/${dateParts[1]}/${dateParts[0]}`;
+            // Convert the date to dd/mm/yyyy format
+			const formattedDate = `${dateParts[0]}-${dateParts[1]}-${dateParts[2]}T00:00:00Z`;
+            
+			localStorage.setItem('created_at', formattedDate);
+            localStorage.setItem('dataInBody', 'false');
+            resolve(void 0);
+			},
+			},
+		],
+		});
+
+		return alert.present();
+  		});
+		},
+
+
 		//Method to send the data to database
 		async storeData() {
 			const confirmed = confirm(this.$t('savingDataNext'));
@@ -512,6 +594,7 @@ export default {
 										this.$router.push(targetUrl);
 									}, 2000);
 									evaluationHousingStore.resetBodies();
+									localStorage.setItem('created_at', '');
 									this.dolphinSelect = [];
 									this.criteria = null;
 								}
@@ -525,6 +608,7 @@ export default {
 									setTimeout(() => {
 										dataInBody = false;
 										localStorage.setItem('dataInBody', dataInBody.toString());
+										localStorage.setItem('created_at', '');
 										this.$router.push(targetUrl);
 									}, 3000);
 							});

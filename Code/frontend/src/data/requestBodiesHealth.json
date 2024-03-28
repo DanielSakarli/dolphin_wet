@@ -16,7 +16,8 @@
         "respiratory_disease_comments": "",
         "force_expiration_comments": "",
         "gastric_abnormality_comments": "",
-        "external_disease_signs_comments": ""
+        "external_disease_signs_comments": "",
+        "created_at": ""
     },
     {
         "dolphin_name": "Donna",
@@ -35,7 +36,8 @@
         "respiratory_disease_comments": "",
         "force_expiration_comments": "",
         "gastric_abnormality_comments": "",
-        "external_disease_signs_comments": ""
+        "external_disease_signs_comments": "",
+        "created_at": ""
     },
     {
         "dolphin_name": "Jenny",
@@ -54,7 +56,8 @@
         "respiratory_disease_comments": "",
         "force_expiration_comments": "",
         "gastric_abnormality_comments": "",
-        "external_disease_signs_comments": ""
+        "external_disease_signs_comments": "",
+        "created_at": ""
     },    
     {
         "dolphin_name": "Nami",
@@ -73,7 +76,8 @@
         "respiratory_disease_comments": "",
         "force_expiration_comments": "",
         "gastric_abnormality_comments": "",
-        "external_disease_signs_comments": ""
+        "external_disease_signs_comments": "",
+        "created_at": ""
     },
     {
         "dolphin_name": "Nynke",
@@ -92,7 +96,8 @@
         "respiratory_disease_comments": "",
         "force_expiration_comments": "",
         "gastric_abnormality_comments": "",
-        "external_disease_signs_comments": ""
+        "external_disease_signs_comments": "",
+        "created_at": ""
     },
     {
         "dolphin_name": "Sunny",
@@ -111,7 +116,8 @@
         "respiratory_disease_comments": "",
         "force_expiration_comments": "",
         "gastric_abnormality_comments": "",
-        "external_disease_signs_comments": ""
+        "external_disease_signs_comments": "",
+        "created_at": ""
     },
     {
         "dolphin_name": "Dörte",
@@ -130,6 +136,7 @@
         "respiratory_disease_comments": "",
         "force_expiration_comments": "",
         "gastric_abnormality_comments": "",
-        "external_disease_signs_comments": ""
+        "external_disease_signs_comments": "",
+        "created_at": ""
     }
 ]

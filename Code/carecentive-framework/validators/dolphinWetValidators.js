@@ -190,6 +190,7 @@ const goodHealthPostValidateRequestBody = [
 			'external_disease_signs_comments',
 			'eye_photo_path',
 			'teeth_photo_path',
+			'created_at'
 		];
 		const keys = Object.keys(value);
 
@@ -287,6 +288,10 @@ const goodHealthPostValidateRequestBody = [
 		.optional({ values: 'null' })
 		.isString()
 		.withMessage('Invalid teeth photo path'),
+	body('created_at')
+		.optional({ values: 'null' })
+		.isString()
+		.withMessage('Invalid created date'),
 ];
 /**
  * End of Good health validation rules.
@@ -315,6 +320,7 @@ const goodHousingPostValidateRequestBody = [
 			'water_temperature_comments',
 			'sufficient_shade_comments',
 			'acoustic_comfort_comments',
+			'created_at'
 		];
 		const keys = Object.keys(value);
 
@@ -388,6 +394,10 @@ const goodHousingPostValidateRequestBody = [
 		.optional({ values: 'null' })
 		.isString()
 		.withMessage('Invalid comments for sufficient shade'),
+	body('created_at')
+		.optional({ values: 'null' })
+		.isString()
+		.withMessage('Invalid created date'),
 ];
 /**
  * End of good housing validation rules.
@@ -430,6 +440,7 @@ const behaviorPostValidateRequestBody = [
 			'receiving_aggressive_behaviour_comments',
 			'social_isolation_comments',
 			'avoidance_pool_areas_comments',
+			'created_at',
 		];
 		const keys = Object.keys(value);
 
@@ -507,6 +518,10 @@ const behaviorPostValidateRequestBody = [
 		.optional({ values: 'null' })
 		.isInt({ min: 1, max: 3 })
 		.toInt(),
+	body('created_at')
+		.optional({ values: 'null' })
+		.isString()
+		.withMessage('Invalid created date'),
 ];
 /**
  * End of behavior validation rules.

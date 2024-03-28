@@ -29,6 +29,7 @@ class GoodHealthService {
 	 * @param {String} result.external_disease_signs_comments
 	 * @param {String} result.eye_photo_path
 	 * @param {String} result.teeth_photo_path
+	 * @param {String} result.created_at The date of test result
 	 * @returns {Object} The inserted test data
 	 */
 	static async loadTestResult(result) {
@@ -47,12 +48,22 @@ class GoodHealthService {
 			}
 
 			const { dolphin_id } = dolphin_data;
-			// Inserts data into database.
-			const insertedResult = await GoodHealth.query().insert({
-				dolphin_id,
-				...result,
-			});
-			return insertedResult;
+			// Inserts data into database.			
+			if (result.created_at !== "") {
+				const insertedResult = await GoodHealth.query().insert({
+					dolphin_id,
+					...result,
+					created_at: new Date(result.created_at),
+				});
+				return insertedResult;
+			} else {
+				const insertedResult = await GoodHealth.query().insert({
+					dolphin_id,
+					...result,
+					created_at: new Date().toISOString().split('.')[0],
+				});
+				return insertedResult;
+			}
 		} catch (error) {
 			throw error;
 		}
