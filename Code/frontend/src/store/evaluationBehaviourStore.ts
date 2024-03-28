@@ -28,6 +28,7 @@ export const useEvaluationBehaviourStore = defineStore(
 					requestBodiesBehaviour[i]['social_isolation'] = 0;
 					requestBodiesBehaviour[i]['avoidance_pool_areas'] = 0;
 					requestBodiesBehaviour[i]['comments'] = null;
+					requestBodiesBehaviour[i]['created_at'] = '';
 				}
 			},
 		},

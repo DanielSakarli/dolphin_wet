@@ -16,7 +16,8 @@
         "receiving_aggressive_behaviour": 2,
         "social_isolation": 2,
         "avoidance_pool_areas": 2,
-        "comments": null
+        "comments": null,
+        "created_at": ""
     
     },
     {
@@ -36,7 +37,8 @@
         "receiving_aggressive_behaviour": 2,
         "social_isolation": 2,
         "avoidance_pool_areas": 2,
-        "comments": null
+        "comments": null,
+        "created_at": ""
     },
     {
         "dolphin_name": "Jenny",
@@ -55,7 +57,8 @@
         "receiving_aggressive_behaviour": 2,
         "social_isolation": 2,
         "avoidance_pool_areas": 2,
-        "comments": null
+        "comments": null,
+        "created_at": ""
     },    
     {
         "dolphin_name": "Nami",
@@ -74,7 +77,8 @@
         "receiving_aggressive_behaviour": 2,
         "social_isolation": 2,
         "avoidance_pool_areas": 2,
-        "comments": null
+        "comments": null,
+        "created_at": ""
     },
     {
         "dolphin_name": "Nynke",
@@ -93,7 +97,8 @@
         "receiving_aggressive_behaviour": 2,
         "social_isolation": 2,
         "avoidance_pool_areas": 2,
-        "comments": null
+        "comments": null,
+        "created_at": ""
     },
     {
         "dolphin_name": "Sunny",
@@ -112,7 +117,8 @@
         "receiving_aggressive_behaviour": 2,
         "social_isolation": 2,
         "avoidance_pool_areas": 2,
-        "comments": null
+        "comments": null,
+        "created_at": ""
     },
     {
         "dolphin_name": "Dörte",
@@ -131,6 +137,7 @@
         "receiving_aggressive_behaviour": 2,
         "social_isolation": 2,
         "avoidance_pool_areas": 2,
-        "comments": ""
+        "comments": "",
+        "created_at": ""
     }
 ]
