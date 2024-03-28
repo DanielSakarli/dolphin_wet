@@ -24,6 +24,7 @@ export const useEvaluationFeedingStore = defineStore('evaluationFeedingStore', {
 				requestBodiesFeeding[i]['blood_hydration_comments'] = '';
 				requestBodiesFeeding[i]['fish_quality_comments'] = '';
 				requestBodiesFeeding[i]['fish_variety_comments'] = '';
+				requestBodiesFeeding[i]['created_at'] = '';
 			}
 		},
 	},

@@ -23,6 +23,7 @@
 							v-bind:key="dolphin.name"
 							>{{ dolphin.name }}</ion-select-option
 						>
+						<ion-select-option value="">All dolphins</ion-select-option>
 					</ion-select>
 				</ion-item>
 				<ion-item>
@@ -386,6 +387,8 @@ import { reload, mailOutline } from 'ionicons/icons';
 import axios from 'axios';
 import { useDolphinsStore } from '@/store/dolphinsStore';
 import { baseUrl } from '@/utils/baseUrl';
+import { toast } from 'vue3-toastify';
+import 'vue3-toastify/dist/index.css';
 
 const dolphinsStore = useDolphinsStore();
 
@@ -517,6 +520,7 @@ export default {
 			urlHousing: baseUrl + '/api/good_housing?name=',
 			urlBehaviour: baseUrl + '/api/behaviour?name=',
 			urlHealth: baseUrl + '/api/good_health?name=',
+			urlCsv: baseUrl + '/api/export-csv',
 			numMonths: '3', //default value for view data is 3 months
 		};
 	},
@@ -608,7 +612,35 @@ export default {
 		},
 
 		async sendCSV() {
+			console.log(
+				'Params: ',
+				this.dolphinSelect,
+				this.principleSelect,
+				sessionStorage.getItem('user_name'),
+				this.numMonths
+			);
 			//do a get request to backend
+			await axios
+				.get(this.urlCsv, {
+					params: {
+						dolphin_name: this.dolphinSelect,
+						section: this.principleSelect,
+						user_name: sessionStorage.getItem('user_name'),
+						numMonths: this.numMonths,
+					},
+				})
+				.then((response) => {
+					console.log('Response:', response.data);
+					toast.success('Data sent to logged in user', {
+						autoClose: 1500,
+					});
+				})
+				.catch((e) => {
+					toast.error('Data not sent. Check internet connectivity!', {
+						autoClose: 2000,
+					});
+					console.error(e);
+				});
 		},
 
 		changeLanguage($event: any) {

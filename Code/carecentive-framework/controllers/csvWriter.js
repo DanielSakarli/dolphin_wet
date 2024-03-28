@@ -17,26 +17,13 @@ async function csvWriter(req, res, next) {
 		// Handle validation errors
 		return res.status(400).json({ errors: errors.array() });
 	}*/
+	try {
 
-	let userID;
-	let userName;
-	let userEmail;
-	userName = req.body.user_name;
-	userEmail = await User.query().where('name', userName).select('email').first();
-	console.log('user email: ', userEmail);
-	/*if (isUserAuth) {
-		console.log('authdata: ', req.authData);
-		const { user_id, name } = req.authData;
-		
-		userID = user_id;
-		userName = name;
-		// Get user email
-		userEmail = await User.query().where('name', userName).select('email').first();
-		
-		console.log('user name: ', userName);
-	} else {
-		userID = 1;
-	}*/
+	let { dolphin_name, user_name, numMonths, section } = req.query;
+	const userName = user_name;
+	console.log('req params: ', dolphin_name, user_name, numMonths, section);
+	const userEmail = await User.query().where('name', userName).select('email').first();
+	//console.log('user email: ', userEmail);
 
 	// Email configuration
 	const transporter = nodemailer.createTransport({
@@ -59,9 +46,9 @@ async function csvWriter(req, res, next) {
 	let resultBehaviour;
 	let resultEmotions;
 	let csvWriter;
-	let { dolphin_name, numMonths, section } = req.body;
 	
-	if(section === 'feeding') {
+	
+	if(section === 'Feeding') {
 	if (numMonths != '') {
 		if(dolphin_name != ''){
 			// Data of a specific dolphin_name and specific numMonths
@@ -117,7 +104,7 @@ async function csvWriter(req, res, next) {
 	}
 
 
-	if(section === 'housing') {
+	if(section === 'Housing/Environment') {
 		if (numMonths != '') {
 			if(dolphin_name != ''){
 				// Data of a specific dolphin_name and specific numMonths
@@ -177,7 +164,7 @@ async function csvWriter(req, res, next) {
 	}
 
 
-	if(section === 'health') {
+	if(section === 'Health') {
 			if (numMonths != '') {
 				if(dolphin_name != ''){
 					// Data of a specific dolphin_name and specific numMonths
@@ -278,6 +265,11 @@ async function csvWriter(req, res, next) {
 			console.log(error);
 			res.sendStatus(500);
 		});
-}
+	
+		} catch (error) {
+			console.error(error);
+			res.sendStatus(500);
+		}
+	}
 
-module.exports = csvWriter;
+	module.exports = csvWriter;

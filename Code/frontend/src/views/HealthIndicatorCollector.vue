@@ -62,11 +62,13 @@ export default defineComponent({
 		async handleBackButtonClick() {
 			//Call here the showAlert()
 			console.log('Back button clicked');
+			localStorage.setItem('backButtonClicked', 'true');
 			if (localStorage.getItem('dataInBody') === 'true') {
 				await this.showAlert();
 			}
 			if (localStorage.getItem('dataInBody') === 'false') {
-				this.$router.back();
+				//this.$router.back();
+				this.$router.push('/folder/Evaluate');
 			}
 		},
 		async showAlert() {
@@ -88,7 +90,8 @@ export default defineComponent({
 							text: 'Lose Data',
 							handler: () => {
 								console.log('Confirm Okay');
-								this.$router.back();
+								this.$router.push('/folder/Evaluate');
+								localStorage.setItem('dataInBody', 'false');
 								resolve(void 0);
 							},
 						},

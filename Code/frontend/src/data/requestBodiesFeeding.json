@@ -12,7 +12,8 @@
         "kcal_calculations_comments": "",
         "blood_hydration_comments": "",
         "fish_quality_comments": "",
-        "fish_variety_comments": ""
+        "fish_variety_comments": "",
+        "created_at": ""
     },
     {
         "dolphin_name": "Donna",
@@ -27,7 +28,8 @@
         "kcal_calculations_comments": "",
         "blood_hydration_comments": "",
         "fish_quality_comments": "",
-        "fish_variety_comments": ""
+        "fish_variety_comments": "",
+        "created_at": ""
     },
     {
         "dolphin_name": "Jenny",
@@ -42,7 +44,8 @@
         "kcal_calculations_comments": "",
         "blood_hydration_comments": "",
         "fish_quality_comments": "",
-        "fish_variety_comments": ""
+        "fish_variety_comments": "",
+        "created_at": ""
     },    
     {
         "dolphin_name": "Nami",
@@ -57,7 +60,8 @@
         "kcal_calculations_comments": "",
         "blood_hydration_comments": "",
         "fish_quality_comments": "",
-        "fish_variety_comments": ""
+        "fish_variety_comments": "",
+        "created_at": ""
     },
     {
         "dolphin_name": "Nynke",
@@ -72,7 +76,8 @@
         "kcal_calculations_comments": "",
         "blood_hydration_comments": "",
         "fish_quality_comments": "",
-        "fish_variety_comments": ""
+        "fish_variety_comments": "",
+        "created_at": ""
     },
     {
         "dolphin_name": "Sunny",
@@ -87,7 +92,8 @@
         "kcal_calculations_comments": "",
         "blood_hydration_comments": "",
         "fish_quality_comments": "",
-        "fish_variety_comments": ""
+        "fish_variety_comments": "",
+        "created_at": ""
     },
     {
         "dolphin_name": "Dörte",
@@ -102,6 +108,7 @@
         "kcal_calculations_comments": "",
         "blood_hydration_comments": "",
         "fish_quality_comments": "",
-        "fish_variety_comments": ""
+        "fish_variety_comments": "",
+        "created_at": ""
     }
 ]

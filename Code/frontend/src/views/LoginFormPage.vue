@@ -82,7 +82,7 @@ import { defineComponent } from 'vue';
 import { IonIcon, IonButton, IonCard, IonCardContent } from '@ionic/vue';
 import axios from 'axios';
 import { baseUrl } from '@/utils/baseUrl';
-// import router from '@/router';
+//import router from '@/router';
 //import { link } from 'ionicons/icons';
 
 export default defineComponent({
@@ -99,6 +99,10 @@ export default defineComponent({
 			const url = baseUrl + '/api/users/login';
 			// Reset the error message at the beginning of each login attempt
 			this.errorMessage = '';
+			// Initialize necessary localStorage variables
+			localStorage.setItem('dataInBody', 'false');
+			localStorage.setItem('backButtonClicked', 'false');
+
 			const requestBody = {
 				username: this.username,
 				password: this.password,
@@ -106,9 +110,10 @@ export default defineComponent({
 			//console.log(this.username, this.password);
 			axios
 				.post(url, requestBody, { withCredentials: true })
-				.then((response) => {
-					this.$router.push('/folder/Evaluate'); //Go to Evaluation Page if Login was succesfull
+				.then(async (response) => {
+					
 					const token = response.data;
+					//this.$router.push('/folder/Evaluate'); //Go to Evaluation Page if Login was succesfull
 					console.log(
 						'Token that I get as a response from the server when I log in: ',
 						token
@@ -118,6 +123,12 @@ export default defineComponent({
 						'Saved in local storage: ',
 						localStorage.getItem('token')
 					);
+					sessionStorage.setItem('user_name', this.username);
+					console.log(
+						'user_name saved in session storage: ',
+						sessionStorage.getItem('user_name')
+					);
+					await this.$router.push('/folder/Evaluate');
 				})
 				.catch((error) => {
 					this.errorMessage = 'Invalid username or password.';

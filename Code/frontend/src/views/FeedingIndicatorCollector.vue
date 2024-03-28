@@ -121,7 +121,8 @@ export default defineComponent({
 				await this.showAlert();
 			}
 			if (localStorage.getItem('dataInBody') === 'false') {
-				this.$router.back();
+				//this.$router.back();
+				this.$router.push('/folder/Evaluate');
 			}
 		},
 		async showAlert() {
@@ -143,7 +144,9 @@ export default defineComponent({
 							text: 'Lose Data',
 							handler: () => {
 								console.log('Confirm Okay');
-								this.$router.back();
+								//this.$router.back();
+								this.$router.push('/folder/Evaluate');
+								localStorage.setItem('dataInBody', 'false');
 								resolve(void 0);
 							},
 						},
@@ -153,7 +156,6 @@ export default defineComponent({
 				return alert.present();
 			});
 		},
-
 		async storeData() {
 			const confirmed = confirm(this.$t('savingDataNext'));
 			// Check in console if token is correct

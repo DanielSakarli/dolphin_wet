@@ -83,6 +83,7 @@ const goodFeedingPostValidateRequestBody = [
 			'fish_quality_comments',
 			'fish_variety',
 			'fish_variety_comments',
+			'created_at',
 			//'weight',
 		];
 		const keys = Object.keys(value);
@@ -91,7 +92,7 @@ const goodFeedingPostValidateRequestBody = [
 		const disallowedKeys = keys.filter((key) => !allowedFields.includes(key));
 		if (disallowedKeys.length > 0) {
 			throw new Error(
-				`Invalid good_housing fields: ${disallowedKeys.join(', ')}`
+				`Invalid good_feeding fields: ${disallowedKeys.join(', ')}`
 			);
 		}
 
@@ -155,6 +156,10 @@ const goodFeedingPostValidateRequestBody = [
 		.optional({ values: 'null' })
 		.isString()
 		.withMessage('Invalid comments for fish variety'),
+	body('created_at')
+		.optional({ values: 'null' })
+		.isString()
+		.withMessage('Invalid created date'),
 ];
 /**
  * End of Good feeding validation rules.

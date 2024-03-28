@@ -85,6 +85,7 @@ const router = createRouter({
 // If login successful, the token is stored in the localStorage
 router.beforeEach((to, from, next) => {
 	// Check if the route requires authentication
+	console.log('token in router file: ', localStorage.getItem('token'));
 	if (to.matched.some((record) => record.meta.requiresAuth)) {
 		// Check if the user is not logged in
 		if (!localStorage.getItem('token')) {

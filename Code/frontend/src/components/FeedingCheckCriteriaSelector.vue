@@ -332,7 +332,7 @@
 import {IonAlert, IonItem, IonList, IonSelect, IonSelectOption, IonLabel, IonModal,
 	IonHeader, IonToolbar, IonContent, IonTitle, IonButtons, IonButton,
 	IonText, IonCheckbox, IonInput, IonRange, IonCard, IonCardTitle, IonFooter,
-	IonIcon
+	IonIcon, alertController
 } from '@ionic/vue';
 import axios from 'axios';
 import CheckComments from '@/components/CheckComments.vue';
@@ -380,6 +380,8 @@ export default {
 		// Reset here data while page is mounted
 		localStorage.setItem('backButtonClicked', 'false');
 		localStorage.setItem('dataInBody', 'false');
+		localStorage.setItem('created_at', '');
+
 		evaluationFeedingStore.resetBodies();
 	},
 	/*props: {
@@ -493,6 +495,10 @@ export default {
 					evaluationFeedingStore.requestBodiesFeeding[k]["blood_hydration_comments"] = this.blood_hydration_comments;
 					evaluationFeedingStore.requestBodiesFeeding[k]["fish_quality_comments"] = this.fish_quality_comments;
 					evaluationFeedingStore.requestBodiesFeeding[k]["fish_variety_comments"] = this.fish_variety_comments;
+
+					if(localStorage.getItem('created_at') !== "") {
+						evaluationFeedingStore.requestBodiesFeeding[k]["created_at"] = localStorage.getItem('created_at') as string;
+					}
 				}
 			}
 			for(let i = 0; i <= 4; i++){
@@ -526,13 +532,95 @@ export default {
 	  		this.fish_variety_comments = comment;
 		},
 
+		async confirmTestDate() {
+		return new Promise(async (resolve, reject) => {
+			const alert = await alertController.create({
+			header: 'Confirmation',
+			message: 'Is the data you entered current?',
+			buttons: [
+				{
+				text: 'Yes',
+				role: 'cancel',
+				cssClass: 'secondary',
+				handler: () => {
+					console.log('Yes clicked');
+					resolve(void 0);
+				},
+				},
+				{
+				text: 'No',
+				handler: () => {
+					(async () => {
+						await this.showDateInputAlert();
+						resolve(void 0);	
+					})();
+					
+					
+				},
+				},
+			],
+			});
+
+			return alert.present();
+		});
+},
+
+async showDateInputAlert() {
+  return new Promise(async (resolve, reject) => {
+    const alert = await alertController.create({
+      header: 'Enter Date',
+      inputs: [
+        {
+          name: 'date',
+          type: 'date',
+        },
+      ],
+      buttons: [
+        {
+          text: 'Cancel',
+          role: '',
+          cssClass: 'secondary',
+          handler: () => {
+            console.log('Cancel clicked');
+            reject();
+            this.storeData();
+          },
+        },
+        {
+          text: 'Confirm',
+          handler: (data) => {
+            console.log('Test date changed');
+            // Convert the date to dd/mm/yyyy format
+            const dateParts = data.date.split('-');
+            //const formattedDate = `${dateParts[2]}/${dateParts[1]}/${dateParts[0]}`;
+            // Convert the date to dd/mm/yyyy format
+			const formattedDate = `${dateParts[0]}-${dateParts[1]}-${dateParts[2]}T00:00:00Z`;
+            
+			localStorage.setItem('created_at', formattedDate);
+            localStorage.setItem('dataInBody', 'false');
+            resolve(void 0);
+          },
+        },
+      ],
+    });
+
+    return alert.present();
+  });
+},
 		//Method to send the data to database
 		async storeData() {
 			//console.log('config', config);
-			const confirmed = confirm(this.$t('savingDataNext')); //Where is the variable savingDataNext initialized and what does it do?
-     		if (confirmed) {
+			//const confirmed = confirm(this.$t('savingDataNext')); //Where is the variable savingDataNext initialized and what does it do?
+     		const confirmed = true;
+			if (confirmed) {
+				//Check if the date of the test is the current date
+				await this.confirmTestDate();
+
+				//Store the checked values in the request body
 				this.storeCheckedValues();
 				console.log(this.CheckboxArray);
+				
+				console.log('Reached this');
 				for(let i = 0; i < evaluationFeedingStore.requestBodiesFeeding.length; i++){
 					/*for(const data in evaluationFeedingStore.requestBodiesFeeding[i]){
 						if(evaluationFeedingStore.requestBodiesFeeding[i].content(data)){}
@@ -556,6 +644,7 @@ export default {
 									evaluationFeedingStore.resetBodies();
 									this.dolphinSelect = [];
 									this.criteria = null;
+									localStorage.setItem('created_at', '');
 								}
 							})
 							.catch((error) => {
@@ -567,6 +656,7 @@ export default {
 									setTimeout(() => {
 										dataInBody = false;
 										localStorage.setItem('dataInBody', dataInBody.toString());
+										localStorage.setItem('created_at', '');
 										this.$router.push(targetUrl);
 									}, 3000);
 							});

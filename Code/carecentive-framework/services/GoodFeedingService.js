@@ -24,14 +24,27 @@ class GoodFeedingService {
 	 * @param {String} result.blood_hydration_comments
 	 * @param {String} result.fish_quality_comments
 	 * @param {String} result.fish_variety_comments
+	 * @param {String} result.created_at The date of test result
 	 * @returns {Object} Inserted result in database
 	 */
 	static async loadTestResult(result) {
 		try {
-			const insertedResult = await GoodFeeding.query().insert({
+			console.log("Date sent to backend: ", result.created_at);
+			if (result.created_at !== "") {
+				const insertedResult = await GoodFeeding.query().insert({
+					...result,
+					created_at: new Date(result.created_at),
+				});
+				return insertedResult;
+			} else {
+				const insertedResult = await GoodFeeding.query().insert({
 				...result,
+				created_at: new Date().toISOString().split('.')[0],
+
 			});
+			
 			return insertedResult;
+			}
 		} catch (error) {
 			throw error;
 		}

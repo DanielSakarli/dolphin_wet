@@ -121,7 +121,21 @@ export default defineComponent({
 				//router.push(url);
 			} else {
 				selectedIndex.value = index; // Use .value to access or modify the value of a ref
-				router.push(url);
+				console.log('url: ', url);
+				console.log('index: ', index);
+				if (url === '/home') {
+					// Page needs a full reload when pressing on 'Logout' and
+					// then go to /home, but I don´t know why
+					router.push(url).then(() => window.location.reload());
+
+					//Clear storages when user logs out
+					//sessionStorage.clear();
+					localStorage.setItem('dataInBody', 'false');
+					localStorage.setItem('backButtonClicked', 'false');
+				} else {
+					//Otherwise a normal router.push(url) is sufficient
+					router.push(url);
+				}
 			}
 		};
 
