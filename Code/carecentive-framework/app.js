@@ -136,6 +136,27 @@ app.use('/api/files', fileRouter);
 app.use('/api/analytics', analyticsRouter);
 app.use('/api/settings', settingsRouter);
 
+///////////////////////////////////////////////////
+// Set up the session storage
+app.post('/api/setup_session_storage', (req, res, next) => {
+	try {
+		const { photo_type, eye_photo_path, teeth_photo_path, dolphin_name, image } = req.body;
+		req.session.photo_type = photo_type; // Either 'eye' or 'teeth'
+		req.session.dolphin_name = dolphin_name;
+		req.session.photo_path = {
+			eye_photo_path,
+			teeth_photo_path
+		};
+		req.session.image = image;
+		console.log('Session storage initialized')
+		res.sendStatus(201);
+	} catch(e) {
+		console.log('Error occured while initializing session storage');
+		res.sendStatus(500);
+	}
+});
+///////////////////////////////////////////////////
+
 /**
  * Dolphin Wet Routes
  */
@@ -148,25 +169,7 @@ app.post('/api/photo', uploadPhoto);
 app.get('/api/export-csv', csvWriter);
 
 
-///////////////////////////////////////////////////
-// Set up the session storage
-app.post('/api/setup_session_storage', (req, res, next) => {
-	try {
-		const { photo_type, eye_photo_path, teeth_photo_path, dolphin_name } = req.body;
-		req.session.photo_type = photo_type; // Either 'eye' or 'teeth'
-		req.session.dolphin_name = dolphin_name;
-		req.session.photo_path = {
-			eye_photo_path,
-			teeth_photo_path
-		};
-		console.log('Session storage initialized')
-		res.sendStatus(201);
-	} catch(e) {
-		console.log('Error occured while initializing session storage');
-		res.sendStatus(500);
-	}
-});
-///////////////////////////////////////////////////
+
 
 /**
  * Custom routes

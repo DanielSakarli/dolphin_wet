@@ -103,6 +103,12 @@ async function uploadPhoto(req, res, next) {
       } else {
         // Everything went fine.
 
+
+        // Read the file as a binary buffer
+        const fileBuffer = req.files[0].toString('base64');
+        console.log('fileBuffer: ', fileBuffer);
+        req.session.image = fileBuffer;
+
         res.sendStatus(201); //picture uploaded successfully
         }
     })

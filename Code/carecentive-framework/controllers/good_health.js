@@ -62,9 +62,9 @@ async function setResult(req, res, next) {
 					if (test_result.dolphin_name === req.session.dolphin_name) {
 					// Append eye_photo_path to the array
 					test_result.eye_photo_path = req.session.photo_path.eye_photo_path.toString();
-					fileData = fs.readFileSync(test_result.eye_photo_path);
-					test_result.image = fileData;
-					console.log(fileData);
+					//fileData = fs.readFileSync(test_result.eye_photo_path);
+					test_result.image = req.session.image;
+					console.log(test_result.image);
 				}
 				
 				}
@@ -78,9 +78,9 @@ async function setResult(req, res, next) {
 					if (test_result.dolphin_name === req.session.dolphin_name) {
 					// Append teeth_photo_path to the array
 					test_result.teeth_photo_path = req.session.photo_path.teeth_photo_path.toString();
-					fileData = fs.readFileSync(test_result.teeth_photo_path);
-					test_result.image = fileData;
-					console.log(fileData);
+					//fileData = fs.readFileSync(test_result.teeth_photo_path);
+					test_result.image = req.session.image;
+					console.log(test_result.image);
 				}
 				
 				}
