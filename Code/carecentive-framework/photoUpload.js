@@ -1,4 +1,5 @@
 const path = require('path');
+const fs = require('fs');
 const multer = require('multer');
 let photo_path;
 let photo_type;
@@ -100,7 +101,8 @@ async function uploadPhoto(req, res, next) {
         // An unknown error occurred when uploading.
         res.sendStatus(500); 
       } else {
-        // Everything went fine.             
+        // Everything went fine.
+
         res.sendStatus(201); //picture uploaded successfully
         }
     })

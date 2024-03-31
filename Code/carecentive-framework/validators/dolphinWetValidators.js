@@ -190,7 +190,8 @@ const goodHealthPostValidateRequestBody = [
 			'external_disease_signs_comments',
 			'eye_photo_path',
 			'teeth_photo_path',
-			'created_at'
+			'created_at',
+			'image'
 		];
 		const keys = Object.keys(value);
 
@@ -292,6 +293,11 @@ const goodHealthPostValidateRequestBody = [
 		.optional({ values: 'null' })
 		.isString()
 		.withMessage('Invalid created date'),
+	body('image')
+		.optional({ values: 'null' })	
+		.isBase64()
+		.withMessage('Invalid image'),
+			
 ];
 /**
  * End of Good health validation rules.
