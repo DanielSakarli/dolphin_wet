@@ -53,17 +53,23 @@ class GoodHealthService {
 			// TEST //
 			// Why the test is needed? The database doesn´t accept an array of Buffers as input.
 			// Convert the array of Buffers to an array of base64 strings
-			const base64Images = result.image.map(buffer => buffer.toString('base64'));
+			//const base64Images = result.image.map(buffer => buffer.toString('base64'));
 			// Join the array of base64 strings into a single string
-			const imageString = base64Images.join(',');
+			//const imageString = base64Images.join(',');
 			// TEST //
-
+			// Split the image string into an array
+			const base64Images = result.image.toString().split(',');
+			// Decode the first base64 string into a Buffer
+			const firstBuffer = Buffer.from(base64Images[0], 'base64');
+			// Log the first Buffer
+			console.log('First image to be inserted in db: ', firstBuffer);
+			
 			// Inserts data into database.			
 			if (result.created_at !== "") {
 				const insertedResult = await GoodHealth.query().insert({
 					dolphin_id,
 					...result,
-					image: imageString, // Store the image string in the database
+					//image: imageString, // Store the image string in the database
 					created_at: new Date(result.created_at),
 				});
 				return insertedResult;
@@ -71,7 +77,7 @@ class GoodHealthService {
 				const insertedResult = await GoodHealth.query().insert({
 					dolphin_id,
 					...result,
-					image: imageString, // Store the image string in the database
+					//image: imageString, // Store the image string in the database
 					created_at: new Date().toISOString().split('.')[0],
 				});
 				return insertedResult;

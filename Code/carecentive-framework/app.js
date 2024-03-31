@@ -148,7 +148,7 @@ app.post('/api/setup_session_storage', (req, res, next) => {
 			eye_photo_path,
 			teeth_photo_path
 		};
-		req.session.image = []; // Array to store the image Buffers
+		req.session.image = image;
 		console.log('Session storage initialized')
 		res.sendStatus(201);
 	} catch(e) {

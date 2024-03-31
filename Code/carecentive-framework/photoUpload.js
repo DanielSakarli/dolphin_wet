@@ -86,7 +86,7 @@ async function uploadPhoto(req, res, next) {
       eye_photo_path: '',
       teeth_photo_path: ''
     };
-    req.session.images = []; // Array to store the image Buffers
+    req.session.images = ''; // Array to store the image Buffers
     currentIndex = 0; // Reset the index before each photo upload
     //console.log('Photo path accessed  from session storage: ' + photo_path.eye_photo_path.toString());
 
@@ -110,8 +110,18 @@ async function uploadPhoto(req, res, next) {
           console.log('file: ', file);
           const fileBuffer = file.toString('base64'); //req.files.toString('base64');
           console.log('fileBuffer: ', fileBuffer);
-          req.session.image.push(fileBuffer);
+          if(req.session.image === ''){ //If empty, so session storage has just been initialized
+            //First photo in the list
+            console.log('I am here');
+            req.session.image = fileBuffer;
+          } else {
+          //Commaseparated list of image buffers if several photos to upload
+          req.session.image = req.session.image + ',' + fileBuffer;
+          //req.session.image.push(fileBuffer);
           console.log('req.session.image: ', req.session.image);
+          }
+
+
         }
         res.sendStatus(201); //picture uploaded successfully
         // TEST //
