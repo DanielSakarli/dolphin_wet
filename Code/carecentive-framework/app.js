@@ -75,6 +75,7 @@ const good_feeding = require('./routes/good_feeding');
 const good_health = require('./routes/good_health');
 const good_housing = require('./routes/good_housing');
 const behaviour = require('./routes/behabvior');
+const get_image = require('./routes/get_image');
 //const photoPath = require('./routes/photoPath');
 const uploadPhoto = require('./photoUpload');
 const csvWriter = require('./controllers/csvWriter');
@@ -147,7 +148,7 @@ app.post('/api/setup_session_storage', (req, res, next) => {
 			eye_photo_path,
 			teeth_photo_path
 		};
-		req.session.image = image;
+		req.session.image = []; // Array to store the image Buffers
 		console.log('Session storage initialized')
 		res.sendStatus(201);
 	} catch(e) {
@@ -165,10 +166,9 @@ app.use('/api/good_feeding', good_feeding);
 app.use('/api/good_health', good_health);
 app.use('/api/good_housing', good_housing);
 app.use('/api/behaviour', behaviour);
+app.use('/api/images', get_image); // Get the image from the database
 app.post('/api/photo', uploadPhoto);
 app.get('/api/export-csv', csvWriter);
-
-
 
 
 /**

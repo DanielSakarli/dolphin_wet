@@ -221,7 +221,8 @@ async function csvWriter(req, res, next) {
 					{id: 'eye_photo_path', title: 'Eye Photo Path'},
 					{id: 'teeth_photo_path', title: 'Teeth Photo Path'},
 					{id: 'created_at', title: 'Created At'},
-					{id: 'updated_at', title: 'Updated At'}
+					{id: 'updated_at', title: 'Updated At'},
+					{id: 'image', title: 'Image'}					
 				]
 			});
 		}

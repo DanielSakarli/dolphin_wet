@@ -1,7 +1,7 @@
 const { validationResult } = require('express-validator');
 const { isUserAuth } = require('./authSwitch');
 const GoodHealthService = require('../services/GoodHealthService');
-const fs = require('fs');
+//const fs = require('fs');
 const path = require('path');
 
 /**
@@ -44,8 +44,6 @@ async function setResult(req, res, next) {
 			
 		if(req.session.photo_path) {
 			// attach userID to test result in req.body
-			let fileData;
-			
 			let test_result = req.body;
 			test_result = { user_id: userID, user_name: userName, ...test_result };
 
@@ -62,8 +60,8 @@ async function setResult(req, res, next) {
 					if (test_result.dolphin_name === req.session.dolphin_name) {
 					// Append eye_photo_path to the array
 					test_result.eye_photo_path = req.session.photo_path.eye_photo_path.toString();
-					//fileData = fs.readFileSync(test_result.eye_photo_path);
-					test_result.image = req.session.image;
+					
+					test_result.image = req.session.image; // Add the binary image to the test_result
 					console.log(test_result.image);
 				}
 				
@@ -78,26 +76,12 @@ async function setResult(req, res, next) {
 					if (test_result.dolphin_name === req.session.dolphin_name) {
 					// Append teeth_photo_path to the array
 					test_result.teeth_photo_path = req.session.photo_path.teeth_photo_path.toString();
-					//fileData = fs.readFileSync(test_result.teeth_photo_path);
-					test_result.image = req.session.image;
+					
+					test_result.image = req.session.image; // Add the binary image to the test_result
 					console.log(test_result.image);
 				}
 				
 				}
-				
-		///////////////////////////////////////////
-        // TEST
-        // Read the uploaded file as a binary buffer
-        
-		//const filePath = path.join(__dirname, 'uploads', req.file.filename);
-        //const fileData = fs.readFileSync(filePath);
-		
-        // Insert the binary data into your database
-        // Replace this with your actual database insertion code
-		//test_result.image = fileData;
-
-
-        ///////////////////////////////////////////
 			
 				const insertedResult = await GoodHealthService.loadTestResult(test_result);
 				res.status(201).json(insertedResult);

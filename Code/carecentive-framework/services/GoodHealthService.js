@@ -105,7 +105,8 @@ class GoodHealthService {
 					'eye_photo_path',
 					'teeth_photo_path',
 					'created_at',
-					'updated_at'
+					'updated_at',
+					'image'
 				)
 				.where('dolphin_name', '=', name)
 				.where(
@@ -119,6 +120,27 @@ class GoodHealthService {
 			throw error;
 		}
 	}
+
+	/**
+	 * Gets good_health images by given health record id.
+	 * @param {id} health_record_id - The id of health record
+	 * @returns {Promise<Array>} list of query result
+	 */
+	static async getImages(health_record_id) {
+		try {
+			// Gets the image of the given health record id
+			const result = await GoodHealth.query()
+			.findById(health_record_id)
+			.select('image', 'eye_photo_path', 'teeth_photo_path');
+			console.log('This is the image data in the getImages method: ', result);
+			return result;
+
+		} catch (error) {
+			throw error;
+		}
+	}
+
+
 
 	/**
 	 * Gets the test result of last N month of given dolphin. The default value of month is 3.

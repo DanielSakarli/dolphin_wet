@@ -86,6 +86,7 @@ async function uploadPhoto(req, res, next) {
       eye_photo_path: '',
       teeth_photo_path: ''
     };
+    req.session.images = []; // Array to store the image Buffers
     currentIndex = 0; // Reset the index before each photo upload
     //console.log('Photo path accessed  from session storage: ' + photo_path.eye_photo_path.toString());
 
@@ -101,15 +102,30 @@ async function uploadPhoto(req, res, next) {
         // An unknown error occurred when uploading.
         res.sendStatus(500); 
       } else {
+
+
+        // TEST //
+        for (let file of req.files) {
+          //console.log('currentIndex: ', file);
+          console.log('file: ', file);
+          const fileBuffer = file.toString('base64'); //req.files.toString('base64');
+          console.log('fileBuffer: ', fileBuffer);
+          req.session.image.push(fileBuffer);
+          console.log('req.session.image: ', req.session.image);
+        }
+        res.sendStatus(201); //picture uploaded successfully
+        // TEST //
+        
+
+
         // Everything went fine.
-
-
         // Read the file as a binary buffer
-        const fileBuffer = req.files[0].toString('base64');
+        /*const fileBuffer = req.files.toString('base64');
         console.log('fileBuffer: ', fileBuffer);
+        // Save the file in the session storage for later access in good_health.js to save the photo in the database
         req.session.image = fileBuffer;
 
-        res.sendStatus(201); //picture uploaded successfully
+        res.sendStatus(201); //picture uploaded successfully*/
         }
     })
     } catch (error) {
