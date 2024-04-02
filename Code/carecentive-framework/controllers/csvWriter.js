@@ -227,7 +227,7 @@ async function csvWriter(req, res, next) {
 		}
 		
 
-
+	data.sort((a, b) => a.created_at - b.created_at);
 	csvWriter
 		.writeRecords(data)
 		.then(() => {
