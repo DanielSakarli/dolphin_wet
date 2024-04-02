@@ -506,8 +506,8 @@ export default {
 			dolphinSelect: null as string | null,
 			principleSelect: null as string | null,
 			principles: [
-				this.$t('principleFeeding'),
-				this.$t('principleHousing'),
+				this.$t('principleNutrition'),
+				this.$t('principleEnvironment'),
 				this.$t('principleHealth'),
 				this.$t('principleBehaviour'),
 				this.$t('principleEmotionalState'),

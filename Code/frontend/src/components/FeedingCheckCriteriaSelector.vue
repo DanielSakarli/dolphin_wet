@@ -28,17 +28,17 @@
 					okText="OK"
 					:cancelText="firstcancelText"
 				>
-					<ion-select-option value="firstCriteriaFeeding">{{
-						$t('firstCriteriaFeeding')
+					<ion-select-option value="firstCriteriaNutrition">{{
+						$t('firstCriteriaNutrition')
 					}}</ion-select-option>
-					<ion-select-option value="secondCriteriaFeeding">{{
-						$t('secondCriteriaFeeding')
+					<ion-select-option value="secondCriteriaNutrition">{{
+						$t('secondCriteriaNutrition')
 					}}</ion-select-option>
-					<ion-select-option value="thirdCriteriaFeeding">{{
-						$t('thirdCriteriaFeeding')
+					<ion-select-option value="thirdCriteriaNutrition">{{
+						$t('thirdCriteriaNutrition')
 					}}</ion-select-option>
-					<ion-select-option value="fourthCriteriaFeeding">{{
-						$t('fourthCriteriaFeeding')
+					<ion-select-option value="fourthCriteriaNutrition">{{
+						$t('fourthCriteriaNutrition')
 					}}</ion-select-option>
 				</ion-select>
 			</ion-item>
@@ -51,17 +51,17 @@
 		<ion-modal :is-open="isOpenManual">
 			<ion-header>
 				<ion-toolbar>
-					<ion-title v-if=" criteria === 'firstCriteriaFeeding'"
-						>{{$t('firstCriteriaFeeding')}}
+					<ion-title v-if=" criteria === 'firstCriteriaNutrition'"
+						>{{$t('firstCriteriaNutrition')}}
 					</ion-title>
-					<ion-title v-else-if=" criteria === 'secondCriteriaFeeding'"
-						>{{$t('secondCriteriaFeeding')}}
+					<ion-title v-else-if=" criteria === 'secondCriteriaNutrition'"
+						>{{$t('secondCriteriaNutrition')}}
 					</ion-title>
-					<ion-title v-else-if=" criteria === 'thirdCriteriaFeeding'"
-						>{{$t('thirdCriteriaFeeding')}}
+					<ion-title v-else-if=" criteria === 'thirdCriteriaNutrition'"
+						>{{$t('thirdCriteriaNutrition')}}
 					</ion-title>
-					<ion-title v-else-if=" criteria === 'fourthCriteriaFeeding'"
-						>{{$t('fourthCriteriaFeeding')}}
+					<ion-title v-else-if=" criteria === 'fourthCriteriaNutrition'"
+						>{{$t('fourthCriteriaNutrition')}}
 					</ion-title>
 					<ion-buttons slot="end">
 						<ion-button @click="setOpenManual(false)">{{ $t('close')}}</ion-button>
@@ -69,16 +69,16 @@
 				</ion-toolbar>
 			</ion-header>
 			<ion-content class="ion-padding">
-				<p v-if=" criteria === 'firstCriteriaFeeding'">
+				<p v-if=" criteria === 'firstCriteriaNutrition'">
 					{{ $t('userManualHungerThirst') }}
 				</p>
-				<p v-if=" criteria === 'secondCriteriaFeeding'">
+				<p v-if=" criteria === 'secondCriteriaNutrition'">
 					{{ $t('userManualAdequateDiet') }}
 				</p>
-				<p v-if=" criteria === 'thirdCriteriaFeeding'">
+				<p v-if=" criteria === 'thirdCriteriaNutrition'">
 					{{ $t('userManualFoodQuality') }}
 				</p>
-				<p v-if=" criteria === 'fourthCriteriaFeeding'">
+				<p v-if=" criteria === 'fourthCriteriaNutrition'">
 					{{ $t('userManualFoodVariety') }}
 				</p>
 			</ion-content>
@@ -90,17 +90,17 @@
 		<ion-modal :is-open="isOpenScoring">
 			<ion-header>
 				<ion-toolbar>
-					<ion-title v-if=" criteria === 'firstCriteriaFeeding'"
-						>{{$t('firstCriteriaFeeding')}}
+					<ion-title v-if=" criteria === 'firstCriteriaNutrition'"
+						>{{$t('firstCriteriaNutrition')}}
 					</ion-title>
-					<ion-title v-else-if=" criteria === 'secondCriteriaFeeding'"
-						>{{$t('secondCriteriaFeeding')}}
+					<ion-title v-else-if=" criteria === 'secondCriteriaNutrition'"
+						>{{$t('secondCriteriaNutrition')}}
 					</ion-title>
-					<ion-title v-else-if=" criteria === 'thirdCriteriaFeeding'"
-						>{{$t('thirdCriteriaFeeding')}}
+					<ion-title v-else-if=" criteria === 'thirdCriteriaNutrition'"
+						>{{$t('thirdCriteriaNutrition')}}
 					</ion-title>
-					<ion-title v-else-if=" criteria === 'fourthCriteriaFeeding'"
-						>{{$t('fourthCriteriaFeeding')}}
+					<ion-title v-else-if=" criteria === 'fourthCriteriaNutrition'"
+						>{{$t('fourthCriteriaNutrition')}}
 					</ion-title>
 					<ion-buttons slot="end">
 						<ion-button @click="setOpenScoring(false)">{{ $t('close')}}</ion-button>
@@ -108,7 +108,7 @@
 				</ion-toolbar>
 			</ion-header>
 			<ion-content class="ion-padding">
-				<p v-if=" criteria === 'firstCriteriaFeeding'">
+				<p v-if=" criteria === 'firstCriteriaNutrition'">
 					<h1>Body Condition Score:</h1>
 					<h3>Score 1</h3>
 					BCS of 3 = adequate
@@ -122,7 +122,7 @@
 					<h3>Score 3</h3>
 					BWOS: &gt;13% along the year or &lt;5% in a 3-month period
 				</p>
-				<p v-if=" criteria === 'secondCriteriaFeeding'">
+				<p v-if=" criteria === 'secondCriteriaNutrition'">
 					<h1>Kcal calculations</h1>
 					<h3>Score 1</h3>
 					Diet designed on the basis of EAAM S&G
@@ -136,14 +136,14 @@
 					<h3>Score 3</h3>
 					&gt;10% out of range
 				</p>
-				<p v-if=" criteria === 'thirdCriteriaFeeding'">
+				<p v-if=" criteria === 'thirdCriteriaNutrition'">
 					<h1>Food quality Microbiology, Physico-chemical analysis:</h1>
 					<h3>Score 1</h3>
 					Fulfilled according to EAAM S&G
 					<h3>Score 3</h3>
 					Not fulfilled according to EAAM S&G
 				</p>
-				<p v-if=" criteria === 'fourthCriteriaFeeding'">
+				<p v-if=" criteria === 'fourthCriteriaNutrition'">
 					<h1>Food variety along the year:</h1>
 					<h3>Score 1</h3>
 					At least 5 species are fed throughout the year, 
@@ -178,7 +178,7 @@
 			</ion-header>
 
 			<ion-content class="ion-padding">
-				<p v-if=" criteria === 'firstCriteriaFeeding'">
+				<p v-if=" criteria === 'firstCriteriaNutrition'">
 					<!--Here are the values of reference area-->
 					<h3>Wanted weight area:</h3>
 					<div v-if="dolphinSelect">
@@ -203,7 +203,7 @@
 						  </div>
 					  </div>
 				</p>
-				<p v-if=" criteria === 'secondCriteriaFeeding'">
+				<p v-if=" criteria === 'secondCriteriaNutrition'">
 					<!--Here are the values of reference area-->
 					<h3>Kcal calculations</h3>
 					<div v-if="dolphinSelect">
@@ -232,23 +232,23 @@
 		</ion-modal>
 		<!--End of Reference Area-->
 		<!-- Start of Checkboxes-->
-		<ion-card v-if=" criteria === 'firstCriteriaFeeding'">
-			<ion-card-title>{{$t('body_condition_score')}}</ion-card-title>
+		<ion-card v-if=" criteria === 'firstCriteriaNutrition'">
+			<ion-card-title>{{$t('firstSubCriteriaNutrition')}}</ion-card-title>
 			<ion-list >
 					<ion-item>
-						<ion-checkbox v-model="CheckboxArray[0][0]" @click="handleClick(0,0)">Score 1</ion-checkbox>
+						<ion-checkbox v-model="CheckboxArray[0][0]" @click="handleClick(0,0)">Score 0</ion-checkbox>
 					</ion-item>
 					<ion-item>
-						<ion-checkbox v-model="CheckboxArray[0][1]" @click="handleClick(0,1)">Score 2</ion-checkbox>
+						<ion-checkbox v-model="CheckboxArray[0][1]" @click="handleClick(0,1)">Score 1</ion-checkbox>
 					</ion-item>
 					<ion-item>
-						<ion-checkbox v-model="CheckboxArray[0][2]" @click="handleClick(0,2)">Score 3</ion-checkbox>
+						<ion-checkbox v-model="CheckboxArray[0][2]" @click="handleClick(0,2)">Score 2</ion-checkbox>
 					</ion-item>
 					<CheckComments @update-comment="updateBodyConditionScoreComments" />
 			</ion-list>
 		</ion-card>
-		<ion-card v-if=" criteria === 'firstCriteriaFeeding'">
-			<ion-card-title>{{$t('weight_measured')}}</ion-card-title>
+		<ion-card v-if=" criteria === 'firstCriteriaNutrition'">
+			<ion-card-title>{{$t('secondSubCriteriaNutrition')}}</ion-card-title>
 			<ion-list >
 				<ion-item>
 					<ion-input :label="weightLabel" :placeholder="weightPlaceholder" v-model="weight_measured"> </ion-input>
@@ -259,56 +259,56 @@
 				<CheckComments @update-comment="updateWeightMeasuredComments" />
 			</ion-list>
 		</ion-card>
-		<ion-card v-if=" criteria === 'secondCriteriaFeeding'">
-			<ion-card-title>{{$t('kcal_calculations')}}</ion-card-title>
+		<ion-card v-if=" criteria === 'secondCriteriaNutrition'">
+			<ion-card-title>{{$t('thirdSubCriteriaNutrition')}}</ion-card-title>
 			<ion-list>
 				<ion-item>
-					<ion-checkbox v-model="CheckboxArray[1][0]" @click="handleClick(1,0)">Score 1</ion-checkbox>
+					<ion-checkbox v-model="CheckboxArray[1][0]" @click="handleClick(1,0)">Score 0</ion-checkbox>
 				</ion-item>
 				<ion-item>
-					<ion-checkbox v-model="CheckboxArray[1][2]" @click="handleClick(1,1)">Score 3</ion-checkbox>
+					<ion-checkbox v-model="CheckboxArray[1][2]" @click="handleClick(1,2)">Score 2</ion-checkbox>
 				</ion-item>
 				<CheckComments @update-comment="updateKcalCalculationsComments" />
 			</ion-list>
 		</ion-card>
-		<ion-card v-if=" criteria === 'secondCriteriaFeeding'">
-			<ion-card-title>{{$t('fourthSubcriteriaFeeding')}}</ion-card-title>		
+		<ion-card v-if=" criteria === 'secondCriteriaNutrition'">
+			<ion-card-title>{{$t('fourthSubCriteriaNutrition')}}</ion-card-title>		
 			<ion-list>
 				<ion-item>
-					<ion-checkbox v-model="CheckboxArray[2][0]" @click="handleClick(2,0)">Score 1</ion-checkbox>
+					<ion-checkbox v-model="CheckboxArray[2][0]" @click="handleClick(2,0)">Score 0</ion-checkbox>
 				</ion-item>
 				<ion-item>
-					<ion-checkbox v-model="CheckboxArray[2][1]" @click="handleClick(2,1)">Score 2</ion-checkbox>
+					<ion-checkbox v-model="CheckboxArray[2][1]" @click="handleClick(2,1)">Score 1</ion-checkbox>
 				</ion-item>
 				<ion-item>
-					<ion-checkbox v-model="CheckboxArray[2][2]" @click="handleClick(2,2)">Score 3</ion-checkbox>
+					<ion-checkbox v-model="CheckboxArray[2][2]" @click="handleClick(2,2)">Score 2</ion-checkbox>
 				</ion-item>
 				<CheckComments @update-comment="updateBloodHydrationComments" />
 			</ion-list>
 		</ion-card>
-		<ion-card v-if=" criteria === 'thirdCriteriaFeeding'">
-			<ion-card-title>{{$t('fifthSubcriteriaFeeding')}}</ion-card-title>		
+		<ion-card v-if=" criteria === 'thirdCriteriaNutrition'">
+			<ion-card-title>{{$t('fifthSubCriteriaNutrition')}}</ion-card-title>		
 			<ion-list >
 				<ion-item>
-					<ion-checkbox v-model="CheckboxArray[3][0]" @click="handleClick(3,0)">Score 1</ion-checkbox>
+					<ion-checkbox v-model="CheckboxArray[3][0]" @click="handleClick(3,0)">Score 0</ion-checkbox>
 				</ion-item>
 				<ion-item>
-					<ion-checkbox v-model="CheckboxArray[3][2]" @click="handleClick(3,1)">Score 3</ion-checkbox>
+					<ion-checkbox v-model="CheckboxArray[3][2]" @click="handleClick(3,1)">Score 2</ion-checkbox>
 				</ion-item>
 				<CheckComments @update-comment="updateFishQualityComments" />
 			</ion-list>
 		</ion-card>
-		<ion-card v-if=" criteria === 'fourthCriteriaFeeding'">
-			<ion-card-title>{{$t('sixthSubcriteriaFeeding')}}</ion-card-title>	
+		<ion-card v-if=" criteria === 'fourthCriteriaNutrition'">
+			<ion-card-title>{{$t('sixthSubCriteriaNutrition')}}</ion-card-title>	
 			<ion-list>
 				<ion-item>
-					<ion-checkbox v-model="CheckboxArray[4][0]" @click="handleClick(4,0)">Score 1</ion-checkbox>
+					<ion-checkbox v-model="CheckboxArray[4][0]" @click="handleClick(4,0)">Score 0</ion-checkbox>
 				</ion-item>
 				<ion-item>
-					<ion-checkbox v-model="CheckboxArray[4][1]" @click="handleClick(4,1)">Score 2</ion-checkbox>
+					<ion-checkbox v-model="CheckboxArray[4][1]" @click="handleClick(4,1)">Score 1</ion-checkbox>
 				</ion-item>
 				<ion-item>
-					<ion-checkbox v-model="CheckboxArray[4][2]" @click="handleClick(4,2)">Score 3</ion-checkbox>
+					<ion-checkbox v-model="CheckboxArray[4][2]" @click="handleClick(4,2)">Score 2</ion-checkbox>
 				</ion-item>
 				<CheckComments @update-comment="updateFishVarietyComments" />
 			</ion-list>
@@ -476,15 +476,15 @@ export default {
 					for(let i = 0; i < this.CheckboxArray.length; i++){
 						for(let j = 0; j < this.CheckboxArray[i].length; j++){
 							if (this.CheckboxArray[i][j] === true && i === 0){
-								evaluationFeedingStore.requestBodiesFeeding[k]["body_condition_score"] = j + 1;
+								evaluationFeedingStore.requestBodiesFeeding[k]["body_condition_score"] = j;
 							}else if (this.CheckboxArray[i][j] === true && i === 1){
-								evaluationFeedingStore.requestBodiesFeeding[k]["kcal_calculations"] = j + 1;
+								evaluationFeedingStore.requestBodiesFeeding[k]["kcal_calculations"] = j;
 							}else if (this.CheckboxArray[i][j] === true && i === 2){
-								evaluationFeedingStore.requestBodiesFeeding[k]["blood_hydration"] = j + 1;
+								evaluationFeedingStore.requestBodiesFeeding[k]["blood_hydration"] = j;
 							}else if (this.CheckboxArray[i][j] === true && i === 3){
-								evaluationFeedingStore.requestBodiesFeeding[k]["fish_quality"] = j + 1;
+								evaluationFeedingStore.requestBodiesFeeding[k]["fish_quality"] = j;
 							}else if (this.CheckboxArray[i][j] === true && i === 4){
-								evaluationFeedingStore.requestBodiesFeeding[k]["fish_variety"] = j + 1;
+								evaluationFeedingStore.requestBodiesFeeding[k]["fish_variety"] = j;
 							}
 						}
 					}

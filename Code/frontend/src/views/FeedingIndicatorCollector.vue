@@ -3,7 +3,7 @@
 	<ion-page>
 		<ion-header>
 			<ion-toolbar>
-				<ion-title>{{ $t('topicFeeding') }} </ion-title>
+				<ion-title>{{ $t('topicNutrition') }} </ion-title>
 				<ion-buttons slot="start">
 					<!--<ion-back-button defaultHref="/folder/Evaluate"></ion-back-button>-->
 					<ion-back-button @click="handleBackButtonClick"></ion-back-button>

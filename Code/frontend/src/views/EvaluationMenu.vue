@@ -10,10 +10,10 @@
 		</ion-header>
 		<ion-content>
 			<ion-button expand="block" size="large" router-link="/detailFeeding">{{
-				$t('principleFeeding')
+				$t('principleNutrition')
 			}}</ion-button>
 			<ion-button expand="block" size="large" router-link="/detailHousing">{{
-				$t('principleHousing')
+				$t('principleEnvironment')
 			}}</ion-button>
 			<ion-button expand="block" size="large" router-link="/detailHealth">{{
 				$t('principleHealth')

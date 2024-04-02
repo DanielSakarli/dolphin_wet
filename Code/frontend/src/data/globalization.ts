@@ -38,7 +38,8 @@ export const globalizationList = {
 		sixthCriteriaHealth: 'Generische, systemische oder andere Krankheiten',
 		firstSubCriteriaHealth: 'Korrekte Fortbewegung und Schwimmfähigkeitstest',
 		secondSubCriteriaHealth: 'Fehlen von Augenläsionen',
-		thirdSubCriteriaHealth: 'Normale Reaktionen beider Augen auf visuelle Hinweise',
+		thirdSubCriteriaHealth:
+			'Normale Reaktionen beider Augen auf visuelle Hinweise',
 		fourthSubCriteriaHealth: 'Fehlen von dentalen Läsionen',
 		fifthSubCriteriaHealth: 'Vorherige respiratorische Läsionen',
 		sixthSubCriteriaHealth: 'Erzwungener Ausatmungstest',
@@ -167,8 +168,8 @@ export const globalizationList = {
 		principleHealth: 'Health',
 		principleBehaviour: 'Behaviour',
 		principleEmotionalState: 'Emotional State',
-		principleFeeding: 'Feeding',
-		principleHousing: 'Housing/Environment',
+		principleNutrition: 'Nutrition',
+		principleEnvironment: 'Environment',
 		//Translation Dolphins
 		dolphin1: 'Dolphin 1: Dolly',
 		dolphin2: 'Dolphin 2: Donna',
@@ -183,7 +184,7 @@ export const globalizationList = {
 		test: 'Test',
 		selectTest: 'Select Test',
 		//Translation Indicator Collector Health
-		topicHealth: 'Good Health',
+		topicHealth: 'Health',
 		cardTitle: 'Card Title',
 		dolphin: 'Dolphin',
 		subcardTitle: 'Subcard Title',
@@ -193,38 +194,34 @@ export const globalizationList = {
 		met: 'Met',
 		notMet: 'Not Met',
 		noTendency: 'No Tendency',
-		firstCriteriaHealth: 'Locomotion',
+		//Criteria Health
+		firstCriteriaHealth: 'Correct locomotion',
 		secondCriteriaHealth: 'Eye lesions',
-		thirdCriteriaHealth: 'Mouth condition',
-		fourthCriteriaHealth: 'Respiratory diseases',
-		fifthCriteriaHealth: 'GIT disease',
-		sixthCriteriaHealth: 'Generic, systemic or other diseases',
-		// Subcriteria Health
-		firstSubCriteriaHealth: 'Normal floatability and displacement movement test',
-		secondSubCriteriaHealth: 'Absence of eye lesions',
-		thirdSubCriteriaHealth: 'Normal responses on both eyes to visual cues',
-		fourthSubCriteriaHealth: 'Absence of dental lesions',
-		fifthSubCriteriaHealth: 'Previous respiratory lesions',
-		sixthSubCriteriaHealth: 'Forced expiration test',
-		seventhSubCriteriaHealth: 'Previous gastric/faecal abnormalities',
-		eigthSubCriteriaHealth: 'Absence of external wounds or scars',
-		/*secondSubCriteriaHealth:
+		thirdCriteriaHealth: 'Gastrointestinal tract diseases',
+		fourthCriteriaHealth: 'Mouth condition (teeth, tongue, mucosa)',
+		fifthCriteriaHealth: 'Respiratory diseases',
+		sixthCriteriaHealth: 'Generic/systemic/other diseases',
+		// SubCriteria Health
+		firstSubCriteriaHealth:
+			'Normal floatability and displacement movement test',
+		secondSubCriteriaHealth:
 			'Records on previous incidents/diseases altering locomotion or floatability',
-		thirdSubCriteriaHealth: 'Direct veterinary inspection',
+		thidSubCriteriaHealth: 'Direct veterinary inspection',
 		fourthSubCriteriaHealth: 'Normal responses on both eyes to visual cues',
 		fifthSubCriteriaHealth:
 			'Records on previous eye lesions/incidents/diseases',
 		sixthSubCriteriaHealth: 'Direct physical exam of mouth',
 		seventhSubCriteriaHealth: 'Records on previous dental or oral lesions',
-		eigthSubCriteriaHealth:
-			'Records of previous gastric/faecal abnormalities on records',
+		eigthSubCriteriaHealth: 'Records on previous gastric/faecal abnormalities',
 		ninthSubCriteriaHealth:
 			'Direct physical exam including blowhole visual evaluation, and respiration performance',
 		tenthSubCriteriaHealth: 'Forced expiration test',
 		eleventhSubCriteriaHealth:
 			'Records on previous respiratory lesions/incidents/diseases',
-		twelfthSubCriteriaHealth: 'Direct physical exam',
-		thirteenthSubCriteriaHealth: 'Records (complete blood works*)',*/
+		twelvthSubCriteriaHealth: 'Direct physical exam',
+		thirteenthSubCriteriaHealth: 'Records (completed blood work)',
+
+		
 		fulfilled: 'Fulfilled',
 		notFulfilled: 'Not fulfilled',
 		noStatement: 'No statement possible',
@@ -276,24 +273,26 @@ export const globalizationList = {
 		thirdSubcriteriaEmotionalState:
 			'Possibility of environmental control and choices',
 
-		//Translation Indicator Collector Feeding
-		topicFeeding: 'Feeding',
-		firstCriteriaFeeding: 'Hunger or thirst',
-		secondCriteriaFeeding: 'Diet',
-		thirdCriteriaFeeding: 'Food quality',
-		fourthCriteriaFeeding: 'Food variety',
-		body_condition_score: 'Body Condition Score (BCS)',
-		weight_measured: 'Weigth oscillation during the year',
-		kcal_calculations: 'Kcal',
-		fourthSubcriteriaFeeding: 'Blood parameters for adequate hydration',
-		fifthSubcriteriaFeeding:
-			'Food quality Microbiology, Physicochemical analysis',
-		sixthSubcriteriaFeeding: 'Food variety along the year',
+		//Translation Indicator Collector Nutrition
+		topicNutrition: 'Nutrition',
+		firstCriteriaNutrition: 'Absence of prolonged hunger or thirst',
+		secondCriteriaNutrition: 'Adequate diet',
+		thirdCriteriaNutrition: 'Adequate food quality',
+		fourthCriteriaNutrition: 'Adequate food variety',
+		//SubCriteria Nutrition
+		firstSubCriteriaNutrition: 'Body Condition Score (BCS)',
+		secondSubCriteriaNutrition: 'Weigth oscillation throughout the year',
+		thirdSubCriteriaNutrition: 'Kilocalories',
+		fourthSubCriteriaNutrition: 'Blood parameters for adequate hydration',
+		fifthSubCriteriaNutrition:
+			'Food quality, microbiology, physicochemical analysis',
+		sixthSubCriteriaNutrition: 'Food variety throughout the year',
+
 		ScoringDescription: 'Scoring Description',
 		ReferenceArea: 'Reference Area',
 		weightLabel: 'Weight [kg]:',
 		weightPlaceholder: 'Enter weight in kg',
-		//Translation User Manual Feeding
+		//Translation User Manual Nutrition
 		userManualHungerThirst:
 			'Body condition scoring (BCS, a visual assessment of muscle and fat cover) and weight are well-accepted welfare measures used for numerous terrestrial and marine animals, both in the wild and under human care (e.g., WelfareQuality 2009; Roche et al. 2009; Hart et al. 2017; Lauderdale et al. 2019). The Dolphin-WET includes a BCS measure where the assessor visually evaluates the animal during multiple activities (e.g training, during free time, when performing aerial jumps, beaching). A  five-point likert scale (from emaciated to obese) established by Clegg et al. (2015) is used here and is translated into a 3-point scale, as well as the graphic developed in this study (Credit: Universities Federation for Animal Welfare, UFAW). A second animal-based measure regarding the animals nutritional status is the “Weight Oscillation along the Year” indicator, which assesses how the animal’s weight changes as a percentage of the total, using a year’s worth of weight data. Wild dolphins accumulate more blubber in the winter as water temperatures decrease (Worthy et al. 1990; Noren & Wells 2009), so some changes in weight throughout the year should be observed, when feeding rations are accorded to water and ambient temperatures changes. Given that no literature is available on normal and abnormal weight oscillations in human care settings, a pilot study was conducted in several EAAM facilities to conservatively establish these thresholds, using data from healthy animals and those experiencing health or welfare challenges. It was found that a weight oscillation of 13% or less over the year, and 5% or less across a 3-month period, would likely not represent a welfare concern but that oscillations outside these thresholds would likely indicate a welfare issue., for this indicator a 2-point scoring is applied.',
 		userManualAdequateDiet:
@@ -304,54 +303,57 @@ export const globalizationList = {
 			'Wild dolphins feed on a large range of fish species, varying their diet with season, prey availability and quality, and other factors (Gannon & Waples 2004). Feeding a large variety of fish species, which is the 6th indicator, to animals in human care is likely to aid in supplying all necessary nutrients to the animals, more closely mimic their natural diet, and maintain their appetites more effectively. Depending on the number of species fed, the adaptation of individual needs and the provision of food enrichment a 3-point-scoring is used.',
 		//Translation Indicator Collector Behaviour
 		topicBehaviour: 'Behaviour',
-		firstCriteriaBehaviour:
-			'Expression of selected behaviour important for animal welfare',
+		firstCriteriaBehaviour: 'Display of exploratory behaviour',
 		secondCriteriaBehaviour:
-			'Absense of abnormal behaviour/ behaviours causing negative effects',
-		firstSubcriteriaBehaviour: 'Display of exploratory behaviours',
-		secondSubcriteriaBehaviour: 'Display of affiliative behaviours',
-		thirdSubcriteriaBehaviour: 'Display of play behaviours',
-		fourthSubcriteriaBehaviour: 'Display of socio-sexual behaviour',
-		fifthSubcriteriaBehaviour: 'Display of maternal behaviours when justified',
-		sixthSubcriteriaBehaviour:
-			'Display of displacement stereotypic behavior during observations',
-		seventhSubcriteriaBehaviour:
-			'Oral stereotypic behavior during observations according to attached protocol',
-		eigthSubcriteriaBehaviour:
-			'Repetitive body movements during observations according to attached protocol',
-		ninthSubcriteriaBehaviour:
-			'Excessive self-grooming behavior during observations according to attached protocol',
-		tenthSubcriteriaBehaviour:
-			'Regurgitation behavior during observations according to attached protocol',
-		eleventhSubcriteriaBehaviour:
-			'Receiving aggressive behaviors during observations according to attached protocol',
-		twelfthSubcriteriaBehaviour: 'New and old rake marks',
-		thirteenthSubcriteriaBehaviour:
-			'Displaying aggressive behaviors during observations according to attached protocol',
-		fourteenthSubcriteriaBehaviour:
-			'Social isolation or displacement during the last three months based on trainer interviews',
-		fifteenthSubcriteriaBehaviour:
-			'Active avoidance of certain pool areas during the last three months based on trainer interviews',
+			'Display of affiliative behaviour, play, or socio-sexual behaviour',
+		thirdCriteriaBehaviour: 'Display of maternal behaviour when justified',
+		fourthCriteriaBehaviour: 'Absence of repetitive abnormal behaviours',
+		fifthCriteriaBehaviour:
+			'Absence of receiving aggressive behaviours, causing negative consequences',
+		sixthCriteriaBehaviour:
+			'Absence of displaying aggressive behaviours, causing negative consequences',
+		seventhCriteriaBehaviour: 'Evidence of social isolation',
+		//SubCriteria Behaviour
+		firstSubCriteriaBehaviour:
+			'Adequate environmental enrichment programme inducing exploratory behaviour',
+		secondSubCriteriaBehaviour: 'Affiliative behaviour',
+		thirdSubCriteriaBehaviour: 'Play behaviour',
+		fourthSubCriteriaBehaviour: 'Socio-sexual behaviour',
+		fifthSubCriteriaBehaviour: 'Maternal behaviour',
+		sixthSubCriteriaBehaviour: 'Displacement behavior',
+		seventhSubCriteriaBehaviour: 'Oral stereotypic behavior',
+		eigthSubCriteriaBehaviour: 'Repetitive body movement',
+		ninthSubCriteriaBehaviour:
+			'Frequent, repetitive, and intense self-grooming behaviour',
+		tenthSubCriteriaBehaviour: 'Regurgitation/Reingestion',
+		eleventhSubCriteriaBehaviour: 'Receiving aggressive behavior',
+		twelfthSubCriteriaBehaviour: 'Rake marks',
+		thirteenthSubCriteriaBehaviour: 'Displaying aggressive behavior',
+		fourteenthSubCriteriaBehaviour: 'Social isolation',
+		fifteenthSubCriteriaBehaviour: 'Avoidance of pool areas',
 		//Criteria Housing
-		topicHousing: 'Housing/Environment',
-		firstCriteriaHousing: 'Safe Environment',
-		secondCriteriaHousing: 'Pool Design',
-		thirdCriteriaHousing: 'Forced Loneliness',
-		fourthCriteriaHousing: 'Water Quality',
-		fifthCriteriaHousing: 'Water Temperature',
-		sixthCriteriaHousing: 'Sufficient Shade',
-		seventhCriteriaHousing: 'Acoustic Comfort',
-		//Subcriteria Housing
-		firstSubCriteriaHousing: 'Enclosures/Barriers safety and maintenance',
-		secondSubCriteriaHousing: 'Absence of foreign body ingestion',
-		thirdSubCriteriaHousing:
-			'Pool dimension, pool design, number of pools, available access to pools & group management',
-		fourthSubCriteriaHousing: 'Absence of forced loneliness',
-		fifthSubCriteriaHousing:
-			'Adequate water PH, Adequate water OR P levels, Absence of  toxic water levels of total chlorine, free chlorine, and combined chlorine, Absence of abnormal water levels of coliformes, Absence of abnormal water levels of E.coli, Adequate salinity',
-		sixthSubCriteriaHousing: 'Adequate water temperature',
-		seventhSubCriteriaHousing: 'Presence of/Access to shaded areas',
-		eighthSubCriteriaHousing:
-			'Adequate degree of  underwater noise (40dB above hearing threshold)',
+		topicEnvironment: 'Environment',
+		firstCriteriaEnvironment: 'Safe environment',
+		secondCriteriaEnvironment:
+			'Adequate spatial requirements and pool complexity',
+		thirdCriteriaEnvironment: 'Social management',
+		fourthCriteriaEnvironment: 'Water quality',
+		fifthCriteriaEnvironment: 'Temperature',
+		sixthCriteriaEnvironment: 'Ambient light',
+		seventhCriteriaEnvironment: 'Ambient noise',
+		//SubCriteria Environment
+		firstSubCriteriaEnvironment:
+			'Enclosures and barriers safety and maintenance',
+		secondSubCriteriaEnvironment: 'No foreign body ingestion',
+		thirdSubCriteriaEnvironment:
+			'Pool dimension, pool design, number of pools, available access to pools, and group management',
+		fourthSubCriteriaEnvironment:
+			'Absence of forced loneliness based on records/trainer interviews',
+		fifthSubCriteriaEnvironment: 'Water quality parameters',
+		sixthSubCriteriaEnvironment: 'Water temperature levels',
+		seventhSubCriteriaEnvironment:
+			'Sufficient shade provided and accessible in case it is needed',
+		eigthSubCriteriaEnvironment: 'Absence of reflecting colours',
+		ninthSubCriteriaEnvironment: '40dB above hearing threshold',
 	},
 };
