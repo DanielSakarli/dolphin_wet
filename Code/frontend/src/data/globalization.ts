@@ -197,8 +197,8 @@ export const globalizationList = {
 		//Criteria Health
 		firstCriteriaHealth: 'Correct locomotion',
 		secondCriteriaHealth: 'Eye lesions',
-		thirdCriteriaHealth: 'Gastrointestinal tract diseases',
-		fourthCriteriaHealth: 'Mouth condition (teeth, tongue, mucosa)',
+		thirdCriteriaHealth: 'Mouth condition (teeth, tongue, mucosa)',
+		fourthCriteriaHealth: 'Gastrointestinal tract diseases',
 		fifthCriteriaHealth: 'Respiratory diseases',
 		sixthCriteriaHealth: 'Generic/systemic/other diseases',
 		// SubCriteria Health
@@ -206,7 +206,7 @@ export const globalizationList = {
 			'Normal floatability and displacement movement test',
 		secondSubCriteriaHealth:
 			'Records on previous incidents/diseases altering locomotion or floatability',
-		thidSubCriteriaHealth: 'Direct veterinary inspection',
+		thirdSubCriteriaHealth: 'Direct veterinary inspection',
 		fourthSubCriteriaHealth: 'Normal responses on both eyes to visual cues',
 		fifthSubCriteriaHealth:
 			'Records on previous eye lesions/incidents/diseases',

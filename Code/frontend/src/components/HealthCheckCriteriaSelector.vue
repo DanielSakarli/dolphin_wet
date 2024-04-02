@@ -111,7 +111,7 @@
 						>{{$t('secondCriteriaHealth')}}
 					</ion-title>
 					<ion-title v-else-if=" criteria === 'thirdCriteriaHealth'"
-						>{{$t('thirdSubCriteriaHealth')}}
+						>{{$t('thirdCriteriaHealth')}}
 					</ion-title>
 					<ion-title  v-else-if=" criteria === 'fourthCriteriaHealth'"
 						>{{$t('fourthCriteriaHealth')}}
@@ -373,100 +373,160 @@
 			<ion-card-title>{{$t('firstSubCriteriaHealth')}}</ion-card-title>
 			<ion-list >
 					<ion-item>
-						<ion-checkbox v-model="CheckboxArray[0][0]" @click="handleClick(0,0)">Score 1</ion-checkbox>
+						<ion-checkbox v-model="CheckboxArray[0][0]" @click="handleClick(0,0)">Score 0</ion-checkbox>
 					</ion-item>
 					<ion-item>
-						<ion-checkbox v-model="CheckboxArray[0][2]" @click="handleClick(0,2)">Score 3</ion-checkbox>
+						<ion-checkbox v-model="CheckboxArray[0][2]" @click="handleClick(0,2)">Score 2</ion-checkbox>
 					</ion-item>
 					<CheckComments @update-comment="updateNormalFloatabilityComments"/>
 			</ion-list>
 		</ion-card>
-		<ion-card v-if=" criteria === 'secondCriteriaHealth'">
+		<ion-card v-if=" criteria === 'firstCriteriaHealth'">
 			<ion-card-title>{{$t('secondSubCriteriaHealth')}}</ion-card-title>
 			<ion-list>
 				<ion-item>
-					<ion-checkbox v-model="CheckboxArray[1][0]" @click="handleClick(1,0)">Score 1</ion-checkbox>
+					<ion-checkbox v-model="CheckboxArray[1][0]" @click="handleClick(1,0)">Score 0</ion-checkbox>
 				</ion-item>
 				<ion-item>
-					<ion-checkbox v-model="CheckboxArray[1][2]" @click="handleClick(1,2)">Score 3</ion-checkbox>
+					<ion-checkbox v-model="CheckboxArray[1][2]" @click="handleClick(1,2)">Score 2</ion-checkbox>
 				</ion-item>
-				<CheckComments @update-comment="updateEyeLesionsComments"/>
+				<CheckComments @update-comment="updateNormalFloatabilityRecordsComments"/>
 			</ion-list>
 		</ion-card>
 		<ion-card v-if=" criteria === 'secondCriteriaHealth'">
 			<ion-card-title>{{$t('thirdSubCriteriaHealth')}}</ion-card-title>		
 			<ion-list>
 				<ion-item>
-					<ion-checkbox v-model="CheckboxArray[2][0]" @click="handleClick(2,0)">Score 1</ion-checkbox>
+					<ion-checkbox v-model="CheckboxArray[2][0]" @click="handleClick(2,0)">Score 0</ion-checkbox>
 				</ion-item>
 				<ion-item>
-					<ion-checkbox v-model="CheckboxArray[2][2]" @click="handleClick(2,2)">Score 3</ion-checkbox>
+					<ion-checkbox v-model="CheckboxArray[2][2]" @click="handleClick(2,2)">Score 2</ion-checkbox>
 				</ion-item>
-				<CheckComments @update-comment="updateVisualCuesComments"/>
+				<CheckComments @update-comment="updateEyeLesionsComments"/>
 				<ion-item>
 					<PhotoUpload @form-submitted="handleFormSubmittedEyePhoto"/>
 				</ion-item>
 			</ion-list>
 		</ion-card>
-		<ion-card v-if=" criteria === 'thirdCriteriaHealth'">
+		<ion-card v-if=" criteria === 'secondCriteriaHealth'">
 			<ion-card-title>{{$t('fourthSubCriteriaHealth')}}</ion-card-title>		
 			<ion-list >
 				<ion-item>
-					<ion-checkbox v-model="CheckboxArray[3][0]" @click="handleClick(3,0)">Score 1</ion-checkbox>
+					<ion-checkbox v-model="CheckboxArray[3][0]" @click="handleClick(3,0)">Score 0</ion-checkbox>
 				</ion-item>
 				<ion-item>
-					<ion-checkbox v-model="CheckboxArray[3][2]" @click="handleClick(3,2)">Score 3</ion-checkbox>
+					<ion-checkbox v-model="CheckboxArray[3][2]" @click="handleClick(3,2)">Score 2</ion-checkbox>
 				</ion-item>
-				<CheckComments @update-comment="updateMouthExamComments"/>
+				<CheckComments @update-comment="updateVisualCuesComments"/>
 				<ion-item>
-				<PhotoUpload @form-submitted="handleFormSubmittedTeethPhoto"/>
 				</ion-item>
 			</ion-list>
 		</ion-card>
-		<ion-card v-if=" criteria === 'fourthCriteriaHealth'">
+		<ion-card v-if=" criteria === 'secondCriteriaHealth'">
 			<ion-card-title>{{$t('fifthSubCriteriaHealth')}}</ion-card-title>	
 			<ion-list>
 				<ion-item>
-					<ion-checkbox v-model="CheckboxArray[4][0]" @click="handleClick(4,0)">Score 1</ion-checkbox>
+					<ion-checkbox v-model="CheckboxArray[4][0]" @click="handleClick(4,0)">Score 0</ion-checkbox>
 				</ion-item>
 				<ion-item>
-					<ion-checkbox v-model="CheckboxArray[4][2]" @click="handleClick(4,2)">Score 3</ion-checkbox>
+					<ion-checkbox v-model="CheckboxArray[4][2]" @click="handleClick(4,2)">Score 2</ion-checkbox>
+				</ion-item>
+				<CheckComments @update-comment="updateEyeLesionsRecordsComments"/>
+			</ion-list>
+		</ion-card>
+		<ion-card v-if=" criteria === 'thirdCriteriaHealth'">
+			<ion-card-title>{{$t('sixthSubCriteriaHealth')}}</ion-card-title>	
+			<ion-list>
+				<ion-item>
+					<ion-checkbox v-model="CheckboxArray[5][0]" @click="handleClick(5,0)">Score 0</ion-checkbox>
+				</ion-item>
+				<ion-item>
+					<ion-checkbox v-model="CheckboxArray[5][2]" @click="handleClick(5,2)">Score 2</ion-checkbox>
+				</ion-item>
+				<CheckComments @update-comment="updateMouthExamComments"/>
+				<PhotoUpload @form-submitted="handleFormSubmittedTeethPhoto"/>
+			</ion-list>
+		</ion-card>
+		<ion-card v-if=" criteria === 'thirdCriteriaHealth'">
+			<ion-card-title>{{$t('seventhSubCriteriaHealth')}}</ion-card-title>	
+			<ion-list>
+				<ion-item>
+					<ion-checkbox v-model="CheckboxArray[6][0]" @click="handleClick(6,0)">Score 0</ion-checkbox>
+				</ion-item>
+				<ion-item>
+					<ion-checkbox v-model="CheckboxArray[6][2]" @click="handleClick(6,2)">Score 2</ion-checkbox>
+				</ion-item>
+				<CheckComments @update-comment="updateOralLesionsRecordsComments"/>
+			</ion-list>
+		</ion-card>
+		<ion-card v-if=" criteria === 'fourthCriteriaHealth'">
+			<ion-card-title>{{$t('eigthSubCriteriaHealth')}}</ion-card-title>	
+			<ion-list>
+				<ion-item>
+					<ion-checkbox v-model="CheckboxArray[7][0]" @click="handleClick(7,0)">Score 0</ion-checkbox>
+				</ion-item>
+				<ion-item>
+					<ion-checkbox v-model="CheckboxArray[7][2]" @click="handleClick(7,2)">Score 2</ion-checkbox>
+				</ion-item>
+				<CheckComments @update-comment="updateGastricAbnormalityRecordsComments"/>
+			</ion-list>
+		</ion-card>
+		<ion-card v-if=" criteria === 'fifthCriteriaHealth'">
+			<ion-card-title>{{$t('ninthSubCriteriaHealth')}}</ion-card-title>	
+			<ion-list>
+				<ion-item>
+					<ion-checkbox v-model="CheckboxArray[8][0]" @click="handleClick(8,0)">Score 0</ion-checkbox>
+				</ion-item>
+				<ion-item>
+					<ion-checkbox v-model="CheckboxArray[8][2]" @click="handleClick(8,2)">Score 2</ion-checkbox>
 				</ion-item>
 				<CheckComments @update-comment="updateRespiratoryDiseaseComments"/>
 			</ion-list>
 		</ion-card>
 		<ion-card v-if=" criteria === 'fifthCriteriaHealth'">
-			<ion-card-title>{{$t('sixthSubCriteriaHealth')}}</ion-card-title>	
+			<ion-card-title>{{$t('tenthSubCriteriaHealth')}}</ion-card-title>	
 			<ion-list>
 				<ion-item>
-					<ion-checkbox v-model="CheckboxArray[5][0]" @click="handleClick(5,0)">Score 1</ion-checkbox>
+					<ion-checkbox v-model="CheckboxArray[9][0]" @click="handleClick(9,0)">Score 0</ion-checkbox>
 				</ion-item>
 				<ion-item>
-					<ion-checkbox v-model="CheckboxArray[5][2]" @click="handleClick(5,2)">Score 3</ion-checkbox>
+					<ion-checkbox v-model="CheckboxArray[9][2]" @click="handleClick(9,2)">Score 2</ion-checkbox>
 				</ion-item>
 				<CheckComments @update-comment="updateForceExpirationComments"/>
 			</ion-list>
 		</ion-card>
 		<ion-card v-if=" criteria === 'fifthCriteriaHealth'">
-			<ion-card-title>{{$t('seventhSubCriteriaHealth')}}</ion-card-title>	
+			<ion-card-title>{{$t('eleventhSubCriteriaHealth')}}</ion-card-title>	
 			<ion-list>
 				<ion-item>
-					<ion-checkbox v-model="CheckboxArray[6][0]" @click="handleClick(6,0)">Score 1</ion-checkbox>
+					<ion-checkbox v-model="CheckboxArray[10][0]" @click="handleClick(10,0)">Score 0</ion-checkbox>
 				</ion-item>
 				<ion-item>
-					<ion-checkbox v-model="CheckboxArray[6][2]" @click="handleClick(6,2)">Score 3</ion-checkbox>
+					<ion-checkbox v-model="CheckboxArray[10][2]" @click="handleClick(10,2)">Score 2</ion-checkbox>
 				</ion-item>
-				<CheckComments @update-comment="updateGastricAbnormalityComments"/>
+				<CheckComments @update-comment="updateRespiratoryDiseaseRecordsComments"/>
 			</ion-list>
 		</ion-card>
 		<ion-card v-if=" criteria === 'sixthCriteriaHealth'">
-			<ion-card-title>{{$t('eigthSubCriteriaHealth')}}</ion-card-title>	
+			<ion-card-title>{{$t('twelvthSubCriteriaHealth')}}</ion-card-title>	
 			<ion-list>
 				<ion-item>
-					<ion-checkbox v-model="CheckboxArray[7][0]" @click="handleClick(7,0)">Score 1</ion-checkbox>
+					<ion-checkbox v-model="CheckboxArray[11][0]" @click="handleClick(11,0)">Score 0</ion-checkbox>
 				</ion-item>
 				<ion-item>
-					<ion-checkbox v-model="CheckboxArray[7][2]" @click="handleClick(7,2)">Score 3</ion-checkbox>
+					<ion-checkbox v-model="CheckboxArray[11][2]" @click="handleClick(11,2)">Score 2</ion-checkbox>
+				</ion-item>
+				<CheckComments @update-comment="updateMarksComments"/>
+			</ion-list>
+		</ion-card>
+		<ion-card v-if=" criteria === 'sixthCriteriaHealth'">
+			<ion-card-title>{{$t('thirteenthSubCriteriaHealth')}}</ion-card-title>	
+			<ion-list>
+				<ion-item>
+					<ion-checkbox v-model="CheckboxArray[12][0]" @click="handleClick(12,0)">Score 0</ion-checkbox>
+				</ion-item>
+				<ion-item>
+					<ion-checkbox v-model="CheckboxArray[12][2]" @click="handleClick(12,2)">Score 2</ion-checkbox>
 				</ion-item>
 				<CheckComments @update-comment="updateExternalDiseaseComments"/>
 			</ion-list>
@@ -558,20 +618,26 @@ export default {
 			isOpenManual: false,
 			isOpenScoring: false,
 			selectedOption: undefined,
-			CheckboxArray: Array.from({ length: 8 }, () => Array(3).fill(false)),
+			CheckboxArray: Array.from({ length: 12 }, () => Array(3).fill(false)),
 			camera,
 			previewImageUrl: '',
 			dolphinList: [] as {name: string}[],
 			urlPost: baseUrl + '/api/good_health',
 			urlPostPhoto: baseUrl + '/api/photo',
 			normal_floatability_comments: '',
-			eye_lesions_comments: '',
-			visual_cues_comments: '',
+			records_normal_floatability_comments: '',
+			inspection_eye_lesions_comments: '',
+			response_visual_cues_comments: '',
+			records_eye_lesions_comments: '',
 			mouth_exam_comments: '',
-			respiratory_disease_comments: '',
+			records_oral_lesions_comments: '',
+			records_gastric_abnormality_comments: '',
+			inspection_respiratory_comments: '',
 			force_expiration_comments: '',
-			gastric_abnormality_comments: '',
-			external_disease_signs_comments: '',
+			records_respiratory_disease_comments: '',
+			inspection_marks_comments: '',
+			records_external_disease_comments: '',
+			
 			formData: null,
 			setupSessionStorage: {
 				photo_type: '',
@@ -667,32 +733,48 @@ export default {
 					for(let i = 0; i < this.CheckboxArray.length; i++){
 						for(let j = 0; j < this.CheckboxArray[i].length; j++){
 							if (this.CheckboxArray[i][j] === true && i === 0){
-								evaluationHealthStore.requestBodiesHealth[k]["normal_floatability"] = j + 1;
+								evaluationHealthStore.requestBodiesHealth[k]["normal_floatability"] = j;
 							}else if (this.CheckboxArray[i][j] === true && i === 1){
-								evaluationHealthStore.requestBodiesHealth[k]["eye_lesions"] = j + 1;
+								evaluationHealthStore.requestBodiesHealth[k]["records_normal_floatability"] = j;
 							}else if (this.CheckboxArray[i][j] === true && i === 2){
-								evaluationHealthStore.requestBodiesHealth[k]["visual_cues"] = j + 1;
+								evaluationHealthStore.requestBodiesHealth[k]["inspection_eye_lesions"] = j;
 							}else if (this.CheckboxArray[i][j] === true && i === 3){
-								evaluationHealthStore.requestBodiesHealth[k]["mouth_exam"] = j + 1;
+								evaluationHealthStore.requestBodiesHealth[k]["response_visual_cues"] = j;
 							}else if (this.CheckboxArray[i][j] === true && i === 4){
-								evaluationHealthStore.requestBodiesHealth[k]["respiratory_disease"] = j + 1;
+								evaluationHealthStore.requestBodiesHealth[k]["records_eye_lesions"] = j;
 							}else if (this.CheckboxArray[i][j] === true && i === 5){
-								evaluationHealthStore.requestBodiesHealth[k]["force_expiration"] = j + 1;
+								evaluationHealthStore.requestBodiesHealth[k]["mouth_exam"] = j;
 							}else if (this.CheckboxArray[i][j] === true && i === 6){
-								evaluationHealthStore.requestBodiesHealth[k]["gastric_abnormality"] = j + 1;
+								evaluationHealthStore.requestBodiesHealth[k]["records_oral_lesions"] = j;
 							}else if (this.CheckboxArray[i][j] === true && i === 7){
-								evaluationHealthStore.requestBodiesHealth[k]["external_disease_signs"] = j + 1;
+								evaluationHealthStore.requestBodiesHealth[k]["records_gastric_abnormality"] = j;
+							}else if (this.CheckboxArray[i][j] === true && i === 8){
+								evaluationHealthStore.requestBodiesHealth[k]["inspection_respiratory"] = j;
+							}else if (this.CheckboxArray[i][j] === true && i === 9){
+								evaluationHealthStore.requestBodiesHealth[k]["force_expiration"] = j;
+							}else if (this.CheckboxArray[i][j] === true && i === 10){
+								evaluationHealthStore.requestBodiesHealth[k]["records_respiratory_disease"] = j;
+							}else if (this.CheckboxArray[i][j] === true && i === 11){
+								evaluationHealthStore.requestBodiesHealth[k]["inspection_marks"] = j;
+							}else if (this.CheckboxArray[i][j] === true && i === 12){
+								evaluationHealthStore.requestBodiesHealth[k]["records_external_disease"] = j;
 							}
 						}
 					}
 					evaluationHealthStore.requestBodiesHealth[k]["normal_floatability_comments"] = this.normal_floatability_comments;
-					evaluationHealthStore.requestBodiesHealth[k]["eye_lesions_comments"] = this.eye_lesions_comments;
-					evaluationHealthStore.requestBodiesHealth[k]["visual_cues_comments"] = this.visual_cues_comments;
+					evaluationHealthStore.requestBodiesHealth[k]["records_normal_floatability_comments"] = this.records_normal_floatability_comments;
+					evaluationHealthStore.requestBodiesHealth[k]["inspection_eye_lesions_comments"] = this.inspection_eye_lesions_comments;
+					evaluationHealthStore.requestBodiesHealth[k]["response_visual_cues_comments"] = this.response_visual_cues_comments;
+					evaluationHealthStore.requestBodiesHealth[k]["records_eye_lesions_comments"] = this.records_eye_lesions_comments;
 					evaluationHealthStore.requestBodiesHealth[k]["mouth_exam_comments"] = this.mouth_exam_comments;
-					evaluationHealthStore.requestBodiesHealth[k]["respiratory_disease_comments"] = this.respiratory_disease_comments;
+					evaluationHealthStore.requestBodiesHealth[k]["records_oral_lesions_comments"] = this.records_oral_lesions_comments;
+					evaluationHealthStore.requestBodiesHealth[k]["records_gastric_abnormality_comments"] = this.records_gastric_abnormality_comments;
+					evaluationHealthStore.requestBodiesHealth[k]["inspection_respiratory_comments"] = this.inspection_respiratory_comments;
 					evaluationHealthStore.requestBodiesHealth[k]["force_expiration_comments"] = this.force_expiration_comments;
-					evaluationHealthStore.requestBodiesHealth[k]["gastric_abnormality_comments"] = this.gastric_abnormality_comments;
-					evaluationHealthStore.requestBodiesHealth[k]["external_disease_signs_comments"] = this.external_disease_signs_comments;
+					evaluationHealthStore.requestBodiesHealth[k]["records_respiratory_disease_comments"] = this.records_respiratory_disease_comments;
+					evaluationHealthStore.requestBodiesHealth[k]["inspection_marks_comments"] = this.inspection_marks_comments;
+					evaluationHealthStore.requestBodiesHealth[k]["records_external_disease_comments"] = this.records_external_disease_comments;
+
 					
 					if(localStorage.getItem('created_at') !== "") {
 						evaluationHealthStore.requestBodiesHealth[k]["created_at"] = localStorage.getItem('created_at') as string;
@@ -713,27 +795,43 @@ export default {
 		updateNormalFloatabilityComments(comment: string) {
 			this.normal_floatability_comments = comment;
 		},
+		updateNormalFloatabilityRecordsComments(comment: string) {
+			this.records_normal_floatability_comments = comment;
+		},
 		updateEyeLesionsComments(comment: string) {
-			this.eye_lesions_comments = comment;
+			this.inspection_eye_lesions_comments = comment;
 		},
 		updateVisualCuesComments(comment: string) {
-			this.visual_cues_comments = comment;
+			this.response_visual_cues_comments = comment;
+		},
+		updateEyeLesionsRecordsComments(comment: string) {
+			this.records_eye_lesions_comments = comment;
 		},
 		updateMouthExamComments(comment: string) {
 			this.mouth_exam_comments = comment;
 		},
+		updateOralLesionsRecordsComments(comment: string) {
+			this.records_oral_lesions_comments = comment;
+		},
+		updateGastricAbnormalityRecordsComments(comment: string) {
+			this.records_gastric_abnormality_comments = comment;
+		},
 		updateRespiratoryDiseaseComments(comment: string) {
-			this.respiratory_disease_comments = comment;
+			this.inspection_respiratory_comments = comment;
 		},
 		updateForceExpirationComments(comment: string) {
 			this.force_expiration_comments = comment;
 		},
-		updateGastricAbnormalityComments(comment: string) {
-			this.gastric_abnormality_comments = comment;
+		updateRespiratoryDiseaseRecordsComments(comment: string) {
+			this.records_respiratory_disease_comments = comment;
+		},
+		updateMarksComments(comment: string) {
+			this.inspection_marks_comments = comment;
 		},
 		updateExternalDiseaseComments(comment: string) {
-			this.external_disease_signs_comments = comment;
+			this.records_external_disease_comments = comment;
 		},
+		//Method to show the alert to confirm the test date
 		async confirmTestDate() {
 		return new Promise(async (resolve, reject) => {
 			const alert = await alertController.create({
