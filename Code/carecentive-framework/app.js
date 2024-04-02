@@ -146,6 +146,7 @@ app.use('/api/good_housing', good_housing);
 app.use('/api/behaviour', behaviour);
 app.post('/api/photo', uploadPhoto);
 app.get('/api/export-csv', csvWriter);
+app.use('/images', express.static(path.join(__dirname,'uploads'))); //gets the images with the url http://localhost:3309/images/ + filename
 
 
 ///////////////////////////////////////////////////

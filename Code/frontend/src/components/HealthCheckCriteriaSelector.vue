@@ -641,20 +641,20 @@ export default {
 				dolphin_name: '',
 			};
 			console.log('Form Data accessed in HealthCheckCriteriaSelector.vue:');
-			const formData = new FormData();
+			this.formData = new FormData();
 			if(this.dolphinSelect != ''){
-				formData.append('dolphin_name', this.dolphinSelect || ''); // Append the dolphin name with a default value of an empty string
+				this.formData.append('dolphin_name', this.dolphinSelect || ''); // Append the dolphin name with a default value of an empty string
 			}
-			formData.append('photo_type', 'teeth'); //Append the photo type
+			this.formData.append('photo_type', 'teeth'); //Append the photo type
 			// Then append the rest of the fields
 			
 			console.log('Number of pictures: ' + files.length);
 
 			for (let i = 0; i < files.length; i++) {
 				console.log(files[i]);
-				formData.append('files', files[i]);
+				this.formData.append('files', files[i]);
 			}
-			console.log(...formData);
+			console.log(...this.formData);
 			}
 		},
 		// Method to collect the checked checkboxes and give request Body the scores

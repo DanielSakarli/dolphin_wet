@@ -1,5 +1,6 @@
 const path = require('path');
 const fs = require('fs');
+require('dotenv').config();
 const multer = require('multer');
 let photo_path;
 let photo_type;
@@ -32,16 +33,17 @@ const storage = multer.diskStorage({
       );
       
       // Save photo path in session storage for later access in good_health.js to save the photo paths in the database
+      const apiUrl = process.env.MYSQL_HOST + ':' + process.env.HTTP_PORT;
       if(req.session.photo_type === 'eye'){
         console.log('I am here: ' + req.session.photo_path.eye_photo_path);
         if(req.session.photo_path.eye_photo_path === ''){ //If empty, so session storage has just been initialized
           //First photo in the list
-          req.session.photo_path.eye_photo_path = 'uploads/' + `${uniqueSuffix}${path.extname(
+          req.session.photo_path.eye_photo_path = apiUrl + '/images/' + `${uniqueSuffix}${path.extname(
             file.originalname
           )}`;
         } else {
           //Commaseparated list of photo paths if several photos to upload
-          req.session.photo_path.eye_photo_path = req.session.photo_path.eye_photo_path + ',' + 'uploads/' + `${uniqueSuffix}${path.extname(
+          req.session.photo_path.eye_photo_path = req.session.photo_path.eye_photo_path + ',' + apiUrl + '/images/' + `${uniqueSuffix}${path.extname(
             file.originalname
           )}`;
         }
@@ -52,12 +54,12 @@ const storage = multer.diskStorage({
         if(req.session.photo_path.teeth_photo_path === ''){ //If empty, so session storage has just been initialized
           //First photo in the list
           console.log('I am here');
-          req.session.photo_path.teeth_photo_path = 'uploads/' + `${uniqueSuffix}${path.extname(
+          req.session.photo_path.teeth_photo_path = apiUrl + '/images/' + `${uniqueSuffix}${path.extname(
             file.originalname
           )}`;
         } else {
           //Commaseparated list of photo paths if several photos to upload
-          req.session.photo_path.teeth_photo_path = req.session.photo_path.teeth_photo_path + ',' + 'uploads/' + `${uniqueSuffix}${path.extname(
+          req.session.photo_path.teeth_photo_path = req.session.photo_path.teeth_photo_path + ',' + apiUrl + '/images/' + `${uniqueSuffix}${path.extname(
             file.originalname
           )}`;
         }
