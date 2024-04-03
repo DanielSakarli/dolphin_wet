@@ -82,12 +82,13 @@ async function setResult(req, res, next) {
 		};*/
 
 		// Get the file paths from the session storage
-		if(req.session.file_path != '') {
+		if(req.session.file_path && req.session.file_path != '') {
+			console.log('File path: ', req.session.file_path);
 			// attach userID to test result in req.body
 			test_result = { user_id: userID, user_name: userName, ...test_result };
 
-				// Check if the dolphin_name in the array is 'Dolly'
-				if (test_result.dolphin_name === req.session.dolphin_name) {
+				// Check if the dolphin_name is in the array of strings 'req.session.dolphin_name'
+				if (req.session.dolphin_name.includes(test_result.dolphin_name)) {
 					// Append file_path to the array
 					test_result.file_path = req.session.file_path.toString();
 				}
@@ -102,7 +103,7 @@ async function setResult(req, res, next) {
 			
 			test_result = { user_id: userID, user_name: userName, ...test_result };
 			console.log(test_result);
-			const insertedResult = await GoodHealthService.loadTestResult(test_result);
+			const insertedResult = await GoodFeedingService.loadTestResult(test_result);
 			res.status(201).json(insertedResult);
 		}
 	} catch (error) {

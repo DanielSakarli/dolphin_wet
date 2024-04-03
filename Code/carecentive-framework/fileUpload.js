@@ -11,6 +11,11 @@ const storage = multer.diskStorage({
 	filename: (req, file, cb) => {
       const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1e9);
       req.session.dolphin_name = req.body.dolphin_name; // The name of the dolphin, so picture is later on assignable to a dolphin
+      if (req.body.dolphin_name.includes(',')) {
+        req.session.dolphin_name = req.body.dolphin_name.split(',');
+      } else {
+        req.session.dolphin_name = req.body.dolphin_name;
+      }
       console.log(req.session.dolphin_name);
       cb(
         null, // currently no error handling

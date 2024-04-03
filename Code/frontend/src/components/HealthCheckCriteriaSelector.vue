@@ -627,6 +627,7 @@ export default {
 				eye_photo_path: '',
 				teeth_photo_path: '',
 				marks_photo_path: '',
+				file_path: '',
 				dolphin_name: '',
 			},
 		};
@@ -662,6 +663,7 @@ export default {
 				eye_photo_path: '',
 				teeth_photo_path: '',
 				marks_photo_path: '',
+				file_path: '',
 				dolphin_name: '',
 			};
 			console.log('Form Data accessed in HealthCheckCriteriaSelector.vue:');
@@ -689,6 +691,7 @@ export default {
 				eye_photo_path: '',
 				teeth_photo_path: '',
 				marks_photo_path: '',
+				file_path: '',
 				dolphin_name: '',
 			};
 			console.log('Form Data accessed in HealthCheckCriteriaSelector.vue:');
@@ -716,6 +719,7 @@ export default {
 				eye_photo_path: '',
 				teeth_photo_path: '',
 				marks_photo_path: '',
+				file_path: '',
 				dolphin_name: '',
 			};
 			console.log('Form Data accessed in HealthCheckCriteriaSelector.vue:');
