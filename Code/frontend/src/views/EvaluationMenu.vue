@@ -28,6 +28,10 @@
 				>{{ $t('principleEmotionalState') }}</ion-button
 			>
 		</ion-content>
+		<ion-button fill="clear" size="large" @click="getDolphinWETMatrix">
+			Download Dolphin WET Matrix
+			<ion-icon slot="start" :icon="download"></ion-icon>
+		</ion-button>
 		<ion-button fill="clear" size="large" @click="showDolphins">
 			Download List of Dolphins
 			<ion-icon slot="start" :icon="download"></ion-icon>
@@ -87,6 +91,27 @@ export default {
 				.catch((e) => {
 					console.error(e);
 				});
+		},
+		async getDolphinWETMatrix() {
+			// Create a link
+			const link = document.createElement('a');
+
+			// Set the href to the path of the PDF file
+			link.href = '../../public/Dolphin_WET_Matrix.pdf';
+			// Set the download attribute to the name you want the downloaded file to have
+			link.download = 'Dolphin_WET_Matrix.pdf';
+
+			// Append the link to the body
+			document.body.appendChild(link);
+
+			// Programmatically click the link to start the download
+			link.click();
+
+			// Remove the link from the body
+			if (document.body.contains(link)) {
+				// If it is, remove the link from the body
+				document.body.removeChild(link);
+			}
 		},
 		isLoggedIn() {
 			if (sessionStorage.getItem('token')) {

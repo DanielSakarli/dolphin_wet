@@ -1,5 +1,5 @@
 const path = require('path');
-const fs = require('fs');
+//const fs = require('fs');
 require('dotenv').config();
 const multer = require('multer');
 let photo_path;
@@ -12,16 +12,8 @@ const storage = multer.diskStorage({
 		  cb(null, './uploads/')
 	},
 	filename: (req, file, cb) => {
-      /*if(req.session.photo_path.eye_photo_path) {
-      photo_path = req.session.photo_path.eye_photo_path[currentIndex];
-      console.log(photo_path);
-      }
-      if(req.session.photo_path.teeth_photo_path) {
-      photo_path = req.session.photo_path.teeth_photo_path[currentIndex];
-      console.log(photo_path);
-      }*/
       const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1e9);
-      req.session.photo_type = req.body.photo_type; // Either 'eye' or 'teeth'
+      req.session.photo_type = req.body.photo_type; // Either 'eye', 'teeth' or 'marks'
       console.log(req.session.photo_type);
       req.session.dolphin_name = req.body.dolphin_name; // The name of the dolphin, so picture is later on assignable to a dolphin
       console.log(req.session.dolphin_name);
@@ -65,7 +57,22 @@ const storage = multer.diskStorage({
         }
         console.log(req.session.photo_path.teeth_photo_path);
       }
-      currentIndex++; //increment the index to get the next photo filename
+      if(req.session.photo_type === 'marks'){
+        console.log('I am here: ' + req.session.photo_path.marks_photo_path);
+        if(req.session.photo_path.marks_photo_path === ''){ //If empty, so session storage has just been initialized
+          //First photo in the list
+          req.session.photo_path.marks_photo_path = apiUrl + '/images/' + `${uniqueSuffix}${path.extname(
+            file.originalname
+          )}`;
+        } else {
+          //Commaseparated list of photo paths if several photos to upload
+          req.session.photo_path.marks_photo_path = req.session.photo_path.marks_photo_path + ',' + apiUrl + '/images/' + `${uniqueSuffix}${path.extname(
+            file.originalname
+          )}`;
+        }
+        console.log(req.session.photo_path.marks_photo_path);
+    }
+    currentIndex++; //increment the index to get the next photo filename
 	},
 });
 
@@ -86,7 +93,8 @@ async function uploadPhoto(req, res, next) {
     req.session.dolphin_name = '';
     req.session.photo_path = {
       eye_photo_path: '',
-      teeth_photo_path: ''
+      teeth_photo_path: '',
+      marks_photo_path: ''
     };
     currentIndex = 0; // Reset the index before each photo upload
     //console.log('Photo path accessed  from session storage: ' + photo_path.eye_photo_path.toString());

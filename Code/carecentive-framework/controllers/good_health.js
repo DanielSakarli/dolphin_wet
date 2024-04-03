@@ -41,6 +41,7 @@ async function setResult(req, res, next) {
 		//console.log('App.use Photo_path in session storage: ' + req.session.photo_path);
 		console.log('Photo path in req.session in good_health.js: ' + req.session.photo_path.eye_photo_path);
 		console.log('Photo path in req.session in good_health.js: ' + req.session.photo_path.teeth_photo_path);
+		console.log('Photo path in req.session in good_health.js: ' + req.session.photo_path.marks_photo_path);
 			
 		if(req.session.photo_path) {
 			// attach userID to test result in req.body
@@ -51,6 +52,7 @@ async function setResult(req, res, next) {
 
 			console.log('Photo path in req.session in good_health.js: ' + req.session.photo_path.eye_photo_path);
 			console.log('Photo path in req.session in good_health.js: ' + req.session.photo_path.teeth_photo_path);	
+			console.log('Photo path in req.session in good_health.js: ' + req.session.photo_path.marks_photo_path);
 
 			//First check if session storage exists at all	
 			if(req.session.photo_path.eye_photo_path != '')
@@ -84,7 +86,18 @@ async function setResult(req, res, next) {
 				}
 				
 				}
+			if(req.session.photo_path.marks_photo_path != '')
+				{
+					console.log('Photo path in req.session in good_health.js: ' + req.session.photo_path.marks_photo_path);
+				// Iterate over the arrays in test_result
 				
+					// Check if the dolphin_name in the array is 'Dolly'
+					if (test_result.dolphin_name === req.session.dolphin_name) {
+					// Append marks_photo_path to the array
+					test_result.marks_photo_path = req.session.photo_path.marks_photo_path.toString();
+				}
+				
+				}
 		///////////////////////////////////////////
         // TEST
         // Read the uploaded file as a binary buffer

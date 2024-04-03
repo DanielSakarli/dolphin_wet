@@ -108,6 +108,7 @@ exports.up = function (knex) {
 
 			table.string('eye_photo_path');
 			table.string('teeth_photo_path');
+			table.string('marks_photo_path');
 			//table.binary('image'); //Holds image as binary data
 			table.timestamps(true, true); //Timestamp: created at, updated at
 		}),

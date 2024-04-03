@@ -29,6 +29,7 @@ class GoodHealthService {
 	 * @param {String} result.external_disease_signs_comments
 	 * @param {String} result.eye_photo_path
 	 * @param {String} result.teeth_photo_path
+	 * @param {String} result.marks_photo_path
 	 * @param {String} result.created_at The date of test result
 	 * @param {BinaryData} result.image The image of the test result as a binary String
 	 * @returns {Object} The inserted test data
@@ -104,6 +105,7 @@ class GoodHealthService {
 					'external_disease_signs_comments',
 					'eye_photo_path',
 					'teeth_photo_path',
+					'marks_photo_path',
 					'created_at',
 					'updated_at'
 				)

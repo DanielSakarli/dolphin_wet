@@ -495,6 +495,10 @@
 					<ion-checkbox v-model="CheckboxArray[11][2]" @click="handleClick(11,2)">Score 2</ion-checkbox>
 				</ion-item>
 				<CheckComments @update-comment="updateMarksComments"/>
+				<ion-label><br>Upload your photos here:</ion-label>
+				<ion-item>
+					<PhotoUpload @form-submitted="handleFormSubmittedMarksPhoto"/>
+				</ion-item>
 			</ion-list>
 		</ion-card>
 		<ion-card v-if=" criteria === 'sixthCriteriaHealth'">
@@ -596,7 +600,7 @@ export default {
 			isOpenManual: false,
 			isOpenScoring: false,
 			selectedOption: undefined,
-			CheckboxArray: Array.from({ length: 12 }, () => Array(3).fill(false)),
+			CheckboxArray: Array.from({ length: 13 }, () => Array(3).fill(false)),
 			camera,
 			previewImageUrl: '',
 			dolphinList: [] as {name: string}[],
@@ -621,6 +625,7 @@ export default {
 				photo_type: '',
 				eye_photo_path: '',
 				teeth_photo_path: '',
+				marks_photo_path: '',
 				dolphin_name: '',
 			},
 		};
@@ -655,6 +660,7 @@ export default {
 				photo_type: '',
 				eye_photo_path: '',
 				teeth_photo_path: '',
+				marks_photo_path: '',
 				dolphin_name: '',
 			};
 			console.log('Form Data accessed in HealthCheckCriteriaSelector.vue:');
@@ -681,6 +687,7 @@ export default {
 				photo_type: '',
 				eye_photo_path: '',
 				teeth_photo_path: '',
+				marks_photo_path: '',
 				dolphin_name: '',
 			};
 			console.log('Form Data accessed in HealthCheckCriteriaSelector.vue:');
@@ -689,6 +696,33 @@ export default {
 				this.formData.append('dolphin_name', this.dolphinSelect || ''); // Append the dolphin name with a default value of an empty string
 			}
 			this.formData.append('photo_type', 'teeth'); //Append the photo type
+			// Then append the rest of the fields
+			
+			console.log('Number of pictures: ' + files.length);
+
+			for (let i = 0; i < files.length; i++) {
+				console.log(files[i]);
+				this.formData.append('files', files[i]);
+			}
+			console.log(...this.formData);
+			}
+		},
+		handleFormSubmittedMarksPhoto(files: File[]) {
+		if (files && this.dolphinSelect != '') {
+			
+			this.setupSessionStorage = {
+				photo_type: '',
+				eye_photo_path: '',
+				teeth_photo_path: '',
+				marks_photo_path: '',
+				dolphin_name: '',
+			};
+			console.log('Form Data accessed in HealthCheckCriteriaSelector.vue:');
+			this.formData = new FormData();
+			if(this.dolphinSelect != ''){
+				this.formData.append('dolphin_name', this.dolphinSelect || ''); // Append the dolphin name with a default value of an empty string
+			}
+			this.formData.append('photo_type', 'marks'); //Append the photo type
 			// Then append the rest of the fields
 			
 			console.log('Number of pictures: ' + files.length);
@@ -758,7 +792,7 @@ export default {
 					}
 				}
 			}
-			for(let i = 0; i <= 11; i++){
+			for(let i = 0; i <= 12; i++){
 				for(let j = 0; j < 3; j++){
 					if (this.CheckboxArray[i][j] === true){
 						this.CheckboxArray[i][j] = false;
