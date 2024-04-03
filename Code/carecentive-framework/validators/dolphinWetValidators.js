@@ -104,7 +104,7 @@ const goodFeedingPostValidateRequestBody = [
 		.withMessage('Invalid dolphin name'),
 	body('body_condition_score')
 		.optional({ values: 'null' })
-		.isIn([1, 2, 3])
+		.isIn([0, 1, 2])
 		.toInt()
 		.withMessage('Invalid body condition score'),
 	body('body_condition_score_comments')
@@ -122,7 +122,7 @@ const goodFeedingPostValidateRequestBody = [
 		.withMessage('Invalid comments for body measured weight'),
 	body('kcal_calculations')
 		.optional({ values: 'null' })
-		.isIn([1, 2, 3])
+		.isIn([0, 1, 2])
 		.toInt()
 		.withMessage('Invalid kcal calculations'),
 	body('kcal_calculations_comments')
@@ -131,7 +131,7 @@ const goodFeedingPostValidateRequestBody = [
 		.withMessage('Invalid comments for kal calculations'),
 	body('blood_hydration')
 		.optional({ values: 'null' })
-		.isIn([1, 2, 3])
+		.isIn([0, 1, 2])
 		.toInt()
 		.withMessage('Invalid blood hydration'),
 	body('blood_hydration_comments')
@@ -140,7 +140,7 @@ const goodFeedingPostValidateRequestBody = [
 		.withMessage('Invalid comments for blood hydration'),
 	body('fish_quality')
 		.optional({ values: 'null' })
-		.isIn([1, 2, 3])
+		.isIn([0, 1, 2])
 		.toInt()
 		.withMessage('Invalid fish quality'),
 	body('fish_quality_comments')
@@ -149,7 +149,7 @@ const goodFeedingPostValidateRequestBody = [
 		.withMessage('Invalid comments for fish quality'),
 	body('fish_variety')
 		.optional({ values: 'null' })
-		.isIn([1, 2, 3])
+		.isIn([0, 1, 2])
 		.toInt()
 		.withMessage('Invalid fish variety'),
 	body('fish_variety_comments')

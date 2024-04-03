@@ -579,6 +579,7 @@ export default {
 		await dolphinsStore.fill();
 		
 		// Reset here data while page is mounted
+		localStorage.setItem('backButtonClicked', 'false');
 		localStorage.setItem('dataInBody', 'false');
 		localStorage.setItem('created_at', '');
 		evaluationHealthStore.resetBodies();
@@ -1030,7 +1031,7 @@ async showDateInputAlert() {
 ////////////////////////////////////////////////////////////////////////
 		
 	async confirmRefresh() {
-		const confirmed = confirm(this.$t('savingDataNext'));
+		const confirmed = true; //confirm(this.$t('savingDataNext'));
      	if (confirmed) {
 			// Upload photos if there are any in formData
 			await this.photoUpload();

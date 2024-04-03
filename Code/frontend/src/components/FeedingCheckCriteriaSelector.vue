@@ -313,6 +313,9 @@
 					<ion-checkbox v-model="CheckboxArray[3][2]" @click="handleClick(3,1)">Score 2</ion-checkbox>
 				</ion-item>
 				<CheckComments @update-comment="updateFishQualityComments" />
+				<ion-item>
+					<FileUpload @form-submitted="handleFormSubmittedFile"/>
+				</ion-item>
 			</ion-list>
 		</ion-card>
 		<ion-card v-if=" criteria === 'fourthCriteriaNutrition'">
@@ -356,6 +359,7 @@ import CheckComments from '@/components/CheckComments.vue';
 import { useDolphinsStore }from '@/store/dolphinsStore';
 import { useEvaluationFeedingStore }from '@/store/evaluationFeedingStore';
 import { baseUrl } from '@/utils/baseUrl';
+import FileUpload from '@/components/FileUpload.vue';
 import { chevronCollapseSharp } from 'ionicons/icons';
 import { toast } from 'vue3-toastify';
 import 'vue3-toastify/dist/index.css';
@@ -387,7 +391,7 @@ export default {
 		// needed Vue components:
 		IonAlert, IonItem, IonList, IonSelect, IonSelectOption, IonLabel, IonModal, IonHeader,
 		IonToolbar, IonContent, IonTitle, IonButtons, IonButton, IonText, IonCheckbox,
-		IonInput, IonRange, IonCard, IonCardTitle, CheckComments, IonFooter, IonIcon, 
+		IonInput, IonRange, IonCard, IonCardTitle, CheckComments, IonFooter, IonIcon, FileUpload,
 	},
 	async mounted()  {
 		// This makes sure that the reference areas are updated while the component is
@@ -435,12 +439,21 @@ export default {
 			//dolphinList: [] as {name: string}[],
 			urlDolphins: baseUrl + '/api/dolphins', //'http://88395-17112.pph-server.de/api/dolphins', //the api route to get the dolphins
 			urlPost: baseUrl + '/api/good_feeding', //'http://88395-17112.pph-server.de/api/good_feeding',
+			urlPostFile: baseUrl + '/api/file',
 			body_condition_score_comments: '',
 			weight_measured_comments: '',
 			kcal_calculations_comments: '',
 			blood_hydration_comments: '',
 			fish_quality_comments: '',
 			fish_variety_comments: '',
+			formData: null,
+			setupSessionStorage: {
+				photo_type: '',
+				eye_photo_path: '',
+				teeth_photo_path: '',
+				marks_photo_path: '',
+				dolphin_name: '',
+			},
 		};
 	},
 	methods: {
@@ -461,6 +474,65 @@ export default {
 			if (this.dolphinSelect.includes('all')) {
 				this.dolphinSelect = this.dolphinsStore.dolphinList.map(dolphin => dolphin.name);
 			}
+		},
+		handleFormSubmittedFile(files: File[]) {
+		if (files && this.dolphinSelect != '') {
+			
+			this.setupSessionStorage = {
+				photo_type: '',
+				eye_photo_path: '',
+				teeth_photo_path: '',
+				marks_photo_path: '',
+				dolphin_name: '',
+			};
+			console.log('Form Data accessed in HealthCheckCriteriaSelector.vue:');
+			this.formData = new FormData();
+			if(this.dolphinSelect != ''){
+				this.formData.append('dolphin_name', this.dolphinSelect || ''); // Append the dolphin name with a default value of an empty string
+			}
+			// Then append the rest of the fields
+			console.log('Number of pictures: ' + files.length);
+			for (let i = 0; i < files.length; i++) {
+				console.log(files[i]);
+				this.formData.append('files', files[i]);
+			}
+			console.log(...this.formData);
+			}
+		},
+		async fileUpload() {
+		// Check if there is a photo to upload
+		if(this.formData != null) {
+			// Setup the session storage
+			console.log('Form Data accessed in FeedingCheckCriteriaSelector.vue');
+			console.log(...this.formData);
+			// Maybe put this in mounted()?
+			axios
+				.post(baseUrl + '/api/setup_session_storage', this.setupSessionStorage, { withCredentials: true })
+				.then((response) => {
+					console.log('Response setup session storage:', response.data);
+				})
+				.catch((error) => {
+					console.error('Error:', error);
+				});
+			// Send the photo to the server
+			axios
+				.post(this.urlPostFile, this.formData, {
+					headers: {
+						'Content-Type': 'multipart/form-data',
+					},
+					withCredentials: true,
+				})
+				.then((response) => {
+					console.log('Response:', response.data);
+				})
+				.catch((error) => {
+					console.error('Error:', error);
+				});
+		
+			//Reset the form data
+			this.formData = null; 
+			console.log('Resetted form data: '+ this.formData);
+		}
 		},
 		//Method uses boolean array. So no multiple checking for one test is possible. --> Every test can have one checked Checkbox
 		handleClick(row: number, column: number) {
@@ -630,9 +702,9 @@ async showDateInputAlert() {
 			//const confirmed = confirm(this.$t('savingDataNext')); //Where is the variable savingDataNext initialized and what does it do?
      		const confirmed = true;
 			if (confirmed) {
+				await this.fileUpload();
 				//Check if the date of the test is the current date
 				await this.confirmTestDate();
-
 				//Store the checked values in the request body
 				this.storeCheckedValues();
 				console.log(this.CheckboxArray);
@@ -680,8 +752,10 @@ async showDateInputAlert() {
 				}
 			}
 		},
-		confirmRefresh() {
-			const confirmed = confirm(this.$t('savingDataNext'));
+		async confirmRefresh() {
+			// Upload photos if there are any in formData
+			await this.fileUpload();
+			const confirmed = true; //confirm(this.$t('savingDataNext'));
      		if (confirmed) {
 				this.storeCheckedValues();
 				console.log(evaluationFeedingStore.requestBodiesFeeding)
