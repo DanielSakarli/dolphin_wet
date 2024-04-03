@@ -36,6 +36,8 @@ export const useEvaluationHealthStore = defineStore('evaluationHealthStore', {
 				requestBodiesHealth[i]['records_respiratory_disease_comments'] = '';
 				requestBodiesHealth[i]['inspection_marks_comments'] = '';
 				requestBodiesHealth[i]['records_external_disease_comments'] = '';
+				requestBodiesHealth[i]['eye_photo_path'] = '';
+				requestBodiesHealth[i]['teeth_photo_path'] = '';
 			}
 		},
 	},

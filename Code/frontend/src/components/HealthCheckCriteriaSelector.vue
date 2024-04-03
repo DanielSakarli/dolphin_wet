@@ -404,6 +404,9 @@
 				</ion-item>
 				<CheckComments @update-comment="updateEyeLesionsComments"/>
 				<ion-item>
+					<ion-label><br>Upload your photos here:</ion-label>
+				</ion-item>
+				<ion-item>
 					<PhotoUpload @form-submitted="handleFormSubmittedEyePhoto"/>
 				</ion-item>
 			</ion-list>
@@ -444,7 +447,12 @@
 					<ion-checkbox v-model="CheckboxArray[5][2]" @click="handleClick(5,2)">Score 2</ion-checkbox>
 				</ion-item>
 				<CheckComments @update-comment="updateMouthExamComments"/>
-				<PhotoUpload @form-submitted="handleFormSubmittedTeethPhoto"/>
+				<ion-item>
+					<ion-label><br>Upload your photos here:</ion-label>
+				</ion-item>
+				<ion-item>
+					<PhotoUpload @form-submitted="handleFormSubmittedTeethPhoto"/>
+				</ion-item>
 			</ion-list>
 		</ion-card>
 		<ion-card v-if=" criteria === 'thirdCriteriaHealth'">
@@ -686,7 +694,6 @@ export default {
 			}
 			this.formData.append('photo_type', 'eye'); //Append the photo type
 			// Then append the rest of the fields
-
 			
 			console.log('Number of pictures: ' + files.length);
 
@@ -700,7 +707,7 @@ export default {
 		handleFormSubmittedTeethPhoto(files: File[]) {
 			if (files && this.dolphinSelect != '') {
 			
-			const setupSessionStorage = {
+			this.setupSessionStorage = {
 				photo_type: '',
 				eye_photo_path: '',
 				teeth_photo_path: '',
@@ -781,7 +788,7 @@ export default {
 					}
 				}
 			}
-			for(let i = 0; i <= 4; i++){
+			for(let i = 0; i <= 11; i++){
 				for(let j = 0; j < 3; j++){
 					if (this.CheckboxArray[i][j] === true){
 						this.CheckboxArray[i][j] = false;
@@ -913,7 +920,7 @@ async showDateInputAlert() {
 			//const confirmed = confirm(this.$t('savingDataNext'));
      		const confirmed = true;
 			if (confirmed) {
-				this.photoUpload();
+				await this.photoUpload();
 				await this.confirmTestDate();
 				this.storeCheckedValues();
 				console.log(this.CheckboxArray);
@@ -1018,11 +1025,11 @@ async showDateInputAlert() {
 // End of TEST for photo upload
 ////////////////////////////////////////////////////////////////////////
 		
-	confirmRefresh() {
+	async confirmRefresh() {
 		const confirmed = confirm(this.$t('savingDataNext'));
      	if (confirmed) {
 			// Upload photos if there are any in formData
-			this.photoUpload();
+			await this.photoUpload();
 
 			// Store the checked scoring values
 			this.storeCheckedValues();
@@ -1034,15 +1041,17 @@ async showDateInputAlert() {
 			this.$router.push(targetUrl);
 			}	
     	},
-		photoUpload() {
+		async photoUpload() {
 		// Check if there is a photo to upload
 		if(this.formData != null) {
 			// Setup the session storage
+			console.log('Form Data accessed in HealthCheckCriteriaSelector.vue');
 			console.log(...this.formData);
+			// Maybe put this in mounted()?
 			axios
 				.post(baseUrl + '/api/setup_session_storage', this.setupSessionStorage, { withCredentials: true })
 				.then((response) => {
-					console.log('Response:', response.data);
+					console.log('Response setup session storage:', response.data);
 				})
 				.catch((error) => {
 					console.error('Error:', error);

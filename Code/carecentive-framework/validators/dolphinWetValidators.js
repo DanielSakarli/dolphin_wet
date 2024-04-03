@@ -173,25 +173,34 @@ const goodHealthPostValidateRequestBody = [
 		const allowedFields = [
 			'dolphin_name',
 			'normal_floatability',
-			'eye_lesions',
-			'visual_cues',
-			'mouth_exam',
-			'respiratory_disease',
-			'force_expiration',
-			'gastric_abnormality',
-			'external_disease_signs',
 			'normal_floatability_comments',
-			'eye_lesions_comments',
-			'visual_cues_comments',
+			'records_normal_floatability',
+			'records_normal_floatability_comments',
+			'inspection_eye_lesions',
+			'inspection_eye_lesions_comments',
+			'response_visual_cues',
+			'response_visual_cues_comments',
+			'records_eye_lesions',
+			'records_eye_lesions_comments',
+			'mouth_exam',
 			'mouth_exam_comments',
-			'respiratory_disease_comments',
+			'records_oral_lesions',
+			'records_oral_lesions_comments',
+			'records_gastric_abnormality',
+			'records_gastric_abnormality_comments',
+			'inspection_respiratory',
+			'inspection_respiratory_comments',
+			'force_expiration',
 			'force_expiration_comments',
-			'gastric_abnormality_comments',
-			'external_disease_signs_comments',
+			'records_respiratory_disease',
+			'records_respiratory_disease_comments',
+			'inspection_marks',
+			'inspection_marks_comments',
+			'records_external_disease',
+			'records_external_disease_comments',
 			'eye_photo_path',
 			'teeth_photo_path',
 			'created_at',
-			'image'
 		];
 		const keys = Object.keys(value);
 
@@ -199,7 +208,7 @@ const goodHealthPostValidateRequestBody = [
 		const disallowedKeys = keys.filter((key) => !allowedFields.includes(key));
 		if (disallowedKeys.length > 0) {
 			throw new Error(
-				`Invalid good_housing fields: ${disallowedKeys.join(', ')}`
+				`Invalid good_health fields: ${disallowedKeys.join(', ')}`
 			);
 		}
 
@@ -209,78 +218,126 @@ const goodHealthPostValidateRequestBody = [
 		.notEmpty()
 		.isString()
 		.withMessage('Invalid dolphin name'),
+	
 	body('normal_floatability')
 		.optional({ values: 'null' })
-		.isInt({ min: 1, max: 3 })
+		.isInt({ min: 0, max: 2 })
 		.toInt()
 		.withMessage('Invalid normal floatability value'),
-	body('eye_lesions')
+	body('records_normal_floatability')
 		.optional({ values: 'null' })
-		.isInt({ min: 1, max: 3 })
+		.isInt({ min: 0, max: 2 })
 		.toInt()
-		.withMessage('Invalid eye lesions value'),
-	body('visual_cues')
+		.withMessage('Invalid records normal floatability value'),
+	body('inspection_eye_lesions')
 		.optional({ values: 'null' })
-		.isInt({ min: 1, max: 3 })
+		.isInt({ min: 0, max: 2 })
 		.toInt()
-		.withMessage('Invalid visual cues value'),
+		.withMessage('Invalid inspection eye lesions value'),
+	body('response_visual_cues')
+		.optional({ values: 'null' })
+		.isInt({ min: 0, max: 2 })
+		.toInt()
+		.withMessage('Invalid response visual cues value'),
+	body('records_eye_lesions')
+		.optional({ values: 'null' })
+		.isInt({ min: 0, max: 2 })
+		.toInt()
+		.withMessage('Invalid records eye lesions value'),
 	body('mouth_exam')
 		.optional({ values: 'null' })
-		.isInt({ min: 1, max: 3 })
+		.isInt({ min: 0, max: 2 })
 		.toInt()
 		.withMessage('Invalid mouth exam value'),
-	body('respiratory_disease')
+	body('records_oral_lesions')
 		.optional({ values: 'null' })
-		.isInt({ min: 1, max: 3 })
+		.isInt({ min: 0, max: 2 })
 		.toInt()
-		.withMessage('Invalid respiratory disease value'),
+		.withMessage('Invalid records oral lesions value'),
+	body('records_gastric_abnormality')
+		.optional({ values: 'null' })
+		.isInt({ min: 0, max: 2 })
+		.toInt()
+		.withMessage('Invalid records gastric abnormality value'),
+	body('inspection_respiratory')
+		.optional({ values: 'null' })
+		.isInt({ min: 0, max: 2 })
+		.toInt()
+		.withMessage('Invalid inspection respiratory value'),
 	body('force_expiration')
 		.optional({ values: 'null' })
-		.isInt({ min: 1, max: 3 })
+		.isInt({ min: 0, max: 2 })
 		.toInt()
 		.withMessage('Invalid force expiration value'),
-	body('gastric_abnormality')
+	body('records_respiratory_disease')
 		.optional({ values: 'null' })
-		.isInt({ min: 1, max: 3 })
+		.isInt({ min: 0, max: 2 })
 		.toInt()
-		.withMessage('Invalid gastric abnormality value'),
-	body('external_disease_signs')
+		.withMessage('Invalid records respiratory disease value'),
+	body('inspection_marks')
 		.optional({ values: 'null' })
-		.isInt({ min: 1, max: 3 })
+		.isInt({ min: 0, max: 2 })
 		.toInt()
-		.withMessage('Invalid external disease signs value'),
+		.withMessage('Invalid inspection marks value'),
+	body('records_external_disease')
+		.optional({ values: 'null' })
+		.isInt({ min: 0, max: 2 })
+		.toInt()
+		.withMessage('Invalid records external disease value'),
+	// Comments
 	body('normal_floatability_comments')
 		.optional({ values: 'null' })
 		.isString()
 		.withMessage('Invalid comments for normal floatability'),
-	body('eye_lesions_comments')
+	body('records_normal_floatability_comments')
 		.optional({ values: 'null' })
 		.isString()
-		.withMessage('Invalid comments for eye lesions'),
-	body('visual_cues_comments')
+		.withMessage('Invalid comments for records normal floatability'),
+	body('inspection_eye_lesions_comments')
 		.optional({ values: 'null' })
 		.isString()
-		.withMessage('Invalid comments for visual cues'),
+		.withMessage('Invalid comments for inspection eye lesions'),
+	body('response_visual_cues_comments')
+		.optional({ values: 'null' })
+		.isString()
+		.withMessage('Invalid comments for response visual cues'),
+	body('records_eye_lesions_comments')
+		.optional({ values: 'null' })
+		.isString()
+		.withMessage('Invalid comments for records eye lesions'),
 	body('mouth_exam_comments')
 		.optional({ values: 'null' })
 		.isString()
 		.withMessage('Invalid comments for mouth exam'),
-	body('respiratory_disease_comments')
+	body('records_oral_lesions_comments')
 		.optional({ values: 'null' })
 		.isString()
-		.withMessage('Invalid comments for respiratory disease'),
+		.withMessage('Invalid comments for records oral lesions'),
+	body('records_gastric_abnormality_comments')
+		.optional({ values: 'null' })
+		.isString()
+		.withMessage('Invalid comments for records gastric abnormality'),
+	body('inspection_respiratory_comments')
+		.optional({ values: 'null' })
+		.isString()
+		.withMessage('Invalid comments for inspection respiratory'),
 	body('force_expiration_comments')
 		.optional({ values: 'null' })
 		.isString()
 		.withMessage('Invalid comments for force expiration'),
-	body('gastric_abnormality_comments')
+	body('records_respiratory_disease_comments')
 		.optional({ values: 'null' })
 		.isString()
-		.withMessage('Invalid comments for force expiration'),
-	body('external_disease_signs_comments')
+		.withMessage('Invalid comments for records respiratory disease'),
+	body('inspection_marks_comments')
 		.optional({ values: 'null' })
 		.isString()
-		.withMessage('Invalid comments for external disease signs'),
+		.withMessage('Invalid comments for inspection marks'),
+	body('records_external_disease_comments')
+		.optional({ values: 'null' })
+		.isString()
+		.withMessage('Invalid comments for records external disease'),
+	// Photos paths		
 	body('eye_photo_path')
 		.optional({ values: 'null' })
 		.isString()
@@ -289,15 +346,11 @@ const goodHealthPostValidateRequestBody = [
 		.optional({ values: 'null' })
 		.isString()
 		.withMessage('Invalid teeth photo path'),
+	// Timestamps
 	body('created_at')
 		.optional({ values: 'null' })
 		.isString()
 		.withMessage('Invalid created date'),
-	body('image')
-		.optional({ values: 'null' })	
-		.isBase64()
-		.withMessage('Invalid image'),
-			
 ];
 /**
  * End of Good health validation rules.

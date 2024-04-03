@@ -79,27 +79,36 @@ exports.up = function (knex) {
 				.onUpdate('CASCADE');
 			table.string('dolphin_name');
 
-			table.tinyint('normal_floatability').unsigned(); //1, 3
+			table.tinyint('normal_floatability').unsigned(); //0, 2
 			table.string('normal_floatability_comments');
-			table.tinyint('eye_lesions').unsigned(); //1, 3
-			table.string('eye_lesions_comments');
-			table.tinyint('visual_cues').unsigned(); //1, 3
-			table.string('visual_cues_comments');
-			table.tinyint('mouth_exam').unsigned(); //1, 3
+			table.tinyint('records_normal_floatability').unsigned(); //0, 2
+			table.string('records_normal_floatability_comments');
+			table.tinyint('inspection_eye_lesions').unsigned();
+			table.string('inspection_eye_lesions_comments');
+			table.tinyint('response_visual_cues').unsigned();
+			table.string('response_visual_cues_comments');
+			table.tinyint('records_eye_lesions').unsigned();
+			table.string('records_eye_lesions_comments');
+			table.tinyint('mouth_exam').unsigned();
 			table.string('mouth_exam_comments');
-			table.tinyint('gastric_abnormality').unsigned(); //1, 3
-			table.string('gastric_abnormality_comments');
-			table.tinyint('respiratory_disease').unsigned(); //1, 3
-			table.string('respiratory_disease_comments');
-			table.tinyint('force_expiration').unsigned(); //1, 3
+			table.tinyint('records_oral_lesions').unsigned();
+			table.string('records_oral_lesions_comments');
+			table.tinyint('records_gastric_abnormality').unsigned();
+			table.string('records_gastric_abnormality_comments');
+			table.tinyint('inspection_respiratory').unsigned();
+			table.string('inspection_respiratory_comments');
+			table.tinyint('force_expiration').unsigned();
 			table.string('force_expiration_comments');
-			table.tinyint('external_disease_signs').unsigned(); //1, 3
-			table.string('external_disease_signs_comments');
+			table.tinyint('records_respiratory_disease').unsigned();
+			table.string('records_respiratory_disease_comments');
+			table.tinyint('inspection_marks').unsigned();
+			table.string('inspection_marks_comments');
+			table.tinyint('records_external_disease').unsigned();
+			table.string('records_external_disease_comments');
 
 			table.string('eye_photo_path');
 			table.string('teeth_photo_path');
-			//table.string('image'); //Holds image as binary String
-			table.binary('image'); //Holds image as binary data
+			//table.binary('image'); //Holds image as binary data
 			table.timestamps(true, true); //Timestamp: created at, updated at
 		}),
 
