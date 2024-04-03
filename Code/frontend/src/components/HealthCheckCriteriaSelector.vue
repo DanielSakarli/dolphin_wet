@@ -16,7 +16,6 @@
 					</ion-select>
 			</ion-item>
 			<ion-item>
-				
 				<ion-select
 					:value="criteria"
 					@IonChange="criteria=$event.target.value"
@@ -1105,12 +1104,5 @@ ion-card {
 	margin: 5px 15px;
 }
 
-/* Daniel: This is a workaround to make the ion-select full width 
-.sc-ion-alert-md-h {
-	--width: 500px;
-}*/
-/*.my-class {
-    width: 600px !important;
-}*/
 </style>
 ```

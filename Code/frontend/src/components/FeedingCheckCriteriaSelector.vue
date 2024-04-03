@@ -705,4 +705,6 @@ ion-item {
 ion-card {
 	margin: 5px 15px;
 }
+
+
 </style>
