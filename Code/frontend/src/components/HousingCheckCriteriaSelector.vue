@@ -27,26 +27,26 @@
 					@IonChange="criteria=$event.target.value"
 					:cancelText="firstcancelText"
 				>
-					<ion-select-option value="firstCriteriaHousing">{{
-						$t('firstCriteriaHousing')
+					<ion-select-option value="firstCriteriaEnvironment">{{
+						$t('firstCriteriaEnvironment')
 					}}</ion-select-option>
-					<ion-select-option value="secondCriteriaHousing">{{
-						$t('secondCriteriaHousing')
+					<ion-select-option value="secondCriteriaEnvironment">{{
+						$t('secondCriteriaEnvironment')
 					}}</ion-select-option>
-					<ion-select-option value="thirdCriteriaHousing">{{
-						$t('thirdCriteriaHousing')
+					<ion-select-option value="thirdCriteriaEnvironment">{{
+						$t('thirdCriteriaEnvironment')
 					}}</ion-select-option>
-					<ion-select-option value="fourthCriteriaHousing">{{
-						$t('fourthCriteriaHousing')
+					<ion-select-option value="fourthCriteriaEnvironment">{{
+						$t('fourthCriteriaEnvironment')
 					}}</ion-select-option>
-					<ion-select-option value="fifthCriteriaHousing">{{
-						$t('fifthCriteriaHousing')
+					<ion-select-option value="fifthCriteriaEnvironment">{{
+						$t('fifthCriteriaEnvironment')
 					}}</ion-select-option>
-					<ion-select-option value="sixthCriteriaHousing">{{
-						$t('sixthCriteriaHousing')
+					<ion-select-option value="sixthCriteriaEnvironment">{{
+						$t('sixthCriteriaEnvironment')
 					}}</ion-select-option>
-					<ion-select-option value="seventhCriteriaHousing">{{
-						$t('seventhCriteriaHousing')
+					<ion-select-option value="seventhCriteriaEnvironment">{{
+						$t('seventhCriteriaEnvironment')
 					}}</ion-select-option>
 				</ion-select>
 			</ion-item>
@@ -59,26 +59,26 @@
 		<ion-modal :is-open="isOpenManual">
 			<ion-header>
 				<ion-toolbar>
-					<ion-title v-if=" criteria === 'firstCriteriaHousing'"
-						>{{$t('firstCriteriaHousing')
+					<ion-title v-if=" criteria === 'firstCriteriaEnvironment'"
+						>{{$t('firstCriteriaEnvironment')
 					}}</ion-title>
-					<ion-title v-else-if=" criteria === 'secondCriteriaHousing'"
-						>{{$t('secondCriteriaHousing')}}
+					<ion-title v-else-if=" criteria === 'secondCriteriaEnvironment'"
+						>{{$t('secondCriteriaEnvironment')}}
 					</ion-title>
-					<ion-title v-else-if=" criteria === 'thirdCriteriaHousing'"
-						>{{$t('thirdCriteriaHousing')}}
+					<ion-title v-else-if=" criteria === 'thirdCriteriaEnvironment'"
+						>{{$t('thirdCriteriaEnvironment')}}
 					</ion-title>
-					<ion-title  v-else-if=" criteria === 'fourthCriteriaHousing'"
-						>{{$t('fourthCriteriaHousing')}}
+					<ion-title  v-else-if=" criteria === 'fourthCriteriaEnvironment'"
+						>{{$t('fourthCriteriaEnvironment')}}
 					</ion-title>
-					<ion-title v-else-if=" criteria === 'fifthCriteriaHousing'"
-						>{{$t('fifthCriteriaHousing')}}
+					<ion-title v-else-if=" criteria === 'fifthCriteriaEnvironment'"
+						>{{$t('fifthCriteriaEnvironment')}}
 					</ion-title>
-					<ion-title v-else-if=" criteria === 'sixthCriteriaHousing'"
-						>{{$t('sixthCriteriaHousing')}}
+					<ion-title v-else-if=" criteria === 'sixthCriteriaEnvironment'"
+						>{{$t('sixthCriteriaEnvironment')}}
 					</ion-title>
-					<ion-title v-else-if=" criteria === 'seventhCriteriaHousing'"
-						>{{$t('seventhCriteriaHousing')}}
+					<ion-title v-else-if=" criteria === 'seventhCriteriaEnvironment'"
+						>{{$t('seventhCriteriaEnvironment')}}
 					</ion-title>
 					<ion-buttons slot="end">
 						<ion-button @click="setOpenManual(false)">Close</ion-button>
@@ -86,36 +86,36 @@
 				</ion-toolbar>
 			</ion-header>
 			<ion-content class="ion-padding">
-				<p v-if=" criteria === 'firstCriteriaHousing'">
-					<h3>{{ $t('firstSubCriteriaHousing') }}</h3>
+				<p v-if=" criteria === 'firstCriteriaEnvironment'">
+					<h3>{{ $t('firstSubCriteriaEnvironment') }}</h3>
 					Enclosures and barriers safety and maintenance according to EAAM S&Gs (see 5.)
 				</p>
-				<p v-if=" criteria === 'firstCriteriaHousing'">
-					<h3>{{ $t('secondSubCriteriaHousing') }}</h3>
+				<p v-if=" criteria === 'firstCriteriaEnvironment'">
+					<h3>{{ $t('secondSubCriteriaEnvironment') }}</h3>
 					Presence or absence in records
 				</p>
-				<p v-if=" criteria === 'secondCriteriaHousing'">
-					<h3>{{ $t('thirdSubCriteriaHousing') }}</h3>
+				<p v-if=" criteria === 'secondCriteriaEnvironment'">
+					<h3>{{ $t('thirdSubCriteriaEnvironment') }}</h3>
 					Pool dimension, pool design, number of pools, available access to pools & group management according to EAAM S&Gs (see 5.)
 				</p>
-				<p v-if=" criteria === 'thirdCriteriaHousing'">
-					<h3>{{ $t('fourthSubCriteriaHousing') }}</h3>
+				<p v-if=" criteria === 'thirdCriteriaEnvironment'">
+					<h3>{{ $t('fourthSubCriteriaEnvironment') }}</h3>
 					Presence or absence of forced loneliness based on records/ trainer interviews
 				</p>
-				<p v-if=" criteria === 'fourthCriteriaHousing'">
-					<h3>{{ $t('fifthSubCriteriaHousing') }}</h3>
+				<p v-if=" criteria === 'fourthCriteriaEnvironment'">
+					<h3>{{ $t('fifthSubCriteriaEnvironment') }}</h3>
 					Water quality parameters accordig to EAAM S&Gs (see 9.)
 				</p>
-				<p v-if=" criteria === 'fifthCriteriaHousing'">
-					<h3>{{ $t('sixthSubCriteriaHousing') }}</h3>
+				<p v-if=" criteria === 'fifthCriteriaEnvironment'">
+					<h3>{{ $t('sixthSubCriteriaEnvironment') }}</h3>
 					Water temperature levels according to EAAM S&Gs (see 9.)
 				</p>
-				<p v-if=" criteria === 'sixthCriteriaHousing'">
-					<h3>{{ $t('seventhSubCriteriaHousing') }}</h3>
+				<p v-if=" criteria === 'sixthCriteriaEnvironment'">
+					<h3>{{ $t('seventhSubCriteriaEnvironment') }}</h3>
 					Presence of/Access to shaded areas
 				</p>
-				<p v-if=" criteria === 'seventhCriteriaHousing'">
-					<h3>{{ $t('eighthSubCriteriaHousing') }}</h3>
+				<p v-if=" criteria === 'seventhCriteriaEnvironment'">
+					<h3>{{ $t('eighthSubCriteriaEnvironment') }}</h3>
 					Adequate degree of  underwater noise (40dB above hearing threshold)
 				</p>
 			</ion-content>
@@ -128,26 +128,26 @@
 		<ion-modal :is-open="isOpenScoring">
 			<ion-header>
 				<ion-toolbar>
-					<ion-title v-if=" criteria === 'firstCriteriaHousing'"
-						>{{$t('firstCriteriaHousing')}}
+					<ion-title v-if=" criteria === 'firstCriteriaEnvironment'"
+						>{{$t('firstCriteriaEnvironment')}}
 					</ion-title>
-					<ion-title v-else-if=" criteria === 'secondCriteriaHousing'"
-						>{{$t('secondCriteriaHousing')}}
+					<ion-title v-else-if=" criteria === 'secondCriteriaEnvironment'"
+						>{{$t('secondCriteriaEnvironment')}}
 					</ion-title>
-					<ion-title v-else-if=" criteria === 'thirdCriteriaHousing'"
-						>{{$t('thirdCriteriaHousing')}}
+					<ion-title v-else-if=" criteria === 'thirdCriteriaEnvironment'"
+						>{{$t('thirdCriteriaEnvironment')}}
 					</ion-title>
-					<ion-title v-else-if=" criteria === 'fourthCriteriaHousing'"
-						>{{$t('fourthCriteriaHousing')}}
+					<ion-title v-else-if=" criteria === 'fourthCriteriaEnvironment'"
+						>{{$t('fourthCriteriaEnvironment')}}
 					</ion-title>
-					<ion-title v-else-if=" criteria === 'fifthCriteriaHousing'"
-						>{{$t('fifthCriteriaHousing')}}
+					<ion-title v-else-if=" criteria === 'fifthCriteriaEnvironment'"
+						>{{$t('fifthCriteriaEnvironment')}}
 					</ion-title>
-					<ion-title v-else-if=" criteria === 'sixthCriteriaHousing'"
-						>{{$t('sixthCriteriaHousing')}}
+					<ion-title v-else-if=" criteria === 'sixthCriteriaEnvironment'"
+						>{{$t('sixthCriteriaEnvironment')}}
 					</ion-title>
-					<ion-title v-else-if=" criteria === 'seventhCriteriaHousing'"
-						>{{$t('seventhCriteriaHousing')}}
+					<ion-title v-else-if=" criteria === 'seventhCriteriaEnvironment'"
+						>{{$t('seventhCriteriaEnvironment')}}
 					</ion-title>
 					<ion-buttons slot="end">
 						<ion-button @click="setOpenScoring(false)">{{ $t('close')}}</ion-button>
@@ -155,7 +155,7 @@
 				</ion-toolbar>
 			</ion-header>
 			<ion-content class="ion-padding">
-				<p v-if=" criteria === 'firstCriteriaHousing'">
+				<p v-if=" criteria === 'firstCriteriaEnvironment'">
 					<h1>Enclosures and barriers safety and maintenance:</h1>
 					<h3>Score 1</h3>
 					All criteria are met according to EAAM S&Gs (see 5.)
@@ -167,42 +167,42 @@
 					<h3>Score 3</h3>
 					Presence on records (last three months)
 				</p>
-				<p v-if=" criteria === 'secondCriteriaHousing'">
+				<p v-if=" criteria === 'secondCriteriaEnvironment'">
 					<h1>Pool dimension, pool design, number of pools, available access to pools & group management:</h1>
 					<h3>Score 1</h3>
 					All criteria are met according to EAAM S&Gs (see 5.)
 					<h3>Score 3</h3>
 					At least one criteria is not  met according to EAAM S&Gs (see 5.)
 				</p>
-				<p v-if=" criteria === 'thirdCriteriaHousing'">
+				<p v-if=" criteria === 'thirdCriteriaEnvironment'">
 					<h1>Presence or absence based on records/ trainer interviews:</h1>
 					<h3>Score 1</h3>
 					Dolphin was not separated or only separated during medical emergencies or research purposes for short periods of time (less than 1 h/day) during last three months
 					<h3>Score 3</h3>
 					Dolphin was separated for longer periods of time (more than 1 h/day) during last three months
 				</p>
-				<p v-if=" criteria === 'fourthCriteriaHousing'">
+				<p v-if=" criteria === 'fourthCriteriaEnvironment'">
 					<h1>Water quality parameters:</h1>
 					<h3>Score 1</h3>
 					All criteria are met according to EAAM S&Gs (see 9.)
 					<h3>Score 3</h3>
 					At least one criterion is not met according to EAAM S&Gs (see 9.)
 				</p>
-				<p v-if=" criteria === 'fifthCriteriaHousing'">
+				<p v-if=" criteria === 'fifthCriteriaEnvironment'">
 					<h1>Water temperature levels:</h1>
 					<h3>Score 1</h3>
 					All criteria are met according to EAAM S&Gs (see 9.)
 					<h3>Score 3</h3>
 					At least one criteria is not met according to EAAM S&Gs (see 9.)
 				</p>
-				<p v-if=" criteria === 'sixthCriteriaHousing'">
+				<p v-if=" criteria === 'sixthCriteriaEnvironment'">
 					<h1>Sufficient shade provided and accessible in case needed:</h1>
 					<h3>Score 1</h3>
 					All criteria are met according to EAAM S&Gs (see 9.)
 					<h3>Score 3</h3>
 					At least one criteria is not met according to EAAM S&Gs (see 9.)
 				</p>
-				<p v-if=" criteria === 'seventhCriteriaHousing'">
+				<p v-if=" criteria === 'seventhCriteriaEnvironment'">
 					<h1>40dB above hearing threshold (based on German "Gutachten über die Mindesanforderungen an die Haltung von Säugetieren, BMEL 2014")</h1>
 					<h3>Score 1</h3>
 					no noise above 40 dB above the hearing threshold for more than 1 minute/day
@@ -213,98 +213,110 @@
 		</ion-modal>
 		<!--End of Scoring Description-->
 		<!-- Start of Checkboxes-->
-		<ion-card v-if=" criteria === 'firstCriteriaHousing'">
-			<ion-card-title>{{$t('firstSubCriteriaHousing')}}</ion-card-title>
+		<ion-card v-if=" criteria === 'firstCriteriaEnvironment'">
+			<ion-card-title>{{$t('firstSubCriteriaEnvironment')}}</ion-card-title>
 			<ion-list >
 					<ion-item>
-						<ion-checkbox v-model="CheckboxArray[0][0]" @click="handleClick(0,0)">Score 1</ion-checkbox>
+						<ion-checkbox v-model="CheckboxArray[0][0]" @click="handleClick(0,0)">Score 0</ion-checkbox>
 					</ion-item>
 					<ion-item>
-						<ion-checkbox v-model="CheckboxArray[0][2]" @click="handleClick(0,2)">Score 3</ion-checkbox>
+						<ion-checkbox v-model="CheckboxArray[0][2]" @click="handleClick(0,2)">Score 2</ion-checkbox>
 					</ion-item>					
 					<CheckComments @update-comment="updateEnclosureSafetyComments" />
 			</ion-list>
 		</ion-card>
-		<ion-card v-if=" criteria === 'firstCriteriaHousing'">
-			<ion-card-title>{{$t('secondSubCriteriaHousing')}}</ion-card-title>
+		<ion-card v-if=" criteria === 'firstCriteriaEnvironment'">
+			<ion-card-title>{{$t('secondSubCriteriaEnvironment')}}</ion-card-title>
 			<ion-list >
 					<ion-item>
-						<ion-checkbox v-model="CheckboxArray[1][0]" @click="handleClick(1,0)">Score 1</ion-checkbox>
+						<ion-checkbox v-model="CheckboxArray[1][0]" @click="handleClick(1,0)">Score 0</ion-checkbox>
 					</ion-item>
 					<ion-item>
-						<ion-checkbox v-model="CheckboxArray[1][2]" @click="handleClick(1,2)">Score 3</ion-checkbox>
+						<ion-checkbox v-model="CheckboxArray[1][2]" @click="handleClick(1,2)">Score 2</ion-checkbox>
 					</ion-item>
 					<CheckComments @update-comment="updateForeignBodyComments"/>
 			</ion-list>
 		</ion-card>
-		<ion-card v-if=" criteria === 'secondCriteriaHousing'">
-			<ion-card-title>{{$t('thirdSubCriteriaHousing')}}</ion-card-title>
+		<ion-card v-if=" criteria === 'secondCriteriaEnvironment'">
+			<ion-card-title>{{$t('thirdSubCriteriaEnvironment')}}</ion-card-title>
 			<ion-list >
 				<ion-item>
-					<ion-checkbox v-model="CheckboxArray[2][0]" @click="handleClick(2,0)">Score 1</ion-checkbox>
+					<ion-checkbox v-model="CheckboxArray[2][0]" @click="handleClick(2,0)">Score 0</ion-checkbox>
 				</ion-item>
 				<ion-item>
-					<ion-checkbox v-model="CheckboxArray[2][2]" @click="handleClick(2,2)">Score 3</ion-checkbox>
+					<ion-checkbox v-model="CheckboxArray[2][2]" @click="handleClick(2,2)">Score 2</ion-checkbox>
 				</ion-item>
 				<CheckComments @update-comment="updatePoolDesignComments"/>
 			</ion-list>
 		</ion-card>
-		<ion-card v-if=" criteria === 'thirdCriteriaHousing'">
-			<ion-card-title>{{$t('fourthSubCriteriaHousing')}}</ion-card-title>
+		<ion-card v-if=" criteria === 'thirdCriteriaEnvironment'">
+			<ion-card-title>{{$t('fourthSubCriteriaEnvironment')}}</ion-card-title>
 			<ion-list>
 				<ion-item>
-					<ion-checkbox v-model="CheckboxArray[3][0]" @click="handleClick(3,0)">Score 1</ion-checkbox>
+					<ion-checkbox v-model="CheckboxArray[3][0]" @click="handleClick(3,0)">Score 0</ion-checkbox>
 				</ion-item>
 				<ion-item>
-					<ion-checkbox v-model="CheckboxArray[3][2]" @click="handleClick(3,1)">Score 3</ion-checkbox>
+					<ion-checkbox v-model="CheckboxArray[3][2]" @click="handleClick(3,2)">Score 2</ion-checkbox>
 				</ion-item>
 				<CheckComments @update-comment="updateForcedLonelinessComments"/>
 			</ion-list>
 		</ion-card>
-		<ion-card v-if=" criteria === 'fourthCriteriaHousing'">
-			<ion-card-title>{{$t('fifthSubCriteriaHousing')}}</ion-card-title>		
+		<ion-card v-if=" criteria === 'fourthCriteriaEnvironment'">
+			<ion-card-title>{{$t('fifthSubCriteriaEnvironment')}}</ion-card-title>		
 			<ion-list>
 				<ion-item>
-					<ion-checkbox v-model="CheckboxArray[4][0]" @click="handleClick(4,0)">Score 1</ion-checkbox>
+					<ion-checkbox v-model="CheckboxArray[4][0]" @click="handleClick(4,0)">Score 0</ion-checkbox>
 				</ion-item>
 				<ion-item>
-					<ion-checkbox v-model="CheckboxArray[4][2]" @click="handleClick(4,2)">Score 3</ion-checkbox>
+					<ion-checkbox v-model="CheckboxArray[4][2]" @click="handleClick(4,2)">Score 2</ion-checkbox>
 				</ion-item>
 				<CheckComments @update-comment="updateWaterQualityComments"/>
 			</ion-list>
 		</ion-card>
-		<ion-card v-if=" criteria === 'fifthCriteriaHousing'">
-			<ion-card-title>{{$t('sixthSubCriteriaHousing')}}</ion-card-title>		
+		<ion-card v-if=" criteria === 'fifthCriteriaEnvironment'">
+			<ion-card-title>{{$t('sixthSubCriteriaEnvironment')}}</ion-card-title>		
 			<ion-list >
 				<ion-item>
-					<ion-checkbox v-model="CheckboxArray[5][0]" @click="handleClick(5,0)">Score 1</ion-checkbox>
+					<ion-checkbox v-model="CheckboxArray[5][0]" @click="handleClick(5,0)">Score 0</ion-checkbox>
 				</ion-item>
 				<ion-item>
-					<ion-checkbox v-model="CheckboxArray[5][2]" @click="handleClick(5,1)">Score 3</ion-checkbox>
+					<ion-checkbox v-model="CheckboxArray[5][2]" @click="handleClick(5,2)">Score 2</ion-checkbox>
 				</ion-item>
 				<CheckComments @update-comment="updateWaterTemperatureComments"/>
 			</ion-list>
 		</ion-card>
-		<ion-card v-if=" criteria === 'sixthCriteriaHousing'">
-			<ion-card-title>{{$t('seventhSubCriteriaHousing')}}</ion-card-title>	
+		<ion-card v-if=" criteria === 'sixthCriteriaEnvironment'">
+			<ion-card-title>{{$t('seventhSubCriteriaEnvironment')}}</ion-card-title>	
 			<ion-list>
 				<ion-item>
-					<ion-checkbox v-model="CheckboxArray[6][0]" @click="handleClick(6,0)">Score 1</ion-checkbox>
+					<ion-checkbox v-model="CheckboxArray[6][0]" @click="handleClick(6,0)">Score 0</ion-checkbox>
 				</ion-item>
 				<ion-item>
-					<ion-checkbox v-model="CheckboxArray[6][2]" @click="handleClick(6,2)">Score 3</ion-checkbox>
+					<ion-checkbox v-model="CheckboxArray[6][2]" @click="handleClick(6,2)">Score 2</ion-checkbox>
 				</ion-item>
 				<CheckComments @update-comment="updateSufficientShadeComments"/>
 			</ion-list>
 		</ion-card>
-		<ion-card v-if=" criteria === 'seventhCriteriaHousing'">
-			<ion-card-title>{{$t('eighthSubCriteriaHousing')}}</ion-card-title>	
+		<ion-card v-if=" criteria === 'sixthCriteriaEnvironment'">
+			<ion-card-title>{{$t('eighthSubCriteriaEnvironment')}}</ion-card-title>	
 			<ion-list>
 				<ion-item>
-					<ion-checkbox v-model="CheckboxArray[7][0]" @click="handleClick(7,0)">Score 1</ion-checkbox>
+					<ion-checkbox v-model="CheckboxArray[7][0]" @click="handleClick(7,0)">Score 0</ion-checkbox>
 				</ion-item>
 				<ion-item>
-					<ion-checkbox v-model="CheckboxArray[7][2]" @click="handleClick(7,2)">Score 3</ion-checkbox>
+					<ion-checkbox v-model="CheckboxArray[7][2]" @click="handleClick(7,2)">Score 2</ion-checkbox>
+				</ion-item>
+				<CheckComments @update-comment="updateReflectingColoursComments"/>
+			</ion-list>
+		</ion-card>
+		<ion-card v-if=" criteria === 'seventhCriteriaEnvironment'">
+			<ion-card-title>{{$t('ninthSubCriteriaEnvironment')}}</ion-card-title>	
+			<ion-list>
+				<ion-item>
+					<ion-checkbox v-model="CheckboxArray[8][0]" @click="handleClick(8,0)">Score 0</ion-checkbox>
+				</ion-item>
+				<ion-item>
+					<ion-checkbox v-model="CheckboxArray[8][2]" @click="handleClick(8,2)">Score 2</ion-checkbox>
 				</ion-item>
 				<CheckComments @update-comment="updateAcousticComfortComments"/>
 			</ion-list>
@@ -338,6 +350,7 @@ import { useEvaluationHousingStore }from '@/store/evaluationHousingStore';
 import { baseUrl } from '@/utils/baseUrl';
 import { toast } from 'vue3-toastify';
 import 'vue3-toastify/dist/index.css';
+import { journal } from 'ionicons/icons';
 
 const dolphinsStore = useDolphinsStore();
 const evaluationHousingStore = useEvaluationHousingStore();
@@ -374,7 +387,7 @@ export default {
 			secondplaceholder: this.$t('selectCriteria'),
 			isOpenManual: false,
 			isOpenScoring: false,
-			CheckboxArray: Array.from({ length: 8 }, () => Array(3).fill(false)),
+			CheckboxArray: Array.from({ length: 9 }, () => Array(3).fill(false)),
 			urlPost: baseUrl + '/api/good_housing',
 			enclosure_barrier_safety_comments: '',
 			foreign_body_ingestion_comments: '',
@@ -383,6 +396,7 @@ export default {
 			water_quality_comments: '',
 			water_temperature_comments: '',
 			sufficient_shade_comments: '',
+			reflecting_colours_comments: '',
 			acoustic_comfort_comments: '',
 		};
 	},
@@ -426,21 +440,23 @@ export default {
 					for(let i = 0; i < this.CheckboxArray.length; i++){
 						for(let j = 0; j < this.CheckboxArray[i].length; j++){
 							if (this.CheckboxArray[i][j] === true && i === 0){
-								evaluationHousingStore.requestBodiesHousing[k]["enclosure_barrier_safety"] = j + 1;
+								evaluationHousingStore.requestBodiesHousing[k]["enclosure_barrier_safety"] = j;
 							}else if (this.CheckboxArray[i][j] === true && i === 1){
-								evaluationHousingStore.requestBodiesHousing[k]["foreign_body_ingestion"] = j + 1;
+								evaluationHousingStore.requestBodiesHousing[k]["foreign_body_ingestion"] = j;
 							}else if (this.CheckboxArray[i][j] === true && i === 2){
-								evaluationHousingStore.requestBodiesHousing[k]["pool_design"] = j + 1;
+								evaluationHousingStore.requestBodiesHousing[k]["pool_design"] = j;
 							}else if (this.CheckboxArray[i][j] === true && i === 3){
-								evaluationHousingStore.requestBodiesHousing[k]["forced_loneliness"] = j + 1;
+								evaluationHousingStore.requestBodiesHousing[k]["forced_loneliness"] = j;
 							}else if (this.CheckboxArray[i][j] === true && i === 4){
-								evaluationHousingStore.requestBodiesHousing[k]["water_quality"] = j + 1;
+								evaluationHousingStore.requestBodiesHousing[k]["water_quality"] = j;
 							}else if (this.CheckboxArray[i][j] === true && i === 5){
-								evaluationHousingStore.requestBodiesHousing[k]["water_temperature"] = j + 1;
+								evaluationHousingStore.requestBodiesHousing[k]["water_temperature"] = j;
 							}else if (this.CheckboxArray[i][j] === true && i === 6){
-								evaluationHousingStore.requestBodiesHousing[k]["sufficient_shade"] = j + 1;
+								evaluationHousingStore.requestBodiesHousing[k]["sufficient_shade"] = j;
 							}else if (this.CheckboxArray[i][j] === true && i === 7){
-								evaluationHousingStore.requestBodiesHousing[k]["acoustic_comfort"] = j + 1;
+								evaluationHousingStore.requestBodiesHousing[k]["reflecting_colours"] = j;
+							}else if (this.CheckboxArray[i][j] === true && i === 8){
+								evaluationHousingStore.requestBodiesHousing[k]["acoustic_comfort"] = j;
 							}
 						}
 					}
@@ -451,6 +467,7 @@ export default {
 					evaluationHousingStore.requestBodiesHousing[k]["water_quality_comments"] = this.water_quality_comments;
 					evaluationHousingStore.requestBodiesHousing[k]["water_temperature_comments"] = this.water_temperature_comments;
 					evaluationHousingStore.requestBodiesHousing[k]["sufficient_shade_comments"] = this.sufficient_shade_comments;
+					evaluationHousingStore.requestBodiesHousing[k]["reflecting_colours_comments"] = this.reflecting_colours_comments;
 					evaluationHousingStore.requestBodiesHousing[k]["acoustic_comfort_comments"] = this.acoustic_comfort_comments;
 					
 					if(localStorage.getItem('created_at') !== "") {
@@ -458,7 +475,7 @@ export default {
 					}
 				}
 			}
-			for(let i = 0; i <= 4; i++){
+			for(let i = 0; i <= 8; i++){
 				for(let j = 0; j < 3; j++){
 					if (this.CheckboxArray[i][j] === true){
 						this.CheckboxArray[i][j] = false;
@@ -489,6 +506,9 @@ export default {
 		},
 		updateSufficientShadeComments(comment: string) {
 			this.sufficient_shade_comments = comment;
+		},
+		updateReflectingColoursComments(comment: string) {
+			this.reflecting_colours_comments = comment;
 		},
 		updateAcousticComfortComments(comment: string) {
 			this.acoustic_comfort_comments = comment;

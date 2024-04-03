@@ -17,6 +17,7 @@ export const useEvaluationHousingStore = defineStore('evaluationHousingStore', {
 				requestBodiesHousing[i]['water_quality'] = null;
 				requestBodiesHousing[i]['water_temperature'] = null;
 				requestBodiesHousing[i]['sufficient_shade'] = null;
+				requestBodiesHousing[i]['reflecting_colours'] = null;
 				requestBodiesHousing[i]['acoustic_comfort'] = null;
 				requestBodiesHousing[i]['enclosure_barrier_safety_comments'] = '';
 				requestBodiesHousing[i]['foreign_body_ingestion_comments'] = '';
@@ -25,6 +26,7 @@ export const useEvaluationHousingStore = defineStore('evaluationHousingStore', {
 				requestBodiesHousing[i]['water_quality_comments'] = '';
 				requestBodiesHousing[i]['water_temperature_comments'] = '';
 				requestBodiesHousing[i]['sufficient_shade_comments'] = '';
+				requestBodiesHousing[i]['reflecting_colours_comments'] = '';
 				requestBodiesHousing[i]['acoustic_comfort_comments'] = '';
 				requestBodiesHousing[i]['created_at'] = '';
 			}

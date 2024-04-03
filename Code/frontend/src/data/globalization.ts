@@ -221,7 +221,6 @@ export const globalizationList = {
 		twelvthSubCriteriaHealth: 'Direct physical exam',
 		thirteenthSubCriteriaHealth: 'Records (completed blood work)',
 
-		
 		fulfilled: 'Fulfilled',
 		notFulfilled: 'Not fulfilled',
 		noStatement: 'No statement possible',

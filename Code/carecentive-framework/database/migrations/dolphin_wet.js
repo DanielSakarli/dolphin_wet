@@ -132,21 +132,23 @@ exports.up = function (knex) {
 				.onUpdate('CASCADE');
 			table.string('dolphin_name');
 
-			table.tinyint('enclosure_barrier_safety').unsigned(); //1, 3
+			table.tinyint('enclosure_barrier_safety').unsigned(); //0, 2
 			table.string('enclosure_barrier_safety_comments');
-			table.tinyint('foreign_body_ingestion').unsigned(); //1, 3
+			table.tinyint('foreign_body_ingestion').unsigned(); //0, 2
 			table.string('foreign_body_ingestion_comments');
-			table.tinyint('pool_design').unsigned(); //1, 3
+			table.tinyint('pool_design').unsigned();
 			table.string('pool_design_comments');
-			table.tinyint('forced_loneliness').unsigned(); //1, 3
+			table.tinyint('forced_loneliness').unsigned();
 			table.string('forced_loneliness_comments');
-			table.tinyint('water_quality').unsigned(); //1, 3
+			table.tinyint('water_quality').unsigned();
 			table.string('water_quality_comments');
-			table.tinyint('water_temperature').unsigned(); //1, 3
+			table.tinyint('water_temperature').unsigned();
 			table.string('water_temperature_comments');
-			table.tinyint('sufficient_shade').unsigned(); //1, 3
+			table.tinyint('sufficient_shade').unsigned();
 			table.string('sufficient_shade_comments');
-			table.tinyint('acoustic_comfort').unsigned(); //1, 3
+			table.tinyint('reflecting_colours').unsigned();
+			table.string('reflecting_colours_comments');
+			table.tinyint('acoustic_comfort').unsigned();
 			table.string('acoustic_comfort_comments');
 
 			// Comments columns

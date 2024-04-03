@@ -370,6 +370,7 @@ const goodHousingPostValidateRequestBody = [
 			'water_quality',
 			'water_temperature',
 			'sufficient_shade',
+			'reflecting_colours',
 			'acoustic_comfort',
 			'enclosure_barrier_safety_comments',
 			'foreign_body_ingestion_comments',
@@ -378,6 +379,7 @@ const goodHousingPostValidateRequestBody = [
 			'water_quality_comments',
 			'water_temperature_comments',
 			'sufficient_shade_comments',
+			'reflecting_colours_comments',
 			'acoustic_comfort_comments',
 			'created_at'
 		];
@@ -399,7 +401,7 @@ const goodHousingPostValidateRequestBody = [
 		.withMessage('Invalid dolphin name'),
 	body('enclosure_barrier_safety')
 		.optional({ values: 'null' })
-		.isInt({ min: 1, max: 3 })
+		.isInt({ min: 0, max: 2 })
 		.toInt(),
 	body('enclosure_barrier_safety_comments')
 		.optional({ values: 'null' })
@@ -407,7 +409,7 @@ const goodHousingPostValidateRequestBody = [
 		.withMessage('Invalid comments for enclosure barrier safety'),
 	body('foreign_body_ingestion')
 		.optional({ values: 'null' })
-		.isInt({ min: 1, max: 3 })
+		.isInt({ min: 0, max: 2 })
 		.toInt(),
 	body('foreign_body_ingestion_comments')
 		.optional({ values: 'null' })
@@ -415,7 +417,7 @@ const goodHousingPostValidateRequestBody = [
 		.withMessage('Invalid comments for foreign body ingestion'),
 	body('pool_design')
 		.optional({ values: 'null' })
-		.isInt({ min: 1, max: 3 })
+		.isInt({ min: 0, max: 2 })
 		.toInt(),
 	body('pool_design_comments')
 		.optional({ values: 'null' })
@@ -423,7 +425,7 @@ const goodHousingPostValidateRequestBody = [
 		.withMessage('Invalid comments for pool design'),
 	body('forced_loneliness')
 		.optional({ values: 'null' })
-		.isInt({ min: 1, max: 3 })
+		.isInt({ min: 0, max: 2 })
 		.toInt(),
 	body('forced_loneliness_comments')
 		.optional({ values: 'null' })
@@ -431,7 +433,7 @@ const goodHousingPostValidateRequestBody = [
 		.withMessage('Invalid comments for forced loneliness'),
 	body('water_quality')
 		.optional({ values: 'null' })
-		.isInt({ min: 1, max: 3 })
+		.isInt({ min: 0, max: 2 })
 		.toInt(),
 	body('water_quality_comments')
 		.optional({ values: 'null' })
@@ -439,7 +441,7 @@ const goodHousingPostValidateRequestBody = [
 		.withMessage('Invalid comments for water quality'),
 	body('water_temperature')
 		.optional({ values: 'null' })
-		.isInt({ min: 1, max: 3 })
+		.isInt({ min: 0, max: 2 })
 		.toInt(),
 	body('water_temperature_comments')
 		.optional({ values: 'null' })
@@ -447,12 +449,21 @@ const goodHousingPostValidateRequestBody = [
 		.withMessage('Invalid comments for water temperature'),
 	body('sufficient_shade')
 		.optional({ values: 'null' })
-		.isInt({ min: 1, max: 3 })
+		.isInt({ min: 0, max: 2 })
 		.toInt(),
 	body('sufficient_shade_comments')
 		.optional({ values: 'null' })
 		.isString()
 		.withMessage('Invalid comments for sufficient shade'),
+	body('reflecting_colours')
+		.optional({ values: 'null' })
+		.isInt({ min: 0, max: 2 })
+		.toInt(),
+	body('reflecting_colours_comments')
+		.optional({ values: 'null' })
+		.isString()
+		.withMessage('Invalid comments for reflecting colours'),
+	// Timestamps
 	body('created_at')
 		.optional({ values: 'null' })
 		.isString()
