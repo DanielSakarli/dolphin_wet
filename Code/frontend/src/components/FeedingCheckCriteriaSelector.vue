@@ -70,16 +70,33 @@
 			</ion-header>
 			<ion-content class="ion-padding">
 				<p v-if=" criteria === 'firstCriteriaNutrition'">
-					{{ $t('userManualHungerThirst') }}
+					<h3>{{ $t('firstSubCriteriaNutrition') }}</h3>
+						<li>Score 0: {{ $t('score0Nutrition1') }}</li>
+						<li>Score 1: {{ $t('score1Nutrition1') }}</li>
+						<li>Score 2: {{ $t('score2Nutrition1') }}</li>
+					<h3>{{ $t('secondSubCriteriaNutrition') }}</h3>
+						<li>Score 0: {{ $t('score0Nutrition2') }}</li>
+						<li>Score 2: {{ $t('score2Nutrition2') }}</li>
 				</p>
 				<p v-if=" criteria === 'secondCriteriaNutrition'">
-					{{ $t('userManualAdequateDiet') }}
+					<h3>{{ $t('thirdSubCriteriaNutrition') }}</h3>
+						<li>Score 0: {{ $t('score0Nutrition3') }}</li>
+						<li>Score 2: {{ $t('score2Nutrition3') }}</li>
+					<h3>{{ $t('fourthSubCriteriaNutrition') }}</h3>
+						<li>Score 0: {{ $t('score0Nutrition4') }}</li>
+						<li>Score 1: {{ $t('score1Nutrition4') }}</li>
+						<li>Score 2: {{ $t('score2Nutrition4') }}</li>
 				</p>
 				<p v-if=" criteria === 'thirdCriteriaNutrition'">
-					{{ $t('userManualFoodQuality') }}
+					<h3>{{ $t('fifthSubCriteriaNutrition') }}</h3>
+						<li>Score 0: {{ $t('score0Nutrition5') }}</li>
+						<li>Score 2: {{ $t('score2Nutrition5') }}</li>
 				</p>
 				<p v-if=" criteria === 'fourthCriteriaNutrition'">
-					{{ $t('userManualFoodVariety') }}
+					<h3>{{ $t('sixthSubCriteriaNutrition') }}</h3>
+						<li>Score 0: {{ $t('score0Nutrition6') }}</li>
+						<li>Score 1: {{ $t('score1Nutrition6') }}</li>
+						<li>Score 2: {{ $t('score2Nutrition6') }}</li>
 				</p>
 			</ion-content>
 		</ion-modal>

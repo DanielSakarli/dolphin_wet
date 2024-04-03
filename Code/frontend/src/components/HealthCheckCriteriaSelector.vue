@@ -44,56 +44,6 @@
 					}}</ion-select-option>
 				</ion-select>
 			</ion-item>
-			<!--<ion-item>
-				<ion-select
-					:value="SubCriteria"
-					@IonChange ="SubCriteria=$event.target.value"
-					:label="thirdlabel"
-					:placeholder="thirdplaceholder"
-					okText="OK"
-					:cancelText="firstcancelText"
-				>
-					<ion-select-option v-if=" criteria === 'firstCriteriaHealth'" value="firstSubCriteriaHealth">{{
-						$t('firstSubCriteriaHealth')
-					}}</ion-select-option>
-					<ion-select-option v-if=" criteria === 'firstCriteriaHealth'" value="secondSubCriteriaHealth">{{
-						$t('secondSubCriteriaHealth')
-					}}</ion-select-option>
-					<ion-select-option v-if=" criteria === 'secondCriteriaHealth'" value="thirdSubCriteriaHealth">{{
-						$t('thirdSubCriteriaHealth')
-					}}</ion-select-option>
-					<ion-select-option v-if=" criteria === 'secondCriteriaHealth'" value="fourthSubCriteriaHealth">{{
-						$t('fourthSubCriteriaHealth')
-					}}</ion-select-option>
-					<ion-select-option v-if=" criteria === 'secondCriteriaHealth'" value="fifthSubCriteriaHealth">{{
-						$t('fifthSubCriteriaHealth')
-					}}</ion-select-option>
-					<ion-select-option v-if=" criteria === 'thirdCriteriaHealth'" value="sixthSubCriteriaHealth">{{
-						$t('sixthSubCriteriaHealth')
-					}}</ion-select-option>
-					<ion-select-option v-if=" criteria === 'thirdCriteriaHealth'" value="seventhSubCriteriaHealth">{{
-						$t('seventhSubCriteriaHealth')
-					}}</ion-select-option>
-					<ion-select-option v-if=" criteria === 'fourthCriteriaHealth'" value="eigthSubCriteriaHealth">{{
-						$t('eigthSubCriteriaHealth')
-					}}</ion-select-option>
-					<ion-select-option v-if=" criteria === 'fifthCriteriaHealth'" value="ninthSubCriteriaHealth">{{
-						$t('ninthSubCriteriaHealth')
-					}}</ion-select-option>
-					<ion-select-option v-if=" criteria === 'fifthCriteriaHealth'" value="tenthSubCriteriaHealth">{{
-						$t('tenthSubCriteriaHealth')
-					}}</ion-select-option>
-					<ion-select-option v-if=" criteria === 'fifthCriteriaHealth'" value="eleventhSubCriteriaHealth">{{
-						$t('eleventhSubCriteriaHealth')
-					}}</ion-select-option>
-					<ion-select-option v-if=" criteria === 'sixthCriteriaHealth'" value="twelfthSubCriteriaHealth">{{
-						$t('twelfthSubCriteriaHealth')
-					}}</ion-select-option>
-					<ion-select-option v-if=" criteria === 'sixthCriteriaHealth'" value="thirteenthSubCriteriaHealth">{{
-						$t('thirteenthSubCriteriaHealth')
-					}}</ion-select-option>
-				</ion-select>
-			</ion-item>-->
 		</ion-list>
 		<!-- End of Criteria Selector -->
 
@@ -128,36 +78,57 @@
 			</ion-header>
 			<ion-content class="ion-padding">
 				<p v-if=" criteria === 'firstCriteriaHealth'">
-					<h3>{{ $t('correctLocomotion1') }}</h3>
-					<ol>
-						<li>{{ $t('correctLocomotion2') }}</li>
-						<li>{{ $t('correctLocomotion3') }}</li>
-					</ol>
-					<h3>{{ $t('correctLocomotion4') }}</h3>
-					{{ $t('correctLocomotion5') }}
+					<h3>{{ $t('firstSubCriteriaHealth') }}</h3>
+						<li>Score 0: {{ $t('score0Health1') }}</li>
+						<li>Score 2: {{ $t('score2Health1') }}</li>
+					<h3>{{ $t('secondSubCriteriaHealth') }}</h3>
+						<li>Score 0: {{ $t('score0Health2') }}</li>
+						<li>Score 2: {{ $t('score2Health2') }}</li>
 				</p>
 				<p v-if=" criteria === 'secondCriteriaHealth'">
-					<h3>{{ $t('AbsenceOfEyeLesions1') }}</h3>
-					{{ $t('AbsenceOfEyeLesions2') }}
-					<h3>{{ $t('AbsenceOfEyeLesions3') }}</h3>
-
-					<h3>{{ $t('AbsenceOfEyeLesions4') }}</h3>
-					{{ $t('AbsenceOfEyeLesions5') }}
+					<h3>{{ $t('thirdSubCriteriaHealth') }}</h3>
+						<li>Score 0: {{ $t('score0Health3') }}</li>
+						<li>Score 2: {{ $t('score2Health3') }}</li>
+					<h3>{{ $t('fourthSubCriteriaHealth') }}</h3>
+						<li>Score 0: {{ $t('score0Health4') }}</li>
+						<li>Score 2: {{ $t('score2Health4') }}</li>
+					<h3>{{ $t('fifthSubCriteriaHealth') }}</h3>
+						<li>Score 0: {{ $t('score0Health5') }}</li>
+						<li>Score 2: {{ $t('score2Health5') }}</li>
 				</p>
 				<p v-if=" criteria === 'thirdCriteriaHealth'">
-					<h3>{{$t('GoodMouthCondition1')}}</h3>
-					{{$t('GoodMouthCondition2')}}
-					<h3>{{ $t('pleaseCheck') }}</h3>
-					<ul>
-						<li>{{$t('GoodMouthCondition3')}}</li>
-						<li>{{ $t('GoodMouthCondition4') }}</li>
-						<li> {{ $t('GoodMouthCondition5') }}</li>
-						<li>{{ $t('GoodMouthCondition6') }} </li>
-					</ul>
-					<h3>{{ $t('GoodMouthCondition7') }}</h3>
-					{{ $t('GoodMouthCondition8') }}
+					<h3>{{ $t('sixthSubCriteriaHealth') }}</h3>
+						<li>Score 0: {{ $t('score0Health6') }}</li>
+						<li>Score 2: {{ $t('score2Health6') }}</li>
+					<h3>{{ $t('seventhSubCriteriaHealth') }}</h3>
+						<li>Score 0: {{ $t('score0Health7') }}</li>
+						<li>Score 2: {{ $t('score2Health7') }}</li>
 				</p>
 				<p v-if=" criteria === 'fourthCriteriaHealth'">
+					<h3>{{ $t('eigthSubCriteriaHealth') }}</h3>
+						<li>Score 0: {{ $t('score0Health8') }}</li>
+						<li>Score 2: {{ $t('score2Health8') }}</li>
+				</p>
+				<p v-if=" criteria === 'fifthCriteriaHealth'">
+					<h3>{{ $t('ninthSubCriteriaHealth') }}</h3>
+						<li>Score 0: {{ $t('score0Health9') }}</li>
+						<li>Score 2: {{ $t('score2Health9') }}</li>
+					<h3>{{ $t('tenthSubCriteriaHealth') }}</h3>
+						<li>Score 0: {{ $t('score0Health10') }}</li>
+						<li>Score 2: {{ $t('score2Health10') }}</li>
+					<h3>{{ $t('eleventhSubCriteriaHealth') }}</h3>
+						<li>Score 0: {{ $t('score0Health11') }}</li>
+						<li>Score 2: {{ $t('score2Health11') }}</li>
+				</p>
+				<p v-if=" criteria === 'sixthCriteriaHealth'">
+					<h3>{{ $t('twelvthSubCriteriaHealth') }}</h3>
+						<li>Score 0: {{ $t('score0Health12') }}</li>
+						<li>Score 2: {{ $t('score2Health12') }}</li>
+					<h3>{{ $t('thirteenthSubCriteriaHealth') }}</h3>
+						<li>Score 0: {{ $t('score0Health13') }}</li>
+						<li>Score 2: {{ $t('score2Health13') }}</li>
+				</p>
+				<!--<p v-if=" criteria === 'fourthCriteriaHealth'">
 					<h3>Records of previous gastric/fecal abnormalities on records</h3>
 					Verification with the team of trainers and veterinarians there have been no previous lesions/diseases/behaviours reflecting or potentially causing alteration of gastrointestinal tract or associated feeding behaviour during the previous 3 months.
 				</p>
@@ -230,7 +201,7 @@
 					All 30 parameters measured should remain in the normal range for the species (according to Appendix 1 @ Gulland, F. M., Dierauf, L. A., & Whitman, K. L. (Eds.). (2018). CRC handbook of marine mammal medicine. CRC Press. (Page 1003)) and (if available) within the individual reference values/ranges according to previous analysis (at least including one year period and ideally more) under the same lab and technique.
 					In case of a relevant deviation of one or more parameters from normal average values or ranges, the veterinarian should further on study the individual in search of a potential disease that could compromise welfare.
 					<p>*</p>
-				</p>
+				</p>-->
 			</ion-content>
 		</ion-modal>
 		<!-- End of Description of Criteria (User Manual) -->

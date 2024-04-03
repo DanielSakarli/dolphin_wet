@@ -194,14 +194,16 @@ export const globalizationList = {
 		met: 'Met',
 		notMet: 'Not Met',
 		noTendency: 'No Tendency',
-		//Criteria Health
+		////////// HEALTH /////////////
+		///////////////////////////////
+		//Criteria
 		firstCriteriaHealth: 'Correct locomotion',
 		secondCriteriaHealth: 'Eye lesions',
 		thirdCriteriaHealth: 'Mouth condition (teeth, tongue, mucosa)',
 		fourthCriteriaHealth: 'Gastrointestinal tract diseases',
 		fifthCriteriaHealth: 'Respiratory diseases',
 		sixthCriteriaHealth: 'Generic/systemic/other diseases',
-		// SubCriteria Health
+		// SubCriteria
 		firstSubCriteriaHealth:
 			'Normal floatability and displacement movement test',
 		secondSubCriteriaHealth:
@@ -220,6 +222,53 @@ export const globalizationList = {
 			'Records on previous respiratory lesions/incidents/diseases',
 		twelvthSubCriteriaHealth: 'Direct physical exam',
 		thirteenthSubCriteriaHealth: 'Records (completed blood work)',
+		// Scoring description
+		score0Health1: 'Verification of normal movements',
+		score2Health1: 'Evidence of any locomotive/floating abnormalities',
+		score0Health2:
+			'Absence of any locomotive/floating abnormalities in records',
+		score2Health2:
+			'Evidence of any locomotive/floating abnormalities in records',
+		score0Health3: 'Absence of active eye lesions',
+		score2Health3: 'Presence of active eye lesions',
+		score0Health4: 'Normal response',
+		score2Health4: 'Evidence of any abnormalities',
+		score0Health5:
+			'Absence of previous incidents in records during the last 3 months',
+		score2Health5:
+			'Evidence of previous incidents in the records during the last 3 months',
+		score0Health6:
+			'Absence of oral lesions or painful areas in the mouth (including teeth) based on direct physical exam',
+		score2Health6:
+			'Presence of oral lesions or painful areas in the mouth (including teeth) based on direct physical exam',
+		score0Health7:
+			'Absence of previous incidents in the records during the last 3 months',
+		score2Health7:
+			'Evidence of previous incidents in the records during the last 3 months',
+		score0Health8:
+			'Absence of previous incidents in the records during the last 3 months',
+		score2Health8:
+			'Evidence of previous incidents in the records during the last 3 months',
+		score0Health9:
+			'Absence of any signs or evidence of respiratory disease during direct physical exam',
+		score2Health9:
+			'Presence or signs of respiratory disease during direct physical exam',
+		score0Health10: 'Absence of abnormalities',
+		score2Health10: 'Evidence of any abnormalities',
+		score0Health11:
+			'Absence of previous incidents in the records during the last 3 months',
+		score2Health11:
+			'Evidence of previous incidents in the records during the last 3 months',
+		score0Health12:
+			'Absence of external active signs of disease on skin or other natural openings on direct physical exam including global skin condition (colour, number and severity of viral lesions, major wounds, cracking, relative desquamation, scars, thermal ischemic necrosis, etc., excluding rake marks), genital slit (exudates, mucosal colour, and mucosal lesions), ears (exudates, pain to touch, and bulging), and rostrum (wounds and callosity)',
+		score2Health12:
+			'Presence of external active signs of disease on skin or other natural openings on direct physical exam including global skin condition (colour, number and severity of viral lesions, major wounds, cracking, relative desquamation, scars, thermal ischemic necrosis, etc., excluding rake marks), genital slit (exudates, mucosal colour, and mucosal lesions), ears (exudates, pain to touch, and bulging), and rostrum (wounds and callosity)',
+		score0Health13:
+			'Absence of previous signs/diseases in the records during the last 3 months',
+		score2Health13:
+			'Evidence of previous signs/diseases in the records during the last 3 months',
+		/////// END OF HEALTH /////////
+		///////////////////////////////
 
 		fulfilled: 'Fulfilled',
 		notFulfilled: 'Not fulfilled',
@@ -234,16 +283,6 @@ export const globalizationList = {
 		userManual: 'User Manual',
 		close: 'Close',
 		pleaseCheck: 'Please Check:',
-		//Test correct locomotion
-		correctLocomotion1: 'Normal floatability and locomotion test',
-		correctLocomotion2:
-			'underwater and out of water observation for 2 min  of the animal floating inactive keeping position on the water. Special attention to normal movement of both pectoral flippers, lack of organic restrictions or deformities (e.g.: scoliosis), lack of permanent inclination leaning on one side, lack of external wounds or scars potentially compromising movement, normal buoyancy.',
-		correctLocomotion3:
-			'underwater and out of water observation for 3 min of active swimming pattern and dynamic movements (requested on command) including free jumps, fast swims, etc.. Special attention to normal and fluid tail movements, normal movement of both pectoral flippers, normal maneuvering to both sides avoiding objects, walls and pool mates, lack of organic restrictions or deformities (e.g.: scoliosis), lack of permanent inclination leaning on one side, capacity to perform basic dynamic behaviors.',
-		correctLocomotion4:
-			'Records on previous incidents/diseases altering locomotion or floatability',
-		correctLocomotion5:
-			'Verification with the team of trainers and veterinarians that there is no previous incident/disease altering locomotion or floatability during the previous 3 months.',
 		//Test Absence of eye lesions
 		AbsenceOfEyeLesions1: 'Direct veterinary inspection',
 		AbsenceOfEyeLesions2:
@@ -272,13 +311,15 @@ export const globalizationList = {
 		thirdSubcriteriaEmotionalState:
 			'Possibility of environmental control and choices',
 
+		////////// NUTRITION //////////
+		///////////////////////////////
 		//Translation Indicator Collector Nutrition
 		topicNutrition: 'Nutrition',
 		firstCriteriaNutrition: 'Absence of prolonged hunger or thirst',
 		secondCriteriaNutrition: 'Adequate diet',
 		thirdCriteriaNutrition: 'Adequate food quality',
 		fourthCriteriaNutrition: 'Adequate food variety',
-		//SubCriteria Nutrition
+		// SubCriteria Nutrition
 		firstSubCriteriaNutrition: 'Body Condition Score (BCS)',
 		secondSubCriteriaNutrition: 'Weigth oscillation throughout the year',
 		thirdSubCriteriaNutrition: 'Kilocalories',
@@ -286,6 +327,33 @@ export const globalizationList = {
 		fifthSubCriteriaNutrition:
 			'Food quality, microbiology, physicochemical analysis',
 		sixthSubCriteriaNutrition: 'Food variety throughout the year',
+		// Scoring description
+		score0Nutrition1: 'BCS of 3 = adequate',
+		score1Nutrition1: 'BCS of 2 (underweight) or 4 (overweight)',
+		score2Nutrition1: 'BCS of 1 (emaciated) or 5 (obese)',
+		score0Nutrition2:
+			'Body weight oscillation (BWOS): ≤13% throughout the year or ≤5% in a 3-month period',
+		score2Nutrition2:
+			'BWOS: >13% throughout the year or >5% in a 3-month period',
+		score0Nutrition3:
+			'Diet designed based on the EAAM Standards and Guidelines',
+		score2Nutrition3:
+			'Diet not designed based on the EAAM Standards and Guidelines',
+		score0Nutrition4: 'Within the range',
+		score1Nutrition4: '10% out of range',
+		score2Nutrition4: '>10% out of range',
+		score0Nutrition5:
+			'Fulfilled according to the EAAM Standards and Guidelines',
+		score2Nutrition5:
+			'Not fulfilled according to the EAAM Standards and Guidelines',
+		score0Nutrition6:
+			'At least five species are fed throughout the year, each individual’s diet is adapted to its nutritional needs and preferences, the amount of food fed varies between sessions, and part of the diet is given via enrichment',
+		score1Nutrition6:
+			'At least three, but no more than five, species are fed throughout the year, each individual’s diet is adapted to its nutritional needs, but the amount of food provided to the dolphins during each session is the same, and favourite species/animal preferences are neglected',
+		score2Nutrition6:
+			'Only three or less species of food are fed throughout the year, no variation throughout the year, and diet is not adapted to individual preferences/specific need',
+		////// END OF NUTRITION ///////
+		///////////////////////////////
 
 		ScoringDescription: 'Scoring Description',
 		ReferenceArea: 'Reference Area',
@@ -330,7 +398,10 @@ export const globalizationList = {
 		thirteenthSubCriteriaBehaviour: 'Displaying aggressive behavior',
 		fourteenthSubCriteriaBehaviour: 'Social isolation',
 		fifteenthSubCriteriaBehaviour: 'Avoidance of pool areas',
-		//Criteria Housing
+
+		//////// ENVIRONMENT //////////
+		///////////////////////////////
+		//Criteria
 		topicEnvironment: 'Environment',
 		firstCriteriaEnvironment: 'Safe environment',
 		secondCriteriaEnvironment:
@@ -340,7 +411,7 @@ export const globalizationList = {
 		fifthCriteriaEnvironment: 'Temperature',
 		sixthCriteriaEnvironment: 'Ambient light',
 		seventhCriteriaEnvironment: 'Ambient noise',
-		//SubCriteria Environment
+		//SubCriteria
 		firstSubCriteriaEnvironment:
 			'Enclosures and barriers safety and maintenance',
 		secondSubCriteriaEnvironment: 'No foreign body ingestion',
@@ -354,5 +425,42 @@ export const globalizationList = {
 			'Sufficient shade provided and accessible in case it is needed',
 		eigthSubCriteriaEnvironment: 'Absence of reflecting colours',
 		ninthSubCriteriaEnvironment: '40dB above hearing threshold',
+		//Scoring description
+		score0Environment1:
+			'All criteria are met according to the EAAM Standards and Guidelines (see Section 5)',
+		score2Environment1:
+			'At least one criterion is not met according to the EAAM Standards and Guidelines (see Section 5)',
+		score0Environment2: 'Absence in records',
+		score2Environment2: 'Presence in records (last 3 months)',
+		score0Environment3:
+			'All criteria are met according to the EAAM Standards and Guidelines (see Section 5)',
+		score2Environment3:
+			'At least one criterion is not met according to the EAAM Standards and Guidelines (see Section 5)',
+		score0Environment4:
+			'Dolphin was not separated or only separated during medical emergencies or for research purposes for short periods of time (<1 h/day) during the last 3 months',
+		score2Environment4:
+			'Dolphin was separated for longer periods of time (>1 h/day) during the last 3 months',
+		score0Environment5:
+			'All criteria are met according to Section 9 of the EAAM Standards and Guidelines',
+		score2Environment5:
+			'At least one criterion is not met according to Section 9 of the EAAM Standards and Guidelines',
+		score0Environment6:
+			'All criteria are met according to Section 9 of the EAAM Standards and Guidelines',
+		score2Environment6:
+			'At least one criterion is not met according Section 9 of to the EAAM Standards and Guidelines',
+		score0Environment7:
+			'All criteria are met according to Section 5 of the EAAM Standards and Guidelines',
+		score2Environment7:
+			'At least one criterion is not met according to Section 5 of the EAAM Standards and Guidelines',
+		score0Environment8:
+			'All criteria are met according to Section 5 of the EAAM Standards and Guidelines',
+		score2Environment8:
+			'At least one criterion is not met according Section 5 of to the EAAM Standards and Guidelines',
+		score0Environment9:
+			'No noise above the 40 dB hearing threshold for more than 1 min/day',
+		score2Environment9:
+			'Noise above the 40 dB hearing threshold for more than 1 min/day',
+		////// END OF ENVIRONMENT /////
+		///////////////////////////////
 	},
 };

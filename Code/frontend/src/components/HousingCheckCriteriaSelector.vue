@@ -88,35 +88,46 @@
 			<ion-content class="ion-padding">
 				<p v-if=" criteria === 'firstCriteriaEnvironment'">
 					<h3>{{ $t('firstSubCriteriaEnvironment') }}</h3>
-					Enclosures and barriers safety and maintenance according to EAAM S&Gs (see 5.)
-				</p>
-				<p v-if=" criteria === 'firstCriteriaEnvironment'">
+						<li>Score 0: {{ $t('score0Environment1') }}</li>
+						<li>Score 2: {{ $t('score2Environment1') }}</li>
 					<h3>{{ $t('secondSubCriteriaEnvironment') }}</h3>
-					Presence or absence in records
+						<li>Score 0: {{ $t('score0Environment2') }}</li>
+						<li>Score 2: {{ $t('score2Environment2') }}</li>
 				</p>
 				<p v-if=" criteria === 'secondCriteriaEnvironment'">
 					<h3>{{ $t('thirdSubCriteriaEnvironment') }}</h3>
-					Pool dimension, pool design, number of pools, available access to pools & group management according to EAAM S&Gs (see 5.)
+						<li>Score 0: {{ $t('score0Environment3') }}</li>
+						<li>Score 2: {{ $t('score2Environment3') }}</li>
 				</p>
 				<p v-if=" criteria === 'thirdCriteriaEnvironment'">
 					<h3>{{ $t('fourthSubCriteriaEnvironment') }}</h3>
-					Presence or absence of forced loneliness based on records/ trainer interviews
+						<li>Score 0: {{ $t('score0Environment4') }}</li>
+						<li>Score 2: {{ $t('score2Environment4') }}</li>
 				</p>
 				<p v-if=" criteria === 'fourthCriteriaEnvironment'">
 					<h3>{{ $t('fifthSubCriteriaEnvironment') }}</h3>
-					Water quality parameters accordig to EAAM S&Gs (see 9.)
+						<li>Score 0: {{ $t('score0Environment5') }}</li>
+						<li>Score 2: {{ $t('score2Environment5') }}</li>
 				</p>
 				<p v-if=" criteria === 'fifthCriteriaEnvironment'">
 					<h3>{{ $t('sixthSubCriteriaEnvironment') }}</h3>
-					Water temperature levels according to EAAM S&Gs (see 9.)
+						<li>Score 0: {{ $t('score0Environment6') }}</li>
+						<li>Score 2: {{ $t('score2Environment6') }}</li>
 				</p>
 				<p v-if=" criteria === 'sixthCriteriaEnvironment'">
 					<h3>{{ $t('seventhSubCriteriaEnvironment') }}</h3>
-					Presence of/Access to shaded areas
+						<li>Score 0: {{ $t('score0Environment7') }}</li>
+						<li>Score 2: {{ $t('score2Environment7') }}</li>
+				</p>
+				<p v-if=" criteria === 'sixthCriteriaEnvironment'">
+					<h3>{{ $t('eigthSubCriteriaEnvironment') }}</h3>
+						<li>Score 0: {{ $t('score0Environment8') }}</li>
+						<li>Score 2: {{ $t('score2Environment8') }}</li>
 				</p>
 				<p v-if=" criteria === 'seventhCriteriaEnvironment'">
-					<h3>{{ $t('eighthSubCriteriaEnvironment') }}</h3>
-					Adequate degree of  underwater noise (40dB above hearing threshold)
+					<h3>{{ $t('ninthSubCriteriaEnvironment') }}</h3>
+						<li>Score 0: {{ $t('score0Environment9') }}</li>
+						<li>Score 2: {{ $t('score2Environment9') }}</li>
 				</p>
 			</ion-content>
 		</ion-modal>
