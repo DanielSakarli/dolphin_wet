@@ -156,6 +156,10 @@ const goodFeedingPostValidateRequestBody = [
 		.optional({ values: 'null' })
 		.isString()
 		.withMessage('Invalid comments for fish variety'),
+	body('file_path')
+		.optional({ values: 'null' })
+		.isString()
+		.withMessage('Invalid file path'),
 	body('created_at')
 		.optional({ values: 'null' })
 		.isString()

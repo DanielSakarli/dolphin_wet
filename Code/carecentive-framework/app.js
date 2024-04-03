@@ -77,6 +77,7 @@ const good_housing = require('./routes/good_housing');
 const behaviour = require('./routes/behabvior');
 //const photoPath = require('./routes/photoPath');
 const uploadPhoto = require('./photoUpload');
+const uploadFile = require('./fileUpload');
 const csvWriter = require('./controllers/csvWriter');
 //const uploadPhotoPath = require('./photoUpload');
 
@@ -145,21 +146,23 @@ app.use('/api/good_health', good_health);
 app.use('/api/good_housing', good_housing);
 app.use('/api/behaviour', behaviour);
 app.post('/api/photo', uploadPhoto);
+app.post('/api/file', uploadFile);
 app.get('/api/export-csv', csvWriter);
-app.use('/images', express.static(path.join(__dirname,'uploads'))); //gets the images with the url http://localhost:3309/images/ + filename
-
+app.use('/images', express.static(path.join(__dirname,'uploads/images'))); //gets the images with the url http://localhost:3309/images/ + filename
+app.use('/files', express.static(path.join(__dirname,'uploads/files'))); //gets the files with the url http://localhost:3309/files/ + filename
 
 ///////////////////////////////////////////////////
 // Set up the session storage
 app.post('/api/setup_session_storage', (req, res, next) => {
 	try {
-		const { photo_type, eye_photo_path, teeth_photo_path, dolphin_name } = req.body;
-		req.session.photo_type = photo_type; // Either 'eye' or 'teeth'
+		const { photo_type, eye_photo_path, teeth_photo_path, dolphin_name, file_path } = req.body;
+		req.session.photo_type = photo_type; // Either 'eye', 'teeth' or 'marks'
 		req.session.dolphin_name = dolphin_name;
 		req.session.photo_path = {
 			eye_photo_path,
 			teeth_photo_path
 		};
+		req.session.file_path = file_path;
 		console.log('Session storage initialized')
 		res.sendStatus(201);
 	} catch(e) {

@@ -24,20 +24,38 @@ class GoodFeedingService {
 	 * @param {String} result.blood_hydration_comments
 	 * @param {String} result.fish_quality_comments
 	 * @param {String} result.fish_variety_comments
+	 * @param {String} result.file_path The path(s) of the file(s)
 	 * @param {String} result.created_at The date of test result
 	 * @returns {Object} Inserted result in database
 	 */
 	static async loadTestResult(result) {
 		try {
+			// Get the id of current dolphin by name
+			const myDolphinDao = new DolphinDAO();
+			const dolphin_name = result.dolphin_name;
+			const dolphin_data = await myDolphinDao.getDolphinByName(dolphin_name);
+			// If the dolphin is not in the database, throws error
+			// 400: bad request
+			if (!dolphin_data) {
+				throw new DolphinError(
+					`Dolphin ${result.dolphin_name} does not exist`,
+					400
+				);
+			}
+
+			const { dolphin_id } = dolphin_data;
+
 			console.log("Date sent to backend: ", result.created_at);
 			if (result.created_at !== "") {
 				const insertedResult = await GoodFeeding.query().insert({
+					dolphin_id,
 					...result,
 					created_at: new Date(result.created_at),
 				});
 				return insertedResult;
 			} else {
 				const insertedResult = await GoodFeeding.query().insert({
+				dolphin_id,
 				...result,
 				created_at: new Date().toISOString().split('.')[0],
 

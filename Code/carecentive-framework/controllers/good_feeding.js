@@ -29,7 +29,9 @@ async function setResult(req, res, next) {
 			userID = 1;
 		}
 
-		const {
+		let test_result = req.body;
+
+		/*const {
 			dolphin_name,
 			body_condition_score,
 			weight_measured,
@@ -44,22 +46,22 @@ async function setResult(req, res, next) {
 			fish_quality_comments,
 			fish_variety_comments,
 			created_at,
-		} = req.body;
+		} = req.body;*/
 
-		// If dolphin is not existed in database,
+		// If dolphin is not existing in database,
 		// 400: bad request
 		const isDolphinExisted = await DolphinService.isDolphinExisted(
-			dolphin_name
+			test_result.dolphin_name
 		);
 		if (!isDolphinExisted) {
-			res.status(400).json({ error: `Dolphin ${dolphin_name} does not exist` });
+			res.status(400).json({ error: `Dolphin ${test_result.dolphin_name} does not exist` });
 		}
 
 		// Gets dolphin_id for test result.
-		const dolphin_obj = await DolphinService.getOneDolphin(dolphin_name);
+		const dolphin_obj = await DolphinService.getOneDolphin(test_result.dolphin_name);
 		const dolphin_id = dolphin_obj.dolphin_id;
 
-		const testResult = {
+		/* const testResult = {
 			user_id: userID,
 			user_name: userName,
 			dolphin_id,
@@ -77,10 +79,32 @@ async function setResult(req, res, next) {
 			fish_quality_comments,
 			fish_variety_comments,
 			created_at,
-		};
-		const testResultAdded = await GoodFeedingService.loadTestResult(testResult);
+		};*/
 
-		res.status(201).json(testResultAdded);
+		// Get the file paths from the session storage
+		if(req.session.file_path != '') {
+			// attach userID to test result in req.body
+			test_result = { user_id: userID, user_name: userName, ...test_result };
+
+				// Check if the dolphin_name in the array is 'Dolly'
+				if (test_result.dolphin_name === req.session.dolphin_name) {
+					// Append file_path to the array
+					test_result.file_path = req.session.file_path.toString();
+				}
+							
+				const insertedResult = await GoodFeedingService.loadTestResult(test_result);
+				res.status(201).json(insertedResult);
+		}else {
+		///////////////////////////////////////////////////////////////////////////
+		// No file path to upload
+		// attach userID to test result in req.body
+			let test_result = req.body;
+			
+			test_result = { user_id: userID, user_name: userName, ...test_result };
+			console.log(test_result);
+			const insertedResult = await GoodHealthService.loadTestResult(test_result);
+			res.status(201).json(insertedResult);
+		}
 	} catch (error) {
 		next(error);
 	}
