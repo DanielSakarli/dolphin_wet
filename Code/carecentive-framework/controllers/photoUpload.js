@@ -2,6 +2,8 @@ const path = require('path');
 //const fs = require('fs');
 require('dotenv').config();
 const multer = require('multer');
+const { validationResult } = require('express-validator');
+const { isUserAuth } = require('./authSwitch');
 let photo_path;
 let photo_type;
 let currentIndex = 0;
@@ -85,9 +87,36 @@ const upload = multer({
 
 const uploadMultiple = upload.array('files');
 
+
+
+/**
+ * Controller of post request of /api/photo.
+ * Uploads the photos.
+ * @returns {Object} The inserted test result
+ */
 async function uploadPhoto(req, res, next) {
     try {
     //console.log(req.body);
+    const errors = validationResult(req);
+		if (!errors.isEmpty()) {
+			// Handle validation errors
+			return res.status(400).json({ error: errors.array() });
+		}
+
+		// After gone through the authenticateToken middleware
+		// the data of user is in the req.authData
+		let userID;
+		let userName;
+		if (isUserAuth) {
+			//const { user_id, name } = req.authData;
+			//console.log('authdata: ', req.authData);
+			//userID = user_id;
+			//userName = name;
+		} else {
+			//userID = 1;
+		}
+    
+    console.log('currentIndex: ',currentIndex);
     
     req.session.photo_type = ''; // Reset the photo_path in session storage, so no duplicate photo paths
     req.session.dolphin_name = '';
@@ -106,21 +135,21 @@ async function uploadPhoto(req, res, next) {
     uploadMultiple(req, res, function (err) {
       if (err instanceof multer.MulterError) {
         // A Multer error occurred when uploading.
-        res.sendStatus(401); 
+        res.status(401).json(); //res.sendStatus(401); 
       } else if (err) {
         // An unknown error occurred when uploading.
-        res.sendStatus(500); 
+        res.status(500).json(); //res.sendStatus(500); 
       } else {
         // Everything went fine.
 
-        res.sendStatus(201); //picture uploaded successfully
+        res.status(201).json(); //res.sendStatus(201); //picture uploaded successfully
         }
     })
     } catch (error) {
     console.error(error);
     // An unknown error occurred
-    res.sendStatus(500);
+    next(error);//res.status(500); //res.sendStatus(500);
     }
 }
 
-module.exports = uploadPhoto;
+module.exports = { uploadPhoto };

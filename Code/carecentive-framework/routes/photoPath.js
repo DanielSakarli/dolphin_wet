@@ -1,23 +1,33 @@
-/*const express = require('express');
+const express = require('express');
 const router = express.Router();
 /*const {
-	photoPostValidateRequestBody,
-} = require('../validators/photoValidator');*/
-//const { authenticateTokenWithSwitch } = require('../controllers/authSwitch');
+	goodHealthPostValidateRequestBody,
+} = require('../validators/dolphinWetValidators');*/
+const { authenticateTokenWithSwitch } = require('../controllers/authSwitch');
+const { query } = require('express-validator');
 
 /**
  * Controllers
  */
-/*const { handlePhotoPath } = require('../controllers/photoPath');
+const { uploadPhoto } = require('../controllers/photoUpload');
 
 /**
- * Loads photos
+ * Loads test result for good_health
  */
-/*router.post(
+router.post(
 	'/',
-	//authenticateTokenWithSwitch,
-	//photoPostValidateRequestBody, //Commented out to allow for testing
-	handlePhotoPath
+	authenticateTokenWithSwitch,
+	uploadPhoto
 );
 
-module.exports = router;*/
+/**
+ * Gets the test result based on given query params.
+ */
+/*router.get(
+	'/',
+	[query('name').notEmpty().isString().withMessage('Name can not be empty!')],
+	[query('numMonths').optional().isInt().withMessage('numMonths must be an integer!')],
+	getTestResult
+);*/
+
+module.exports = router;

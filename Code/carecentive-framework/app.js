@@ -9,6 +9,17 @@ var httplogger = require('morgan');
 // Middleware for cross-origin policy
 const cors = require('cors');
 
+var app = express();
+
+// Try setting up a session storage for the photo path of the picture upload
+app.use(session({
+	secret: 'secret',
+  	cookie: { maxAge: 1800000000 }, //300 minutes = 6 hours expiring of session cookie
+	saveUninitialized: true,
+	store: store,
+	resave: true
+}));
+
 setup.setup();
 const dotenv = require('dotenv');
 dotenv.config();
@@ -29,17 +40,6 @@ var adminUsersRouter = require('@carecentive/carecentive-core/routes/admin/users
 var adminMeasurementsRouter = require('@carecentive/carecentive-core/routes/admin/measurements');
 var activityRouter = require('./routes/activities');
 var exampleRouter = require('./routes/examples');
-
-var app = express();
-
-// Try setting up a session storage for the photo path of the picture upload
-app.use(session({
-	secret: 'secret',
-  	cookie: { maxAge: 1800000000 }, //300 minutes = 6 hours expiring of session cookie
-	saveUninitialized: true,
-	store: store,
-	resave: true
-}));
 
 
 
@@ -66,17 +66,17 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-
 /**
  * Dolphin Wet Routers
  */
 const dolphins = require('./routes/dolphins');
+const uploadPhoto = require('./routes/photoPath');
 const good_feeding = require('./routes/good_feeding');
 const good_health = require('./routes/good_health');
 const good_housing = require('./routes/good_housing');
 const behaviour = require('./routes/behabvior');
-//const photoPath = require('./routes/photoPath');
-const uploadPhoto = require('./photoUpload');
+
+//const uploadPhoto = require('./controllers/photoUpload');
 const uploadFile = require('./fileUpload');
 const csvWriter = require('./controllers/csvWriter');
 //const uploadPhotoPath = require('./photoUpload');
@@ -122,6 +122,33 @@ const corsOptions = {
 };
 app.use(cors(corsOptions));
 
+
+///////////////////////////////////////////////////
+// Set up the session storage
+app.post('/api/setup_session_storage', (req, res, next) => {
+	try {
+		const { photo_type, eye_photo_path, teeth_photo_path, dolphin_name, file_path } = req.body;
+		req.session.photo_type= [];// = photo_type; // Either 'eye', 'teeth' or 'marks'
+		req.session.dolphin_name = []; //dolphin_name;
+		req.session.photo_path = {
+			eye_photo_path: [],
+			teeth_photo_path: [],
+			marks_photo_path: []
+		};
+		req.session.file_path = []; //file_path; // For the nutrition section, laboratory data files
+		// Index used in photoUpload.js to upload for different dolphins in the
+		// same test upload. Reset the index after photo paths are uploaded into db
+		req.session.dolphinIndex = 0;
+		req.session.save();
+		console.log('Session storage initialized')
+		res.sendStatus(201);
+	} catch(e) {
+		console.log('Error occured while initializing session storage');
+		res.sendStatus(500);
+	}
+});
+///////////////////////////////////////////////////
+
 /**
  * Core routes
  */
@@ -142,35 +169,17 @@ app.use('/api/settings', settingsRouter);
  */
 app.use('/api/dolphins', dolphins);
 app.use('/api/good_feeding', good_feeding);
+app.use('/api/photo', uploadPhoto);
 app.use('/api/good_health', good_health);
 app.use('/api/good_housing', good_housing);
 app.use('/api/behaviour', behaviour);
-app.post('/api/photo', uploadPhoto);
+//app.post('/api/photo', uploadPhoto);
 app.post('/api/file', uploadFile);
 app.get('/api/export-csv', csvWriter);
 app.use('/images', express.static(path.join(__dirname,'uploads/images'))); //gets the images with the url http://localhost:3309/images/ + filename
 app.use('/files', express.static(path.join(__dirname,'uploads/files'))); //gets the files with the url http://localhost:3309/files/ + filename
 
-///////////////////////////////////////////////////
-// Set up the session storage
-app.post('/api/setup_session_storage', (req, res, next) => {
-	try {
-		const { photo_type, eye_photo_path, teeth_photo_path, dolphin_name, file_path } = req.body;
-		req.session.photo_type = photo_type; // Either 'eye', 'teeth' or 'marks'
-		req.session.dolphin_name = dolphin_name;
-		req.session.photo_path = {
-			eye_photo_path,
-			teeth_photo_path
-		};
-		req.session.file_path = file_path;
-		console.log('Session storage initialized')
-		res.sendStatus(201);
-	} catch(e) {
-		console.log('Error occured while initializing session storage');
-		res.sendStatus(500);
-	}
-});
-///////////////////////////////////////////////////
+
 
 /**
  * Custom routes

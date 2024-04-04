@@ -621,7 +621,7 @@ export default {
 			inspection_marks_comments: '',
 			records_external_disease_comments: '',
 			
-			formData: null,
+			formData: [],
 			setupSessionStorage: {
 				photo_type: '',
 				eye_photo_path: '',
@@ -667,19 +667,20 @@ export default {
 				dolphin_name: '',
 			};
 			console.log('Form Data accessed in HealthCheckCriteriaSelector.vue:');
-			this.formData = new FormData();
+			const newFormData = new FormData();
 			if(this.dolphinSelect != ''){
-				this.formData.append('dolphin_name', this.dolphinSelect || ''); // Append the dolphin name with a default value of an empty string
+				newFormData.append('dolphin_name', this.dolphinSelect || ''); // Append the dolphin name with a default value of an empty string
 			}
-			this.formData.append('photo_type', 'eye'); //Append the photo type
+			newFormData.append('photo_type', 'eye'); //Append the photo type
 			// Then append the rest of the fields
 			
 			console.log('Number of pictures: ' + files.length);
 
 			for (let i = 0; i < files.length; i++) {
 				console.log(files[i]);
-				this.formData.append('files', files[i]);
+				newFormData.append('files', files[i]);
 			}
+			this.formData.push(newFormData);
 			console.log(...this.formData);
 			}
 		},
@@ -929,12 +930,15 @@ async showDateInputAlert() {
 			//const confirmed = confirm(this.$t('savingDataNext'));
      		const confirmed = true;
 			if (confirmed) {
-				await this.photoUpload();
+				//await this.photoUpload();
 				await this.confirmTestDate();
-				this.storeCheckedValues();
+				await this.storeCheckedValues();
 				console.log(this.CheckboxArray);
 				for(let i = 0; i < evaluationHealthStore.requestBodiesHealth.length; i++){
-					axios
+					console.log(evaluationHealthStore.requestBodiesHealth[i]["dolphin_name"]);
+					await this.photoUpload(evaluationHealthStore.requestBodiesHealth[i]["dolphin_name"]);
+					console.log('This is sent to backend: ', evaluationHealthStore.requestBodiesHealth[i]);
+					await axios
 							.post(this.urlPost, evaluationHealthStore.requestBodiesHealth[i], { withCredentials: true })
 							.then((response) => {
 								console.log('Response:', response.data);
@@ -977,6 +981,7 @@ async showDateInputAlert() {
 				// call function submitForm which handles the photo upload
 				//submitForm();
 			}
+			this.formData = []; //Reset after upload
 		},
 		
 /*
@@ -1038,7 +1043,7 @@ async showDateInputAlert() {
 		const confirmed = true; //confirm(this.$t('savingDataNext'));
      	if (confirmed) {
 			// Upload photos if there are any in formData
-			await this.photoUpload();
+			//await this.photoUpload();
 
 			// Store the checked scoring values
 			this.storeCheckedValues();
@@ -1050,40 +1055,56 @@ async showDateInputAlert() {
 			this.$router.push(targetUrl);
 			}	
     	},
-		async photoUpload() {
+		async photoUpload(dolphin_name: string) {
 		// Check if there is a photo to upload
 		if(this.formData != null) {
-			// Setup the session storage
-			console.log('Form Data accessed in HealthCheckCriteriaSelector.vue');
-			console.log(...this.formData);
-			// Maybe put this in mounted()?
-			axios
-				.post(baseUrl + '/api/setup_session_storage', this.setupSessionStorage, { withCredentials: true })
-				.then((response) => {
-					console.log('Response setup session storage:', response.data);
-				})
-				.catch((error) => {
-					console.error('Error:', error);
-				});
-			// Send the photo to the server
-			axios
-				.post(this.urlPostPhoto, this.formData, {
-					headers: {
-						'Content-Type': 'multipart/form-data',
-					},
-					withCredentials: true,
-				})
-				.then((response) => {
-					console.log('Response:', response.data);
-				})
-				.catch((error) => {
-					console.error('Error:', error);
-				});
-		
-			//Reset the form data
-			this.formData = null; 
-			console.log('Resetted form data: '+ this.formData);
+		// Find the FormData object with the desired dolphin_name
+		console.log('Length formData array: ', this.formData.length);
+		let desiredFormData = null;
+		for (let i = 0; i < this.formData.length; i++) {
+		if (this.formData[i].get('dolphin_name') === dolphin_name) {
+			desiredFormData = this.formData[i];
+			console.log('Found the desired form data: ', ...desiredFormData);
+			//break;
 		}
+		}
+
+		//const desiredFormData = this.formData.find(formData => formData.get('dolphin_name') === dolphin_name);
+		
+		console.log('Desired form data:', desiredFormData);
+		if (desiredFormData) {
+		// Setup the session storage
+		console.log('Form Data accessed in HealthCheckCriteriaSelector.vue');
+		console.log(...desiredFormData);
+		// Maybe put this in mounted()?
+		await axios
+        .post(baseUrl + '/api/setup_session_storage', this.setupSessionStorage, { withCredentials: true })
+        .then((response) => {
+          console.log('Response setup session storage:', response.data);
+        })
+        .catch((error) => {
+          console.error('Error:', error);
+        });
+		// Send the photo to the server
+		await axios
+        .post(this.urlPostPhoto, desiredFormData, {
+          headers: {
+            'Content-Type': 'multipart/form-data',
+          },
+          withCredentials: true,
+        })
+        .then((response) => {
+          console.log('Response:', response.data);
+        })
+        .catch((error) => {
+          console.error('Error:', error);
+        });
+    
+      //Reset the form data
+      desiredFormData = null; 
+      //console.log('Resetted form data: '+ this.formData);
+    }
+  	}
 		},
 		/*
 		async takePhoto(){
