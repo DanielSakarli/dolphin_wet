@@ -106,8 +106,6 @@ async function uploadPhoto(req, res, next) {
 
       try {
         //console.log(req.body);
-        
-        
         //console.log('Photo path accessed  from session storage: ' + photo_path.eye_photo_path.toString());
     
         //console.log(photo_type); // Either 'eye' or 'teeth'

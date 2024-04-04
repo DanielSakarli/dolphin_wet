@@ -39,14 +39,14 @@ async function setResult(req, res, next) {
 		// Reset the photo_path in session storage, so no duplicate photo paths
 		//req.session.photo_path = {};
 		//console.log('App.use Photo_path in session storage: ' + req.session.photo_path);
-		console.log('Photo path in req.session in good_health.js: ' + req.session.photo_path.eye_photo_path);
+		/*console.log('Photo path in req.session in good_health.js: ' + req.session.photo_path.eye_photo_path);
 		console.log('Photo path in req.session in good_health.js: ' + req.session.photo_path.teeth_photo_path);
-		console.log('Photo path in req.session in good_health.js: ' + req.session.photo_path.marks_photo_path);
-			
-		if(req.session.photo_path) {
+		console.log('Photo path in req.session in good_health.js: ' + req.session.photo_path.marks_photo_path);*/
+		const confirm = false;
+		if(req.session.photo_path.eye_photo_path) {//req.session.photo_path
 			// attach userID to test result in req.body
 			//let fileData;
-			console.log('I´m here');
+			console.log('I am here');
 			let test_result = req.body;
 			test_result = { user_id: userID, user_name: userName, ...test_result };
 
