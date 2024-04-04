@@ -31,7 +31,7 @@ const storage = multer.diskStorage({
       const apiUrl = process.env.MYSQL_HOST + ':' + process.env.HTTP_PORT;
       if(req.session.photo_type[dolphinIndex] === 'eye'){
         console.log('I am here: ' + req.session.photo_path.eye_photo_path[dolphinIndex]);
-        if(req.session.photo_path.eye_photo_path[dolphinIndex] === ''){ //If empty, so session storage has just been initialized
+        if(!req.session.photo_path.eye_photo_path[dolphinIndex]){//req.session.photo_path.eye_photo_path[dolphinIndex] === ''){ //If empty, so session storage has just been initialized
           //First photo in the list
           req.session.photo_path.eye_photo_path[dolphinIndex] = apiUrl + '/images/' + `${uniqueSuffix}${path.extname(
             file.originalname
@@ -62,7 +62,7 @@ const storage = multer.diskStorage({
       }
       if(req.session.photo_type[dolphinIndex] === 'marks'){
         console.log('I am here: ' + req.session.photo_path.marks_photo_path[dolphinIndex]);
-        if(req.session.photo_path.marks_photo_path[dolphinIndex] === ''){ //If empty, so session storage has just been initialized
+        if(!req.session.photo_path.marks_photo_path[dolphinIndex]){//req.session.photo_path.marks_photo_path[dolphinIndex] === ''){ //If empty, so session storage has just been initialized
           //First photo in the list
           req.session.photo_path.marks_photo_path[dolphinIndex] = apiUrl + '/images/' + `${uniqueSuffix}${path.extname(
             file.originalname

@@ -45,72 +45,59 @@ async function setResult(req, res, next) {
 			
 		if(req.session.photo_path) {
 			// attach userID to test result in req.body
-			let fileData;
-			
+			//let fileData;
+			console.log('I´m here');
 			let test_result = req.body;
 			test_result = { user_id: userID, user_name: userName, ...test_result };
 
-			console.log('Photo path in req.session in good_health.js: ' + req.session.photo_path.eye_photo_path);
+			/*console.log('Photo path in req.session in good_health.js: ' + req.session.photo_path.eye_photo_path);
 			console.log('Photo path in req.session in good_health.js: ' + req.session.photo_path.teeth_photo_path);	
-			console.log('Photo path in req.session in good_health.js: ' + req.session.photo_path.marks_photo_path);
+			console.log('Photo path in req.session in good_health.js: ' + req.session.photo_path.marks_photo_path);*/
 
 			//First check if session storage exists at all	
 			if(req.session.photo_path.eye_photo_path != '')
 				{
-					console.log('Photo path in req.session in good_health.js: ' + req.session.photo_path.eye_photo_path);
-				// Iterate over the arrays in test_result
-				
-					// Check if the dolphin_name in the array is 'Dolly'
-					if (test_result.dolphin_name === req.session.dolphin_name) {
+					console.log('Eye photo path in req.session in good_health.js: ' + req.session.photo_path.eye_photo_path);
+	
+				// Check if the dolphin_name is in the array
+				let index = req.session.dolphin_name.indexOf(test_result.dolphin_name);
+				console.log('Index in good_health.js: ' + index);
+				if (index !== -1) {
+					//!== -1 means the dolphin_name is found in the array
 					// Append eye_photo_path to the array
-					test_result.eye_photo_path = req.session.photo_path.eye_photo_path.toString();
-					//fileData = fs.readFileSync(test_result.eye_photo_path);
-					//test_result.image = fileData;
-					//console.log(fileData);
+					test_result.eye_photo_path = req.session.photo_path.eye_photo_path[index].toString();
 				}
 				
 				}
 
 			if(req.session.photo_path.teeth_photo_path != '')
 				{
-					console.log('Photo path in req.session in good_health.js: ' + req.session.photo_path.teeth_photo_path);
-				// Iterate over the arrays in test_result
+					console.log('Teeth photo path in req.session in good_health.js: ' + req.session.photo_path.teeth_photo_path);
 				
-					// Check if the dolphin_name in the array is 'Dolly'
-					if (test_result.dolphin_name === req.session.dolphin_name) {
+				// Check if the dolphin_name is in the array
+				let index = req.session.dolphin_name.indexOf(test_result.dolphin_name);
+				console.log('Index in good_health.js: ' + index);
+				if (index !== -1) {
+					//!== -1 means the dolphin_name is found in the array
 					// Append teeth_photo_path to the array
-					test_result.teeth_photo_path = req.session.photo_path.teeth_photo_path.toString();
-					//fileData = fs.readFileSync(test_result.teeth_photo_path);
-					//test_result.image = fileData;
-					console.log(fileData);
+					test_result.teeth_photo_path = req.session.photo_path.teeth_photo_path[index].toString();
+				}
 				}
 				
-				}
+				
 			if(req.session.photo_path.marks_photo_path != '')
 				{
-					console.log('Photo path in req.session in good_health.js: ' + req.session.photo_path.marks_photo_path);
-				// Iterate over the arrays in test_result
+					console.log('Marks photo path in req.session in good_health.js: ' + req.session.photo_path.marks_photo_path);
 				
-					// Check if the dolphin_name in the array is 'Dolly'
-					if (test_result.dolphin_name === req.session.dolphin_name) {
+				// Check if the dolphin_name is in the array
+				let index = req.session.dolphin_name.indexOf(test_result.dolphin_name);
+				console.log('Index in good_health.js: ' + index);
+				if (index !== -1) {
+					//!== -1 means the dolphin_name is found in the array
 					// Append marks_photo_path to the array
-					test_result.marks_photo_path = req.session.photo_path.marks_photo_path.toString();
+					test_result.marks_photo_path = req.session.photo_path.marks_photo_path[index].toString();
 				}
-				
 				}
-		///////////////////////////////////////////
-        // TEST
-        // Read the uploaded file as a binary buffer
-        
-		//const filePath = path.join(__dirname, 'uploads', req.file.filename);
-        //const fileData = fs.readFileSync(filePath);
-		
-        // Insert the binary data into your database
-        // Replace this with your actual database insertion code
-		//test_result.image = fileData;
-
-
-        ///////////////////////////////////////////
 			
 				const insertedResult = await GoodHealthService.loadTestResult(test_result);
 				res.status(201).json(insertedResult);
@@ -123,7 +110,6 @@ async function setResult(req, res, next) {
 			test_result = { user_id: userID, user_name: userName, ...test_result };
 			console.log(test_result);
 			const insertedResult = await GoodHealthService.loadTestResult(test_result);
-			//next();
 			res.status(201).json(insertedResult);
 		}
 
