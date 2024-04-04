@@ -156,13 +156,17 @@ app.use('/files', express.static(path.join(__dirname,'uploads/files'))); //gets 
 app.post('/api/setup_session_storage', (req, res, next) => {
 	try {
 		const { photo_type, eye_photo_path, teeth_photo_path, dolphin_name, file_path } = req.body;
-		req.session.photo_type = photo_type; // Either 'eye', 'teeth' or 'marks'
-		req.session.dolphin_name = dolphin_name;
+		req.session.photo_type= [];// = photo_type; // Either 'eye', 'teeth' or 'marks'
+		req.session.dolphin_name = []; //dolphin_name;
 		req.session.photo_path = {
-			eye_photo_path,
-			teeth_photo_path
+			eye_photo_path: [],
+			teeth_photo_path: [],
+			marks_photo_path: []
 		};
-		req.session.file_path = file_path;
+		req.session.file_path = []; //file_path; // For the nutrition section, laboratory data files
+		// Index used in photoUpload.js to upload for different dolphins in the
+		// same test upload. Reset the index after photo paths are uploaded into db
+		req.session.dolphinIndex = 0;
 		console.log('Session storage initialized')
 		res.sendStatus(201);
 	} catch(e) {
