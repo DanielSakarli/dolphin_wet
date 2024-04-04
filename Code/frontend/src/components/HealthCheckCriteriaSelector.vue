@@ -696,20 +696,20 @@ export default {
 				dolphin_name: '',
 			};
 			console.log('Form Data accessed in HealthCheckCriteriaSelector.vue:');
-			this.formData = new FormData();
+			const newFormData = new FormData();
 			if(this.dolphinSelect != ''){
-				this.formData.append('dolphin_name', this.dolphinSelect || ''); // Append the dolphin name with a default value of an empty string
+				newFormData.append('dolphin_name', this.dolphinSelect || ''); // Append the dolphin name with a default value of an empty string
 			}
-			this.formData.append('photo_type', 'teeth'); //Append the photo type
+			newFormData.append('photo_type', 'teeth'); //Append the photo type
 			// Then append the rest of the fields
 			
 			console.log('Number of pictures: ' + files.length);
 
 			for (let i = 0; i < files.length; i++) {
 				console.log(files[i]);
-				this.formData.append('files', files[i]);
+				newFormData.append('files', files[i]);
 			}
-			console.log(...this.formData);
+			this.formData.push(newFormData);
 			}
 		},
 		handleFormSubmittedMarksPhoto(files: File[]) {
@@ -724,20 +724,20 @@ export default {
 				dolphin_name: '',
 			};
 			console.log('Form Data accessed in HealthCheckCriteriaSelector.vue:');
-			this.formData = new FormData();
+			const newFormData = new FormData();
 			if(this.dolphinSelect != ''){
-				this.formData.append('dolphin_name', this.dolphinSelect || ''); // Append the dolphin name with a default value of an empty string
+				newFormData.append('dolphin_name', this.dolphinSelect || ''); // Append the dolphin name with a default value of an empty string
 			}
-			this.formData.append('photo_type', 'marks'); //Append the photo type
+			newFormData.append('photo_type', 'marks'); //Append the photo type
 			// Then append the rest of the fields
 			
 			console.log('Number of pictures: ' + files.length);
 
 			for (let i = 0; i < files.length; i++) {
 				console.log(files[i]);
-				this.formData.append('files', files[i]);
+				newFormData.append('files', files[i]);
 			}
-			console.log(...this.formData);
+			this.formData.push(newFormData);
 			}
 		},
 		// Method to collect the checked checkboxes and give request Body the scores
