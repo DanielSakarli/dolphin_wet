@@ -933,6 +933,15 @@ async showDateInputAlert() {
 				//await this.photoUpload();
 				await this.confirmTestDate();
 				await this.storeCheckedValues();
+				// Setting up session storage
+				await axios
+				.post(baseUrl + '/api/setup_session_storage', this.setupSessionStorage, { withCredentials: true })
+				.then((response) => {
+				console.log('Response setup session storage:', response.data);
+				})
+				.catch((error) => {
+				console.error('Error:', error);
+				});
 				console.log(this.CheckboxArray);
 				for(let i = 0; i < evaluationHealthStore.requestBodiesHealth.length; i++){
 					console.log(evaluationHealthStore.requestBodiesHealth[i]["dolphin_name"]);
@@ -1076,15 +1085,7 @@ async showDateInputAlert() {
 		// Setup the session storage
 		console.log('Form Data accessed in HealthCheckCriteriaSelector.vue');
 		console.log(...desiredFormData);
-		// Maybe put this in mounted()?
-		await axios
-        .post(baseUrl + '/api/setup_session_storage', this.setupSessionStorage, { withCredentials: true })
-        .then((response) => {
-          console.log('Response setup session storage:', response.data);
-        })
-        .catch((error) => {
-          console.error('Error:', error);
-        });
+		
 		// Send the photo to the server
 		await axios
         .post(this.urlPostPhoto, desiredFormData, {
