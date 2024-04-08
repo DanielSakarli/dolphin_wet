@@ -176,8 +176,8 @@ app.use('/api/behaviour', behaviour);
 //app.post('/api/photo', uploadPhoto);
 app.post('/api/file', uploadFile);
 app.get('/api/export-csv', csvWriter);
-app.use('/images', express.static(path.join(__dirname,'uploads/images'))); //gets the images with the url http://localhost:3309/images/ + filename
-app.use('/files', express.static(path.join(__dirname,'uploads/files'))); //gets the files with the url http://localhost:3309/files/ + filename
+app.use('/api/images', express.static(path.join(__dirname,'uploads/images'))); //gets the images with the url http://localhost:3309/images/ + filename
+app.use('/api/files', express.static(path.join(__dirname,'uploads/files'))); //gets the files with the url http://localhost:3309/files/ + filename
 
 
 
