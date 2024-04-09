@@ -129,6 +129,14 @@ const corsOptions = {
 };
 app.use(cors(corsOptions));
 
+// Set headers because of server side CORS policy
+app.use(function(req, res, next) {
+	res.header("Access-Control-Allow-Origin", "http://localhost:8100");
+	res.header("Access-Control-Allow-Credentials", true);
+	res.header("Access-Control-Allow-Methods", "GET, POST, PATCH, OPTIONS");
+	res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+	next();
+});
 
 ///////////////////////////////////////////////////
 // Set up the session storage
