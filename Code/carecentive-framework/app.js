@@ -115,10 +115,17 @@ const csvWriter = require('./controllers/csvWriter');
  * However, for security purposes, it's recommended to specify the allowed origins explicitly.
  */
 //app.use(cors());
+const allowedOrigins = ['http://localhost:8100', 'http://localhost:3309'];
+
 const corsOptions = {
-	origin: 'http://localhost:8100', // Replace with your frontend app's origin
-	//origin: '*',
-	credentials: true,
+  origin: function (origin, callback) {
+    if (allowedOrigins.includes(origin)) {
+      callback(null, true)
+    } else {
+      callback(new Error('Not allowed by CORS'))
+    }
+  },
+  credentials: true,
 };
 app.use(cors(corsOptions));
 
