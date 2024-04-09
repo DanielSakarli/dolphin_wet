@@ -48,7 +48,7 @@ async function csvWriter(req, res, next) {
 	let csvWriter;
 	
 	
-	if(section === 'Feeding') {
+	if(section === 'Nutrition') {
 	if (numMonths != '') {
 		if(dolphin_name != ''){
 			// Data of a specific dolphin_name and specific numMonths
@@ -91,6 +91,7 @@ async function csvWriter(req, res, next) {
 			{id: 'blood_hydration', title: 'Blood Hydration'},
 			{id: 'fish_quality', title: 'Fish Quality'},
 			{id: 'fish_variety', title: 'Fish Variety'},
+			{id: 'file_path', title: 'File Path'},
 			{id: 'body_condition_score_comments', title: 'Body Condition Score Comments'},
 			{id: 'weight_measured_comments', title: 'Weight Measured Comments'},
 			{id: 'kcal_calculations_comments', title: 'Kcal Calculations Comments'},
@@ -104,7 +105,7 @@ async function csvWriter(req, res, next) {
 	}
 
 
-	if(section === 'Housing/Environment') {
+	if(section === 'Environment') {
 		if (numMonths != '') {
 			if(dolphin_name != ''){
 				// Data of a specific dolphin_name and specific numMonths
@@ -228,6 +229,7 @@ async function csvWriter(req, res, next) {
 		
 
 	data.sort((a, b) => a.created_at - b.created_at);
+	console.log('data: ', ...data);
 	csvWriter
 		.writeRecords(data)
 		.then(() => {

@@ -30,12 +30,12 @@ const storage = multer.diskStorage({
         console.log('I am here: ' + req.session.file_path);
         if(req.session.file_path === ''){ //If empty, so session storage has just been initialized
           //First path in the list
-          req.session.file_path = apiUrl + '/files/' + `${uniqueSuffix}${path.extname(
+          req.session.file_path = apiUrl + '/api/files/' + `${uniqueSuffix}${path.extname(
             file.originalname
           )}`;
         } else {
           //Commaseparated list of paths if several files to upload
-          req.session.file_path = req.session.file_path + ',' + apiUrl + '/files/' + `${uniqueSuffix}${path.extname(
+          req.session.file_path = req.session.file_path + ',' + apiUrl + '/api/files/' + `${uniqueSuffix}${path.extname(
             file.originalname
           )}`;
         }

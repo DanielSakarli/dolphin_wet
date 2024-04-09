@@ -119,7 +119,7 @@ const allowedOrigins = ['http://localhost:8100', 'http://localhost:3309'];
 
 const corsOptions = {
   origin: function (origin, callback) {
-    if (allowedOrigins.includes(origin)) {
+    if (allowedOrigins.includes(origin) || !origin) {
       callback(null, true)
     } else {
       callback(new Error('Not allowed by CORS'))
@@ -175,7 +175,7 @@ app.use('/api/users', usersRouter);
 app.use('/api/callback', callbackRouter);
 app.use('/api/questionnaires', questionnaireRouter);
 app.use('/api/measurements', measurementRouter);
-app.use('/api/files', fileRouter);
+//app.use('/api/files', fileRouter);
 app.use('/api/analytics', analyticsRouter);
 app.use('/api/settings', settingsRouter);
 
@@ -193,8 +193,8 @@ app.post('/api/file', uploadFile);
 app.get('/api/export-csv', csvWriter);
 app.use('/api/images', express.static(path.join(__dirname,'uploads/images'))); //gets the images with the url http://localhost:3309/images/ + filename
 app.use('/api/files', express.static(path.join(__dirname,'uploads/files'))); //gets the files with the url http://localhost:3309/files/ + filename
-
-
+console.log('Path to images: ', path.join(__dirname,'uploads/images'));
+console.log('Path to files: ', path.join(__dirname,'uploads/files'));
 
 /**
  * Custom routes
