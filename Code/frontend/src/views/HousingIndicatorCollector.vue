@@ -3,7 +3,7 @@
 	<ion-page>
 		<ion-header>
 			<ion-toolbar>
-				<ion-title>{{ $t('topicHousing') }}</ion-title>
+				<ion-title>{{ $t('topicEnvironment') }}</ion-title>
 				<ion-buttons slot="start">
 					<ion-back-button @click="handleBackButtonClick"></ion-back-button>
 					<!--<ion-back-button defaultHref="/home"></ion-back-button>-->

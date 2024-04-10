@@ -224,7 +224,7 @@
 		</ion-modal>
 		<!--End of Scoring Description-->
 		<!-- Start of Checkboxes-->
-		<ion-card v-if=" criteria === 'firstCriteriaEnvironment'">
+		<ion-card v-if="dolphinSelect && dolphinSelect.length !== 0 && criteria === 'firstCriteriaEnvironment'">
 			<ion-card-title>{{$t('firstSubCriteriaEnvironment')}}</ion-card-title>
 			<ion-list >
 					<ion-item>
@@ -236,7 +236,7 @@
 					<CheckComments @update-comment="updateEnclosureSafetyComments" />
 			</ion-list>
 		</ion-card>
-		<ion-card v-if=" criteria === 'firstCriteriaEnvironment'">
+		<ion-card v-if="dolphinSelect && dolphinSelect.length !== 0 && criteria === 'firstCriteriaEnvironment'">
 			<ion-card-title>{{$t('secondSubCriteriaEnvironment')}}</ion-card-title>
 			<ion-list >
 					<ion-item>
@@ -248,7 +248,7 @@
 					<CheckComments @update-comment="updateForeignBodyComments"/>
 			</ion-list>
 		</ion-card>
-		<ion-card v-if=" criteria === 'secondCriteriaEnvironment'">
+		<ion-card v-if="dolphinSelect && dolphinSelect.length !== 0 && criteria === 'secondCriteriaEnvironment'">
 			<ion-card-title>{{$t('thirdSubCriteriaEnvironment')}}</ion-card-title>
 			<ion-list >
 				<ion-item>
@@ -260,7 +260,7 @@
 				<CheckComments @update-comment="updatePoolDesignComments"/>
 			</ion-list>
 		</ion-card>
-		<ion-card v-if=" criteria === 'thirdCriteriaEnvironment'">
+		<ion-card v-if="dolphinSelect && dolphinSelect.length !== 0 && criteria === 'thirdCriteriaEnvironment'">
 			<ion-card-title>{{$t('fourthSubCriteriaEnvironment')}}</ion-card-title>
 			<ion-list>
 				<ion-item>
@@ -272,7 +272,7 @@
 				<CheckComments @update-comment="updateForcedLonelinessComments"/>
 			</ion-list>
 		</ion-card>
-		<ion-card v-if=" criteria === 'fourthCriteriaEnvironment'">
+		<ion-card v-if="dolphinSelect && dolphinSelect.length !== 0 && criteria === 'fourthCriteriaEnvironment'">
 			<ion-card-title>{{$t('fifthSubCriteriaEnvironment')}}</ion-card-title>		
 			<ion-list>
 				<ion-item>
@@ -284,7 +284,7 @@
 				<CheckComments @update-comment="updateWaterQualityComments"/>
 			</ion-list>
 		</ion-card>
-		<ion-card v-if=" criteria === 'fifthCriteriaEnvironment'">
+		<ion-card v-if="dolphinSelect && dolphinSelect.length !== 0 && criteria === 'fifthCriteriaEnvironment'">
 			<ion-card-title>{{$t('sixthSubCriteriaEnvironment')}}</ion-card-title>		
 			<ion-list >
 				<ion-item>
@@ -296,7 +296,7 @@
 				<CheckComments @update-comment="updateWaterTemperatureComments"/>
 			</ion-list>
 		</ion-card>
-		<ion-card v-if=" criteria === 'sixthCriteriaEnvironment'">
+		<ion-card v-if="dolphinSelect && dolphinSelect.length !== 0 && criteria === 'sixthCriteriaEnvironment'">
 			<ion-card-title>{{$t('seventhSubCriteriaEnvironment')}}</ion-card-title>	
 			<ion-list>
 				<ion-item>
@@ -308,7 +308,7 @@
 				<CheckComments @update-comment="updateSufficientShadeComments"/>
 			</ion-list>
 		</ion-card>
-		<ion-card v-if=" criteria === 'sixthCriteriaEnvironment'">
+		<ion-card v-if="dolphinSelect && dolphinSelect.length !== 0 && criteria === 'sixthCriteriaEnvironment'">
 			<ion-card-title>{{$t('eighthSubCriteriaEnvironment')}}</ion-card-title>	
 			<ion-list>
 				<ion-item>
@@ -320,7 +320,7 @@
 				<CheckComments @update-comment="updateReflectingColoursComments"/>
 			</ion-list>
 		</ion-card>
-		<ion-card v-if=" criteria === 'seventhCriteriaEnvironment'">
+		<ion-card v-if="dolphinSelect && dolphinSelect.length !== 0 && criteria === 'seventhCriteriaEnvironment'">
 			<ion-card-title>{{$t('ninthSubCriteriaEnvironment')}}</ion-card-title>	
 			<ion-list>
 				<ion-item>
@@ -603,7 +603,7 @@ async showDateInputAlert() {
 
 		//Method to send the data to database
 		async storeData() {
-			const confirmed = confirm(this.$t('savingDataNext'));
+			const confirmed = true; //confirm(this.$t('savingDataNext'));
      		if (confirmed) {
 				this.storeCheckedValues();
 				console.log(this.CheckboxArray);
@@ -647,12 +647,31 @@ async showDateInputAlert() {
 			}
 		},
 		confirmRefresh() {
-			const confirmed = confirm(this.$t('savingDataNext'));
+			const confirmed = true; //confirm(this.$t('savingDataNext'));
      		if (confirmed) {
 				this.storeCheckedValues();
 				console.log(evaluationHousingStore.requestBodiesHousing)
-				this.dolphinSelect = null;
-				this.criteria = null;
+				
+				// Doing the same dolphinSelect with the next criteria in the list:
+				switch (this.criteria) {
+					case 'firstCriteriaEnvironment':
+						this.criteria = 'secondCriteriaEnvironment';
+						break;
+					case 'secondCriteriaEnvironment':
+						this.criteria = 'thirdCriteriaEnvironment';
+						break;
+					case 'thirdCriteriaEnvironment':
+						this.criteria = 'fourthCriteriaEnvironment';
+						break;
+					case 'fourthCriteriaEnvironment':
+						this.criteria = 'firstCriteriaEnvironment';
+						break;
+					default:
+						this.criteria = 'firstCriteriaEnvironment';
+				}
+				
+				//this.dolphinSelect = null;
+				//this.criteria = null;
 				const currentPath = this.$route.path;
 				const targetUrl = `/detailHousing`;
 				this.$router.push(targetUrl);

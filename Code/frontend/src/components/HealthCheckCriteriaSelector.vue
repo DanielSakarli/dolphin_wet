@@ -339,7 +339,7 @@
 		</ion-modal>
 		<!--End of Scoring Description-->
 		<!-- Start of Checkboxes-->
-		<ion-card v-if=" criteria === 'firstCriteriaHealth'">
+		<ion-card v-if="dolphinSelect && dolphinSelect.length !== 0 && criteria === 'firstCriteriaHealth'">
 			<ion-card-title>{{$t('firstSubCriteriaHealth')}}</ion-card-title>
 			<ion-list >
 					<ion-item>
@@ -351,7 +351,7 @@
 					<CheckComments @update-comment="updateNormalFloatabilityComments"/>
 			</ion-list>
 		</ion-card>
-		<ion-card v-if=" criteria === 'firstCriteriaHealth'">
+		<ion-card v-if="dolphinSelect && dolphinSelect.length !== 0 && criteria === 'firstCriteriaHealth'">
 			<ion-card-title>{{$t('secondSubCriteriaHealth')}}</ion-card-title>
 			<ion-list>
 				<ion-item>
@@ -363,7 +363,7 @@
 				<CheckComments @update-comment="updateNormalFloatabilityRecordsComments"/>
 			</ion-list>
 		</ion-card>
-		<ion-card v-if=" criteria === 'secondCriteriaHealth'">
+		<ion-card v-if="dolphinSelect && dolphinSelect.length !== 0 && criteria === 'secondCriteriaHealth'">
 			<ion-card-title>{{$t('thirdSubCriteriaHealth')}}</ion-card-title>		
 			<ion-list>
 				<ion-item>
@@ -381,7 +381,7 @@
 				</ion-item>
 			</ion-list>
 		</ion-card>
-		<ion-card v-if=" criteria === 'secondCriteriaHealth'">
+		<ion-card v-if="dolphinSelect && dolphinSelect.length !== 0 && criteria === 'secondCriteriaHealth'">
 			<ion-card-title>{{$t('fourthSubCriteriaHealth')}}</ion-card-title>		
 			<ion-list >
 				<ion-item>
@@ -395,7 +395,7 @@
 				</ion-item>
 			</ion-list>
 		</ion-card>
-		<ion-card v-if=" criteria === 'secondCriteriaHealth'">
+		<ion-card v-if="dolphinSelect && dolphinSelect.length !== 0 && criteria === 'secondCriteriaHealth'">
 			<ion-card-title>{{$t('fifthSubCriteriaHealth')}}</ion-card-title>	
 			<ion-list>
 				<ion-item>
@@ -407,7 +407,7 @@
 				<CheckComments @update-comment="updateEyeLesionsRecordsComments"/>
 			</ion-list>
 		</ion-card>
-		<ion-card v-if=" criteria === 'thirdCriteriaHealth'">
+		<ion-card v-if="dolphinSelect && dolphinSelect.length !== 0 && criteria === 'thirdCriteriaHealth'">
 			<ion-card-title>{{$t('sixthSubCriteriaHealth')}}</ion-card-title>	
 			<ion-list>
 				<ion-item>
@@ -425,7 +425,7 @@
 				</ion-item>
 			</ion-list>
 		</ion-card>
-		<ion-card v-if=" criteria === 'thirdCriteriaHealth'">
+		<ion-card v-if="dolphinSelect && dolphinSelect.length !== 0 && criteria === 'thirdCriteriaHealth'">
 			<ion-card-title>{{$t('seventhSubCriteriaHealth')}}</ion-card-title>	
 			<ion-list>
 				<ion-item>
@@ -437,7 +437,7 @@
 				<CheckComments @update-comment="updateOralLesionsRecordsComments"/>
 			</ion-list>
 		</ion-card>
-		<ion-card v-if=" criteria === 'fourthCriteriaHealth'">
+		<ion-card v-if="dolphinSelect && dolphinSelect.length !== 0 && criteria === 'fourthCriteriaHealth'">
 			<ion-card-title>{{$t('eigthSubCriteriaHealth')}}</ion-card-title>	
 			<ion-list>
 				<ion-item>
@@ -449,7 +449,7 @@
 				<CheckComments @update-comment="updateGastricAbnormalityRecordsComments"/>
 			</ion-list>
 		</ion-card>
-		<ion-card v-if=" criteria === 'fifthCriteriaHealth'">
+		<ion-card v-if="dolphinSelect && dolphinSelect.length !== 0 && criteria === 'fifthCriteriaHealth'">
 			<ion-card-title>{{$t('ninthSubCriteriaHealth')}}</ion-card-title>	
 			<ion-list>
 				<ion-item>
@@ -461,7 +461,7 @@
 				<CheckComments @update-comment="updateRespiratoryDiseaseComments"/>
 			</ion-list>
 		</ion-card>
-		<ion-card v-if=" criteria === 'fifthCriteriaHealth'">
+		<ion-card v-if="dolphinSelect && dolphinSelect.length !== 0 && criteria === 'fifthCriteriaHealth'">
 			<ion-card-title>{{$t('tenthSubCriteriaHealth')}}</ion-card-title>	
 			<ion-list>
 				<ion-item>
@@ -473,7 +473,7 @@
 				<CheckComments @update-comment="updateForceExpirationComments"/>
 			</ion-list>
 		</ion-card>
-		<ion-card v-if=" criteria === 'fifthCriteriaHealth'">
+		<ion-card v-if="dolphinSelect && dolphinSelect.length !== 0 && criteria === 'fifthCriteriaHealth'">
 			<ion-card-title>{{$t('eleventhSubCriteriaHealth')}}</ion-card-title>	
 			<ion-list>
 				<ion-item>
@@ -485,7 +485,7 @@
 				<CheckComments @update-comment="updateRespiratoryDiseaseRecordsComments"/>
 			</ion-list>
 		</ion-card>
-		<ion-card v-if=" criteria === 'sixthCriteriaHealth'">
+		<ion-card v-if="dolphinSelect && dolphinSelect.length !== 0 && criteria === 'sixthCriteriaHealth'">
 			<ion-card-title>{{$t('twelvthSubCriteriaHealth')}}</ion-card-title>	
 			<ion-list>
 				<ion-item>
@@ -501,7 +501,7 @@
 				</ion-item>
 			</ion-list>
 		</ion-card>
-		<ion-card v-if=" criteria === 'sixthCriteriaHealth'">
+		<ion-card v-if="dolphinSelect && dolphinSelect.length !== 0 && criteria === 'sixthCriteriaHealth'">
 			<ion-card-title>{{$t('thirteenthSubCriteriaHealth')}}</ion-card-title>	
 			<ion-list>
 				<ion-item>
@@ -1057,8 +1057,27 @@ async showDateInputAlert() {
 			// Store the checked scoring values
 			this.storeCheckedValues();
 			console.log(evaluationHealthStore.requestBodiesHealth)
-			this.dolphinSelect = null;
-			this.criteria = null;
+			
+			// Doing the same dolphinSelect with the next criteria in the list:
+			switch (this.criteria) {
+					case 'firstCriteriaHealth':
+						this.criteria = 'secondCriteriaHealth';
+						break;
+					case 'secondCriteriaHealth':
+						this.criteria = 'thirdCriteriaHealth';
+						break;
+					case 'thirdCriteriaHealth':
+						this.criteria = 'fourthCriteriaHealth';
+						break;
+					case 'fourthCriteriaHealth':
+						this.criteria = 'firstCriteriaHealth';
+						break;
+					default:
+						this.criteria = 'firstCriteriaHealth';
+				}
+			
+			//this.dolphinSelect = null;
+			//this.criteria = null;
 			const currentPath = this.$route.path;
 			const targetUrl = `/detailHealth`;
 			this.$router.push(targetUrl);

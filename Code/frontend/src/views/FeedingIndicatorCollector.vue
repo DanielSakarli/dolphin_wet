@@ -157,7 +157,7 @@ export default defineComponent({
 			});
 		},
 		async storeData() {
-			const confirmed = confirm(this.$t('savingDataNext'));
+			const confirmed = true; //confirm(this.$t('savingDataNext'));
 			// Check in console if token is correct
 			console.log('this is the token that is sent to backend: ', token);
 

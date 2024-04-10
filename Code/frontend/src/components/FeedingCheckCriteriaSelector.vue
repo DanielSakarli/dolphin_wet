@@ -249,7 +249,7 @@
 		</ion-modal>
 		<!--End of Reference Area-->
 		<!-- Start of Checkboxes-->
-		<ion-card v-if=" criteria === 'firstCriteriaNutrition'">
+		<ion-card v-if="dolphinSelect && dolphinSelect.length !== 0 && criteria === 'firstCriteriaNutrition'">
 			<ion-card-title>{{$t('firstSubCriteriaNutrition')}}</ion-card-title>
 			<ion-list >
 					<ion-item>
@@ -264,7 +264,7 @@
 					<CheckComments @update-comment="updateBodyConditionScoreComments" />
 			</ion-list>
 		</ion-card>
-		<ion-card v-if=" criteria === 'firstCriteriaNutrition'">
+		<ion-card v-if="dolphinSelect && dolphinSelect.length !== 0 && criteria === 'firstCriteriaNutrition'">
 			<ion-card-title>{{$t('secondSubCriteriaNutrition')}}</ion-card-title>
 			<ion-list >
 				<ion-item>
@@ -276,7 +276,7 @@
 				<CheckComments @update-comment="updateWeightMeasuredComments" />
 			</ion-list>
 		</ion-card>
-		<ion-card v-if=" criteria === 'secondCriteriaNutrition'">
+		<ion-card v-if="dolphinSelect && dolphinSelect.length !== 0 && criteria === 'secondCriteriaNutrition'">
 			<ion-card-title>{{$t('thirdSubCriteriaNutrition')}}</ion-card-title>
 			<ion-list>
 				<ion-item>
@@ -288,7 +288,7 @@
 				<CheckComments @update-comment="updateKcalCalculationsComments" />
 			</ion-list>
 		</ion-card>
-		<ion-card v-if=" criteria === 'secondCriteriaNutrition'">
+		<ion-card v-if="dolphinSelect && dolphinSelect.length !== 0 && criteria === 'secondCriteriaNutrition'">
 			<ion-card-title>{{$t('fourthSubCriteriaNutrition')}}</ion-card-title>		
 			<ion-list>
 				<ion-item>
@@ -303,7 +303,7 @@
 				<CheckComments @update-comment="updateBloodHydrationComments" />
 			</ion-list>
 		</ion-card>
-		<ion-card v-if=" criteria === 'thirdCriteriaNutrition'">
+		<ion-card v-if="dolphinSelect && dolphinSelect.length !== 0 && criteria === 'thirdCriteriaNutrition'">
 			<ion-card-title>{{$t('fifthSubCriteriaNutrition')}}</ion-card-title>		
 			<ion-list >
 				<ion-item>
@@ -318,7 +318,7 @@
 				</ion-item>
 			</ion-list>
 		</ion-card>
-		<ion-card v-if=" criteria === 'fourthCriteriaNutrition'">
+		<ion-card v-if="dolphinSelect && dolphinSelect.length !== 0 && criteria === 'fourthCriteriaNutrition'">
 			<ion-card-title>{{$t('sixthSubCriteriaNutrition')}}</ion-card-title>	
 			<ion-list>
 				<ion-item>
@@ -761,8 +761,26 @@ async showDateInputAlert() {
      		if (confirmed) {
 				this.storeCheckedValues();
 				console.log(evaluationFeedingStore.requestBodiesFeeding)
-				this.dolphinSelect = [];
-				this.criteria = null;
+				// Doing the same dolphinSelect with the next criteria in the list:
+				switch (this.criteria) {
+					case 'firstCriteriaNutrition':
+						this.criteria = 'secondCriteriaNutrition';
+						break;
+					case 'secondCriteriaNutrition':
+						this.criteria = 'thirdCriteriaNutrition';
+						break;
+					case 'thirdCriteriaNutrition':
+						this.criteria = 'fourthCriteriaNutrition';
+						break;
+					case 'fourthCriteriaNutrition':
+						this.criteria = 'firstCriteriaNutrition';
+						break;
+					default:
+						this.criteria = 'firstCriteriaNutrition';
+				}
+				//this.dolphinSelect = [];
+				//this.criteria = null;
+				
 				//const currentPath = this.$route.path;
 				const targetUrl = `/detailFeeding`;
 				// No need to check if dataInBody true or false, because /detailFeeding doesn´t

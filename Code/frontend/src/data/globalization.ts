@@ -125,7 +125,7 @@ export const globalizationList = {
 		ScoringDescription: 'Scoring: Beschreibung',
 		ReferenceArea: 'Referenzbereich',
 		//Criteria Housing
-		topicHousing: 'Wohnen',
+		topicEnvironment: 'Wohnen',
 		firstCriteriaHousing: 'Sichere Umgebung',
 		secondCriteriaHousing: 'Becken Design',
 		thirdCriteriaHousing: 'Erzwungene Einsamkeit',

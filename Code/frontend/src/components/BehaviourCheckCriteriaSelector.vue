@@ -396,7 +396,7 @@
 		</ion-modal>
 		<!--End of Scoring Description-->
 		<!-- Start of Checkboxes-->
-		<ion-list v-if=" subcriteria === 'firstSubcriteriaBehaviour'">
+		<ion-list v-if="dolphinSelect && dolphinSelect.length !== 0 && subcriteria === 'firstSubcriteriaBehaviour'">
 			<ion-item>
 				<ion-checkbox v-model="CheckboxArray[0][0]" @click="handleClick(0,0)">Score 1</ion-checkbox>
 			</ion-item>
@@ -408,7 +408,7 @@
 			</ion-item>
 			<CheckComments />
 		</ion-list>
-		<ion-list v-if=" subcriteria === 'secondSubcriteriaBehaviour'">
+		<ion-list v-if=" dolphinSelect && dolphinSelect.length !== 0 && subcriteria === 'secondSubcriteriaBehaviour'">
 			<ion-item>
 				<ion-checkbox v-model="CheckboxArray[1][0]" @click="handleClick(1,0)">Score 1</ion-checkbox>
 			</ion-item>
@@ -416,7 +416,7 @@
 				<ion-checkbox v-model="CheckboxArray[2][2]" @click="handleClick(1,2)">Score 3</ion-checkbox>
 			</ion-item>
 		</ion-list>
-		<ion-list v-if=" subcriteria === 'thirdSubcriteriaBehaviour'">
+		<ion-list v-if=" dolphinSelect && dolphinSelect.length !== 0 && subcriteria === 'thirdSubcriteriaBehaviour'">
 			<ion-item>
 				<ion-checkbox v-model="CheckboxArray[2][0]" @click="handleClick(2,0)">Score 1</ion-checkbox>
 			</ion-item>
@@ -424,7 +424,7 @@
 				<ion-checkbox v-model="CheckboxArray[2][2]" @click="handleClick(2,2)">Score 3</ion-checkbox>
 			</ion-item>
 		</ion-list>
-		<ion-list v-if=" subcriteria === 'fourthSubcriteriaBehaviour'">
+		<ion-list v-if=" dolphinSelect && dolphinSelect.length !== 0 && subcriteria === 'fourthSubcriteriaBehaviour'">
 			<ion-item>
 				<ion-checkbox v-model="CheckboxArray[3][0]" @click="handleClick(3,0)">Score 1</ion-checkbox>
 			</ion-item>
@@ -432,7 +432,7 @@
 				<ion-checkbox v-model="CheckboxArray[3][2]" @click="handleClick(3,2)">Score 3</ion-checkbox>
 			</ion-item>
 		</ion-list>
-		<ion-list v-if=" subcriteria === 'fifthSubcriteriaBehaviour'">
+		<ion-list v-if="dolphinSelect && dolphinSelect.length !== 0 &&  subcriteria === 'fifthSubcriteriaBehaviour'">
 			<ion-item>
 				<ion-checkbox v-model="CheckboxArray[4][0]" @click="handleClick(4,0)">Score 1</ion-checkbox>
 			</ion-item>
@@ -440,7 +440,7 @@
 				<ion-checkbox v-model="CheckboxArray[4][2]" @click="handleClick(4,2)">Score 3</ion-checkbox>
 			</ion-item>
 		</ion-list>
-		<ion-list v-if=" subcriteria === 'sixthSubcriteriaBehaviour'">
+		<ion-list v-if="dolphinSelect && dolphinSelect.length !== 0 &&  subcriteria === 'sixthSubcriteriaBehaviour'">
 			<ion-item>
 				<ion-checkbox v-model="CheckboxArray[5][0]" @click="handleClick(5,0)">Score 1</ion-checkbox>
 			</ion-item>
@@ -448,7 +448,7 @@
 				<ion-checkbox v-model="CheckboxArray[5][2]" @click="handleClick(5,2)">Score 3</ion-checkbox>
 			</ion-item>
 		</ion-list>
-		<ion-list v-if=" subcriteria === 'seventhSubcriteriaBehaviour'">
+		<ion-list v-if=" dolphinSelect && dolphinSelect.length !== 0 && subcriteria === 'seventhSubcriteriaBehaviour'">
 			<ion-item>
 				<ion-checkbox v-model="CheckboxArray[6][0]" @click="handleClick(6,0)">Score 1</ion-checkbox>
 			</ion-item>
@@ -456,7 +456,7 @@
 				<ion-checkbox v-model="CheckboxArray[6][2]" @click="handleClick(6,2)">Score 3</ion-checkbox>
 			</ion-item>
 		</ion-list>
-		<ion-list v-if=" subcriteria === 'eigthSubcriteriaBehaviour'">
+		<ion-list v-if=" dolphinSelect && dolphinSelect.length !== 0 && subcriteria === 'eigthSubcriteriaBehaviour'">
 			<ion-item>
 				<ion-checkbox v-model="CheckboxArray[7][0]" @click="handleClick(7,0)">Score 1</ion-checkbox>
 			</ion-item>
@@ -464,7 +464,7 @@
 				<ion-checkbox v-model="CheckboxArray[7][2]" @click="handleClick(7,2)">Score 3</ion-checkbox>
 			</ion-item>
 		</ion-list>
-		<ion-list v-if=" subcriteria === 'ninthSubcriteriaBehaviour'">
+		<ion-list v-if=" dolphinSelect && dolphinSelect.length !== 0 && subcriteria === 'ninthSubcriteriaBehaviour'">
 			<ion-item>
 				<ion-checkbox v-model="CheckboxArray[8][0]" @click="handleClick(8,0)">Score 1</ion-checkbox>
 			</ion-item>
@@ -472,7 +472,7 @@
 				<ion-checkbox v-model="CheckboxArray[8][2]" @click="handleClick(8,2)">Score 3</ion-checkbox>
 			</ion-item>
 		</ion-list>
-		<ion-list v-if=" subcriteria === 'tenthSubcriteriaBehaviour'">
+		<ion-list v-if=" dolphinSelect && dolphinSelect.length !== 0 && subcriteria === 'tenthSubcriteriaBehaviour'">
 			<ion-item>
 				<ion-checkbox v-model="CheckboxArray[9][0]" @click="handleClick(9,0)">Score 1</ion-checkbox>
 			</ion-item>
@@ -480,7 +480,7 @@
 				<ion-checkbox v-model="CheckboxArray[9][2]" @click="handleClick(9,2)">Score 3</ion-checkbox>
 			</ion-item>
 		</ion-list>
-		<ion-list v-if=" subcriteria === 'eleventhSubcriteriaBehaviour'">
+		<ion-list v-if=" dolphinSelect && dolphinSelect.length !== 0 && subcriteria === 'eleventhSubcriteriaBehaviour'">
 			<ion-item>
 				<ion-checkbox v-model="CheckboxArray[10][0]" @click="handleClick(10,0)">Score 1</ion-checkbox>
 			</ion-item>
@@ -488,7 +488,7 @@
 				<ion-checkbox v-model="CheckboxArray[10][2]" @click="handleClick(10,2)">Score 3</ion-checkbox>
 			</ion-item>
 		</ion-list>
-		<ion-list v-if=" subcriteria === 'twelfthSubcriteriaBehaviour'">
+		<ion-list v-if=" dolphinSelect && dolphinSelect.length !== 0 && subcriteria === 'twelfthSubcriteriaBehaviour'">
 			<ion-item>
 				<ion-checkbox v-model="CheckboxArray[11][0]" @click="handleClick(11,0)">Score 1</ion-checkbox>
 			</ion-item>
@@ -500,7 +500,7 @@
 			</ion-item>
 			<CheckComments />
 		</ion-list>
-		<ion-list v-if=" subcriteria === 'thirteenthSubcriteriaBehaviour'">
+		<ion-list v-if="dolphinSelect && dolphinSelect.length !== 0 &&  subcriteria === 'thirteenthSubcriteriaBehaviour'">
 			<ion-item>
 				<ion-checkbox v-model="CheckboxArray[12][0]" @click="handleClick(12,0)">Score 1</ion-checkbox>
 			</ion-item>
@@ -509,7 +509,7 @@
 			</ion-item>
 			<CheckComments />
 		</ion-list>
-		<ion-list v-if=" subcriteria === 'fourteenthSubcriteriaBehaviour'">
+		<ion-list v-if="dolphinSelect && dolphinSelect.length !== 0 &&  subcriteria === 'fourteenthSubcriteriaBehaviour'">
 			<ion-item>
 				<ion-checkbox v-model="CheckboxArray[13][0]" @click="handleClick(13,0)">Score 1</ion-checkbox>
 			</ion-item>
@@ -518,7 +518,7 @@
 			</ion-item>
 			<CheckComments />
 		</ion-list>
-		<ion-list v-if=" subcriteria === 'fifteenthSubcriteriaBehaviour'">
+		<ion-list v-if="dolphinSelect && dolphinSelect.length !== 0 && subcriteria === 'fifteenthSubcriteriaBehaviour'">
 			<ion-item>
 				<ion-checkbox v-model="CheckboxArray[14][0]" @click="handleClick(14,0)">Score 1</ion-checkbox>
 			</ion-item>
@@ -759,7 +759,7 @@ async showDateInputAlert() {
 
 		//Method to send the data to database
 		async storeData() {
-			const confirmed = confirm(this.$t('savingDataNext'));
+			const confirmed = true; //confirm(this.$t('savingDataNext'));
      		if (confirmed) {
 				this.storeCheckedValues();
 				console.log(this.CheckboxArray);
@@ -803,12 +803,32 @@ async showDateInputAlert() {
 			}
 		},
 		confirmRefresh() {
-			const confirmed = confirm(this.$t('savingDataNext'));
+			const confirmed = true; //confirm(this.$t('savingDataNext'));
      		if (confirmed) {
 				this.storeCheckedValues();
 				console.log(evaluationBehaviourStore.requestBodiesBehaviour)
-				this.dolphinSelect = null;
-				this.criteria = null;
+				
+				// Doing the same dolphinSelect with the next criteria in the list:
+				switch (this.criteria) {
+					case 'firstCriteriaBehaviour':
+						this.criteria = 'secondCriteriaBehaviour';
+						break;
+					case 'secondCriteriaBehaviour':
+						this.criteria = 'thirdCriteriaBehaviour';
+						break;
+					case 'thirdCriteriaBehaviour':
+						this.criteria = 'fourthCriteriaBehaviour';
+						break;
+					case 'fourthCriteriaBehaviour':
+						this.criteria = 'firstCriteriaBehaviour';
+						break;
+					default:
+						this.criteria = 'firstCriteriaBehaviour';
+				}
+
+				
+				//this.dolphinSelect = null;
+				//this.criteria = null;
 				const currentPath = this.$route.path;
 				const targetUrl = `/detailFeeding`;
 				this.$router.push(targetUrl);
