@@ -89,20 +89,30 @@ class GoodHealthService {
 					'dolphin_name',
 					'normal_floatability',
 					'normal_floatability_comments',
-					'eye_lesions',
-					'eye_lesions_comments',
-					'visual_cues',
-					'visual_cues_comments',
+					'records_normal_floatability',
+					'records_normal_floatability_comments',
+					'inspection_eye_lesions',
+					'inspection_eye_lesions_comments',
+					'response_visual_cues',
+					'response_visual_cues_comments',
+					'records_eye_lesions',
+					'records_eye_lesions_comments',
 					'mouth_exam',
 					'mouth_exam_comments',
-					'respiratory_disease',
-					'respiratory_disease_comments',
-					'gastric_abnormality',
-					'gastric_abnormality_comments',
+					'records_oral_lesions',
+					'records_oral_lesions_comments',
+					'records_gastric_abnormality',
+					'records_gastric_abnormality_comments',
+					'inspection_respiratory',
+					'inspection_respiratory_comments',
 					'force_expiration',
 					'force_expiration_comments',
-					'external_disease_signs',
-					'external_disease_signs_comments',
+					'records_respiratory_disease',
+					'records_respiratory_disease_comments',
+					'inspection_marks',
+					'inspection_marks_comments',
+					'records_external_disease',
+					'records_external_disease_comments',
 					'eye_photo_path',
 					'teeth_photo_path',
 					'marks_photo_path',
@@ -121,6 +131,68 @@ class GoodHealthService {
 			throw error;
 		}
 	}
+
+
+	/**
+	 * Gets all good_health test results by given dolphin and month.
+	 * @param {string} name - The name of dolphin
+	 * @param {number} year - Year
+	 * @param {number} month - Month
+	 * @returns {Promise<Array>} list of query result
+	 */
+	static async getTestResultByMonth(year, month) {
+		try {
+			const result = await GoodHealth.query()
+				.select(
+					'health_record_id',
+					'user_id',
+					'user_name',
+					'dolphin_id',
+					'dolphin_name',
+					'normal_floatability',
+					'normal_floatability_comments',
+					'records_normal_floatability',
+					'records_normal_floatability_comments',
+					'inspection_eye_lesions',
+					'inspection_eye_lesions_comments',
+					'response_visual_cues',
+					'response_visual_cues_comments',
+					'records_eye_lesions',
+					'records_eye_lesions_comments',
+					'mouth_exam',
+					'mouth_exam_comments',
+					'records_oral_lesions',
+					'records_oral_lesions_comments',
+					'records_gastric_abnormality',
+					'records_gastric_abnormality_comments',
+					'inspection_respiratory',
+					'inspection_respiratory_comments',
+					'force_expiration',
+					'force_expiration_comments',
+					'records_respiratory_disease',
+					'records_respiratory_disease_comments',
+					'inspection_marks',
+					'inspection_marks_comments',
+					'records_external_disease',
+					'records_external_disease_comments',
+					'eye_photo_path',
+					'teeth_photo_path',
+					'marks_photo_path',
+					'created_at',
+					'updated_at'
+				)
+				.where(
+					raw(
+						`EXTRACT(MONTH FROM created_at) = ? AND EXTRACT(YEAR FROM created_at) = ?`,
+						[month, year]
+					)
+				);
+			return result;
+		} catch (error) {
+			throw error;
+		}
+	}
+
 
 	/**
 	 * Gets the test result of last N month of given dolphin. The default value of month is 3.

@@ -202,27 +202,39 @@ async function csvWriter(req, res, next) {
 					{id: 'dolphin_id', title: 'Dolphin ID'},
 					{id: 'dolphin_name', title: 'Dolphin Name'},
 					{id: 'normal_floatability', title: 'Normal Floatability'},
-					{id: 'eye_lesions', title: 'Eye Lesions'},
-					{id: 'visual_cues', title: 'Visual Cues'},
+					{id: 'records_normal_floatability', title: 'Records Normal Floatability'},
+					{id: 'inspection_eye_lesions', title: 'Inspection Eye Lesions'},
+					{id: 'response_visual_cues', title: 'Response Visual Cues'},
+					{id: 'records_eye_lesions', title: 'Records Eye Lesions'},
 					{id: 'mouth_exam', title: 'Mouth Exam'},
-					{id: 'gastric_abnormality', title: 'Gastric Abnormality'},
-					{id: 'respiratory_disease', title: 'Respiratory Disease'},
-					{id: 'force_expiration', title: 'Force Expiration'},
-					{id: 'external_disease_signs', title: 'External Disease Signs'},
+					{id: 'records_oral_lesions', title: 'Records Oral Lesions'},
+					{id: 'records_gastric_abnormality', title: 'Records Gastric Abnormality'},
+					{id: 'inspection_respiratory', title: 'Inspection Respiratory Disease'},
+					{id: 'force_expiration', title: 'Forced Expiration'},
+					{id: 'records_respiratory_disease', title: 'Records Respiratory Disease'},
+					{id: 'inspection_marks', title: 'Rake marks'},
+					{id: 'records_external_disease', title: 'Records External Disease Signs'},
+
 					//Comments
 					{id: 'normal_floatability_comments', title: 'Normal Floatability Comments'},
-					{id: 'eye_lesions_comments', title: 'Eye Lesions Comments'},
-					{id: 'visual_cues_comments', title: 'Visual Cues Comments'},
+					{id: 'records_normal_floatability_comments', title: 'Records Normal Floatability Comments'},
+					{id: 'inspection_eye_lesions_comments', title: 'Inspection Eye Lesions Comments'},
+					{id: 'response_visual_cues_comments', title: 'Response Visual Cues Comments'},
+					{id: 'records_eye_lesions_comments', title: 'Records Eye Lesions Comments'},
 					{id: 'mouth_exam_comments', title: 'Mouth Exam Comments'},
-					{id: 'gastric_abnormality_comments', title: 'Gastric Abnormality Comments'},
-					{id: 'respiratory_disease_comments', title: 'Respiratory Disease Comments'},
-					{id: 'force_expiration_comments', title: 'Force Expiration Comments'},
-					{id: 'external_disease_signs_comments', title: 'External Disease Signs Comments'},
+					{id: 'records_oral_lesions_comments', title: 'Records Oral Lesions Comments'},
+					{id: 'records_gastric_abnormality_comments', title: 'Records Gastric Abnormality Comments'},
+					{id: 'inspection_respiratory_comments', title: 'Inspection Respiratory Disease Comments'},
+					{id: 'force_expiration_comments', title: 'Forced Expiration Comments'},
+					{id: 'records_respiratory_disease_comments', title: 'Records Respiratory Disease Comments'},
+					{id: 'inspection_marks_comments', title: 'Rake marks Comments'},
+					{id: 'records_external_disease_comments', title: 'Records External Disease Signs Comments'},
+					
 					//Photo paths
 					{id: 'eye_photo_path', title: 'Eye Photo Path'},
 					{id: 'teeth_photo_path', title: 'Teeth Photo Path'},
-					{id: 'created_at', title: 'Created At'},
-					{id: 'updated_at', title: 'Updated At'}
+					{id: 'marks_photo_path', title: 'Marks Photo Path'},
+					{id: 'created_at', title: 'Created At'}
 				]
 			});
 		}
