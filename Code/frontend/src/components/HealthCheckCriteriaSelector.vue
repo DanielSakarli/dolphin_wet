@@ -798,6 +798,7 @@ export default {
 					}
 				}
 			}
+			// Reset the checkboxes
 			for(let i = 0; i <= 12; i++){
 				for(let j = 0; j < 3; j++){
 					if (this.CheckboxArray[i][j] === true){
@@ -805,6 +806,21 @@ export default {
 					}
 				}
 			}
+			// Reset comments
+			this.normal_floatability_comments = '';
+			this.records_normal_floatability_comments = '';
+			this.inspection_eye_lesions_comments = '';
+			this.response_visual_cues_comments = '';
+			this.records_eye_lesions_comments = '';
+			this.mouth_exam_comments = '';
+			this.records_oral_lesions_comments = '';
+			this.records_gastric_abnormality_comments = '';
+			this.inspection_respiratory_comments = '';
+			this.force_expiration_comments = '';
+			this.records_respiratory_disease_comments = '';
+			this.inspection_marks_comments = '';
+			this.records_external_disease_comments = '';
+			
 			dataInBody = true;
 			localStorage.setItem('dataInBody', dataInBody.toString());
 		},
@@ -1058,6 +1074,10 @@ async showDateInputAlert() {
 			this.storeCheckedValues();
 			console.log(evaluationHealthStore.requestBodiesHealth)
 			
+			toast.success('Saved temporarily. Click \'Finish Tests\' in the end!', {
+				autoClose: 1000,
+			});
+
 			// Doing the same dolphinSelect with the next criteria in the list:
 			switch (this.criteria) {
 					case 'firstCriteriaHealth':

@@ -671,6 +671,7 @@ export default {
 					evaluationBehaviourStore.requestBodiesBehaviour[k]["created_at"] = localStorage.getItem('created_at') as string;
 				}
 			}
+			// Reset checkboxes
 			for(let i = 0; i <= 4; i++){
 				for(let j = 0; j < 3; j++){
 					if (this.CheckboxArray[i][j] === true){
@@ -678,6 +679,8 @@ export default {
 					}
 				}
 			}
+			// Reset comments
+			
 			dataInBody = true;
 			localStorage.setItem('dataInBody', dataInBody.toString());
 		},
@@ -808,6 +811,10 @@ async showDateInputAlert() {
 				this.storeCheckedValues();
 				console.log(evaluationBehaviourStore.requestBodiesBehaviour)
 				
+				toast.success('Saved temporarily. Click \'Finish Tests\' in the end!', {
+					autoClose: 1000,
+				});
+
 				// Doing the same dolphinSelect with the next criteria in the list:
 				switch (this.criteria) {
 					case 'firstCriteriaBehaviour':

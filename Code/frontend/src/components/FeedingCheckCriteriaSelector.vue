@@ -592,6 +592,7 @@ export default {
 					}
 				}
 			}
+			// Reset checkboxes
 			for(let i = 0; i <= 4; i++){
 				for(let j = 0; j < 3; j++){
 					if (this.CheckboxArray[i][j] === true){
@@ -599,6 +600,14 @@ export default {
 					}
 				}
 			}
+			// Reset comments
+			this.body_condition_score_comments = '';
+			this.weight_measured_comments = '';
+			this.kcal_calculations_comments = '';
+			this.blood_hydration_comments = '';
+			this.fish_quality_comments = '';
+			this.fish_variety_comments = '';
+			
 			dataInBody = true;
 			localStorage.setItem('dataInBody', dataInBody.toString());
 		},
@@ -761,6 +770,11 @@ async showDateInputAlert() {
      		if (confirmed) {
 				this.storeCheckedValues();
 				console.log(evaluationFeedingStore.requestBodiesFeeding)
+				
+				toast.success('Saved temporarily. Click \'Finish Tests\' in the end!', {
+					autoClose: 1000,
+				});
+				
 				// Doing the same dolphinSelect with the next criteria in the list:
 				switch (this.criteria) {
 					case 'firstCriteriaNutrition':

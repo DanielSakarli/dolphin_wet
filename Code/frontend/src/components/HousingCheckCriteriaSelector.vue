@@ -486,6 +486,7 @@ export default {
 					}
 				}
 			}
+			// Reset checkboxes
 			for(let i = 0; i <= 8; i++){
 				for(let j = 0; j < 3; j++){
 					if (this.CheckboxArray[i][j] === true){
@@ -493,6 +494,17 @@ export default {
 					}
 				}
 			}
+			// Reset comments
+			this.enclosure_barrier_safety_comments = '';
+			this.foreign_body_ingestion_comments = '';
+			this.pool_design_comments = '';
+			this.forced_loneliness_comments = '';
+			this.water_quality_comments = '';
+			this.water_temperature_comments = '';
+			this.sufficient_shade_comments = '';
+			this.reflecting_colours_comments = '';
+			this.acoustic_comfort_comments = '';
+			
 			dataInBody = true;
 			localStorage.setItem('dataInBody', dataInBody.toString());
 		},
@@ -651,6 +663,10 @@ async showDateInputAlert() {
      		if (confirmed) {
 				this.storeCheckedValues();
 				console.log(evaluationHousingStore.requestBodiesHousing)
+				
+				toast.success('Saved temporarily. Click \'Finish Tests\' in the end!', {
+					autoClose: 1000,
+				});
 				
 				// Doing the same dolphinSelect with the next criteria in the list:
 				switch (this.criteria) {
