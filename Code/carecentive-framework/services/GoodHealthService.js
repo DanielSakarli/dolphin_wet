@@ -115,6 +115,7 @@ class GoodHealthService {
 					'records_external_disease_comments',
 					'eye_photo_path',
 					'teeth_photo_path',
+					'odontogramm_photo_path',
 					'marks_photo_path',
 					'created_at',
 					'updated_at'
@@ -177,6 +178,7 @@ class GoodHealthService {
 					'records_external_disease_comments',
 					'eye_photo_path',
 					'teeth_photo_path',
+					'odontogramm_photo_path',
 					'marks_photo_path',
 					'created_at',
 					'updated_at'

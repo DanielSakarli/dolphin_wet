@@ -148,6 +148,7 @@ app.post('/api/setup_session_storage', (req, res, next) => {
 		req.session.photo_path = {
 			eye_photo_path: [],
 			teeth_photo_path: [],
+			odontogramm_photo_path: [],
 			marks_photo_path: []
 		};
 		req.session.file_path = []; //file_path; // For the nutrition section, laboratory data files
@@ -191,10 +192,10 @@ app.use('/api/behaviour', behaviour);
 //app.post('/api/photo', uploadPhoto);
 app.post('/api/file', uploadFile);
 app.get('/api/export-csv', csvWriter);
+// For example eye, teeth, odontogramm, or rake mark image files
 app.use('/api/images', express.static(path.join(__dirname,'uploads/images'))); //gets the images with the url http://localhost:3309/images/ + filename
+// Laboratory data files: e.g. food quality
 app.use('/api/files', express.static(path.join(__dirname,'uploads/files'))); //gets the files with the url http://localhost:3309/files/ + filename
-console.log('Path to images: ', path.join(__dirname,'uploads/images'));
-console.log('Path to files: ', path.join(__dirname,'uploads/files'));
 
 /**
  * Custom routes

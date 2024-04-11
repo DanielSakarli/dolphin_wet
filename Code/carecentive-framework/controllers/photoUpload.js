@@ -4,8 +4,6 @@ require('dotenv').config();
 const multer = require('multer');
 const { validationResult } = require('express-validator');
 const { isUserAuth } = require('./authSwitch');
-let photo_path;
-let photo_type;
 let currentIndex = 0;
 
 // set storage engine
@@ -15,7 +13,7 @@ const storage = multer.diskStorage({
 	},
 	filename: (req, file, cb) => {
       const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1e9);
-      req.session.photo_type = req.body.photo_type; // Either 'eye', 'teeth' or 'marks'
+      req.session.photo_type = req.body.photo_type; // Either 'eye', 'teeth', 'odontogramm', or 'marks'
       console.log(req.session.photo_type);
       req.session.dolphin_name = req.body.dolphin_name; // The name of the dolphin, so picture is later on assignable to a dolphin
       console.log(req.session.dolphin_name);
@@ -32,12 +30,12 @@ const storage = multer.diskStorage({
         console.log('I am here: ' + req.session.photo_path.eye_photo_path);
         if(req.session.photo_path.eye_photo_path === ''){ //If empty, so session storage has just been initialized
           //First photo in the list
-          req.session.photo_path.eye_photo_path = apiUrl + '/images/' + `${uniqueSuffix}${path.extname(
+          req.session.photo_path.eye_photo_path = apiUrl + '/api/images/' + `${uniqueSuffix}${path.extname(
             file.originalname
           )}`;
         } else {
           //Commaseparated list of photo paths if several photos to upload
-          req.session.photo_path.eye_photo_path = req.session.photo_path.eye_photo_path + ',' + apiUrl + '/images/' + `${uniqueSuffix}${path.extname(
+          req.session.photo_path.eye_photo_path = req.session.photo_path.eye_photo_path + ',' + apiUrl + '/api/images/' + `${uniqueSuffix}${path.extname(
             file.originalname
           )}`;
         }
@@ -48,27 +46,43 @@ const storage = multer.diskStorage({
         if(req.session.photo_path.teeth_photo_path === ''){ //If empty, so session storage has just been initialized
           //First photo in the list
           console.log('I am here');
-          req.session.photo_path.teeth_photo_path = apiUrl + '/images/' + `${uniqueSuffix}${path.extname(
+          req.session.photo_path.teeth_photo_path = apiUrl + '/api/images/' + `${uniqueSuffix}${path.extname(
             file.originalname
           )}`;
         } else {
           //Commaseparated list of photo paths if several photos to upload
-          req.session.photo_path.teeth_photo_path = req.session.photo_path.teeth_photo_path + ',' + apiUrl + '/images/' + `${uniqueSuffix}${path.extname(
+          req.session.photo_path.teeth_photo_path = req.session.photo_path.teeth_photo_path + ',' + apiUrl + '/api/images/' + `${uniqueSuffix}${path.extname(
             file.originalname
           )}`;
         }
         console.log(req.session.photo_path.teeth_photo_path);
       }
-      if(req.session.photo_type === 'marks'){
-        console.log('I am here: ' + req.session.photo_path.marks_photo_path);
-        if(req.session.photo_path.marks_photo_path === ''){ //If empty, so session storage has just been initialized
+      if(req.session.photo_type === 'odontogramm'){
+        console.log('I am here');
+        if(req.session.photo_path.odontogramm_photo_path === ''){ //If empty, so session storage has just been initialized
           //First photo in the list
-          req.session.photo_path.marks_photo_path = apiUrl + '/images/' + `${uniqueSuffix}${path.extname(
+          console.log('I am here');
+          req.session.photo_path.odontogramm_photo_path = apiUrl + '/api/images/' + `${uniqueSuffix}${path.extname(
             file.originalname
           )}`;
         } else {
           //Commaseparated list of photo paths if several photos to upload
-          req.session.photo_path.marks_photo_path = req.session.photo_path.marks_photo_path + ',' + apiUrl + '/images/' + `${uniqueSuffix}${path.extname(
+          req.session.photo_path.odontogramm_photo_path = req.session.photo_path.odontogramm_photo_path + ',' + apiUrl + '/api/images/' + `${uniqueSuffix}${path.extname(
+            file.originalname
+          )}`;
+        }
+        console.log(req.session.photo_path.odontogramm_photo_path);
+      }
+      if(req.session.photo_type === 'marks'){
+        console.log('I am here: ' + req.session.photo_path.marks_photo_path);
+        if(req.session.photo_path.marks_photo_path === ''){ //If empty, so session storage has just been initialized
+          //First photo in the list
+          req.session.photo_path.marks_photo_path = apiUrl + '/api/images/' + `${uniqueSuffix}${path.extname(
+            file.originalname
+          )}`;
+        } else {
+          //Commaseparated list of photo paths if several photos to upload
+          req.session.photo_path.marks_photo_path = req.session.photo_path.marks_photo_path + ',' + apiUrl + '/api/images/' + `${uniqueSuffix}${path.extname(
             file.originalname
           )}`;
         }
@@ -123,6 +137,7 @@ async function uploadPhoto(req, res, next) {
     req.session.photo_path = {
       eye_photo_path: '',
       teeth_photo_path: '',
+      odontogramm_photo_path: '',
       marks_photo_path: ''
     };
     currentIndex = 0; // Reset the index before each photo upload

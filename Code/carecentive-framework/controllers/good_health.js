@@ -39,9 +39,6 @@ async function setResult(req, res, next) {
 		// Reset the photo_path in session storage, so no duplicate photo paths
 		//req.session.photo_path = {};
 		//console.log('App.use Photo_path in session storage: ' + req.session.photo_path);
-		console.log('Photo path in req.session in good_health.js: ' + req.session.photo_path.eye_photo_path);
-		console.log('Photo path in req.session in good_health.js: ' + req.session.photo_path.teeth_photo_path);
-		console.log('Photo path in req.session in good_health.js: ' + req.session.photo_path.marks_photo_path);
 			
 		if(req.session.photo_path) {
 			// attach userID to test result in req.body
@@ -52,6 +49,7 @@ async function setResult(req, res, next) {
 
 			console.log('Photo path in req.session in good_health.js: ' + req.session.photo_path.eye_photo_path);
 			console.log('Photo path in req.session in good_health.js: ' + req.session.photo_path.teeth_photo_path);	
+			console.log('Photo path in req.session in good_health.js: ' + req.session.photo_path.odontogramm_photo_path);
 			console.log('Photo path in req.session in good_health.js: ' + req.session.photo_path.marks_photo_path);
 
 			//First check if session storage exists at all	
@@ -86,6 +84,22 @@ async function setResult(req, res, next) {
 				}
 				
 				}
+
+			if(req.session.photo_path.odontogramm_photo_path != '')
+				{
+					console.log('Photo path in req.session in good_health.js: ' + req.session.photo_path.odontogramm_photo_path);
+				// Iterate over the arrays in test_result
+				
+					// Check if the dolphin_name in the array is 'Dolly'
+					if (test_result.dolphin_name === req.session.dolphin_name) {
+					// Append teeth_photo_path to the array
+					test_result.odontogramm_photo_path = req.session.photo_path.odontogramm_photo_path.toString();
+					//fileData = fs.readFileSync(test_result.teeth_photo_path);
+					//test_result.image = fileData;
+					console.log(fileData);
+					}
+				}
+
 			if(req.session.photo_path.marks_photo_path != '')
 				{
 					console.log('Photo path in req.session in good_health.js: ' + req.session.photo_path.marks_photo_path);
@@ -95,8 +109,7 @@ async function setResult(req, res, next) {
 					if (test_result.dolphin_name === req.session.dolphin_name) {
 					// Append marks_photo_path to the array
 					test_result.marks_photo_path = req.session.photo_path.marks_photo_path.toString();
-				}
-				
+					}
 				}
 		///////////////////////////////////////////
         // TEST
@@ -116,7 +129,7 @@ async function setResult(req, res, next) {
 				res.status(201).json(insertedResult);
 		} else {
 		///////////////////////////////////////////////////////////////////////////
-		// No photo path to upload
+		// NO photo path to upload
 		// attach userID to test result in req.body
 			let test_result = req.body;
 			
