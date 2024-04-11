@@ -142,14 +142,15 @@ app.use(function(req, res, next) {
 // Set up the session storage
 app.post('/api/setup_session_storage', (req, res, next) => {
 	try {
-		const { photo_type, eye_photo_path, teeth_photo_path, odontogramm_photo_path, dolphin_name, file_path } = req.body;
-		req.session.photo_type= [];// = photo_type; // Either 'eye', 'teeth' or 'marks'
-		req.session.dolphin_name = []; //dolphin_name;
+		//const { photo_type, eye_photo_path, teeth_photo_path, odontogramm_photo_path, dolphin_name, file_path } = req.body;
+		// Initializing with 'empty', because if we initialize with '' the sessionStorage isn´t actually initialized
+		req.session.photo_type= 'empty';// = photo_type; // Either 'eye', 'teeth' or 'marks'
+		req.session.dolphin_name = 'empty'; //dolphin_name;
 		req.session.photo_path = {
-			eye_photo_path: [],
-			teeth_photo_path: [],
-			odontogramm_photo_path: [],
-			marks_photo_path: []
+			eye_photo_path: 'empty',
+			teeth_photo_path: 'empty',
+			odontogramm_photo_path: 'empty',
+			marks_photo_path: 'empty'
 		};
 		req.session.file_path = []; //file_path; // For the nutrition section, laboratory data files
 		// Index used in photoUpload.js to upload for different dolphins in the

@@ -13,7 +13,8 @@ const storage = multer.diskStorage({
 	},
 	filename: (req, file, cb) => {
       const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1e9);
-      req.session.photo_type = req.body.photo_type; // Either 'eye', 'teeth', 'odontogramm', or 'marks'
+      //req.session.photo_type = req.body.photo_type; // Either 'eye', 'teeth', 'odontogramm', or 'marks'
+      
       console.log('Photo type in req.session: ', req.session.photo_type);
       req.session.dolphin_name = req.body.dolphin_name; // The name of the dolphin, so picture is later on assignable to a dolphin
       console.log('Dolphin name in req.session: ',req.session.dolphin_name);
@@ -26,9 +27,9 @@ const storage = multer.diskStorage({
       
       // Save photo path in session storage for later access in good_health.js to save the photo paths in the database
       const apiUrl = process.env.MYSQL_HOST + ':' + process.env.HTTP_PORT;
-      if(req.session.photo_type === 'eye'){
+      if(req.body.photo_type === 'eye'){
         console.log('I am here: ' + req.session.photo_path.eye_photo_path);
-        if(req.session.photo_path.eye_photo_path === ''){ //If empty, so session storage has just been initialized
+        if(req.session.photo_path.eye_photo_path === 'empty'){ //If empty, so session storage has just been initialized
           //First photo in the list
           req.session.photo_path.eye_photo_path = apiUrl + '/api/images/' + `${uniqueSuffix}${path.extname(
             file.originalname
@@ -41,9 +42,9 @@ const storage = multer.diskStorage({
         }
         console.log(req.session.photo_path.eye_photo_path);
       }
-      if(req.session.photo_type === 'teeth'){
+      if(req.body.photo_type === 'teeth'){
         console.log('I am here');
-        if(req.session.photo_path.teeth_photo_path === ''){ //If empty, so session storage has just been initialized
+        if(req.session.photo_path.teeth_photo_path === 'empty'){ //If empty, so session storage has just been initialized
           //First photo in the list
           console.log('I am here');
           req.session.photo_path.teeth_photo_path = apiUrl + '/api/images/' + `${uniqueSuffix}${path.extname(
@@ -57,9 +58,9 @@ const storage = multer.diskStorage({
         }
         console.log(req.session.photo_path.teeth_photo_path);
       }
-      if(req.session.photo_type === 'odontogramm'){
+      if(req.body.photo_type === 'odontogramm'){
         console.log('I am here');
-        if(req.session.photo_path.odontogramm_photo_path === ''){ //If empty, so session storage has just been initialized
+        if(req.session.photo_path.odontogramm_photo_path === 'empty'){ //If empty, so session storage has just been initialized
           //First photo in the list
           console.log('I am here');
           req.session.photo_path.odontogramm_photo_path = apiUrl + '/api/images/' + `${uniqueSuffix}${path.extname(
@@ -73,9 +74,9 @@ const storage = multer.diskStorage({
         }
         console.log(req.session.photo_path.odontogramm_photo_path);
       }
-      if(req.session.photo_type === 'marks'){
+      if(req.body.photo_type === 'marks'){
         console.log('I am here: ' + req.session.photo_path.marks_photo_path);
-        if(req.session.photo_path.marks_photo_path === ''){ //If empty, so session storage has just been initialized
+        if(req.session.photo_path.marks_photo_path === 'empty'){ //If empty, so session storage has just been initialized
           //First photo in the list
           req.session.photo_path.marks_photo_path = apiUrl + '/api/images/' + `${uniqueSuffix}${path.extname(
             file.originalname
@@ -131,15 +132,15 @@ async function uploadPhoto(req, res, next) {
 		}
     
     console.log('currentIndex: ',currentIndex);
-    
-    req.session.photo_type = ''; // Reset the photo_path in session storage, so no duplicate photo paths
+    console.log('marks photo path in photoUpload.js: ',req.session.photo_path.marks_photo_path);
+    /*req.session.photo_type = ''; // Reset the photo_path in session storage, so no duplicate photo paths
     req.session.dolphin_name = '';
     req.session.photo_path = {
       eye_photo_path: '',
       teeth_photo_path: '',
       odontogramm_photo_path: '',
-      marks_photo_path: ''
-    };
+      //marks_photo_path: ''
+    };*/
     currentIndex = 0; // Reset the index before each photo upload
     //console.log('Photo path accessed  from session storage: ' + photo_path.eye_photo_path.toString());
 

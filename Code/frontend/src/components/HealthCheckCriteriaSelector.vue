@@ -1172,15 +1172,24 @@ async showDateInputAlert() {
 			}	
     	},
 		async photoUpload(dolphin_name: string) {
+		// This method is called for one dolphin at a time
 		// Check if there is a photo to upload
 		if(this.formData != null) {
 		// Find the FormData object with the desired dolphin_name
 		console.log('Length formData array: ', this.formData.length);
-		let desiredFormData = null;
+		let desiredFormData = [];
 		for (let i = 0; i < this.formData.length; i++) {
 		if (this.formData[i].get('dolphin_name') === dolphin_name) {
-			desiredFormData = this.formData[i];
-			console.log('Found the desired form data: ', ...desiredFormData);
+			if(desiredFormData.length === 0)
+			{
+				//If desiredFormData doesn't exist yet, create a new array with the form data
+				desiredFormData[0] = this.formData[i];
+			}else
+			{
+				//If desiredFormData already exists for this dolphin, push the new form data to the array desiredFormData
+				desiredFormData.push(this.formData[i]);
+				console.log('Found the desired form data: ', ...desiredFormData);
+			}
 			//break;
 		}
 		}
@@ -1188,28 +1197,29 @@ async showDateInputAlert() {
 		//const desiredFormData = this.formData.find(formData => formData.get('dolphin_name') === dolphin_name);
 		
 		console.log('Desired form data:', desiredFormData);
-		if (desiredFormData) {
+		if (desiredFormData.length != 0) {
 		// Setup the session storage
 		console.log('Form Data accessed in HealthCheckCriteriaSelector.vue');
 		console.log(...desiredFormData);
 		
-		// Send the photo to the server
-		await axios
-        .post(this.urlPostPhoto, desiredFormData, {
-          headers: {
-            'Content-Type': 'multipart/form-data',
-          },
-          withCredentials: true,
-        })
-        .then((response) => {
-          console.log('Response:', response.data);
-        })
-        .catch((error) => {
-          console.error('Error:', error);
-        });
-    
+		for(let i = 0; i < desiredFormData.length; i++){
+			// Send the photo to the server
+			await axios
+			.post(this.urlPostPhoto, desiredFormData[i], {
+			headers: {
+				'Content-Type': 'multipart/form-data',
+			},
+			withCredentials: true,
+			})
+			.then((response) => {
+			console.log('Response:', response.data);
+			})
+			.catch((error) => {
+			console.error('Error:', error);
+			});
+		}
       //Reset the form data
-      desiredFormData = null; 
+      desiredFormData = []; 
       //console.log('Resetted form data: '+ this.formData);
     }
   	}

@@ -40,7 +40,7 @@ async function setResult(req, res, next) {
 		//req.session.photo_path = {};
 		//console.log('App.use Photo_path in session storage: ' + req.session.photo_path);
 			
-		if(req.session.photo_path) {
+		if(req.session.photo_path.eye_photo_path != 'empty' || req.session.photo_path.teeth_photo_path != 'empty' || req.session.photo_path.odontogramm_photo_path != 'empty' || req.session.photo_path.marks_photo_path != 'empty') {
 			// attach userID to test result in req.body
 			let fileData;
 			
@@ -53,7 +53,7 @@ async function setResult(req, res, next) {
 			console.log('Photo path in req.session in good_health.js: ' + req.session.photo_path.marks_photo_path);
 
 			//First check if session storage exists at all	
-			if(req.session.photo_path.eye_photo_path != '')
+			if(req.session.photo_path.eye_photo_path != 'empty')
 				{
 					console.log('Photo path in req.session in good_health.js: ' + req.session.photo_path.eye_photo_path);
 				// Iterate over the arrays in test_result
