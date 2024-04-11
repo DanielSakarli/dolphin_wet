@@ -377,13 +377,19 @@
 					<ion-checkbox v-model="CheckboxArray[2][2]" @click="handleClick(2,2)">Score 2</ion-checkbox>
 				</ion-item>
 				<CheckComments @update-comment="updateEyeLesionsComments"/>
-				<ion-item>
-					<ion-label><br>Upload your photos here:</ion-label>
+				<!--<ion-item>
+					<ion-label><br>Upload your eye photos here:</ion-label>
 				</ion-item>
 				<ion-item>
 					<PhotoUpload @form-submitted="handleFormSubmittedEyePhoto"/>
-				</ion-item>
+				</ion-item>-->
 			</ion-list>
+		</ion-card>
+		<ion-card v-if="dolphinSelect && dolphinSelect.length !== 0 && criteria === 'secondCriteriaHealth'">
+			<ion-card-title style="margin-bottom: 15px;">Upload your eye photos here</ion-card-title>
+			<ion-item>
+			<PhotoUpload @form-submitted="handleFormSubmittedEyePhoto"/>
+			</ion-item>
 		</ion-card>
 		<ion-card v-if="dolphinSelect && dolphinSelect.length !== 0 && criteria === 'secondCriteriaHealth'">
 			<ion-card-title>{{$t('fourthSubCriteriaHealth')}}</ion-card-title>		
@@ -421,13 +427,25 @@
 					<ion-checkbox v-model="CheckboxArray[5][2]" @click="handleClick(5,2)">Score 2</ion-checkbox>
 				</ion-item>
 				<CheckComments @update-comment="updateMouthExamComments"/>
-				<ion-item>
-					<ion-label><br>Upload your photos here:</ion-label>
+				<!--<ion-item>
+					<ion-label><br>Upload your teeth photos here:</ion-label>
 				</ion-item>
-				<ion-item>
+				<ion-item style="display: flex; justify-content: center; align-items: center;">
 					<PhotoUpload @form-submitted="handleFormSubmittedTeethPhoto"/>
 				</ion-item>
+				<ion-item>
+					<ion-label><br>Upload your odontogramms here:</ion-label>
+				</ion-item>
+				<ion-item style="display: flex; flex-direction: column;">					
+					<PhotoUpload @form-submitted="handleFormSubmittedOdontogrammPhoto"/>
+				</ion-item>-->
 			</ion-list>
+		</ion-card>
+		<ion-card v-if="dolphinSelect && dolphinSelect.length !== 0 && criteria === 'thirdCriteriaHealth'">
+			<ion-card-title style="margin-bottom: 15px;">Upload your teeth photos here</ion-card-title>
+			<ion-item>
+			<PhotoUpload @form-submitted="handleFormSubmittedTeethPhoto"/>
+			</ion-item>
 		</ion-card>
 		<ion-card v-if="dolphinSelect && dolphinSelect.length !== 0 && criteria === 'thirdCriteriaHealth'">
 			<ion-card-title>{{$t('seventhSubCriteriaHealth')}}</ion-card-title>	
@@ -440,6 +458,12 @@
 				</ion-item>
 				<CheckComments @update-comment="updateOralLesionsRecordsComments"/>
 			</ion-list>
+		</ion-card>
+		<ion-card v-if="dolphinSelect && dolphinSelect.length !== 0 && criteria === 'thirdCriteriaHealth'">
+			<ion-card-title style="margin-bottom: 15px;">Upload your odontogramms here</ion-card-title>
+			<ion-item>
+			<PhotoUpload @form-submitted="handleFormSubmittedOdontogrammPhoto"/>
+			</ion-item>
 		</ion-card>
 		<ion-card v-if="dolphinSelect && dolphinSelect.length !== 0 && criteria === 'fourthCriteriaHealth'">
 			<ion-card-title>{{$t('eigthSubCriteriaHealth')}}</ion-card-title>	
@@ -499,11 +523,17 @@
 					<ion-checkbox v-model="CheckboxArray[11][2]" @click="handleClick(11,2)">Score 2</ion-checkbox>
 				</ion-item>
 				<CheckComments @update-comment="updateMarksComments"/>
-				<ion-label><br>Upload your photos here:</ion-label>
+				<!--<ion-label><br>Upload your photos here:</ion-label>
 				<ion-item>
 					<PhotoUpload @form-submitted="handleFormSubmittedMarksPhoto"/>
-				</ion-item>
+				</ion-item>-->
 			</ion-list>
+		</ion-card>
+		<ion-card v-if="dolphinSelect && dolphinSelect.length !== 0 && criteria === 'sixthCriteriaHealth'">
+			<ion-card-title style="margin-bottom: 15px;">Upload your marks photos here</ion-card-title>
+			<ion-item>
+			<PhotoUpload @form-submitted="handleFormSubmittedMarksPhoto"/>
+			</ion-item>
 		</ion-card>
 		<ion-card v-if="dolphinSelect && dolphinSelect.length !== 0 && criteria === 'sixthCriteriaHealth'">
 			<ion-card-title>{{$t('thirteenthSubCriteriaHealth')}}</ion-card-title>	
@@ -630,6 +660,7 @@ export default {
 				photo_type: '',
 				eye_photo_path: '',
 				teeth_photo_path: '',
+				odontogramm_photo_path: '',
 				marks_photo_path: '',
 				file_path: '',
 				dolphin_name: '',
@@ -666,6 +697,7 @@ export default {
 				photo_type: '',
 				eye_photo_path: '',
 				teeth_photo_path: '',
+				odontogramm_photo_path: '',
 				marks_photo_path: '',
 				file_path: '',
 				dolphin_name: '',
@@ -688,6 +720,36 @@ export default {
 			console.log(...this.formData);
 			}
 		},
+		handleFormSubmittedOdontogrammPhoto(files: File[]) {
+		if (files && this.dolphinSelect != '') {
+			
+			this.setupSessionStorage = {
+				photo_type: '',
+				eye_photo_path: '',
+				teeth_photo_path: '',
+				odontogramm_photo_path: '',
+				marks_photo_path: '',
+				file_path: '',
+				dolphin_name: '',
+			};
+			console.log('Form Data accessed in HealthCheckCriteriaSelector.vue:');
+			const newFormData = new FormData();
+			if(this.dolphinSelect != ''){
+				newFormData.append('dolphin_name', this.dolphinSelect || ''); // Append the dolphin name with a default value of an empty string
+			}
+			newFormData.append('photo_type', 'odontogramm'); //Append the photo type
+			// Then append the rest of the fields
+			
+			console.log('Number of pictures: ' + files.length);
+
+			for (let i = 0; i < files.length; i++) {
+				console.log(files[i]);
+				newFormData.append('files', files[i]);
+			}
+			this.formData.push(newFormData);
+			console.log(...this.formData);
+			}
+		},
 		handleFormSubmittedTeethPhoto(files: File[]) {
 			if (files && this.dolphinSelect != '') {
 			
@@ -695,6 +757,7 @@ export default {
 				photo_type: '',
 				eye_photo_path: '',
 				teeth_photo_path: '',
+				odontogramm_photo_path: '',
 				marks_photo_path: '',
 				file_path: '',
 				dolphin_name: '',
@@ -723,6 +786,7 @@ export default {
 				photo_type: '',
 				eye_photo_path: '',
 				teeth_photo_path: '',
+				odontogramm_photo_path: '',
 				marks_photo_path: '',
 				file_path: '',
 				dolphin_name: '',
@@ -1174,6 +1238,8 @@ async showDateInputAlert() {
 <style scoped>
 ion-item {
 	margin: 5px;
+	display: flex;
+	flex-direction: column;					
 }
 ion-card {
 	margin: 5px 15px;

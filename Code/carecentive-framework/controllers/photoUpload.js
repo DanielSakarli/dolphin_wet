@@ -14,9 +14,9 @@ const storage = multer.diskStorage({
 	filename: (req, file, cb) => {
       const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1e9);
       req.session.photo_type = req.body.photo_type; // Either 'eye', 'teeth', 'odontogramm', or 'marks'
-      console.log(req.session.photo_type);
+      console.log('Photo type in req.session: ', req.session.photo_type);
       req.session.dolphin_name = req.body.dolphin_name; // The name of the dolphin, so picture is later on assignable to a dolphin
-      console.log(req.session.dolphin_name);
+      console.log('Dolphin name in req.session: ',req.session.dolphin_name);
       cb(
         null, // currently no error handling
         `${uniqueSuffix}${path.extname(

@@ -29,6 +29,7 @@
         "records_external_disease_comments": "",
         "eye_photo_path": "",
         "teeth_photo_path": "",
+        "odontogramm_photo_path": "",
         "marks_photo_path": "",
         "created_at": ""
     },
@@ -62,6 +63,7 @@
         "records_external_disease_comments": "",
         "eye_photo_path": "",
         "teeth_photo_path": "",
+        "odontogramm_photo_path": "",
         "marks_photo_path": "",
         "created_at": ""
     },
@@ -95,6 +97,7 @@
         "records_external_disease_comments": "",
         "eye_photo_path": "",
         "teeth_photo_path": "",
+        "odontogramm_photo_path": "",
         "marks_photo_path": "",
         "created_at": ""
     },    
@@ -128,6 +131,7 @@
         "records_external_disease_comments": "",
         "eye_photo_path": "",
         "teeth_photo_path": "",
+        "odontogramm_photo_path": "",
         "marks_photo_path": "",
         "created_at": ""
     },
@@ -161,6 +165,7 @@
         "records_external_disease_comments": "",
         "eye_photo_path": "",
         "teeth_photo_path": "",
+        "odontogramm_photo_path": "",
         "marks_photo_path": "",
         "created_at": ""
     },
@@ -194,6 +199,7 @@
         "records_external_disease_comments": "",
         "eye_photo_path": "",
         "teeth_photo_path": "",
+        "odontogramm_photo_path": "",
         "marks_photo_path": "",
         "created_at": ""
     },
@@ -227,6 +233,7 @@
         "records_external_disease_comments": "",
         "eye_photo_path": "",
         "teeth_photo_path": "",
+        "odontogramm_photo_path": "",
         "marks_photo_path": "",
         "created_at": ""
     }
