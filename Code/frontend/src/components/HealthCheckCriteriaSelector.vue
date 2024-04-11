@@ -100,6 +100,10 @@
 					<h3>{{ $t('sixthSubCriteriaHealth') }}</h3>
 						<li>Score 0: {{ $t('score0Health6') }}</li>
 						<li>Score 2: {{ $t('score2Health6') }}</li>
+					<h3>Odontogramm Template:</h3>
+						<img src="../../public/Odontogramm_template.png" alt="Odontogramm Tempplate">		
+					<h4>Odontogramm Color Schema:</h4>
+						<img src="../../public/Odontogramm_color_schema.png" alt="Odontogramm Color Schema">
 					<h3>{{ $t('seventhSubCriteriaHealth') }}</h3>
 						<li>Score 0: {{ $t('score0Health7') }}</li>
 						<li>Score 2: {{ $t('score2Health7') }}</li>
