@@ -43,7 +43,6 @@ async function setResult(req, res, next) {
 		if(req.session.photo_path.eye_photo_path != 'empty' || req.session.photo_path.teeth_photo_path != 'empty' || req.session.photo_path.odontogramm_photo_path != 'empty' || req.session.photo_path.marks_photo_path != 'empty') {
 			// attach userID to test result in req.body
 			let fileData;
-			
 			let test_result = req.body;
 			test_result = { user_id: userID, user_name: userName, ...test_result };
 
@@ -69,7 +68,7 @@ async function setResult(req, res, next) {
 				
 				}
 
-			if(req.session.photo_path.teeth_photo_path != '')
+			if(req.session.photo_path.teeth_photo_path != 'empty')
 				{
 					console.log('Photo path in req.session in good_health.js: ' + req.session.photo_path.teeth_photo_path);
 				// Iterate over the arrays in test_result
@@ -85,7 +84,7 @@ async function setResult(req, res, next) {
 				
 				}
 
-			if(req.session.photo_path.odontogramm_photo_path != '')
+			if(req.session.photo_path.odontogramm_photo_path != 'empty')
 				{
 					console.log('Photo path in req.session in good_health.js: ' + req.session.photo_path.odontogramm_photo_path);
 				// Iterate over the arrays in test_result
@@ -100,7 +99,7 @@ async function setResult(req, res, next) {
 					}
 				}
 
-			if(req.session.photo_path.marks_photo_path != '')
+			if(req.session.photo_path.marks_photo_path != 'empty')
 				{
 					console.log('Photo path in req.session in good_health.js: ' + req.session.photo_path.marks_photo_path);
 				// Iterate over the arrays in test_result

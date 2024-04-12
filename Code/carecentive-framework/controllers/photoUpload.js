@@ -132,7 +132,7 @@ async function uploadPhoto(req, res, next) {
 		}
     
     console.log('currentIndex: ',currentIndex);
-    console.log('marks photo path in photoUpload.js: ',req.session.photo_path.marks_photo_path);
+    //console.log('marks photo path in photoUpload.js: ',req.session.photo_path.marks_photo_path);
     /*req.session.photo_type = ''; // Reset the photo_path in session storage, so no duplicate photo paths
     req.session.dolphin_name = '';
     req.session.photo_path = {

@@ -656,7 +656,7 @@ export default {
 			records_external_disease_comments: '',
 			
 			formData: [],
-			setupSessionStorage: {
+			sessionStorage: {
 				photo_type: '',
 				eye_photo_path: '',
 				teeth_photo_path: '',
@@ -693,7 +693,7 @@ export default {
 		handleFormSubmittedEyePhoto(files: File[]) {
 		if (files && this.dolphinSelect != '') {
 			
-			this.setupSessionStorage = {
+			this.sessionStorage = {
 				photo_type: '',
 				eye_photo_path: '',
 				teeth_photo_path: '',
@@ -723,7 +723,7 @@ export default {
 		handleFormSubmittedOdontogrammPhoto(files: File[]) {
 		if (files && this.dolphinSelect != '') {
 			
-			this.setupSessionStorage = {
+			this.sessionStorage = {
 				photo_type: '',
 				eye_photo_path: '',
 				teeth_photo_path: '',
@@ -753,7 +753,7 @@ export default {
 		handleFormSubmittedTeethPhoto(files: File[]) {
 			if (files && this.dolphinSelect != '') {
 			
-			this.setupSessionStorage = {
+			this.sessionStorage = {
 				photo_type: '',
 				eye_photo_path: '',
 				teeth_photo_path: '',
@@ -782,7 +782,7 @@ export default {
 		handleFormSubmittedMarksPhoto(files: File[]) {
 		if (files && this.dolphinSelect != '') {
 			
-			this.setupSessionStorage = {
+			this.sessionStorage = {
 				photo_type: '',
 				eye_photo_path: '',
 				teeth_photo_path: '',
@@ -807,6 +807,20 @@ export default {
 			}
 			this.formData.push(newFormData);
 			}
+		},
+		async setupSessionStorage() {
+			// We have to send a req.body to set up the session storage in backend
+			// Even though the req.body is not being used in the backend. I don´t
+			// know why, just leave it there, otherwise req.session will not work
+			// in the backend
+			await axios
+				.post(baseUrl + '/api/setup_session_storage', this.sessionStorage, { withCredentials: true })
+				.then((response) => {
+				console.log('Response setup session storage:', response.data);
+				})
+				.catch((error) => {
+				console.error('Error:', error);
+				});
 		},
 		// Method to collect the checked checkboxes and give request Body the scores
 		storeCheckedValues() {
@@ -1017,18 +1031,11 @@ async showDateInputAlert() {
 				//await this.photoUpload();
 				await this.confirmTestDate();
 				await this.storeCheckedValues();
-				// Setting up session storage
-				await axios
-				.post(baseUrl + '/api/setup_session_storage', this.setupSessionStorage, { withCredentials: true })
-				.then((response) => {
-				console.log('Response setup session storage:', response.data);
-				})
-				.catch((error) => {
-				console.error('Error:', error);
-				});
 				console.log(this.CheckboxArray);
 				for(let i = 0; i < evaluationHealthStore.requestBodiesHealth.length; i++){
 					console.log(evaluationHealthStore.requestBodiesHealth[i]["dolphin_name"]);
+					// Setting up session storage
+					await this.setupSessionStorage();
 					await this.photoUpload(evaluationHealthStore.requestBodiesHealth[i]["dolphin_name"]);
 					console.log('This is sent to backend: ', evaluationHealthStore.requestBodiesHealth[i]);
 					await axios
@@ -1198,7 +1205,6 @@ async showDateInputAlert() {
 		
 		console.log('Desired form data:', desiredFormData);
 		if (desiredFormData.length != 0) {
-		// Setup the session storage
 		console.log('Form Data accessed in HealthCheckCriteriaSelector.vue');
 		console.log(...desiredFormData);
 		
