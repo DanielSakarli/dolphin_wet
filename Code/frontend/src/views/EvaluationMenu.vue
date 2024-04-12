@@ -28,16 +28,16 @@
 				>{{ $t('principleEmotionalState') }}</ion-button
 			>
 		</ion-content>
-		<ion-button fill="clear" size="large" @click="getStandardsAndGudielines">
-			Download Standards and Guidelines
+		<ion-button fill="clear" size="large" @click="getStandardsAndGuidelines">
+			Standards & Guidelines
 			<ion-icon slot="start" :icon="download"></ion-icon>
 		</ion-button>
 		<ion-button fill="clear" size="large" @click="getDolphinWETMatrix">
-			Download Dolphin WET Matrix
+			Dolphin WET Matrix
 			<ion-icon slot="start" :icon="download"></ion-icon>
 		</ion-button>
 		<ion-button fill="clear" size="large" @click="showDolphins">
-			Download List of Dolphins
+			List of Dolphins
 			<ion-icon slot="start" :icon="download"></ion-icon>
 		</ion-button>
 	</ion-page>
@@ -96,7 +96,7 @@ export default {
 					console.error(e);
 				});
 		},
-		async getStandardsAndGudielines() {
+		async getStandardsAndGuidelines() {
 			// Create a link
 			const link = document.createElement('a');
 

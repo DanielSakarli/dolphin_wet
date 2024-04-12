@@ -16,7 +16,7 @@
 						<ion-select-option value="de">German</ion-select-option>
 					</ion-select>
     			</ion-item> -->
-		<HealthCheckCriteriaSelector />
+		<HealthCheckCriteriaSelector ref="healthCheckRef" />
 	</ion-page>
 </template>
 
@@ -92,6 +92,7 @@ export default defineComponent({
 								console.log('Confirm Okay');
 								this.$router.push('/folder/Evaluate');
 								localStorage.setItem('dataInBody', 'false');
+								(this.$refs.healthCheckRef as any).resetData();
 								resolve(void 0);
 							},
 						},

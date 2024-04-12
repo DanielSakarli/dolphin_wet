@@ -617,6 +617,7 @@ export default {
 		localStorage.setItem('dataInBody', 'false');
 		localStorage.setItem('created_at', '');
 		evaluationHealthStore.resetBodies();
+		this.resetData();
 	},
 	data() {
 		return {
@@ -690,6 +691,31 @@ export default {
 			dataInBody = true;
 			localStorage.setItem('dataInBody', dataInBody.toString());
     	},
+		async resetData() {
+			console.log('resetData() called');
+			// Reset the checkboxes
+			for(let i = 0; i <= 12; i++){
+				for(let j = 0; j < 3; j++){
+					if (this.CheckboxArray[i][j] === true){
+						this.CheckboxArray[i][j] = false;
+					}
+				}
+			}
+			// Reset comments
+			this.normal_floatability_comments = '';
+			this.records_normal_floatability_comments = '';
+			this.inspection_eye_lesions_comments = '';
+			this.response_visual_cues_comments = '';
+			this.records_eye_lesions_comments = '';
+			this.mouth_exam_comments = '';
+			this.records_oral_lesions_comments = '';
+			this.records_gastric_abnormality_comments = '';
+			this.inspection_respiratory_comments = '';
+			this.force_expiration_comments = '';
+			this.records_respiratory_disease_comments = '';
+			this.inspection_marks_comments = '';
+			this.records_external_disease_comments = '';
+		},
 		handleFormSubmittedEyePhoto(files: File[]) {
 		if (files && this.dolphinSelect != '') {
 			
@@ -880,29 +906,9 @@ export default {
 					}
 				}
 			}
-			// Reset the checkboxes
-			for(let i = 0; i <= 12; i++){
-				for(let j = 0; j < 3; j++){
-					if (this.CheckboxArray[i][j] === true){
-						this.CheckboxArray[i][j] = false;
-					}
-				}
-			}
-			// Reset comments
-			this.normal_floatability_comments = '';
-			this.records_normal_floatability_comments = '';
-			this.inspection_eye_lesions_comments = '';
-			this.response_visual_cues_comments = '';
-			this.records_eye_lesions_comments = '';
-			this.mouth_exam_comments = '';
-			this.records_oral_lesions_comments = '';
-			this.records_gastric_abnormality_comments = '';
-			this.inspection_respiratory_comments = '';
-			this.force_expiration_comments = '';
-			this.records_respiratory_disease_comments = '';
-			this.inspection_marks_comments = '';
-			this.records_external_disease_comments = '';
-			
+			// Reset the data in checkboxes and comments
+			this.resetData();
+			// There is non-saved data (not sent to backend yet)
 			dataInBody = true;
 			localStorage.setItem('dataInBody', dataInBody.toString());
 		},
