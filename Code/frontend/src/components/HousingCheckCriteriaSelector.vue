@@ -621,6 +621,8 @@ async showDateInputAlert() {
 			const confirmed = true; //confirm(this.$t('savingDataNext'));
      		if (confirmed) {
 				this.storeCheckedValues();
+				// Flag to only show network error alert once instead of several times after another
+				let alertShown = false;
 				console.log(this.CheckboxArray);
 				for(let i = 0; i < evaluationHousingStore.requestBodiesHousing.length; i++){
 					await axios
@@ -648,8 +650,9 @@ async showDateInputAlert() {
 							.catch((error) => {
 								console.error('Error:', error.response.data);
 								const targetUrl = `/detailHousing`;
-								if(error.message === 'Network Error') {
+								if(error.message === 'Network Error' && !alertShown) {
 									//console.log('Inside error catch block');
+									alertShown = true;
 									toast.error('Data upload failed! Check internet connectivity.', {
 										autoClose: 2000,
 									});

@@ -1037,6 +1037,8 @@ async showDateInputAlert() {
 				//await this.photoUpload();
 				await this.confirmTestDate();
 				await this.storeCheckedValues();
+				// Flag to only show network error alert once instead of several times after another
+				let alertShown = false;
 				console.log(this.CheckboxArray);
 				for(let i = 0; i < evaluationHealthStore.requestBodiesHealth.length; i++){
 					console.log(evaluationHealthStore.requestBodiesHealth[i]["dolphin_name"]);
@@ -1069,7 +1071,8 @@ async showDateInputAlert() {
 							.catch((error) => {
 								console.error('Error:', error.response.data);
 								const targetUrl = `/detailHealth`;
-								if(error.message === 'Network Error') {
+								if(error.message === 'Network Error' && !alertShown) {
+									alertShown = true;
 									//console.log('Inside error catch block');
 									toast.error('Data upload failed! Check internet connectivity.', {
 										autoClose: 2000,

@@ -720,7 +720,8 @@ async showDateInputAlert() {
 				//Store the checked values in the request body
 				this.storeCheckedValues();
 				console.log(this.CheckboxArray);
-				
+				// Flag to only show network error alert once instead of several times after another
+				let alertShown = false;
 				console.log('Reached this');
 				for(let i = 0; i < evaluationFeedingStore.requestBodiesFeeding.length; i++){
 					/*for(const data in evaluationFeedingStore.requestBodiesFeeding[i]){
@@ -748,9 +749,11 @@ async showDateInputAlert() {
 									localStorage.setItem('created_at', '');
 								}
 							})
-							.catch((error) => {								
+							.catch((error) => {	
+														
 								const targetUrl = `/detailFeeding`;
-								if(error.message === 'Network Error') {
+								if(error.message === 'Network Error' && !alertShown) {
+									alertShown = true;	
 									//console.log('Inside error catch block');
 									toast.error('Data upload failed! Check internet connectivity.', {
 										autoClose: 2000,
