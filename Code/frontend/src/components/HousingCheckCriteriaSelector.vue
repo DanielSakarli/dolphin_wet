@@ -486,6 +486,12 @@ export default {
 					}
 				}
 			}
+			
+			this.resetData();
+			dataInBody = true;
+			localStorage.setItem('dataInBody', dataInBody.toString());
+		},
+		async resetData() {
 			// Reset checkboxes
 			for(let i = 0; i <= 8; i++){
 				for(let j = 0; j < 3; j++){
@@ -504,9 +510,6 @@ export default {
 			this.sufficient_shade_comments = '';
 			this.reflecting_colours_comments = '';
 			this.acoustic_comfort_comments = '';
-			
-			dataInBody = true;
-			localStorage.setItem('dataInBody', dataInBody.toString());
 		},
 		//Methods to update the comments
 		updateEnclosureSafetyComments(comment: string) {
@@ -645,7 +648,9 @@ async showDateInputAlert() {
 							.catch((error) => {
 								console.error('Error:', error.response.data);
 								const targetUrl = `/detailHousing`;
-								toast.error('Data upload failed! Check internet connectivity.', {
+								if(error.message === 'Network Error') {
+									//console.log('Inside error catch block');
+									toast.error('Data upload failed! Check internet connectivity.', {
 										autoClose: 2000,
 									});
 									setTimeout(() => {
@@ -654,6 +659,7 @@ async showDateInputAlert() {
 										localStorage.setItem('created_at', '');
 										this.$router.push(targetUrl);
 									}, 3000);
+								}
 							});
 				}
 			}

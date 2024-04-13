@@ -4,7 +4,9 @@
 			<ion-menu content-id="main-content" type="overlay">
 				<ion-content>
 					<ion-list id="page-list">
-						<ion-list-header>Dolphin WET</ion-list-header>
+						<ion-list-header @click="navigateTo('/folder/Evaluate', 0)"
+							>Dolphin WET</ion-list-header
+						>
 						<ion-menu-toggle
 							:auto-hide="false"
 							v-for="(p, i) in appPages"
@@ -103,6 +105,8 @@ export default defineComponent({
 							text: 'Lose Data',
 							handler: () => {
 								console.log('Confirm Okay');
+								localStorage.setItem('dataInBody', 'false');
+								localStorage.setItem('backButtonClicked', 'false');
 								router.back();
 								resolve(void 0);
 							},
@@ -124,14 +128,14 @@ export default defineComponent({
 				console.log('url: ', url);
 				console.log('index: ', index);
 				if (url === '/home') {
-					// Page needs a full reload when pressing on 'Logout' and
-					// then go to /home, but I don´t know why
-					router.push(url).then(() => window.location.reload());
-
 					//Clear storages when user logs out
 					//sessionStorage.clear();
+					localStorage.setItem('token', '');
 					localStorage.setItem('dataInBody', 'false');
 					localStorage.setItem('backButtonClicked', 'false');
+					// Page needs a full reload when pressing on 'Logout' and
+					// then go to /home, but I don´t know why
+					router.push(url); //.then(() => window.location.reload());
 				} else {
 					//Otherwise a normal router.push(url) is sufficient
 					router.push(url);

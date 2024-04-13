@@ -74,46 +74,49 @@
 									:key="feedingRecord.feeding_record_id"
 								>
 									<ion-label>
-										<p>Dolphin Name: {{ feedingRecord.dolphin_name }}</p>
+										<p>Record created at: {{ feedingRecord.created_at }}</p>
+										<p>Dolphin name: {{ feedingRecord.dolphin_name }}</p>
 										<p>User ID: {{ feedingRecord.user_id }}</p>
 										<p>
-											Body Condition Score:
+											Body condition score:
 											{{ feedingRecord.body_condition_score }}
 										</p>
 										<p>
-											Weight Measured [kg]: {{ feedingRecord.weight_measured }}
-										</p>
-										<p>
-											Kcal Calculations: {{ feedingRecord.kcal_calculations }}
-										</p>
-										<p>Blood Hydration: {{ feedingRecord.blood_hydration }}</p>
-										<p>Fish Quality: {{ feedingRecord.fish_quality }}</p>
-										<p>Fish Variety: {{ feedingRecord.fish_variety }}</p>
-										<p>
-											Body Condition Score comments:
+											Body condition score comments:
 											{{ feedingRecord.body_condition_score_comments || 'N/A' }}
+										</p>
+										<p>
+											Weight measured [kg]: {{ feedingRecord.weight_measured }}
 										</p>
 										<p>
 											Weight measured comments:
 											{{ feedingRecord.weight_measured_comments || 'N/A' }}
 										</p>
 										<p>
+											Kcal calculations: {{ feedingRecord.kcal_calculations }}
+										</p>
+										<p>
 											Kcal calculation comments:
 											{{ feedingRecord.kcal_calculations_comments || 'N/A' }}
 										</p>
+										<p>Blood hydration: {{ feedingRecord.blood_hydration }}</p>
+
 										<p>
 											Blood hydration comments:
 											{{ feedingRecord.blood_hydration_comments || 'N/A' }}
 										</p>
+										<p>Fish quality: {{ feedingRecord.fish_quality }}</p>
 										<p>
 											Fish quality comments:
 											{{ feedingRecord.fish_quality_comments || 'N/A' }}
 										</p>
+										<p>Fish variety: {{ feedingRecord.fish_variety }}</p>
+
 										<p>
 											Fish variety comments:
 											{{ feedingRecord.fish_variety_comments || 'N/A' }}
 										</p>
-										<p>Created At: {{ feedingRecord.created_at }}</p>
+
 										<!--<p>Updated At: {{ feedingRecord.updated_at }}</p>-->
 									</ion-label>
 								</ion-item>
@@ -136,64 +139,80 @@
 									:key="HousingRecord.housing_record_id"
 								>
 									<ion-label>
-										<p>Dolphin Name: {{ HousingRecord.dolphin_name }}</p>
+										<p>Record created at: {{ HousingRecord.created_at }}</p>
+										<p>Dolphin name: {{ HousingRecord.dolphin_name }}</p>
 										<p>
-											Enclosure Barrier Safety:
+											Enclosure barrier safety:
 											{{ HousingRecord.enclosure_barrier_safety }}
 										</p>
 										<p>
-											Foreign Body Ingestion:
-											{{ HousingRecord.foreign_body_ingestion }}
-										</p>
-										<p>Pool Design: {{ HousingRecord.pool_design }}</p>
-										<p>
-											Forced Loneliness: {{ HousingRecord.forced_loneliness }}
-										</p>
-										<p>Water Quality: {{ HousingRecord.water_quality }}</p>
-										<p>
-											Sufficient Shade: {{ HousingRecord.sufficient_shade }}
-										</p>
-										<p>
-											Acoustic Comfort: {{ HousingRecord.acoustic_comfort }}
-										</p>
-										<p>
-											Enclosure/Barrier Safety Comments:
+											Enclosure barrier safety comments:
 											{{
 												HousingRecord.enclosure_barrier_safety_comments || 'N/A'
 											}}
 										</p>
 										<p>
-											Foreign Body Ingestion Comments:
+											Foreign body ingestion:
+											{{ HousingRecord.foreign_body_ingestion }}
+										</p>
+										<p>
+											Foreign body ingestion comments:
 											{{
 												HousingRecord.foreign_body_ingestion_comments || 'N/A'
 											}}
 										</p>
+										<p>Pool design: {{ HousingRecord.pool_design }}</p>
+
 										<p>
-											Pool Design Comments:
+											Pool design comments:
 											{{ HousingRecord.pool_design_comments || 'N/A' }}
 										</p>
 										<p>
-											Forced Loneliness Comments:
+											Forced loneliness: {{ HousingRecord.forced_loneliness }}
+										</p>
+
+										<p>
+											Forced loneliness comments:
 											{{ HousingRecord.forced_loneliness_comments || 'N/A' }}
 										</p>
+										<p>Water quality: {{ HousingRecord.water_quality }}</p>
+
 										<p>
-											Water Quality Comments:
+											Water quality comments:
 											{{ HousingRecord.water_quality_comments || 'N/A' }}
 										</p>
 										<p>
-											Water Temperature Comments:
+											Water temperature: {{ HousingRecord.water_temperature }}
+										</p>
+
+										<p>
+											Water temperature comments:
 											{{ HousingRecord.water_temperature_comments || 'N/A' }}
 										</p>
 										<p>
-											Sufficient Shade Comments:
+											Sufficient shade: {{ HousingRecord.sufficient_shade }}
+										</p>
+
+										<p>
+											Sufficient shade comments:
 											{{ HousingRecord.sufficient_shade_comments || 'N/A' }}
 										</p>
 										<p>
-											Acoustic Comfort Comments:
+											Reflecting colours: {{ HousingRecord.reflecting_colours }}
+										</p>
+
+										<p>
+											Reflecting colours comments:
+											{{ HousingRecord.reflecting_colours_comments || 'N/A' }}
+										</p>
+										<p>
+											Acoustic comfort: {{ HousingRecord.acoustic_comfort }}
+										</p>
+
+										<p>
+											Acoustic comfort comments:
 											{{ HousingRecord.acoustic_comfort_comments || 'N/A' }}
 										</p>
-										<p>Created At: {{ HousingRecord.created_at }}</p>
-										<p>Updated At: {{ HousingRecord.updated_at }}</p>
 									</ion-label>
 								</ion-item>
 							</ion-list>
@@ -215,63 +234,135 @@
 									:key="HealthRecord.health_record_id"
 								>
 									<ion-label>
-										<p>Dolphin Name: {{ HealthRecord.dolphin_name }}</p>
+										<p>Record created at: {{ HealthRecord.created_at }}</p>
+
+										<p>Dolphin name: {{ HealthRecord.dolphin_name }}</p>
 										<p>
-											Normal Floatability:
+											Normal floatability:
 											{{ HealthRecord.normal_floatability }}
 										</p>
-										<p>Eye Lesions: {{ HealthRecord.eye_lesions }}</p>
-										<p>Visual Cues: {{ HealthRecord.visual_cues }}</p>
-										<p>Mouth Exam: {{ HealthRecord.mouth_exam }}</p>
 										<p>
-											Respiratory Disease:
-											{{ HealthRecord.respiratory_disease }}
-										</p>
-										<p>Force Expiration: {{ HealthRecord.force_expiration }}</p>
-										<p>
-											Gastric Abnormality:
-											{{ HealthRecord.gastric_abnormality }}
-										</p>
-										<p>
-											External Disease Signs:
-											{{ HealthRecord.external_disease_signs }}
-										</p>
-										<p>
-											Normal Floatability Comments:
+											Normal floatability comments:
 											{{ HealthRecord.normal_floatability_comments || 'N/A' }}
 										</p>
 										<p>
-											Eye Lesions Comments:
-											{{ HealthRecord.eye_lesions_comments || 'N/A' }}
+											Records normal floatability:
+											{{ HealthRecord.records_normal_floatability }}
 										</p>
 										<p>
-											Visual Cues Comments:
-											{{ HealthRecord.visual_cues_comments || 'N/A' }}
+											Records normal floatability comments:
+											{{
+												HealthRecord.records_normal_floatability_comments ||
+												'N/A'
+											}}
 										</p>
 										<p>
-											Mouth Exam Comments:
+											Inspection eye lesions:
+											{{ HealthRecord.inspection_eye_lesions }}
+										</p>
+
+										<p>
+											Inspection eye lesions comments:
+											{{
+												HealthRecord.inspection_eye_lesions_comments || 'N/A'
+											}}
+										</p>
+										<p>
+											Response visual cues:
+											{{ HealthRecord.response_visual_cues }}
+										</p>
+
+										<p>
+											Response visual cues comments:
+											{{ HealthRecord.response_visual_cues_comments || 'N/A' }}
+										</p>
+										<p>
+											Records eye lesions:
+											{{ HealthRecord.records_eye_lesions }}
+										</p>
+
+										<p>
+											Records eye lesions comments:
+											{{ HealthRecord.records_eye_lesions_comments || 'N/A' }}
+										</p>
+										<p>Mouth exam: {{ HealthRecord.mouth_exam }}</p>
+
+										<p>
+											Mouth exam comments:
 											{{ HealthRecord.mouth_exam_comments || 'N/A' }}
 										</p>
 										<p>
-											Respiratory Disease Comments:
-											{{ HealthRecord.respiratory_disease_comments || 'N/A' }}
+											Records oral lesions:
+											{{ HealthRecord.records_oral_lesions }}
+										</p>
+
+										<p>
+											Records oral lesions comments:
+											{{ HealthRecord.records_oral_lesions_comments || 'N/A' }}
 										</p>
 										<p>
-											Force Expiration Comments:
+											Records gastric abnormality:
+											{{ HealthRecord.records_gastric_abnormality }}
+										</p>
+
+										<p>
+											Records gastric abnormality comments:
+											{{
+												HealthRecord.records_gastric_abnormality_comments ||
+												'N/A'
+											}}
+										</p>
+										<p>
+											Inspection respiratory disease:
+											{{ HealthRecord.inspection_respiratory }}
+										</p>
+
+										<p>
+											Inspection respiratory disease comments:
+											{{
+												HealthRecord.inspection_respiratory_comments || 'N/A'
+											}}
+										</p>
+										<p>
+											Forced expiration:
+											{{ HealthRecord.force_expiration }}
+										</p>
+
+										<p>
+											Forced expiration comments:
 											{{ HealthRecord.force_expiration_comments || 'N/A' }}
 										</p>
 										<p>
-											Gastric Abnormality Comments:
-											{{ HealthRecord.gastric_abnormality_comments || 'N/A' }}
+											Records respiratory disease:
+											{{ HealthRecord.records_respiratory_disease }}
 										</p>
+
 										<p>
-											External Disease Signs Comments:
+											Records respiratory disease comments:
 											{{
-												HealthRecord.external_disease_signs_comments || 'N/A'
+												HealthRecord.records_respiratory_disease_comments ||
+												'N/A'
 											}}
 										</p>
-										<p>Created At: {{ HealthRecord.created_at }}</p>
-										<p>Updated At: {{ HealthRecord.updated_at }}</p>
+										<p>
+											Inspection rake marks:
+											{{ HealthRecord.inspection_marks }}
+										</p>
+
+										<p>
+											Inspection rake marks comments:
+											{{ HealthRecord.inspection_marks_comments || 'N/A' }}
+										</p>
+										<p>
+											Records external diseases:
+											{{ HealthRecord.records_external_disease }}
+										</p>
+										<p>
+											Records external diseases comments:
+											{{
+												HealthRecord.records_external_disease_comments || 'N/A'
+											}}
+										</p>
 									</ion-label>
 								</ion-item>
 							</ion-list>
@@ -427,6 +518,7 @@ interface HousingRecord {
 	water_quality: number;
 	water_temperature: number;
 	sufficient_shade: number;
+	reflecting_colours: number;
 	acoustic_comfort: number;
 	enclosure_barrier_safety_comments: string | null;
 	foreign_body_ingestion_comments: string | null;
@@ -435,6 +527,7 @@ interface HousingRecord {
 	water_quality_comments: string | null;
 	water_temperature_comments: string | null;
 	sufficient_shade_comments: string | null;
+	reflecting_colours_comments: string | null;
 	acoustic_comfort_comments: string | null;
 	created_at: string;
 	updated_at: string;
@@ -448,21 +541,35 @@ interface HealthRecord {
 	dolphin_id: number;
 	dolphin_name: string;
 	normal_floatability: number;
-	eye_lesions: number;
-	visual_cues: number;
+	records_normal_floatability: number;
+	inspection_eye_lesions: number;
+	response_visual_cues: number;
+	records_eye_lesions: number;
 	mouth_exam: number;
-	respiratory_disease: number;
+	records_oral_lesions: number;
+	records_gastric_abnormality: number;
+	inspection_respiratory: number;
 	force_expiration: number;
-	gastric_abnormality: number;
-	external_disease_signs: number;
+	records_respiratory_disease: number;
+	inspection_marks: number;
+	records_external_disease: number;
 	normal_floatability_comments: string | null;
-	eye_lesions_comments: string | null;
-	visual_cues_comments: string | null;
+	records_normal_floatability_comments: string | null;
+	inspection_eye_lesions_comments: string | null;
+	response_visual_cues_comments: string | null;
+	records_eye_lesions_comments: string | null;
 	mouth_exam_comments: string | null;
-	respiratory_disease_comments: string | null;
+	records_oral_lesions_comments: string | null;
+	records_gastric_abnormality_comments: string | null;
+	inspection_respiratory_comments: string | null;
 	force_expiration_comments: string | null;
-	gastric_abnormality_comments: string | null;
-	external_disease_signs_comments: string | null;
+	records_respiratory_disease_comments: string | null;
+	inspection_marks_comments: string | null;
+	records_external_disease_comments: string | null;
+	eye_photo_path: string | null;
+	teeth_photo_path: string | null;
+	odontogramm_photo_path: string | null;
+	marks_photo_path: string | null;
 	created_at: string;
 	updated_at: string;
 }
@@ -549,7 +656,7 @@ export default {
 			this.dataHousing = null;
 			this.dataBehaviour = null;
 			this.dataHealth = null;
-			if (this.principleSelect === 'Feeding') {
+			if (this.principleSelect === this.$t('principleNutrition')) {
 				this.urlFeeding =
 					this.urlFeeding + this.dolphinSelect + '&numMonths=' + this.numMonths; //default value numMonths=3
 				await axios
@@ -563,7 +670,7 @@ export default {
 						console.error(e);
 						this.urlFeeding = baseUrl + '/api/good_feeding?name='; //reset the url
 					});
-			} else if (this.principleSelect === 'Housing/Environment') {
+			} else if (this.principleSelect === this.$t('principleEnvironment')) {
 				this.urlHousing =
 					this.urlHousing + this.dolphinSelect + '&numMonths=' + this.numMonths; //default value numMonths=3
 				await axios
@@ -577,7 +684,7 @@ export default {
 						console.error(e);
 						this.urlHousing = baseUrl + '/api/good_housing?name='; //reset the url
 					});
-			} else if (this.principleSelect === 'Behaviour') {
+			} else if (this.principleSelect === this.$t('principleBehaviour')) {
 				this.urlBehaviour =
 					this.urlBehaviour +
 					this.dolphinSelect +
@@ -594,7 +701,7 @@ export default {
 						console.error(e);
 						this.urlBehaviour = baseUrl + '/api/behaviour?name='; //reset the url
 					});
-			} else if (this.principleSelect === 'Health') {
+			} else if (this.principleSelect === this.$t('principleHealth')) {
 				this.urlHealth =
 					this.urlHealth + this.dolphinSelect + '&numMonths=' + this.numMonths; //default value numMonths=3
 				await axios

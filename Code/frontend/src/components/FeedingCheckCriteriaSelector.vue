@@ -592,6 +592,11 @@ export default {
 					}
 				}
 			}
+			this.resetData();
+			dataInBody = true;
+			localStorage.setItem('dataInBody', dataInBody.toString());
+		},
+		async resetData() {
 			// Reset checkboxes
 			for(let i = 0; i <= 4; i++){
 				for(let j = 0; j < 3; j++){
@@ -607,11 +612,7 @@ export default {
 			this.blood_hydration_comments = '';
 			this.fish_quality_comments = '';
 			this.fish_variety_comments = '';
-			
-			dataInBody = true;
-			localStorage.setItem('dataInBody', dataInBody.toString());
 		},
-		
 		//Methods to update the comments
 		updateBodyConditionScoreComments(comment: string) {
       		this.body_condition_score_comments = comment;
@@ -747,10 +748,11 @@ async showDateInputAlert() {
 									localStorage.setItem('created_at', '');
 								}
 							})
-							.catch((error) => {
-								console.error('Error:', error.response.data);
+							.catch((error) => {								
 								const targetUrl = `/detailFeeding`;
-								toast.error('Data upload failed! Check internet connectivity.', {
+								if(error.message === 'Network Error') {
+									//console.log('Inside error catch block');
+									toast.error('Data upload failed! Check internet connectivity.', {
 										autoClose: 2000,
 									});
 									setTimeout(() => {
@@ -759,6 +761,7 @@ async showDateInputAlert() {
 										localStorage.setItem('created_at', '');
 										this.$router.push(targetUrl);
 									}, 3000);
+								}
 							});
 				}
 			}

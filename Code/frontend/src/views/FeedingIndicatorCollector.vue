@@ -17,7 +17,7 @@
 						<ion-select-option value="de">German</ion-select-option>
 					</ion-select>
     			</ion-item> -->
-		<FeedingCheckCriteriaSelector />
+		<FeedingCheckCriteriaSelector ref="feedingCheckRef" />
 
 		<!--<ion-footer>
 			<ion-toolbar>
@@ -146,6 +146,7 @@ export default defineComponent({
 								console.log('Confirm Okay');
 								//this.$router.back();
 								this.$router.push('/folder/Evaluate');
+								(this.$refs.feedingCheckRef as any).resetData();
 								localStorage.setItem('dataInBody', 'false');
 								resolve(void 0);
 							},

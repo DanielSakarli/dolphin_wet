@@ -16,7 +16,7 @@
 						<ion-select-option value="de">German</ion-select-option>
 					</ion-select>
     			</ion-item> -->
-		<FeedingCheckCriteriaSelector />
+		<BehaviourCheckCriteriaSelector ref="behaviourCheckRef" />
 	</ion-page>
 </template>
 
@@ -34,7 +34,7 @@ import {
 	alertController,
 } from '@ionic/vue';
 // Import customized components
-import FeedingCheckCriteriaSelector from '@/components/BehaviourCheckCriteriaSelector.vue';
+import BehaviourCheckCriteriaSelector from '@/components/BehaviourCheckCriteriaSelector.vue';
 import CheckComments from '@/components/CheckComments.vue';
 import { defineComponent } from 'vue';
 
@@ -52,7 +52,7 @@ export default defineComponent({
 		IonContent,
 		IonPage,
 		IonButton,
-		FeedingCheckCriteriaSelector,
+		BehaviourCheckCriteriaSelector,
 		CheckComments,
 		IonButtons,
 		IonBackButton,
@@ -94,6 +94,7 @@ export default defineComponent({
 							handler: () => {
 								console.log('Confirm Okay');
 								this.$router.push('/folder/Evaluate');
+								(this.$refs.behaviourCheckRef as any).resetData();
 								localStorage.setItem('dataInBody', 'false');
 								resolve(void 0);
 							},

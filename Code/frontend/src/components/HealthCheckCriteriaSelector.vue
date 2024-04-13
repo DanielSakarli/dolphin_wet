@@ -1069,7 +1069,9 @@ async showDateInputAlert() {
 							.catch((error) => {
 								console.error('Error:', error.response.data);
 								const targetUrl = `/detailHealth`;
-								toast.error('Data upload failed! Check internet connectivity.', {
+								if(error.message === 'Network Error') {
+									//console.log('Inside error catch block');
+									toast.error('Data upload failed! Check internet connectivity.', {
 										autoClose: 2000,
 									});
 									setTimeout(() => {
@@ -1078,6 +1080,7 @@ async showDateInputAlert() {
 										localStorage.setItem('created_at', '');
 										this.$router.push(targetUrl);
 									}, 3000);
+								}
 							});
 				}
 				////////////////////////////////////////////////////////////////

@@ -16,7 +16,7 @@
 						<ion-select-option value="de">German</ion-select-option>
 					</ion-select>
     			</ion-item> -->
-		<HousingCheckCriteriaSelector />
+		<HousingCheckCriteriaSelector ref="housingCheckRef" />
 	</ion-page>
 </template>
 
@@ -96,6 +96,7 @@ export default defineComponent({
 							text: 'Lose Data',
 							handler: () => {
 								console.log('Confirm Okay');
+								(this.$refs.housingCheckRef as any).resetData();
 								this.$router.push('/folder/Evaluate');
 								localStorage.setItem('dataInBody', 'false');
 								resolve(void 0);

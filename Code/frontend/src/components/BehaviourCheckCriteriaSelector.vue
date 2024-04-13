@@ -671,6 +671,11 @@ export default {
 					evaluationBehaviourStore.requestBodiesBehaviour[k]["created_at"] = localStorage.getItem('created_at') as string;
 				}
 			}
+			this.resetData();
+			dataInBody = true;
+			localStorage.setItem('dataInBody', dataInBody.toString());
+		},
+		async resetData() {
 			// Reset checkboxes
 			for(let i = 0; i <= 4; i++){
 				for(let j = 0; j < 3; j++){
@@ -681,8 +686,6 @@ export default {
 			}
 			// Reset comments
 			
-			dataInBody = true;
-			localStorage.setItem('dataInBody', dataInBody.toString());
 		},
 		async confirmTestDate() {
 		return new Promise(async (resolve, reject) => {
@@ -792,7 +795,9 @@ async showDateInputAlert() {
 							.catch((error) => {
 								console.error('Error:', error.response.data);
 								const targetUrl = `/detailBehaviour`;
-								toast.error('Data upload failed! Check internet connectivity.', {
+								if(error.message === 'Network Error') {
+									//console.log('Inside error catch block');
+									toast.error('Data upload failed! Check internet connectivity.', {
 										autoClose: 2000,
 									});
 									setTimeout(() => {
@@ -801,6 +806,7 @@ async showDateInputAlert() {
 										localStorage.setItem('created_at', '');
 										this.$router.push(targetUrl);
 									}, 3000);
+								}
 							});
 				}
 			}
