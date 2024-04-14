@@ -15,12 +15,12 @@ app.set('trust proxy', 1); // test to trust the proxy with a cookie
 // Try setting up a session storage for the photo path of the picture upload
 app.use(session({
 	secret: 'secret',
-  	cookie: { secure: true, sameSite: 'none', httpOnly: false, maxAge: 1800000000 }, //300 minutes = 6 hours expiring of session cookie
+  	cookie: { secure: true, sameSite: 'none', httpOnly: true, maxAge: 1800000000 }, //300 minutes = 6 hours expiring of session cookie
 	saveUninitialized: true,
 	store: store,
 	resave: true,
 	proxy: true,
-	name: 'cookie' //Try giving a name to the cookie
+	name: 'connect.sid' //Try giving a name to the cookie
 }));
 
 setup.setup();
