@@ -126,6 +126,9 @@ const corsOptions = {
     }
   },
   credentials: true,
+  secure: true,
+  httpOnly: false,
+  sameSite: 'none'
 };
 app.use(cors(corsOptions));
 
