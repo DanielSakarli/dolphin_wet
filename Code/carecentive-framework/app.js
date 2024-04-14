@@ -17,7 +17,8 @@ app.use(session({
   	cookie: { maxAge: 1800000000 }, //300 minutes = 6 hours expiring of session cookie
 	saveUninitialized: true,
 	store: store,
-	resave: true
+	resave: true,
+	name: 'cookie' //Try giving a name to the cookie
 }));
 
 setup.setup();
@@ -128,7 +129,8 @@ const corsOptions = {
   credentials: true,
   secure: true,
   httpOnly: false,
-  sameSite: 'none'
+  sameSite: 'none',
+  name: 'cookie' //Try giving a name to the cookie
 };
 app.use(cors(corsOptions));
 
