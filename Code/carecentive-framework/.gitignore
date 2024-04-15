@@ -41,6 +41,8 @@ build/Release
 # Dependency directories
 node_modules/
 jspm_packages/
+# Except this dependency which I adapted for my project
+!node_modules/@carecentive/carecentive-core/services/
 
 # Snowpack dependency directory (https://snowpack.dev/)
 web_modules/
