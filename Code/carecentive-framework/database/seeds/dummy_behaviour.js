@@ -169,7 +169,7 @@ async function loadDummyBehaviour(knex) {
 		avoidance_pool_areas: Math.floor(Math.random() * 2) + 1,
 	};
 
-	return knex('appropriate_behaviour').insert([
+	return knex('nuernberg_appropriate_behaviour').insert([
 		testGoodHealthResult1,
 		testGoodHealthResult2,
 		testGoodHealthResult3,

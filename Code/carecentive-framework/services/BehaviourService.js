@@ -1,8 +1,8 @@
 const DolphinDAO = require('../dao/dolphinDao');
 const { DolphinError } = require('../source/Errors');
-const Behaviour = require('../models/Behaviour');
 const { raw } = require('objection');
 const { getLastNMonths } = require('../source/CustomSource');
+const User = require('@carecentive/carecentive-core/models/User');
 
 class BehaviourService {
 	/**
@@ -45,6 +45,16 @@ class BehaviourService {
 			}
 
 			const { dolphin_id } = dolphin_data;
+			// Check if user has a role and if, which role (i.e. which zoo he is working at)
+			const user = await User.query().findById(result.user_id).withGraphFetched('roles');
+			const roleName = user.roles[0].name;
+			if (roleName) {
+			console.log('role: ', roleName);
+			const location = roleName;
+			const modelName = `${location}Behaviour`;
+			const Behaviour = require(`../models/${modelName}`); // Get the respective model, depending on which zoo the user works at
+			////////////////////////////////////////////////
+			
 			// Inserts data into database.			
 			if (result.created_at !== "") {
 				const insertedResult = await Behaviour.query().insert({
@@ -61,79 +71,289 @@ class BehaviourService {
 				});
 				return insertedResult;
 			}
+		} else {
+			throw new Error('USER_HAS_NO_ROLE');
+		}
 		} catch (error) {
 			throw error;
 		}
 	}
-
 	/**
-	 * Gets all appropriate behaviour test results by given dolphin and month.
-	 * @param {string} name - The name of dolphin
-	 * @param {number} year - Year
-	 * @param {number} month - Month
-	 * @returns {Promise<Array>} list of query result
+	 * Gets the test result of behaviour of given date.
+	 * @param {string} date - date in format `yyyy-mm-dd`.
 	 */
-	static async getTestResultByDolphinAndMonth(name, year, month) {
-		try {
-			const result = await Behaviour.query()
-				.where('dolphin_name', '=', name)
-				.where(
-					raw(
-						`EXTRACT(MONTH FROM created_at) = ? AND EXTRACT(YEAR FROM created_at) = ?`,
-						[month, year]
-					)
-				);
-			return result;
-		} catch (error) {
-			throw error;
+static async getTestResultWithDate(date, userID) {
+	try {
+		// Check if user has a role and if, which role (i.e. which zoo he is working at)
+		const user = await User.query().findById(userID).withGraphFetched('roles');
+		const roleName = user.roles[0].name;
+		if (roleName) {
+		console.log('role: ', roleName);
+		const location = roleName;
+		const modelName = `${location}Behaviour`;
+		const Behaviour = require(`../models/${modelName}`); // Get the respective model, depending on which zoo the user works at
+		////////////////////////////////////////////////
+
+			const result = await Behaviour.query().where(
+			raw(`DATE(created_at) = ?`, [date])
+		);
+		return result;
+		} else {
+			throw new Error('USER_HAS_NO_ROLE');
 		}
-	}
-
-	/**
-	 * Gets the test result of last N month of given dolphin. The default value of month is 3.
-	 * @param {string} name - The name of dolphin
-	 * @param {number} numMonths - The number of past months to include in the result.
-	 * @returns {Promise<Array>} list of query result
-	 */
-	static async getTestResultNMonths(name, numMonths = 3) {
-		const myDolphinDAO = new DolphinDAO();
-
-		// if this dolphin is not in database,
-		// 404: not found.
-		if (!(await myDolphinDAO.getDolphinByName(name))) {
-			throw new DolphinError(`Dolphin ${name} doesn't exist!`, 404);
-		}
-
-		// Gets the year and month numbers of last numMonths months
-		const lastNMonths = getLastNMonths(numMonths);
-		const allResultsPromises = [];
-
-		// Gets all test results in pending promise
-		// Stores them in allResultsPromises array
-		for (let i = 0; i < lastNMonths.length; i++) {
-			allResultsPromises.push(
-				BehaviourService.getTestResultByDolphinAndMonth(
-					name,
-					lastNMonths[i].year,
-					lastNMonths[i].month
-				)
-			);
-		}
-
-		// Uses Promise.all([]) to resolve them concurrently.
-		const allResults = await Promise.all(allResultsPromises);
-
-		// final return value
-		const returnedResults = {};
-
-		// Sets up the returned result
-		for (let i = 0; i < allResults.length; i++) {
-			returnedResults[`${lastNMonths[i].year}-${lastNMonths[i].month}`] =
-				allResults[i];
-		}
-
-		return returnedResults;
+	} catch (error) {
+		throw error;
 	}
 }
+
+/**
+ * Gets all behaviour test results by the given dolphin name.
+ * @returns {Promise<Array>} list of query result
+ */
+static async getAllTestResults(userID) {
+	try {
+		// Check if user has a role and if, which role (i.e. which zoo he is working at)
+		const user = await User.query().findById(userID).withGraphFetched('roles');
+		const roleName = user.roles[0].name;
+		if (roleName) {
+		console.log('role: ', roleName);
+		const location = roleName;
+		const modelName = `${location}Behaviour`;
+		const Behaviour = require(`../models/${modelName}`); // Get the respective model, depending on which zoo the user works at
+		////////////////////////////////////////////////
+
+
+		const result = await Behaviour.query();
+		return result;
+		} else {
+			throw new Error('USER_HAS_NO_ROLE');
+		}
+	} catch (error) {
+		throw error;
+	}
+}
+
+
+
+/**
+ * Gets all behaviour test results by the given dolphin name.
+ * @param {String} name - The name of dolphin
+ * @returns {Promise<Array>} list of query result
+ */
+static async getTestResultByDolphin(name, userID) {
+	try {
+		// Check if user has a role and if, which role (i.e. which zoo he is working at)
+		const user = await User.query().findById(userID).withGraphFetched('roles');
+		const roleName = user.roles[0].name;
+		if (roleName) {
+		console.log('role: ', roleName);
+		const location = roleName;
+		const modelName = `${location}Behaviour`;
+		const Behaviour = require(`../models/${modelName}`); // Get the respective model, depending on which zoo the user works at
+		////////////////////////////////////////////////
+		const result = await Behaviour.query().where('dolphin_name', '=', name);
+		return result;
+		} else {
+			throw new Error('USER_HAS_NO_ROLE');
+		}
+	} catch (error) {
+		throw error;
+	}
+}
+
+/**
+ * Gets all behaviour test results by given dolphin and month.
+ * @param {string} name - The name of dolphin
+ * @param {number} year - Year
+ * @param {number} month - Month
+ * @returns {Promise<Array>} list of query result
+ */
+static async getTestResultByDolphinAndMonth(name, year, month, userID) {
+	try {
+		// Check if user has a role and if, which role (i.e. which zoo he is working at)
+		const user = await User.query().findById(userID).withGraphFetched('roles');
+		const roleName = user.roles[0].name;
+		if (roleName) {
+		console.log('role: ', roleName);
+		const location = roleName;
+		const modelName = `${location}Behaviour`;
+		const Behaviour = require(`../models/${modelName}`); // Get the respective model, depending on which zoo the user works at
+		////////////////////////////////////////////////
+
+		const result = await Behaviour.query()
+			.where('dolphin_name', '=', name)
+			.where(
+				raw( 
+					`EXTRACT(MONTH FROM created_at) = ? AND EXTRACT(YEAR FROM created_at) = ?`,
+					[month, year]
+				)
+			);
+		return result;
+		} else {
+			throw new Error('USER_HAS_NO_ROLE');
+		}
+	} catch (error) {
+		throw error;
+	}
+}
+
+/**
+ * Gets all behaviour test results by given month.
+ * @param {number} year - Year
+ * @param {number} month - Month
+ * @returns {Promise<Array>} list of query result
+ */
+static async getTestResultByMonth(year, month, userID) {
+	try {
+		// Check if user has a role and if, which role (i.e. which zoo he is working at)
+		const user = await User.query().findById(userID).withGraphFetched('roles');
+		const roleName = user.roles[0].name;
+		if (roleName) {
+		console.log('role: ', roleName);
+		const location = roleName;
+		const modelName = `${location}Behaviour`;
+		const Behaviour = require(`../models/${modelName}`); // Get the respective model, depending on which zoo the user works at
+		////////////////////////////////////////////////
+		const result = await Behaviour.query()
+			.where(
+				raw( 
+					`EXTRACT(MONTH FROM created_at) = ? AND EXTRACT(YEAR FROM created_at) = ?`,
+					[month, year]
+				)
+			);
+		return result;
+		} else {
+			throw new Error('USER_HAS_NO_ROLE');
+		}
+	} catch (error) {
+		throw error;
+	}
+}
+
+
+
+/**
+ * Gets the test result of last N month of given dolphin. The default value of month is 3.
+ * @param {string} name - The name of dolphin
+ * @param {number} numMonths - The number of past months to include in the result.
+ * @returns {Promise<Array>} list of query result
+ */
+static async getTestResultNMonths(name, numMonths = 3, userID) {
+try {
+	const myDolphinDAO = new DolphinDAO();
+
+	// if this dolphin is not in database,
+	// 404: not found.
+	if (!(await myDolphinDAO.getDolphinByName(name))) {
+		throw new DolphinError(`Dolphin ${name} doesn't exist!`, 404);
+	}
+	// Check if user has a role and if, which role (i.e. which zoo he is working at)
+	const user = await User.query().findById(userID).withGraphFetched('roles');
+	const roleName = user.roles[0].name;
+	if (roleName) {
+	console.log('role: ', roleName);
+	
+	// Gets the year and month numbers of last numMonths months
+	const lastNMonths = getLastNMonths(numMonths);
+	const allResultsPromises = [];
+
+	// Gets all test results in pending promise
+	// Stores them in allResultsPromises array
+	for (let i = 0; i < lastNMonths.length; i++) {
+		allResultsPromises.push(
+			BehaviourService.getTestResultByDolphinAndMonth(
+				name,
+				lastNMonths[i].year,
+				lastNMonths[i].month,
+				userID
+			)
+		);
+	}
+
+	// Uses Promise.all([]) to resolve them concurrently.
+	const allResults = await Promise.all(allResultsPromises);
+
+	// final return value
+	const returnedResults = {};
+
+	// Sets up the returned result
+	for (let i = 0; i < allResults.length; i++) {
+		returnedResults[`${lastNMonths[i].year}-${lastNMonths[i].month}`] =
+			allResults[i];
+	}
+
+	return returnedResults;}
+	else {
+		throw new Error('USER_HAS_NO_ROLE');
+	}
+} catch (error) {
+	throw error;
+}
+}
+
+
+
+
+/**
+ * Gets the test result of last N month of all dolphins. The default value of month is 3.
+ * @param {number} numMonths - The number of past months to include in the result.
+ * @returns {Promise<Array>} list of query result
+ */
+static async getAllTestResultNMonths(numMonths = 3, userID) {
+try {
+		// Check if user has a role and if, which role (i.e. which zoo he is working at)
+		const user = await User.query().findById(userID).withGraphFetched('roles');
+		const roleName = user.roles[0].name;
+		if (roleName) {
+		console.log('role: ', roleName);
+		const location = roleName;
+		const modelName = `${location}Behaviour`;
+		const Behaviour = require(`../models/${modelName}`); // Get the respective model, depending on which zoo the user works at
+		////////////////////////////////////////////////
+	//const myDolphinDAO = new DolphinDAO();
+	// if this dolphin is not in database,
+	// 404: not found.
+	/*if (!(await myDolphinDAO.getDolphinByName(name))) {
+		throw new DolphinError(`Dolphin ${name} doesn't exist!`, 404);
+	}*/
+
+	// Gets the year and month numbers of last numMonths months
+	const lastNMonths = getLastNMonths(numMonths);
+	const allResultsPromises = [];
+
+	// Gets all test results in pending promise
+	// Stores them in allResultsPromises array
+	for (let i = 0; i < lastNMonths.length; i++) {
+		allResultsPromises.push(
+			BehaviourService.getTestResultByMonth(
+				lastNMonths[i].year,
+				lastNMonths[i].month,
+				userID
+			)
+		);
+	}
+
+	// Uses Promise.all([]) to resolve them concurrently.
+	const allResults = await Promise.all(allResultsPromises);
+
+	// final return value
+	const returnedResults = {};
+
+	// Sets up the returned result
+	for (let i = 0; i < allResults.length; i++) {
+		returnedResults[`${lastNMonths[i].year}-${lastNMonths[i].month}`] =
+			allResults[i];
+	}
+
+	return returnedResults;
+	} else {
+		throw new Error('USER_HAS_NO_ROLE');
+	}
+} catch (error) {
+	throw error;
+}
+}
+}
+
 
 module.exports = BehaviourService;

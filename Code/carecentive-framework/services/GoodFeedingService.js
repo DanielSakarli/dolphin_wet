@@ -4,7 +4,7 @@ const { getLastNMonths } = require('../source/CustomSource');
 const DolphinDAO = require('../dao/dolphinDao');
 const { DolphinError } = require('../source/Errors');
 const User = require('@carecentive/carecentive-core/models/User');
-const e = require('express');
+//const e = require('express');
 
 class GoodFeedingService {
 	/**

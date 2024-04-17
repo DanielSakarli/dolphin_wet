@@ -431,8 +431,116 @@ exports.up = function (knex) {
 			table.timestamps(true, true); //Timestamp: created at, updated at
 		}),
 
-		// good_behavior table
-		knex.schema.createTable('appropriate_behaviour', function (table) {
+		// nuernberg_good_behavior table
+		knex.schema.createTable('nuernberg_appropriate_behaviour', function (table) {
+			table.increments('behaviour_record_id').primary();
+			table.integer('user_id').unsigned();
+			// Foreign key constrains for user_id.
+			table
+				.foreign('user_id')
+				.references('users.id')
+				.onDelete('SET NULL')
+				.onUpdate('CASCADE');
+			table.string('user_name');	
+			table.integer('dolphin_id').unsigned().notNullable();
+			// Foreign key constrains for dolphin_id.
+			table
+				.foreign('dolphin_id')
+				.references('dolphins.dolphin_id')
+				.onDelete('CASCADE')
+				.onUpdate('CASCADE');
+			table.string('dolphin_name');
+
+			table.tinyint('environmental_enrichment').unsigned(); //1, 2, 3
+			table.string('environmental_enrichment_comments');
+			table.tinyint('affiliative_behaviour').unsigned(); //1, 3
+			table.string('affiliative_behaviour_comments');
+			table.tinyint('play_behaviour').unsigned(); //1, 3
+			table.string('play_behaviour_comments');
+			table.tinyint('socio_sexual_behaviour').unsigned(); //1, 3
+			table.string('socio_sexual_behaviour_comments');
+			table.tinyint('maternal_behaviour').unsigned(); //1, 3
+			table.string('maternal_behaviour_comments');
+			table.tinyint('displacement_behaviour').unsigned(); //1, 3
+			table.string('displacement_behaviour_comments');
+			table.tinyint('oral_stereotypic_behaviour').unsigned(); //1, 3
+			table.string('oral_stereotypic_behaviour_comments');
+			table.tinyint('repetitive_body_movement').unsigned(); //1, 3
+			table.string('repetitive_body_movement_comments');
+			table.tinyint('self_grooming_behaviour').unsigned(); //1, 3
+			table.string('self_grooming_behaviour_comments');
+			table.tinyint('regurgitation_reingestion').unsigned(); //1, 3
+			table.string('regurgitation_reingestion_comments');
+			table.tinyint('rake_marks').unsigned(); //1, 2, 3
+			table.string('rake_marks_comments');
+			//And a photo for the rake_marks!
+			table.tinyint('displaying_aggressive_behaviour').unsigned(); //1, 3
+			table.string('displaying_aggressive_behaviour_comments');
+			table.tinyint('receiving_aggressive_behaviour').unsigned(); //1, 3
+			table.string('receiving_aggressive_behaviour_comments');
+			table.tinyint('social_isolation').unsigned(); //1, 3
+			table.string('social_isolation_comments');
+			table.tinyint('avoidance_pool_areas').unsigned(); //1, 2, 3
+			table.string('avoidance_pool_areas_comments');
+
+			table.timestamps(true, true); //Timestamp: created at, updated at
+		}),
+		// duesseldorf_good_behavior table
+		knex.schema.createTable('duesseldorf_appropriate_behaviour', function (table) {
+			table.increments('behaviour_record_id').primary();
+			table.integer('user_id').unsigned();
+			// Foreign key constrains for user_id.
+			table
+				.foreign('user_id')
+				.references('users.id')
+				.onDelete('SET NULL')
+				.onUpdate('CASCADE');
+			table.string('user_name');	
+			table.integer('dolphin_id').unsigned().notNullable();
+			// Foreign key constrains for dolphin_id.
+			table
+				.foreign('dolphin_id')
+				.references('dolphins.dolphin_id')
+				.onDelete('CASCADE')
+				.onUpdate('CASCADE');
+			table.string('dolphin_name');
+
+			table.tinyint('environmental_enrichment').unsigned(); //1, 2, 3
+			table.string('environmental_enrichment_comments');
+			table.tinyint('affiliative_behaviour').unsigned(); //1, 3
+			table.string('affiliative_behaviour_comments');
+			table.tinyint('play_behaviour').unsigned(); //1, 3
+			table.string('play_behaviour_comments');
+			table.tinyint('socio_sexual_behaviour').unsigned(); //1, 3
+			table.string('socio_sexual_behaviour_comments');
+			table.tinyint('maternal_behaviour').unsigned(); //1, 3
+			table.string('maternal_behaviour_comments');
+			table.tinyint('displacement_behaviour').unsigned(); //1, 3
+			table.string('displacement_behaviour_comments');
+			table.tinyint('oral_stereotypic_behaviour').unsigned(); //1, 3
+			table.string('oral_stereotypic_behaviour_comments');
+			table.tinyint('repetitive_body_movement').unsigned(); //1, 3
+			table.string('repetitive_body_movement_comments');
+			table.tinyint('self_grooming_behaviour').unsigned(); //1, 3
+			table.string('self_grooming_behaviour_comments');
+			table.tinyint('regurgitation_reingestion').unsigned(); //1, 3
+			table.string('regurgitation_reingestion_comments');
+			table.tinyint('rake_marks').unsigned(); //1, 2, 3
+			table.string('rake_marks_comments');
+			//And a photo for the rake_marks!
+			table.tinyint('displaying_aggressive_behaviour').unsigned(); //1, 3
+			table.string('displaying_aggressive_behaviour_comments');
+			table.tinyint('receiving_aggressive_behaviour').unsigned(); //1, 3
+			table.string('receiving_aggressive_behaviour_comments');
+			table.tinyint('social_isolation').unsigned(); //1, 3
+			table.string('social_isolation_comments');
+			table.tinyint('avoidance_pool_areas').unsigned(); //1, 2, 3
+			table.string('avoidance_pool_areas_comments');
+
+			table.timestamps(true, true); //Timestamp: created at, updated at
+		}),
+		// valencia_good_behavior table
+		knex.schema.createTable('valencia_appropriate_behaviour', function (table) {
 			table.increments('behaviour_record_id').primary();
 			table.integer('user_id').unsigned();
 			// Foreign key constrains for user_id.

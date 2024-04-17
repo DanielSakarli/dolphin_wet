@@ -2,7 +2,7 @@ const { validationResult } = require('express-validator');
 const { isUserAuth } = require('./authSwitch');
 const GoodHealthService = require('../services/GoodHealthService');
 //const fs = require('fs');
-const path = require('path');
+// const path = require('path');
 
 /**
  * Controller of post request of /api/good_health.
