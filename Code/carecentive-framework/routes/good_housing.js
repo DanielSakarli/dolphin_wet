@@ -26,6 +26,7 @@ router.post(
  */
 router.get(
 	'/',
+	authenticateTokenWithSwitch,
 	[query('name').notEmpty().isString().withMessage('Name can not be empty!')],
 	[query('numMonths').optional().isInt().withMessage('numMonths must be an integer!')],
 	getTestResult

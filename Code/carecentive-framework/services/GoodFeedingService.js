@@ -256,10 +256,7 @@ class GoodFeedingService {
 		const roleName = user.roles[0].name;
 		if (roleName) {
 		console.log('role: ', roleName);
-		//const location = roleName;
-		//const modelName = `${location}GoodFeeding`;
-		//const GoodFeeding = require(`../models/${modelName}`); // Get the respective model, depending on which zoo the user works at
-		////////////////////////////////////////////////
+		
 		// Gets the year and month numbers of last numMonths months
 		const lastNMonths = getLastNMonths(numMonths);
 		const allResultsPromises = [];

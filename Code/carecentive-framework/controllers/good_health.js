@@ -26,13 +26,10 @@ async function setResult(req, res, next) {
 			//console.log('authdata: ', req.authData);
 			userID = user_id;
 			userName = name;
-		} else {
-			userID = 1;
-		}
-
-		// attach userID to test result in req.body
-		let test_result = req.body;
-		test_result = { userID, user_name: userName, ...test_result };
+		
+			// attach userID to test result in req.body
+			let test_result = req.body;
+			test_result = { userID, user_name: userName, ...test_result };
 
 		///////////////////////////////////////////////////////////////////////////
 		// Get the photo paths from the session storage
@@ -40,16 +37,16 @@ async function setResult(req, res, next) {
 		//req.session.photo_path = {};
 		//console.log('App.use Photo_path in session storage: ' + req.session.photo_path);
 			
-		if(req.session.photo_path.eye_photo_path != 'empty' || req.session.photo_path.teeth_photo_path != 'empty' || req.session.photo_path.odontogramm_photo_path != 'empty' || req.session.photo_path.marks_photo_path != 'empty') {
+		if(req.session && (req.session.photo_path.eye_photo_path != 'empty' || req.session.photo_path.teeth_photo_path != 'empty' || req.session.photo_path.odontogramm_photo_path != 'empty' || req.session.photo_path.marks_photo_path != 'empty')) {
 			// attach userID to test result in req.body
 			let fileData;
 			let test_result = req.body;
 			test_result = { user_id: userID, user_name: userName, ...test_result };
 
-			console.log('Photo path in req.session in good_health.js: ' + req.session.photo_path.eye_photo_path);
+			/*console.log('Photo path in req.session in good_health.js: ' + req.session.photo_path.eye_photo_path);
 			console.log('Photo path in req.session in good_health.js: ' + req.session.photo_path.teeth_photo_path);	
 			console.log('Photo path in req.session in good_health.js: ' + req.session.photo_path.odontogramm_photo_path);
-			console.log('Photo path in req.session in good_health.js: ' + req.session.photo_path.marks_photo_path);
+			console.log('Photo path in req.session in good_health.js: ' + req.session.photo_path.marks_photo_path);*/
 
 			//First check if session storage exists at all	
 			if(req.session.photo_path.eye_photo_path != 'empty')
@@ -110,19 +107,6 @@ async function setResult(req, res, next) {
 					test_result.marks_photo_path = req.session.photo_path.marks_photo_path.toString();
 					}
 				}
-		///////////////////////////////////////////
-        // TEST
-        // Read the uploaded file as a binary buffer
-        
-		//const filePath = path.join(__dirname, 'uploads', req.file.filename);
-        //const fileData = fs.readFileSync(filePath);
-		
-        // Insert the binary data into your database
-        // Replace this with your actual database insertion code
-		//test_result.image = fileData;
-
-
-        ///////////////////////////////////////////
 			
 				const insertedResult = await GoodHealthService.loadTestResult(test_result);
 				res.status(201).json(insertedResult);
@@ -138,7 +122,7 @@ async function setResult(req, res, next) {
 			//next();
 			res.status(201).json(insertedResult);
 		}
-
+	}
 	} catch (error) {
 		next(error);
 	}
@@ -151,25 +135,43 @@ async function setResult(req, res, next) {
  */
 async function getTestResult(req, res, next) {
 	try {
-		const errors = validationResult(req);
+		/*const errors = validationResult(req);
 		if (!errors.isEmpty()) {
 			// Handle validation errors
 			return res.status(400).json({ errors: errors.array() });
-		}
-
+		}*/
+		if (isUserAuth) {
+			console.log('authdata: ', req.authData);
+			const { user_id } = req.authData;
+			const userID = user_id;
+			console.log('User ID: ', userID);
 		// Gets the dolphin name
 		const { name, numMonths } = req.query;
-
+		console.log('name: ', name);
+		if(name === '') {
+		// when name is '' it should get the data of all dolphins
 		// If numMonths is 10, return all results, not just past 10 months
-		if(numMonths===10){
-			const queryAllResults = await GoodHealthService.getTestResultByDolphin(name);
-			next();
+		if(numMonths === 10) {
+			const queryAllResults = await GoodHealthService.getAllTestResults(userID);
 			res.status(200).json(queryAllResults);
 		}
-
-		const queryResult = await GoodHealthService.getTestResultNMonths(name, numMonths);
-		next();
+		// All dolphins for specific months
+		const queryResult = await GoodHealthService.getAllTestResultNMonths(numMonths, userID);;
 		res.status(200).json(queryResult);
+		} else {
+			// Get the test result of the given dolphin
+				// All the data of that dolphin
+			if(numMonths === 10) {
+				const queryAllResults = await GoodHealthService.getTestResultByDolphin(name, userID);
+				res.status(200).json(queryAllResults);
+			}
+				// Past numMonths data of that dolphin
+			const queryResult = await GoodHealthService.getTestResultNMonths(name, numMonths, userID);
+			res.status(200).json(queryResult);
+		}
+	} else {
+		throw new Error('USER_IS_NOT_AUTHENTICATED');
+	}
 	} catch (error) {
 		next(error);
 	}

@@ -92,12 +92,12 @@ async function getTestResult(req, res, next) {
 		}*/
 		// After gone through the authenticateToken middleware
 		// the data of user is in the req.authData
-		let userID;
+		
 		console.log('isUserAuth: ', isUserAuth);
 		if (isUserAuth) {
 			console.log('authdata: ', req.authData);
 			const { user_id } = req.authData;
-			userID = user_id;
+			const userID = user_id;
 			console.log('User ID: ', userID);
 		// Gets the dolphin name and the number of months from query params
 		const { name, numMonths } = req.query; 

@@ -15,12 +15,12 @@ app.set('trust proxy', 1); // test to trust the proxy with a cookie
 // Try setting up a session storage for the photo path of the picture upload
 app.use(session({
 	secret: 'secret',
-  	cookie: { secure: true, sameSite: 'none', httpOnly: true, maxAge: 1800000000 }, //300 minutes = 6 hours expiring of session cookie
+  	cookie: { httpOnly: true, maxAge: 1800000000 }, //300 minutes = 6 hours expiring of session cookie
 	saveUninitialized: true,
 	store: store,
 	resave: true,
-	proxy: true,
-	name: 'connect.sid' //Try giving a name to the cookie
+	//proxy: true,
+	name: 'session' //Try giving a name to the cookie
 }));
 
 setup.setup();
@@ -163,9 +163,15 @@ app.post('/api/setup_session_storage', (req, res, next) => {
 		// Index used in photoUpload.js to upload for different dolphins in the
 		// same test upload. Reset the index after photo paths are uploaded into db
 		req.session.dolphinIndex = 0;
-		req.session.save();
-		console.log('Session storage initialized')
-		res.sendStatus(201);
+		req.session.save(err => {
+			if (err) {
+			  console.log('Error occurred while initializing session storage');
+			  return res.sendStatus(500);
+			}
+	  
+			console.log('Session storage initialized');
+			res.sendStatus(201);
+		  });
 	} catch(e) {
 		console.log('Error occured while initializing session storage');
 		res.sendStatus(500);

@@ -1,8 +1,8 @@
 const DolphinDAO = require('../dao/dolphinDao');
 const { DolphinError } = require('../source/Errors');
-const GoodHealth = require('../models/GoodHealth');
 const { getLastNMonths } = require('../source/CustomSource');
 const { raw } = require('objection');
+const User = require('@carecentive/carecentive-core/models/User');
 
 class GoodHealthService {
 	/**
@@ -50,6 +50,18 @@ class GoodHealthService {
 			}
 
 			const { dolphin_id } = dolphin_data;
+
+			// Check if user has a role and if, which role (i.e. which zoo he is working at)
+			const user = await User.query().findById(result.user_id).withGraphFetched('roles');
+			const roleName = user.roles[0].name;
+			if (roleName) {
+			console.log('role: ', roleName);
+			const location = roleName;
+			const modelName = `${location}GoodHealth`;
+			const GoodHealth = require(`../models/${modelName}`); // Get the respective model, depending on which zoo the user works at
+			////////////////////////////////////////////////
+
+
 			// Inserts data into database.			
 			if (result.created_at !== "") {
 				const insertedResult = await GoodHealth.query().insert({
@@ -66,6 +78,7 @@ class GoodHealthService {
 				});
 				return insertedResult;
 			}
+		}
 		} catch (error) {
 			throw error;
 		}
@@ -78,8 +91,18 @@ class GoodHealthService {
 	 * @param {number} month - Month
 	 * @returns {Promise<Array>} list of query result
 	 */
-	static async getTestResultByDolphinAndMonth(name, year, month) {
+	static async getTestResultByDolphinAndMonth(name, year, month, userID) {
 		try {
+			// Check if user has a role and if, which role (i.e. which zoo he is working at)
+			const user = await User.query().findById(userID).withGraphFetched('roles');
+			const roleName = user.roles[0].name;
+			if (roleName) {
+			console.log('role: ', roleName);
+			const location = roleName;
+			const modelName = `${location}GoodHealth`;
+			const GoodHealth = require(`../models/${modelName}`); // Get the respective model, depending on which zoo the user works at
+			////////////////////////////////////////////////
+
 			const result = await GoodHealth.query()
 				.select(
 					'health_record_id',
@@ -128,6 +151,7 @@ class GoodHealthService {
 					)
 				);
 			return result;
+			}
 		} catch (error) {
 			throw error;
 		}
@@ -141,8 +165,18 @@ class GoodHealthService {
 	 * @param {number} month - Month
 	 * @returns {Promise<Array>} list of query result
 	 */
-	static async getTestResultByMonth(year, month) {
+	static async getTestResultByMonth(year, month, userID) {
 		try {
+			// Check if user has a role and if, which role (i.e. which zoo he is working at)
+			const user = await User.query().findById(userID).withGraphFetched('roles');
+			const roleName = user.roles[0].name;
+			if (roleName) {
+			console.log('role: ', roleName);
+			const location = roleName;
+			const modelName = `${location}GoodHealth`;
+			const GoodHealth = require(`../models/${modelName}`); // Get the respective model, depending on which zoo the user works at
+			////////////////////////////////////////////////
+
 			const result = await GoodHealth.query()
 				.select(
 					'health_record_id',
@@ -190,6 +224,7 @@ class GoodHealthService {
 					)
 				);
 			return result;
+			}
 		} catch (error) {
 			throw error;
 		}
@@ -202,14 +237,24 @@ class GoodHealthService {
 	 * @param {number} numMonths - The number of past months to include in the result.
 	 * @returns {Promise<Array>} list of query result
 	 */
-	static async getTestResultNMonths(name, numMonths = 3) {
-		const myDolphinDAO = new DolphinDAO();
+	static async getTestResultNMonths(name, numMonths = 3, userID) {
+		try {
+			const myDolphinDAO = new DolphinDAO();
 
 		// if this dolphin is not in database,
 		// 404: not found.
 		if (!(await myDolphinDAO.getDolphinByName(name))) {
 			throw new DolphinError(`Dolphin ${name} doesn't exist!`, 404);
 		}
+		// Check if user has a role and if, which role (i.e. which zoo he is working at)
+		const user = await User.query().findById(userID).withGraphFetched('roles');
+		const roleName = user.roles[0].name;
+		if (roleName) {
+		console.log('role: ', roleName);
+		const location = roleName;
+		const modelName = `${location}GoodHealth`;
+		const GoodHealth = require(`../models/${modelName}`); // Get the respective model, depending on which zoo the user works at
+		////////////////////////////////////////////////
 
 		// Gets the year and month numbers of last numMonths months
 		const lastNMonths = getLastNMonths(numMonths);
@@ -222,7 +267,8 @@ class GoodHealthService {
 				GoodHealthService.getTestResultByDolphinAndMonth(
 					name,
 					lastNMonths[i].year,
-					lastNMonths[i].month
+					lastNMonths[i].month,
+					userID
 				)
 			);
 		}
@@ -240,6 +286,11 @@ class GoodHealthService {
 		}
 
 		return returnedResults;
+		}
+	}
+	catch (error) {
+		throw error;
+	}
 	}
 
 
@@ -247,10 +298,24 @@ class GoodHealthService {
 	 * Gets all good_health test results by the given dolphin name.
 	 * @returns {Promise<Array>} list of query result
 	 */
-	static async getAllTestResults() {
+	static async getAllTestResults(userID) {
 		try {
+			console.log('Inside getAllTestResults method');
+			// Check if user has a role and if, which role (i.e. which zoo he is working at)
+			const user = await User.query().findById(userID).withGraphFetched('roles');
+			const roleName = user.roles[0].name;
+			if (roleName) {
+			console.log('role: ', roleName);
+			const location = roleName;
+			const modelName = `${location}GoodHealth`;
+			const GoodHealth = require(`../models/${modelName}`); // Get the respective model, depending on which zoo the user works at
+			////////////////////////////////////////////////
+
 			const result = await GoodHealth.query();
 			return result;
+			} else {
+				throw new Error('USER_IS_NOT_AUTHENTICATED');
+			}
 		} catch (error) {
 			throw error;
 		}
@@ -264,7 +329,18 @@ class GoodHealthService {
 	 * @param {number} numMonths - The number of past months to include in the result.
 	 * @returns {Promise<Array>} list of query result
 	 */
-	static async getAllTestResultNMonths(numMonths = 3) {
+	static async getAllTestResultNMonths(numMonths = 3, userID) {
+		try {
+		// Check if user has a role and if, which role (i.e. which zoo he is working at)
+		const user = await User.query().findById(userID).withGraphFetched('roles');
+		const roleName = user.roles[0].name;
+		if (roleName) {
+		console.log('role: ', roleName);
+		const location = roleName;
+		const modelName = `${location}GoodHealth`;
+		const GoodHealth = require(`../models/${modelName}`); // Get the respective model, depending on which zoo the user works at
+		////////////////////////////////////////////////
+		
 		// Gets the year and month numbers of last numMonths months
 		const lastNMonths = getLastNMonths(numMonths);
 		const allResultsPromises = [];
@@ -275,7 +351,8 @@ class GoodHealthService {
 			allResultsPromises.push(
 				GoodHealthService.getTestResultByMonth(
 					lastNMonths[i].year,
-					lastNMonths[i].month
+					lastNMonths[i].month,
+					userID
 				)
 			);
 		}
@@ -293,6 +370,13 @@ class GoodHealthService {
 		}
 
 		return returnedResults;
+
+		} else {
+		throw new Error('USER_IS_NOT_AUTHENTICATED');
+		} 
+	} catch (error) {
+		throw error;
+	}
 	}
 
 
@@ -303,10 +387,23 @@ class GoodHealthService {
 	 * @param {String} name - The name of dolphin
 	 * @returns {Promise<Array>} list of query result
 	 */
-	static async getTestResultByDolphin(name) {
+	static async getTestResultByDolphin(name, userID) {
 		try {
+			// Check if user has a role and if, which role (i.e. which zoo he is working at)
+			const user = await User.query().findById(userID).withGraphFetched('roles');
+			const roleName = user.roles[0].name;
+			if (roleName) {
+			console.log('role: ', roleName);
+			const location = roleName;
+			const modelName = `${location}GoodHealth`;
+			const GoodHealth = require(`../models/${modelName}`); // Get the respective model, depending on which zoo the user works at
+			////////////////////////////////////////////////
+
 			const result = await GoodHealth.query().where('dolphin_name', '=', name);
 			return result;
+			} else {
+				throw new Error('USER_IS_NOT_AUTHENTICATED');
+			}
 		} catch (error) {
 			throw error;
 		}

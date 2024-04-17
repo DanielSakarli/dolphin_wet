@@ -106,7 +106,7 @@ async function loadDummyGoodFeeding(knex) {
 		fish_variety: 1,
 	};
 
-	return knex('good_feeding').insert([
+	return knex('nuernberg_good_feeding').insert([
 		testGoodFeedingResult1,
 		testGoodFeedingResult2,
 		testGoodFeedingResult3,

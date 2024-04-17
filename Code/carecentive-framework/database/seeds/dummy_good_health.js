@@ -155,7 +155,7 @@ async function loadDummyGoodHealth(knex) {
         records_external_disease: 0,
 	};
 
-	return knex('good_health').insert([
+	return knex('nuernberg_good_health').insert([
 		testGoodHealthResult1,
 		testGoodHealthResult2,
 		testGoodHealthResult3,

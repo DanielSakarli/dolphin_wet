@@ -122,16 +122,16 @@ async function uploadPhoto(req, res, next) {
 		// the data of user is in the req.authData
 		let userID;
 		let userName;
-		if (isUserAuth) {
+		//if (isUserAuth) {
 			//const { user_id, name } = req.authData;
 			//console.log('authdata: ', req.authData);
 			//userID = user_id;
 			//userName = name;
-		} else {
+		//} else {
 			//userID = 1;
-		}
+		//}
     
-    console.log('currentIndex: ',currentIndex);
+    console.log('currentIndex: ', currentIndex);
     //console.log('marks photo path in photoUpload.js: ',req.session.photo_path.marks_photo_path);
     /*req.session.photo_type = ''; // Reset the photo_path in session storage, so no duplicate photo paths
     req.session.dolphin_name = '';
@@ -151,7 +151,7 @@ async function uploadPhoto(req, res, next) {
     uploadMultiple(req, res, function (err) {
       if (err instanceof multer.MulterError) {
         // A Multer error occurred when uploading.
-        res.status(401).json(); //res.sendStatus(401); 
+        res.status(400).json(); //res.sendStatus(401); 
       } else if (err) {
         // An unknown error occurred when uploading.
         res.status(500).json(); //res.sendStatus(500); 

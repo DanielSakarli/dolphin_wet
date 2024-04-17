@@ -23,44 +23,6 @@ exports.up = function (knex) {
 			table.timestamps(false, true); //Timestamp: created at, updated at
 		}),
 
-		// good_feeding table
-		knex.schema.createTable('good_feeding', function (table) {
-			table.increments('feeding_record_id').primary();
-			table.integer('user_id').unsigned();
-			// Foreign key constrains for user_id.
-			table
-				.foreign('user_id')
-				.references('users.id')
-				.onDelete('SET NULL')
-				.onUpdate('CASCADE');
-			table.string('user_name');		
-			table.integer('dolphin_id').unsigned().notNullable();
-			// Foreign key constrains for dolphin_id.
-			table
-				.foreign('dolphin_id')
-				.references('dolphins.dolphin_id')
-				.onDelete('CASCADE')
-				.onUpdate('CASCADE');
-			table.string('dolphin_name');
-
-			table.tinyint('body_condition_score').unsigned(); //0, 1, 2
-			table.string('body_condition_score_comments'); //0, 1, 2
-			// table.tinyint('weight').unsigned(); //0, 2
-			table.double('weight_measured'); //weekly measured weight of dolphin
-			table.string('weight_measured_comments');
-			table.tinyint('kcal_calculations').unsigned(); //0, 2
-			table.string('kcal_calculations_comments'); //0, 2
-			table.tinyint('blood_hydration').unsigned(); //0, 1, 2
-			table.string('blood_hydration_comments'); //0, 1, 2
-			table.tinyint('fish_quality').unsigned(); //0, 2
-			table.string('fish_quality_comments'); //0, 2
-			table.tinyint('fish_variety').unsigned(); //0, 1, 2
-			table.string('fish_variety_comments'); //0, 1, 2
-			table.string('file_path'); //Path to the uploaded file(s)
-			table.timestamps(true, true); //Timestamp: created at, updated at
-		}),
-
-		
 		// Nuernberg good_feeding table
 		knex.schema.createTable('nuernberg_good_feeding', function (table) {
 			table.increments('feeding_record_id').primary();
@@ -172,8 +134,118 @@ exports.up = function (knex) {
 			table.timestamps(true, true); //Timestamp: created at, updated at
 		}),
 
-		// good_health table
-		knex.schema.createTable('good_health', function (table) {
+		// nuernberg_good_health table
+		knex.schema.createTable('nuernberg_good_health', function (table) {
+			table.increments('health_record_id').primary();
+			table.integer('user_id').unsigned();
+			// Foreign key constrains for user_id.
+			table
+				.foreign('user_id')
+				.references('users.id')
+				.onDelete('SET NULL')
+				.onUpdate('CASCADE');
+			table.string('user_name');	
+			table.integer('dolphin_id').unsigned().notNullable();
+			// Foreign key constrains for dolphin_id.
+			table
+				.foreign('dolphin_id')
+				.references('dolphins.dolphin_id')
+				.onDelete('CASCADE')
+				.onUpdate('CASCADE');
+			table.string('dolphin_name');
+
+			table.tinyint('normal_floatability').unsigned(); //0, 2
+			table.string('normal_floatability_comments');
+			table.tinyint('records_normal_floatability').unsigned(); //0, 2
+			table.string('records_normal_floatability_comments');
+			table.tinyint('inspection_eye_lesions').unsigned();
+			table.string('inspection_eye_lesions_comments');
+			table.tinyint('response_visual_cues').unsigned();
+			table.string('response_visual_cues_comments');
+			table.tinyint('records_eye_lesions').unsigned();
+			table.string('records_eye_lesions_comments');
+			table.tinyint('mouth_exam').unsigned();
+			table.string('mouth_exam_comments');
+			table.tinyint('records_oral_lesions').unsigned();
+			table.string('records_oral_lesions_comments');
+			table.tinyint('records_gastric_abnormality').unsigned();
+			table.string('records_gastric_abnormality_comments');
+			table.tinyint('inspection_respiratory').unsigned();
+			table.string('inspection_respiratory_comments');
+			table.tinyint('force_expiration').unsigned();
+			table.string('force_expiration_comments');
+			table.tinyint('records_respiratory_disease').unsigned();
+			table.string('records_respiratory_disease_comments');
+			table.tinyint('inspection_marks').unsigned();
+			table.string('inspection_marks_comments');
+			table.tinyint('records_external_disease').unsigned();
+			table.string('records_external_disease_comments');
+
+			table.string('eye_photo_path');
+			table.string('teeth_photo_path');
+			table.string('odontogramm_photo_path');
+			table.string('marks_photo_path');
+			//table.binary('image'); //Holds image as binary data
+			table.timestamps(true, true); //Timestamp: created at, updated at
+		}),
+
+		// valencia_good_health table
+		knex.schema.createTable('valencia_good_health', function (table) {
+			table.increments('health_record_id').primary();
+			table.integer('user_id').unsigned();
+			// Foreign key constrains for user_id.
+			table
+				.foreign('user_id')
+				.references('users.id')
+				.onDelete('SET NULL')
+				.onUpdate('CASCADE');
+			table.string('user_name');	
+			table.integer('dolphin_id').unsigned().notNullable();
+			// Foreign key constrains for dolphin_id.
+			table
+				.foreign('dolphin_id')
+				.references('dolphins.dolphin_id')
+				.onDelete('CASCADE')
+				.onUpdate('CASCADE');
+			table.string('dolphin_name');
+
+			table.tinyint('normal_floatability').unsigned(); //0, 2
+			table.string('normal_floatability_comments');
+			table.tinyint('records_normal_floatability').unsigned(); //0, 2
+			table.string('records_normal_floatability_comments');
+			table.tinyint('inspection_eye_lesions').unsigned();
+			table.string('inspection_eye_lesions_comments');
+			table.tinyint('response_visual_cues').unsigned();
+			table.string('response_visual_cues_comments');
+			table.tinyint('records_eye_lesions').unsigned();
+			table.string('records_eye_lesions_comments');
+			table.tinyint('mouth_exam').unsigned();
+			table.string('mouth_exam_comments');
+			table.tinyint('records_oral_lesions').unsigned();
+			table.string('records_oral_lesions_comments');
+			table.tinyint('records_gastric_abnormality').unsigned();
+			table.string('records_gastric_abnormality_comments');
+			table.tinyint('inspection_respiratory').unsigned();
+			table.string('inspection_respiratory_comments');
+			table.tinyint('force_expiration').unsigned();
+			table.string('force_expiration_comments');
+			table.tinyint('records_respiratory_disease').unsigned();
+			table.string('records_respiratory_disease_comments');
+			table.tinyint('inspection_marks').unsigned();
+			table.string('inspection_marks_comments');
+			table.tinyint('records_external_disease').unsigned();
+			table.string('records_external_disease_comments');
+
+			table.string('eye_photo_path');
+			table.string('teeth_photo_path');
+			table.string('odontogramm_photo_path');
+			table.string('marks_photo_path');
+			//table.binary('image'); //Holds image as binary data
+			table.timestamps(true, true); //Timestamp: created at, updated at
+		}),
+
+		// duesseldorf_good_health table
+		knex.schema.createTable('duesseldorf_good_health', function (table) {
 			table.increments('health_record_id').primary();
 			table.integer('user_id').unsigned();
 			// Foreign key constrains for user_id.
