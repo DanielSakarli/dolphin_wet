@@ -299,8 +299,96 @@ exports.up = function (knex) {
 			table.timestamps(true, true); //Timestamp: created at, updated at
 		}),
 
-		// good_housing table
-		knex.schema.createTable('good_housing', function (table) {
+		// nuernberg_good_housing table
+		knex.schema.createTable('nuernberg_good_housing', function (table) {
+			table.increments('housing_record_id').primary();
+			table.integer('user_id').unsigned();
+			// Foreign key constrains for user_id.
+			table
+				.foreign('user_id')
+				.references('users.id')
+				.onDelete('SET NULL')
+				.onUpdate('CASCADE');
+			table.string('user_name');
+			table.integer('dolphin_id').unsigned().notNullable();
+			// Foreign key constrains for dolphin_id.
+			table
+				.foreign('dolphin_id')
+				.references('dolphins.dolphin_id')
+				.onDelete('CASCADE')
+				.onUpdate('CASCADE');
+			table.string('dolphin_name');
+
+			table.tinyint('enclosure_barrier_safety').unsigned(); //0, 2
+			table.string('enclosure_barrier_safety_comments');
+			table.tinyint('foreign_body_ingestion').unsigned(); //0, 2
+			table.string('foreign_body_ingestion_comments');
+			table.tinyint('pool_design').unsigned();
+			table.string('pool_design_comments');
+			table.tinyint('forced_loneliness').unsigned();
+			table.string('forced_loneliness_comments');
+			table.tinyint('water_quality').unsigned();
+			table.string('water_quality_comments');
+			table.tinyint('water_temperature').unsigned();
+			table.string('water_temperature_comments');
+			table.tinyint('sufficient_shade').unsigned();
+			table.string('sufficient_shade_comments');
+			table.tinyint('reflecting_colours').unsigned();
+			table.string('reflecting_colours_comments');
+			table.tinyint('acoustic_comfort').unsigned();
+			table.string('acoustic_comfort_comments');
+
+			// Comments columns
+
+			table.timestamps(true, true); //Timestamp: created at, updated at
+		}),
+
+		// valencia_good_housing table
+		knex.schema.createTable('valencia_good_housing', function (table) {
+			table.increments('housing_record_id').primary();
+			table.integer('user_id').unsigned();
+			// Foreign key constrains for user_id.
+			table
+				.foreign('user_id')
+				.references('users.id')
+				.onDelete('SET NULL')
+				.onUpdate('CASCADE');
+			table.string('user_name');
+			table.integer('dolphin_id').unsigned().notNullable();
+			// Foreign key constrains for dolphin_id.
+			table
+				.foreign('dolphin_id')
+				.references('dolphins.dolphin_id')
+				.onDelete('CASCADE')
+				.onUpdate('CASCADE');
+			table.string('dolphin_name');
+
+			table.tinyint('enclosure_barrier_safety').unsigned(); //0, 2
+			table.string('enclosure_barrier_safety_comments');
+			table.tinyint('foreign_body_ingestion').unsigned(); //0, 2
+			table.string('foreign_body_ingestion_comments');
+			table.tinyint('pool_design').unsigned();
+			table.string('pool_design_comments');
+			table.tinyint('forced_loneliness').unsigned();
+			table.string('forced_loneliness_comments');
+			table.tinyint('water_quality').unsigned();
+			table.string('water_quality_comments');
+			table.tinyint('water_temperature').unsigned();
+			table.string('water_temperature_comments');
+			table.tinyint('sufficient_shade').unsigned();
+			table.string('sufficient_shade_comments');
+			table.tinyint('reflecting_colours').unsigned();
+			table.string('reflecting_colours_comments');
+			table.tinyint('acoustic_comfort').unsigned();
+			table.string('acoustic_comfort_comments');
+
+			// Comments columns
+
+			table.timestamps(true, true); //Timestamp: created at, updated at
+		}),
+
+		// duesseldorf_good_housing table
+		knex.schema.createTable('duesseldorf_good_housing', function (table) {
 			table.increments('housing_record_id').primary();
 			table.integer('user_id').unsigned();
 			// Foreign key constrains for user_id.

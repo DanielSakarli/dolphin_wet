@@ -120,7 +120,7 @@ async function loadDummyGoodHousing(knex) {
 		acoustic_comfort: Math.floor(Math.random() * 2) + 1,
 	};
 
-	return knex('good_housing').insert([
+	return knex('nuernberg_good_housing').insert([
 		testGoodHealthResult1,
 		testGoodHealthResult2,
 		testGoodHealthResult3,
