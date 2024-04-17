@@ -11,7 +11,6 @@ exports.seed = async function (knex) {
 	await loadDummyRole();
 	// Insert dummy users.
 	await loadDummyUser();
-	
 	// Insert dummy dolphins.
 	await loadDummyDolphins(knex);
 	// Insert dummy good_feeding data.

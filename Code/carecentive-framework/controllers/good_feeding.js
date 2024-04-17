@@ -25,28 +25,8 @@ async function setResult(req, res, next) {
 			userID = user_id;
 			userName = name;
 			console.log('user name: ', userName);
-		} else {
-			userID = 1;
-		}
 
-		let test_result = req.body;
-
-		/*const {
-			dolphin_name,
-			body_condition_score,
-			weight_measured,
-			kcal_calculations,
-			blood_hydration,
-			fish_quality,
-			fish_variety,
-			body_condition_score_comments,
-			weight_measured_comments,
-			kcal_calculations_comments,
-			blood_hydration_comments,
-			fish_quality_comments,
-			fish_variety_comments,
-			created_at,
-		} = req.body;*/
+			let test_result = req.body;
 
 		// If dolphin is not existing in database,
 		// 400: bad request
@@ -60,26 +40,6 @@ async function setResult(req, res, next) {
 		// Gets dolphin_id for test result.
 		const dolphin_obj = await DolphinService.getOneDolphin(test_result.dolphin_name);
 		const dolphin_id = dolphin_obj.dolphin_id;
-
-		/* const testResult = {
-			user_id: userID,
-			user_name: userName,
-			dolphin_id,
-			dolphin_name,
-			body_condition_score,
-			weight_measured,
-			kcal_calculations,
-			blood_hydration,
-			fish_quality,
-			fish_variety,
-			body_condition_score_comments,
-			weight_measured_comments,
-			kcal_calculations_comments,
-			blood_hydration_comments,
-			fish_quality_comments,
-			fish_variety_comments,
-			created_at,
-		};*/
 
 		// Get the file paths from the session storage
 		if(req.session.file_path && req.session.file_path != '') {
@@ -106,6 +66,13 @@ async function setResult(req, res, next) {
 			const insertedResult = await GoodFeedingService.loadTestResult(test_result);
 			res.status(201).json(insertedResult);
 		}
+
+
+		} else {
+			throw new Error('USER_IS_NOT_AUTHENTICATED');
+		}
+
+		
 	} catch (error) {
 		next(error);
 	}
@@ -118,23 +85,47 @@ async function setResult(req, res, next) {
  */
 async function getTestResult(req, res, next) {
 	try {
-		const errors = validationResult(req);
+		/*const errors = validationResult(req);
 		if (!errors.isEmpty()) {
 			// Handle validation errors
 			return res.status(400).json({ errors: errors.array() });
-		}
-
+		}*/
+		// After gone through the authenticateToken middleware
+		// the data of user is in the req.authData
+		let userID;
+		console.log('isUserAuth: ', isUserAuth);
+		if (isUserAuth) {
+			console.log('authdata: ', req.authData);
+			const { user_id } = req.authData;
+			userID = user_id;
+			console.log('User ID: ', userID);
 		// Gets the dolphin name and the number of months from query params
 		const { name, numMonths } = req.query; 
-		
+		console.log('name: ', name);
+		if(name === '') {
+		// when name is '' it should get the data of all dolphins
 		// If numMonths is 10, return all results, not just past 10 months
 		if(numMonths === 10) {
-			const queryAllResults = await GoodFeedingService.getTestResultByDolphin(name);
+			const queryAllResults = await GoodFeedingService.getAllTestResults(userID);
 			res.status(200).json(queryAllResults);
 		}
-
-		const queryResult = await GoodFeedingService.getTestResultNMonths(name, numMonths);;
+		// All dolphins for specific months
+		const queryResult = await GoodFeedingService.getAllTestResultNMonths(numMonths, userID);;
 		res.status(200).json(queryResult);
+		} else {
+			// Get the test result of the given dolphin
+				// All the data of that dolphin
+			if(numMonths === 10) {
+				const queryAllResults = await GoodFeedingService.getTestResultByDolphin(name, userID);
+				res.status(200).json(queryAllResults);
+			}
+				// Past numMonths data of that dolphin
+			const queryResult = await GoodFeedingService.getTestResultNMonths(name, numMonths, userID);
+			res.status(200).json(queryResult);
+		}
+	} else {
+		throw new Error('USER_IS_NOT_AUTHENTICATED');
+	}
 	} catch (error) {
 		next(error);
 	}

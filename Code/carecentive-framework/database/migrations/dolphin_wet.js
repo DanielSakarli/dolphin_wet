@@ -60,6 +60,118 @@ exports.up = function (knex) {
 			table.timestamps(true, true); //Timestamp: created at, updated at
 		}),
 
+		
+		// Nuernberg good_feeding table
+		knex.schema.createTable('nuernberg_good_feeding', function (table) {
+			table.increments('feeding_record_id').primary();
+			table.integer('user_id').unsigned();
+			// Foreign key constrains for user_id.
+			table
+				.foreign('user_id')
+				.references('users.id')
+				.onDelete('SET NULL')
+				.onUpdate('CASCADE');
+			table.string('user_name');		
+			table.integer('dolphin_id').unsigned().notNullable();
+			// Foreign key constrains for dolphin_id.
+			table
+				.foreign('dolphin_id')
+				.references('dolphins.dolphin_id')
+				.onDelete('CASCADE')
+				.onUpdate('CASCADE');
+			table.string('dolphin_name');
+
+			table.tinyint('body_condition_score').unsigned(); //0, 1, 2
+			table.string('body_condition_score_comments'); //0, 1, 2
+			// table.tinyint('weight').unsigned(); //0, 2
+			table.double('weight_measured'); //weekly measured weight of dolphin
+			table.string('weight_measured_comments');
+			table.tinyint('kcal_calculations').unsigned(); //0, 2
+			table.string('kcal_calculations_comments'); //0, 2
+			table.tinyint('blood_hydration').unsigned(); //0, 1, 2
+			table.string('blood_hydration_comments'); //0, 1, 2
+			table.tinyint('fish_quality').unsigned(); //0, 2
+			table.string('fish_quality_comments'); //0, 2
+			table.tinyint('fish_variety').unsigned(); //0, 1, 2
+			table.string('fish_variety_comments'); //0, 1, 2
+			table.string('file_path'); //Path to the uploaded file(s)
+			table.timestamps(true, true); //Timestamp: created at, updated at
+		}),
+
+		// Valencia good_feeding table
+		knex.schema.createTable('valencia_good_feeding', function (table) {
+			table.increments('feeding_record_id').primary();
+			table.integer('user_id').unsigned();
+			// Foreign key constrains for user_id.
+			table
+				.foreign('user_id')
+				.references('users.id')
+				.onDelete('SET NULL')
+				.onUpdate('CASCADE');
+			table.string('user_name');		
+			table.integer('dolphin_id').unsigned().notNullable();
+			// Foreign key constrains for dolphin_id.
+			table
+				.foreign('dolphin_id')
+				.references('dolphins.dolphin_id')
+				.onDelete('CASCADE')
+				.onUpdate('CASCADE');
+			table.string('dolphin_name');
+
+			table.tinyint('body_condition_score').unsigned(); //0, 1, 2
+			table.string('body_condition_score_comments'); //0, 1, 2
+			// table.tinyint('weight').unsigned(); //0, 2
+			table.double('weight_measured'); //weekly measured weight of dolphin
+			table.string('weight_measured_comments');
+			table.tinyint('kcal_calculations').unsigned(); //0, 2
+			table.string('kcal_calculations_comments'); //0, 2
+			table.tinyint('blood_hydration').unsigned(); //0, 1, 2
+			table.string('blood_hydration_comments'); //0, 1, 2
+			table.tinyint('fish_quality').unsigned(); //0, 2
+			table.string('fish_quality_comments'); //0, 2
+			table.tinyint('fish_variety').unsigned(); //0, 1, 2
+			table.string('fish_variety_comments'); //0, 1, 2
+			table.string('file_path'); //Path to the uploaded file(s)
+			table.timestamps(true, true); //Timestamp: created at, updated at
+		}),
+
+		// Duesseldorf good_feeding table
+		knex.schema.createTable('duesseldorf_good_feeding', function (table) {
+			table.increments('feeding_record_id').primary();
+			table.integer('user_id').unsigned();
+			// Foreign key constrains for user_id.
+			table
+				.foreign('user_id')
+				.references('users.id')
+				.onDelete('SET NULL')
+				.onUpdate('CASCADE');
+			table.string('user_name');		
+			table.integer('dolphin_id').unsigned().notNullable();
+			// Foreign key constrains for dolphin_id.
+			table
+				.foreign('dolphin_id')
+				.references('dolphins.dolphin_id')
+				.onDelete('CASCADE')
+				.onUpdate('CASCADE');
+			table.string('dolphin_name');
+
+			table.tinyint('body_condition_score').unsigned(); //0, 1, 2
+			table.string('body_condition_score_comments'); //0, 1, 2
+			// table.tinyint('weight').unsigned(); //0, 2
+			table.double('weight_measured'); //weekly measured weight of dolphin
+			table.string('weight_measured_comments');
+			table.tinyint('kcal_calculations').unsigned(); //0, 2
+			table.string('kcal_calculations_comments'); //0, 2
+			table.tinyint('blood_hydration').unsigned(); //0, 1, 2
+			table.string('blood_hydration_comments'); //0, 1, 2
+			table.tinyint('fish_quality').unsigned(); //0, 2
+			table.string('fish_quality_comments'); //0, 2
+			table.tinyint('fish_variety').unsigned(); //0, 1, 2
+			table.string('fish_variety_comments'); //0, 1, 2
+			table.string('file_path'); //Path to the uploaded file(s)
+			table.timestamps(true, true); //Timestamp: created at, updated at
+		}),
+
 		// good_health table
 		knex.schema.createTable('good_health', function (table) {
 			table.increments('health_record_id').primary();

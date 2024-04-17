@@ -15,7 +15,8 @@ async function loadDummyUser() {
 			name: 'john doe1',
 			email: 'john.doe@example.email',
 			password: 'secret_password',
-			roleName: 'valencia'
+			roleName: 'Valencia',
+			rolePassword: 'bcu82gs_!n',
 		});
 	await request(app)
 		.post('/api/users/register')
@@ -24,7 +25,8 @@ async function loadDummyUser() {
 			name: 'john doe2',
 			email: 'john.doe2@example.email',
 			password: 'secret_password',
-			roleName: 'duesseldorf',
+			roleName: 'Duesseldorf',
+			rolePassword: 'safdjhc7#s',
 		});
 	await request(app)
 		.post('/api/users/register')
@@ -33,7 +35,8 @@ async function loadDummyUser() {
 			name: 'john doe3',
 			email: 'john.doe@example.email',
 			password: 'secret_password',
-			roleName: 'valencia',
+			roleName: 'Valencia',
+			rolePassword: 'bcu82gs_!n',
 		});
 		await request(app)
 		.post('/api/users/register')
@@ -42,7 +45,8 @@ async function loadDummyUser() {
 			name: 'john doe4',
 			email: 'doe4@gmx.de',
 			password: '123456',
-			roleName: 'nuernberg',
+			roleName: 'Nuernberg',
+			rolePassword: 'uzh*jq6t1_',
 		});
 	return;
 }

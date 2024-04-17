@@ -1,8 +1,10 @@
-const GoodFeeding = require('../models/GoodFeeding');
+//const GoodFeeding = require('../models/GoodFeeding');
 const { raw } = require('objection'); //What does the function raw do? It allows us to use SQL functions in our queries. In this case, we are using the SQL function DATE() to extract the date from the created_at column. We are then comparing it to the date passed in as a parameter.
 const { getLastNMonths } = require('../source/CustomSource');
 const DolphinDAO = require('../dao/dolphinDao');
 const { DolphinError } = require('../source/Errors');
+const User = require('@carecentive/carecentive-core/models/User');
+const e = require('express');
 
 class GoodFeedingService {
 	/**
@@ -45,6 +47,17 @@ class GoodFeedingService {
 
 			const { dolphin_id } = dolphin_data;
 
+			// Check if user has a role and if, which role (i.e. which zoo he is working at)
+			const user = await User.query().findById(result.user_id).withGraphFetched('roles');
+			const roleName = user.roles[0].name;
+			if (roleName) {
+			console.log('role: ', roleName);
+			const location = roleName;
+			const modelName = `${location}GoodFeeding`;
+			const GoodFeeding = require(`../models/${modelName}`); // Get the respective model, depending on which zoo the user works at
+			////////////////////////////////////////////////
+
+
 			console.log("Date sent to backend: ", result.created_at);
 			if (result.created_at !== "") {
 				const insertedResult = await GoodFeeding.query().insert({
@@ -63,6 +76,7 @@ class GoodFeedingService {
 			
 			return insertedResult;
 			}
+		}
 		} catch (error) {
 			throw error;
 		}
@@ -72,12 +86,25 @@ class GoodFeedingService {
 	 * Gets the test result of good feeding of given date.
 	 * @param {string} date - date in format `yyyy-mm-dd`.
 	 */
-	static async getTestResultWithDate(date) {
+	static async getTestResultWithDate(date, userID) {
 		try {
-			const result = await GoodFeeding.query().where(
+			// Check if user has a role and if, which role (i.e. which zoo he is working at)
+			const user = await User.query().findById(userID).withGraphFetched('roles');
+			const roleName = user.roles[0].name;
+			if (roleName) {
+			console.log('role: ', roleName);
+			const location = roleName;
+			const modelName = `${location}GoodFeeding`;
+			const GoodFeeding = require(`../models/${modelName}`); // Get the respective model, depending on which zoo the user works at
+			////////////////////////////////////////////////
+
+				const result = await GoodFeeding.query().where(
 				raw(`DATE(created_at) = ?`, [date])
 			);
 			return result;
+			} else {
+				throw new Error('USER_HAS_NO_ROLE');
+			}
 		} catch (error) {
 			throw error;
 		}
@@ -87,10 +114,24 @@ class GoodFeedingService {
 	 * Gets all good_feeding test results by the given dolphin name.
 	 * @returns {Promise<Array>} list of query result
 	 */
-	static async getAllTestResults() {
+	static async getAllTestResults(userID) {
 		try {
+			// Check if user has a role and if, which role (i.e. which zoo he is working at)
+			const user = await User.query().findById(userID).withGraphFetched('roles');
+			const roleName = user.roles[0].name;
+			if (roleName) {
+			console.log('role: ', roleName);
+			const location = roleName;
+			const modelName = `${location}GoodFeeding`;
+			const GoodFeeding = require(`../models/${modelName}`); // Get the respective model, depending on which zoo the user works at
+			////////////////////////////////////////////////
+
+
 			const result = await GoodFeeding.query();
 			return result;
+			} else {
+				throw new Error('USER_HAS_NO_ROLE');
+			}
 		} catch (error) {
 			throw error;
 		}
@@ -103,10 +144,22 @@ class GoodFeedingService {
 	 * @param {String} name - The name of dolphin
 	 * @returns {Promise<Array>} list of query result
 	 */
-	static async getTestResultByDolphin(name) {
+	static async getTestResultByDolphin(name, userID) {
 		try {
+			// Check if user has a role and if, which role (i.e. which zoo he is working at)
+			const user = await User.query().findById(userID).withGraphFetched('roles');
+			const roleName = user.roles[0].name;
+			if (roleName) {
+			console.log('role: ', roleName);
+			const location = roleName;
+			const modelName = `${location}GoodFeeding`;
+			const GoodFeeding = require(`../models/${modelName}`); // Get the respective model, depending on which zoo the user works at
+			////////////////////////////////////////////////
 			const result = await GoodFeeding.query().where('dolphin_name', '=', name);
 			return result;
+			} else {
+				throw new Error('USER_HAS_NO_ROLE');
+			}
 		} catch (error) {
 			throw error;
 		}
@@ -119,8 +172,18 @@ class GoodFeedingService {
 	 * @param {number} month - Month
 	 * @returns {Promise<Array>} list of query result
 	 */
-	static async getTestResultByDolphinAndMonth(name, year, month) {
+	static async getTestResultByDolphinAndMonth(name, year, month, userID) {
 		try {
+			// Check if user has a role and if, which role (i.e. which zoo he is working at)
+			const user = await User.query().findById(userID).withGraphFetched('roles');
+			const roleName = user.roles[0].name;
+			if (roleName) {
+			console.log('role: ', roleName);
+			const location = roleName;
+			const modelName = `${location}GoodFeeding`;
+			const GoodFeeding = require(`../models/${modelName}`); // Get the respective model, depending on which zoo the user works at
+			////////////////////////////////////////////////
+
 			const result = await GoodFeeding.query()
 				.where('dolphin_name', '=', name)
 				.where(
@@ -130,6 +193,9 @@ class GoodFeedingService {
 					)
 				);
 			return result;
+			} else {
+				throw new Error('USER_HAS_NO_ROLE');
+			}
 		} catch (error) {
 			throw error;
 		}
@@ -141,8 +207,17 @@ class GoodFeedingService {
 	 * @param {number} month - Month
 	 * @returns {Promise<Array>} list of query result
 	 */
-	static async getTestResultByMonth(year, month) {
+	static async getTestResultByMonth(year, month, userID) {
 		try {
+			// Check if user has a role and if, which role (i.e. which zoo he is working at)
+			const user = await User.query().findById(userID).withGraphFetched('roles');
+			const roleName = user.roles[0].name;
+			if (roleName) {
+			console.log('role: ', roleName);
+			const location = roleName;
+			const modelName = `${location}GoodFeeding`;
+			const GoodFeeding = require(`../models/${modelName}`); // Get the respective model, depending on which zoo the user works at
+			////////////////////////////////////////////////
 			const result = await GoodFeeding.query()
 				.where(
 					raw( 
@@ -151,6 +226,9 @@ class GoodFeedingService {
 					)
 				);
 			return result;
+			} else {
+				throw new Error('USER_HAS_NO_ROLE');
+			}
 		} catch (error) {
 			throw error;
 		}
@@ -164,7 +242,8 @@ class GoodFeedingService {
 	 * @param {number} numMonths - The number of past months to include in the result.
 	 * @returns {Promise<Array>} list of query result
 	 */
-	static async getTestResultNMonths(name, numMonths = 3) {
+	static async getTestResultNMonths(name, numMonths = 3, userID) {
+	try {
 		const myDolphinDAO = new DolphinDAO();
 
 		// if this dolphin is not in database,
@@ -172,7 +251,15 @@ class GoodFeedingService {
 		if (!(await myDolphinDAO.getDolphinByName(name))) {
 			throw new DolphinError(`Dolphin ${name} doesn't exist!`, 404);
 		}
-
+		// Check if user has a role and if, which role (i.e. which zoo he is working at)
+		const user = await User.query().findById(userID).withGraphFetched('roles');
+		const roleName = user.roles[0].name;
+		if (roleName) {
+		console.log('role: ', roleName);
+		//const location = roleName;
+		//const modelName = `${location}GoodFeeding`;
+		//const GoodFeeding = require(`../models/${modelName}`); // Get the respective model, depending on which zoo the user works at
+		////////////////////////////////////////////////
 		// Gets the year and month numbers of last numMonths months
 		const lastNMonths = getLastNMonths(numMonths);
 		const allResultsPromises = [];
@@ -184,7 +271,8 @@ class GoodFeedingService {
 				GoodFeedingService.getTestResultByDolphinAndMonth(
 					name,
 					lastNMonths[i].year,
-					lastNMonths[i].month
+					lastNMonths[i].month,
+					userID
 				)
 			);
 		}
@@ -201,7 +289,13 @@ class GoodFeedingService {
 				allResults[i];
 		}
 
-		return returnedResults;
+		return returnedResults;}
+		else {
+			throw new Error('USER_HAS_NO_ROLE');
+		}
+	} catch (error) {
+		throw error;
+	}
 	}
 
 
@@ -212,9 +306,18 @@ class GoodFeedingService {
 	 * @param {number} numMonths - The number of past months to include in the result.
 	 * @returns {Promise<Array>} list of query result
 	 */
-	static async getAllTestResultNMonths(numMonths = 3) {
-		const myDolphinDAO = new DolphinDAO();
-
+	static async getAllTestResultNMonths(numMonths = 3, userID) {
+	try {
+			// Check if user has a role and if, which role (i.e. which zoo he is working at)
+			const user = await User.query().findById(userID).withGraphFetched('roles');
+			const roleName = user.roles[0].name;
+			if (roleName) {
+			console.log('role: ', roleName);
+			const location = roleName;
+			const modelName = `${location}GoodFeeding`;
+			const GoodFeeding = require(`../models/${modelName}`); // Get the respective model, depending on which zoo the user works at
+			////////////////////////////////////////////////
+		//const myDolphinDAO = new DolphinDAO();
 		// if this dolphin is not in database,
 		// 404: not found.
 		/*if (!(await myDolphinDAO.getDolphinByName(name))) {
@@ -231,7 +334,8 @@ class GoodFeedingService {
 			allResultsPromises.push(
 				GoodFeedingService.getTestResultByMonth(
 					lastNMonths[i].year,
-					lastNMonths[i].month
+					lastNMonths[i].month,
+					userID
 				)
 			);
 		}
@@ -249,9 +353,13 @@ class GoodFeedingService {
 		}
 
 		return returnedResults;
+		} else {
+			throw new Error('USER_HAS_NO_ROLE');
+		}
+	} catch (error) {
+		throw error;
 	}
-
-
+}
 }
 
 module.exports = GoodFeedingService;
