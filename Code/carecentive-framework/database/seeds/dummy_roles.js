@@ -3,6 +3,8 @@ async function loadDummyRole() {
 	// Insert dummy user roles.
 
 	// Array of roles, that is: zoos and their passwords
+  // These are dummy password for development and are 
+  // not being used in production.
     const roles = [
       {name: 'Nuernberg', password: 'uzh*jq6t1_'},
       {name: 'Duesseldorf', password: 'safdjhc7#s'},

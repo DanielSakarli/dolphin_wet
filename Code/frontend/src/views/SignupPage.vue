@@ -20,6 +20,9 @@
 			<ion-card>
 				<ion-icon name="heart" aria-hidden="true"></ion-icon>
 				<ion-card-content>
+					<p style="text-align: center">
+						---------- Your information --------<br />
+					</p>
 					<ion-input
 						v-model="username"
 						ref="input"
@@ -27,25 +30,45 @@
 						fill="solid"
 						label="Name"
 						label-placement="floating"
-						helper-text="Enter Your Name"
+						helper-text="Enter your name"
 					></ion-input>
 					<ion-input
 						v-model="email"
 						ref="input"
 						type="email"
 						fill="solid"
-						label="Email"
+						label="E-mail"
 						label-placement="floating"
-						helper-text="Enter a valid email"
+						helper-text="Enter a valid e-mail"
 					></ion-input>
 					<ion-input
 						v-model="password"
 						ref="input"
 						type="password"
 						fill="solid"
-						label="Password"
+						label="Your password"
 						label-placement="floating"
 						helper-text="Enter your password"
+					></ion-input>
+					<p style="text-align: center">
+						-------------- Your zoo ------------<br />
+					</p>
+					<p>Select your zoo:<br /></p>
+					<select v-model="selectedZoo">
+						<option disabled value="">Please select a zoo</option>
+						<option v-for="zoo in zoos" :key="zoo" :value="zoo">
+							{{ zoo }}
+						</option>
+					</select>
+
+					<ion-input
+						v-model="zoo_password"
+						ref="input"
+						type="password"
+						fill="solid"
+						label="Zoo password"
+						label-placement="floating"
+						helper-text="Ask your administrator for the zoo´s password"
 					></ion-input>
 					<ion-button @click="registerUser" color="primary" expand="block"
 						>Sign up</ion-button
@@ -89,7 +112,18 @@ export default {
 			username: '',
 			email: '',
 			password: '',
+			zoos: [],
+			selectedZoo: null,
+			zoo_password: '',
 		};
+	},
+	async created() {
+		try {
+			const response = await axios.get(baseUrl + '/api/users/roles');
+			this.zoos = response.data;
+		} catch (error) {
+			console.error('Error:', error);
+		}
 	},
 	methods: {
 		async registerUser() {
@@ -97,6 +131,8 @@ export default {
 				name: this.username,
 				email: this.email,
 				password: this.password,
+				roleName: this.selectedZoo,
+				rolePassword: this.zoo_password,
 			};
 			axios
 				.post(url, requestBody, { withCredentials: true })
