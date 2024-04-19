@@ -78,6 +78,7 @@ const good_feeding = require('./routes/good_feeding');
 const good_health = require('./routes/good_health');
 const good_housing = require('./routes/good_housing');
 const behaviour = require('./routes/behabvior');
+const emotional_state = require('./routes/emotional_state');
 
 //const uploadPhoto = require('./controllers/photoUpload');
 const uploadFile = require('./fileUpload');
@@ -203,6 +204,7 @@ app.use('/api/photo', uploadPhoto);
 app.use('/api/good_health', good_health);
 app.use('/api/good_housing', good_housing);
 app.use('/api/behaviour', behaviour);
+app.use('/api/emotional_state', emotional_state);
 //app.post('/api/photo', uploadPhoto);
 app.post('/api/file', uploadFile);
 app.get('/api/export-csv', csvWriter);

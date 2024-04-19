@@ -17,15 +17,16 @@ async function setResult(req, res, next) {
 
 		// After gone through the authenticateToken middleware
 		// the data of user is in the req.authData
-		let userID;
-		let userName;
 		if (isUserAuth) {
+            let userID;
+		    let userName;
 			const { user_id, name } = req.authData;
 			console.log('authdata: ', req.authData);
 			userID = user_id;
 			userName = name;
 			console.log('user name: ', userName);
 
+        let test_result = req.body;
 		// If dolphin is not existing in database,
 		// 400: bad request
 		const isDolphinExisted = await DolphinService.isDolphinExisted(
@@ -40,8 +41,6 @@ async function setResult(req, res, next) {
 		const dolphin_id = dolphin_obj.dolphin_id;
 
 		// attach userID to test result in req.body
-		let test_result = req.body;
-			
 		test_result = { user_id: userID, user_name: userName, ...test_result };
 		console.log(test_result);
 		const insertedResult = await EmotionalStateService.loadTestResult(test_result);
