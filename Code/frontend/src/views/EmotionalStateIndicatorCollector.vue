@@ -69,22 +69,6 @@ const token = localStorage.getItem('token'); //Get current JWT token of the user
 	},
 };*/
 
-const requestBody = {
-	dolphin_name: selectedDolphin,
-	body_condition_score: 3,
-	weight_measured: 15.5,
-	kcal_calculations: 3,
-	blood_hydration: 3,
-	fish_quality: 3,
-	fish_variety: 3,
-	body_condition_score_comments: '',
-	weight_measured_comments: '',
-	kcal_calculations_comments: '',
-	blood_hydration_comments: '',
-	fish_quality_comments: '',
-	fish_variety_comments: '',
-};
-
 export default defineComponent({
 	data() {
 		return {
@@ -157,6 +141,7 @@ export default defineComponent({
 				return alert.present();
 			});
 		},
+		/*
 		async storeData() {
 			const confirmed = true; //confirm(this.$t('savingDataNext'));
 			// Check in console if token is correct
@@ -174,7 +159,7 @@ export default defineComponent({
 						console.error('Error:', error.response.data);
 					});
 			}
-		},
+		},*/
 		changeLanguage($event: any) {
 			this.$i18n.locale = $event.detail.value;
 		},
