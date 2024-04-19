@@ -1,9 +1,10 @@
+<!-- eslint-disable vue/no-unused-components -->
 <template>
+	<!-- Criteria Selector v-on:click="showDolphins" @click="showDolphins"-->
 	<ion-content>
-	<!-- Criteria Selector -->
 		<ion-list>
 			<ion-item>
-					<ion-select
+				<ion-select
 						:label="firstlabel"
 						:placeholder="firstplaceholder"
 						okText="OK"
@@ -13,7 +14,7 @@
 						<ion-select-option v-for="dolphin in dolphinsStore.dolphinList" v-bind:key="dolphin.name">
 							{{dolphin.name}}
 						</ion-select-option>
-					</ion-select>
+				</ion-select>
 			</ion-item>
 			<ion-item>
 				<ion-select
@@ -24,86 +25,30 @@
 					okText="OK"
 					:cancelText="firstcancelText"
 				>
-					<ion-select-option value="firstCriteriaBehaviour">
-						Display of exploratory behavior
-					</ion-select-option>
-					<ion-select-option value="secondCriteriaBehaviour">
-						Display of affiliative behavior, play, socio-sexual behavior
-					</ion-select-option>
-					<ion-select-option value="thirdSubcriteriaBehaviour">
-						Display of Maternal behavior when justified
-					</ion-select-option>
-					<ion-select-option value="forthSubcriteriaBehaviour">
-						Absence of repetitive abnormal behaviors
-					</ion-select-option>
-					<ion-select-option value="fifthSubcriteriaBehaviour">
-						Absence of receving aggressive behaviors causing negative consequences
-					</ion-select-option>
-					<ion-select-option value="sixthSubcriteriaBehaviour">
-						Absence of receving aggressive behaviors causing negative consequences
-					</ion-select-option>
-					<ion-select-option value="seventhSubcriteriaBehaviour">
-						Evidence of social isolation
-					</ion-select-option>
-					<ion-select-option value="eighthSubcriteriaBehaviour">
-						Evidence avoidance of certain pool regions
-					</ion-select-option>
-				</ion-select>
-			</ion-item>
-			<ion-item>
-				<ion-select
-					:value="subcriteria"
-					@IonChange="subcriteria=$event.target.value"
-					:label="thirdlabel"
-					:placeholder="thirdplaceholder"
-					okText="OK"
-					:cancelText="firstcancelText"
-				>
-					<ion-select-option v-if=" criteria === 'firstCriteriaBehaviour'" value="firstSubcriteriaBehaviour">{{
-						$t('firstSubcriteriaBehaviour')
+					<ion-select-option value="firstCriteriaBehaviour">{{
+						$t('firstCriteriaBehaviour')
 					}}</ion-select-option>
-					<ion-select-option v-if=" criteria === 'firstCriteriaBehaviour'" value="secondSubcriteriaBehaviour">{{
-						$t('secondSubcriteriaBehaviour')
+					<ion-select-option value="secondCriteriaBehaviour">{{
+						$t('secondCriteriaBehaviour')
 					}}</ion-select-option>
-					<ion-select-option v-if=" criteria === 'firstCriteriaBehaviour'" value="thirdSubcriteriaBehaviour">{{
-						$t('thirdSubcriteriaBehaviour')
+					<ion-select-option value="thirdCriteriaBehaviour">{{
+						$t('thirdCriteriaBehaviour')
 					}}</ion-select-option>
-					<ion-select-option v-if=" criteria === 'firstCriteriaBehaviour'" value="fourthSubcriteriaBehaviour">{{
-						$t('fourthSubcriteriaBehaviour')
+					<ion-select-option value="fourthCriteriaBehaviour">{{
+						$t('fourthCriteriaBehaviour')
 					}}</ion-select-option>
-					<ion-select-option v-if=" criteria === 'firstCriteriaBehaviour'" value="fifthSubcriteriaBehaviour">{{
-						$t('fifthSubcriteriaBehaviour')
-					}}</ion-select-option>
-					<ion-select-option v-if=" criteria === 'secondCriteriaBehaviour'" value="sixthSubcriteriaBehaviour">{{
-						$t('sixthSubcriteriaBehaviour')
-					}}</ion-select-option>
-					<ion-select-option v-if=" criteria === 'secondCriteriaBehaviour'" value="seventhSubcriteriaBehaviour">{{
-						$t('seventhSubcriteriaBehaviour')
-					}}</ion-select-option>
-					<ion-select-option v-if=" criteria === 'secondCriteriaBehaviour'" value="eigthSubcriteriaBehaviour">{{
-						$t('eigthSubcriteriaBehaviour')
-					}}</ion-select-option>
-					<ion-select-option v-if=" criteria === 'secondCriteriaBehaviour'" value="ninthSubcriteriaBehaviour">{{
-						$t('ninthSubcriteriaBehaviour')
-					}}</ion-select-option>
-					<ion-select-option v-if=" criteria === 'secondCriteriaBehaviour'" value="tenthSubcriteriaBehaviour">{{
-						$t('tenthSubcriteriaBehaviour')
-					}}</ion-select-option>
-					<ion-select-option v-if=" criteria === 'secondCriteriaBehaviour'" value="eleventhSubcriteriaBehaviour">{{
-						$t('eleventhSubcriteriaBehaviour')
-					}}</ion-select-option>
-					<ion-select-option v-if=" criteria === 'secondCriteriaBehaviour'" value="twelfthSubcriteriaBehaviour">{{
-						$t('twelfthSubcriteriaBehaviour')
-					}}</ion-select-option>
-					<ion-select-option v-if=" criteria === 'secondCriteriaBehaviour'" value="thirteenthSubcriteriaBehaviour">{{
-						$t('thirteenthSubcriteriaBehaviour')
-					}}</ion-select-option>
-					<ion-select-option v-if=" criteria === 'secondCriteriaBehaviour'" value="fourteenthSubcriteriaBehaviour">{{
-						$t('fourteenthSubcriteriaBehaviour')
-					}}</ion-select-option>
-					<ion-select-option v-if=" criteria === 'secondCriteriaBehaviour'" value="fifteenthSubcriteriaBehaviour">{{
-						$t('fifteenthSubcriteriaBehaviour')
-					}}</ion-select-option>
+                    <ion-select-option value="fifthCriteriaBehaviour">{{
+                        $t('fifthCriteriaBehaviour')
+                    }}</ion-select-option>
+                    <ion-select-option value="sixthCriteriaBehaviour">{{
+                        $t('sixthCriteriaBehaviour')
+                    }}</ion-select-option>
+                    <ion-select-option value="seventhCriteriaBehaviour">{{
+                        $t('seventhCriteriaBehaviour')
+                    }}</ion-select-option>
+                    <ion-select-option value="eighthCriteriaBehaviour">{{
+                        $t('eighthCriteriaBehaviour')
+                    }}</ion-select-option>
 				</ion-select>
 			</ion-item>
 		</ion-list>
@@ -115,119 +60,131 @@
 		<ion-modal :is-open="isOpenManual">
 			<ion-header>
 				<ion-toolbar>
-					<ion-title v-if=" subcriteria === 'firstSubcriteriaBehaviour'"
-						>{{$t('firstSubcriteriaBehaviour')}}
+					<ion-title v-if=" criteria === 'firstCriteriaBehaviour'"
+						>{{$t('firstCriteriaBehaviour')}}
 					</ion-title>
-					<ion-title v-else-if=" subcriteria === 'secondSubcriteriaBehaviour'"
-						>{{$t('secondSubcriteriaBehaviour')}}
+					<ion-title v-else-if=" criteria === 'secondCriteriaBehaviour'"
+						>{{$t('secondCriteriaBehaviour')}}
 					</ion-title>
-					<ion-title v-else-if=" subcriteria === 'thirdSubcriteriaBehaviour'"
-						>{{$t('thirdSubcriteriaBehaviour')}}
+					<ion-title v-else-if=" criteria === 'thirdCriteriaBehaviour'"
+						>{{$t('thirdCriteriaBehaviour')}}
 					</ion-title>
-					<ion-title v-else-if=" subcriteria === 'fourthSubcriteriaBehaviour'"
-						>{{$t('fourthSubcriteriaBehaviour')}}
+					<ion-title v-else-if=" criteria === 'fourthCriteriaBehaviour'"
+						>{{$t('fourthCriteriaBehaviour')}}
 					</ion-title>
-					<ion-title v-else-if=" subcriteria === 'fifthSubcriteriaBehaviour'"
-						>{{$t('fifthSubcriteriaBehaviour')}}
-					</ion-title>
-					<ion-title v-else-if=" subcriteria === 'sixthSubcriteriaBehaviour'"
-						>{{$t('sixthSubcriteriaBehaviour')}}
-					</ion-title>
-					<ion-title v-if=" subcriteria === 'seventhSubcriteriaBehaviour'"
-						>{{$t('seventhSubcriteriaBehaviour')}}
-					</ion-title>
-					<ion-title v-else-if=" subcriteria === 'eigthSubcriteriaBehaviour'"
-						>{{$t('eigthSubcriteriaBehaviour')}}
-					</ion-title>
-					<ion-title v-else-if=" subcriteria === 'ninthSubcriteriaBehaviour'"
-						>{{$t('ninthSubcriteriaBehaviour')}}
-					</ion-title>
-					<ion-title v-else-if=" subcriteria === 'tenthSubcriteriaBehaviour'"
-						>{{$t('tenthSubcriteriaBehaviour')}}
-					</ion-title>
-					<ion-title v-else-if=" subcriteria === 'eleventhSubcriteriaBehaviour'"
-						>{{$t('eleventhSubcriteriaBehaviour')}}
-					</ion-title>
-					<ion-title v-else-if=" subcriteria === 'twelfthSubcriteriaBehaviour'"
-						>{{$t('twelfthSubcriteriaBehaviour')}}
-					</ion-title>
-					<ion-title v-else-if=" subcriteria === 'thirteenthSubcriteriaBehaviour'"
-						>{{$t('thirteenthSubcriteriaBehaviour')}}
-					</ion-title>
-					<ion-title v-else-if=" subcriteria === 'fourteenthSubcriteriaBehaviour'"
-						>{{$t('fourteenthSubcriteriaBehaviour')}}
-					</ion-title>
-					<ion-title v-else-if=" subcriteria === 'fifteenthSubcriteriaBehaviour'"
-						>{{$t('fifteenthSubcriteriaBehaviour')}}
-					</ion-title>
+                    <ion-title v-else-if=" criteria === 'fifthCriteriaBehaviour'"
+                        >{{$t('fifthCriteriaBehaviour')}}
+                    </ion-title>
+                    <ion-title v-else-if=" criteria === 'sixthCriteriaBehaviour'"
+                        >{{$t('sixthCriteriaBehaviour')}}
+                    </ion-title>
+                    <ion-title v-else-if=" criteria === 'seventhCriteriaBehaviour'"
+                        >{{$t('seventhCriteriaBehaviour')}}
+                    </ion-title>
+                    <ion-title v-else-if=" criteria === 'eighthCriteriaBehaviour'"
+                        >{{$t('eighthCriteriaBehaviour')}}
+                    </ion-title>
 					<ion-buttons slot="end">
 						<ion-button @click="setOpenManual(false)">{{ $t('close')}}</ion-button>
 					</ion-buttons>
 				</ion-toolbar>
 			</ion-header>
 			<ion-content class="ion-padding">
-				<p v-if=" subcriteria === 'firstSubcriteriaBehaviour'">
-					<h3>Environmental enrichment program</h3>
-					Assess if your environmental enrichment program follows the EAAM Standards & Guidelines.
+				<p v-if=" criteria === 'firstCriteriaBehaviour'">
+					<h1>{{ $t('firstSubCriteriaBehaviour') }}</h1>
+					<h3>Score 0</h3>
+					{{  $t('score0Behaviour1') }}
+                    <h3>Score 1</h3>
+                    {{  $t('score1Behaviour1') }}
+					<h3>Score 2</h3>
+					{{  $t('score2Behaviour1') }}
 				</p>
-				<p v-if=" subcriteria === 'secondSubcriteriaBehaviour'">
-					<h3>Methods behavioral observations</h3>
-					1. Observations should be conducted on 5 days within an 8-day period, ideally including (1) weekend day(s).
-					2. Observation duration: 3x 10 min per day (morning, noon, and afternoon) with a 5-minute interval that allows the dolphins to habituate to the presence of the observer.
-					3. Modified all occurrence sampling (see Appendix) allows to assess presence/absence as well as the frequency of each behavior (that can late be used to calculate activity budgets in % for each animal).
+				<p v-if=" criteria === 'secondCriteriaBehaviour'">
+					<h1>{{ $t('secondSubCriteriaBehaviour') }}</h1>
+					<h3>Score 0</h3>
+					{{  $t('score0Behaviour2') }}
+					<h3>Score 2</h3>
+					{{  $t('score2Behaviour2') }}
+                    <h1>{{ $t('thirdSubCriteriaBehaviour') }}</h1>
+					<h3>Score 0</h3>
+					{{  $t('score0Behaviour3') }}
+					<h3>Score 2</h3>
+					{{  $t('score2Behaviour3') }}
+                    <h1>{{ $t('fourthSubCriteriaBehaviour') }}</h1>
+					<h3>Score 0</h3>
+					{{  $t('score0Behaviour4') }}
+					<h3>Score 2</h3>
+					{{  $t('score2Behaviour4') }}
 				</p>
-				<p v-if=" subcriteria === 'thirdSubcriteriaBehaviour'">
-					<h3>Absence of stereotypic behaviors</h3>
-					All stereotypic behavior types mentioned in the welfare tool (displacement and oral stereotypic behaviors, repetitive body movements without displacement, excessive self-grooming behavior, and regurgitation/reingestion) should be assessed using the modified all occurrence sampling protocol.
+				<p v-if=" criteria === 'thirdCriteriaBehaviour'">
+					<h1>{{ $t('fifthSubCriteriaBehaviour') }}</h1>
+					<h3>Score 0</h3>
+					{{  $t('score0Behaviour5') }}
+					<h3>Score 2</h3>
+					{{  $t('score2Behaviour5') }}
 				</p>
-				<p v-if=" subcriteria === 'fourthSubcriteriaBehaviour'">
-					<h3>Methods behavioral observations</h3>
-					1. Observations should be conducted on 5 days within an 8-day period, ideally including (1) weekend day(s).
-					2. Observation duration: 3x 10 min per day (morning, noon, and afternoon) with a 5-minute interval that allows the dolphins to habituate to the presence of the observer.
-					3. Modified all occurrence sampling (see Appendix) allows to assess presence/absence as well as the frequency of each behavior (that can late be used to calculate activity budgets in % for each animal).
+				<p v-if=" criteria === 'fourthCriteriaBehaviour'">
+					<h1>{{ $t('sixthSubCriteriaBehaviour') }}</h1>
+					<h3>Score 0</h3>
+					{{  $t('score0Behaviour6') }}
+					<h3>Score 2</h3>
+					{{  $t('score2Behaviour6') }}
+                    <h1>{{ $t('seventhSubCriteriaBehaviour') }}</h1>
+					<h3>Score 0</h3>
+					{{  $t('score0Behaviour7') }}
+					<h3>Score 2</h3>
+					{{  $t('score2Behaviour7') }}
+                    <h1>{{ $t('eighthSubCriteriaBehaviour') }}</h1>
+					<h3>Score 0</h3>
+					{{  $t('score0Behaviour8') }}
+					<h3>Score 2</h3>
+					{{  $t('score2Behaviour8') }}
+                    <h1>{{ $t('ninthSubCriteriaBehaviour') }}</h1>
+					<h3>Score 0</h3>
+					{{  $t('score0Behaviour9') }}
+					<h3>Score 2</h3>
+					{{  $t('score2Behaviour9') }}
+                    <h1>{{ $t('tenthSubCriteriaBehaviour') }}</h1>
+					<h3>Score 0</h3>
+					{{  $t('score0Behaviour10') }}
+					<h3>Score 2</h3>
+					{{  $t('score2Behaviour10') }}
 				</p>
-				<p v-if=" subcriteria === 'fifthSubcriteriaBehaviour'">
-					<h3>Absence of stereotypic behaviors</h3>
-					All stereotypic behavior types mentioned in the welfare tool (displacement and oral stereotypic behaviors, repetitive body movements without displacement, excessive self-grooming behavior, and regurgitation/reingestion) should be assessed using the modified all occurrence sampling protocol.
+                <p v-if=" criteria === 'fifthCriteriaBehaviour'">
+					<h1>{{ $t('eleventhSubCriteriaBehaviour') }}</h1>
+					<h3>Score 0</h3>
+					{{  $t('score0Behaviour11') }}
+					<h3>Score 2</h3>
+					{{  $t('score2Behaviour11') }}
+                    <h1>{{ $t('twelfthSubCriteriaBehaviour') }}</h1>
+					<h3>Score 0</h3>
+					{{  $t('score0Behaviour12') }}
+                    <h3>Score 1</h3>
+                    {{  $t('score1Behaviour12') }}
+					<h3>Score 2</h3>
+					{{  $t('score2Behaviour12') }}
 				</p>
-				<p v-if=" subcriteria === 'sixthSubcriteriaBehaviour'">
-					<h3>Absence of stereotypic behaviors</h3>
-					All stereotypic behavior types mentioned in the welfare tool (displacement and oral stereotypic behaviors, repetitive body movements without displacement, excessive self-grooming behavior, and regurgitation/reingestion) should be assessed using the modified all occurrence sampling protocol.
-				</p>
-				<p v-if=" subcriteria === 'seventhSubcriteriaBehaviour'">
-					<h3>Absence of stereotypic behaviors</h3>
-					All stereotypic behavior types mentioned in the welfare tool (displacement and oral stereotypic behaviors, repetitive body movements without displacement, excessive self-grooming behavior, and regurgitation/reingestion) should be assessed using the modified all occurrence sampling protocol.
-				</p>
-				<p v-if=" subcriteria === 'eigthSubcriteriaBehaviour'">
-					<h3>Absence of stereotypic behaviors</h3>
-					All stereotypic behavior types mentioned in the welfare tool (displacement and oral stereotypic behaviors, repetitive body movements without displacement, excessive self-grooming behavior, and regurgitation/reingestion) should be assessed using the modified all occurrence sampling protocol.
-				</p>
-				<p v-if=" subcriteria === 'ninthSubcriteriaBehaviour'">
-					<h3>Absence of stereotypic behaviors</h3>
-					All stereotypic behavior types mentioned in the welfare tool (displacement and oral stereotypic behaviors, repetitive body movements without displacement, excessive self-grooming behavior, and regurgitation/reingestion) should be assessed using the modified all occurrence sampling protocol.
-				</p>
-				<p v-if=" subcriteria === 'tenthSubcriteriaBehaviour'">
-					<h3>Absence of stereotypic behaviors</h3>
-					All stereotypic behavior types mentioned in the welfare tool (displacement and oral stereotypic behaviors, repetitive body movements without displacement, excessive self-grooming behavior, and regurgitation/reingestion) should be assessed using the modified all occurrence sampling protocol.
-				</p>
-				<p v-if=" subcriteria === 'eleventhSubcriteriaBehaviour'">
-					<h3>Absence of receiving aggressive behaviors causing negative consequences</h3>
-					Using the attached template (see Appendix) and preferably using photos taken of each body side (back, belly, left & right side) of each animal, rake marks (social-related marks) should be drawn into the dolphin silhouettes. In doing so, over time, one can easily access if and to what extent a dolphin receives aggressive behavior.
-				</p>
-				<p v-if=" subcriteria === 'twelfthSubcriteriaBehaviour'">
-					<h3>Rake marks (social-related marks)</h3>
-					Using the attached template (see Appendix) and preferably using photos taken of each body side (back, belly, left & right side) of each animal, rake marks (social-related marks) should be drawn into the dolphin silhouettes. In doing so, over time, one can easily access if and to what extent a dolphin receives aggressive behavior.
-				</p>
-				<p v-if=" subcriteria === 'thirteenthSubcriteriaBehaviour'">
-				</p>
-				<p v-if=" subcriteria === 'fourteenthSubcriteriaBehaviour'">
-					<h3>Evidence of social isolation</h3>
-					Use trainer interviews (ask them about their observations during each day) if the e.g., the presence of other animals lead to the displacement of one animal from certain pool areas, etc., during the last three months.
-				</p>
-				<p v-if=" subcriteria === 'fifteenthSubcriteriaBehaviour'">
-					<h3>Evidence of avoidance of certain pool areas</h3>
-					Use trainer interviews to assess if a dolphin showed active avoidance of certain pool areas during the last 3 months.
-				</p>
+                <p v-if=" criteria === 'sixthCriteriaBehaviour'">
+                    <h1>{{ $t('thirteenthSubCriteriaBehaviour') }}</h1>
+                    <h3>Score 0</h3>
+                    {{  $t('score0Behaviour13') }}
+                    <h3>Score 2</h3>
+                    {{  $t('score2Behaviour13') }}
+                </p>
+                <p v-if=" criteria === 'seventhCriteriaBehaviour'">
+                <h1>{{ $t('fourteenthSubCriteriaBehaviour') }}</h1>
+                <h3>Score 0</h3>
+                {{  $t('score0Behaviour14') }}
+                <h3>Score 2</h3>
+                {{  $t('score2Behaviour14') }}
+                </p>
+                <p v-if=" criteria === 'eighthCriteriaBehaviour'">
+                    <h1>{{ $t('fifteenthSubCriteriaBehaviour') }}</h1>
+                    <h3>Score 0</h3>
+                    {{  $t('score0Behaviour15') }}
+                    <h3>Score 2</h3>
+                    {{  $t('score2Behaviour15') }}
+                </p>
 			</ion-content>
 		</ion-modal>
 		<!-- End of Description of Criteria (UserManual)-->
@@ -237,296 +194,346 @@
 		<ion-modal :is-open="isOpenScoring">
 			<ion-header>
 				<ion-toolbar>
-					<ion-title v-if=" subcriteria === 'firstSubcriteriaBehaviour'"
-						>{{$t('firstSubcriteriaBehaviour')}}
+					<ion-title v-if=" criteria === 'firstCriteriaBehaviour'"
+						>{{$t('firstCriteriaBehaviour')}}
 					</ion-title>
-					<ion-title v-else-if=" subcriteria === 'secondSubcriteriaBehaviour'"
-						>{{$t('secondSubcriteriaBehaviour')}}
+					<ion-title v-else-if=" criteria === 'secondCriteriaBehaviour'"
+						>{{$t('secondCriteriaBehaviour')}}
 					</ion-title>
-					<ion-title v-else-if=" subcriteria === 'thirdSubcriteriaBehaviour'"
-						>{{$t('thirdSubcriteriaBehaviour')}}
+					<ion-title v-else-if=" criteria === 'thirdCriteriaBehaviour'"
+						>{{$t('thirdCriteriaBehaviour')}}
 					</ion-title>
-					<ion-title v-else-if=" subcriteria === 'fourthSubcriteriaBehaviour'"
-						>{{$t('fourthSubcriteriaBehaviour')}}
+					<ion-title v-else-if=" criteria === 'fourthCriteriaBehaviour'"
+						>{{$t('fourthCriteriaBehaviour')}}
 					</ion-title>
-					<ion-title v-else-if=" subcriteria === 'fifthSubcriteriaBehaviour'"
-						>{{$t('fifthSubcriteriaBehaviour')}}
-					</ion-title>
-					<ion-title v-else-if=" subcriteria === 'sixthSubcriteriaBehaviour'"
-						>{{$t('sixthSubcriteriaBehaviour')}}
-					</ion-title>
-					<ion-title v-else-if=" subcriteria === 'seventhSubcriteriaBehaviour'"
-						>{{$t('seventhSubcriteriaBehaviour')}}
-					</ion-title>
-					<ion-title v-else-if=" subcriteria === 'eigthSubcriteriaBehaviour'"
-						>{{$t('eigthSubcriteriaBehaviour')}}
-					</ion-title>
-					<ion-title v-else-if=" subcriteria === 'ninthSubcriteriaBehaviour'"
-						>{{$t('ninthSubcriteriaBehaviour')}}
-					</ion-title>
-					<ion-title v-else-if=" subcriteria === 'tenthSubcriteriaBehaviour'"
-						>{{$t('tenthSubcriteriaBehaviour')}}
-					</ion-title>
-					<ion-title v-else-if=" subcriteria === 'eleventhSubcriteriaBehaviour'"
-						>{{$t('eleventhSubcriteriaBehaviour')}}
-					</ion-title>
-					<ion-title v-else-if=" subcriteria === 'twelfthSubcriteriaBehaviour'"
-						>{{$t('twelfthSubcriteriaBehaviour')}}
-					</ion-title>
-					<ion-title v-else-if=" subcriteria === 'thirteenthSubcriteriaBehaviour'"
-						>{{$t('thirteenthSubcriteriaBehaviour')}}
-					</ion-title>
-					<ion-title v-else-if=" subcriteria === 'fourteenthSubcriteriaBehaviour'"
-						>{{$t('fourteenthSubcriteriaBehaviour')}}
-					</ion-title>
-					<ion-title v-else-if=" subcriteria === 'fifteenthSubcriteriaBehaviour'"
-						>{{$t('fifteenthSubcriteriaBehaviour')}}
-					</ion-title>
+                    <ion-title v-else-if=" criteria === 'fifthCriteriaBehaviour'"
+                        >{{$t('fifthCriteriaBehaviour')}}
+                    </ion-title>
+                    <ion-title v-else-if=" criteria === 'sixthCriteriaBehaviour'"
+                        >{{$t('sixthCriteriaBehaviour')}}
+                    </ion-title>
+                    <ion-title v-else-if=" criteria === 'seventhCriteriaBehaviour'"
+                        >{{$t('seventhCriteriaBehaviour')}}
+                    </ion-title>
+                    <ion-title v-else-if=" criteria === 'eighthCriteriaBehaviour'"
+                        >{{$t('eighthCriteriaBehaviour')}}
+                    </ion-title>
 					<ion-buttons slot="end">
 						<ion-button @click="setOpenScoring(false)">{{ $t('close')}}</ion-button>
 					</ion-buttons>
 				</ion-toolbar>
 			</ion-header>
 			<ion-content class="ion-padding">
-				<p v-if=" subcriteria === 'firstSubcriteriaBehaviour'">
+				<!--<p v-if=" criteria === 'firstCriteriaBehaviour'">
+					<h1>Body Condition Score:</h1>
 					<h3>Score 1</h3>
-					No enrichment program
-
+					BCS of 3 = adequate
 					<h3>Score 2</h3>
-					Presence of enrichment program according to EAAM S&Gs but no  achievement of enrichment goals; presence of enrichment program but not in fulfillment of the EAAM S&Gs
-
+					BCS of 2 (underweight) or 4(overweight)
 					<h3>Score 3</h3>
-					Presence of enrichment program according to EAAm S&Gs and the display of exploratory behaviors as planned in goal-orientated EP, EP needs to be evaluated against set goals
-
-				</p>
-				<p v-if=" subcriteria === 'secondSubcriteriaBehaviour'">
+					BCS of 1 (emaciated) or 5(obese)
+					<h1>Weight oscillation during the year:</h1>
 					<h3>Score 1</h3>
-					Dolphins do not display affiliative behaviors (e.g. pair swimming, flipper rubbing, etc.) during observations according to attached protocol
-
+					Body weight oscillation (BWOS): &le;13% along the year or &le;5% in a 3-month period  
 					<h3>Score 3</h3>
-					Dolphins display affiliative behaviors (e.g. pair swimming, flipper rubbing, etc.) during observations according to attached protocol
-
+					BWOS: &gt;13% along the year or &lt;5% in a 3-month period
 				</p>
-				<p v-if=" subcriteria === 'thirdSubcriteriaBehaviour'">
+				<p v-if=" criteria === 'secondCriteriaBehaviour'">
+					<h1>Kcal calculations</h1>
 					<h3>Score 1</h3>
-					Dolphins do not display play behavior (social play, bubble ring play, object play) during observations according to attached protocol
-
+					Diet designed on the basis of EAAM S&G
 					<h3>Score 3</h3>
-					Dolphins display play behavior (social play, bubble ring play, object play) during observations according to attached protocol
-
-				</p>
-				<p v-if=" subcriteria === 'fourthSubcriteriaBehaviour'">
+					Diet not designed on the basis of EAAM S&G
+					<h1>Blood parameters for adequate hydration:</h1>
 					<h3>Score 1</h3>
-					Dolphins do not display socio-sexual interactions (e.g. petting, goosing, etc.) during observations according to attached protocol
-					<h3>Score 3</h3>
-					Dolphins display socio-sexual interactions (e.g. petting, goosing, etc.) during observations according to attached protocol
-				</p>
-				<p v-if=" subcriteria === 'fifthSubcriteriaBehaviour'">
-					<h3>Score 1</h3>
-					Presence of any inappropriate maternal behavior towards the calf
-					<h3>Score 3</h3>
-					Absence of inappropriate maternal behavior towards the calf
-				</p>
-				<p v-if=" subcriteria === 'sixthSubcriteriaBehaviour'">
-					<h3>Score 1</h3>
-					Dolphin shows the behavior
-					<h3>Score 3</h3>
-					Dolphin shows no evidence of this behavior
-				</p>
-				<p v-if=" subcriteria === 'seventhSubcriteriaBehaviour'">
-					<h3>Score 1</h3>
-					Dolphin shows the behavior
-					<h3>Score 3</h3>
-					Dolphin shows no evidence of this behavior
-				</p>
-				<p v-if=" subcriteria === 'eigthSubcriteriaBehaviour'">
-					<h3>Score 1</h3>
-					Dolphin shows the behavior
-					<h3>Score 3</h3>
-					Dolphin shows no evidence of this behavior
-				</p>
-				<p v-if=" subcriteria === 'ninthSubcriteriaBehaviour'">
-					<h3>Score 1</h3>
-					Dolphin shows the behavior
-					<h3>Score 3</h3>
-					Dolphin shows no evidence of this behavior
-				</p>
-				<p v-if=" subcriteria === 'tenthSubcriteriaBehaviour'">
-					<h3>Score 1</h3>
-					Dolphin shows the behavior
-					<h3>Score 3</h3>
-					Dolphin shows no evidence of this behavior
-				</p>
-				<p v-if=" subcriteria === 'eleventhSubcriteriaBehaviour'">
-					<h3>Score 1</h3>
-					Dolphin receives aggressive behavior (e.g. biting, hitting, slapping) during observations according to attached protocol
-
-					<h3>Score 3</h3>
-					Dolphin does not receive aggressive behavior (e.g. biting, hitting, slapping) during observations according to attached protocol
-
-				</p>
-				<p v-if=" subcriteria === 'twelfthSubcriteriaBehaviour'">
-					<h3>Score 1</h3>
-					> 20 % new rake marks
+					Within the range
 					<h3>Score 2</h3>
-					15-20 % new rake marks and > 30 % old wounds
+					10% out of range
 					<h3>Score 3</h3>
-					0-15 % new rake marks and &lt; 30 % old wounds
+					&gt;10% out of range
 				</p>
-				<p v-if=" subcriteria === 'thirteenthSubcriteriaBehaviour'">
+				<p v-if=" criteria === 'thirdCriteriaBehaviour'">
+					<h1>Food quality Microbiology, Physico-chemical analysis:</h1>
 					<h3>Score 1</h3>
-					Dolphin displays aggressive behavior (e.g. biting, hitting, slapping) during observations according to attached protocol
+					Fulfilled according to EAAM S&G
 					<h3>Score 3</h3>
-					Dolphin does not display aggressive behavior (e.g. biting, hitting, slapping) during observations according to attached protocol
+					Not fulfilled according to EAAM S&G
 				</p>
-				<p v-if=" subcriteria === 'fourteenthSubcriteriaBehaviour'">
+				<p v-if=" criteria === 'fourthCriteriaBehaviour'">
+					<h1>Food variety along the year:</h1>
 					<h3>Score 1</h3>
-					Presence of other animals lead to displacement from certain pool areas during the last three months
+					At least 5 species are fed throughout the year, 
+					each individual's diet is adapted to its individual Behavioural needs and preferences, 
+					amount of food fed varies between sessions, 
+					part of the diet is given via enrichment
+					<h3>Score 2</h3>
+					At least 3, but no more than 5 species are fed throughout the year, 
+					each individual's diet is adapted to its individual Behavioural needs, but the 
+					amount of food provided to the dolphins during each session is the same, 
+					favorite species/animal preferences are neglected
 					<h3>Score 3</h3>
-					Absence of social isolation or displacement during the last three months
-
-				</p>
-				<p v-if=" subcriteria === 'fifteenthSubcriteriaBehaviour'">
-					<h3>Score 1</h3>
-					Dolphins avoid certain pool areas on a consistent basis
-					<h3>Score 3</h3>
-					Absence of active avoidance of certain pool areas during the last three months
-				</p>
+					Only 3 or less species of food are fed throughout the year, no variation along the year, 
+					diet is not adapted to individual preferences/specific need
+				</p>-->
 			</ion-content>
 		</ion-modal>
 		<!--End of Scoring Description-->
+		<!--Start of Reference Area-->
+		<!--<ion-button v-if="criteria" fill="outline" @click="setOpenReferenceArea(true)">{{ $t('ReferenceArea') }}</ion-button>
+
+		<ion-modal :is-open="isOpenReferenceArea">
+			<ion-header>
+				<ion-toolbar>
+					<ion-title>
+						{{$t('ReferenceArea')}}
+					</ion-title>
+					<ion-buttons slot="end">
+						<ion-button @click="setOpenReferenceArea(false)">{{ $t('close')}}</ion-button>
+					</ion-buttons>
+				</ion-toolbar>
+			</ion-header>
+
+			<ion-content class="ion-padding">
+				<p v-if=" criteria === 'firstCriteriaBehaviour'">-->
+					<!--Here are the values of reference area-->
+					<!--<h3>Wanted weight area:</h3>
+					<div v-if="dolphinSelect">
+						<div v-for="selectedDolphin in dolphinSelect" :key="selectedDolphin">
+							<h4>{{ selectedDolphin }}</h4>
+							<p>
+							  Minimum: 
+							  {{ 
+								(dolphinsStore.dolphinList.find(
+								  (dolphin) => dolphin.name === selectedDolphin
+								)?.min_weight_measured) ?? null
+							  }}
+							</p>
+							<p>
+							  Maximum: 
+							  {{ 
+								(dolphinsStore.dolphinList.find(
+								  (dolphin) => dolphin.name === selectedDolphin
+								)?.max_weight_measured) ?? null
+							  }}
+							</p>
+						  </div>
+					  </div>
+				</p>
+				<p v-if=" criteria === 'secondCriteriaBehaviour'">-->
+					<!--Here are the values of reference area-->
+					<!--<h3>Kcal calculations</h3>
+					<div v-if="dolphinSelect">
+						<div v-for="selectedDolphin in dolphinSelect" :key="selectedDolphin">
+							<h4>{{ selectedDolphin }}</h4>
+							<p>
+							  Minimum: 
+							  {{ 
+								(dolphinsStore.dolphinList.find(
+								  (dolphin) => dolphin.name === selectedDolphin
+								)?.min_kcal_calculations) ?? null
+							  }}
+							</p>
+							<p>
+							  Maximum: 
+							  {{ 
+								(dolphinsStore.dolphinList.find(
+								  (dolphin) => dolphin.name === selectedDolphin
+								)?.max_kcal_calculations) ?? null
+							  }}
+							</p>
+						</div>
+					</div>
+				</p>
+			</ion-content>
+		</ion-modal>-->
+		<!--End of Reference Area-->
 		<!-- Start of Checkboxes-->
-		<ion-list v-if="dolphinSelect && dolphinSelect.length !== 0 && subcriteria === 'firstSubcriteriaBehaviour'">
-			<ion-item>
-				<ion-checkbox v-model="CheckboxArray[0][0]" @click="handleClick(0,0)">Score 1</ion-checkbox>
-			</ion-item>
-			<ion-item>
-				<ion-checkbox v-model="CheckboxArray[0][1]" @click="handleClick(0,1)">Score 2</ion-checkbox>
-			</ion-item>
-			<ion-item>
-				<ion-checkbox v-model="CheckboxArray[0][2]" @click="handleClick(0,2)">Score 3</ion-checkbox>
-			</ion-item>
-			<CheckComments />
-		</ion-list>
-		<ion-list v-if=" dolphinSelect && dolphinSelect.length !== 0 && subcriteria === 'secondSubcriteriaBehaviour'">
-			<ion-item>
-				<ion-checkbox v-model="CheckboxArray[1][0]" @click="handleClick(1,0)">Score 1</ion-checkbox>
-			</ion-item>
-			<ion-item>
-				<ion-checkbox v-model="CheckboxArray[2][2]" @click="handleClick(1,2)">Score 3</ion-checkbox>
-			</ion-item>
-		</ion-list>
-		<ion-list v-if=" dolphinSelect && dolphinSelect.length !== 0 && subcriteria === 'thirdSubcriteriaBehaviour'">
-			<ion-item>
-				<ion-checkbox v-model="CheckboxArray[2][0]" @click="handleClick(2,0)">Score 1</ion-checkbox>
-			</ion-item>
-			<ion-item>
-				<ion-checkbox v-model="CheckboxArray[2][2]" @click="handleClick(2,2)">Score 3</ion-checkbox>
-			</ion-item>
-		</ion-list>
-		<ion-list v-if=" dolphinSelect && dolphinSelect.length !== 0 && subcriteria === 'fourthSubcriteriaBehaviour'">
-			<ion-item>
-				<ion-checkbox v-model="CheckboxArray[3][0]" @click="handleClick(3,0)">Score 1</ion-checkbox>
-			</ion-item>
-			<ion-item>
-				<ion-checkbox v-model="CheckboxArray[3][2]" @click="handleClick(3,2)">Score 3</ion-checkbox>
-			</ion-item>
-		</ion-list>
-		<ion-list v-if="dolphinSelect && dolphinSelect.length !== 0 &&  subcriteria === 'fifthSubcriteriaBehaviour'">
-			<ion-item>
-				<ion-checkbox v-model="CheckboxArray[4][0]" @click="handleClick(4,0)">Score 1</ion-checkbox>
-			</ion-item>
-			<ion-item>
-				<ion-checkbox v-model="CheckboxArray[4][2]" @click="handleClick(4,2)">Score 3</ion-checkbox>
-			</ion-item>
-		</ion-list>
-		<ion-list v-if="dolphinSelect && dolphinSelect.length !== 0 &&  subcriteria === 'sixthSubcriteriaBehaviour'">
-			<ion-item>
-				<ion-checkbox v-model="CheckboxArray[5][0]" @click="handleClick(5,0)">Score 1</ion-checkbox>
-			</ion-item>
-			<ion-item>
-				<ion-checkbox v-model="CheckboxArray[5][2]" @click="handleClick(5,2)">Score 3</ion-checkbox>
-			</ion-item>
-		</ion-list>
-		<ion-list v-if=" dolphinSelect && dolphinSelect.length !== 0 && subcriteria === 'seventhSubcriteriaBehaviour'">
-			<ion-item>
-				<ion-checkbox v-model="CheckboxArray[6][0]" @click="handleClick(6,0)">Score 1</ion-checkbox>
-			</ion-item>
-			<ion-item>
-				<ion-checkbox v-model="CheckboxArray[6][2]" @click="handleClick(6,2)">Score 3</ion-checkbox>
-			</ion-item>
-		</ion-list>
-		<ion-list v-if=" dolphinSelect && dolphinSelect.length !== 0 && subcriteria === 'eigthSubcriteriaBehaviour'">
-			<ion-item>
-				<ion-checkbox v-model="CheckboxArray[7][0]" @click="handleClick(7,0)">Score 1</ion-checkbox>
-			</ion-item>
-			<ion-item>
-				<ion-checkbox v-model="CheckboxArray[7][2]" @click="handleClick(7,2)">Score 3</ion-checkbox>
-			</ion-item>
-		</ion-list>
-		<ion-list v-if=" dolphinSelect && dolphinSelect.length !== 0 && subcriteria === 'ninthSubcriteriaBehaviour'">
-			<ion-item>
-				<ion-checkbox v-model="CheckboxArray[8][0]" @click="handleClick(8,0)">Score 1</ion-checkbox>
-			</ion-item>
-			<ion-item>
-				<ion-checkbox v-model="CheckboxArray[8][2]" @click="handleClick(8,2)">Score 3</ion-checkbox>
-			</ion-item>
-		</ion-list>
-		<ion-list v-if=" dolphinSelect && dolphinSelect.length !== 0 && subcriteria === 'tenthSubcriteriaBehaviour'">
-			<ion-item>
-				<ion-checkbox v-model="CheckboxArray[9][0]" @click="handleClick(9,0)">Score 1</ion-checkbox>
-			</ion-item>
-			<ion-item>
-				<ion-checkbox v-model="CheckboxArray[9][2]" @click="handleClick(9,2)">Score 3</ion-checkbox>
-			</ion-item>
-		</ion-list>
-		<ion-list v-if=" dolphinSelect && dolphinSelect.length !== 0 && subcriteria === 'eleventhSubcriteriaBehaviour'">
-			<ion-item>
-				<ion-checkbox v-model="CheckboxArray[10][0]" @click="handleClick(10,0)">Score 1</ion-checkbox>
-			</ion-item>
-			<ion-item>
-				<ion-checkbox v-model="CheckboxArray[10][2]" @click="handleClick(10,2)">Score 3</ion-checkbox>
-			</ion-item>
-		</ion-list>
-		<ion-list v-if=" dolphinSelect && dolphinSelect.length !== 0 && subcriteria === 'twelfthSubcriteriaBehaviour'">
-			<ion-item>
-				<ion-checkbox v-model="CheckboxArray[11][0]" @click="handleClick(11,0)">Score 1</ion-checkbox>
-			</ion-item>
-			<ion-item>
-				<ion-checkbox v-model="CheckboxArray[11][1]" @click="handleClick(11,1)">Score 2</ion-checkbox>
-			</ion-item>
-			<ion-item>
-				<ion-checkbox v-model="CheckboxArray[11][2]" @click="handleClick(11,2)">Score 3</ion-checkbox>
-			</ion-item>
-			<CheckComments />
-		</ion-list>
-		<ion-list v-if="dolphinSelect && dolphinSelect.length !== 0 &&  subcriteria === 'thirteenthSubcriteriaBehaviour'">
-			<ion-item>
-				<ion-checkbox v-model="CheckboxArray[12][0]" @click="handleClick(12,0)">Score 1</ion-checkbox>
-			</ion-item>
-			<ion-item>
-				<ion-checkbox v-model="CheckboxArray[12][2]" @click="handleClick(12,2)">Score 3</ion-checkbox>
-			</ion-item>
-			<CheckComments />
-		</ion-list>
-		<ion-list v-if="dolphinSelect && dolphinSelect.length !== 0 &&  subcriteria === 'fourteenthSubcriteriaBehaviour'">
-			<ion-item>
-				<ion-checkbox v-model="CheckboxArray[13][0]" @click="handleClick(13,0)">Score 1</ion-checkbox>
-			</ion-item>
-			<ion-item>
-				<ion-checkbox v-model="CheckboxArray[13][2]" @click="handleClick(13,2)">Score 3</ion-checkbox>
-			</ion-item>
-			<CheckComments />
-		</ion-list>
-		<ion-list v-if="dolphinSelect && dolphinSelect.length !== 0 && subcriteria === 'fifteenthSubcriteriaBehaviour'">
-			<ion-item>
-				<ion-checkbox v-model="CheckboxArray[14][0]" @click="handleClick(14,0)">Score 1</ion-checkbox>
-			</ion-item>
-			<ion-item>
-				<ion-checkbox v-model="CheckboxArray[14][2]" @click="handleClick(14,2)">Score 3</ion-checkbox>
-			</ion-item>
-			<CheckComments />
-		</ion-list>
+		<ion-card v-if="dolphinSelect && dolphinSelect.length !== 0 && criteria === 'firstCriteriaBehaviour'">
+			<ion-card-title>{{$t('firstSubCriteriaBehaviour')}}</ion-card-title>
+			<ion-list >
+					<ion-item>
+						<ion-checkbox v-model="CheckboxArray[0][0]" @click="handleClick(0,0)">Score 0</ion-checkbox>
+					</ion-item>
+					<ion-item>
+						<ion-checkbox v-model="CheckboxArray[0][1]" @click="handleClick(0,1)">Score 1</ion-checkbox>
+					</ion-item>
+					<ion-item>
+						<ion-checkbox v-model="CheckboxArray[0][2]" @click="handleClick(0,2)">Score 2</ion-checkbox>
+					</ion-item>
+					<CheckComments @update-comment="updateEnvironmentEnrichmentComments" />
+			</ion-list>
+		</ion-card>
+		<ion-card v-if="dolphinSelect && dolphinSelect.length !== 0 && criteria === 'secondCriteriaBehaviour'">
+			<ion-card-title>{{$t('secondSubCriteriaBehaviour')}}</ion-card-title>
+			<ion-list >
+				<ion-item>
+                    <ion-checkbox v-model="CheckboxArray[1][0]" @click="handleClick(1,0)">Score 0</ion-checkbox>
+                </ion-item>
+                <ion-item>
+                    <ion-checkbox v-model="CheckboxArray[1][2]" @click="handleClick(1,2)">Score 2</ion-checkbox>
+                </ion-item>
+                <CheckComments @update-comment="updateAffiliativeBehaviourComments" />
+			</ion-list>
+		</ion-card>
+		<ion-card v-if="dolphinSelect && dolphinSelect.length !== 0 && criteria === 'secondCriteriaBehaviour'">
+            <ion-card-title>{{$t('thirdSubCriteriaBehaviour')}}</ion-card-title>
+			<ion-list >
+				<ion-item>
+                    <ion-checkbox v-model="CheckboxArray[2][0]" @click="handleClick(2,0)">Score 0</ion-checkbox>
+                </ion-item>
+                <ion-item>
+                    <ion-checkbox v-model="CheckboxArray[2][2]" @click="handleClick(2,2)">Score 2</ion-checkbox>
+                </ion-item>
+                <CheckComments @update-comment="updatePlayBehaviourComments" />
+			</ion-list>
+		</ion-card>
+		<ion-card v-if="dolphinSelect && dolphinSelect.length !== 0 && criteria === 'secondCriteriaBehaviour'">
+            <ion-card-title>{{$t('fourthSubCriteriaBehaviour')}}</ion-card-title>
+			<ion-list >
+				<ion-item>
+                    <ion-checkbox v-model="CheckboxArray[3][0]" @click="handleClick(3,0)">Score 0</ion-checkbox>
+                </ion-item>
+                <ion-item>
+                    <ion-checkbox v-model="CheckboxArray[3][2]" @click="handleClick(3,2)">Score 2</ion-checkbox>
+                </ion-item>
+                <CheckComments @update-comment="updateSocioSexualComments" />
+			</ion-list>
+		</ion-card>
+		<ion-card v-if="dolphinSelect && dolphinSelect.length !== 0 && criteria === 'thirdCriteriaBehaviour'">
+			<ion-card-title>{{$t('fifthSubCriteriaBehaviour')}}</ion-card-title>
+			<ion-list>
+				<ion-item>
+					<ion-checkbox v-model="CheckboxArray[4][0]" @click="handleClick(4,0)">Score 0</ion-checkbox>
+				</ion-item>
+				<ion-item>
+					<ion-checkbox v-model="CheckboxArray[4][2]" @click="handleClick(4,2)">Score 2</ion-checkbox>
+				</ion-item>
+				<CheckComments @update-comment="updateMaternalBehaviourComments" />
+			</ion-list>
+		</ion-card>
+		<ion-card v-if="dolphinSelect && dolphinSelect.length !== 0 && criteria === 'fourthCriteriaBehaviour'">
+			<ion-card-title>{{$t('sixthSubCriteriaBehaviour')}}</ion-card-title>
+			<ion-list>
+				<ion-item>
+					<ion-checkbox v-model="CheckboxArray[5][0]" @click="handleClick(5,0)">Score 0</ion-checkbox>
+				</ion-item>
+				<ion-item>
+					<ion-checkbox v-model="CheckboxArray[5][2]" @click="handleClick(5,2)">Score 2</ion-checkbox>
+				</ion-item>
+				<CheckComments @update-comment="updateDisplacementBehaviourComments" />
+			</ion-list>
+		</ion-card>
+        <ion-card v-if="dolphinSelect && dolphinSelect.length !== 0 && criteria === 'fourthCriteriaBehaviour'">
+		<ion-card-title>{{$t('seventhSubCriteriaBehaviour')}}</ion-card-title>
+			<ion-list>
+				<ion-item>
+					<ion-checkbox v-model="CheckboxArray[6][0]" @click="handleClick(6,0)">Score 0</ion-checkbox>
+				</ion-item>
+				<ion-item>
+					<ion-checkbox v-model="CheckboxArray[6][2]" @click="handleClick(6,2)">Score 2</ion-checkbox>
+				</ion-item>
+				<CheckComments @update-comment="updateOralBehaviourComments" />
+			</ion-list>
+		</ion-card>
+        <ion-card v-if="dolphinSelect && dolphinSelect.length !== 0 && criteria === 'fourthCriteriaBehaviour'">
+		<ion-card-title>{{$t('eighthSubCriteriaBehaviour')}}</ion-card-title>
+			<ion-list>
+				<ion-item>
+					<ion-checkbox v-model="CheckboxArray[7][0]" @click="handleClick(7,0)">Score 0</ion-checkbox>
+				</ion-item>
+				<ion-item>
+					<ion-checkbox v-model="CheckboxArray[7][2]" @click="handleClick(7,2)">Score 2</ion-checkbox>
+				</ion-item>
+				<CheckComments @update-comment="updateRepetitiveMovementComments" />
+			</ion-list>
+		</ion-card>
+        <ion-card v-if="dolphinSelect && dolphinSelect.length !== 0 && criteria === 'fourthCriteriaBehaviour'">
+		<ion-card-title>{{$t('ninthSubCriteriaBehaviour')}}</ion-card-title>
+			<ion-list>
+				<ion-item>
+					<ion-checkbox v-model="CheckboxArray[8][0]" @click="handleClick(8,0)">Score 0</ion-checkbox>
+				</ion-item>
+				<ion-item>
+					<ion-checkbox v-model="CheckboxArray[8][2]" @click="handleClick(8,2)">Score 2</ion-checkbox>
+				</ion-item>
+				<CheckComments @update-comment="updateSelfGroomingComments" />
+			</ion-list>
+        </ion-card>
+		<ion-card v-if="dolphinSelect && dolphinSelect.length !== 0 && criteria === 'fourthCriteriaBehaviour'">
+		<ion-card-title>{{$t('tenthSubCriteriaBehaviour')}}</ion-card-title>
+			<ion-list>
+				<ion-item>
+					<ion-checkbox v-model="CheckboxArray[9][0]" @click="handleClick(9,0)">Score 0</ion-checkbox>
+				</ion-item>
+				<ion-item>
+					<ion-checkbox v-model="CheckboxArray[9][2]" @click="handleClick(9,2)">Score 2</ion-checkbox>
+				</ion-item>
+				<CheckComments @update-comment="updateRegurgitationComments" />
+			</ion-list>
+		</ion-card>
+		<ion-card v-if="dolphinSelect && dolphinSelect.length !== 0 && criteria === 'fifthCriteriaBehaviour'">
+			<ion-card-title>{{$t('eleventhSubCriteriaBehaviour')}}</ion-card-title>		
+			<ion-list >
+				<ion-item>
+					<ion-checkbox v-model="CheckboxArray[10][0]" @click="handleClick(10,0)">Score 0</ion-checkbox>
+				</ion-item>
+				<ion-item>
+					<ion-checkbox v-model="CheckboxArray[10][2]" @click="handleClick(10,2)">Score 2</ion-checkbox>
+				</ion-item>
+				<CheckComments @update-comment="updateReceivingAggressiveComments" />
+			</ion-list>
+		</ion-card>
+		<ion-card v-if="dolphinSelect && dolphinSelect.length !== 0 && criteria === 'fifthCriteriaBehaviour'">
+			<ion-card-title>{{$t('twelfthSubCriteriaBehaviour')}}</ion-card-title>		
+			<ion-list >
+				<ion-item>
+					<ion-checkbox v-model="CheckboxArray[11][0]" @click="handleClick(11,0)">Score 0</ion-checkbox>
+				</ion-item>
+				<ion-item>
+					<ion-checkbox v-model="CheckboxArray[11][1]" @click="handleClick(11,1)">Score 1</ion-checkbox>
+				</ion-item>
+				<ion-item>
+					<ion-checkbox v-model="CheckboxArray[11][2]" @click="handleClick(11,2)">Score 2</ion-checkbox>
+				</ion-item>
+				<CheckComments @update-comment="updateRakeMarksComments" />
+			</ion-list>
+		</ion-card>
+		<ion-card v-if="dolphinSelect && dolphinSelect.length !== 0 && criteria === 'sixthCriteriaBehaviour'">
+			<ion-card-title>{{$t('thirteenthSubCriteriaBehaviour')}}</ion-card-title>	
+			<ion-list>
+				<ion-item>
+					<ion-checkbox v-model="CheckboxArray[12][0]" @click="handleClick(12,0)">Score 0</ion-checkbox>
+				</ion-item>
+				<ion-item>
+					<ion-checkbox v-model="CheckboxArray[12][2]" @click="handleClick(12,2)">Score 2</ion-checkbox>
+				</ion-item>
+				<CheckComments @update-comment="updateDisplayingAggressiveComments" />
+			</ion-list>
+		</ion-card>
+		<ion-card v-if="dolphinSelect && dolphinSelect.length !== 0 && criteria === 'seventhCriteriaBehaviour'">
+			<ion-card-title>{{$t('fourteenthSubCriteriaBehaviour')}}</ion-card-title>	
+			<ion-list>
+				<ion-item>
+					<ion-checkbox v-model="CheckboxArray[13][0]" @click="handleClick(13,0)">Score 0</ion-checkbox>
+				</ion-item>
+				<ion-item>
+					<ion-checkbox v-model="CheckboxArray[13][2]" @click="handleClick(13,2)">Score 2</ion-checkbox>
+				</ion-item>
+				<CheckComments @update-comment="updateSocialIsolationComments" />
+			</ion-list>
+		</ion-card>
+		<ion-card v-if="dolphinSelect && dolphinSelect.length !== 0 && criteria === 'eighthCriteriaBehaviour'">
+			<ion-card-title>{{$t('fifteenthSubCriteriaBehaviour')}}</ion-card-title>	
+			<ion-list>
+				<ion-item>
+					<ion-checkbox v-model="CheckboxArray[14][0]" @click="handleClick(14,0)">Score 0</ion-checkbox>
+				</ion-item>
+				<ion-item>
+					<ion-checkbox v-model="CheckboxArray[14][2]" @click="handleClick(14,2)">Score 2</ion-checkbox>
+				</ion-item>
+				<CheckComments @update-comment="updateAvoidancePoolAreasComments" />
+			</ion-list>
+		</ion-card>
 	</ion-content>
 	<!-- End of Checkboxes-->
 	<ion-footer>
@@ -543,43 +550,52 @@
 </template>
 
 <script lang="ts">
-import {
-	IonItem, IonList, IonSelect, IonSelectOption, IonLabel,
-	IonModal, IonHeader, IonToolbar, IonContent, IonTitle,
-	IonButtons, IonButton, IonText, IonCheckbox, IonFooter, IonIcon, alertController
+import {IonItem, IonList, IonSelect, IonSelectOption, IonModal,
+	IonHeader, IonToolbar, IonContent, IonTitle, IonButtons, IonButton,
+	IonCheckbox, IonCard, IonCardTitle, IonFooter,
+	IonIcon, alertController
 } from '@ionic/vue';
-import CheckComments from '@/components/CheckComments.vue';
 import axios from 'axios';
+import CheckComments from '@/components/CheckComments.vue';
 import { useDolphinsStore }from '@/store/dolphinsStore';
 import { useEvaluationBehaviourStore }from '@/store/evaluationBehaviourStore';
 import { baseUrl } from '@/utils/baseUrl';
 import { toast } from 'vue3-toastify';
 import 'vue3-toastify/dist/index.css';
 
+
+
+
 const dolphinsStore = useDolphinsStore();
 const evaluationBehaviourStore = useEvaluationBehaviourStore();
-let dataInBody; //Variable which gets saved in localstorage with either true or false, depending if data is in checkboxes or evaluationFeedingStore
+let dataInBody; //Variable which gets saved in localstorage with either true or false, depending if data is in checkboxes or evaluationBehaviourStore
+const token = localStorage.getItem('token'); //Get current JWT token of the user
+console.log('Token accessed from localStorage: ', token);
 
 export default {
 	components: {
-		IonItem, IonList, IonSelect, IonSelectOption, IonFooter,
-		IonLabel, IonModal, IonHeader, IonToolbar, IonContent, IonIcon,
-		IonTitle, IonButtons, IonButton, IonText, IonCheckbox, CheckComments
+		// needed Vue components:
+		IonItem, IonList, IonSelect, IonSelectOption, IonModal, IonHeader,
+		IonToolbar, IonContent, IonTitle, IonButtons, IonButton, IonCheckbox,
+		IonCard, IonCardTitle, CheckComments, IonFooter, IonIcon,
 	},
 	async mounted()  {
 		// This makes sure that the reference areas are updated while the component is
 		// mounted. But only if there is internet connectivity. If not, the displayed
 		// reference areas are the ones from the animalList.json
    		await dolphinsStore.fill();
-
 		// Reset here data while page is mounted
-		localStorage.setItem('dataInBody', 'false');
-		localStorage.setItem('created_at', '');
+		localStorage.setItem('backButtonClicked', 'false');
+		localStorage.setItem('dataInBody', 'false'); //No unsaved data present while page is mounted
+		localStorage.setItem('created_at', ''); //Used so that user can choose the date of the test himself
+
 		evaluationBehaviourStore.resetBodies();
 	},
 	data() {
 		return {
+			// Variables:
 			language: 'en',
+			dialog: false,
 			dolphinsStore: dolphinsStore,
 			dolphinSelect: null as string | null,
 			criteria: null as string | null,
@@ -589,28 +605,47 @@ export default {
 			firstcancelText: this.$t('cancelChoice'),
 			secondlabel: this.$t('criteria'),
 			secondplaceholder: this.$t('selectCriteria'),
-			thirdlabel: this.$t('test'),
-			thirdplaceholder: this.$t('selectTest'),
 			isOpenManual: false,
 			isOpenScoring: false,
-			selectedOption: undefined,
-			isChecked: {} as Record<number, boolean>,
-			CheckboxArray: Array.from({ length: 15 }, () => Array(3).fill(false)),
-			Score1: this.$t('fulfilled'),
-			urlPost: baseUrl + '/api/behaviour',//'http://88395-17112.pph-server.de/api/behaviour',
+			isOpenReferenceArea: false,
+			CheckboxArray: Array.from({ length: 15 }, () => Array(3).fill(false)), //For 15 subcriterias of behaviour principle
+			urlDolphins: baseUrl + '/api/dolphins', // get the dolphins
+			urlPost: baseUrl + '/api/behaviour', //'https://88395-17112.pph-server.de/api/behaviour',
+			//Comments initialized as empty strings, so that they can be filled with the comments of the user input:
+			environmentEnrichmentComments: '',
+			affiliativeBehaviourComments: '',
+			playBehaviourComments: '',
+			socioSexualComments: '',
+			maternalBehaviourComments: '',
+			displacementBehaviourComments: '',
+			oralBehaviourComments: '',
+			repetitiveMovementComments: '',
+			selfGroomingComments: '',
+			regurgitationComments: '',
+			receivingAggressiveComments: '',
+			rakeMarksComments: '',
+			displayingAggressiveComments: '',
+			socialIsolationComments: '',
+			avoidancePoolAreasComments: '',
 		};
 	},
 	methods: {
+		//Method to open the manual
         setOpenManual(isOpen: boolean) {
             this.isOpenManual = isOpen;
         },
+		//Method to open scoring desciption
 		setOpenScoring(isOpen: boolean) {
             this.isOpenScoring = isOpen;
         },
+		//Method to open reference area
+		setOpenReferenceArea(isOpen: boolean) {
+			this.isOpenReferenceArea = isOpen;
+		},
 		//Method uses boolean array. So no multiple checking for one test is possible. --> Every test can have one checked Checkbox
 		handleClick(row: number, column: number) {
-			console.log(this.CheckboxArray[row][column], row, column); //log on console if Checkbox is checked or not
-
+			console.log(this.CheckboxArray, row, column);
+		
 			if (this.CheckboxArray[row][column]){
 				this.CheckboxArray[row][column] = false;
 			}else{
@@ -624,51 +659,98 @@ export default {
 		dataInBody = true;
 		localStorage.setItem('dataInBody', dataInBody.toString());
     	},
-		// Method to collect the checked checkboxes and give request Body the scores
+		// Method to collect the checked checkboxes and give request body the scores
 		storeCheckedValues() {
 			for(let k = 0; k < evaluationBehaviourStore.requestBodiesBehaviour.length; k++){
-				if(this.dolphinSelect === evaluationBehaviourStore.requestBodiesBehaviour[k]["dolphin_name"]) {
-					if (this.dolphinSelect!== null){
-						evaluationBehaviourStore.requestBodiesBehaviour[k]["dolphin_name"] = this.dolphinSelect;
-					}
+				//k stands for the different dolphins. It iterates through the array of dolphins in requestBodiesBehaviour.json
+				if(this.dolphinSelect.includes(evaluationBehaviourStore.requestBodiesBehaviour[k]["dolphin_name"])) {
 					for(let i = 0; i < this.CheckboxArray.length; i++){
 						for(let j = 0; j < this.CheckboxArray[i].length; j++){
 							if (this.CheckboxArray[i][j] === true && i === 0){
-								evaluationBehaviourStore.requestBodiesBehaviour[k]["environmental_enrichment"] = j + 1;
+								evaluationBehaviourStore.requestBodiesBehaviour[k]["environmental_enrichment"] = j;
 							}else if (this.CheckboxArray[i][j] === true && i === 1){
-								evaluationBehaviourStore.requestBodiesBehaviour[k]["affiliative_behaviour"] = j + 1;
+								evaluationBehaviourStore.requestBodiesBehaviour[k]["affiliative_behaviour"] = j;
 							}else if (this.CheckboxArray[i][j] === true && i === 2){
-								evaluationBehaviourStore.requestBodiesBehaviour[k]["play_behaviour"] = j + 1;
+								evaluationBehaviourStore.requestBodiesBehaviour[k]["play_behaviour"] = j;
 							}else if (this.CheckboxArray[i][j] === true && i === 3){
-								evaluationBehaviourStore.requestBodiesBehaviour[k]["socio_sexual_behaviour"] = j + 1;
+								evaluationBehaviourStore.requestBodiesBehaviour[k]["socio_sexual_behaviour"] = j;
 							}else if (this.CheckboxArray[i][j] === true && i === 4){
-								evaluationBehaviourStore.requestBodiesBehaviour[k]["maternal_behaviour"] = j + 1;
+								evaluationBehaviourStore.requestBodiesBehaviour[k]["maternal_behaviour"] = j;
 							}else if (this.CheckboxArray[i][j] === true && i === 5){
-								evaluationBehaviourStore.requestBodiesBehaviour[k]["displacement_behaviour"] = j + 1;
+								evaluationBehaviourStore.requestBodiesBehaviour[k]["displacement_behaviour"] = j;
 							}else if (this.CheckboxArray[i][j] === true && i === 6){
-								evaluationBehaviourStore.requestBodiesBehaviour[k]["oral_stereotypic_behaviour"] = j + 1;
+								evaluationBehaviourStore.requestBodiesBehaviour[k]["oral_stereotypic_behaviour"] = j;
 							}else if (this.CheckboxArray[i][j] === true && i === 7){
-								evaluationBehaviourStore.requestBodiesBehaviour[k]["repetitive_body_movement"] = j + 1;
+								evaluationBehaviourStore.requestBodiesBehaviour[k]["repetitive_body_movement"] = j;
 							}else if (this.CheckboxArray[i][j] === true && i === 8){
-								evaluationBehaviourStore.requestBodiesBehaviour[k]["self_grooming_behaviour"] = j + 1;
+								evaluationBehaviourStore.requestBodiesBehaviour[k]["self_grooming_behaviour"] = j;
 							}else if (this.CheckboxArray[i][j] === true && i === 9){
-								evaluationBehaviourStore.requestBodiesBehaviour[k]["regurgitation_reingestion"] = j + 1;
+								evaluationBehaviourStore.requestBodiesBehaviour[k]["regurgitation_reingestion"] = j;
 							}else if (this.CheckboxArray[i][j] === true && i === 10){
-								evaluationBehaviourStore.requestBodiesBehaviour[k]["rake_marks"] = j + 1;
+								evaluationBehaviourStore.requestBodiesBehaviour[k]["receiving_aggressive_behaviour"] = j;
 							}else if (this.CheckboxArray[i][j] === true && i === 11){
-								evaluationBehaviourStore.requestBodiesBehaviour[k]["displaying_aggressive_behaviour"] = j + 1;
+								evaluationBehaviourStore.requestBodiesBehaviour[k]["rake_marks"] = j;
 							}else if (this.CheckboxArray[i][j] === true && i === 12){
-								evaluationBehaviourStore.requestBodiesBehaviour[k]["receiving_aggressive_behaviour"] = j + 1;
+								evaluationBehaviourStore.requestBodiesBehaviour[k]["displaying_aggressive_behaviour"] = j;
 							}else if (this.CheckboxArray[i][j] === true && i === 13){
-								evaluationBehaviourStore.requestBodiesBehaviour[k]["social_isolation"] = j + 1;
+								evaluationBehaviourStore.requestBodiesBehaviour[k]["social_isolation"] = j;
 							}else if (this.CheckboxArray[i][j] === true && i === 14){
-								evaluationBehaviourStore.requestBodiesBehaviour[k]["avoidance_pool_areas"] = j + 1;
+								evaluationBehaviourStore.requestBodiesBehaviour[k]["avoidance_pool_areas"] = j;
 							}
 						}
 					}
-				}
-				if(localStorage.getItem('created_at') !== "") {
-					evaluationBehaviourStore.requestBodiesBehaviour[k]["created_at"] = localStorage.getItem('created_at') as string;
+					// Code here the comments into the request body
+					// First check with if statement if comments had been updated or not. If we don´t do that we override the comments with
+					// an empty string if we click on 'Next Test'
+					if(this.environmentEnrichmentComments != '') {
+						evaluationBehaviourStore.requestBodiesBehaviour[k]["environmental_enrichment_comments"] = this.environmentEnrichmentComments;
+					}
+					if(this.affiliativeBehaviourComments != ''){
+					evaluationBehaviourStore.requestBodiesBehaviour[k]["affiliative_behaviour_comments"] = this.affiliativeBehaviourComments;
+					}
+					if(this.playBehaviourComments != ''){
+					evaluationBehaviourStore.requestBodiesBehaviour[k]["play_behaviour_comments"] = this.playBehaviourComments;
+					}
+					if(this.socioSexualComments != ''){
+					evaluationBehaviourStore.requestBodiesBehaviour[k]["socio_sexual_behaviour_comments"] = this.socioSexualComments;
+					}
+					if(this.maternalBehaviourComments != ''){
+					evaluationBehaviourStore.requestBodiesBehaviour[k]["maternal_behaviour_comments"] = this.maternalBehaviourComments;
+					}
+					if(this.displacementBehaviourComments != ''){
+					evaluationBehaviourStore.requestBodiesBehaviour[k]["displacement_behaviour_comments"] = this.displacementBehaviourComments;
+					}
+					if(this.oralBehaviourComments != ''){
+					evaluationBehaviourStore.requestBodiesBehaviour[k]["oral_stereotypic_behaviour_comments"] = this.oralBehaviourComments;
+					}
+					if(this.repetitiveMovementComments != ''){
+					evaluationBehaviourStore.requestBodiesBehaviour[k]["repetitive_body_movement_comments"] = this.repetitiveMovementComments;
+					}
+					if(this.selfGroomingComments != ''){
+					evaluationBehaviourStore.requestBodiesBehaviour[k]["self_grooming_behaviour_comments"] = this.selfGroomingComments;
+					}
+					if(this.regurgitationComments != ''){
+					evaluationBehaviourStore.requestBodiesBehaviour[k]["regurgitation_reingestion_comments"] = this.regurgitationComments;
+					}
+					if(this.receivingAggressiveComments != ''){
+					evaluationBehaviourStore.requestBodiesBehaviour[k]["receiving_aggressive_behaviour_comments"] = this.receivingAggressiveComments;
+					}
+					if(this.rakeMarksComments != ''){
+					evaluationBehaviourStore.requestBodiesBehaviour[k]["rake_marks_comments"] = this.rakeMarksComments;
+					}
+					if(this.displayingAggressiveComments != ''){
+					evaluationBehaviourStore.requestBodiesBehaviour[k]["displaying_aggressive_behaviour_comments"] = this.displayingAggressiveComments;
+					}
+					if(this.socialIsolationComments != ''){
+					evaluationBehaviourStore.requestBodiesBehaviour[k]["social_isolation_comments"] = this.socialIsolationComments;
+					}
+					if(this.avoidancePoolAreasComments != ''){
+					evaluationBehaviourStore.requestBodiesBehaviour[k]["avoidance_pool_areas_comments"] = this.avoidancePoolAreasComments;
+					}
+
+					if(localStorage.getItem('created_at') !== "") {
+						evaluationBehaviourStore.requestBodiesBehaviour[k]["created_at"] = localStorage.getItem('created_at') as string;
+					}
 				}
 			}
 			this.resetData();
@@ -677,7 +759,7 @@ export default {
 		},
 		async resetData() {
 			// Reset checkboxes
-			for(let i = 0; i <= 4; i++){
+			for(let i = 0; i <= 14; i++){
 				for(let j = 0; j < 3; j++){
 					if (this.CheckboxArray[i][j] === true){
 						this.CheckboxArray[i][j] = false;
@@ -685,7 +767,67 @@ export default {
 				}
 			}
 			// Reset comments
-			
+			this.environmentEnrichmentComments = '';
+			this.affiliativeBehaviourComments = '';
+			this.playBehaviourComments = '';
+			this.socioSexualComments = '';
+			this.maternalBehaviourComments = '';
+			this.displacementBehaviourComments = '';
+			this.oralBehaviourComments = '';
+			this.repetitiveMovementComments = '';
+			this.selfGroomingComments = '';
+			this.regurgitationComments = '';
+			this.receivingAggressiveComments = '';
+			this.rakeMarksComments = '';
+			this.displayingAggressiveComments = '';
+			this.socialIsolationComments = '';
+			this.avoidancePoolAreasComments = '';
+		},
+		//Methods to update the comments
+		updateEnvironmentEnrichmentComments(comment: string) {
+			this.environmentEnrichmentComments = comment;
+		},
+		updateAffiliativeBehaviourComments(comment: string) {
+			this.affiliativeBehaviourComments = comment;
+		},
+		updatePlayBehaviourComments(comment: string) {
+			this.playBehaviourComments = comment;
+		},
+		updateSocioSexualComments(comment: string) {
+			this.socioSexualComments = comment;
+		},
+		updateMaternalBehaviourComments(comment: string) {
+			this.maternalBehaviourComments = comment;
+		},
+		updateDisplacementBehaviourComments(comment: string) {
+			this.displacementBehaviourComments = comment;
+		},
+		updateOralBehaviourComments(comment: string) {
+			this.oralBehaviourComments = comment;
+		},
+		updateRepetitiveMovementComments(comment: string) {
+			this.repetitiveMovementComments = comment;
+		},
+		updateSelfGroomingComments(comment: string) {
+			this.selfGroomingComments = comment;
+		},
+		updateRegurgitationComments(comment: string) {
+			this.regurgitationComments = comment;
+		},
+		updateReceivingAggressiveComments(comment: string) {
+			this.receivingAggressiveComments = comment;
+		},
+		updateRakeMarksComments(comment: string) {
+			this.rakeMarksComments = comment;
+		},
+		updateDisplayingAggressiveComments(comment: string) {
+			this.displayingAggressiveComments = comment;
+		},
+		updateSocialIsolationComments(comment: string) {
+			this.socialIsolationComments = comment;
+		},
+		updateAvoidancePoolAreasComments(comment: string) {
+			this.avoidancePoolAreasComments = comment;
 		},
 		async confirmTestDate() {
 		return new Promise(async (resolve, reject) => {
@@ -747,37 +889,39 @@ async showDateInputAlert() {
             console.log('Test date changed');
             // Convert the date to dd/mm/yyyy format
             const dateParts = data.date.split('-');
-            //const formattedDate = `${dateParts[2]}/${dateParts[1]}/${dateParts[0]}`;
-            // Convert the date to dd/mm/yyyy format
 			const formattedDate = `${dateParts[0]}-${dateParts[1]}-${dateParts[2]}T00:00:00Z`;
             
 			localStorage.setItem('created_at', formattedDate);
             localStorage.setItem('dataInBody', 'false');
             resolve(void 0);
-			},
-			},
-		],
-		});
+          },
+        },
+      ],
+    });
 
-		return alert.present();
-  		});
-		},
-
+    return alert.present();
+  });
+},
 		//Method to send the data to database
 		async storeData() {
-			const confirmed = true; //confirm(this.$t('savingDataNext'));
-     		if (confirmed) {
+			//const confirmed = confirm(this.$t('savingDataNext')); //Where is the variable savingDataNext initialized and what does it do?
+     		const confirmed = true;
+			if (confirmed) {
+				//Check if the date of the test is the current date
+				await this.confirmTestDate();
+				//Store the checked values in the request body
 				this.storeCheckedValues();
+				console.log(this.CheckboxArray);
 				// Flag to only show network error alert once instead of several times after another
 				let alertShown = false;
-				console.log(this.CheckboxArray);
+				console.log('Reached this');
 				for(let i = 0; i < evaluationBehaviourStore.requestBodiesBehaviour.length; i++){
 					await axios
 							.post(this.urlPost, evaluationBehaviourStore.requestBodiesBehaviour[i], { withCredentials: true })
 							.then((response) => {
 								console.log('Response:', response.data);
 								if (i === evaluationBehaviourStore.requestBodiesBehaviour.length - 1){
-									const targetUrl = '/folder/Evaluate';
+									const targetUrl = '/detailBehaviour';
 									toast.success('Data uploaded successfully', {
 										autoClose: 1000,
 									});
@@ -786,20 +930,19 @@ async showDateInputAlert() {
 										// without losing data, because data is now successfully uploaded
 										dataInBody = false;
 										localStorage.setItem('dataInBody', dataInBody.toString());
-										localStorage.setItem('created_at', '');
 										this.$router.push(targetUrl);
 									}, 2000);
 									evaluationBehaviourStore.resetBodies();
-									this.dolphinSelect = null;
+									this.dolphinSelect = [];
 									this.criteria = null;
+									localStorage.setItem('created_at', '');
 								}
 							})
-							.catch((error) => {
-								console.error('Error:', error.response.data);
+							.catch((error) => {					
 								const targetUrl = `/detailBehaviour`;
 								if(error.message === 'Network Error' && !alertShown) {
+									alertShown = true;	
 									//console.log('Inside error catch block');
-									alertShown = true;
 									toast.error('Data upload failed! Check internet connectivity.', {
 										autoClose: 2000,
 									});
@@ -814,7 +957,7 @@ async showDateInputAlert() {
 				}
 			}
 		},
-		confirmRefresh() {
+		async confirmRefresh() {
 			const confirmed = true; //confirm(this.$t('savingDataNext'));
      		if (confirmed) {
 				this.storeCheckedValues();
@@ -823,7 +966,7 @@ async showDateInputAlert() {
 				toast.success('Saved temporarily. Click \'Finish Tests\' in the end!', {
 					autoClose: 1000,
 				});
-
+				
 				// Doing the same dolphinSelect with the next criteria in the list:
 				switch (this.criteria) {
 					case 'firstCriteriaBehaviour':
@@ -836,26 +979,47 @@ async showDateInputAlert() {
 						this.criteria = 'fourthCriteriaBehaviour';
 						break;
 					case 'fourthCriteriaBehaviour':
-						this.criteria = 'firstCriteriaBehaviour';
+						this.criteria = 'fifthCriteriaBehaviour';
 						break;
+					case 'fifthCriteriaBehaviour':
+						this.criteria = 'sixthCriteriaBehaviour';
+						break;
+					case 'sixthCriteriaBehaviour':
+						this.criteria = 'seventhCriteriaBehaviour';
+						break;
+					case 'seventhCriteriaBehaviour':
+						this.criteria = 'eighthCriteriaBehaviour';
+						break;
+					case 'eighthCriteriaBehaviour':
+						this.criteria = 'firstCriteriaBehaviour';
+						break;			
 					default:
 						this.criteria = 'firstCriteriaBehaviour';
 				}
-
-				
-				//this.dolphinSelect = null;
-				//this.criteria = null;
-				const currentPath = this.$route.path;
-				const targetUrl = `/detailFeeding`;
+				const targetUrl = `/detailBehaviour`;
+				// No need to check if dataInBody true or false, because /detailBehaviour doesn´t
+				// need to be protected from losing data
 				this.$router.push(targetUrl);
 			}	
     	},
-        /*emitSubcriteriaUpdated() {
-            const subcriteria = this.subcriteria;
-
-            this.$emit('subcriteria-updated', subcriteria);
-        }*/
-    }
+		//Method to get the Dolphins
+		showDolphins(){
+			//this.dolphins = this.dolphinsStore.dolphinList;
+			//console.log(this.dolphinsStore.dolphinList);
+			//console.log(this.dolphins);
+			//console.log(evaluationBehaviourStore.requestBodiesBehaviour);
+		},
+		/*async showDolphins() {
+			await axios.get(this.urlDolphins)
+				.then ((response) => {
+        		//console.log('Response:', response.data);
+				this.dolphinList = response.data;
+    			})
+			 	.catch ((e) => {
+				console.error(e);
+				});
+		},*/
+	},
 };
 </script>
 
@@ -866,4 +1030,6 @@ ion-item {
 ion-card {
 	margin: 5px 15px;
 }
+
+
 </style>

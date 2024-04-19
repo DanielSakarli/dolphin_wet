@@ -544,63 +544,63 @@ const behaviorPostValidateRequestBody = [
 		.withMessage('Invalid dolphin name'),
 	body('environmental_enrichment')
 		.optional({ values: 'null' })
-		.isInt({ min: 1, max: 3 })
+		.isInt({ min: 0, max: 2 })
 		.toInt(),
 	body('affiliative_behaviour')
 		.optional({ values: 'null' })
-		.isInt({ min: 1, max: 3 })
+		.isInt({ min: 0, max: 2 })
 		.toInt(),
 	body('play_behaviour')
 		.optional({ values: 'null' })
-		.isInt({ min: 1, max: 3 })
+		.isInt({ min: 0, max: 2 })
 		.toInt(),
 	body('socio_sexual_behaviour')
 		.optional({ values: 'null' })
-		.isInt({ min: 1, max: 3 })
+		.isInt({ min: 0, max: 2 })
 		.toInt(),
 	body('maternal_behaviour')
 		.optional({ values: 'null' })
-		.isInt({ min: 1, max: 3 })
+		.isInt({ min: 0, max: 2 })
 		.toInt(),
 	body('displacement_behaviour')
 		.optional({ values: 'null' })
-		.isInt({ min: 1, max: 3 })
+		.isInt({ min: 0, max: 2 })
 		.toInt(),
 	body('oral_stereotypic_behaviour')
 		.optional({ values: 'null' })
-		.isInt({ min: 1, max: 3 })
+		.isInt({ min: 0, max: 2 })
 		.toInt(),
 	body('repetitive_body_movement')
 		.optional({ values: 'null' })
-		.isInt({ min: 1, max: 3 })
+		.isInt({ min: 0, max: 2 })
 		.toInt(),
 	body('self_grooming_behaviour')
 		.optional({ values: 'null' })
-		.isInt({ min: 1, max: 3 })
+		.isInt({ min: 0, max: 2 })
 		.toInt(),
 	body('regurgitation_reingestion')
 		.optional({ values: 'null' })
-		.isInt({ min: 1, max: 3 })
+		.isInt({ min: 0, max: 2 })
 		.toInt(),
 	body('rake_marks')
 		.optional({ values: 'null' })
-		.isInt({ min: 1, max: 3 })
+		.isInt({ min: 0, max: 2 })
 		.toInt(),
 	body('displaying_aggressive_behaviour')
 		.optional({ values: 'null' })
-		.isInt({ min: 1, max: 3 })
+		.isInt({ min: 0, max: 2 })
 		.toInt(),
 	body('receiving_aggressive_behaviour')
 		.optional({ values: 'null' })
-		.isInt({ min: 1, max: 3 })
+		.isInt({ min: 0, max: 2 })
 		.toInt(),
 	body('social_isolation')
 		.optional({ values: 'null' })
-		.isInt({ min: 1, max: 3 })
+		.isInt({ min: 0, max: 2 })
 		.toInt(),
 	body('avoidance_pool_areas')
 		.optional({ values: 'null' })
-		.isInt({ min: 1, max: 3 })
+		.isInt({ min: 0, max: 2 })
 		.toInt(),
 	body('created_at')
 		.optional({ values: 'null' })

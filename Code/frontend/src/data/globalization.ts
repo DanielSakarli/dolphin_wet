@@ -368,7 +368,10 @@ export const globalizationList = {
 			'Dolphins under human care should be fed with fish that are fit for human consumption, and the quality of purchased batches should be monitored and managed. Fish quality can differ with species, marine location, season, and storage and handling methods. Shelf life is dependent on three criteria: packaging, storage temperature and fish species (Joseph & Antrim 2010). Poor fish quality can cause the animal to be lethargic, thirsty, hungry, and/or cause disease and malnutrition. For the fish quality the selected indicators are microbiological and physicochemical values required by the EAAM S&G, therefore a 2-level scoring is used.',
 		userManualFoodVariety:
 			'Wild dolphins feed on a large range of fish species, varying their diet with season, prey availability and quality, and other factors (Gannon & Waples 2004). Feeding a large variety of fish species, which is the 6th indicator, to animals in human care is likely to aid in supplying all necessary nutrients to the animals, more closely mimic their natural diet, and maintain their appetites more effectively. Depending on the number of species fed, the adaptation of individual needs and the provision of food enrichment a 3-point-scoring is used.',
-		//Translation Indicator Collector Behaviour
+
+		//////// BEHAVIOUR /////////
+		////////////////////////////
+		// Criteria Behaviour
 		topicBehaviour: 'Behaviour',
 		firstCriteriaBehaviour: 'Display of exploratory behaviour',
 		secondCriteriaBehaviour:
@@ -380,6 +383,8 @@ export const globalizationList = {
 		sixthCriteriaBehaviour:
 			'Absence of displaying aggressive behaviours, causing negative consequences',
 		seventhCriteriaBehaviour: 'Evidence of social isolation',
+		eighthCriteriaBehaviour: 'Evidence of avoidance of certain pool regions',
+
 		//SubCriteria Behaviour
 		firstSubCriteriaBehaviour:
 			'Adequate environmental enrichment programme inducing exploratory behaviour',
@@ -389,15 +394,75 @@ export const globalizationList = {
 		fifthSubCriteriaBehaviour: 'Maternal behaviour',
 		sixthSubCriteriaBehaviour: 'Displacement behavior',
 		seventhSubCriteriaBehaviour: 'Oral stereotypic behavior',
-		eigthSubCriteriaBehaviour: 'Repetitive body movement',
+		eighthSubCriteriaBehaviour: 'Repetitive body movement',
 		ninthSubCriteriaBehaviour:
 			'Frequent, repetitive, and intense self-grooming behaviour',
 		tenthSubCriteriaBehaviour: 'Regurgitation/Reingestion',
 		eleventhSubCriteriaBehaviour: 'Receiving aggressive behavior',
-		twelfthSubCriteriaBehaviour: 'Rake marks',
+		twelfthSubCriteriaBehaviour: 'Rake marks (social-related marks)',
 		thirteenthSubCriteriaBehaviour: 'Displaying aggressive behavior',
 		fourteenthSubCriteriaBehaviour: 'Social isolation',
 		fifteenthSubCriteriaBehaviour: 'Avoidance of pool areas',
+
+		// Scoring description
+		score0Behaviour1:
+			'Presence of an enrichment programme according to the EAAM Standards and Guidelines and display of exploratory behaviours',
+		score1Behaviour1:
+			'Presence of an enrichment programme according to the EAAM Standards and Guidelines but no display of exploratory behaviours',
+		score2Behaviour1: 'No enrichment programme',
+		score0Behaviour2:
+			'Dolphin displays affiliative behaviours (e.g., pair swimming, flipper rubbing, etc.) during observations',
+		score2Behaviour2:
+			'Dolphin does not display affiliative behaviours (e.g., pair swimming, flipper rubbing, etc.) during observations',
+		score0Behaviour3:
+			'Dolphin displays play behaviour (social play, bubble ring play, object play, etc.) during observations',
+		score2Behaviour3:
+			'Dolphin does not display play behaviour (social play, bubble ring play, object play, etc.) during observations',
+		score0Behaviour4:
+			'Dolphin displays socio-sexual interactions (petting, goosing, etc.) during observations',
+		score2Behaviour4:
+			'Dolphin does not display socio-sexual interactions (petting, goosing, etc.) during observations',
+		score0Behaviour5:
+			'Display of appropriate maternal behaviour towards the calf (echelon swimming, nursing, etc.)',
+		score2Behaviour5:
+			'Absence of appropriate maternal behaviour towards the calf',
+		score0Behaviour6:
+			'Dolphin does not display this behaviour during the last 3 months based on trainer interviews',
+		score2Behaviour6: 'Dolphin displays the behaviour',
+		score0Behaviour7:
+			'Dolphin does not display oral stereotypic behaviour (e.g., chewing on gates, hoses, and toys)',
+		score2Behaviour7: 'Dolphin displays oral stereotypic behaviour',
+		score0Behaviour8:
+			'Dolphin does not display this behaviour (e.g., circling)',
+		score2Behaviour8: 'Dolphin displays the behaviour',
+		score0Behaviour9:
+			'Dolphin does not display frequent, repetitive, and intense self-grooming',
+		score2Behaviour9:
+			'Dolphin displays frequent, repetitive, and intense self-grooming (e.g., excessive bottom rubbing)',
+		score0Behaviour10: 'Dolphin does not regurgitate',
+		score2Behaviour10: 'Dolphin regurgitates',
+		score0Behaviour11:
+			'Dolphin does not receive aggressive behaviour (e.g., biting, hitting, and slapping) during observations',
+		score2Behaviour11:
+			'Dolphin receives aggressive behaviour (e.g., biting, hitting, and slapping) during observations',
+		score0Behaviour12: '0%–15% new rake marks and < 30% old wounds',
+		score1Behaviour12: '15%–20% new rake marks and > 30% old wounds',
+		score2Behaviour12: '>20% new rake marks',
+		score0Behaviour13:
+			'Dolphin does not display aggressive behaviour (e.g., biting, hitting, and slapping) during observations',
+		score2Behaviour13:
+			'Dolphin displays frequent, repetitive, and intense aggressive behaviour (e.g., biting, hitting, and slapping) during observations',
+		score0Behaviour14:
+			'Absence of social isolation during the last 3 months based on trainer interviews',
+		score2Behaviour14:
+			'Presence of other animals lead to avoidance of certain pool areas during the last 3 months based on trainer interviews',
+		score0Behaviour15:
+			'Absence of active avoidance of certain pool areas during the last three months',
+		score2Behaviour15:
+			'Dolphin avoids certain pool areas on a consistent basis',
+
+		////// END OF BEHAVIOUR ///////
+		///////////////////////////////
 
 		//////// ENVIRONMENT //////////
 		///////////////////////////////

@@ -138,7 +138,7 @@ export default {
 				.post(url, requestBody, { withCredentials: true })
 				.then((response) => {
 					console.log('Response:', response.data);
-					toast.success('User registered successfully', {
+					toast.success('User registered successfully.', {
 						autoClose: 1000,
 					});
 					setTimeout(() => {
@@ -146,7 +146,38 @@ export default {
 					}, 2000);
 				})
 				.catch((error) => {
-					console.error('Error:', error.response.data);
+					if (error.response.data.error === 'USER_ALREADY_EXISTS') {
+						toast.error('Username already exists! Choose a different one.', {
+							autoClose: 2000,
+						});
+					}
+					if (error.response.data === 'NAME_MUST_BE_PROVIDED.') {
+						toast.error('Please enter your name!', {
+							autoClose: 2000,
+						});
+					}
+					if (error.response.data === 'EMAIL_MUST_BE_PROVIDED.') {
+						toast.error('Please enter your e-mail!', {
+							autoClose: 2000,
+						});
+					}
+					if (error.response.data === 'PASSWORD_MUST_BE_PROVIDED.') {
+						toast.error('Please enter your password!', {
+							autoClose: 2000,
+						});
+					}
+					if (error.response.data === 'ROLE_NAME_MUST_BE_PROVIDED.') {
+						toast.error('Please select a zoo!', {
+							autoClose: 2000,
+						});
+					}
+					if (error.response.data === 'ROLE_PASSWORD_MUST_BE_PROVIDED.') {
+						toast.error('Please enter the zoo´s password!', {
+							autoClose: 2000,
+						});
+					}
+
+					console.error('Error:', error);
 				});
 		},
 	},
