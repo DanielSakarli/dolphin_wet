@@ -611,6 +611,112 @@ const behaviorPostValidateRequestBody = [
  * End of behavior validation rules.
  */
 
+
+/**
+ * Emotional state validation rules.
+ */
+const emotionalStatePostValidateRequestBody = [
+	body().custom((value) => {
+		const allowedFields = [
+			'dolphin_name',
+			'willingness_to_participate',
+			'synchronous_swimming',
+			'rubbing_behaviour',
+			'anticipatory_behaviour',
+			'fast_swimming',
+			'tail_slapping',
+			'choice_and_control',
+			'willingness_to_participate_comments',
+			'synchronous_swimming_comments',
+			'rubbing_behaviour_comments',
+			'anticipatory_behaviour_comments',
+			'fast_swimming_comments',
+			'tail_slapping_comments',
+			'choice_and_control_comments',			
+			'created_at',
+		];
+		const keys = Object.keys(value);
+
+		// Check if any key is not allowed
+		const disallowedKeys = keys.filter((key) => !allowedFields.includes(key));
+		if (disallowedKeys.length > 0) {
+			throw new Error(
+				`Invalid emotional_state fields: ${disallowedKeys.join(', ')}`
+			);
+		}
+
+		return true;
+	}),
+	body('dolphin_name')
+		.notEmpty()
+		.isString()
+		.withMessage('Invalid dolphin name'),
+	body('willingness_to_participate')
+		.optional({ values: 'null' })
+		.isInt({ min: 0, max: 2 })
+		.toInt(),
+	body('synchronous_swimming')
+		.optional({ values: 'null' })
+		.isInt({ min: 0, max: 2 })
+		.toInt(),
+	body('rubbing_behaviour')
+		.optional({ values: 'null' })
+		.isInt({ min: 0, max: 2 })
+		.toInt(),
+	body('anticipatory_behaviour')
+		.optional({ values: 'null' })
+		.isInt({ min: 0, max: 2 })
+		.toInt(),
+	body('fast_swimming')
+		.optional({ values: 'null' })
+		.isInt({ min: 0, max: 2 })
+		.toInt(),
+	body('tail_slapping')
+		.optional({ values: 'null' })
+		.isInt({ min: 0, max: 2 })
+		.toInt(),
+	body('choice_and_control')
+		.optional({ values: 'null' })
+		.isInt({ min: 0, max: 2 })
+		.toInt(),
+	body('willingness_to_participate_comments')
+		.optional({ values: 'null' })
+		.isString()
+		.withMessage('Invalid comments for willingness to participate'),
+	body('synchronous_swimming_comments')
+		.optional({ values: 'null' })
+		.isString()
+		.withMessage('Invalid comments for synchronous swimming'),
+	body('rubbing_behaviour_comments')
+		.optional({ values: 'null' })
+		.isString()
+		.withMessage('Invalid comments for rubbing behaviour'),
+	body('anticipatory_behaviour_comments')
+		.optional({ values: 'null' })
+		.isString()
+		.withMessage('Invalid comments for anticipatory behaviour'),
+	body('fast_swimming_comments')
+		.optional({ values: 'null' })
+		.isString()
+		.withMessage('Invalid comments for fast swimming'),
+	body('tail_slapping_comments')
+		.optional({ values: 'null' })
+		.isString()
+		.withMessage('Invalid comments for tail slapping'),
+	body('choice_and_control_comments')
+		.optional({ values: 'null' })
+		.isString()
+		.withMessage('Invalid comments for choice and control'),
+	// Timestamps
+	body('created_at')
+		.optional({ values: 'null' })
+		.isString()
+		.withMessage('Invalid created date'),
+];
+/**
+ * End of emotional state validation rules.
+ */
+
 module.exports = {
 	dolphinPostValidateRequestBody,
 	dolphinPatchValidateRequestBody,
@@ -618,4 +724,5 @@ module.exports = {
 	goodHealthPostValidateRequestBody,
 	goodHousingPostValidateRequestBody,
 	behaviorPostValidateRequestBody,
+	emotionalStatePostValidateRequestBody,
 };

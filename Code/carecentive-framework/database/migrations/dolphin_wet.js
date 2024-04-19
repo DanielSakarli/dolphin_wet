@@ -593,6 +593,114 @@ exports.up = function (knex) {
 
 			table.timestamps(true, true); //Timestamp: created at, updated at
 		}),
+		// nuernberg_emotional_state table
+		knex.schema.createTable('nuernberg_emotional_state', function (table) {
+			table.increments('emotional_state_record_id').primary();
+			table.integer('user_id').unsigned();
+			// Foreign key constrains for user_id.
+			table
+				.foreign('user_id')
+				.references('users.id')
+				.onDelete('SET NULL')
+				.onUpdate('CASCADE');
+			table.string('user_name');	
+			table.integer('dolphin_id').unsigned().notNullable();
+			// Foreign key constrains for dolphin_id.
+			table
+				.foreign('dolphin_id')
+				.references('dolphins.dolphin_id')
+				.onDelete('CASCADE')
+				.onUpdate('CASCADE');
+			table.string('dolphin_name');
+			table.tinyint('willingness_to_participate').unsigned(); //0, 2
+			table.string('willingness_to_participate_comments');
+			table.tinyint('synchronous_swimming').unsigned(); //0, 2
+			table.string('synchronous_swimming_comments');
+			table.tinyint('rubbing_behaviour').unsigned(); //0, 2
+			table.string('rubbing_behaviour_comments');
+			table.tinyint('anticipatory_behaviour').unsigned(); //0, 2
+			table.string('anticipatory_behaviour_comments');
+			table.tinyint('fast_swimming').unsigned(); //0, 2
+			table.string('fast_swimming_comments');
+			table.tinyint('tail_slapping').unsigned(); //0, 2
+			table.string('tail_slapping_comments');
+			table.tinyint('choice_and_control').unsigned(); //0, 2
+			table.string('choice_and_control_comments');
+			
+			table.timestamps(true, true); //Timestamp: created at, updated at
+		}),
+		// duesseldorf_emotional_state table
+		knex.schema.createTable('duesseldorf_emotional_state', function (table) {
+			table.increments('emotional_state_record_id').primary();
+			table.integer('user_id').unsigned();
+			// Foreign key constrains for user_id.
+			table
+				.foreign('user_id')
+				.references('users.id')
+				.onDelete('SET NULL')
+				.onUpdate('CASCADE');
+			table.string('user_name');	
+			table.integer('dolphin_id').unsigned().notNullable();
+			// Foreign key constrains for dolphin_id.
+			table
+				.foreign('dolphin_id')
+				.references('dolphins.dolphin_id')
+				.onDelete('CASCADE')
+				.onUpdate('CASCADE');
+			table.string('dolphin_name');
+			table.tinyint('willingness_to_participate').unsigned(); //0, 2
+			table.string('willingness_to_participate_comments');
+			table.tinyint('synchronous_swimming').unsigned(); //0, 2
+			table.string('synchronous_swimming_comments');
+			table.tinyint('rubbing_behaviour').unsigned(); //0, 2
+			table.string('rubbing_behaviour_comments');
+			table.tinyint('anticipatory_behaviour').unsigned(); //0, 2
+			table.string('anticipatory_behaviour_comments');
+			table.tinyint('fast_swimming').unsigned(); //0, 2
+			table.string('fast_swimming_comments');
+			table.tinyint('tail_slapping').unsigned(); //0, 2
+			table.string('tail_slapping_comments');
+			table.tinyint('choice_and_control').unsigned(); //0, 2
+			table.string('choice_and_control_comments');
+			
+			table.timestamps(true, true); //Timestamp: created at, updated at
+		}),
+		// valencia_emotional_state table
+		knex.schema.createTable('valencia_emotional_state', function (table) {
+			table.increments('emotional_state_record_id').primary();
+			table.integer('user_id').unsigned();
+			// Foreign key constrains for user_id.
+			table
+				.foreign('user_id')
+				.references('users.id')
+				.onDelete('SET NULL')
+				.onUpdate('CASCADE');
+			table.string('user_name');	
+			table.integer('dolphin_id').unsigned().notNullable();
+			// Foreign key constrains for dolphin_id.
+			table
+				.foreign('dolphin_id')
+				.references('dolphins.dolphin_id')
+				.onDelete('CASCADE')
+				.onUpdate('CASCADE');
+			table.string('dolphin_name');
+			table.tinyint('willingness_to_participate').unsigned(); //0, 2
+			table.string('willingness_to_participate_comments');
+			table.tinyint('synchronous_swimming').unsigned(); //0, 2
+			table.string('synchronous_swimming_comments');
+			table.tinyint('rubbing_behaviour').unsigned(); //0, 2
+			table.string('rubbing_behaviour_comments');
+			table.tinyint('anticipatory_behaviour').unsigned(); //0, 2
+			table.string('anticipatory_behaviour_comments');
+			table.tinyint('fast_swimming').unsigned(); //0, 2
+			table.string('fast_swimming_comments');
+			table.tinyint('tail_slapping').unsigned(); //0, 2
+			table.string('tail_slapping_comments');
+			table.tinyint('choice_and_control').unsigned(); //0, 2
+			table.string('choice_and_control_comments');
+			
+			table.timestamps(true, true); //Timestamp: created at, updated at
+		}),
 	]);
 };
 
