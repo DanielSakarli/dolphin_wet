@@ -1,14 +1,46 @@
 import { defineStore } from 'pinia';
 import requestBodiesBehaviour from '@/data/requestBodiesBehaviour.json';
 
+interface RequestBodyBehaviour {
+	environmental_enrichment: number | null;
+	affiliative_behaviour: number | null;
+	play_behaviour: number | null;
+	socio_sexual_behaviour: number | null;
+	maternal_behaviour: number | null;
+	displacement_behaviour: number | null;
+	oral_stereotypic_behaviour: number | null;
+	repetitive_body_movement: number | null;
+	self_grooming_behaviour: number | null;
+	regurgitation_reingestion: number | null;
+	rake_marks: number | null;
+	displaying_aggressive_behaviour: number | null;
+	receiving_aggressive_behaviour: number | null;
+	social_isolation: number | null;
+	avoidance_pool_areas: number | null;
+	environmental_enrichment_comments: string;
+	affiliative_behaviour_comments: string;
+	play_behaviour_comments: string;
+	socio_sexual_behaviour_comments: string;
+	maternal_behaviour_comments: string;
+	displacement_behaviour_comments: string;
+	oral_stereotypic_behaviour_comments: string;
+	repetitive_body_movement_comments: string;
+	self_grooming_behaviour_comments: string;
+	regurgitation_reingestion_comments: string;
+	rake_marks_comments: string;
+	displaying_aggressive_behaviour_comments: string;
+	receiving_aggressive_behaviour_comments: string;
+	social_isolation_comments: string;
+	avoidance_pool_areas_comments: string;
+	created_at: string;
+}
+
 export const useEvaluationBehaviourStore = defineStore(
 	'evaluationBehaviourStore',
 	{
-		state: () => {
-			return {
-				requestBodiesBehaviour,
-			};
-		},
+		state: (): { requestBodiesBehaviour: RequestBodyBehaviour[] } => ({
+			requestBodiesBehaviour,
+		}),
 		actions: {
 			resetBodies() {
 				for (let i = 0; i < requestBodiesBehaviour.length; i++) {
