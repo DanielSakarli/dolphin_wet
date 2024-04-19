@@ -304,12 +304,6 @@ export const globalizationList = {
 		GoodMouthCondition7: 'Records on previous dental or oral lesions',
 		GoodMouthCondition8:
 			'Verification with the team of trainers and veterinarians there have been no previous lesions/diseases/behaviors altering or reflecting alteration of oral health or associated feeding behaviour during the previous 3 months.',
-		//Translation Indicator Collector Emotional State
-		topicEmotionalState: 'Emotional State',
-		firstSubcriteriaEmotionalState: 'Positive animal-staff relationship',
-		secondSubcriteriaEmotionalState: 'Positive animal-visitor contacts',
-		thirdSubcriteriaEmotionalState:
-			'Possibility of environmental control and choices',
 
 		////////// NUTRITION //////////
 		///////////////////////////////
@@ -526,6 +520,60 @@ export const globalizationList = {
 		score2Environment9:
 			'Noise above the 40 dB hearing threshold for more than 1 min/day',
 		////// END OF ENVIRONMENT /////
+		///////////////////////////////
+
+		////// EMOTIONAL STATE ////////
+		///////////////////////////////
+		// Criteria
+		topicEmotionalState: 'Mental State',
+		firstCriteriaEmotionalState: 'Positive human-animal relationship',
+		secondCriteriaEmotionalState:
+			'Behaviours linked to positive affective states',
+		thirdCriteriaEmotionalState:
+			'Swimming behaviours linked to negative affective states',
+		fourthCriteriaEmotionalState:
+			'Abilities of environmental choice and control',
+		//SubCriteria
+		firstSubCriteriaEmotionalState: 'Willingness to participate (WtP)',
+		secondSubCriteriaEmotionalState:
+			'Slow synchronous swimming, slow contact swimming, slow circular swimming',
+		thirdSubCriteriaEmotionalState: 'Gentle rubbing behaviour',
+		fourthSubCriteriaEmotionalState: 'Anticipatory behaviour',
+		fifthSubCriteriaEmotionalState: 'High frequency of fast swimming behaviour',
+		sixthSubCriteriaEmotionalState:
+			'Intense and repetitive tail slapping behaviour',
+		seventhSubCriteriaEmotionalState:
+			'Evaluation of choice and control based on trainer survey',
+		//Scoring description
+		score0EmotionalState1:
+			'Average WtP over 5 days (same days as behavioural observations) is ≥2.5',
+		score2EmotionalState1:
+			'Average WtP over 5 days (same days as behavioural observations) is <2.5',
+		score0EmotionalState2:
+			'Dolphin displays slow synchronous swimming, slow contact swimming, and slow circular swimming during observations',
+		score2EmotionalState2:
+			'Dolphin does not display slow synchronous swimming, slow contact swimming, and slow circular swimming during observations',
+		score0EmotionalState3:
+			'Dolphin displays gentle rubbing behaviours during observations',
+		score2EmotionalState3:
+			'Dolphin does not display gentle rubbing behaviours during observations',
+		score0EmotionalState4:
+			'Dolphin displays anticipatory behaviour during observations',
+		score2EmotionalState4:
+			'Dolphin does not display anticipatory behaviour or displays intense and long-lasting anticipatory behaviour during observations',
+		score0EmotionalState5:
+			'Dolphin does not exhibit high frequencies of fast swimming behaviour during observations',
+		score2EmotionalState5:
+			'Dolphin exhibits high frequencies of fast swimming behaviour during observations',
+		score0EmotionalState6:
+			'Dolphin does not display intense and repetitive tail slapping behaviour during observations',
+		score2EmotionalState6:
+			'Dolphin displays intense and repetitive tail slapping behaviour during observations',
+		score0EmotionalState7:
+			'Facility promotes policies or management favouring choice and control, not forcing the animal towards any type of participation in any regular activity except for medical purposes as needed.Choice is promoted in other daily care activities such as feeding, enrichment, or companionship',
+		score2EmotionalState7:
+			'Facility does not promote policies or management favouring choice and control, not forcing the animal towards any type of participation in any regular activity except for medical purposes as needed. Choice is not promoted in other daily care activities such as feeding, enrichment, or companionship.',
+		//// END OF EMOTIONAL STATE ///
 		///////////////////////////////
 	},
 };

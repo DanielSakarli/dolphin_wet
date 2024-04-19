@@ -3,37 +3,34 @@
 	<ion-page>
 		<ion-header>
 			<ion-toolbar>
-				<ion-title>{{ $t('topicEmotionalState') }}</ion-title>
+				<ion-title>{{ $t('topicEmotionalState') }} </ion-title>
 				<ion-buttons slot="start">
-					<ion-back-button defaultHref="/folder/Evaluate"></ion-back-button>
+					<!--<ion-back-button defaultHref="/folder/Evaluate"></ion-back-button>-->
+					<ion-back-button @click="handleBackButtonClick"></ion-back-button>
 				</ion-buttons>
 			</ion-toolbar>
 		</ion-header>
 
-		<ion-content>
-			<!--<ion-item slot ="end">
+		<!--<ion-item slot ="end">
 					<ion-select @ionChange="changeLanguage($event)" value="en">
 						<ion-select-option value="en">English</ion-select-option>
 						<ion-select-option value="de">German</ion-select-option>
 					</ion-select>
     			</ion-item> -->
-			<EmotionalStateCheckCriteriaSelector />
-			<EmotionalStateCheckScoreField />
-			<CheckComments />
-		</ion-content>
+		<EmotionalStateCheckCriteriaSelector ref="EmotionalStateCheckRef" />
 
-		<ion-footer>
+		<!--<ion-footer>
 			<ion-toolbar>
-				<!--<ion-button color="light" slot="start">
+				<ion-button color="light" slot="start">
 					<ion-icon src="/icons/arrow-back-outline.svg"> </ion-icon>
 					{{$t('buttonPrevious')}}
-				</ion-button>-->
-				<ion-button color="light" slot="end" @click="confirmRefresh">
+				</ion-button>
+				<ion-button color="light" slot="end" @click="storeData" >
 					<ion-icon src="/icons/arrow-forward-outline.svg"></ion-icon>
-					{{ $t('buttonNext') }}
+					{{$t('buttonNext')}}
 				</ion-button>
 			</ion-toolbar>
-		</ion-footer>
+		</ion-footer>-->
 	</ion-page>
 </template>
 
@@ -49,17 +46,50 @@ import {
 	IonButton,
 	IonButtons,
 	IonBackButton,
+	alertController,
 } from '@ionic/vue';
 // Import customized components
 import EmotionalStateCheckCriteriaSelector from '@/components/EmotionalStateCheckCriteriaSelector.vue';
-import EmotionalStateCheckScoreField from '@/components/EmotionalStateCheckScoreField.vue';
-import CheckComments from '@/components/CheckComments.vue';
+import selectedDolphin from '@/components/EmotionalStateCheckCriteriaSelector.vue';
 import { defineComponent } from 'vue';
+import axios from 'axios';
+import { baseUrl } from '@/utils/baseUrl';
+import { mapActions } from 'vuex';
+
+const url = baseUrl + '/api/emotional_state';
+const token = localStorage.getItem('token'); //Get current JWT token of the user
+
+// document.cookie = token;
+// console.log('This token is set in cookie (client-side): ', document.cookie);
+
+// Set up request config
+/*const config = {
+	headers: {
+		Cookie: document.cookie,
+	},
+};*/
+
+const requestBody = {
+	dolphin_name: selectedDolphin,
+	body_condition_score: 3,
+	weight_measured: 15.5,
+	kcal_calculations: 3,
+	blood_hydration: 3,
+	fish_quality: 3,
+	fish_variety: 3,
+	body_condition_score_comments: '',
+	weight_measured_comments: '',
+	kcal_calculations_comments: '',
+	blood_hydration_comments: '',
+	fish_quality_comments: '',
+	fish_variety_comments: '',
+};
 
 export default defineComponent({
 	data() {
 		return {
 			language: 'de',
+			userComment: '',
 		};
 	},
 	components: {
@@ -72,23 +102,86 @@ export default defineComponent({
 		IonPage,
 		IonButton,
 		EmotionalStateCheckCriteriaSelector,
-		EmotionalStateCheckScoreField,
-		CheckComments,
 		IonButtons,
 		IonBackButton,
 	},
 
 	methods: {
+		...mapActions(['updateUserComment']),
+		updateUserComment(event: any) {
+			this.userComment = event.target.value;
+			this.updateUserComment(this.userComment);
+			console.log('userComment: ', this.userComment);
+		},
+		async handleBackButtonClick() {
+			//Call here the showAlert()
+			console.log('Back button clicked');
+			localStorage.setItem('backButtonClicked', 'true');
+			if (localStorage.getItem('dataInBody') === 'true') {
+				await this.showAlert();
+			}
+			if (localStorage.getItem('dataInBody') === 'false') {
+				//this.$router.back();
+				this.$router.push('/folder/Evaluate');
+			}
+		},
+		async showAlert() {
+			return new Promise(async (resolve, reject) => {
+				const alert = await alertController.create({
+					header: 'Confirmation',
+					message: 'Are you sure you want to proceed?',
+					buttons: [
+						{
+							text: 'Stay on Page',
+							role: 'cancel',
+							cssClass: 'secondary',
+							handler: () => {
+								console.log('Cancel clicked');
+								reject();
+							},
+						},
+						{
+							text: 'Lose Data',
+							handler: () => {
+								console.log('Confirm Okay');
+								//this.$router.back();
+								this.$router.push('/folder/Evaluate');
+								(this.$refs.EmotionalStateCheckRef as any).resetData();
+								localStorage.setItem('dataInBody', 'false');
+								resolve(void 0);
+							},
+						},
+					],
+				});
+
+				return alert.present();
+			});
+		},
+		async storeData() {
+			const confirmed = true; //confirm(this.$t('savingDataNext'));
+			// Check in console if token is correct
+			console.log('this is the token that is sent to backend: ', token);
+
+			if (confirmed) {
+				console.log('Data is stored');
+				await axios
+					.post(url, requestBody, { withCredentials: true })
+					.then((response) => {
+						console.log('Response:', response.data);
+						this.confirmRefresh();
+					})
+					.catch((error) => {
+						console.error('Error:', error.response.data);
+					});
+			}
+		},
 		changeLanguage($event: any) {
 			this.$i18n.locale = $event.detail.value;
 		},
 		confirmRefresh() {
-			const confirmed = confirm(this.$t('savingDataNext'));
-			if (confirmed) {
-				const currentPath = this.$route.path;
-				const targetUrl = `/detailEmotionalState`;
-				window.location.href = targetUrl;
-			}
+			const currentPath = this.$route.path;
+			const targetUrl = `/detailEmotionalState`;
+			window.location.href = targetUrl;
 		},
 	},
 });

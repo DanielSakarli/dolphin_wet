@@ -25,30 +25,18 @@
 					okText="OK"
 					:cancelText="firstcancelText"
 				>
-					<ion-select-option value="firstCriteriaBehaviour">{{
-						$t('firstCriteriaBehaviour')
+					<ion-select-option value="firstCriteriaEmotionalState">{{
+						$t('firstCriteriaEmotionalState')
 					}}</ion-select-option>
-					<ion-select-option value="secondCriteriaBehaviour">{{
-						$t('secondCriteriaBehaviour')
+					<ion-select-option value="secondCriteriaEmotionalState">{{
+						$t('secondCriteriaEmotionalState')
 					}}</ion-select-option>
-					<ion-select-option value="thirdCriteriaBehaviour">{{
-						$t('thirdCriteriaBehaviour')
+					<ion-select-option value="thirdCriteriaEmotionalState">{{
+						$t('thirdCriteriaEmotionalState')
 					}}</ion-select-option>
-					<ion-select-option value="fourthCriteriaBehaviour">{{
-						$t('fourthCriteriaBehaviour')
+					<ion-select-option value="fourthCriteriaEmotionalState">{{
+						$t('fourthCriteriaEmotionalState')
 					}}</ion-select-option>
-                    <ion-select-option value="fifthCriteriaBehaviour">{{
-                        $t('fifthCriteriaBehaviour')
-                    }}</ion-select-option>
-                    <ion-select-option value="sixthCriteriaBehaviour">{{
-                        $t('sixthCriteriaBehaviour')
-                    }}</ion-select-option>
-                    <ion-select-option value="seventhCriteriaBehaviour">{{
-                        $t('seventhCriteriaBehaviour')
-                    }}</ion-select-option>
-                    <ion-select-option value="eighthCriteriaBehaviour">{{
-                        $t('eighthCriteriaBehaviour')
-                    }}</ion-select-option>
 				</ion-select>
 			</ion-item>
 		</ion-list>
@@ -60,130 +48,66 @@
 		<ion-modal :is-open="isOpenManual">
 			<ion-header>
 				<ion-toolbar>
-					<ion-title v-if=" criteria === 'firstCriteriaBehaviour'"
-						>{{$t('firstCriteriaBehaviour')}}
+					<ion-title v-if=" criteria === 'firstCriteriaEmotionalState'"
+						>{{$t('firstCriteriaEmotionalState')}}
 					</ion-title>
-					<ion-title v-else-if=" criteria === 'secondCriteriaBehaviour'"
-						>{{$t('secondCriteriaBehaviour')}}
+					<ion-title v-else-if=" criteria === 'secondCriteriaEmotionalState'"
+						>{{$t('secondCriteriaEmotionalState')}}
 					</ion-title>
-					<ion-title v-else-if=" criteria === 'thirdCriteriaBehaviour'"
-						>{{$t('thirdCriteriaBehaviour')}}
+					<ion-title v-else-if=" criteria === 'thirdCriteriaEmotionalState'"
+						>{{$t('thirdCriteriaEmotionalState')}}
 					</ion-title>
-					<ion-title v-else-if=" criteria === 'fourthCriteriaBehaviour'"
-						>{{$t('fourthCriteriaBehaviour')}}
+					<ion-title v-else-if=" criteria === 'fourthCriteriaEmotionalState'"
+						>{{$t('fourthCriteriaEmotionalState')}}
 					</ion-title>
-                    <ion-title v-else-if=" criteria === 'fifthCriteriaBehaviour'"
-                        >{{$t('fifthCriteriaBehaviour')}}
-                    </ion-title>
-                    <ion-title v-else-if=" criteria === 'sixthCriteriaBehaviour'"
-                        >{{$t('sixthCriteriaBehaviour')}}
-                    </ion-title>
-                    <ion-title v-else-if=" criteria === 'seventhCriteriaBehaviour'"
-                        >{{$t('seventhCriteriaBehaviour')}}
-                    </ion-title>
-                    <ion-title v-else-if=" criteria === 'eighthCriteriaBehaviour'"
-                        >{{$t('eighthCriteriaBehaviour')}}
-                    </ion-title>
 					<ion-buttons slot="end">
 						<ion-button @click="setOpenManual(false)">{{ $t('close')}}</ion-button>
 					</ion-buttons>
 				</ion-toolbar>
 			</ion-header>
 			<ion-content class="ion-padding">
-				<p v-if=" criteria === 'firstCriteriaBehaviour'">
-					<h1>{{ $t('firstSubCriteriaBehaviour') }}</h1>
+				<p v-if=" criteria === 'firstCriteriaEmotionalState'">
+					<h1>{{ $t('firstSubCriteriaEmotionalState') }}</h1>
 					<h3>Score 0</h3>
-					{{  $t('score0Behaviour1') }}
-                    <h3>Score 1</h3>
-                    {{  $t('score1Behaviour1') }}
+					{{  $t('score0EmotionalState1') }}
 					<h3>Score 2</h3>
-					{{  $t('score2Behaviour1') }}
+					{{  $t('score2EmotionalState1') }}
 				</p>
-				<p v-if=" criteria === 'secondCriteriaBehaviour'">
-					<h1>{{ $t('secondSubCriteriaBehaviour') }}</h1>
+				<p v-if=" criteria === 'secondCriteriaEmotionalState'">
+					<h1>{{ $t('secondSubCriteriaEmotionalState') }}</h1>
 					<h3>Score 0</h3>
-					{{  $t('score0Behaviour2') }}
+					{{  $t('score0EmotionalState2') }}
 					<h3>Score 2</h3>
-					{{  $t('score2Behaviour2') }}
-                    <h1>{{ $t('thirdSubCriteriaBehaviour') }}</h1>
+					{{  $t('score2EmotionalState2') }}
+                    <h1>{{ $t('thirdSubCriteriaEmotionalState') }}</h1>
 					<h3>Score 0</h3>
-					{{  $t('score0Behaviour3') }}
+					{{  $t('score0EmotionalState3') }}
 					<h3>Score 2</h3>
-					{{  $t('score2Behaviour3') }}
-                    <h1>{{ $t('fourthSubCriteriaBehaviour') }}</h1>
+					{{  $t('score2EmotionalState3') }}
+                    <h1>{{ $t('fourthSubCriteriaEmotionalState') }}</h1>
 					<h3>Score 0</h3>
-					{{  $t('score0Behaviour4') }}
+					{{  $t('score0EmotionalState4') }}
 					<h3>Score 2</h3>
-					{{  $t('score2Behaviour4') }}
+					{{  $t('score2EmotionalState4') }}
 				</p>
-				<p v-if=" criteria === 'thirdCriteriaBehaviour'">
-					<h1>{{ $t('fifthSubCriteriaBehaviour') }}</h1>
+				<p v-if=" criteria === 'thirdCriteriaEmotionalState'">
+					<h1>{{ $t('fifthSubCriteriaEmotionalState') }}</h1>
 					<h3>Score 0</h3>
-					{{  $t('score0Behaviour5') }}
+					{{  $t('score0EmotionalState5') }}
 					<h3>Score 2</h3>
-					{{  $t('score2Behaviour5') }}
+					{{  $t('score2EmotionalState5') }}
+					<h1>{{ $t('sixthSubCriteriaEmotionalState') }}</h1>
+					<h3>Score 0</h3>
+					{{  $t('score0EmotionalState6') }}
+					<h3>Score 2</h3>
+					{{  $t('score2EmotionalState6') }}
 				</p>
-				<p v-if=" criteria === 'fourthCriteriaBehaviour'">
-					<h1>{{ $t('sixthSubCriteriaBehaviour') }}</h1>
+				<p v-if=" criteria === 'fourthCriteriaEmotionalState'">
+                    <h1>{{ $t('seventhSubCriteriaEmotionalState') }}</h1>
 					<h3>Score 0</h3>
-					{{  $t('score0Behaviour6') }}
+					{{  $t('score0EmotionalState7') }}
 					<h3>Score 2</h3>
-					{{  $t('score2Behaviour6') }}
-                    <h1>{{ $t('seventhSubCriteriaBehaviour') }}</h1>
-					<h3>Score 0</h3>
-					{{  $t('score0Behaviour7') }}
-					<h3>Score 2</h3>
-					{{  $t('score2Behaviour7') }}
-                    <h1>{{ $t('eighthSubCriteriaBehaviour') }}</h1>
-					<h3>Score 0</h3>
-					{{  $t('score0Behaviour8') }}
-					<h3>Score 2</h3>
-					{{  $t('score2Behaviour8') }}
-                    <h1>{{ $t('ninthSubCriteriaBehaviour') }}</h1>
-					<h3>Score 0</h3>
-					{{  $t('score0Behaviour9') }}
-					<h3>Score 2</h3>
-					{{  $t('score2Behaviour9') }}
-                    <h1>{{ $t('tenthSubCriteriaBehaviour') }}</h1>
-					<h3>Score 0</h3>
-					{{  $t('score0Behaviour10') }}
-					<h3>Score 2</h3>
-					{{  $t('score2Behaviour10') }}
-				</p>
-                <p v-if=" criteria === 'fifthCriteriaBehaviour'">
-					<h1>{{ $t('eleventhSubCriteriaBehaviour') }}</h1>
-					<h3>Score 0</h3>
-					{{  $t('score0Behaviour11') }}
-					<h3>Score 2</h3>
-					{{  $t('score2Behaviour11') }}
-                    <h1>{{ $t('twelfthSubCriteriaBehaviour') }}</h1>
-					<h3>Score 0</h3>
-					{{  $t('score0Behaviour12') }}
-                    <h3>Score 1</h3>
-                    {{  $t('score1Behaviour12') }}
-					<h3>Score 2</h3>
-					{{  $t('score2Behaviour12') }}
-				</p>
-                <p v-if=" criteria === 'sixthCriteriaBehaviour'">
-                    <h1>{{ $t('thirteenthSubCriteriaBehaviour') }}</h1>
-                    <h3>Score 0</h3>
-                    {{  $t('score0Behaviour13') }}
-                    <h3>Score 2</h3>
-                    {{  $t('score2Behaviour13') }}
-                </p>
-                <p v-if=" criteria === 'seventhCriteriaBehaviour'">
-                <h1>{{ $t('fourteenthSubCriteriaBehaviour') }}</h1>
-                <h3>Score 0</h3>
-                {{  $t('score0Behaviour14') }}
-                <h3>Score 2</h3>
-                {{  $t('score2Behaviour14') }}
-                </p>
-                <p v-if=" criteria === 'eighthCriteriaBehaviour'">
-                    <h1>{{ $t('fifteenthSubCriteriaBehaviour') }}</h1>
-                    <h3>Score 0</h3>
-                    {{  $t('score0Behaviour15') }}
-                    <h3>Score 2</h3>
-                    {{  $t('score2Behaviour15') }}
+					{{  $t('score2EmotionalState7') }}
                 </p>
 			</ion-content>
 		</ion-modal>
@@ -194,37 +118,25 @@
 		<ion-modal :is-open="isOpenScoring">
 			<ion-header>
 				<ion-toolbar>
-					<ion-title v-if=" criteria === 'firstCriteriaBehaviour'"
-						>{{$t('firstCriteriaBehaviour')}}
+					<ion-title v-if=" criteria === 'firstCriteriaEmotionalState'"
+						>{{$t('firstCriteriaEmotionalState')}}
 					</ion-title>
-					<ion-title v-else-if=" criteria === 'secondCriteriaBehaviour'"
-						>{{$t('secondCriteriaBehaviour')}}
+					<ion-title v-else-if=" criteria === 'secondCriteriaEmotionalState'"
+						>{{$t('secondCriteriaEmotionalState')}}
 					</ion-title>
-					<ion-title v-else-if=" criteria === 'thirdCriteriaBehaviour'"
-						>{{$t('thirdCriteriaBehaviour')}}
+					<ion-title v-else-if=" criteria === 'thirdCriteriaEmotionalState'"
+						>{{$t('thirdCriteriaEmotionalState')}}
 					</ion-title>
-					<ion-title v-else-if=" criteria === 'fourthCriteriaBehaviour'"
-						>{{$t('fourthCriteriaBehaviour')}}
+					<ion-title v-else-if=" criteria === 'fourthCriteriaEmotionalState'"
+						>{{$t('fourthCriteriaEmotionalState')}}
 					</ion-title>
-                    <ion-title v-else-if=" criteria === 'fifthCriteriaBehaviour'"
-                        >{{$t('fifthCriteriaBehaviour')}}
-                    </ion-title>
-                    <ion-title v-else-if=" criteria === 'sixthCriteriaBehaviour'"
-                        >{{$t('sixthCriteriaBehaviour')}}
-                    </ion-title>
-                    <ion-title v-else-if=" criteria === 'seventhCriteriaBehaviour'"
-                        >{{$t('seventhCriteriaBehaviour')}}
-                    </ion-title>
-                    <ion-title v-else-if=" criteria === 'eighthCriteriaBehaviour'"
-                        >{{$t('eighthCriteriaBehaviour')}}
-                    </ion-title>
 					<ion-buttons slot="end">
 						<ion-button @click="setOpenScoring(false)">{{ $t('close')}}</ion-button>
 					</ion-buttons>
 				</ion-toolbar>
 			</ion-header>
 			<ion-content class="ion-padding">
-				<!--<p v-if=" criteria === 'firstCriteriaBehaviour'">
+				<!--<p v-if=" criteria === 'firstCriteriaEmotionalState'">
 					<h1>Body Condition Score:</h1>
 					<h3>Score 1</h3>
 					BCS of 3 = adequate
@@ -238,7 +150,7 @@
 					<h3>Score 3</h3>
 					BWOS: &gt;13% along the year or &lt;5% in a 3-month period
 				</p>
-				<p v-if=" criteria === 'secondCriteriaBehaviour'">
+				<p v-if=" criteria === 'secondCriteriaEmotionalState'">
 					<h1>Kcal calculations</h1>
 					<h3>Score 1</h3>
 					Diet designed on the basis of EAAM S&G
@@ -252,23 +164,23 @@
 					<h3>Score 3</h3>
 					&gt;10% out of range
 				</p>
-				<p v-if=" criteria === 'thirdCriteriaBehaviour'">
+				<p v-if=" criteria === 'thirdCriteriaEmotionalState'">
 					<h1>Food quality Microbiology, Physico-chemical analysis:</h1>
 					<h3>Score 1</h3>
 					Fulfilled according to EAAM S&G
 					<h3>Score 3</h3>
 					Not fulfilled according to EAAM S&G
 				</p>
-				<p v-if=" criteria === 'fourthCriteriaBehaviour'">
+				<p v-if=" criteria === 'fourthCriteriaEmotionalState'">
 					<h1>Food variety along the year:</h1>
 					<h3>Score 1</h3>
 					At least 5 species are fed throughout the year, 
-					each individual's diet is adapted to its individual Behavioural needs and preferences, 
+					each individual's diet is adapted to its individual EmotionalStateal needs and preferences, 
 					amount of food fed varies between sessions, 
 					part of the diet is given via enrichment
 					<h3>Score 2</h3>
 					At least 3, but no more than 5 species are fed throughout the year, 
-					each individual's diet is adapted to its individual Behavioural needs, but the 
+					each individual's diet is adapted to its individual EmotionalStateal needs, but the 
 					amount of food provided to the dolphins during each session is the same, 
 					favorite species/animal preferences are neglected
 					<h3>Score 3</h3>
@@ -294,7 +206,7 @@
 			</ion-header>
 
 			<ion-content class="ion-padding">
-				<p v-if=" criteria === 'firstCriteriaBehaviour'">-->
+				<p v-if=" criteria === 'firstCriteriaEmotionalState'">-->
 					<!--Here are the values of reference area-->
 					<!--<h3>Wanted weight area:</h3>
 					<div v-if="dolphinSelect">
@@ -319,7 +231,7 @@
 						  </div>
 					  </div>
 				</p>
-				<p v-if=" criteria === 'secondCriteriaBehaviour'">-->
+				<p v-if=" criteria === 'secondCriteriaEmotionalState'">-->
 					<!--Here are the values of reference area-->
 					<!--<h3>Kcal calculations</h3>
 					<div v-if="dolphinSelect">
@@ -348,23 +260,20 @@
 		</ion-modal>-->
 		<!--End of Reference Area-->
 		<!-- Start of Checkboxes-->
-		<ion-card v-if="dolphinSelect && dolphinSelect.length !== 0 && criteria === 'firstCriteriaBehaviour'">
-			<ion-card-title>{{$t('firstSubCriteriaBehaviour')}}</ion-card-title>
+		<ion-card v-if="dolphinSelect && dolphinSelect.length !== 0 && criteria === 'firstCriteriaEmotionalState'">
+			<ion-card-title>{{$t('firstSubCriteriaEmotionalState')}}</ion-card-title>
 			<ion-list >
 					<ion-item>
 						<ion-checkbox v-model="CheckboxArray[0][0]" @click="handleClick(0,0)">Score 0</ion-checkbox>
 					</ion-item>
 					<ion-item>
-						<ion-checkbox v-model="CheckboxArray[0][1]" @click="handleClick(0,1)">Score 1</ion-checkbox>
-					</ion-item>
-					<ion-item>
 						<ion-checkbox v-model="CheckboxArray[0][2]" @click="handleClick(0,2)">Score 2</ion-checkbox>
 					</ion-item>
-					<CheckComments @update-comment="updateEnvironmentEnrichmentComments" />
+					<CheckComments @update-comment="updateWillingnessParticipateComments" />
 			</ion-list>
 		</ion-card>
-		<ion-card v-if="dolphinSelect && dolphinSelect.length !== 0 && criteria === 'secondCriteriaBehaviour'">
-			<ion-card-title>{{$t('secondSubCriteriaBehaviour')}}</ion-card-title>
+		<ion-card v-if="dolphinSelect && dolphinSelect.length !== 0 && criteria === 'secondCriteriaEmotionalState'">
+			<ion-card-title>{{$t('secondSubCriteriaEmotionalState')}}</ion-card-title>
 			<ion-list >
 				<ion-item>
                     <ion-checkbox v-model="CheckboxArray[1][0]" @click="handleClick(1,0)">Score 0</ion-checkbox>
@@ -372,11 +281,11 @@
                 <ion-item>
                     <ion-checkbox v-model="CheckboxArray[1][2]" @click="handleClick(1,2)">Score 2</ion-checkbox>
                 </ion-item>
-                <CheckComments @update-comment="updateAffiliativeBehaviourComments" />
+                <CheckComments @update-comment="updateSynchronousSwimmingComments" />
 			</ion-list>
 		</ion-card>
-		<ion-card v-if="dolphinSelect && dolphinSelect.length !== 0 && criteria === 'secondCriteriaBehaviour'">
-            <ion-card-title>{{$t('thirdSubCriteriaBehaviour')}}</ion-card-title>
+		<ion-card v-if="dolphinSelect && dolphinSelect.length !== 0 && criteria === 'secondCriteriaEmotionalState'">
+            <ion-card-title>{{$t('thirdSubCriteriaEmotionalState')}}</ion-card-title>
 			<ion-list >
 				<ion-item>
                     <ion-checkbox v-model="CheckboxArray[2][0]" @click="handleClick(2,0)">Score 0</ion-checkbox>
@@ -384,11 +293,11 @@
                 <ion-item>
                     <ion-checkbox v-model="CheckboxArray[2][2]" @click="handleClick(2,2)">Score 2</ion-checkbox>
                 </ion-item>
-                <CheckComments @update-comment="updatePlayBehaviourComments" />
+                <CheckComments @update-comment="updateGentleRubbingComments" />
 			</ion-list>
 		</ion-card>
-		<ion-card v-if="dolphinSelect && dolphinSelect.length !== 0 && criteria === 'secondCriteriaBehaviour'">
-            <ion-card-title>{{$t('fourthSubCriteriaBehaviour')}}</ion-card-title>
+		<ion-card v-if="dolphinSelect && dolphinSelect.length !== 0 && criteria === 'secondCriteriaEmotionalState'">
+            <ion-card-title>{{$t('fourthSubCriteriaEmotionalState')}}</ion-card-title>
 			<ion-list >
 				<ion-item>
                     <ion-checkbox v-model="CheckboxArray[3][0]" @click="handleClick(3,0)">Score 0</ion-checkbox>
@@ -396,11 +305,11 @@
                 <ion-item>
                     <ion-checkbox v-model="CheckboxArray[3][2]" @click="handleClick(3,2)">Score 2</ion-checkbox>
                 </ion-item>
-                <CheckComments @update-comment="updateSocioSexualComments" />
+                <CheckComments @update-comment="updateAnticipatoryBehaviourComments" />
 			</ion-list>
 		</ion-card>
-		<ion-card v-if="dolphinSelect && dolphinSelect.length !== 0 && criteria === 'thirdCriteriaBehaviour'">
-			<ion-card-title>{{$t('fifthSubCriteriaBehaviour')}}</ion-card-title>
+		<ion-card v-if="dolphinSelect && dolphinSelect.length !== 0 && criteria === 'thirdCriteriaEmotionalState'">
+			<ion-card-title>{{$t('fifthSubCriteriaEmotionalState')}}</ion-card-title>
 			<ion-list>
 				<ion-item>
 					<ion-checkbox v-model="CheckboxArray[4][0]" @click="handleClick(4,0)">Score 0</ion-checkbox>
@@ -408,11 +317,11 @@
 				<ion-item>
 					<ion-checkbox v-model="CheckboxArray[4][2]" @click="handleClick(4,2)">Score 2</ion-checkbox>
 				</ion-item>
-				<CheckComments @update-comment="updateMaternalBehaviourComments" />
+				<CheckComments @update-comment="updateFastSwimmingComments" />
 			</ion-list>
 		</ion-card>
-		<ion-card v-if="dolphinSelect && dolphinSelect.length !== 0 && criteria === 'fourthCriteriaBehaviour'">
-			<ion-card-title>{{$t('sixthSubCriteriaBehaviour')}}</ion-card-title>
+		<ion-card v-if="dolphinSelect && dolphinSelect.length !== 0 && criteria === 'thirdCriteriaEmotionalState'">
+			<ion-card-title>{{$t('sixthSubCriteriaEmotionalState')}}</ion-card-title>
 			<ion-list>
 				<ion-item>
 					<ion-checkbox v-model="CheckboxArray[5][0]" @click="handleClick(5,0)">Score 0</ion-checkbox>
@@ -420,11 +329,11 @@
 				<ion-item>
 					<ion-checkbox v-model="CheckboxArray[5][2]" @click="handleClick(5,2)">Score 2</ion-checkbox>
 				</ion-item>
-				<CheckComments @update-comment="updateDisplacementBehaviourComments" />
+				<CheckComments @update-comment="updateTailSlappingComments" />
 			</ion-list>
 		</ion-card>
-        <ion-card v-if="dolphinSelect && dolphinSelect.length !== 0 && criteria === 'fourthCriteriaBehaviour'">
-		<ion-card-title>{{$t('seventhSubCriteriaBehaviour')}}</ion-card-title>
+		<ion-card v-if="dolphinSelect && dolphinSelect.length !== 0 && criteria === 'fourthCriteriaEmotionalState'">
+			<ion-card-title>{{$t('seventhSubCriteriaEmotionalState')}}</ion-card-title>
 			<ion-list>
 				<ion-item>
 					<ion-checkbox v-model="CheckboxArray[6][0]" @click="handleClick(6,0)">Score 0</ion-checkbox>
@@ -432,106 +341,7 @@
 				<ion-item>
 					<ion-checkbox v-model="CheckboxArray[6][2]" @click="handleClick(6,2)">Score 2</ion-checkbox>
 				</ion-item>
-				<CheckComments @update-comment="updateOralBehaviourComments" />
-			</ion-list>
-		</ion-card>
-        <ion-card v-if="dolphinSelect && dolphinSelect.length !== 0 && criteria === 'fourthCriteriaBehaviour'">
-		<ion-card-title>{{$t('eighthSubCriteriaBehaviour')}}</ion-card-title>
-			<ion-list>
-				<ion-item>
-					<ion-checkbox v-model="CheckboxArray[7][0]" @click="handleClick(7,0)">Score 0</ion-checkbox>
-				</ion-item>
-				<ion-item>
-					<ion-checkbox v-model="CheckboxArray[7][2]" @click="handleClick(7,2)">Score 2</ion-checkbox>
-				</ion-item>
-				<CheckComments @update-comment="updateRepetitiveMovementComments" />
-			</ion-list>
-		</ion-card>
-        <ion-card v-if="dolphinSelect && dolphinSelect.length !== 0 && criteria === 'fourthCriteriaBehaviour'">
-		<ion-card-title>{{$t('ninthSubCriteriaBehaviour')}}</ion-card-title>
-			<ion-list>
-				<ion-item>
-					<ion-checkbox v-model="CheckboxArray[8][0]" @click="handleClick(8,0)">Score 0</ion-checkbox>
-				</ion-item>
-				<ion-item>
-					<ion-checkbox v-model="CheckboxArray[8][2]" @click="handleClick(8,2)">Score 2</ion-checkbox>
-				</ion-item>
-				<CheckComments @update-comment="updateSelfGroomingComments" />
-			</ion-list>
-        </ion-card>
-		<ion-card v-if="dolphinSelect && dolphinSelect.length !== 0 && criteria === 'fourthCriteriaBehaviour'">
-		<ion-card-title>{{$t('tenthSubCriteriaBehaviour')}}</ion-card-title>
-			<ion-list>
-				<ion-item>
-					<ion-checkbox v-model="CheckboxArray[9][0]" @click="handleClick(9,0)">Score 0</ion-checkbox>
-				</ion-item>
-				<ion-item>
-					<ion-checkbox v-model="CheckboxArray[9][2]" @click="handleClick(9,2)">Score 2</ion-checkbox>
-				</ion-item>
-				<CheckComments @update-comment="updateRegurgitationComments" />
-			</ion-list>
-		</ion-card>
-		<ion-card v-if="dolphinSelect && dolphinSelect.length !== 0 && criteria === 'fifthCriteriaBehaviour'">
-			<ion-card-title>{{$t('eleventhSubCriteriaBehaviour')}}</ion-card-title>		
-			<ion-list >
-				<ion-item>
-					<ion-checkbox v-model="CheckboxArray[10][0]" @click="handleClick(10,0)">Score 0</ion-checkbox>
-				</ion-item>
-				<ion-item>
-					<ion-checkbox v-model="CheckboxArray[10][2]" @click="handleClick(10,2)">Score 2</ion-checkbox>
-				</ion-item>
-				<CheckComments @update-comment="updateReceivingAggressiveComments" />
-			</ion-list>
-		</ion-card>
-		<ion-card v-if="dolphinSelect && dolphinSelect.length !== 0 && criteria === 'fifthCriteriaBehaviour'">
-			<ion-card-title>{{$t('twelfthSubCriteriaBehaviour')}}</ion-card-title>		
-			<ion-list >
-				<ion-item>
-					<ion-checkbox v-model="CheckboxArray[11][0]" @click="handleClick(11,0)">Score 0</ion-checkbox>
-				</ion-item>
-				<ion-item>
-					<ion-checkbox v-model="CheckboxArray[11][1]" @click="handleClick(11,1)">Score 1</ion-checkbox>
-				</ion-item>
-				<ion-item>
-					<ion-checkbox v-model="CheckboxArray[11][2]" @click="handleClick(11,2)">Score 2</ion-checkbox>
-				</ion-item>
-				<CheckComments @update-comment="updateRakeMarksComments" />
-			</ion-list>
-		</ion-card>
-		<ion-card v-if="dolphinSelect && dolphinSelect.length !== 0 && criteria === 'sixthCriteriaBehaviour'">
-			<ion-card-title>{{$t('thirteenthSubCriteriaBehaviour')}}</ion-card-title>	
-			<ion-list>
-				<ion-item>
-					<ion-checkbox v-model="CheckboxArray[12][0]" @click="handleClick(12,0)">Score 0</ion-checkbox>
-				</ion-item>
-				<ion-item>
-					<ion-checkbox v-model="CheckboxArray[12][2]" @click="handleClick(12,2)">Score 2</ion-checkbox>
-				</ion-item>
-				<CheckComments @update-comment="updateDisplayingAggressiveComments" />
-			</ion-list>
-		</ion-card>
-		<ion-card v-if="dolphinSelect && dolphinSelect.length !== 0 && criteria === 'seventhCriteriaBehaviour'">
-			<ion-card-title>{{$t('fourteenthSubCriteriaBehaviour')}}</ion-card-title>	
-			<ion-list>
-				<ion-item>
-					<ion-checkbox v-model="CheckboxArray[13][0]" @click="handleClick(13,0)">Score 0</ion-checkbox>
-				</ion-item>
-				<ion-item>
-					<ion-checkbox v-model="CheckboxArray[13][2]" @click="handleClick(13,2)">Score 2</ion-checkbox>
-				</ion-item>
-				<CheckComments @update-comment="updateSocialIsolationComments" />
-			</ion-list>
-		</ion-card>
-		<ion-card v-if="dolphinSelect && dolphinSelect.length !== 0 && criteria === 'eighthCriteriaBehaviour'">
-			<ion-card-title>{{$t('fifteenthSubCriteriaBehaviour')}}</ion-card-title>	
-			<ion-list>
-				<ion-item>
-					<ion-checkbox v-model="CheckboxArray[14][0]" @click="handleClick(14,0)">Score 0</ion-checkbox>
-				</ion-item>
-				<ion-item>
-					<ion-checkbox v-model="CheckboxArray[14][2]" @click="handleClick(14,2)">Score 2</ion-checkbox>
-				</ion-item>
-				<CheckComments @update-comment="updateAvoidancePoolAreasComments" />
+				<CheckComments @update-comment="updateChoiceControlComments" />
 			</ion-list>
 		</ion-card>
 	</ion-content>
@@ -558,7 +368,7 @@ import {IonItem, IonList, IonSelect, IonSelectOption, IonModal,
 import axios from 'axios';
 import CheckComments from '@/components/CheckComments.vue';
 import { useDolphinsStore }from '@/store/dolphinsStore';
-import { useEvaluationBehaviourStore }from '@/store/evaluationBehaviourStore';
+import { useEvaluationEmotionalStateStore } from '@/store/evaluationEmotionalStateStore';
 import { baseUrl } from '@/utils/baseUrl';
 import { toast } from 'vue3-toastify';
 import 'vue3-toastify/dist/index.css';
@@ -567,8 +377,8 @@ import 'vue3-toastify/dist/index.css';
 
 
 const dolphinsStore = useDolphinsStore();
-const evaluationBehaviourStore = useEvaluationBehaviourStore();
-let dataInBody; //Variable which gets saved in localstorage with either true or false, depending if data is in checkboxes or evaluationBehaviourStore
+const evaluationEmotionalStateStore = useEvaluationEmotionalStateStore();
+let dataInBody; //Variable which gets saved in localstorage with either true or false, depending if data is in checkboxes or evaluationEmotionalStateStore
 const token = localStorage.getItem('token'); //Get current JWT token of the user
 console.log('Token accessed from localStorage: ', token);
 
@@ -589,7 +399,7 @@ export default {
 		localStorage.setItem('dataInBody', 'false'); //No unsaved data present while page is mounted
 		localStorage.setItem('created_at', ''); //Used so that user can choose the date of the test himself
 
-		evaluationBehaviourStore.resetBodies();
+		evaluationEmotionalStateStore.resetBodies();
 	},
 	data() {
 		return {
@@ -608,25 +418,17 @@ export default {
 			isOpenManual: false,
 			isOpenScoring: false,
 			isOpenReferenceArea: false,
-			CheckboxArray: Array.from({ length: 15 }, () => Array(3).fill(false)), //For 15 subcriterias of behaviour principle
+			CheckboxArray: Array.from({ length: 7 }, () => Array(3).fill(false)), //For 7 subcriterias of EmotionalState principle
 			urlDolphins: baseUrl + '/api/dolphins', // get the dolphins
-			urlPost: baseUrl + '/api/behaviour', //'https://88395-17112.pph-server.de/api/behaviour',
+			urlPost: baseUrl + '/api/emotional_state', //'https://88395-17112.pph-server.de/api/emotional_state',
 			//Comments initialized as empty strings, so that they can be filled with the comments of the user input:
-			environmentEnrichmentComments: '',
-			affiliativeBehaviourComments: '',
-			playBehaviourComments: '',
-			socioSexualComments: '',
-			maternalBehaviourComments: '',
-			displacementBehaviourComments: '',
-			oralBehaviourComments: '',
-			repetitiveMovementComments: '',
-			selfGroomingComments: '',
-			regurgitationComments: '',
-			receivingAggressiveComments: '',
-			rakeMarksComments: '',
-			displayingAggressiveComments: '',
-			socialIsolationComments: '',
-			avoidancePoolAreasComments: '',
+			willingnessParticipateComments: '',
+			synchronousSwimmingComments: '',
+			gentleRubbingComments: '',
+			anticipatoryBehaviourComments: '',
+			fastSwimmingComments: '',
+			tailSlappingComments: '',
+			choiceControlComments: '',
 		};
 	},
 	methods: {
@@ -661,95 +463,55 @@ export default {
     	},
 		// Method to collect the checked checkboxes and give request body the scores
 		storeCheckedValues() {
-			for(let k = 0; k < evaluationBehaviourStore.requestBodiesBehaviour.length; k++){
-				//k stands for the different dolphins. It iterates through the array of dolphins in requestBodiesBehaviour.json
-				if(this.dolphinSelect.includes(evaluationBehaviourStore.requestBodiesBehaviour[k]["dolphin_name"])) {
+			for(let k = 0; k < evaluationEmotionalStateStore.requestBodiesEmotionalState.length; k++){
+				//k stands for the different dolphins. It iterates through the array of dolphins in requestBodiesEmotionalState.json
+				if(this.dolphinSelect.includes(evaluationEmotionalStateStore.requestBodiesEmotionalState[k]["dolphin_name"])) {
 					for(let i = 0; i < this.CheckboxArray.length; i++){
 						for(let j = 0; j < this.CheckboxArray[i].length; j++){
 							if (this.CheckboxArray[i][j] === true && i === 0){
-								evaluationBehaviourStore.requestBodiesBehaviour[k]["environmental_enrichment"] = j;
+								evaluationEmotionalStateStore.requestBodiesEmotionalState[k]["willingness_to_participate"] = j;
 							}else if (this.CheckboxArray[i][j] === true && i === 1){
-								evaluationBehaviourStore.requestBodiesBehaviour[k]["affiliative_behaviour"] = j;
+								evaluationEmotionalStateStore.requestBodiesEmotionalState[k]["synchronous_swimming"] = j;
 							}else if (this.CheckboxArray[i][j] === true && i === 2){
-								evaluationBehaviourStore.requestBodiesBehaviour[k]["play_behaviour"] = j;
+								evaluationEmotionalStateStore.requestBodiesEmotionalState[k]["rubbing_behaviour"] = j;
 							}else if (this.CheckboxArray[i][j] === true && i === 3){
-								evaluationBehaviourStore.requestBodiesBehaviour[k]["socio_sexual_behaviour"] = j;
+								evaluationEmotionalStateStore.requestBodiesEmotionalState[k]["anticipatory_behaviour"] = j;
 							}else if (this.CheckboxArray[i][j] === true && i === 4){
-								evaluationBehaviourStore.requestBodiesBehaviour[k]["maternal_behaviour"] = j;
+								evaluationEmotionalStateStore.requestBodiesEmotionalState[k]["fast_swimming"] = j;
 							}else if (this.CheckboxArray[i][j] === true && i === 5){
-								evaluationBehaviourStore.requestBodiesBehaviour[k]["displacement_behaviour"] = j;
+								evaluationEmotionalStateStore.requestBodiesEmotionalState[k]["tail_slapping"] = j;
 							}else if (this.CheckboxArray[i][j] === true && i === 6){
-								evaluationBehaviourStore.requestBodiesBehaviour[k]["oral_stereotypic_behaviour"] = j;
-							}else if (this.CheckboxArray[i][j] === true && i === 7){
-								evaluationBehaviourStore.requestBodiesBehaviour[k]["repetitive_body_movement"] = j;
-							}else if (this.CheckboxArray[i][j] === true && i === 8){
-								evaluationBehaviourStore.requestBodiesBehaviour[k]["self_grooming_behaviour"] = j;
-							}else if (this.CheckboxArray[i][j] === true && i === 9){
-								evaluationBehaviourStore.requestBodiesBehaviour[k]["regurgitation_reingestion"] = j;
-							}else if (this.CheckboxArray[i][j] === true && i === 10){
-								evaluationBehaviourStore.requestBodiesBehaviour[k]["receiving_aggressive_behaviour"] = j;
-							}else if (this.CheckboxArray[i][j] === true && i === 11){
-								evaluationBehaviourStore.requestBodiesBehaviour[k]["rake_marks"] = j;
-							}else if (this.CheckboxArray[i][j] === true && i === 12){
-								evaluationBehaviourStore.requestBodiesBehaviour[k]["displaying_aggressive_behaviour"] = j;
-							}else if (this.CheckboxArray[i][j] === true && i === 13){
-								evaluationBehaviourStore.requestBodiesBehaviour[k]["social_isolation"] = j;
-							}else if (this.CheckboxArray[i][j] === true && i === 14){
-								evaluationBehaviourStore.requestBodiesBehaviour[k]["avoidance_pool_areas"] = j;
+								evaluationEmotionalStateStore.requestBodiesEmotionalState[k]["choice_and_control"] = j;
 							}
 						}
 					}
 					// Code here the comments into the request body
 					// First check with if statement if comments had been updated or not. If we don´t do that we override the comments with
 					// an empty string if we click on 'Next Test'
-					if(this.environmentEnrichmentComments != '') {
-						evaluationBehaviourStore.requestBodiesBehaviour[k]["environmental_enrichment_comments"] = this.environmentEnrichmentComments;
+					if(this.willingnessParticipateComments != '') {
+						evaluationEmotionalStateStore.requestBodiesEmotionalState[k]["willingness_to_participate_comments"] = this.willingnessParticipateComments;
 					}
-					if(this.affiliativeBehaviourComments != ''){
-					evaluationBehaviourStore.requestBodiesBehaviour[k]["affiliative_behaviour_comments"] = this.affiliativeBehaviourComments;
+					if(this.synchronousSwimmingComments != '') {
+						evaluationEmotionalStateStore.requestBodiesEmotionalState[k]["synchronous_swimming_comments"] = this.synchronousSwimmingComments;
 					}
-					if(this.playBehaviourComments != ''){
-					evaluationBehaviourStore.requestBodiesBehaviour[k]["play_behaviour_comments"] = this.playBehaviourComments;
+					if(this.gentleRubbingComments != '') {
+						evaluationEmotionalStateStore.requestBodiesEmotionalState[k]["rubbing_behaviour_comments"] = this.gentleRubbingComments;
 					}
-					if(this.socioSexualComments != ''){
-					evaluationBehaviourStore.requestBodiesBehaviour[k]["socio_sexual_behaviour_comments"] = this.socioSexualComments;
+					if(this.anticipatoryBehaviourComments != '') {
+						evaluationEmotionalStateStore.requestBodiesEmotionalState[k]["anticipatory_behaviour_comments"] = this.anticipatoryBehaviourComments;
 					}
-					if(this.maternalBehaviourComments != ''){
-					evaluationBehaviourStore.requestBodiesBehaviour[k]["maternal_behaviour_comments"] = this.maternalBehaviourComments;
+					if(this.fastSwimmingComments != '') {
+						evaluationEmotionalStateStore.requestBodiesEmotionalState[k]["fast_swimming_comments"] = this.fastSwimmingComments;
 					}
-					if(this.displacementBehaviourComments != ''){
-					evaluationBehaviourStore.requestBodiesBehaviour[k]["displacement_behaviour_comments"] = this.displacementBehaviourComments;
+					if(this.tailSlappingComments != '') {
+						evaluationEmotionalStateStore.requestBodiesEmotionalState[k]["tail_slapping_comments"] = this.tailSlappingComments;
 					}
-					if(this.oralBehaviourComments != ''){
-					evaluationBehaviourStore.requestBodiesBehaviour[k]["oral_stereotypic_behaviour_comments"] = this.oralBehaviourComments;
-					}
-					if(this.repetitiveMovementComments != ''){
-					evaluationBehaviourStore.requestBodiesBehaviour[k]["repetitive_body_movement_comments"] = this.repetitiveMovementComments;
-					}
-					if(this.selfGroomingComments != ''){
-					evaluationBehaviourStore.requestBodiesBehaviour[k]["self_grooming_behaviour_comments"] = this.selfGroomingComments;
-					}
-					if(this.regurgitationComments != ''){
-					evaluationBehaviourStore.requestBodiesBehaviour[k]["regurgitation_reingestion_comments"] = this.regurgitationComments;
-					}
-					if(this.receivingAggressiveComments != ''){
-					evaluationBehaviourStore.requestBodiesBehaviour[k]["receiving_aggressive_behaviour_comments"] = this.receivingAggressiveComments;
-					}
-					if(this.rakeMarksComments != ''){
-					evaluationBehaviourStore.requestBodiesBehaviour[k]["rake_marks_comments"] = this.rakeMarksComments;
-					}
-					if(this.displayingAggressiveComments != ''){
-					evaluationBehaviourStore.requestBodiesBehaviour[k]["displaying_aggressive_behaviour_comments"] = this.displayingAggressiveComments;
-					}
-					if(this.socialIsolationComments != ''){
-					evaluationBehaviourStore.requestBodiesBehaviour[k]["social_isolation_comments"] = this.socialIsolationComments;
-					}
-					if(this.avoidancePoolAreasComments != ''){
-					evaluationBehaviourStore.requestBodiesBehaviour[k]["avoidance_pool_areas_comments"] = this.avoidancePoolAreasComments;
+					if(this.choiceControlComments != '') {
+						evaluationEmotionalStateStore.requestBodiesEmotionalState[k]["choice_and_control_comments"] = this.choiceControlComments;
 					}
 
 					if(localStorage.getItem('created_at') !== "") {
-						evaluationBehaviourStore.requestBodiesBehaviour[k]["created_at"] = localStorage.getItem('created_at') as string;
+						evaluationEmotionalStateStore.requestBodiesEmotionalState[k]["created_at"] = localStorage.getItem('created_at') as string;
 					}
 				}
 			}
@@ -759,7 +521,7 @@ export default {
 		},
 		async resetData() {
 			// Reset checkboxes
-			for(let i = 0; i <= 14; i++){
+			for(let i = 0; i <= 6; i++){
 				for(let j = 0; j < 3; j++){
 					if (this.CheckboxArray[i][j] === true){
 						this.CheckboxArray[i][j] = false;
@@ -767,67 +529,35 @@ export default {
 				}
 			}
 			// Reset comments
-			this.environmentEnrichmentComments = '';
-			this.affiliativeBehaviourComments = '';
-			this.playBehaviourComments = '';
-			this.socioSexualComments = '';
-			this.maternalBehaviourComments = '';
-			this.displacementBehaviourComments = '';
-			this.oralBehaviourComments = '';
-			this.repetitiveMovementComments = '';
-			this.selfGroomingComments = '';
-			this.regurgitationComments = '';
-			this.receivingAggressiveComments = '';
-			this.rakeMarksComments = '';
-			this.displayingAggressiveComments = '';
-			this.socialIsolationComments = '';
-			this.avoidancePoolAreasComments = '';
+			this.willingnessParticipateComments = '';
+			this.synchronousSwimmingComments = '';
+			this.gentleRubbingComments = '';
+			this.anticipatoryBehaviourComments = '';
+			this.fastSwimmingComments = '';
+			this.tailSlappingComments = '';
+			this.choiceControlComments = '';
 		},
 		//Methods to update the comments
-		updateEnvironmentEnrichmentComments(comment: string) {
-			this.environmentEnrichmentComments = comment;
+		updateWillingnessParticipateComments(comment: string) {
+			this.willingnessParticipateComments = comment;
 		},
-		updateAffiliativeBehaviourComments(comment: string) {
-			this.affiliativeBehaviourComments = comment;
+		updateSynchronousSwimmingComments(comment: string) {
+			this.synchronousSwimmingComments = comment;
 		},
-		updatePlayBehaviourComments(comment: string) {
-			this.playBehaviourComments = comment;
+		updateGentleRubbingComments(comment: string) {
+			this.gentleRubbingComments = comment;
 		},
-		updateSocioSexualComments(comment: string) {
-			this.socioSexualComments = comment;
+		updateAnticipatoryBehaviourComments(comment: string) {
+			this.anticipatoryBehaviourComments = comment;
 		},
-		updateMaternalBehaviourComments(comment: string) {
-			this.maternalBehaviourComments = comment;
+		updateFastSwimmingComments(comment: string) {
+			this.fastSwimmingComments = comment;
 		},
-		updateDisplacementBehaviourComments(comment: string) {
-			this.displacementBehaviourComments = comment;
+		updateTailSlappingComments(comment: string) {
+			this.tailSlappingComments = comment;
 		},
-		updateOralBehaviourComments(comment: string) {
-			this.oralBehaviourComments = comment;
-		},
-		updateRepetitiveMovementComments(comment: string) {
-			this.repetitiveMovementComments = comment;
-		},
-		updateSelfGroomingComments(comment: string) {
-			this.selfGroomingComments = comment;
-		},
-		updateRegurgitationComments(comment: string) {
-			this.regurgitationComments = comment;
-		},
-		updateReceivingAggressiveComments(comment: string) {
-			this.receivingAggressiveComments = comment;
-		},
-		updateRakeMarksComments(comment: string) {
-			this.rakeMarksComments = comment;
-		},
-		updateDisplayingAggressiveComments(comment: string) {
-			this.displayingAggressiveComments = comment;
-		},
-		updateSocialIsolationComments(comment: string) {
-			this.socialIsolationComments = comment;
-		},
-		updateAvoidancePoolAreasComments(comment: string) {
-			this.avoidancePoolAreasComments = comment;
+		updateChoiceControlComments(comment: string) {
+			this.choiceControlComments = comment;
 		},
 		async confirmTestDate() {
 		return new Promise(async (resolve, reject) => {
@@ -915,13 +645,13 @@ async showDateInputAlert() {
 				// Flag to only show network error alert once instead of several times after another
 				let alertShown = false;
 				console.log('Reached this');
-				for(let i = 0; i < evaluationBehaviourStore.requestBodiesBehaviour.length; i++){
+				for(let i = 0; i < evaluationEmotionalStateStore.requestBodiesEmotionalState.length; i++){
 					await axios
-							.post(this.urlPost, evaluationBehaviourStore.requestBodiesBehaviour[i], { withCredentials: true })
+							.post(this.urlPost, evaluationEmotionalStateStore.requestBodiesEmotionalState[i], { withCredentials: true })
 							.then((response) => {
 								console.log('Response:', response.data);
-								if (i === evaluationBehaviourStore.requestBodiesBehaviour.length - 1){
-									const targetUrl = '/detailBehaviour';
+								if (i === evaluationEmotionalStateStore.requestBodiesEmotionalState.length - 1){
+									const targetUrl = '/detailEmotionalState';
 									toast.success('Data uploaded successfully', {
 										autoClose: 1000,
 									});
@@ -932,14 +662,14 @@ async showDateInputAlert() {
 										localStorage.setItem('dataInBody', dataInBody.toString());
 										this.$router.push(targetUrl);
 									}, 2000);
-									evaluationBehaviourStore.resetBodies();
-									this.dolphinSelect = [];
+									evaluationEmotionalStateStore.resetBodies();
+									this.dolphinSelect = null;
 									this.criteria = null;
 									localStorage.setItem('created_at', '');
 								}
 							})
 							.catch((error) => {					
-								const targetUrl = `/detailBehaviour`;
+								const targetUrl = `/detailEmotionalState`;
 								if(error.message === 'Network Error' && !alertShown) {
 									alertShown = true;	
 									//console.log('Inside error catch block');
@@ -961,7 +691,7 @@ async showDateInputAlert() {
 			const confirmed = true; //confirm(this.$t('savingDataNext'));
      		if (confirmed) {
 				this.storeCheckedValues();
-				console.log(evaluationBehaviourStore.requestBodiesBehaviour)
+				console.log(evaluationEmotionalStateStore.requestBodiesEmotionalState)
 				
 				toast.success('Saved temporarily. Click \'Finish Tests\' in the end!', {
 					autoClose: 1000,
@@ -969,35 +699,35 @@ async showDateInputAlert() {
 				
 				// Doing the same dolphinSelect with the next criteria in the list:
 				switch (this.criteria) {
-					case 'firstCriteriaBehaviour':
-						this.criteria = 'secondCriteriaBehaviour';
+					case 'firstCriteriaEmotionalState':
+						this.criteria = 'secondCriteriaEmotionalState';
 						break;
-					case 'secondCriteriaBehaviour':
-						this.criteria = 'thirdCriteriaBehaviour';
+					case 'secondCriteriaEmotionalState':
+						this.criteria = 'thirdCriteriaEmotionalState';
 						break;
-					case 'thirdCriteriaBehaviour':
-						this.criteria = 'fourthCriteriaBehaviour';
+					case 'thirdCriteriaEmotionalState':
+						this.criteria = 'fourthCriteriaEmotionalState';
 						break;
-					case 'fourthCriteriaBehaviour':
-						this.criteria = 'fifthCriteriaBehaviour';
+					case 'fourthCriteriaEmotionalState':
+						this.criteria = 'fifthCriteriaEmotionalState';
 						break;
-					case 'fifthCriteriaBehaviour':
-						this.criteria = 'sixthCriteriaBehaviour';
+					case 'fifthCriteriaEmotionalState':
+						this.criteria = 'sixthCriteriaEmotionalState';
 						break;
-					case 'sixthCriteriaBehaviour':
-						this.criteria = 'seventhCriteriaBehaviour';
+					case 'sixthCriteriaEmotionalState':
+						this.criteria = 'seventhCriteriaEmotionalState';
 						break;
-					case 'seventhCriteriaBehaviour':
-						this.criteria = 'eighthCriteriaBehaviour';
+					case 'seventhCriteriaEmotionalState':
+						this.criteria = 'eighthCriteriaEmotionalState';
 						break;
-					case 'eighthCriteriaBehaviour':
-						this.criteria = 'firstCriteriaBehaviour';
+					case 'eighthCriteriaEmotionalState':
+						this.criteria = 'firstCriteriaEmotionalState';
 						break;			
 					default:
-						this.criteria = 'firstCriteriaBehaviour';
+						this.criteria = 'firstCriteriaEmotionalState';
 				}
-				const targetUrl = `/detailBehaviour`;
-				// No need to check if dataInBody true or false, because /detailBehaviour doesn´t
+				const targetUrl = `/detailEmotionalState`;
+				// No need to check if dataInBody true or false, because /detailEmotionalState doesn´t
 				// need to be protected from losing data
 				this.$router.push(targetUrl);
 			}	
@@ -1007,7 +737,7 @@ async showDateInputAlert() {
 			//this.dolphins = this.dolphinsStore.dolphinList;
 			//console.log(this.dolphinsStore.dolphinList);
 			//console.log(this.dolphins);
-			//console.log(evaluationBehaviourStore.requestBodiesBehaviour);
+			//console.log(evaluationEmotionalStateStore.requestBodiesEmotionalState);
 		},
 		/*async showDolphins() {
 			await axios.get(this.urlDolphins)

@@ -532,7 +532,7 @@ const behaviorPostValidateRequestBody = [
 		const disallowedKeys = keys.filter((key) => !allowedFields.includes(key));
 		if (disallowedKeys.length > 0) {
 			throw new Error(
-				`Invalid good_housing fields: ${disallowedKeys.join(', ')}`
+				`Invalid behaviour fields: ${disallowedKeys.join(', ')}`
 			);
 		}
 
