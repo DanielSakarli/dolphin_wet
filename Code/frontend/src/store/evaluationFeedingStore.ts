@@ -2,12 +2,26 @@ import { defineStore } from 'pinia';
 
 import requestBodiesFeeding from '@/data/requestBodiesFeeding.json';
 
+interface RequestBodyFeeding {
+	body_condition_score: number | null;
+	weight_measured: number | null;
+	kcal_calculations: number | null;
+	blood_hydration: number | null;
+	fish_quality: number | null;
+	fish_variety: number | null;
+	body_condition_score_comments: string;
+	weight_measured_comments: string;
+	kcal_calculations_comments: string;
+	blood_hydration_comments: string;
+	fish_quality_comments: string;
+	fish_variety_comments: string;
+	created_at: string;
+}
+
 export const useEvaluationFeedingStore = defineStore('evaluationFeedingStore', {
-	state: () => {
-		return {
-			requestBodiesFeeding,
-		};
-	},
+	state: (): { requestBodiesFeeding: RequestBodyFeeding[] } => ({
+		requestBodiesFeeding,
+	}),
 
 	actions: {
 		// Fills the requestBodiesFeeding with the default

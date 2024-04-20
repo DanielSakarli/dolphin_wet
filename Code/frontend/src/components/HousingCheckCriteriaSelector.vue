@@ -379,7 +379,7 @@ export default {
 		// mounted. But only if there is internet connectivity. If not, the displayed
 		// reference areas are the ones from the animalList.json
    		await dolphinsStore.fill();
-
+		evaluationHousingStore.fill(dolphinsStore.dolphinList);
 		// Reset here data while page is mounted
 		localStorage.setItem('dataInBody', 'false');
 		localStorage.setItem('created_at', '');

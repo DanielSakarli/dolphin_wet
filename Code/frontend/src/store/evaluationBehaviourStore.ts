@@ -42,6 +42,46 @@ export const useEvaluationBehaviourStore = defineStore(
 			requestBodiesBehaviour,
 		}),
 		actions: {
+			// Fills the requestBodiesFeeding with the default
+			// values for the variables for all the dolphin which
+			// are in dolphinList
+			async fill(dolphinList: any[]) {
+				this.requestBodiesBehaviour = dolphinList.map((dolphin) => ({
+					dolphin_name: dolphin.name,
+					environmental_enrichment: null,
+					affiliative_behaviour: null,
+					play_behaviour: null,
+					socio_sexual_behaviour: null,
+					maternal_behaviour: null,
+					displacement_behaviour: null,
+					oral_stereotypic_behaviour: null,
+					repetitive_body_movement: null,
+					self_grooming_behaviour: null,
+					regurgitation_reingestion: null,
+					rake_marks: null,
+					displaying_aggressive_behaviour: null,
+					receiving_aggressive_behaviour: null,
+					social_isolation: null,
+					avoidance_pool_areas: null,
+					environmental_enrichment_comments: '',
+					affiliative_behaviour_comments: '',
+					play_behaviour_comments: '',
+					socio_sexual_behaviour_comments: '',
+					maternal_behaviour_comments: '',
+					displacement_behaviour_comments: '',
+					oral_stereotypic_behaviour_comments: '',
+					repetitive_body_movement_comments: '',
+					self_grooming_behaviour_comments: '',
+					regurgitation_reingestion_comments: '',
+					rake_marks_comments: '',
+					displaying_aggressive_behaviour_comments: '',
+					receiving_aggressive_behaviour_comments: '',
+					social_isolation_comments: '',
+					avoidance_pool_areas_comments: '',
+					created_at: '',
+				}));
+				return this.requestBodiesBehaviour;
+			},
 			resetBodies() {
 				for (let i = 0; i < requestBodiesBehaviour.length; i++) {
 					requestBodiesBehaviour[i]['environmental_enrichment'] = null;

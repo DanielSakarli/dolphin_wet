@@ -602,16 +602,16 @@ import {
 export default {
 	components: {
 		IonItem, IonList, IonSelect, IonSelectOption, IonFooter,
-		IonLabel, IonModal, IonHeader, IonToolbar, IonContent,
-		IonTitle, IonButtons, IonButton, IonText, CheckComments, PhotoUpload,
-		IonThumbnail, IonIcon, IonCheckbox, IonCard, IonCardTitle
+		IonModal, IonHeader, IonToolbar, IonContent,
+		IonTitle, IonButtons, IonButton, CheckComments, PhotoUpload,
+		IonIcon, IonCheckbox, IonCard, IonCardTitle
 	},
 	async mounted() {
 		// This makes sure that the reference areas are updated while the component is
 		// mounted. But only if there is internet connectivity. If not, the displayed
 		// reference areas are the ones from the animalList.json
 		await dolphinsStore.fill();
-		
+		evaluationHealthStore.fill(dolphinsStore.dolphinList);
 		// Reset here data while page is mounted
 		localStorage.setItem('backButtonClicked', 'false');
 		localStorage.setItem('dataInBody', 'false');
