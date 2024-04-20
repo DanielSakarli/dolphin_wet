@@ -25,17 +25,16 @@ export const useDolphinsStore = defineStore('dolphinsStore', {
 			const dolphinUrl = baseUrl + '/api/dolphins';
 			await axios
 				.get(dolphinUrl)
-
 				.then((response) => {
 					// if internet connection is present, the dolphinList is updated with
 					// the values from the backend
 					this.dolphinList = response.data;
 					return this.dolphinList;
 				})
-
 				.catch((e) => {
 					// if no internet connection is present, the default values are used
 					console.error(e);
+					return this.dolphinList;
 				});
 		},
 	},

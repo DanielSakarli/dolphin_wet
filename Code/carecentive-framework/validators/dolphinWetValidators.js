@@ -13,6 +13,7 @@ const dolphinPostValidateRequestBody = [
 		.isInt({ min: 0, max: 1 })
 		.withMessage('Sex should be either 0 or 1'),
 	body('on_site')
+		.optional({ values: 'null' })
 		.isInt({ min: 0, max: 1 })
 		.withMessage('On-site value should be either 0 or 1'),
 	body('year_of_birth')
@@ -20,15 +21,19 @@ const dolphinPostValidateRequestBody = [
 		.withMessage('Invalid year of birth'),
 	body('place_of_birth').notEmpty().withMessage('Place of birth is required'),
 	body('min_weight_measured')
+		.optional({ values: 'null' })
 		.isInt({ min: 0, max: 1000 })
 		.withMessage('Invalid minimum wanted weight'),
 	body('max_weight_measured')
+		.optional({ values: 'null' })
 		.isInt({ min: 0, max: 1000 })
 		.withMessage('Invalid maximum wanted weight'),
 	body('min_kcal_calculations')
+		.optional({ values: 'null' })
 		.isInt({ min: 0, max: 30000 })
 		.withMessage('Invalid minimum kcal calculations'),
 	body('max_kcal_calculations')
+		.optional({ values: 'null' })
 		.isInt({ min: 0, max: 30000 })
 		.withMessage('Invalid maximum kcal calculations'),
 

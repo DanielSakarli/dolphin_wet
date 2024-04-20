@@ -360,7 +360,7 @@ import { useDolphinsStore }from '@/store/dolphinsStore';
 import { useEvaluationFeedingStore }from '@/store/evaluationFeedingStore';
 import { baseUrl } from '@/utils/baseUrl';
 import FileUpload from '@/components/FileUpload.vue';
-import { chevronCollapseSharp } from 'ionicons/icons';
+//import { chevronCollapseSharp } from 'ionicons/icons';
 import { toast } from 'vue3-toastify';
 import 'vue3-toastify/dist/index.css';
 
@@ -389,15 +389,17 @@ console.log('Token accessed from localStorage: ', token);
 export default {
 	components: {
 		// needed Vue components:
-		IonAlert, IonItem, IonList, IonSelect, IonSelectOption, IonLabel, IonModal, IonHeader,
-		IonToolbar, IonContent, IonTitle, IonButtons, IonButton, IonText, IonCheckbox,
-		IonInput, IonRange, IonCard, IonCardTitle, CheckComments, IonFooter, IonIcon, FileUpload,
+		IonItem, IonList, IonSelect, IonSelectOption, IonModal, IonHeader,
+		IonToolbar, IonContent, IonTitle, IonButtons, IonButton, IonCheckbox,
+		IonInput, IonCard, IonCardTitle, CheckComments, IonFooter, IonIcon, FileUpload,
 	},
 	async mounted()  {
 		// This makes sure that the reference areas are updated while the component is
 		// mounted. But only if there is internet connectivity. If not, the displayed
-		// reference areas are the ones from the animalList.json
+		// reference areas are the ones from the animalList.json. Also it adds the dolphins
+		// which are added by the user and not in the animalList.json
    		await dolphinsStore.fill();
+		evaluationFeedingStore.fill(dolphinsStore.dolphinList);
 		// Reset here data while page is mounted
 		localStorage.setItem('backButtonClicked', 'false');
 		localStorage.setItem('dataInBody', 'false');
@@ -557,6 +559,7 @@ export default {
     	},
 		// Method to collect the checked checkboxes and give request Body the scores
 		storeCheckedValues() {
+			console.log('This is the dolphinsStore: ', this.dolphinsStore.dolphinList);
 			for(let k = 0; k < evaluationFeedingStore.requestBodiesFeeding.length; k++){
 				//k stands for the different dolphins. It iterates through the array of dolphins in requestBodiesFeeding.json
 				if(this.dolphinSelect.includes(evaluationFeedingStore.requestBodiesFeeding[k]["dolphin_name"])) {

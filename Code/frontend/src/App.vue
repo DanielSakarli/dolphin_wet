@@ -1,5 +1,6 @@
 <template>
 	<ion-app>
+		<ion-page>
 		<ion-split-pane content-id="main-content">
 			<ion-menu content-id="main-content" type="overlay">
 				<ion-content>
@@ -36,12 +37,14 @@
 			</ion-menu>
 			<ion-router-outlet id="main-content"></ion-router-outlet>
 		</ion-split-pane>
+	</ion-page>
 	</ion-app>
 </template>
 
 <script lang="ts">
 import {
 	IonApp,
+	IonPage,
 	IonRouterOutlet,
 	IonMenu,
 	IonListHeader,
@@ -59,6 +62,8 @@ import { ref } from 'vue';
 import { Device, DevicePlugin } from '@capacitor/device';
 import { inject } from 'vue';
 import { useRouter } from 'vue-router';
+import axios from 'axios';
+import { baseUrl } from './utils/baseUrl';
 
 export default defineComponent({
 	name: 'App',
@@ -128,14 +133,23 @@ export default defineComponent({
 				console.log('url: ', url);
 				console.log('index: ', index);
 				if (url === '/home') {
-					//Clear storages when user logs out
-					//sessionStorage.clear();
-					localStorage.setItem('token', '');
-					localStorage.setItem('dataInBody', 'false');
-					localStorage.setItem('backButtonClicked', 'false');
 					// Page needs a full reload when pressing on 'Logout' and
 					// then go to /home, but I don´t know why
 					router.push(url); //.then(() => window.location.reload());
+					//Clear storages when user logs out
+					localStorage.setItem('token', '');
+					localStorage.setItem('dataInBody', 'false');
+					localStorage.setItem('backButtonClicked', 'false');
+					// Call the log out method of the carecentive-framework, so that
+					// the token cookie gets deleted:
+					axios
+						.get(baseUrl + '/api/users/logout', { withCredentials: true })
+						.then((response) => {
+							console.log('Response:', response.data);
+						})
+						.catch((error) => {
+							console.error('Error:', error.response.data);
+						});
 				} else {
 					//Otherwise a normal router.push(url) is sufficient
 					router.push(url);
@@ -151,6 +165,7 @@ export default defineComponent({
 	},
 	components: {
 		IonApp,
+		IonPage,
 		IonRouterOutlet,
 		IonMenu,
 		IonListHeader,

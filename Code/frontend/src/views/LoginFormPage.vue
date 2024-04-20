@@ -16,6 +16,22 @@
 			</h3>
 			<div
 				class="wrapper"
+				style="
+					position: fixed;
+					left: 0;
+					bottom: 100px;
+					right: 0;
+					padding: 20px;
+					display: flex;
+					justify-content: center;
+					align-items: center;
+					height: 100vh;
+				"
+			>
+				<img :src="logo" alt="Logo" style="max-width: 130vw; opacity: 0.05" />
+			</div>
+			<div
+				class="wrapper"
 				style="position: fixed; left: 0; bottom: 100px; right: 0"
 			>
 				<ion-card>
@@ -49,7 +65,7 @@
 									font-weight: 700;
 								"
 							>
-								Forget Password?
+								<!--Forget Password?-->
 							</h5>
 							<ion-button color="primary" expand="block" type="submit"
 								>Login</ion-button
@@ -90,6 +106,7 @@ import {
 } from '@ionic/vue';
 import axios from 'axios';
 import { baseUrl } from '@/utils/baseUrl';
+import logo from '@/../../../Logos/logo.png';
 //import router from '@/router';
 //import { link } from 'ionicons/icons';
 
@@ -107,6 +124,7 @@ export default defineComponent({
 			username: '',
 			password: '',
 			errorMessage: '',
+			logo,
 		};
 	},
 	methods: {

@@ -10,6 +10,28 @@ export const useEvaluationFeedingStore = defineStore('evaluationFeedingStore', {
 	},
 
 	actions: {
+		// Fills the requestBodiesFeeding with the default
+		// values for the variables
+		async fill(dolphinList: any[]) {
+			this.requestBodiesFeeding = dolphinList.map((dolphin) => ({
+				dolphin_name: dolphin.name,
+				body_condition_score: null,
+				weight_measured: null,
+				kcal_calculations: null,
+				blood_hydration: null,
+				fish_quality: null,
+				fish_variety: null,
+				body_condition_score_comments: '',
+				weight_measured_comments: '',
+				kcal_calculations_comments: '',
+				blood_hydration_comments: '',
+				fish_quality_comments: '',
+				fish_variety_comments: '',
+				created_at: '',
+			}));
+			return this.requestBodiesFeeding;
+		},
+
 		resetBodies() {
 			for (let i = 0; i < requestBodiesFeeding.length; i++) {
 				requestBodiesFeeding[i]['body_condition_score'] = null;

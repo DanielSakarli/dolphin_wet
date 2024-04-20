@@ -20,16 +20,16 @@ dotenv.config();
 /**
  * Carecentive-core routers
  */
-var usersRouter = require('@carecentive/carecentive-core/routes/users');
-var questionnaireRouter = require('@carecentive/carecentive-core/routes/questionnaires');
-var measurementRouter = require('@carecentive/carecentive-core/routes/measurements');
-var fileRouter = require('@carecentive/carecentive-core/routes/files');
-var callbackRouter = require('@carecentive/carecentive-core/routes/callback');
-var withingsRouter = require('@carecentive/carecentive-core/routes/settings');
-var analyticsRouter = require('@carecentive/carecentive-core/routes/analytics');
-var settingsRouter = require('@carecentive/carecentive-core/routes/settings');
-var adminUsersRouter = require('@carecentive/carecentive-core/routes/admin/users');
-var adminMeasurementsRouter = require('@carecentive/carecentive-core/routes/admin/measurements');
+var usersRouter = require('./carecentive/carecentive-core/routes/users'); // @carecentive/carecentive-core/routes/users
+var questionnaireRouter = require('./carecentive/carecentive-core/routes/questionnaires');
+var measurementRouter = require('./carecentive/carecentive-core/routes/measurements');
+var fileRouter = require('./carecentive/carecentive-core/routes/files');
+var callbackRouter = require('./carecentive/carecentive-core/routes/callback');
+var withingsRouter = require('./carecentive/carecentive-core/routes/settings');
+var analyticsRouter = require('./carecentive/carecentive-core/routes/analytics');
+var settingsRouter = require('./carecentive/carecentive-core/routes/settings');
+var adminUsersRouter = require('./carecentive/carecentive-core/routes/admin/users');
+var adminMeasurementsRouter = require('./carecentive/carecentive-core/routes/admin/measurements');
 var activityRouter = require('./routes/activities');
 var exampleRouter = require('./routes/examples');
 
@@ -43,7 +43,7 @@ app.set('view engine', 'ejs'); // https://ejs.co/
  * Initialize ORM // https://en.wikipedia.org/wiki/Object-relational_mapping
  * Do not delete this line.
  */
-require('@carecentive/carecentive-core/models/ORM');
+require('./carecentive/carecentive-core/models/ORM');
 // set up development database.
 const setupDevDb = require('./db-setup');
 const { error } = require('console');

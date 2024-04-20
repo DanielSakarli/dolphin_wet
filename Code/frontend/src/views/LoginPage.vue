@@ -42,10 +42,10 @@
 
 <script lang="ts">
 import { IonPage, IonButton } from '@ionic/vue';
-import axios from 'axios';
-import { baseUrl } from '@/utils/baseUrl';
+//import axios from 'axios';
+//import { baseUrl } from '@/utils/baseUrl';
 import logo from '@/../../../Logos/logo.png';
-const url = baseUrl + '/api/users/login'; //'http://88395-17112.pph-server.de/api/users/login';
+//const url = baseUrl + '/api/users/login'; //'http://88395-17112.pph-server.de/api/users/login';
 
 export default {
 	components: {
@@ -69,7 +69,7 @@ export default {
 	},
 	methods: {
 		async loginUser() {
-			const requestBody = {
+			/*const requestBody = {
 				username: this.username,
 				password: this.password,
 			};
@@ -80,7 +80,7 @@ export default {
 				})
 				.catch((error) => {
 					console.error('Error:', error.response.data);
-				});
+				});*/
 		},
 	},
 };
