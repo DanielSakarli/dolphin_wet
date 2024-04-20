@@ -11,17 +11,6 @@ const cors = require('cors');
 
 var app = express();
 
-app.set('trust proxy', 1); // test to trust the proxy with a cookie
-// Try setting up a session storage for the photo path of the picture upload
-app.use(session({
-	secret: 'secret',
-  	cookie: { httpOnly: true, maxAge: 1800000000 }, //300 minutes = 6 hours expiring of session cookie
-	saveUninitialized: true,
-	store: store,
-	resave: true,
-	//proxy: true,
-	name: 'session' //Try giving a name to the cookie
-}));
 
 setup.setup();
 const dotenv = require('dotenv');
@@ -68,6 +57,22 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+
+/**
+ * Set up session storage
+ */
+console.log('this got called');
+//app.set('trust proxy', 1); // test to trust the proxy with a cookie
+// Try setting up a session storage for the photo path of the picture upload
+app.use(session({
+	secret: 'secret',
+  	cookie: { httpOnly: true, maxAge: 3600000, secure: false, sameSite: 'lax' }, //300 minutes = 6 hours expiring of session cookie
+	saveUninitialized: true,
+	store: store,
+	resave: true,
+	//proxy: true,
+	name: 'session' //Try giving a name to the cookie
+}));
 
 /**
  * Dolphin Wet Routers
