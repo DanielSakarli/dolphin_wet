@@ -180,7 +180,8 @@
 					</ion-toolbar>
 				</ion-header>
 				<ion-content>
-					<form @submit.prevent="submitAdd">
+					<AddDolphin />
+					<!--<form @submit.prevent="submitAdd">
 						<ion-list v-for="(value, key) in newDolphin" :key="key + 'Add'">
 							<ion-item>
 								<ion-label position="stacked">{{ key }}</ion-label>
@@ -192,7 +193,8 @@
 							</ion-item>
 						</ion-list>
 						<ion-button expand="full" type="submit">Add Dolphin</ion-button>
-					</form>
+					</form>-->
+
 				</ion-content>
 			</ion-modal>
 		</ion-footer>
@@ -224,7 +226,7 @@ import axios from 'axios';
 import { useRouter } from 'vue-router';
 import { baseUrl } from '@/utils/baseUrl';
 import { useDolphinsStore } from '@/store/dolphinsStore';
-
+import AddDolphin from './AddDolphin.vue';
 const dolphinsStore = useDolphinsStore();
 
 interface Dolphin {
@@ -261,6 +263,7 @@ export default {
 		IonButtons,
 		IonTitle,
 		IonMenuButton,
+		AddDolphin,
 	},
 	methods: {
 		changeLanguage($event: any) {
