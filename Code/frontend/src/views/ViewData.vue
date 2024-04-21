@@ -438,9 +438,194 @@
 											Avoidance Pool Areas:
 											{{ BehaviourRecord.avoidance_pool_areas }}
 										</p>
-										<p>Comments: {{ BehaviourRecord.comments || 'N/A' }}</p>
+										<p>
+											Environmental Enrichment Comments:
+											{{
+												BehaviourRecord.environmental_enrichment_comments ||
+												'N/A'
+											}}
+										</p>
+										<p>
+											Affiliative Behaviour Comments:
+											{{
+												BehaviourRecord.affiliative_behaviour_comments || 'N/A'
+											}}
+										</p>
+										<p>
+											Play Behaviour Comments:
+											{{ BehaviourRecord.play_behaviour_comments || 'N/A' }}
+										</p>
+										<p>
+											Socio Sexual Behaviour Comments:
+											{{
+												BehaviourRecord.socio_sexual_behaviour_comments || 'N/A'
+											}}
+										</p>
+										<p>
+											Maternal Behaviour Comments:
+											{{ BehaviourRecord.maternal_behaviour_comments || 'N/A' }}
+										</p>
+										<p>
+											Displacement Behaviour Comments:
+											{{
+												BehaviourRecord.displacement_behaviour_comments || 'N/A'
+											}}
+										</p>
+										<p>
+											Oral Stereotypic Behaviour Comments:
+											{{
+												BehaviourRecord.oral_stereotypic_behaviour_comments ||
+												'N/A'
+											}}
+										</p>
+										<p>
+											Repetitive Body Movement Comments:
+											{{
+												BehaviourRecord.repetitive_body_movement_comments ||
+												'N/A'
+											}}
+										</p>
+										<p>
+											Self Grooming Behaviour Comments:
+											{{
+												BehaviourRecord.self_grooming_behaviour_comments ||
+												'N/A'
+											}}
+										</p>
+										<p>
+											Regurgitation Reingestion Comments:
+											{{
+												BehaviourRecord.regurgitation_reingestion_comments ||
+												'N/A'
+											}}
+										</p>
+										<p>
+											Rake Marks Comments:
+											{{ BehaviourRecord.rake_marks_comments || 'N/A' }}
+										</p>
+										<p>
+											Displaying Aggressive Behaviour Comments:
+											{{
+												BehaviourRecord.displaying_aggressive_behaviour_comments ||
+												'N/A'
+											}}
+										</p>
+										<p>
+											Receiving Aggressive Behaviour Comments:
+											{{
+												BehaviourRecord.receiving_aggressive_behaviour_comments ||
+												'N/A'
+											}}
+										</p>
+										<p>
+											Social Isolation Comments:
+											{{ BehaviourRecord.social_isolation_comments || 'N/A' }}
+										</p>
+										<p>
+											Avoidance Pool Areas Comments:
+											{{
+												BehaviourRecord.avoidance_pool_areas_comments || 'N/A'
+											}}
+										</p>
+
 										<p>Created At: {{ BehaviourRecord.created_at }}</p>
 										<p>Updated At: {{ BehaviourRecord.updated_at }}</p>
+									</ion-label>
+								</ion-item>
+							</ion-list>
+							<ion-label v-else>
+								<p>No data available for this month and year.</p>
+							</ion-label>
+						</ion-list>
+					</ion-item>
+				</ion-list>
+			</ion-card>
+			<ion-card v-if="dataEmotionalState">
+				<ion-list>
+					<ion-item
+						v-for="(data, monthYear) in dataEmotionalState"
+						:key="monthYear"
+					>
+						<ion-list>
+							<h3>{{ monthYear }}</h3>
+							<ion-list v-if="data">
+								<ion-item
+									v-for="EmotionalStateRecord in data"
+									:key="EmotionalStateRecord.emotional_state_record_id"
+								>
+									<ion-label>
+										<p>Dolphin Name: {{ EmotionalStateRecord.dolphin_name }}</p>
+										<p>
+											Willingness to participate:
+											{{ EmotionalStateRecord.willingness_to_participate }}
+										</p>
+										<p>
+											Synchronous swimming:
+											{{ EmotionalStateRecord.synchronous_swimming }}
+										</p>
+										<p>
+											Rubbing behaviour:
+											{{ EmotionalStateRecord.rubbing_behaviour }}
+										</p>
+										<p>
+											Anticipatory behaviour:
+											{{ EmotionalStateRecord.anticipatory_behaviour }}
+										</p>
+										<p>
+											Fast swimming:
+											{{ EmotionalStateRecord.fast_swimming }}
+										</p>
+										<p>
+											Tail slapping:
+											{{ EmotionalStateRecord.tail_slapping }}
+										</p>
+										<p>
+											Choice and control:
+											{{ EmotionalStateRecord.choice_and_control }}
+										</p>
+										<p>
+											Willingness to participate comments:
+											{{
+												EmotionalStateRecord.willingness_to_participate_comments ||
+												'N/A'
+											}}
+										</p>
+										<p>
+											Synchronous swimming comments:
+											{{
+												EmotionalStateRecord.synchronous_swimming_comments ||
+												'N/A'
+											}}
+										</p>
+										<p>
+											Rubbing behaviour comments:
+											{{
+												EmotionalStateRecord.rubbing_behaviour_comments || 'N/A'
+											}}
+										</p>
+										<p>
+											Anticipatory behaviour comments:
+											{{
+												EmotionalStateRecord.anticipatory_behaviour_comments ||
+												'N/A'
+											}}
+										</p>
+										<p>
+											Fast swimming comments:
+											{{ EmotionalStateRecord.fast_swimming_comments || 'N/A' }}
+										</p>
+										<p>
+											Tail slapping comments:
+											{{ EmotionalStateRecord.tail_slapping_comments || 'N/A' }}
+										</p>
+										<p>
+											Choice and control comments:
+											{{
+												EmotionalStateRecord.choice_and_control_comments ||
+												'N/A'
+											}}
+										</p>
+										<p>Created At: {{ EmotionalStateRecord.created_at }}</p>
 									</ion-label>
 								</ion-item>
 							</ion-list>
@@ -596,7 +781,21 @@ interface BehaviourRecord {
 	receiving_aggressive_behaviour: number;
 	social_isolation: number;
 	avoidance_pool_areas: number;
-	comments: null;
+	environmental_enrichment_comments: string | null;
+	affiliative_behaviour_comments: string | null;
+	play_behaviour_comments: string | null;
+	socio_sexual_behaviour_comments: string | null;
+	maternal_behaviour_comments: string | null;
+	displacement_behaviour_comments: string | null;
+	oral_stereotypic_behaviour_comments: string | null;
+	repetitive_body_movement_comments: string | null;
+	self_grooming_behaviour_comments: string | null;
+	regurgitation_reingestion_comments: string | null;
+	rake_marks_comments: string | null;
+	displaying_aggressive_behaviour_comments: string | null;
+	receiving_aggressive_behaviour_comments: string | null;
+	social_isolation_comments: string | null;
+	avoidance_pool_areas_comments: string | null;
 	created_at: string;
 	updated_at: string;
 }
@@ -604,6 +803,31 @@ interface DataBehaviour {
 	[monthYear: string]: BehaviourRecord[];
 }
 
+interface EmotionalStateRecord {
+	emotional_state_record_id: number;
+	user_id: number;
+	dolphin_id: number;
+	dolphin_name: string;
+	willingness_to_participate: number;
+	synchronous_swimming: number;
+	rubbing_behaviour: number;
+	anticipatory_behaviour: number;
+	fast_swimming: number;
+	tail_slapping: number;
+	choice_and_control: number;
+	willingness_to_participate_comments: string | null;
+	synchronous_swimming_comments: string | null;
+	rubbing_behaviour_comments: string | null;
+	anticipatory_behaviour_comments: string | null;
+	fast_swimming_comments: string | null;
+	tail_slapping_comments: string | null;
+	choice_and_control_comments: string | null;
+	created_at: string;
+	updated_at: string;
+}
+interface DataEmotionalState {
+	[monthYear: string]: EmotionalStateRecord[];
+}
 export default {
 	data() {
 		return {
@@ -623,10 +847,12 @@ export default {
 			dataHousing: null as DataHousing | null,
 			dataBehaviour: null as DataBehaviour | null,
 			dataHealth: null as DataHealth | null,
+			dataEmotionalState: null as DataEmotionalState | null,
 			urlFeeding: baseUrl + '/api/good_feeding?name=', //'http://88395-17112.pph-server.de/api/good_feeding?name=',
 			urlHousing: baseUrl + '/api/good_housing?name=',
 			urlBehaviour: baseUrl + '/api/behaviour?name=',
 			urlHealth: baseUrl + '/api/good_health?name=',
+			urlEmotionalState: baseUrl + '/api/emotional_state?name=',
 			urlCsv: baseUrl + '/api/export-csv',
 			numMonths: '3', //default value for view data is 3 months
 		};
@@ -640,7 +866,6 @@ export default {
 		IonList,
 		IonButton,
 		IonButtons,
-		IonMenu,
 		IonMenuButton,
 		IonIcon,
 		IonSelect,
@@ -656,6 +881,7 @@ export default {
 			this.dataHousing = null;
 			this.dataBehaviour = null;
 			this.dataHealth = null;
+			this.dataEmotionalState = null;
 			if (this.principleSelect === this.$t('principleNutrition')) {
 				this.urlFeeding =
 					this.urlFeeding + this.dolphinSelect + '&numMonths=' + this.numMonths; //default value numMonths=3
@@ -693,7 +919,7 @@ export default {
 				await axios
 					.get(this.urlBehaviour, { withCredentials: true })
 					.then((response) => {
-						this.dataHousing = response.data;
+						this.dataBehaviour = response.data;
 						console.log('Response:', response.data);
 						this.urlBehaviour = baseUrl + '/api/behaviour?name='; //reset the url
 					})
@@ -715,6 +941,23 @@ export default {
 						console.error(e);
 						this.urlHealth = baseUrl + '/api/good_health?name='; //reset the url
 					});
+			} else if (this.principleSelect === this.$t('principleEmotionalState')) {
+				this.urlEmotionalState =
+					this.urlEmotionalState +
+					this.dolphinSelect +
+					'&numMonths=' +
+					this.numMonths; //default value numMonths=3
+				await axios
+					.get(this.urlEmotionalState, { withCredentials: true })
+					.then((response) => {
+						this.dataEmotionalState = response.data;
+						console.log('Response:', response.data);
+						this.urlEmotionalState = baseUrl + '/api/emotional_state?name='; //reset the url
+					})
+					.catch((e) => {
+						console.error(e);
+						this.urlEmotionalState = baseUrl + '/api/emotional_state?name='; //reset the url
+					});
 			}
 		},
 
@@ -732,9 +975,9 @@ export default {
 					params: {
 						dolphin_name: this.dolphinSelect,
 						section: this.principleSelect,
-						user_name: sessionStorage.getItem('user_name'),
 						numMonths: this.numMonths,
 					},
+					withCredentials: true,
 				})
 				.then((response) => {
 					console.log('Response:', response.data);

@@ -6,6 +6,7 @@ const GoodFeedingService = require('../services/GoodFeedingService');
 const GoodHousingService = require('../services/GoodHousingService');
 const GoodHealthService = require('../services/GoodHealthService');
 const BehaviourService = require('../services/BehaviourService');
+const EmotionalStateService = require('../services/EmotionalStateService');
 const { validationResult } = require('express-validator');
 const { isUserAuth } = require('./authSwitch');
 const User = require('../node_modules/@carecentive/carecentive-core/models/User');
@@ -18,10 +19,27 @@ async function csvWriter(req, res, next) {
 		return res.status(400).json({ errors: errors.array() });
 	}*/
 	try {
+		// After gone through the authenticateToken middleware
+		// the user data of user is in the req.authData
+		if (isUserAuth) {
+            let userID;
+			let userName;
 
-	let { dolphin_name, user_name, numMonths, section } = req.query;
-	const userName = user_name;
-	console.log('req params: ', dolphin_name, user_name, numMonths, section);
+			let { dolphin_name, numMonths, section } = req.query;
+			const { user_id, name } = req.authData;
+			console.log('authdata: ', req.authData);
+			userID = user_id;
+			userName = name;
+		// If dolphin is not existing in database,
+		// 400: bad request
+		const isDolphinExisted = await DolphinService.isDolphinExisted(
+			dolphin_name
+		);
+		if (!isDolphinExisted) {
+			res.status(400).json({ error: `Dolphin ${dolphin_name} does not exist` });
+		}
+
+	console.log('req params: ', dolphin_name, numMonths, section);
 	const userEmail = await User.query().where('name', userName).select('email').first();
 	//console.log('user email: ', userEmail);
 
@@ -238,7 +256,144 @@ async function csvWriter(req, res, next) {
 				]
 			});
 		}
+	
+		if(section === 'Behaviour') {
+			if (numMonths != '') {
+				if(dolphin_name != ''){
+					// Data of a specific dolphin_name and specific numMonths
+					resultBehaviour = await BehaviourService.getTestResultNMonths(dolphin_name, numMonths, userID);
+				} else {
+					// Data of all dolphins and specific numMonths
+					resultBehaviour = await BehaviourService.getAllTestResultNMonths(numMonths, userID);
+				}
 		
+				// Save resultBehaviour in data
+				for (const month in resultBehaviour) {
+					data.push(...resultBehaviour[month]);
+				}
+				resultBehaviour = null; //reset Behaviour results
+			} else {
+				if(dolphin_name != '')
+				{
+					resultBehaviour = await BehaviourService.getTestResultByDolphin(dolphin_name, userID);
+				} else {
+					resultBehaviour = await BehaviourService.getAllTestResults(userID);
+				}
+		
+				//console.log('result Behaviour: ', resultBehaviour);
+				data = resultBehaviour; //save the results of Behaviour tests in data
+				resultBehaviour = null; //reset Behaviour results
+			}
+			savePath = 'csv/Behaviour_' + Date.now() + '.csv';
+			csvWriter = createCsvWriter({
+				
+				path: savePath,
+				header: [
+					{id: 'behaviour_record_id', title: 'Behaviour Record ID'},
+					{id: 'user_id', title: 'User ID'},
+					{id: 'user_name', title: 'User Name'},
+					{id: 'dolphin_id', title: 'Dolphin ID'},
+					{id: 'dolphin_name', title: 'Dolphin Name'},
+					// Data
+					{id: 'environmental_enrichment', title: 'Environmental Enrichment'},
+					{id: 'affiliative_behaviour', title: 'Affiliative Behaviour'},
+					{id: 'play_behaviour', title: 'Play Behaviour'},
+					{id: 'socio_sexual_behaviour', title: 'Socio Sexual Behaviour'},
+					{id: 'maternal_behaviour', title: 'Maternal Behaviour'},
+					{id: 'displacement_behaviour', title: 'Displacement Behaviour'},
+					{id: 'oral_stereotypic_behaviour', title: 'Oral Stereotypic Behaviour'},
+					{id: 'repetitive_body_movement', title: 'Repetitive Body Movement'},
+					{id: 'self_grooming_behaviour', title: 'Self Grooming Behaviour'},
+					{id: 'regurgitation_reingestion', title: 'Regurgitation Reingestion'},
+					{id: 'rake_marks', title: 'Rake Marks'},
+					{id: 'displaying_aggressive_behaviour', title: 'Displaying Aggressive Behaviour'},
+					{id: 'receiving_aggressive_behaviour', title: 'Receiving Aggressive Behaviour'},
+					{id: 'social_isolation', title: 'Social Isolation'},
+					{id: 'avoidance_pool_areas', title: 'Avoidance Pool Areas'},
+					// Comments
+					{id: 'environmental_enrichment_comments', title: 'Environmental Enrichment Comments'},
+					{id: 'affiliative_behaviour_comments', title: 'Affiliative Behaviour Comments'},
+					{id: 'play_behaviour_comments', title: 'Play Behaviour Comments'},
+					{id: 'socio_sexual_behaviour_comments', title: 'Socio Sexual Behaviour Comments'},
+					{id: 'maternal_behaviour_comments', title: 'Maternal Behaviour Comments'},
+					{id: 'displacement_behaviour_comments', title: 'Displacement Behaviour Comments'},
+					{id: 'oral_stereotypic_behaviour_comments', title: 'Oral Stereotypic Behaviour Comments'},
+					{id: 'repetitive_body_movement_comments', title: 'Repetitive Body Movement Comments'},
+					{id: 'self_grooming_behaviour_comments', title: 'Self Grooming Behaviour Comments'},
+					{id: 'regurgitation_reingestion_comments', title: 'Regurgitation Reingestion Comments'},
+					{id: 'rake_marks_comments', title: 'Rake Marks Comments'},
+					{id: 'displaying_aggressive_behaviour_comments', title: 'Displaying Aggressive Behaviour Comments'},
+					{id: 'receiving_aggressive_behaviour_comments', title: 'Receiving Aggressive Behaviour Comments'},
+					{id: 'social_isolation_comments', title: 'Social Isolation Comments'},
+					{id: 'avoidance_pool_areas_comments', title: 'Avoidance Pool Areas Comments'},
+					// Timestamps
+					{id: 'created_at', title: 'Created At'},
+					{id: 'updated_at', title: 'Updated At'}
+				]
+			});
+			}
+
+			if(section === 'Emotional State') {
+				if (numMonths != '') {
+					if(dolphin_name != ''){
+						// Data of a specific dolphin_name and specific numMonths
+						resultEmotions = await EmotionalStateService.getTestResultNMonths(dolphin_name, numMonths, userID);
+					} else {
+						// Data of all dolphins and specific numMonths
+						resultEmotions = await EmotionalStateService.getAllTestResultNMonths(numMonths, userID);
+					}
+			
+					// Save resultEmotions in data
+					for (const month in resultEmotions) {
+						data.push(...resultEmotions[month]);
+					}
+					resultEmotions = null; //reset EmotionalState results
+				} else {
+					if(dolphin_name != '')
+					{
+						resultEmotions = await EmotionalStateService.getTestResultByDolphin(dolphin_name, userID);
+					} else {
+						resultEmotions = await EmotionalStateService.getAllTestResults(userID);
+					}
+			
+					//console.log('result Emotions: ', resultEmotions);
+					data = resultEmotions; //save the results of Behaviour tests in data
+					resultEmotions = null; //reset emotions results
+				}
+				savePath = 'csv/Mental_State_' + Date.now() + '.csv';
+				csvWriter = createCsvWriter({
+					
+					path: savePath,
+					header: [
+						{id: 'emotional_state_record_id', title: 'Mental State Record ID'},
+						{id: 'user_id', title: 'User ID'},
+						{id: 'user_name', title: 'User Name'},
+						{id: 'dolphin_id', title: 'Dolphin ID'},
+						{id: 'dolphin_name', title: 'Dolphin Name'},
+						// Data
+						{id: 'willingness_to_participate', title: 'Willingness to Participate'},
+						{id: 'synchronous_swimming', title: 'Synchronous Swimming'},
+						{id: 'rubbing_behaviour', title: 'Rubbing Behaviour'},
+						{id: 'anticipatory_behaviour', title: 'Anticipatory Behaviour'},
+						{id: 'fast_swimming', title: 'Fast Swimming'},
+						{id: 'tail_slapping', title: 'Tail Slapping'},
+						{id: 'choice_and_control', title: 'Choice and Control'},
+						
+						// Comments
+						{id: 'willingness_to_participate_comments', title: 'Willingness to Participate Comments'},
+						{id: 'synchronous_swimming_comments', title: 'Synchronous Swimming Comments'},
+						{id: 'rubbing_behaviour_comments', title: 'Rubbing Behaviour Comments'},
+						{id: 'anticipatory_behaviour_comments', title: 'Anticipatory Behaviour Comments'},
+						{id: 'fast_swimming_comments', title: 'Fast Swimming Comments'},
+						{id: 'tail_slapping_comments', title: 'Tail Slapping Comments'},
+						{id: 'choice_and_control_comments', title: 'Choice and Control Comments'},
+						
+						// Timestamps
+						{id: 'created_at', title: 'Created At'},
+						{id: 'updated_at', title: 'Updated At'}
+					]
+				});
+				}
 
 	data.sort((a, b) => a.created_at - b.created_at);
 	console.log('data: ', ...data);
@@ -279,7 +434,10 @@ async function csvWriter(req, res, next) {
 			console.log(error);
 			res.sendStatus(500);
 		});
-	
+		} else {
+			throw new Error('USER_IS_NOT_AUTHENTICATED');
+		}
+
 		} catch (error) {
 			console.error(error);
 			res.sendStatus(500);

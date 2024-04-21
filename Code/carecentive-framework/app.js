@@ -84,10 +84,10 @@ const good_health = require('./routes/good_health');
 const good_housing = require('./routes/good_housing');
 const behaviour = require('./routes/behabvior');
 const emotional_state = require('./routes/emotional_state');
-
+const csvWriter = require('./routes/csv_writer');
 //const uploadPhoto = require('./controllers/photoUpload');
 const uploadFile = require('./fileUpload');
-const csvWriter = require('./controllers/csvWriter');
+
 //const uploadPhotoPath = require('./photoUpload');
 
 
@@ -212,7 +212,7 @@ app.use('/api/behaviour', behaviour);
 app.use('/api/emotional_state', emotional_state);
 //app.post('/api/photo', uploadPhoto);
 app.post('/api/file', uploadFile);
-app.get('/api/export-csv', csvWriter);
+app.use('/api/export-csv', csvWriter);
 // For example eye, teeth, odontogramm, or rake mark image files
 app.use('/api/images', express.static(path.join(__dirname,'uploads/images'))); //gets the images with the url http://localhost:3309/images/ + filename
 // Laboratory data files: e.g. food quality
