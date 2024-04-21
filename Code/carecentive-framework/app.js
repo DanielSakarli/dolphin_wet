@@ -61,10 +61,9 @@ app.use(express.static(path.join(__dirname, 'public')));
 /**
  * Set up session storage
  */
-console.log('this got called');
 //app.set('trust proxy', 1); // test to trust the proxy with a cookie
 // Try setting up a session storage for the photo path of the picture upload
-app.use(session({
+/*app.use(session({
 	secret: 'secret',
   	cookie: { httpOnly: true, maxAge: 3600000, secure: false, sameSite: 'lax' }, //300 minutes = 6 hours expiring of session cookie
 	saveUninitialized: true,
@@ -72,7 +71,7 @@ app.use(session({
 	resave: true,
 	//proxy: true,
 	name: 'session' //Try giving a name to the cookie
-}));
+}));*/
 
 /**
  * Dolphin Wet Routers
@@ -151,10 +150,21 @@ app.use(function(req, res, next) {
 	next();
 });
 
-///////////////////////////////////////////////////
-// Set up the session storage
+/**
+ * Setup session storage
+ */
 app.post('/api/setup_session_storage', (req, res, next) => {
 	try {
+		session({
+			secret: 'secret',
+			  cookie: { httpOnly: true, maxAge: 3600000, secure: false, sameSite: 'lax' }, //300 minutes = 6 hours expiring of session cookie
+			saveUninitialized: true,
+			store: store,
+			resave: true,
+			//proxy: true,
+			name: 'session' //Try giving a name to the cookie
+		})
+
 		//const { photo_type, eye_photo_path, teeth_photo_path, odontogramm_photo_path, dolphin_name, file_path } = req.body;
 		// Initializing with 'empty', because if we initialize with '' the sessionStorage isn´t actually initialized
 		req.session.photo_type= 'empty';// = photo_type; // Either 'eye', 'teeth' or 'marks'
