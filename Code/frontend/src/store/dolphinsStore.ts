@@ -19,8 +19,10 @@ export const useDolphinsStore = defineStore('dolphinsStore', {
 
 	actions: {
 		async fill() {
-			this.dolphinList = dolphinList; // default values from animalList.json
-
+			// Only set this.dolphinList to the values from the JSON file if this.dolphinList is empty
+			if (!this.dolphinList.length) {
+				this.dolphinList = dolphinList; // default values from animalList.json
+			}
 			//(await import("@/views/EvaluationMenu.vue")).default
 			const dolphinUrl = baseUrl + '/api/dolphins';
 			await axios

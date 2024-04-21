@@ -107,6 +107,7 @@ import {
 import axios from 'axios';
 import { baseUrl } from '@/utils/baseUrl';
 import logo from '@/../../../Logos/logo.png';
+import { useDolphinsStore } from '@/store/dolphinsStore';
 //import router from '@/router';
 //import { link } from 'ionicons/icons';
 
@@ -128,7 +129,7 @@ export default defineComponent({
 		};
 	},
 	methods: {
-		login() {
+		async login() {
 			const url = baseUrl + '/api/users/login';
 			// Reset the error message at the beginning of each login attempt
 			this.errorMessage = '';
@@ -166,6 +167,11 @@ export default defineComponent({
 					this.errorMessage = 'Invalid username or password.';
 					console.error('Error:', error.response.data);
 				});
+
+			// Fill the dolphinsStore with the current dolphinList from /api/dolphins
+			// or the default dolphins of the json file
+			const dolphinsStore = useDolphinsStore();
+			await dolphinsStore.fill();
 		},
 	},
 });

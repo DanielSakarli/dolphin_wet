@@ -52,27 +52,37 @@ export const useEvaluationEmotionalStateStore = defineStore(
 				return this.requestBodiesEmotionalState;
 			},
 			resetBodies() {
+				console.log('Resetting data');
 				for (let i = 0; i < requestBodiesEmotionalState.length; i++) {
-					requestBodiesEmotionalState[i]['willingness_to_participate'] = null;
-					requestBodiesEmotionalState[i]['synchronous_swimming'] = null;
-					requestBodiesEmotionalState[i]['rubbing_behaviour'] = null;
-					requestBodiesEmotionalState[i]['anticipatory_behaviour'] = null;
-					requestBodiesEmotionalState[i]['fast_swimming'] = null;
-					requestBodiesEmotionalState[i]['tail_slapping'] = null;
-					requestBodiesEmotionalState[i]['choice_and_control'] = null;
+					console.log(
+						'Resetting data for: ',
+						this.requestBodiesEmotionalState[i]['dolphin_name']
+					);
+					this.requestBodiesEmotionalState[i]['willingness_to_participate'] =
+						null;
+					this.requestBodiesEmotionalState[i]['synchronous_swimming'] = null;
+					this.requestBodiesEmotionalState[i]['rubbing_behaviour'] = null;
+					this.requestBodiesEmotionalState[i]['anticipatory_behaviour'] = null;
+					this.requestBodiesEmotionalState[i]['fast_swimming'] = null;
+					this.requestBodiesEmotionalState[i]['tail_slapping'] = null;
+					this.requestBodiesEmotionalState[i]['choice_and_control'] = null;
 
-					requestBodiesEmotionalState[i][
+					this.requestBodiesEmotionalState[i][
 						'willingness_to_participate_comments'
 					] = '';
-					requestBodiesEmotionalState[i]['synchronous_swimming_comments'] = '';
-					requestBodiesEmotionalState[i]['rubbing_behaviour_comments'] = '';
-					requestBodiesEmotionalState[i]['anticipatory_behaviour_comments'] =
+					this.requestBodiesEmotionalState[i]['synchronous_swimming_comments'] =
 						'';
-					requestBodiesEmotionalState[i]['fast_swimming_comments'] = '';
-					requestBodiesEmotionalState[i]['tail_slapping_comments'] = '';
-					requestBodiesEmotionalState[i]['choice_and_control_comments'] = '';
+					this.requestBodiesEmotionalState[i]['rubbing_behaviour_comments'] =
+						'';
+					this.requestBodiesEmotionalState[i][
+						'anticipatory_behaviour_comments'
+					] = '';
+					this.requestBodiesEmotionalState[i]['fast_swimming_comments'] = '';
+					this.requestBodiesEmotionalState[i]['tail_slapping_comments'] = '';
+					this.requestBodiesEmotionalState[i]['choice_and_control_comments'] =
+						'';
 
-					requestBodiesEmotionalState[i]['created_at'] = '';
+					this.requestBodiesEmotionalState[i]['created_at'] = '';
 				}
 			},
 		},

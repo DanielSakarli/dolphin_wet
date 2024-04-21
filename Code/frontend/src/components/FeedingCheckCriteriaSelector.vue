@@ -398,14 +398,15 @@ export default {
 		// mounted. But only if there is internet connectivity. If not, the displayed
 		// reference areas are the ones from the animalList.json. Also it adds the dolphins
 		// which are added by the user and not in the animalList.json
-   		await dolphinsStore.fill();
+   		//await dolphinsStore.fill();
+		const dolphinsStore = useDolphinsStore();
+		//evaluationFeedingStore.resetBodies();
+		// The fill method now resets the bodies
 		evaluationFeedingStore.fill(dolphinsStore.dolphinList);
 		// Reset here data while page is mounted
 		localStorage.setItem('backButtonClicked', 'false');
 		localStorage.setItem('dataInBody', 'false');
 		localStorage.setItem('created_at', '');
-
-		evaluationFeedingStore.resetBodies();
 	},
 	/*props: {
 		userComment: {
@@ -583,13 +584,27 @@ export default {
 						}
 					}
 					// Code here the comments into the request body
-					evaluationFeedingStore.requestBodiesFeeding[k]["body_condition_score_comments"] = this.body_condition_score_comments;
-					evaluationFeedingStore.requestBodiesFeeding[k]["weight_measured_comments"] = this.weight_measured_comments;
-					evaluationFeedingStore.requestBodiesFeeding[k]["kcal_calculations_comments"] = this.kcal_calculations_comments;
-					evaluationFeedingStore.requestBodiesFeeding[k]["blood_hydration_comments"] = this.blood_hydration_comments;
-					evaluationFeedingStore.requestBodiesFeeding[k]["fish_quality_comments"] = this.fish_quality_comments;
-					evaluationFeedingStore.requestBodiesFeeding[k]["fish_variety_comments"] = this.fish_variety_comments;
-
+					// First check with if statement if comments had been updated or not. If we don´t do that we override the comments with
+					// an empty string if we click on 'Next Test'
+					if(this.body_condition_score_comments != '') {
+						evaluationFeedingStore.requestBodiesFeeding[k]["body_condition_score_comments"] = this.body_condition_score_comments;
+					}
+					if(this.weight_measured_comments != '') {
+						evaluationFeedingStore.requestBodiesFeeding[k]["weight_measured_comments"] = this.weight_measured_comments;
+					}
+					if(this.kcal_calculations_comments != '') {
+						evaluationFeedingStore.requestBodiesFeeding[k]["kcal_calculations_comments"] = this.kcal_calculations_comments;
+					}
+					if(this.blood_hydration_comments != '') {
+						evaluationFeedingStore.requestBodiesFeeding[k]["blood_hydration_comments"] = this.blood_hydration_comments;
+					}
+					if(this.fish_quality_comments != '') {
+						evaluationFeedingStore.requestBodiesFeeding[k]["fish_quality_comments"] = this.fish_quality_comments;
+					}
+					if(this.fish_variety_comments != '') {
+						evaluationFeedingStore.requestBodiesFeeding[k]["fish_variety_comments"] = this.fish_variety_comments;
+					}
+					
 					if(localStorage.getItem('created_at') !== "") {
 						evaluationFeedingStore.requestBodiesFeeding[k]["created_at"] = localStorage.getItem('created_at') as string;
 					}
@@ -746,7 +761,9 @@ async showDateInputAlert() {
 										localStorage.setItem('dataInBody', dataInBody.toString());
 										this.$router.push(targetUrl);
 									}, 2000);
-									evaluationFeedingStore.resetBodies();
+									// The fill method now resets the bodies
+									//evaluationFeedingStore.resetBodies();
+									evaluationFeedingStore.fill(dolphinsStore.dolphinList);
 									this.dolphinSelect = [];
 									this.criteria = null;
 									localStorage.setItem('created_at', '');

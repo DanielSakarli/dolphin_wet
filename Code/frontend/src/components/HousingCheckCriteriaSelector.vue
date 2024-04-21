@@ -350,7 +350,7 @@
 <script lang="ts">
 import {
 	IonItem, IonList, IonSelect, IonSelectOption,
-	IonLabel, IonModal, IonHeader, IonFooter,
+	IonModal, IonHeader, IonFooter,
 	IonToolbar, IonContent, IonTitle, IonCardTitle,
 	IonButtons, IonButton, IonCheckbox, IonCard, IonIcon, alertController
 } from '@ionic/vue';
@@ -361,7 +361,6 @@ import { useEvaluationHousingStore }from '@/store/evaluationHousingStore';
 import { baseUrl } from '@/utils/baseUrl';
 import { toast } from 'vue3-toastify';
 import 'vue3-toastify/dist/index.css';
-import { journal } from 'ionicons/icons';
 
 const dolphinsStore = useDolphinsStore();
 const evaluationHousingStore = useEvaluationHousingStore();
@@ -370,7 +369,7 @@ let dataInBody; //Variable which gets saved in localstorage with either true or 
 export default {
 	components: {
 		IonItem, IonList, IonSelect, IonSelectOption,
-		IonLabel, IonModal, IonHeader, IonToolbar, IonIcon,
+		IonModal, IonHeader, IonToolbar, IonIcon,
 		IonContent, IonTitle, CheckComments, IonFooter,
 		IonButtons, IonButton, IonCheckbox, IonCard, IonCardTitle
 	},
@@ -378,12 +377,13 @@ export default {
 		// This makes sure that the reference areas are updated while the component is
 		// mounted. But only if there is internet connectivity. If not, the displayed
 		// reference areas are the ones from the animalList.json
-   		await dolphinsStore.fill();
+   		//await dolphinsStore.fill();
+		const dolphinsStore = useDolphinsStore();
+		// The fill method resets the bodies
 		evaluationHousingStore.fill(dolphinsStore.dolphinList);
 		// Reset here data while page is mounted
 		localStorage.setItem('dataInBody', 'false');
 		localStorage.setItem('created_at', '');
-		evaluationHousingStore.resetBodies();
 	},
 	data() {
 		return {
@@ -641,7 +641,9 @@ async showDateInputAlert() {
 										localStorage.setItem('dataInBody', dataInBody.toString());
 										this.$router.push(targetUrl);
 									}, 2000);
-									evaluationHousingStore.resetBodies();
+									//evaluationHousingStore.resetBodies();
+									//The fill method now resets the bodies:
+									evaluationHousingStore.fill(dolphinsStore.dolphinList);
 									localStorage.setItem('created_at', '');
 									this.dolphinSelect = [];
 									this.criteria = null;
@@ -697,7 +699,6 @@ async showDateInputAlert() {
 				
 				//this.dolphinSelect = null;
 				//this.criteria = null;
-				const currentPath = this.$route.path;
 				const targetUrl = `/detailHousing`;
 				this.$router.push(targetUrl);
 			}	

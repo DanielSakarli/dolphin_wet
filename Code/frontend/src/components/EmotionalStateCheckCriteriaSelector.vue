@@ -393,14 +393,15 @@ export default {
 		// This makes sure that the reference areas are updated while the component is
 		// mounted. But only if there is internet connectivity. If not, the displayed
 		// reference areas are the ones from the animalList.json
-   		await dolphinsStore.fill();
+   		// await dolphinsStore.fill();
+		const dolphinsStore = useDolphinsStore();
+		// evaluationEmotionalStateStore.resetBodies();
+		// The fill method now resets the data in evaluationEmotionalStateStore
 		evaluationEmotionalStateStore.fill(dolphinsStore.dolphinList);
 		// Reset here data while page is mounted
 		localStorage.setItem('backButtonClicked', 'false');
 		localStorage.setItem('dataInBody', 'false'); //No unsaved data present while page is mounted
 		localStorage.setItem('created_at', ''); //Used so that user can choose the date of the test himself
-
-		evaluationEmotionalStateStore.resetBodies();
 	},
 	data() {
 		return {
@@ -663,10 +664,13 @@ async showDateInputAlert() {
 										localStorage.setItem('dataInBody', dataInBody.toString());
 										this.$router.push(targetUrl);
 									}, 2000);
-									evaluationEmotionalStateStore.resetBodies();
+									// evaluationEmotionalStateStore.resetBodies();
+									// The fill method now resets the data in evaluationEmotionalStateStore
+									evaluationEmotionalStateStore.fill(dolphinsStore.dolphinList);
 									this.dolphinSelect = null;
 									this.criteria = null;
 									localStorage.setItem('created_at', '');
+									
 								}
 							})
 							.catch((error) => {					

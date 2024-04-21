@@ -610,13 +610,16 @@ export default {
 		// This makes sure that the reference areas are updated while the component is
 		// mounted. But only if there is internet connectivity. If not, the displayed
 		// reference areas are the ones from the animalList.json
-		await dolphinsStore.fill();
+		//await dolphinsStore.fill();
+		const dolphinsStore = useDolphinsStore();
+		//evaluationHealthStore.resetBodies();
+		// Now the fill method resets the bodies
 		evaluationHealthStore.fill(dolphinsStore.dolphinList);
 		// Reset here data while page is mounted
 		localStorage.setItem('backButtonClicked', 'false');
 		localStorage.setItem('dataInBody', 'false');
 		localStorage.setItem('created_at', '');
-		evaluationHealthStore.resetBodies();
+		
 		this.resetData();
 	},
 	data() {
@@ -1062,7 +1065,9 @@ async showDateInputAlert() {
 										localStorage.setItem('dataInBody', dataInBody.toString());
 										this.$router.push(targetUrl);
 									}, 2000);
-									evaluationHealthStore.resetBodies();
+									//evaluationHealthStore.resetBodies();
+									// Now the fill method resets the bodies
+									evaluationHealthStore.fill(dolphinsStore.dolphinList);
 									this.dolphinSelect = null;
 									this.criteria = null;
 									localStorage.setItem('created_at', '');
