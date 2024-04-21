@@ -36,10 +36,10 @@
 			Dolphin WET Matrix
 			<ion-icon slot="start" :icon="download"></ion-icon>
 		</ion-button>
-		<ion-button fill="clear" size="large" @click="showDolphins">
+		<!--<ion-button fill="clear" size="large" @click="showDolphins">
 			List of Dolphins
 			<ion-icon slot="start" :icon="download"></ion-icon>
-		</ion-button>
+		</ion-button>-->
 	</ion-page>
 </template>
 
@@ -50,15 +50,13 @@ import {
 	IonToolbar,
 	IonTitle,
 	IonContent,
-	IonList,
 	IonButton,
 	IonButtons,
-	IonMenu,
 	IonMenuButton,
 	IonIcon,
 } from '@ionic/vue';
 import { download } from 'ionicons/icons';
-import axios from 'axios';
+//import axios from 'axios';
 import { baseUrl } from '@/utils/baseUrl';
 //try to import the animalList
 //import { useDolphinsStore } from '@/store/dolphinsStore';
@@ -77,15 +75,13 @@ export default {
 		IonToolbar,
 		IonTitle,
 		IonContent,
-		IonList,
 		IonButton,
 		IonButtons,
-		IonMenu,
 		IonMenuButton,
 		IonIcon,
 	},
 	methods: {
-		async showDolphins() {
+		/*async showDolphins() {
 			await axios
 				.get(this.urlDolphins, { withCredentials: true })
 				.then((response) => {
@@ -95,7 +91,7 @@ export default {
 				.catch((e) => {
 					console.error(e);
 				});
-		},
+		},*/
 		async getStandardsAndGuidelines() {
 			// Create a link
 			const link = document.createElement('a');

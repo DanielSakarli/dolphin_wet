@@ -157,11 +157,11 @@ app.post('/api/setup_session_storage', (req, res, next) => {
 	try {
 		session({
 			secret: 'secret',
-			  cookie: { httpOnly: true, maxAge: 3600000, secure: false, sameSite: 'lax' }, //300 minutes = 6 hours expiring of session cookie
+			cookie: { httpOnly: true, maxAge: 3600000, secure: false, sameSite: 'lax' }, //300 minutes = 6 hours expiring of session cookie
 			saveUninitialized: true,
 			store: store,
 			resave: true,
-			//proxy: true,
+			proxy: true,
 			name: 'session' //Try giving a name to the cookie
 		})
 

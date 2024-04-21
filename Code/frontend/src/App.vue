@@ -1,26 +1,26 @@
 <template>
 	<ion-app>
 		<ion-page>
-		<ion-split-pane content-id="main-content">
-			<ion-menu content-id="main-content" type="overlay">
-				<ion-content>
-					<ion-list id="page-list">
-						<ion-list-header @click="navigateTo('/folder/Evaluate', 0)"
-							>Dolphin WET</ion-list-header
-						>
-						<ion-menu-toggle
-							:auto-hide="false"
-							v-for="(p, i) in appPages"
-							:key="i"
-						>
-							<ion-item
-								@click="navigateTo(p.url, i)"
-								lines="none"
-								:detail="false"
-								class="hydrated"
-								:class="{ selected: selectedIndex === i }"
+			<ion-split-pane content-id="main-content">
+				<ion-menu content-id="main-content" type="overlay">
+					<ion-content>
+						<ion-list id="page-list">
+							<!--<ion-list-header @click="navigateTo('/folder/Evaluate', 0)"
+								>Dolphin WET</ion-list-header
+							>-->
+							<ion-menu-toggle
+								:auto-hide="false"
+								v-for="(p, i) in appPages"
+								:key="i"
 							>
-								<!--<ion-item
+								<ion-item
+									@click="navigateTo(p.url, i)"
+									lines="none"
+									:detail="false"
+									class="hydrated"
+									:class="{ selected: selectedIndex === i }"
+								>
+									<!--<ion-item
 								@click="selectedIndex = i"
 								router-direction="root"
 								:router-link="p.url"
@@ -29,15 +29,15 @@
 								class="hydrated"
 								:class="{ selected: selectedIndex === i }"
 							>-->
-								<ion-label>{{ p.title }}</ion-label>
-							</ion-item>
-						</ion-menu-toggle>
-					</ion-list>
-				</ion-content>
-			</ion-menu>
-			<ion-router-outlet id="main-content"></ion-router-outlet>
-		</ion-split-pane>
-	</ion-page>
+									<ion-label>{{ p.title }}</ion-label>
+								</ion-item>
+							</ion-menu-toggle>
+						</ion-list>
+					</ion-content>
+				</ion-menu>
+				<ion-router-outlet id="main-content"></ion-router-outlet>
+			</ion-split-pane>
+		</ion-page>
 	</ion-app>
 </template>
 
@@ -169,7 +169,6 @@ export default defineComponent({
 		IonRouterOutlet,
 		IonMenu,
 		IonListHeader,
-		IonTitle,
 		IonContent,
 		IonItem,
 		IonLabel,
@@ -198,6 +197,7 @@ export default defineComponent({
 			selectedIndex: 0,
 			token: localStorage.getItem('token'),
 			appPages: [
+				//{ title: 'Dolphin WET', url: '/folder/Evaluate' },
 				{
 					title: 'Evaluate',
 					url: '/folder/Evaluate',
