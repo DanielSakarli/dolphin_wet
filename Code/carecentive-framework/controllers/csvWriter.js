@@ -51,7 +51,7 @@ async function csvWriter(req, res, next) {
 	secure: true,
 	auth: {
 		user: 'dolphin.wet.app@gmail.com',
-		pass: 'jtmz ywlc wwyn qtuc'
+		pass: process.env.EMAIL_PASSWORD
 	}
 	});
 
@@ -70,10 +70,10 @@ async function csvWriter(req, res, next) {
 	if (numMonths != '') {
 		if(dolphin_name != ''){
 			// Data of a specific dolphin_name and specific numMonths
-			resultFeeding = await GoodFeedingService.getTestResultNMonths(dolphin_name, numMonths);
+			resultFeeding = await GoodFeedingService.getTestResultNMonths(dolphin_name, numMonths, userID);
 		} else {
 			// Data of all dolphins and specific numMonths
-			resultFeeding = await GoodFeedingService.getAllTestResultNMonths(numMonths);
+			resultFeeding = await GoodFeedingService.getAllTestResultNMonths(numMonths, userID);
 		}
 
 		// Save resultFeeding in data
@@ -84,9 +84,9 @@ async function csvWriter(req, res, next) {
 	} else {
 		if(dolphin_name != '')
 		{
-			resultFeeding = await GoodFeedingService.getTestResultByDolphin(dolphin_name);
+			resultFeeding = await GoodFeedingService.getTestResultByDolphin(dolphin_name, userID);
 		} else {
-			resultFeeding = await GoodFeedingService.getAllTestResults();
+			resultFeeding = await GoodFeedingService.getAllTestResults(userID);
 		}
 
 		//console.log('result feeding: ', resultFeeding);
@@ -127,10 +127,10 @@ async function csvWriter(req, res, next) {
 		if (numMonths != '') {
 			if(dolphin_name != ''){
 				// Data of a specific dolphin_name and specific numMonths
-				resultHousing = await GoodHousingService.getTestResultNMonths(dolphin_name, numMonths);
+				resultHousing = await GoodHousingService.getTestResultNMonths(dolphin_name, numMonths, userID);
 			} else {
 				// Data of all dolphins and specific numMonths
-				resultHousing = await GoodHousingService.getAllTestResultNMonths(numMonths);
+				resultHousing = await GoodHousingService.getAllTestResultNMonths(numMonths, userID);
 			}
 	
 			// Save resultFeeding in data
@@ -141,9 +141,9 @@ async function csvWriter(req, res, next) {
 		} else {
 			if(dolphin_name != '')
 			{
-				resultHousing = await GoodHousingService.getTestResultByDolphin(dolphin_name);
+				resultHousing = await GoodHousingService.getTestResultByDolphin(dolphin_name, userID);
 			} else {
-				resultHousing = await GoodHousingService.getAllTestResults();
+				resultHousing = await GoodHousingService.getAllTestResults(userID);
 			}
 	
 			//console.log('result feeding: ', resultFeeding);
@@ -187,10 +187,10 @@ async function csvWriter(req, res, next) {
 			if (numMonths != '') {
 				if(dolphin_name != ''){
 					// Data of a specific dolphin_name and specific numMonths
-					resultHealth = await GoodHealthService.getTestResultNMonths(dolphin_name, numMonths);
+					resultHealth = await GoodHealthService.getTestResultNMonths(dolphin_name, numMonths, userID);
 				} else {
 					// Data of all dolphins and specific numMonths
-					resultHealth = await GoodHealthService.getAllTestResultNMonths(numMonths);
+					resultHealth = await GoodHealthService.getAllTestResultNMonths(numMonths, userID);
 				}
 		
 				// Save resultHealth in data
@@ -201,9 +201,9 @@ async function csvWriter(req, res, next) {
 			} else {
 				if(dolphin_name != '')
 				{
-					resultHealth = await GoodHealthService.getTestResultByDolphin(dolphin_name);
+					resultHealth = await GoodHealthService.getTestResultByDolphin(dolphin_name, userID);
 				} else {
-					resultHealth = await GoodHealthService.getAllTestResults();
+					resultHealth = await GoodHealthService.getAllTestResults(userID);
 				}
 		
 				//console.log('result feeding: ', resultFeeding);
