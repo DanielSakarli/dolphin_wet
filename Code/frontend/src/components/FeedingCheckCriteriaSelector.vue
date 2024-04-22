@@ -780,8 +780,8 @@ async showDateInputAlert() {
 								if(error.message === 'Network Error' && !alertShown) {
 									alertShown = true;	
 									//console.log('Inside error catch block');
-									toast.error('Data upload failed! Check internet connectivity.', {
-										autoClose: 2000,
+									toast.error('Data upload failed! Check internet connectivity and click again on \'Finish Tests\'.', {
+										autoClose: 3000,
 									});
 									setTimeout(() => {
 										dataInBody = false;

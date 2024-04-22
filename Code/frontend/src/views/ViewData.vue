@@ -894,11 +894,21 @@ export default {
 					})
 					.catch((e) => {
 						console.error(e);
+						if (
+							e.message === 'Network Error' ||
+							e.message.includes('net::ERR_CONNECTION_REFUSED')
+						) {
+							// It's a network error
+							toast.error('Check your internet connectivity.', {
+								autoClose: 2000,
+							});
+						}
 						if (e.response.data.error === 'USER_NOT_AN_ADMINISTRATOR') {
 							toast.error('User has no administrator rights!', {
 								autoClose: 2000,
 							});
 						}
+
 						this.urlFeeding = baseUrl + '/api/good_feeding?name='; //reset the url
 					});
 			} else if (this.principleSelect === this.$t('principleEnvironment')) {
@@ -1011,6 +1021,15 @@ export default {
 					});
 				})
 				.catch((e) => {
+					if (
+						e.message === 'Network Error' ||
+						e.message.includes('net::ERR_CONNECTION_REFUSED')
+					) {
+						// It's a network error
+						toast.error('Check your internet connectivity.', {
+							autoClose: 2000,
+						});
+					}
 					if (e.response.data.error === 'USER_NOT_AN_ADMINISTRATOR') {
 						toast.error('User has no administrator rights!', {
 							autoClose: 2000,
