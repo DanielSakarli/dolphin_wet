@@ -444,6 +444,10 @@ export default {
         },
 		//Method to open reference area
 		setOpenReferenceArea(isOpen: boolean) {
+			if(isOpen) {
+				// Update the data of the dolphins when the reference area is opened
+				this.dolphinsStore.fill();
+			}
 			this.isOpenReferenceArea = isOpen;
 		},
 		//Method uses boolean array. So no multiple checking for one test is possible. --> Every test can have one checked Checkbox

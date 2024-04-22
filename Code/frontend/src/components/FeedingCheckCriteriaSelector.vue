@@ -471,6 +471,10 @@ export default {
         },
 		//Method to open reference area
 		setOpenReferenceArea(isOpen: boolean) {
+			if(isOpen) {
+				// Update the data of the dolphins when the reference area is opened
+				this.dolphinsStore.fill();
+			}
 			this.isOpenReferenceArea = isOpen;
 		},
 		// ion-select method to check if all dolphins are selected
