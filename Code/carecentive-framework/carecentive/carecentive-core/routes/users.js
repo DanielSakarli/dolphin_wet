@@ -7,7 +7,7 @@ const authentication = require('../source/Authentication')
 const UserService = require('../services/UserService');
 
 const User = require('../models/User');
-const RoleService = require('@carecentive/carecentive-core/services/RoleService');
+const RoleService = require('../services/RoleService');
 
 /// TEST TO SET THE ROLES WITH SEED DATA
 router.post('/roles', async function(req, res, next) {

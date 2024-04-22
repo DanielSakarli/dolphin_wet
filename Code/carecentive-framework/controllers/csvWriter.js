@@ -7,9 +7,9 @@ const GoodHousingService = require('../services/GoodHousingService');
 const GoodHealthService = require('../services/GoodHealthService');
 const BehaviourService = require('../services/BehaviourService');
 const EmotionalStateService = require('../services/EmotionalStateService');
-const { validationResult } = require('express-validator');
+//const { validationResult } = require('express-validator');
 const { isUserAuth } = require('./authSwitch');
-const User = require('../node_modules/@carecentive/carecentive-core/models/User');
+const User = require('../carecentive/carecentive-core/models/User');
 
 
 async function csvWriter(req, res, next) {

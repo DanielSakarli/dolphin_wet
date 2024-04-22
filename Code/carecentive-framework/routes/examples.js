@@ -5,7 +5,7 @@ const RoleService = require('@carecentive/carecentive-core/services/RoleService'
 
 const router = express.Router();
 
-const authentication = require('@carecentive/carecentive-core/source/Authentication');
+const authentication = require('../carecentive/carecentive-core/source/Authentication');
 
 /* Sample route with Authentication */
 router.get(

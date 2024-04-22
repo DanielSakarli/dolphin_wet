@@ -19,7 +19,7 @@ module.exports = {
 			tableName: 'knex_migrations',
 			directory: [
 				'./database/migrations',
-				'./node_modules/@carecentive/carecentive-core/database/migrations',
+				'./carecentive/carecentive-core/database/migrations',
 			],
 		},
 	},
@@ -36,7 +36,7 @@ module.exports = {
 			tableName: 'knex_migrations',
 			directory: [
 				'./database/migrations',
-				'./node_modules/@carecentive/carecentive-core/database/migrations',
+				'./carecentive/carecentive-core/database/migrations',
 			],
 		},
 	},
@@ -53,7 +53,7 @@ module.exports = {
 			tableName: 'knex_migrations',
 			directory: [
 				'./database/migrations',
-				'./node_modules/@carecentive/carecentive-core/database/migrations',
+				'./carecentive/carecentive-core/database/migrations',
 			],
 		},
 	},

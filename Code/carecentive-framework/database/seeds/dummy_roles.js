@@ -1,4 +1,5 @@
-const RoleService = require('@carecentive/carecentive-core/services/RoleService')
+const RoleService = require('../../carecentive/carecentive-core/services/RoleService');
+
 async function loadDummyRole() {
 	// Insert dummy user roles.
 

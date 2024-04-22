@@ -1,6 +1,6 @@
 const {
 	authenticateToken,
-} = require('@carecentive/carecentive-core/source/Authentication');
+} = require('../carecentive/carecentive-core/source/Authentication');
 
 /**
  * This file contains a flag of whether applying user auth to all controllers.

@@ -3,7 +3,6 @@ const { raw } = require('objection'); //What does the function raw do? It allows
 const { getLastNMonths } = require('../source/CustomSource');
 const DolphinDAO = require('../dao/dolphinDao');
 const { DolphinError } = require('../source/Errors');
-const User = require('@carecentive/carecentive-core/models/User');
 //const e = require('express');
 
 class EmotionalStateService {

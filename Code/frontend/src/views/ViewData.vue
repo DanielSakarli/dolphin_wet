@@ -894,6 +894,11 @@ export default {
 					})
 					.catch((e) => {
 						console.error(e);
+						if (e.response.data.error === 'USER_NOT_AN_ADMINISTRATOR') {
+							toast.error('User has no administrator rights!', {
+								autoClose: 2000,
+							});
+						}
 						this.urlFeeding = baseUrl + '/api/good_feeding?name='; //reset the url
 					});
 			} else if (this.principleSelect === this.$t('principleEnvironment')) {
@@ -908,6 +913,11 @@ export default {
 					})
 					.catch((e) => {
 						console.error(e);
+						if (e.response.data.error === 'USER_NOT_AN_ADMINISTRATOR') {
+							toast.error('User has no administrator rights!', {
+								autoClose: 2000,
+							});
+						}
 						this.urlHousing = baseUrl + '/api/good_housing?name='; //reset the url
 					});
 			} else if (this.principleSelect === this.$t('principleBehaviour')) {
@@ -925,6 +935,11 @@ export default {
 					})
 					.catch((e) => {
 						console.error(e);
+						if (e.response.data.error === 'USER_NOT_AN_ADMINISTRATOR') {
+							toast.error('User has no administrator rights!', {
+								autoClose: 2000,
+							});
+						}
 						this.urlBehaviour = baseUrl + '/api/behaviour?name='; //reset the url
 					});
 			} else if (this.principleSelect === this.$t('principleHealth')) {
@@ -939,6 +954,11 @@ export default {
 					})
 					.catch((e) => {
 						console.error(e);
+						if (e.response.data.error === 'USER_NOT_AN_ADMINISTRATOR') {
+							toast.error('User has no administrator rights!', {
+								autoClose: 2000,
+							});
+						}
 						this.urlHealth = baseUrl + '/api/good_health?name='; //reset the url
 					});
 			} else if (this.principleSelect === this.$t('principleEmotionalState')) {
@@ -956,6 +976,11 @@ export default {
 					})
 					.catch((e) => {
 						console.error(e);
+						if (e.response.data.error === 'USER_NOT_AN_ADMINISTRATOR') {
+							toast.error('User has no administrator rights!', {
+								autoClose: 2000,
+							});
+						}
 						this.urlEmotionalState = baseUrl + '/api/emotional_state?name='; //reset the url
 					});
 			}
@@ -986,9 +1011,11 @@ export default {
 					});
 				})
 				.catch((e) => {
-					toast.error('Data not sent. Check internet connectivity!', {
-						autoClose: 2000,
-					});
+					if (e.response.data.error === 'USER_NOT_AN_ADMINISTRATOR') {
+						toast.error('User has no administrator rights!', {
+							autoClose: 2000,
+						});
+					}
 					console.error(e);
 				});
 		},

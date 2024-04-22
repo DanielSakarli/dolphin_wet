@@ -194,7 +194,6 @@
 						</ion-list>
 						<ion-button expand="full" type="submit">Add Dolphin</ion-button>
 					</form>-->
-
 				</ion-content>
 			</ion-modal>
 		</ion-footer>
@@ -227,6 +226,8 @@ import { useRouter } from 'vue-router';
 import { baseUrl } from '@/utils/baseUrl';
 import { useDolphinsStore } from '@/store/dolphinsStore';
 import AddDolphin from './AddDolphin.vue';
+import { toast } from 'vue3-toastify';
+import 'vue3-toastify/dist/index.css';
 const dolphinsStore = useDolphinsStore();
 
 interface Dolphin {
@@ -378,10 +379,27 @@ export default {
 		// Fetch all dolphins when component is created
 		const fetchDolphins = async () => {
 			try {
-				const response = await axios.get(
-					baseUrl + '/api/dolphins', //'http://88395-17112.pph-server.de/api/dolphins'
-					{ withCredentials: true }
-				);
+				const response = await axios
+					.get(
+						baseUrl + '/api/dolphins', //'http://88395-17112.pph-server.de/api/dolphins'
+						{ withCredentials: true }
+					)
+					.then((response) => {
+						if (localStorage.getItem('reload_data_button_pressed') === 'true') {
+							toast.success('Dolphin data up to date.', {
+								autoClose: 1500,
+							});
+							localStorage.setItem('reload_data_button_pressed', 'false');
+						}
+						console.log('Response:', response.data);
+					})
+					.catch((e) => {
+						console.error(e);
+
+						toast.error('Error while getting the dolphin data.', {
+							autoClose: 2000,
+						});
+					});
 				dolphins.value = response.data;
 			} catch (error) {
 				errorMessage.value = 'Error fetching dolphins.';
@@ -489,6 +507,7 @@ export default {
 		const newDolphin = ref<Dolphin | null>(null);
 
 		const reloadDolphins = () => {
+			localStorage.setItem('reload_data_button_pressed', 'true');
 			fetchDolphins();
 		};
 

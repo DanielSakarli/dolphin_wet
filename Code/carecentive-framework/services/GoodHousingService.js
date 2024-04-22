@@ -2,7 +2,7 @@ const { DolphinError } = require('../source/Errors');
 const DolphinDAO = require('../dao/dolphinDao');
 const { raw } = require('objection');
 const { getLastNMonths } = require('../source/CustomSource');
-const User = require('@carecentive/carecentive-core/models/User');
+//const User = require('../carecentive/carecentive-core/models/User');
 
 class GoodHousingService {
 	/**
