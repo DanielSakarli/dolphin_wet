@@ -25,7 +25,8 @@ async function setResult(req, res, next) {
 			userID = user_id;
 			userName = name;
 			console.log('user name: ', userName);
-
+			const roleName = req.role;
+			console.log('role in control layer: ', roleName);
 			let test_result = req.body;
 
 		// If dolphin is not existing in database,
@@ -41,6 +42,8 @@ async function setResult(req, res, next) {
 		const dolphin_obj = await DolphinService.getOneDolphin(test_result.dolphin_name);
 		const dolphin_id = dolphin_obj.dolphin_id;
 
+		console.log('Dolphins approved');
+		console.log('Session in control layer: ', req.session);
 		// Get the file paths from the session storage
 		if(req.session.file_path && req.session.file_path != '') {
 			console.log('File path: ', req.session.file_path);
@@ -53,7 +56,7 @@ async function setResult(req, res, next) {
 					test_result.file_path = req.session.file_path.toString();
 				}
 							
-				const insertedResult = await GoodFeedingService.loadTestResult(test_result);
+				const insertedResult = await GoodFeedingService.loadTestResult(test_result, roleName);
 				res.status(201).json(insertedResult);
 		}else {
 		///////////////////////////////////////////////////////////////////////////
@@ -63,7 +66,7 @@ async function setResult(req, res, next) {
 			
 			test_result = { user_id: userID, user_name: userName, ...test_result };
 			console.log(test_result);
-			const insertedResult = await GoodFeedingService.loadTestResult(test_result);
+			const insertedResult = await GoodFeedingService.loadTestResult(test_result, roleName);
 			res.status(201).json(insertedResult);
 		}
 
@@ -106,21 +109,21 @@ async function getTestResult(req, res, next) {
 		// when name is '' it should get the data of all dolphins
 		// If numMonths is 10, return all results, not just past 10 months
 		if(numMonths === 10) {
-			const queryAllResults = await GoodFeedingService.getAllTestResults(userID);
+			const queryAllResults = await GoodFeedingService.getAllTestResults(roleName);
 			res.status(200).json(queryAllResults);
 		}
 		// All dolphins for specific months
-		const queryResult = await GoodFeedingService.getAllTestResultNMonths(numMonths, userID);;
+		const queryResult = await GoodFeedingService.getAllTestResultNMonths(numMonths, roleName);;
 		res.status(200).json(queryResult);
 		} else {
 			// Get the test result of the given dolphin
 				// All the data of that dolphin
 			if(numMonths === 10) {
-				const queryAllResults = await GoodFeedingService.getTestResultByDolphin(name, userID);
+				const queryAllResults = await GoodFeedingService.getTestResultByDolphin(name, roleName);
 				res.status(200).json(queryAllResults);
 			}
 				// Past numMonths data of that dolphin
-			const queryResult = await GoodFeedingService.getTestResultNMonths(name, numMonths, userID);
+			const queryResult = await GoodFeedingService.getTestResultNMonths(name, numMonths, roleName);
 			res.status(200).json(queryResult);
 		}
 	} else {

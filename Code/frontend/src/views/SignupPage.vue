@@ -120,7 +120,12 @@ export default {
 	async created() {
 		try {
 			const response = await axios.get(baseUrl + '/api/users/roles');
-			this.zoos = response.data;
+			const roles = response.data;
+			// Create a new array with only the first parts of the strings, i.e. the zoos without the _admin or _user part
+			const zoos = roles.map((role) => role.split('_')[0]);
+
+			// Remove duplicates
+			this.zoos = zoos.filter((zoo, index) => zoos.indexOf(zoo) === index);
 		} catch (error) {
 			console.error('Error:', error);
 		}

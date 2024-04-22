@@ -509,20 +509,21 @@ export default {
 			}
 		},
 		async fileUpload() {
+		// Initialize session storage
+		await axios
+			.post(baseUrl + '/api/setup_session_storage', null, { withCredentials: true })
+			.then((response) => {
+				console.log('Response setup session storage:', response.data);
+			})
+			.catch((error) => {
+				console.error('Error:', error);
+			});	
 		// Check if there is a photo to upload
 		if(this.formData != null) {
 			// Setup the session storage
 			console.log('Form Data accessed in FeedingCheckCriteriaSelector.vue');
 			console.log(...this.formData);
-			// Maybe put this in mounted()?
-			axios
-				.post(baseUrl + '/api/setup_session_storage', this.setupSessionStorage, { withCredentials: true })
-				.then((response) => {
-					console.log('Response setup session storage:', response.data);
-				})
-				.catch((error) => {
-					console.error('Error:', error);
-				});
+			
 			// Send the photo to the server
 			axios
 				.post(this.urlPostFile, this.formData, {

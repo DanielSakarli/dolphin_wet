@@ -21,15 +21,20 @@ class UserService {
     // Hash password
     let password_hash = await bcrypt.hash(password, 12)
 
-    // Get role ID from role name
-    let role = await Role.query().findOne({ name: roleName });
+    // Role names
+    const roleNameAdmin = roleName + '_admin';
+    const roleNameUser = roleName + '_user';
 
-    if(!role) {
+    // Get role ID from role name
+    let role_admin = await Role.query().findOne({ name: roleNameAdmin });
+    let role_user = await Role.query().findOne({ name: roleNameUser });
+
+    if(!role_admin && !role_user) {
       throw new Error("ROLE_DOES_NOT_EXIST");
     } else {
     console.log('Shortly before comparing the role pw ');
     // If role exists compare hashed passwords
-    if (bcrypt.compareSync(rolePassword, role.password_hash)) {
+    if (bcrypt.compareSync(rolePassword, role_admin.password_hash)) {
       try {
 
       // Store user data in database now that role and rolePassword is confirmed
@@ -41,19 +46,48 @@ class UserService {
 
       console.log('I got here');
     
-      console.log('This is the role id that we got from UserService.js: ' + role.id);
+      console.log('This is the role id that we got from UserService.js: ' + role_admin.id);
     
       // Get user
       let user = await User.query().where('name', name).first();
       console.log('This is the user id that we got from UserService.js: ' + user.id);
 
       // Create association between user and role
-      await user.$relatedQuery('roles').for(user.id).relate(role.id);
+      await user.$relatedQuery('roles').for(user.id).relate(role_admin.id);
       }
       catch (err) {
         throw new Error("USER_INSERTION_IN_DATABASE_WENT_WRONG");
       }
-    } else {
+    }
+    
+    if (bcrypt.compareSync(rolePassword, role_user.password_hash)) {
+      try {
+
+      // Store user data in database now that role and rolePassword is confirmed
+      await User.query().insert({
+        name: name,
+        email: email,
+        password_hash: password_hash
+      });
+
+      console.log('I got here');
+    
+      console.log('This is the role id that we got from UserService.js: ' + role_user.id);
+    
+      // Get user
+      let user = await User.query().where('name', name).first();
+      console.log('This is the user id that we got from UserService.js: ' + user.id);
+
+      // Create association between user and role
+      await user.$relatedQuery('roles').for(user.id).relate(role_user.id);
+      }
+      catch (err) {
+        throw new Error("USER_INSERTION_IN_DATABASE_WENT_WRONG");
+      }
+    }
+    
+    
+    if (!bcrypt.compareSync(rolePassword, role_admin.password_hash) && !bcrypt.compareSync(rolePassword, role_user.password_hash)) {
       throw new Error("ROLE_PASSWORD_IS_WRONG");
     }
   }

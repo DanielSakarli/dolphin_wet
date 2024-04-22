@@ -6,9 +6,12 @@ async function loadDummyRole() {
   // These are dummy password for development and are 
   // not being used in production.
     const roles = [
-      {name: 'Nuernberg', password: 'uzh*jq6t1_'},
-      {name: 'Duesseldorf', password: 'safdjhc7#s'},
-      {name: 'Valencia', password: 'bcu82gs_!n'},
+      {name: 'Nuernberg_user', password: 'uzh*jq6t1_'},
+      {name: 'Nuernberg_admin', password: '12345' },
+      {name: 'Duesseldorf_user', password: 'safdjhc7#s'},
+      {name: 'Duesseldorf_admin', password: '3456'},
+      {name: 'Valencia_user', password: 'bcu82gs_!n'},
+      {name: 'Valencia_admin', password: '6789'}
     ];
     for (let role of roles) {
         await RoleService.setRoles(role.name, role.password);

@@ -153,17 +153,28 @@ app.use(function(req, res, next) {
 /**
  * Setup session storage
  */
+app.use(
+    session({
+        secret: 'secret',
+        cookie: { httpOnly: true, maxAge: 3600000, secure: false, sameSite: 'lax' }, //300 minutes = 6 hours expiring of session cookie
+        saveUninitialized: true,
+        store: store,
+        resave: true,
+        //proxy: true,
+        name: 'session' //Try giving a name to the cookie
+    })
+);
 app.post('/api/setup_session_storage', (req, res, next) => {
 	try {
-		session({
+		/*session({
 			secret: 'secret',
 			cookie: { httpOnly: true, maxAge: 3600000, secure: false, sameSite: 'lax' }, //300 minutes = 6 hours expiring of session cookie
 			saveUninitialized: true,
 			store: store,
 			resave: true,
-			proxy: true,
+			//proxy: true,
 			name: 'session' //Try giving a name to the cookie
-		})
+		})*/
 
 		//const { photo_type, eye_photo_path, teeth_photo_path, odontogramm_photo_path, dolphin_name, file_path } = req.body;
 		// Initializing with 'empty', because if we initialize with '' the sessionStorage isn´t actually initialized
@@ -181,7 +192,7 @@ app.post('/api/setup_session_storage', (req, res, next) => {
 		req.session.dolphinIndex = 0;
 		req.session.save(err => {
 			if (err) {
-			  console.log('Error occurred while initializing session storage');
+			  console.log('Error occurred while initializing session storage', err);
 			  return res.sendStatus(500);
 			}
 	  
@@ -189,7 +200,7 @@ app.post('/api/setup_session_storage', (req, res, next) => {
 			res.sendStatus(201);
 		  });
 	} catch(e) {
-		console.log('Error occured while initializing session storage');
+		console.log('Error occured while initializing session storage', e);
 		res.sendStatus(500);
 	}
 });
