@@ -102,6 +102,8 @@ async function getTestResult(req, res, next) {
 			const { user_id } = req.authData;
 			const userID = user_id;
 			console.log('User ID: ', userID);
+			const roleName = req.role;
+			console.log('role in control layer: ', roleName);
 		// Gets the dolphin name and the number of months from query params
 		const { name, numMonths } = req.query; 
 		console.log('name: ', name);

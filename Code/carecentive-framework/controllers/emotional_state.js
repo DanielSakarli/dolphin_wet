@@ -22,6 +22,7 @@ async function setResult(req, res, next) {
 		    let userName;
 			const { user_id, name } = req.authData;
 			console.log('authdata: ', req.authData);
+			const roleName = req.role;
 			userID = user_id;
 			userName = name;
 			console.log('user name: ', userName);
@@ -43,7 +44,7 @@ async function setResult(req, res, next) {
 		// attach userID to test result in req.body
 		test_result = { user_id: userID, user_name: userName, ...test_result };
 		console.log(test_result);
-		const insertedResult = await EmotionalStateService.loadTestResult(test_result);
+		const insertedResult = await EmotionalStateService.loadTestResult(test_result, roleName);
 		res.status(201).json(insertedResult);
 		
 		} else {
@@ -68,6 +69,7 @@ async function getTestResult(req, res, next) {
 			console.log('authdata: ', req.authData);
 			const { user_id } = req.authData;
 			const userID = user_id;
+			const roleName = req.role;
 			console.log('User ID: ', userID);
 		// Gets the dolphin name and the number of months from query params
 		const { name, numMonths } = req.query; 
@@ -76,21 +78,21 @@ async function getTestResult(req, res, next) {
 		// when name is '' it should get the data of all dolphins
 		// If numMonths is 10, return all results, not just past 10 months
 		if(numMonths === 10) {
-			const queryAllResults = await EmotionalStateService.getAllTestResults(userID);
+			const queryAllResults = await EmotionalStateService.getAllTestResults(roleName);
 			res.status(200).json(queryAllResults);
 		}
 		// All dolphins for specific months
-		const queryResult = await EmotionalStateService.getAllTestResultNMonths(numMonths, userID);;
+		const queryResult = await EmotionalStateService.getAllTestResultNMonths(numMonths, roleName);
 		res.status(200).json(queryResult);
 		} else {
 			// Get the test result of the given dolphin
 				// All the data of that dolphin
 			if(numMonths === 10) {
-				const queryAllResults = await EmotionalStateService.getTestResultByDolphin(name, userID);
+				const queryAllResults = await EmotionalStateService.getTestResultByDolphin(name, roleName);
 				res.status(200).json(queryAllResults);
 			}
 				// Past numMonths data of that dolphin
-			const queryResult = await EmotionalStateService.getTestResultNMonths(name, numMonths, userID);
+			const queryResult = await EmotionalStateService.getTestResultNMonths(name, numMonths, roleName);
 			res.status(200).json(queryResult);
 		}
 	} else {

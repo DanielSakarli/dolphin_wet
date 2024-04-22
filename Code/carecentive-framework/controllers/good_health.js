@@ -26,7 +26,7 @@ async function setResult(req, res, next) {
 			//console.log('authdata: ', req.authData);
 			userID = user_id;
 			userName = name;
-		
+			const roleName = req.role;
 			// attach userID to test result in req.body
 			let test_result = req.body;
 			test_result = { userID, user_name: userName, ...test_result };
@@ -108,7 +108,7 @@ async function setResult(req, res, next) {
 					}
 				}
 			
-				const insertedResult = await GoodHealthService.loadTestResult(test_result);
+				const insertedResult = await GoodHealthService.loadTestResult(test_result, roleName);
 				res.status(201).json(insertedResult);
 		} else {
 		///////////////////////////////////////////////////////////////////////////
@@ -118,7 +118,7 @@ async function setResult(req, res, next) {
 			
 			test_result = { user_id: userID, user_name: userName, ...test_result };
 			console.log(test_result);
-			const insertedResult = await GoodHealthService.loadTestResult(test_result);
+			const insertedResult = await GoodHealthService.loadTestResult(test_result, roleName);
 			//next();
 			res.status(201).json(insertedResult);
 		}
@@ -144,6 +144,7 @@ async function getTestResult(req, res, next) {
 			console.log('authdata: ', req.authData);
 			const { user_id } = req.authData;
 			const userID = user_id;
+			const roleName = req.role;
 			console.log('User ID: ', userID);
 		// Gets the dolphin name
 		const { name, numMonths } = req.query;
@@ -152,21 +153,21 @@ async function getTestResult(req, res, next) {
 		// when name is '' it should get the data of all dolphins
 		// If numMonths is 10, return all results, not just past 10 months
 		if(numMonths === 10) {
-			const queryAllResults = await GoodHealthService.getAllTestResults(userID);
+			const queryAllResults = await GoodHealthService.getAllTestResults(roleName);
 			res.status(200).json(queryAllResults);
 		}
 		// All dolphins for specific months
-		const queryResult = await GoodHealthService.getAllTestResultNMonths(numMonths, userID);;
+		const queryResult = await GoodHealthService.getAllTestResultNMonths(numMonths, roleName);
 		res.status(200).json(queryResult);
 		} else {
 			// Get the test result of the given dolphin
 				// All the data of that dolphin
 			if(numMonths === 10) {
-				const queryAllResults = await GoodHealthService.getTestResultByDolphin(name, userID);
+				const queryAllResults = await GoodHealthService.getTestResultByDolphin(name, roleName);
 				res.status(200).json(queryAllResults);
 			}
 				// Past numMonths data of that dolphin
-			const queryResult = await GoodHealthService.getTestResultNMonths(name, numMonths, userID);
+			const queryResult = await GoodHealthService.getTestResultNMonths(name, numMonths, roleName);
 			res.status(200).json(queryResult);
 		}
 	} else {

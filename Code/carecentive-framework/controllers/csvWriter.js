@@ -24,7 +24,7 @@ async function csvWriter(req, res, next) {
 		if (isUserAuth) {
             let userID;
 			let userName;
-
+			const roleName = req.role;
 			let { dolphin_name, numMonths, section } = req.query;
 			const { user_id, name } = req.authData;
 			console.log('authdata: ', req.authData);
@@ -70,10 +70,10 @@ async function csvWriter(req, res, next) {
 	if (numMonths != '') {
 		if(dolphin_name != ''){
 			// Data of a specific dolphin_name and specific numMonths
-			resultFeeding = await GoodFeedingService.getTestResultNMonths(dolphin_name, numMonths, userID);
+			resultFeeding = await GoodFeedingService.getTestResultNMonths(dolphin_name, numMonths, roleName);
 		} else {
 			// Data of all dolphins and specific numMonths
-			resultFeeding = await GoodFeedingService.getAllTestResultNMonths(numMonths, userID);
+			resultFeeding = await GoodFeedingService.getAllTestResultNMonths(numMonths, roleName);
 		}
 
 		// Save resultFeeding in data
@@ -84,9 +84,9 @@ async function csvWriter(req, res, next) {
 	} else {
 		if(dolphin_name != '')
 		{
-			resultFeeding = await GoodFeedingService.getTestResultByDolphin(dolphin_name, userID);
+			resultFeeding = await GoodFeedingService.getTestResultByDolphin(dolphin_name, roleName);
 		} else {
-			resultFeeding = await GoodFeedingService.getAllTestResults(userID);
+			resultFeeding = await GoodFeedingService.getAllTestResults(roleName);
 		}
 
 		//console.log('result feeding: ', resultFeeding);
@@ -127,10 +127,10 @@ async function csvWriter(req, res, next) {
 		if (numMonths != '') {
 			if(dolphin_name != ''){
 				// Data of a specific dolphin_name and specific numMonths
-				resultHousing = await GoodHousingService.getTestResultNMonths(dolphin_name, numMonths, userID);
+				resultHousing = await GoodHousingService.getTestResultNMonths(dolphin_name, numMonths, roleName);
 			} else {
 				// Data of all dolphins and specific numMonths
-				resultHousing = await GoodHousingService.getAllTestResultNMonths(numMonths, userID);
+				resultHousing = await GoodHousingService.getAllTestResultNMonths(numMonths, roleName);
 			}
 	
 			// Save resultFeeding in data
@@ -141,9 +141,9 @@ async function csvWriter(req, res, next) {
 		} else {
 			if(dolphin_name != '')
 			{
-				resultHousing = await GoodHousingService.getTestResultByDolphin(dolphin_name, userID);
+				resultHousing = await GoodHousingService.getTestResultByDolphin(dolphin_name, roleName);
 			} else {
-				resultHousing = await GoodHousingService.getAllTestResults(userID);
+				resultHousing = await GoodHousingService.getAllTestResults(roleName);
 			}
 	
 			//console.log('result feeding: ', resultFeeding);
@@ -187,10 +187,10 @@ async function csvWriter(req, res, next) {
 			if (numMonths != '') {
 				if(dolphin_name != ''){
 					// Data of a specific dolphin_name and specific numMonths
-					resultHealth = await GoodHealthService.getTestResultNMonths(dolphin_name, numMonths, userID);
+					resultHealth = await GoodHealthService.getTestResultNMonths(dolphin_name, numMonths, roleName);
 				} else {
 					// Data of all dolphins and specific numMonths
-					resultHealth = await GoodHealthService.getAllTestResultNMonths(numMonths, userID);
+					resultHealth = await GoodHealthService.getAllTestResultNMonths(numMonths, roleName);
 				}
 		
 				// Save resultHealth in data
@@ -201,9 +201,9 @@ async function csvWriter(req, res, next) {
 			} else {
 				if(dolphin_name != '')
 				{
-					resultHealth = await GoodHealthService.getTestResultByDolphin(dolphin_name, userID);
+					resultHealth = await GoodHealthService.getTestResultByDolphin(dolphin_name, roleName);
 				} else {
-					resultHealth = await GoodHealthService.getAllTestResults(userID);
+					resultHealth = await GoodHealthService.getAllTestResults(roleName);
 				}
 		
 				//console.log('result feeding: ', resultFeeding);
@@ -261,10 +261,10 @@ async function csvWriter(req, res, next) {
 			if (numMonths != '') {
 				if(dolphin_name != ''){
 					// Data of a specific dolphin_name and specific numMonths
-					resultBehaviour = await BehaviourService.getTestResultNMonths(dolphin_name, numMonths, userID);
+					resultBehaviour = await BehaviourService.getTestResultNMonths(dolphin_name, numMonths, roleName);
 				} else {
 					// Data of all dolphins and specific numMonths
-					resultBehaviour = await BehaviourService.getAllTestResultNMonths(numMonths, userID);
+					resultBehaviour = await BehaviourService.getAllTestResultNMonths(numMonths, roleName);
 				}
 		
 				// Save resultBehaviour in data
@@ -275,9 +275,9 @@ async function csvWriter(req, res, next) {
 			} else {
 				if(dolphin_name != '')
 				{
-					resultBehaviour = await BehaviourService.getTestResultByDolphin(dolphin_name, userID);
+					resultBehaviour = await BehaviourService.getTestResultByDolphin(dolphin_name, roleName);
 				} else {
-					resultBehaviour = await BehaviourService.getAllTestResults(userID);
+					resultBehaviour = await BehaviourService.getAllTestResults(roleName);
 				}
 		
 				//console.log('result Behaviour: ', resultBehaviour);
@@ -337,10 +337,10 @@ async function csvWriter(req, res, next) {
 				if (numMonths != '') {
 					if(dolphin_name != ''){
 						// Data of a specific dolphin_name and specific numMonths
-						resultEmotions = await EmotionalStateService.getTestResultNMonths(dolphin_name, numMonths, userID);
+						resultEmotions = await EmotionalStateService.getTestResultNMonths(dolphin_name, numMonths, roleName);
 					} else {
 						// Data of all dolphins and specific numMonths
-						resultEmotions = await EmotionalStateService.getAllTestResultNMonths(numMonths, userID);
+						resultEmotions = await EmotionalStateService.getAllTestResultNMonths(numMonths, roleName);
 					}
 			
 					// Save resultEmotions in data
@@ -351,9 +351,9 @@ async function csvWriter(req, res, next) {
 				} else {
 					if(dolphin_name != '')
 					{
-						resultEmotions = await EmotionalStateService.getTestResultByDolphin(dolphin_name, userID);
+						resultEmotions = await EmotionalStateService.getTestResultByDolphin(dolphin_name, roleName);
 					} else {
-						resultEmotions = await EmotionalStateService.getAllTestResults(userID);
+						resultEmotions = await EmotionalStateService.getAllTestResults(roleName);
 					}
 			
 					//console.log('result Emotions: ', resultEmotions);

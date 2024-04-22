@@ -17,7 +17,7 @@ class EmotionalStateService {
 	 * @param {String} result.body_condition_score_comments
 	 * @returns {Object} Inserted result in database
 	 */
-	static async loadTestResult(result) {
+	static async loadTestResult(result, roleName) {
 		try {
 			// Get the id of current dolphin by name
 			const myDolphinDao = new DolphinDAO();
@@ -35,8 +35,8 @@ class EmotionalStateService {
 			const { dolphin_id } = dolphin_data;
 
 			// Check if user has a role and if, which role (i.e. which zoo he is working at)
-			const user = await User.query().findById(result.user_id).withGraphFetched('roles');
-			const roleName = user.roles[0].name;
+			//const user = await User.query().findById(result.user_id).withGraphFetched('roles');
+			//const roleName = user.roles[0].name;
 			if (roleName) {
 			console.log('role: ', roleName);
 			const location = roleName;
@@ -73,11 +73,11 @@ class EmotionalStateService {
 	 * Gets the test result of emotional state of given date.
 	 * @param {string} date - date in format `yyyy-mm-dd`.
 	 */
-	static async getTestResultWithDate(date, userID) {
+	static async getTestResultWithDate(date, roleName) {
 		try {
 			// Check if user has a role and if, which role (i.e. which zoo he is working at)
-			const user = await User.query().findById(userID).withGraphFetched('roles');
-			const roleName = user.roles[0].name;
+			//const user = await User.query().findById(userID).withGraphFetched('roles');
+			//const roleName = user.roles[0].name;
 			if (roleName) {
 			console.log('role: ', roleName);
 			const location = roleName;
@@ -101,11 +101,11 @@ class EmotionalStateService {
 	 * Gets all emotional_state test results by the given dolphin name.
 	 * @returns {Promise<Array>} list of query result
 	 */
-	static async getAllTestResults(userID) {
+	static async getAllTestResults(roleName) {
 		try {
 			// Check if user has a role and if, which role (i.e. which zoo he is working at)
-			const user = await User.query().findById(userID).withGraphFetched('roles');
-			const roleName = user.roles[0].name;
+			//const user = await User.query().findById(userID).withGraphFetched('roles');
+			//const roleName = user.roles[0].name;
 			if (roleName) {
 			console.log('role: ', roleName);
 			const location = roleName;
@@ -131,11 +131,11 @@ class EmotionalStateService {
 	 * @param {String} name - The name of dolphin
 	 * @returns {Promise<Array>} list of query result
 	 */
-	static async getTestResultByDolphin(name, userID) {
+	static async getTestResultByDolphin(name, roleName) {
 		try {
 			// Check if user has a role and if, which role (i.e. which zoo he is working at)
-			const user = await User.query().findById(userID).withGraphFetched('roles');
-			const roleName = user.roles[0].name;
+			//const user = await User.query().findById(userID).withGraphFetched('roles');
+			//const roleName = user.roles[0].name;
 			if (roleName) {
 			console.log('role: ', roleName);
 			const location = roleName;
@@ -159,11 +159,11 @@ class EmotionalStateService {
 	 * @param {number} month - Month
 	 * @returns {Promise<Array>} list of query result
 	 */
-	static async getTestResultByDolphinAndMonth(name, year, month, userID) {
+	static async getTestResultByDolphinAndMonth(name, year, month, roleName) {
 		try {
 			// Check if user has a role and if, which role (i.e. which zoo he is working at)
-			const user = await User.query().findById(userID).withGraphFetched('roles');
-			const roleName = user.roles[0].name;
+			//const user = await User.query().findById(userID).withGraphFetched('roles');
+			//const roleName = user.roles[0].name;
 			if (roleName) {
 			console.log('role: ', roleName);
 			const location = roleName;
@@ -194,11 +194,11 @@ class EmotionalStateService {
 	 * @param {number} month - Month
 	 * @returns {Promise<Array>} list of query result
 	 */
-	static async getTestResultByMonth(year, month, userID) {
+	static async getTestResultByMonth(year, month, roleName) {
 		try {
 			// Check if user has a role and if, which role (i.e. which zoo he is working at)
-			const user = await User.query().findById(userID).withGraphFetched('roles');
-			const roleName = user.roles[0].name;
+			//const user = await User.query().findById(userID).withGraphFetched('roles');
+			//const roleName = user.roles[0].name;
 			if (roleName) {
 			console.log('role: ', roleName);
 			const location = roleName;
@@ -229,7 +229,7 @@ class EmotionalStateService {
 	 * @param {number} numMonths - The number of past months to include in the result.
 	 * @returns {Promise<Array>} list of query result
 	 */
-	static async getTestResultNMonths(name, numMonths = 3, userID) {
+	static async getTestResultNMonths(name, numMonths = 3, roleName) {
 	try {
 		const myDolphinDAO = new DolphinDAO();
 
@@ -239,8 +239,8 @@ class EmotionalStateService {
 			throw new DolphinError(`Dolphin ${name} doesn't exist!`, 404);
 		}
 		// Check if user has a role and if, which role (i.e. which zoo he is working at)
-		const user = await User.query().findById(userID).withGraphFetched('roles');
-		const roleName = user.roles[0].name;
+		//const user = await User.query().findById(userID).withGraphFetched('roles');
+		//const roleName = user.roles[0].name;
 		if (roleName) {
 		console.log('role: ', roleName);
 		
@@ -256,7 +256,7 @@ class EmotionalStateService {
 					name,
 					lastNMonths[i].year,
 					lastNMonths[i].month,
-					userID
+					roleName
 				)
 			);
 		}
@@ -290,11 +290,11 @@ class EmotionalStateService {
 	 * @param {number} numMonths - The number of past months to include in the result.
 	 * @returns {Promise<Array>} list of query result
 	 */
-	static async getAllTestResultNMonths(numMonths = 3, userID) {
+	static async getAllTestResultNMonths(numMonths = 3, roleName) {
 	try {
 			// Check if user has a role and if, which role (i.e. which zoo he is working at)
-			const user = await User.query().findById(userID).withGraphFetched('roles');
-			const roleName = user.roles[0].name;
+			//const user = await User.query().findById(userID).withGraphFetched('roles');
+			//const roleName = user.roles[0].name;
 			if (roleName) {
 			console.log('role: ', roleName);
 			const location = roleName;
@@ -319,7 +319,7 @@ class EmotionalStateService {
 				EmotionalStateService.getTestResultByMonth(
 					lastNMonths[i].year,
 					lastNMonths[i].month,
-					userID
+					roleName
 				)
 			);
 		}

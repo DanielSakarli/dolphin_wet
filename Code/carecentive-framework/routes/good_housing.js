@@ -10,6 +10,7 @@ const { query } = require('express-validator');
  * Controllers
  */
 const { setResult, getTestResult } = require('../controllers/good_housing');
+const { roleAuthorizerPost, roleAuthorizerGet } = require('../controllers/role_authorizer');
 
 /**
  * Loads test result for good_health
@@ -17,6 +18,7 @@ const { setResult, getTestResult } = require('../controllers/good_housing');
 router.post(
 	'/',
 	authenticateTokenWithSwitch,
+	roleAuthorizerPost,
 	goodHousingPostValidateRequestBody,
 	setResult
 );
@@ -27,6 +29,7 @@ router.post(
 router.get(
 	'/',
 	authenticateTokenWithSwitch,
+	roleAuthorizerGet,
 	[query('name').notEmpty().isString().withMessage('Name can not be empty!')],
 	[query('numMonths').optional().isInt().withMessage('numMonths must be an integer!')],
 	getTestResult

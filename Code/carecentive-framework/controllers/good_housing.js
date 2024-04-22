@@ -25,6 +25,7 @@ async function setResult(req, res, next) {
 			const { user_id, name } = req.authData;
 			userID = user_id;
 			userName = name;
+			const roleName = req.role;
 		
 		// attach user_id to test result in req.body
 		
@@ -92,7 +93,7 @@ async function setResult(req, res, next) {
 			acoustic_comfort_comments,
 			created_at,
 		};
-		const testResultAdded = await GoodHousingService.loadTestResult(testResult);
+		const testResultAdded = await GoodHousingService.loadTestResult(testResult, roleName);
 
 		res.status(201).json(testResultAdded);
 	} else {
@@ -114,6 +115,7 @@ async function getTestResult(req, res, next) {
 			console.log('authdata: ', req.authData);
 			const { user_id } = req.authData;
 			const userID = user_id;
+			const roleName = req.role;
 			console.log('User ID: ', userID);
 			// Gets the dolphin name
 			const { name, numMonths } = req.query;
@@ -121,21 +123,21 @@ async function getTestResult(req, res, next) {
 				// when name is '' it should get the data of all dolphins
 				// If numMonths is 10, return all results, not just past 10 months
 				if(numMonths === 10) {
-					const queryAllResults = await GoodHousingService.getAllTestResults(userID);
+					const queryAllResults = await GoodHousingService.getAllTestResults(roleName);
 					res.status(200).json(queryAllResults);
 				}
 				// All dolphins for specific months
-				const queryResult = await GoodHousingService.getAllTestResultNMonths(numMonths, userID);;
+				const queryResult = await GoodHousingService.getAllTestResultNMonths(numMonths, roleName);
 				res.status(200).json(queryResult);
 				} else {
 					// Get the test result of the given dolphin
 						// All the data of that dolphin
 					if(numMonths === 10) {
-						const queryAllResults = await GoodHousingService.getTestResultByDolphin(name, userID);
+						const queryAllResults = await GoodHousingService.getTestResultByDolphin(name, roleName);
 						res.status(200).json(queryAllResults);
 					}
 						// Past numMonths data of that dolphin
-					const queryResult = await GoodHousingService.getTestResultNMonths(name, numMonths, userID);
+					const queryResult = await GoodHousingService.getTestResultNMonths(name, numMonths, roleName);
 					res.status(200).json(queryResult);
 				}
 	} else {

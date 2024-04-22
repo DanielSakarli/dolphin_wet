@@ -2,7 +2,7 @@ const DolphinDAO = require('../dao/dolphinDao');
 const { DolphinError } = require('../source/Errors');
 const { raw } = require('objection');
 const { getLastNMonths } = require('../source/CustomSource');
-const User = require('@carecentive/carecentive-core/models/User');
+const User = require('../carecentive/carecentive-core/models/User');
 
 class BehaviourService {
 	/**
@@ -29,7 +29,7 @@ class BehaviourService {
 	 * @param {String} result.created_at The date of test result
 	 * @returns {Object} The inserted test data
 	 */
-	static async loadTestResult(result) {
+	static async loadTestResult(result, roleName) {
 		try {
 			// Get the id of current dolphin by name
 			const myDolphinDao = new DolphinDAO();
@@ -47,7 +47,7 @@ class BehaviourService {
 			const { dolphin_id } = dolphin_data;
 			// Check if user has a role and if, which role (i.e. which zoo he is working at)
 			const user = await User.query().findById(result.user_id).withGraphFetched('roles');
-			const roleName = user.roles[0].name;
+			//const roleName = user.roles[0].name;
 			if (roleName) {
 			console.log('role: ', roleName);
 			const location = roleName;
@@ -82,11 +82,11 @@ class BehaviourService {
 	 * Gets the test result of behaviour of given date.
 	 * @param {string} date - date in format `yyyy-mm-dd`.
 	 */
-static async getTestResultWithDate(date, userID) {
+static async getTestResultWithDate(date, roleName) {
 	try {
 		// Check if user has a role and if, which role (i.e. which zoo he is working at)
-		const user = await User.query().findById(userID).withGraphFetched('roles');
-		const roleName = user.roles[0].name;
+		//const user = await User.query().findById(userID).withGraphFetched('roles');
+		//const roleName = user.roles[0].name;
 		if (roleName) {
 		console.log('role: ', roleName);
 		const location = roleName;
@@ -110,11 +110,11 @@ static async getTestResultWithDate(date, userID) {
  * Gets all behaviour test results by the given dolphin name.
  * @returns {Promise<Array>} list of query result
  */
-static async getAllTestResults(userID) {
+static async getAllTestResults(roleName) {
 	try {
 		// Check if user has a role and if, which role (i.e. which zoo he is working at)
-		const user = await User.query().findById(userID).withGraphFetched('roles');
-		const roleName = user.roles[0].name;
+		//const user = await User.query().findById(userID).withGraphFetched('roles');
+		//const roleName = user.roles[0].name;
 		if (roleName) {
 		console.log('role: ', roleName);
 		const location = roleName;
@@ -140,11 +140,11 @@ static async getAllTestResults(userID) {
  * @param {String} name - The name of dolphin
  * @returns {Promise<Array>} list of query result
  */
-static async getTestResultByDolphin(name, userID) {
+static async getTestResultByDolphin(name, roleName) {
 	try {
 		// Check if user has a role and if, which role (i.e. which zoo he is working at)
-		const user = await User.query().findById(userID).withGraphFetched('roles');
-		const roleName = user.roles[0].name;
+		//const user = await User.query().findById(userID).withGraphFetched('roles');
+		//const roleName = user.roles[0].name;
 		if (roleName) {
 		console.log('role: ', roleName);
 		const location = roleName;
@@ -168,11 +168,11 @@ static async getTestResultByDolphin(name, userID) {
  * @param {number} month - Month
  * @returns {Promise<Array>} list of query result
  */
-static async getTestResultByDolphinAndMonth(name, year, month, userID) {
+static async getTestResultByDolphinAndMonth(name, year, month, roleName) {
 	try {
 		// Check if user has a role and if, which role (i.e. which zoo he is working at)
-		const user = await User.query().findById(userID).withGraphFetched('roles');
-		const roleName = user.roles[0].name;
+		//const user = await User.query().findById(userID).withGraphFetched('roles');
+		//const roleName = user.roles[0].name;
 		if (roleName) {
 		console.log('role: ', roleName);
 		const location = roleName;
@@ -203,11 +203,11 @@ static async getTestResultByDolphinAndMonth(name, year, month, userID) {
  * @param {number} month - Month
  * @returns {Promise<Array>} list of query result
  */
-static async getTestResultByMonth(year, month, userID) {
+static async getTestResultByMonth(year, month, roleName) {
 	try {
 		// Check if user has a role and if, which role (i.e. which zoo he is working at)
-		const user = await User.query().findById(userID).withGraphFetched('roles');
-		const roleName = user.roles[0].name;
+		//const user = await User.query().findById(userID).withGraphFetched('roles');
+		//const roleName = user.roles[0].name;
 		if (roleName) {
 		console.log('role: ', roleName);
 		const location = roleName;
@@ -238,7 +238,7 @@ static async getTestResultByMonth(year, month, userID) {
  * @param {number} numMonths - The number of past months to include in the result.
  * @returns {Promise<Array>} list of query result
  */
-static async getTestResultNMonths(name, numMonths = 3, userID) {
+static async getTestResultNMonths(name, numMonths = 3, roleName) {
 try {
 	const myDolphinDAO = new DolphinDAO();
 
@@ -248,8 +248,8 @@ try {
 		throw new DolphinError(`Dolphin ${name} doesn't exist!`, 404);
 	}
 	// Check if user has a role and if, which role (i.e. which zoo he is working at)
-	const user = await User.query().findById(userID).withGraphFetched('roles');
-	const roleName = user.roles[0].name;
+	//const user = await User.query().findById(userID).withGraphFetched('roles');
+	//const roleName = user.roles[0].name;
 	if (roleName) {
 	console.log('role: ', roleName);
 	
@@ -265,7 +265,7 @@ try {
 				name,
 				lastNMonths[i].year,
 				lastNMonths[i].month,
-				userID
+				roleName
 			)
 		);
 	}
@@ -299,11 +299,11 @@ try {
  * @param {number} numMonths - The number of past months to include in the result.
  * @returns {Promise<Array>} list of query result
  */
-static async getAllTestResultNMonths(numMonths = 3, userID) {
+static async getAllTestResultNMonths(numMonths = 3, roleName) {
 try {
 		// Check if user has a role and if, which role (i.e. which zoo he is working at)
-		const user = await User.query().findById(userID).withGraphFetched('roles');
-		const roleName = user.roles[0].name;
+		//const user = await User.query().findById(userID).withGraphFetched('roles');
+		//const roleName = user.roles[0].name;
 		if (roleName) {
 		console.log('role: ', roleName);
 		const location = roleName;
@@ -328,7 +328,7 @@ try {
 			BehaviourService.getTestResultByMonth(
 				lastNMonths[i].year,
 				lastNMonths[i].month,
-				userID
+				roleName
 			)
 		);
 	}
