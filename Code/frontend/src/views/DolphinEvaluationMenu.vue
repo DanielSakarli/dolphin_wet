@@ -116,7 +116,7 @@
 				</ion-content>
 			</ion-modal>
 			<!-- Card content of each dolphin -->
-			<ion-card v-if="currentDolphin?.name">
+			<ion-card v-if="showDolphin">
 				<ion-card-title>{{ currentDolphin.name }}</ion-card-title>
 				<ion-item>
 					<ion-label>Sex:</ion-label>
@@ -169,19 +169,10 @@
 					</ion-button>
 				</ion-buttons>
 			</ion-toolbar>
-
 			<ion-modal :is-open="addModalOpen">
-				<ion-header>
-					<ion-toolbar>
-						<ion-title>Add Dolphin</ion-title>
-						<ion-buttons slot="end">
-							<ion-button @click="closeAddModal">Close</ion-button>
-						</ion-buttons>
-					</ion-toolbar>
-				</ion-header>
-				<ion-content>
-					<AddDolphin />
-					<!--<form @submit.prevent="submitAdd">
+				<AddDolphin @close-modal="addModalOpen = false" />
+			</ion-modal>
+			<!--<form @submit.prevent="submitAdd">
 						<ion-list v-for="(value, key) in newDolphin" :key="key + 'Add'">
 							<ion-item>
 								<ion-label position="stacked">{{ key }}</ion-label>
@@ -194,8 +185,6 @@
 						</ion-list>
 						<ion-button expand="full" type="submit">Add Dolphin</ion-button>
 					</form>-->
-				</ion-content>
-			</ion-modal>
 		</ion-footer>
 	</ion-page>
 </template>
@@ -301,7 +290,7 @@ export default {
 	},
 	data() {
 		return {
-			currentDolphinValues: {
+			/*currentDolphinValues: {
 				dolphin_id: null,
 				name: '',
 				sex: null,
@@ -312,7 +301,7 @@ export default {
 				max_weight_measured: null,
 				min_kcal_calculations: null,
 				max_kcal_calculations: null,
-			},
+			},*/
 			/*currentDolphin: {
 				dolphin_id: null,
 				name: '',
@@ -346,6 +335,7 @@ export default {
 		const errorMessage = ref<string | null>(null);
 		const editModalOpen = ref<boolean>(false);
 		const currentDolphinValues = ref<Dolphin | null>(null);
+		const showDolphin = ref<boolean>(false);
 
 		// For editing the dolphin
 		// const dolphinValues = dolphinsStore.dolphinList;
@@ -379,7 +369,7 @@ export default {
 		// Fetch all dolphins when component is created
 		const fetchDolphins = async () => {
 			try {
-				const response = await axios
+				await axios
 					.get(
 						baseUrl + '/api/dolphins', //'http://88395-17112.pph-server.de/api/dolphins'
 						{ withCredentials: true }
@@ -392,6 +382,9 @@ export default {
 							localStorage.setItem('reload_data_button_pressed', 'false');
 						}
 						console.log('Response:', response.data);
+						dolphins.value = response.data;
+						currentDolphinValues.value = response.data;
+						console.log('Current dolphin values: ', currentDolphinValues.value);
 					})
 					.catch((e) => {
 						console.error(e);
@@ -400,13 +393,12 @@ export default {
 							autoClose: 2000,
 						});
 					});
-				dolphins.value = response.data;
 			} catch (error) {
 				errorMessage.value = 'Error fetching dolphins.';
 			}
 		};
 
-		fetchDolphins();
+		//fetchDolphins();
 
 		// Select a dolphin to view
 		const selectDolphin = (dolphin: Dolphin) => {
@@ -415,6 +407,7 @@ export default {
 				(d) => d.dolphin_id === dolphin.dolphin_id
 			);
 			currentDolphinValues.value = { ...dolphin };
+			showDolphin.value = true;
 		};
 
 		// Move to the next dolphin
@@ -494,9 +487,10 @@ export default {
 					fetchDolphins();
 					// Set current dolphin name to null and then again to name
 					// Because than the ion-card with the new dolphin data will be updated
-					if (currentDolphin.value !== null) {
+					/*if (currentDolphin.value !== null) {
 						currentDolphin.value.name = null; //closes the ion-card
-					}
+					}*/
+					showDolphin.value = false;
 				})
 				.catch((error) => {
 					console.error('Error:', error.response.data);
@@ -560,6 +554,7 @@ export default {
 			openEditModal,
 			closeEditModal,
 			currentDolphinValues,
+			showDolphin,
 			submitEdit,
 			editModalOpen,
 			reloadDolphins,

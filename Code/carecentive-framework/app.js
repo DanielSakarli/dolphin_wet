@@ -160,7 +160,7 @@ app.use(
         saveUninitialized: true,
         store: store,
         resave: true,
-        //proxy: true,
+        proxy: true,
         name: 'session' //Try giving a name to the cookie
     })
 );

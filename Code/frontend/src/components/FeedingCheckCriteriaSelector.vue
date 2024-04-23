@@ -368,6 +368,7 @@ import 'vue3-toastify/dist/index.css';
 
 
 const dolphinsStore = useDolphinsStore();
+dolphinsStore.fill();
 const evaluationFeedingStore = useEvaluationFeedingStore();
 //dolphinsStore.fill();
 let dataInBody; //Variable which gets saved in localstorage with either true or false, depending if data is in checkboxes or evaluationFeedingStore
@@ -398,11 +399,12 @@ export default {
 		// mounted. But only if there is internet connectivity. If not, the displayed
 		// reference areas are the ones from the animalList.json. Also it adds the dolphins
 		// which are added by the user and not in the animalList.json
-   		//await dolphinsStore.fill();
-		const dolphinsStore = useDolphinsStore();
+   		
+		this.dolphinsStore = useDolphinsStore();
+		await this.dolphinsStore.fill();
 		//evaluationFeedingStore.resetBodies();
 		// The fill method now resets the bodies
-		evaluationFeedingStore.fill(dolphinsStore.dolphinList);
+		evaluationFeedingStore.fill(this.dolphinsStore.dolphinList);
 		// Reset here data while page is mounted
 		localStorage.setItem('backButtonClicked', 'false');
 		localStorage.setItem('dataInBody', 'false');
