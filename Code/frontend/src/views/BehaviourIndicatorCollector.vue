@@ -67,42 +67,68 @@ export default defineComponent({
 			console.log('Back button clicked');
 			localStorage.setItem('backButtonClicked', 'true');
 			if (localStorage.getItem('dataInBody') === 'true') {
-				await this.showAlert();
-			}
-			if (localStorage.getItem('dataInBody') === 'false') {
-				//this.$router.back();
+				this.showAlert().then(() => {
+					// Gets executed when user clicks on 'Lose Data'
+					// Set it back to false, so the window.alert in index.ts will
+					// still correctly work
+					console.log('I am here');
+					localStorage.setItem('backButtonClicked', 'false');
+					console.log(
+						'backButtonClicked: ',
+						localStorage.getItem('backButtonClicked')
+					);
+				});
+			} else {
+				// If no data in body
+				localStorage.setItem('backButtonClicked', 'false');
+				console.log('Back button clicked without data in body');
 				this.$router.push('/folder/Evaluate');
 			}
 		},
-		async showAlert() {
-			return new Promise(async (resolve, reject) => {
-				const alert = await alertController.create({
-					header: 'Confirmation',
-					message: 'Are you sure you want to proceed?',
-					buttons: [
-						{
-							text: 'Stay on Page',
-							role: 'cancel',
-							cssClass: 'secondary',
-							handler: () => {
-								console.log('Cancel clicked');
-								reject();
+		showAlert() {
+			return new Promise((resolve, reject) => {
+				alertController
+					.create({
+						header: 'Confirmation',
+						message: 'Are you sure you want to proceed?',
+						buttons: [
+							{
+								text: 'Stay on Page',
+								role: 'cancel',
+								cssClass: 'secondary',
+								handler: () => {
+									console.log('Cancel clicked');
+									localStorage.setItem('backButtonClicked', 'false');
+									localStorage.setItem('dataInBody', 'true');
+									console.log(
+										'backButtonClicked: ',
+										localStorage.getItem('backButtonClicked')
+									);
+									console.log(
+										'dataInBody: ',
+										localStorage.getItem('dataInBody')
+									);
+									reject();
+								},
 							},
-						},
-						{
-							text: 'Lose Data',
-							handler: () => {
-								console.log('Confirm Okay');
-								this.$router.push('/folder/Evaluate');
-								(this.$refs.behaviourCheckRef as any).resetData();
-								localStorage.setItem('dataInBody', 'false');
-								resolve(void 0);
+							{
+								text: 'Lose Data',
+								handler: () => {
+									console.log('Confirm Okay');
+									//this.$router.back();
+									localStorage.setItem('dataInBody', 'false');
+									//localStorage.setItem('backButtonClicked', 'false');
+									//console.log('backButtonClicked: ', localStorage.getItem('backButtonClicked'));
+									this.$router.push('/folder/Evaluate');
+									(this.$refs.behaviourCheckRef as any).resetData();
+									resolve(void 0);
+								},
 							},
-						},
-					],
-				});
-
-				return alert.present();
+						],
+					})
+					.then((alert) => {
+						alert.present();
+					});
 			});
 		},
 		confirmRefresh() {

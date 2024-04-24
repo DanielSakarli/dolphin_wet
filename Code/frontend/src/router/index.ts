@@ -46,25 +46,25 @@ const routes: Array<RouteRecordRaw> = [
 		path: '/detailHealth',
 		name: 'DetailHealth',
 		component: () => import('@/views/HealthIndicatorCollector.vue'),
-		meta: { requiresAuth: false },
+		meta: { requiresAuth: true },
 	},
 	{
 		path: '/detailBehaviour',
 		name: 'DetailBehaviour',
 		component: () => import('@/views/BehaviourIndicatorCollector.vue'),
-		meta: { requiresAuth: false },
+		meta: { requiresAuth: true },
 	},
 	{
 		path: '/detailEmotionalState',
 		name: 'DetailEmotionalState',
 		component: () => import('@/views/EmotionalStateIndicatorCollector.vue'),
-		meta: { requiresAuth: false },
+		meta: { requiresAuth: true },
 	},
 	{
 		path: '/detailFeeding',
 		name: 'DetailFeeding',
 		component: () => import('@/views/FeedingIndicatorCollector.vue'),
-		meta: { requiresAuth: false },
+		meta: { requiresAuth: true },
 	},
 	{
 		path: '/detailHousing',
@@ -100,7 +100,10 @@ router.beforeEach((to, from, next) => {
 			// has unsaved data in the CheckCriteriaSelector
 			// vue files.
 			console.log('dataInBody: ', localStorage.getItem('dataInBody'));
-			console.log('backButtonClicked: ', localStorage.getItem('backButtonClicked'));
+			console.log(
+				'backButtonClicked: ',
+				localStorage.getItem('backButtonClicked')
+			);
 			if (localStorage.getItem('dataInBody') === 'false') {
 				next();
 			}

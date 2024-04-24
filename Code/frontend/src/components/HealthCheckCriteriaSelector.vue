@@ -1063,6 +1063,7 @@ async showDateInputAlert() {
 										// without losing data, because data is now successfully uploaded
 										dataInBody = false;
 										localStorage.setItem('dataInBody', dataInBody.toString());
+										localStorage.setItem('backButtonClicked', 'false');
 										this.$router.push(targetUrl);
 									}, 2000);
 									//evaluationHealthStore.resetBodies();

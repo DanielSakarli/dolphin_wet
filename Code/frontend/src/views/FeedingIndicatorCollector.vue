@@ -120,10 +120,6 @@ export default defineComponent({
 			if (localStorage.getItem('dataInBody') === 'true') {
 				this.showAlert().then(() => {
 					// Gets executed when user clicks on 'Lose Data'
-					/*if (localStorage.getItem('dataInBody') === 'false') {
-						//this.$router.back();
-						this.$router.push('/folder/Evaluate');
-					}*/
 					// Set it back to false, so the window.alert in index.ts will
 					// still correctly work
 					console.log('I am here');
@@ -135,6 +131,8 @@ export default defineComponent({
 				});
 			} else {
 				// If no data in body
+				localStorage.setItem('backButtonClicked', 'false');
+				console.log('Back button clicked without data in body');
 				this.$router.push('/folder/Evaluate');
 			}
 		},
@@ -153,8 +151,14 @@ export default defineComponent({
 									console.log('Cancel clicked');
 									localStorage.setItem('backButtonClicked', 'false');
 									localStorage.setItem('dataInBody', 'true');
-									console.log('backButtonClicked: ', localStorage.getItem('backButtonClicked'));
-									console.log('dataInBody: ', localStorage.getItem('dataInBody'));
+									console.log(
+										'backButtonClicked: ',
+										localStorage.getItem('backButtonClicked')
+									);
+									console.log(
+										'dataInBody: ',
+										localStorage.getItem('dataInBody')
+									);
 									reject();
 								},
 							},

@@ -382,6 +382,7 @@ export default {
 		// The fill method resets the bodies
 		evaluationHousingStore.fill(dolphinsStore.dolphinList);
 		// Reset here data while page is mounted
+		localStorage.setItem('backButtonClicked', 'false');
 		localStorage.setItem('dataInBody', 'false');
 		localStorage.setItem('created_at', '');
 	},
@@ -639,6 +640,7 @@ async showDateInputAlert() {
 										// without losing data, because data is now successfully uploaded
 										dataInBody = false;
 										localStorage.setItem('dataInBody', dataInBody.toString());
+										localStorage.setItem('backButtonClicked', 'false');
 										this.$router.push(targetUrl);
 									}, 2000);
 									//evaluationHousingStore.resetBodies();

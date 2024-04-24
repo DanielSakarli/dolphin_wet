@@ -549,9 +549,8 @@ export default {
 		//Method uses boolean array. So no multiple checking for one test is possible. --> Every test can have one checked Checkbox
 		handleClick(row: number, column: number) {
 		console.log(this.CheckboxArray, row, column);
-		
-
-
+		dataInBody = true;
+		localStorage.setItem('dataInBody', dataInBody.toString());
 			if (this.CheckboxArray[row][column]){
 				this.CheckboxArray[row][column] = false;
 			}else{
@@ -562,8 +561,6 @@ export default {
 					this.CheckboxArray[row][i] = false;
 				}
 			}
-		dataInBody = true;
-		localStorage.setItem('dataInBody', dataInBody.toString());
     	},
 		// Method to collect the checked checkboxes and give request Body the scores
 		storeCheckedValues() {
