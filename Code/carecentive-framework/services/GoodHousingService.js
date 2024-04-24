@@ -95,7 +95,7 @@ class GoodHousingService {
 			const GoodHousing = require(`../models/${modelName}`); // Get the respective model, depending on which zoo the user works at
 			////////////////////////////////////////////////
 
-			const result = await GoodHousing.query()
+			let result = await GoodHousing.query()
 				.where('dolphin_name', '=', name)
 				.where(
 					raw(
@@ -103,6 +103,8 @@ class GoodHousingService {
 						[month, year]
 					)
 				);
+			// Sort the data according to 'created_at' date
+			result = await this.sortData(result);
 			return result;
 			} else {
 				throw new Error('USER_HAS_NO_ROLE');
@@ -239,7 +241,9 @@ class GoodHousingService {
 			const modelName = `${location}GoodHousing`;
 			const GoodHousing = require(`../models/${modelName}`); // Get the respective model, depending on which zoo the user works at
 			////////////////////////////////////////////////
-			const result = await GoodHousing.query().where('dolphin_name', '=', name);
+			let result = await GoodHousing.query().where('dolphin_name', '=', name);
+			// Sort the data according to 'created_at' date
+			result = await this.sortData(result);
 			return result;
 			} else {
 				throw new Error('USER_HAS_NO_ROLE');
@@ -266,13 +270,15 @@ class GoodHousingService {
 				const modelName = `${location}GoodHousing`;
 				const GoodHousing = require(`../models/${modelName}`); // Get the respective model, depending on which zoo the user works at
 				////////////////////////////////////////////////
-				const result = await GoodHousing.query()
+				let result = await GoodHousing.query()
 					.where(
 						raw( 
 							`EXTRACT(MONTH FROM created_at) = ? AND EXTRACT(YEAR FROM created_at) = ?`,
 							[month, year]
 						)
 					);
+				// Sort the data according to 'created_at' date
+				result = await this.sortData(result);
 				return result;
 			} else {
 				throw new Error('USER_HAS_NO_ROLE');
@@ -298,7 +304,9 @@ class GoodHousingService {
 			const modelName = `${location}GoodHousing`;
 			const GoodHousing = require(`../models/${modelName}`); // Get the respective model, depending on which zoo the user works at
 			////////////////////////////////////////////////
-			const result = await GoodHousing.query();
+			let result = await GoodHousing.query();
+			// Sort the data according to 'created_at' date
+			result = await this.sortData(result);
 			return result;
 			} else {
 				throw new Error('USER_HAS_NO_ROLE');
@@ -308,7 +316,19 @@ class GoodHousingService {
 		}
 	}
 
-
+/**
+ * Sorts the data to be returned according to 'created at' date
+ */
+static async sortData(data) {
+	try {
+		const sortedData = data.sort((a, b) => {
+			return new Date(b.created_at) - new Date(a.created_at);
+		});
+		return sortedData;
+	} catch (error) {
+		throw error;
+	}	
+}
 }
 
 module.exports = GoodHousingService;

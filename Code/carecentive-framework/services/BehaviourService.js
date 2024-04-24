@@ -94,9 +94,11 @@ static async getTestResultWithDate(date, roleName) {
 		const Behaviour = require(`../models/${modelName}`); // Get the respective model, depending on which zoo the user works at
 		////////////////////////////////////////////////
 
-			const result = await Behaviour.query().where(
+			let result = await Behaviour.query().where(
 			raw(`DATE(created_at) = ?`, [date])
 		);
+		// Sort the data according to 'created_at' date
+		result = await this.sortData(result);
 		return result;
 		} else {
 			throw new Error('USER_HAS_NO_ROLE');
@@ -123,7 +125,9 @@ static async getAllTestResults(roleName) {
 		////////////////////////////////////////////////
 
 
-		const result = await Behaviour.query();
+		let result = await Behaviour.query();
+		// Sort the data according to 'created_at' date
+		result = await this.sortData(result);
 		return result;
 		} else {
 			throw new Error('USER_HAS_NO_ROLE');
@@ -151,7 +155,9 @@ static async getTestResultByDolphin(name, roleName) {
 		const modelName = `${location}Behaviour`;
 		const Behaviour = require(`../models/${modelName}`); // Get the respective model, depending on which zoo the user works at
 		////////////////////////////////////////////////
-		const result = await Behaviour.query().where('dolphin_name', '=', name);
+		let result = await Behaviour.query().where('dolphin_name', '=', name);
+		// Sort the data according to 'created_at' date
+		result = await this.sortData(result);
 		return result;
 		} else {
 			throw new Error('USER_HAS_NO_ROLE');
@@ -180,7 +186,7 @@ static async getTestResultByDolphinAndMonth(name, year, month, roleName) {
 		const Behaviour = require(`../models/${modelName}`); // Get the respective model, depending on which zoo the user works at
 		////////////////////////////////////////////////
 
-		const result = await Behaviour.query()
+		let result = await Behaviour.query()
 			.where('dolphin_name', '=', name)
 			.where(
 				raw( 
@@ -188,6 +194,8 @@ static async getTestResultByDolphinAndMonth(name, year, month, roleName) {
 					[month, year]
 				)
 			);
+		// Sort the data according to 'created_at' date
+		result = await this.sortData(result);
 		return result;
 		} else {
 			throw new Error('USER_HAS_NO_ROLE');
@@ -214,13 +222,15 @@ static async getTestResultByMonth(year, month, roleName) {
 		const modelName = `${location}Behaviour`;
 		const Behaviour = require(`../models/${modelName}`); // Get the respective model, depending on which zoo the user works at
 		////////////////////////////////////////////////
-		const result = await Behaviour.query()
+		let result = await Behaviour.query()
 			.where(
 				raw( 
 					`EXTRACT(MONTH FROM created_at) = ? AND EXTRACT(YEAR FROM created_at) = ?`,
 					[month, year]
 				)
 			);
+		// Sort the data according to 'created_at' date
+		result = await this.sortData(result);
 		return result;
 		} else {
 			throw new Error('USER_HAS_NO_ROLE');
@@ -352,6 +362,20 @@ try {
 } catch (error) {
 	throw error;
 }
+}
+
+/**
+ * Sorts the data to be returned according to 'created at' date
+ */
+static async sortData(data) {
+	try {
+		const sortedData = data.sort((a, b) => {
+			return new Date(b.created_at) - new Date(a.created_at);
+		});
+		return sortedData;
+	} catch (error) {
+		throw error;
+	}	
 }
 }
 

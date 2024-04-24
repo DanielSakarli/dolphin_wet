@@ -84,9 +84,11 @@ class EmotionalStateService {
 			const EmotionalState = require(`../models/${modelName}`); // Get the respective model, depending on which zoo the user works at
 			////////////////////////////////////////////////
 
-				const result = await EmotionalState.query().where(
+				let result = await EmotionalState.query().where(
 				raw(`DATE(created_at) = ?`, [date])
 			);
+			// Sort the data according to 'created_at' date
+			result = await this.sortData(result);
 			return result;
 			} else {
 				throw new Error('USER_HAS_NO_ROLE');
@@ -113,7 +115,9 @@ class EmotionalStateService {
 			////////////////////////////////////////////////
 
 
-			const result = await EmotionalState.query();
+			let result = await EmotionalState.query();
+			// Sort the data according to 'created_at' date
+			result = await this.sortData(result);
 			return result;
 			} else {
 				throw new Error('USER_HAS_NO_ROLE');
@@ -141,7 +145,9 @@ class EmotionalStateService {
 			const modelName = `${location}EmotionalState`;
 			const EmotionalState = require(`../models/${modelName}`); // Get the respective model, depending on which zoo the user works at
 			////////////////////////////////////////////////
-			const result = await EmotionalState.query().where('dolphin_name', '=', name);
+			let result = await EmotionalState.query().where('dolphin_name', '=', name);
+			// Sort the data according to 'created_at' date
+			result = await this.sortData(result);
 			return result;
 			} else {
 				throw new Error('USER_HAS_NO_ROLE');
@@ -170,7 +176,7 @@ class EmotionalStateService {
 			const EmotionalState = require(`../models/${modelName}`); // Get the respective model, depending on which zoo the user works at
 			////////////////////////////////////////////////
 
-			const result = await EmotionalState.query()
+			let result = await EmotionalState.query()
 				.where('dolphin_name', '=', name)
 				.where(
 					raw( 
@@ -178,6 +184,8 @@ class EmotionalStateService {
 						[month, year]
 					)
 				);
+			// Sort the data according to 'created_at' date
+			result = await this.sortData(result);
 			return result;
 			} else {
 				throw new Error('USER_HAS_NO_ROLE');
@@ -204,13 +212,15 @@ class EmotionalStateService {
 			const modelName = `${location}EmotionalState`;
 			const EmotionalState = require(`../models/${modelName}`); // Get the respective model, depending on which zoo the user works at
 			////////////////////////////////////////////////
-			const result = await EmotionalState.query()
+			let result = await EmotionalState.query()
 				.where(
 					raw( 
 						`EXTRACT(MONTH FROM created_at) = ? AND EXTRACT(YEAR FROM created_at) = ?`,
 						[month, year]
 					)
 				);
+			// Sort the data according to 'created_at' date
+			result = await this.sortData(result);
 			return result;
 			} else {
 				throw new Error('USER_HAS_NO_ROLE');

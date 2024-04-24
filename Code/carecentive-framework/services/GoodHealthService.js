@@ -102,7 +102,7 @@ class GoodHealthService {
 			const GoodHealth = require(`../models/${modelName}`); // Get the respective model, depending on which zoo the user works at
 			////////////////////////////////////////////////
 
-			const result = await GoodHealth.query()
+			let result = await GoodHealth.query()
 				.select(
 					'health_record_id',
 					'user_id',
@@ -149,6 +149,8 @@ class GoodHealthService {
 						[month, year]
 					)
 				);
+			// Sort the data according to 'created_at' date
+			result = await this.sortData(result);
 			return result;
 			}
 		} catch (error) {
@@ -176,7 +178,7 @@ class GoodHealthService {
 			const GoodHealth = require(`../models/${modelName}`); // Get the respective model, depending on which zoo the user works at
 			////////////////////////////////////////////////
 
-			const result = await GoodHealth.query()
+			let result = await GoodHealth.query()
 				.select(
 					'health_record_id',
 					'user_id',
@@ -222,6 +224,8 @@ class GoodHealthService {
 						[month, year]
 					)
 				);
+			// Sort the data according to 'created_at' date
+			result = await this.sortData(result);
 			return result;
 			}
 		} catch (error) {
@@ -310,7 +314,9 @@ class GoodHealthService {
 			const GoodHealth = require(`../models/${modelName}`); // Get the respective model, depending on which zoo the user works at
 			////////////////////////////////////////////////
 
-			const result = await GoodHealth.query();
+			let result = await GoodHealth.query();
+			// Sort the data according to 'created_at' date
+			result = await this.sortData(result);
 			return result;
 			} else {
 				throw new Error('USER_IS_NOT_AUTHENTICATED');
@@ -398,7 +404,9 @@ class GoodHealthService {
 			const GoodHealth = require(`../models/${modelName}`); // Get the respective model, depending on which zoo the user works at
 			////////////////////////////////////////////////
 
-			const result = await GoodHealth.query().where('dolphin_name', '=', name);
+			let result = await GoodHealth.query().where('dolphin_name', '=', name);
+			// Sort the data according to 'created_at' date
+			result = await this.sortData(result);
 			return result;
 			} else {
 				throw new Error('USER_IS_NOT_AUTHENTICATED');
@@ -408,6 +416,19 @@ class GoodHealthService {
 		}
 	}
 
+/**
+ * Sorts the data to be returned according to 'created at' date
+ */
+static async sortData(data) {
+	try {
+		const sortedData = data.sort((a, b) => {
+			return new Date(b.created_at) - new Date(a.created_at);
+		});
+		return sortedData;
+	} catch (error) {
+		throw error;
+	}	
+}
 }
 
 module.exports = GoodHealthService;
