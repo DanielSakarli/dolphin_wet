@@ -70,7 +70,7 @@ const routes: Array<RouteRecordRaw> = [
 		path: '/detailHousing',
 		name: 'DetailHousing',
 		component: () => import('@/views/HousingIndicatorCollector.vue'),
-		meta: { requiresAuth: false },
+		meta: { requiresAuth: true },
 	},
 ];
 
@@ -99,6 +99,8 @@ router.beforeEach((to, from, next) => {
 			// dataInBody is a flag that indicates if the user
 			// has unsaved data in the CheckCriteriaSelector
 			// vue files.
+			console.log('dataInBody: ', localStorage.getItem('dataInBody'));
+			console.log('backButtonClicked: ', localStorage.getItem('backButtonClicked'));
 			if (
 				localStorage.getItem('dataInBody') === 'true' &&
 				localStorage.getItem('backButtonClicked') === 'false'
@@ -116,10 +118,7 @@ router.beforeEach((to, from, next) => {
 					// If the user cancels, stop navigation
 					next(false);
 				}
-			} /*else {
-				// If dataInBody is not present in localStorage, proceed to the route
-				next();
-			}*/
+			}
 			if (localStorage.getItem('dataInBody') === 'false') {
 				next();
 			}

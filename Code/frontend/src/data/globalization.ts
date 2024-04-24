@@ -167,7 +167,7 @@ export const globalizationList = {
 		//Translation Evaluation Menu
 		principleHealth: 'Health',
 		principleBehaviour: 'Behaviour',
-		principleEmotionalState: 'Emotional State',
+		principleEmotionalState: 'Mental State',
 		principleNutrition: 'Nutrition',
 		principleEnvironment: 'Environment',
 		//Translation Dolphins

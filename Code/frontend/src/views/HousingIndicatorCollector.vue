@@ -109,12 +109,9 @@ export default defineComponent({
 			});
 		},
 		confirmRefresh() {
-			const confirmed = confirm(this.$t('savingDataNext'));
-			if (confirmed) {
-				const currentPath = this.$route.path;
-				const targetUrl = '/detailHealth';
-				window.location.href = targetUrl;
-			}
+			const currentPath = this.$route.path;
+			const targetUrl = '/detailHealth';
+			window.location.href = targetUrl;
 		},
 	},
 });

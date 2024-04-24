@@ -75,7 +75,7 @@ import axios from 'axios';
 import { baseUrl } from '@/utils/baseUrl';
 import { toast } from 'vue3-toastify';
 import 'vue3-toastify/dist/index.css';
-import { add } from 'ionicons/icons';
+//import { add } from 'ionicons/icons';
 
 export default {
 	components: {

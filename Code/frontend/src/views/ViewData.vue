@@ -74,7 +74,10 @@
 									:key="feedingRecord.feeding_record_id"
 								>
 									<ion-label>
-										<p>Record created at: {{ feedingRecord.created_at }}</p>
+										<p>
+											<span class="bold-text">Record created at:</span>
+											{{ feedingRecord.created_at }}
+										</p>
 										<p>Dolphin name: {{ feedingRecord.dolphin_name }}</p>
 										<p>User ID: {{ feedingRecord.user_id }}</p>
 										<p>
@@ -110,7 +113,7 @@
 											Fish quality comments:
 											{{ feedingRecord.fish_quality_comments || 'N/A' }}
 										</p>
-										<p>
+										<p class="break-words">
 											Laboratory data file:
 											{{ feedingRecord.file_path || 'N/A' }}
 										</p>
@@ -143,7 +146,10 @@
 									:key="HousingRecord.housing_record_id"
 								>
 									<ion-label>
-										<p>Record created at: {{ HousingRecord.created_at }}</p>
+										<p>
+											<span class="bold-text">Record created at:</span
+											>{{ HousingRecord.created_at }}
+										</p>
 										<p>Dolphin name: {{ HousingRecord.dolphin_name }}</p>
 										<p>
 											Enclosure barrier safety:
@@ -238,7 +244,10 @@
 									:key="HealthRecord.health_record_id"
 								>
 									<ion-label>
-										<p>Record created at: {{ HealthRecord.created_at }}</p>
+										<p>
+											<span class="bold-text">Record created at:</span>
+											{{ HealthRecord.created_at }}
+										</p>
 
 										<p>Dolphin name: {{ HealthRecord.dolphin_name }}</p>
 										<p>
@@ -388,6 +397,11 @@
 									:key="BehaviourRecord.behaviour_record_id"
 								>
 									<ion-label>
+										<p>
+											<span class="bold-text">Record created at:</span>
+											{{ BehaviourRecord.created_at }}
+										</p>
+
 										<p>Dolphin Name: {{ BehaviourRecord.dolphin_name }}</p>
 										<p>
 											Environmental Enrichment:
@@ -532,8 +546,7 @@
 											}}
 										</p>
 
-										<p>Created At: {{ BehaviourRecord.created_at }}</p>
-										<p>Updated At: {{ BehaviourRecord.updated_at }}</p>
+										
 									</ion-label>
 								</ion-item>
 							</ion-list>
@@ -558,6 +571,11 @@
 									:key="EmotionalStateRecord.emotional_state_record_id"
 								>
 									<ion-label>
+										<p>
+											<span class="bold-text">Record created at:</span>
+											{{ EmotionalStateRecord.created_at }}
+										</p>
+
 										<p>Dolphin Name: {{ EmotionalStateRecord.dolphin_name }}</p>
 										<p>
 											Willingness to participate:
@@ -629,7 +647,6 @@
 												'N/A'
 											}}
 										</p>
-										<p>Created At: {{ EmotionalStateRecord.created_at }}</p>
 									</ion-label>
 								</ion-item>
 							</ion-list>
@@ -688,6 +705,7 @@ interface FeedingRecord {
 	kcal_calculations_comments: string | null;
 	blood_hydration_comments: string | null;
 	fish_quality_comments: string | null;
+	file_path: string | null;
 	fish_variety_comments: string | null;
 	created_at: string;
 	updated_at: string;
@@ -1049,3 +1067,12 @@ export default {
 	},
 };
 </script>
+
+<style scoped>
+.break-words {
+	word-break: break-word;
+}
+.bold-text {
+	font-weight: bold;
+}
+</style>

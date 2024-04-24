@@ -82,7 +82,9 @@ async function deleteDolphin(req, res, next) {
 	try {
 		const dolphinName = req.params.name;
 		await DolphinService.deleteDolphin(dolphinName);
-		res.sendStatus(204);
+		// Return all existing dolphins after deleting the given one.
+		const dolphins = await DolphinService.getAllDolphins();
+		res.status(200).json(dolphins);
 	} catch (error) {
 		next(error);
 	}

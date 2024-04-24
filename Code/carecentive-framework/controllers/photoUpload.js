@@ -26,7 +26,7 @@ const storage = multer.diskStorage({
       );
       
       // Save photo path in session storage for later access in good_health.js to save the photo paths in the database
-      const apiUrl = process.env.MYSQL_HOST + ':' + process.env.HTTP_PORT;
+      const apiUrl = process.env.PHOTO_PATH; //process.env.MYSQL_HOST + ':' + process.env.HTTP_PORT;
       if(req.body.photo_type === 'eye'){
         console.log('I am here: ' + req.session.photo_path.eye_photo_path);
         if(req.session.photo_path.eye_photo_path === 'empty'){ //If empty, so session storage has just been initialized

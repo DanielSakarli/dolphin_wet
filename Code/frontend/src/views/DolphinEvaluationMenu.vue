@@ -150,7 +150,14 @@
 					<ion-label>Maximum Kcal Calculations:</ion-label>
 					<ion-text>{{ currentDolphin.max_kcal_calculations }}</ion-text>
 				</ion-item>
-				<ion-button @click="openEditModal">Edit</ion-button>
+				<ion-row>
+					<ion-col size="6">
+						<ion-button expand="full" @click="openEditModal">Edit</ion-button>
+					</ion-col>
+					<ion-col size="6" class="ion-text-end">
+						<ion-button expand="full" @click="deleteDolphin">Delete</ion-button>
+					</ion-col>
+				</ion-row>
 			</ion-card>
 		</ion-content>
 
@@ -170,7 +177,7 @@
 				</ion-buttons>
 			</ion-toolbar>
 			<ion-modal :is-open="addModalOpen">
-				<AddDolphin @close-modal="addModalOpen = false" />
+				<AddDolphin @close-modal="dolphinAdded" />
 			</ion-modal>
 			<!--<form @submit.prevent="submitAdd">
 						<ion-list v-for="(value, key) in newDolphin" :key="key + 'Add'">
@@ -193,6 +200,8 @@
 import {
 	IonPage,
 	IonButton,
+	IonRow,
+	IonCol,
 	IonCard,
 	IonCardTitle,
 	IonContent,
@@ -208,6 +217,7 @@ import {
 	IonButtons,
 	IonTitle,
 	IonMenuButton,
+	alertController,
 } from '@ionic/vue';
 import { ref, computed, onMounted } from 'vue';
 import axios from 'axios';
@@ -238,6 +248,8 @@ export default {
 	components: {
 		IonPage,
 		IonButton,
+		IonRow,
+		IonCol,
 		IonCard,
 		IonCardTitle,
 		IonContent,
@@ -398,6 +410,73 @@ export default {
 			}
 		};
 
+		// Gets called after user added a new dolphin
+		// fetches the newest dolphinList and closes the ion-modal for adding dolphins
+		const dolphinAdded = () => {
+			fetchDolphins();
+			addModalOpen.value = false;
+		};
+
+		const deleteDolphin = () => {
+			if (currentDolphinValues.value.name) {
+				showAlert().then(() => {
+					let deleteDolphin = currentDolphinValues.value.name;
+					const urlDelete = baseUrl + `/api/dolphins/${deleteDolphin}`;
+					axios
+						.delete(urlDelete, { withCredentials: true })
+						.then((response) => {
+							console.log('Response:', response.data);
+							fetchDolphins();
+							showDolphin.value = false;
+							toast.success(`Dolphin ${deleteDolphin} successfully deleted!`, {
+								autoClose: 1700,
+							});
+							deleteDolphin = '';
+						})
+						.catch((error) => {
+							console.error('Error:', error.response.data);
+							if (error.response.data.error === 'USER_NOT_AN_ADMINISTRATOR') {
+								toast.error('User has no administrator rights!', {
+									autoClose: 2000,
+								});
+							}
+							deleteDolphin = '';
+						});
+				});
+			}
+		};
+
+		const showAlert = () => {
+			return new Promise((resolve, reject) => {
+				console.log('Reached the alert message');
+				alertController
+					.create({
+						header: 'Confirmation',
+						message: 'Are you sure you want to delete the dolphin?',
+						buttons: [
+							{
+								text: 'Cancel',
+								role: 'cancel',
+								cssClass: 'secondary',
+								handler: () => {
+									console.log('Cancel clicked');
+									reject();
+								},
+							},
+							{
+								text: 'Delete',
+								handler: () => {
+									console.log('Confirm Okay');
+									resolve(void 0);
+								},
+							},
+						],
+					})
+					.then((alert) => {
+						alert.present();
+					});
+			});
+		};
 		//fetchDolphins();
 
 		// Select a dolphin to view
@@ -556,6 +635,8 @@ export default {
 			currentDolphinValues,
 			showDolphin,
 			submitEdit,
+			deleteDolphin,
+			dolphinAdded,
 			editModalOpen,
 			reloadDolphins,
 			openAddModal,
