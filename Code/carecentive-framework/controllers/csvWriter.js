@@ -52,7 +52,7 @@ async function csvWriter(req, res, next) {
 	port: 465,
 	secure: true,
 	auth: {
-		user: 'dolphin.wet.app@gmail.com',
+		user: process.env.EMAIL,
 		pass: process.env.EMAIL_PASSWORD
 	}
 	});
