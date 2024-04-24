@@ -399,7 +399,7 @@ async function csvWriter(req, res, next) {
 	console.log('data: ', ...data);
 	csvWriter
 		.writeRecords(data)
-		.then(() => {
+		.then(async () => {
 			console.log('...Done');
 			res.download(savePath);
 
@@ -418,15 +418,20 @@ async function csvWriter(req, res, next) {
 			  };
 			  
 			  // Sends the mail
-			  transporter.sendMail(mailOptions, (error, info) => {
-				if (error) {
-				  console.log(error);
-				  res.sendStatus(500);
-				} else {
-				  console.log('Email sent: ' + info.response);
-				  res.sendStatus(200);
-				}
+			  await new Promise((resolve, reject) => {
+				transporter.sendMail(mailOptions, (error, info) => {
+					if (error) {
+					  console.error(error);
+					 reject(error); 
+					  //res.sendStatus(500);
+					} else {
+					  console.log('Email sent: ' + info.response);
+					  resolve(info);
+					  //res.sendStatus(200);
+					}
+				  });
 			  });
+			 
 
 
 		})
