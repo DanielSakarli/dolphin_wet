@@ -1,4 +1,4 @@
-const NODE_ENV = 'development'; // or 'production'
+const NODE_ENV = 'production'; // or 'production'
 
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore

@@ -50,16 +50,16 @@ class GoodFeedingService {
 			// Check if user has a role and if, which role (i.e. which zoo he is working at)
 			//const user = await User.query().findById(result.user_id).withGraphFetched('roles');
 			//const roleName = user.roles[0].name;
-			console.log('Role in service layer: ', roleName);
+			//console.log('Role in service layer: ', roleName);
 			if (roleName) {
-			console.log('role: ', roleName);
+			//console.log('role: ', roleName);
 			const location = roleName;
 			const modelName = `${location}GoodFeeding`;
 			const GoodFeeding = require(`../models/${modelName}`); // Get the respective model, depending on which zoo the user works at
 			////////////////////////////////////////////////
 
 
-			console.log("Date sent to backend: ", result.created_at);
+			//console.log("Date sent to backend: ", result.created_at);
 			if (result.created_at !== "") {
 				const insertedResult = await GoodFeeding.query().insert({
 					dolphin_id,
@@ -94,7 +94,7 @@ class GoodFeedingService {
 			//const roleName = user.roles[0].name;
 			//const roleName = req.role;
 			if (roleName) {
-			console.log('role: ', roleName);
+			//console.log('role: ', roleName);
 			const location = roleName;
 			const modelName = `${location}GoodFeeding`;
 			const GoodFeeding = require(`../models/${modelName}`); // Get the respective model, depending on which zoo the user works at
@@ -123,7 +123,7 @@ class GoodFeedingService {
 			//const roleName = user.roles[0].name;
 			//const roleName = req.role;
 			if (roleName) {
-			console.log('role: ', roleName);
+			//console.log('role: ', roleName);
 			const location = roleName;
 			const modelName = `${location}GoodFeeding`;
 			const GoodFeeding = require(`../models/${modelName}`); // Get the respective model, depending on which zoo the user works at
@@ -154,7 +154,7 @@ class GoodFeedingService {
 			//const roleName = user.roles[0].name;
 			//const roleName = req.role;
 			if (roleName) {
-			console.log('role: ', roleName);
+			//console.log('role: ', roleName);
 			const location = roleName;
 			const modelName = `${location}GoodFeeding`;
 			const GoodFeeding = require(`../models/${modelName}`); // Get the respective model, depending on which zoo the user works at
@@ -183,7 +183,7 @@ class GoodFeedingService {
 			//const roleName = user.roles[0].name;
 			//const roleName = req.role;
 			if (roleName) {
-			console.log('role: ', roleName);
+			//console.log('role: ', roleName);
 			const location = roleName;
 			const modelName = `${location}GoodFeeding`;
 			const GoodFeeding = require(`../models/${modelName}`); // Get the respective model, depending on which zoo the user works at
@@ -219,7 +219,7 @@ class GoodFeedingService {
 			//const roleName = user.roles[0].name;
 			//const roleName = req.role;
 			if (roleName) {
-			console.log('role: ', roleName);
+			//console.log('role: ', roleName);
 			const location = roleName;
 			const modelName = `${location}GoodFeeding`;
 			const GoodFeeding = require(`../models/${modelName}`); // Get the respective model, depending on which zoo the user works at
@@ -262,7 +262,7 @@ class GoodFeedingService {
 		//const roleName = user.roles[0].name;
 		//const roleName = req.role;
 		if (roleName) {
-		console.log('role: ', roleName);
+		//console.log('role: ', roleName);
 		
 		// Gets the year and month numbers of last numMonths months
 		const lastNMonths = getLastNMonths(numMonths);
@@ -317,7 +317,7 @@ class GoodFeedingService {
 			//const roleName = user.roles[0].name;
 			//const roleName = req.role;
 			if (roleName) {
-			console.log('role: ', roleName);
+			//console.log('role: ', roleName);
 			const location = roleName;
 			const modelName = `${location}GoodFeeding`;
 			const GoodFeeding = require(`../models/${modelName}`); // Get the respective model, depending on which zoo the user works at

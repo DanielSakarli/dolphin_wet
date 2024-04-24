@@ -21,12 +21,12 @@ async function setResult(req, res, next) {
 		let userName;
 		if (isUserAuth) {
 			const { user_id, name } = req.authData;
-			console.log('authdata: ', req.authData);
+			//console.log('authdata: ', req.authData);
 			userID = user_id;
 			userName = name;
-			console.log('user name: ', userName);
+			//console.log('user name: ', userName);
 			const roleName = req.role;
-			console.log('role in control layer: ', roleName);
+			//console.log('role in control layer: ', roleName);
 			let test_result = req.body;
 
 		// If dolphin is not existing in database,
@@ -42,11 +42,11 @@ async function setResult(req, res, next) {
 		const dolphin_obj = await DolphinService.getOneDolphin(test_result.dolphin_name);
 		const dolphin_id = dolphin_obj.dolphin_id;
 
-		console.log('Dolphins approved');
-		console.log('Session in control layer: ', req.session);
+		//console.log('Dolphins approved');
+		//console.log('Session in control layer: ', req.session);
 		// Get the file paths from the session storage
 		if(req.session.file_path && req.session.file_path != '') {
-			console.log('File path: ', req.session.file_path);
+			//console.log('File path: ', req.session.file_path);
 			// attach userID to test result in req.body
 			test_result = { user_id: userID, user_name: userName, ...test_result };
 
@@ -65,7 +65,7 @@ async function setResult(req, res, next) {
 			let test_result = req.body;
 			
 			test_result = { user_id: userID, user_name: userName, ...test_result };
-			console.log(test_result);
+			//console.log(test_result);
 			const insertedResult = await GoodFeedingService.loadTestResult(test_result, roleName);
 			res.status(201).json(insertedResult);
 		}
@@ -96,17 +96,17 @@ async function getTestResult(req, res, next) {
 		// After gone through the authenticateToken middleware
 		// the data of user is in the req.authData
 		
-		console.log('isUserAuth: ', isUserAuth);
+		//console.log('isUserAuth: ', isUserAuth);
 		if (isUserAuth) {
-			console.log('authdata: ', req.authData);
+			//console.log('authdata: ', req.authData);
 			const { user_id } = req.authData;
 			const userID = user_id;
-			console.log('User ID: ', userID);
+			//console.log('User ID: ', userID);
 			const roleName = req.role;
-			console.log('role in control layer: ', roleName);
+			//console.log('role in control layer: ', roleName);
 		// Gets the dolphin name and the number of months from query params
 		const { name, numMonths } = req.query; 
-		console.log('name: ', name);
+		//console.log('name: ', name);
 		if(name === '') {
 		// when name is '' it should get the data of all dolphins
 		// If numMonths is 10, return all results, not just past 10 months

@@ -1,5 +1,7 @@
 const path = require('path');
 const nodemailer = require('nodemailer');
+const dotenv = require('dotenv');
+dotenv.config();
 const createCsvWriter = require('csv-writer').createObjectCsvWriter;
 const DolphinService = require('../services/DolphinService');
 const GoodFeedingService = require('../services/GoodFeedingService');
