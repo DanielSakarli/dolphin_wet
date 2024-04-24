@@ -110,6 +110,10 @@
 											Fish quality comments:
 											{{ feedingRecord.fish_quality_comments || 'N/A' }}
 										</p>
+										<p>
+											Laboratory data file:
+											{{ feedingRecord.file_path || 'N/A' }}
+										</p>
 										<p>Fish variety: {{ feedingRecord.fish_variety }}</p>
 
 										<p>
