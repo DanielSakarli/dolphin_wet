@@ -155,7 +155,7 @@ export default defineComponent({
 									//localStorage.setItem('backButtonClicked', 'false');
 									//console.log('backButtonClicked: ', localStorage.getItem('backButtonClicked'));
 									this.$router.push('/folder/Evaluate');
-									(this.$refs.emotionalStateCheckRef as any).resetData();
+									(this.$refs.EmotionalStateCheckRef as any).resetData();
 									resolve(void 0);
 								},
 							},
