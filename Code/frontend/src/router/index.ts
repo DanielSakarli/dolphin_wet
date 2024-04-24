@@ -101,6 +101,9 @@ router.beforeEach((to, from, next) => {
 			// vue files.
 			console.log('dataInBody: ', localStorage.getItem('dataInBody'));
 			console.log('backButtonClicked: ', localStorage.getItem('backButtonClicked'));
+			if (localStorage.getItem('dataInBody') === 'false') {
+				next();
+			}
 			if (
 				localStorage.getItem('dataInBody') === 'true' &&
 				localStorage.getItem('backButtonClicked') === 'false'
@@ -118,9 +121,6 @@ router.beforeEach((to, from, next) => {
 					// If the user cancels, stop navigation
 					next(false);
 				}
-			}
-			if (localStorage.getItem('dataInBody') === 'false') {
-				next();
 			}
 			if (
 				localStorage.getItem('dataInBody') === 'true' &&

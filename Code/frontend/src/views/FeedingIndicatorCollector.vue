@@ -133,6 +133,9 @@ export default defineComponent({
 						localStorage.getItem('backButtonClicked')
 					);
 				});
+			} else {
+				// If no data in body
+				this.$router.push('/folder/Evaluate');
 			}
 		},
 		showAlert() {
@@ -148,6 +151,10 @@ export default defineComponent({
 								cssClass: 'secondary',
 								handler: () => {
 									console.log('Cancel clicked');
+									localStorage.setItem('backButtonClicked', 'false');
+									localStorage.setItem('dataInBody', 'true');
+									console.log('backButtonClicked: ', localStorage.getItem('backButtonClicked'));
+									console.log('dataInBody: ', localStorage.getItem('dataInBody'));
 									reject();
 								},
 							},
