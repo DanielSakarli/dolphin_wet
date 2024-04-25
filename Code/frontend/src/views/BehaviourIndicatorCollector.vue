@@ -25,17 +25,14 @@ import {
 	IonHeader,
 	IonTitle,
 	IonToolbar,
-	IonContent,
 	IonPage,
-	IonIcon,
-	IonButton,
 	IonButtons,
 	IonBackButton,
 	alertController,
 } from '@ionic/vue';
 // Import customized components
 import BehaviourCheckCriteriaSelector from '@/components/BehaviourCheckCriteriaSelector.vue';
-import CheckComments from '@/components/CheckComments.vue';
+//import CheckComments from '@/components/CheckComments.vue';
 import { defineComponent } from 'vue';
 
 export default defineComponent({
@@ -45,15 +42,11 @@ export default defineComponent({
 		};
 	},
 	components: {
-		IonIcon,
 		IonHeader,
 		IonTitle,
 		IonToolbar,
-		IonContent,
 		IonPage,
-		IonButton,
 		BehaviourCheckCriteriaSelector,
-		CheckComments,
 		IonButtons,
 		IonBackButton,
 	},
@@ -134,7 +127,6 @@ export default defineComponent({
 		confirmRefresh() {
 			const confirmed = confirm(this.$t('savingDataNext'));
 			if (confirmed) {
-				const currentPath = this.$route.path;
 				const targetUrl = `/detailBehaviour`;
 				window.location.href = targetUrl;
 			}

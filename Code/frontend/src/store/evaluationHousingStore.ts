@@ -2,6 +2,7 @@ import { defineStore } from 'pinia';
 import requestBodiesHousing from '@/data/requestBodiesHousing.json';
 
 interface RequestBodyHousing {
+	dolphin_name: string;
 	enclosure_barrier_safety: number | null;
 	foreign_body_ingestion: number | null;
 	pool_design: number | null;

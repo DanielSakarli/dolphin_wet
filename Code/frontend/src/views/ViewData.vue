@@ -34,9 +34,15 @@
 						cancelText="Cancel"
 						v-model="principleSelect"
 					>
-						<ion-select-option v-for="principle in principles">{{
+						<ion-select-option
+							v-for="(principle, index) in principles"
+							:key="index"
+						>
+							{{ principle }}
+						</ion-select-option>
+						<!--<ion-select-option v-for="principle in principles">{{
 							principle
-						}}</ion-select-option>
+						}}</ion-select-option>-->
 					</ion-select>
 				</ion-item>
 				<!--Put here the button for choosing how long ago the data should be displayed (1, 2, 3, ... months and so on)-->
@@ -545,8 +551,6 @@
 												BehaviourRecord.avoidance_pool_areas_comments || 'N/A'
 											}}
 										</p>
-
-										
 									</ion-label>
 								</ion-item>
 							</ion-list>
@@ -671,7 +675,6 @@ import {
 	IonList,
 	IonButton,
 	IonButtons,
-	IonMenu,
 	IonMenuButton,
 	IonIcon,
 	IonSelect,

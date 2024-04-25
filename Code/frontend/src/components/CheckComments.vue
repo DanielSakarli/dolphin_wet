@@ -17,7 +17,7 @@
 <script lang="ts">
 import { IonItem, IonTextarea } from '@ionic/vue';
 import { defineComponent } from 'vue';
-import FeedingCheckCriteriaSelector from './FeedingCheckCriteriaSelector.vue';
+//import FeedingCheckCriteriaSelector from './FeedingCheckCriteriaSelector.vue';
 import { mapActions } from 'vuex';
 
 export default defineComponent({
@@ -48,9 +48,3 @@ export default defineComponent({
 	},
 });
 </script>
-
-<!--<style scoped>
-ion-item {
-	margin: 0.5rem 2rem;
-}
-</style>-->

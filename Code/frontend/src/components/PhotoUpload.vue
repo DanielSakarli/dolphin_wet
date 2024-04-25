@@ -32,14 +32,11 @@ export default defineComponent({
 	},
 	data() {
 		return {
-			test_name: '',
-			test_date: '',
 			//form: null,
 		};
 	},
 	methods: {
-		submitForm(e: SubmitEvent) {
-			//}, test_date: string, test_name: string) {
+		submitForm(e: Event) {
 			// prevents the default behavior of the browser, which is to perform a full page reload.
 			// I have no idea wether you need this in ionic.
 			e.preventDefault();
@@ -49,34 +46,35 @@ export default defineComponent({
 			if (form) {
 				console.log('submitForm in photoUpload.vue');
 				// get the files from the input form
-				const filesInput = document.getElementById('files');
-				const files = filesInput.files;
+				const filesInput = document.getElementById('files') as HTMLInputElement;
+				if (filesInput) {
+					const files = filesInput.files;
 
-				// create a new FormData object, you can learn more here
-				// https://developer.mozilla.org/en-US/docs/Web/API/FormData/FormData
-				const formData = new FormData();
+					// create a new FormData object, you can learn more here
+					// https://developer.mozilla.org/en-US/docs/Web/API/FormData/FormData
+					const formData = new FormData();
 
-				// in case of multiple photos, use a loop here to add all photos.
-				// file.file: first file is the html element,
-				// second file is the name for that html element
-				// The html element is like:
-				// <input id="file" name="file" type="file" multiple />
-				if (files) {
-					console.log('Number of pictures: ' + files.length);
+					// in case of multiple photos, use a loop here to add all photos.
+					// file.file: first file is the html element,
+					// second file is the name for that html element
+					// The html element is like:
+					// <input id="file" name="file" type="file" multiple />
+					if (files) {
+						console.log('Number of pictures: ' + files.length);
 
-					for (let i = 0; i < files.length; i++) {
-						console.log(files[i]);
-						formData.append('files', files[i]);
-					}
-					console.log(...formData);
-					/*
+						for (let i = 0; i < files.length; i++) {
+							console.log(files[i]);
+							formData.append('files', files[i]);
+						}
+						//console.log(...formData);
+						/*
 					for (let [key, value] of formData.entries()) {
 						console.log(key, value);
 					}*/
-					//console.log('access second picture: ' + formData.get('files', files[1].file));
-				}
+						//console.log('access second picture: ' + formData.get('files', files[1].file));
+					}
 
-				/*
+					/*
 				if (files) {
 					console.log(
 						'Number of pictures: ' + (files as HTMLInputElement).files.length
@@ -90,31 +88,11 @@ export default defineComponent({
 					//formData.append('files', (files as HTMLInputElement).files[i]);
 					//}
 				}*/
-				//console.log(formData.get('files'));
-				//console.log(file);
+					//console.log(formData.get('files'));
+					//console.log(file);
 
-				this.$emit('form-submitted', files);
-				/*
-				axios
-					.post(baseUrl + '/api/photo', formData, {
-						headers: {
-							// !!! The content-type must be multipart/form-date
-							// otherwise errors arise
-							'Content-Type': 'multipart/form-data',
-						},
-					})
-					/* Commented out the response: I think the middelware calls next() and doesn´t give a response back
-					.then((response) => {
-						console.log(response);
-						if (response.status === 201) {
-							// do something after uploading successfully
-							console.log('success!');
-						}
-					})
-					.catch((error) => {
-						// error handling here
-						console.log(error);
-					});*/
+					this.$emit('form-submitted', files);
+				}
 			}
 		},
 	},

@@ -221,7 +221,7 @@ import {
 } from '@ionic/vue';
 import { ref, computed, onMounted } from 'vue';
 import axios from 'axios';
-import { useRouter } from 'vue-router';
+//import { useRouter } from 'vue-router';
 import { baseUrl } from '@/utils/baseUrl';
 import { useDolphinsStore } from '@/store/dolphinsStore';
 import AddDolphin from './AddDolphin.vue';
@@ -353,7 +353,7 @@ export default {
 		// const dolphinValues = dolphinsStore.dolphinList;
 
 		const isLoading = ref<boolean>(false);
-		const router = useRouter();
+		//const router = useRouter();
 
 		onMounted(async () => {
 			isLoading.value = true;

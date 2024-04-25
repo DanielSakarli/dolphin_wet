@@ -29,7 +29,6 @@
 import {
 	IonCheckbox,
 	IonItem,
-	IonCard,
 	IonThumbnail,
 	IonButton,
 	IonIcon,
@@ -40,7 +39,6 @@ export default {
 	components: {
 		IonCheckbox,
 		IonItem,
-		IonCard,
 		IonThumbnail,
 		IonButton,
 		IonIcon,

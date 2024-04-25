@@ -22,22 +22,16 @@
 
 <script lang="ts">
 import {
-	IonFooter,
 	IonHeader,
 	IonTitle,
 	IonToolbar,
-	IonContent,
 	IonPage,
-	IonIcon,
-	IonButton,
 	IonButtons,
 	IonBackButton,
 	alertController,
 } from '@ionic/vue';
 // Import customized components
 import HousingCheckCriteriaSelector from '@/components/HousingCheckCriteriaSelector.vue';
-import HousingCheckScoreField from '@/components/HousingCheckScoreField.vue';
-import CheckComments from '@/components/CheckComments.vue';
 import { defineComponent } from 'vue';
 
 export default defineComponent({
@@ -47,17 +41,11 @@ export default defineComponent({
 		};
 	},
 	components: {
-		IonIcon,
-		IonFooter,
 		IonHeader,
 		IonTitle,
 		IonToolbar,
-		IonContent,
 		IonPage,
-		IonButton,
 		HousingCheckCriteriaSelector,
-		HousingCheckScoreField,
-		CheckComments,
 		IonButtons,
 		IonBackButton,
 	},
@@ -135,7 +123,6 @@ export default defineComponent({
 			});
 		},
 		confirmRefresh() {
-			const currentPath = this.$route.path;
 			const targetUrl = '/detailHealth';
 			window.location.href = targetUrl;
 		},

@@ -36,14 +36,10 @@
 
 <script lang="ts">
 import {
-	IonFooter,
 	IonHeader,
 	IonTitle,
 	IonToolbar,
-	IonContent,
 	IonPage,
-	IonIcon,
-	IonButton,
 	IonButtons,
 	IonBackButton,
 	alertController,
@@ -93,14 +89,10 @@ export default defineComponent({
 		};
 	},
 	components: {
-		IonIcon,
-		IonFooter,
 		IonHeader,
 		IonTitle,
 		IonToolbar,
-		IonContent,
 		IonPage,
-		IonButton,
 		FeedingCheckCriteriaSelector,
 		IonButtons,
 		IonBackButton,
@@ -204,7 +196,6 @@ export default defineComponent({
 			this.$i18n.locale = $event.detail.value;
 		},
 		confirmRefresh() {
-			const currentPath = this.$route.path;
 			const targetUrl = `/detailFeeding`;
 			window.location.href = targetUrl;
 		},

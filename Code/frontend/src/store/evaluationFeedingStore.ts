@@ -3,6 +3,7 @@ import { defineStore } from 'pinia';
 import requestBodiesFeeding from '@/data/requestBodiesFeeding.json';
 
 interface RequestBodyFeeding {
+	dolphin_name: string;
 	body_condition_score: number | null;
 	weight_measured: number | null;
 	kcal_calculations: number | null;

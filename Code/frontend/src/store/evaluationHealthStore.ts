@@ -2,6 +2,7 @@ import { defineStore } from 'pinia';
 import requestBodiesHealth from '@/data/requestBodiesHealth.json';
 
 interface RequestBodyHealth {
+	dolphin_name: string;
 	normal_floatability: number | null;
 	records_normal_floatability: number | null;
 	inspection_eye_lesions: number | null;

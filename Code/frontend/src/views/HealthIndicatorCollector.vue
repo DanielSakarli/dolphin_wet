@@ -22,14 +22,10 @@
 
 <script lang="ts">
 import {
-	IonFooter,
 	IonHeader,
 	IonTitle,
 	IonToolbar,
-	IonContent,
 	IonPage,
-	IonIcon,
-	IonButton,
 	IonButtons,
 	IonBackButton,
 	alertController,
@@ -45,14 +41,10 @@ export default defineComponent({
 		};
 	},
 	components: {
-		IonIcon,
-		IonFooter,
 		IonHeader,
 		IonTitle,
 		IonToolbar,
-		IonContent,
 		IonPage,
-		IonButton,
 		HealthCheckCriteriaSelector,
 		IonButtons,
 		IonBackButton,
@@ -134,7 +126,6 @@ export default defineComponent({
 		confirmRefresh() {
 			const confirmed = confirm(this.$t('savingDataNext'));
 			if (confirmed) {
-				const currentPath = this.$route.path;
 				const targetUrl = `/detailHealth`;
 				window.location.href = targetUrl;
 			}

@@ -36,28 +36,18 @@
 
 <script lang="ts">
 import {
-	IonFooter,
 	IonHeader,
 	IonTitle,
 	IonToolbar,
-	IonContent,
 	IonPage,
-	IonIcon,
-	IonButton,
 	IonButtons,
 	IonBackButton,
 	alertController,
 } from '@ionic/vue';
 // Import customized components
 import EmotionalStateCheckCriteriaSelector from '@/components/EmotionalStateCheckCriteriaSelector.vue';
-import selectedDolphin from '@/components/EmotionalStateCheckCriteriaSelector.vue';
 import { defineComponent } from 'vue';
-import axios from 'axios';
-import { baseUrl } from '@/utils/baseUrl';
 import { mapActions } from 'vuex';
-
-const url = baseUrl + '/api/emotional_state';
-const token = localStorage.getItem('token'); //Get current JWT token of the user
 
 // document.cookie = token;
 // console.log('This token is set in cookie (client-side): ', document.cookie);
@@ -77,14 +67,10 @@ export default defineComponent({
 		};
 	},
 	components: {
-		IonIcon,
-		IonFooter,
 		IonHeader,
 		IonTitle,
 		IonToolbar,
-		IonContent,
 		IonPage,
-		IonButton,
 		EmotionalStateCheckCriteriaSelector,
 		IonButtons,
 		IonBackButton,
@@ -189,7 +175,6 @@ export default defineComponent({
 			this.$i18n.locale = $event.detail.value;
 		},
 		confirmRefresh() {
-			const currentPath = this.$route.path;
 			const targetUrl = `/detailEmotionalState`;
 			window.location.href = targetUrl;
 		},

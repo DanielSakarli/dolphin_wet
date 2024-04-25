@@ -2,6 +2,7 @@ import { defineStore } from 'pinia';
 import requestBodiesBehaviour from '@/data/requestBodiesBehaviour.json';
 
 interface RequestBodyBehaviour {
+	dolphin_name: string;
 	environmental_enrichment: number | null;
 	affiliative_behaviour: number | null;
 	play_behaviour: number | null;

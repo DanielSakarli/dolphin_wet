@@ -2,6 +2,7 @@ import { defineStore } from 'pinia';
 import requestBodiesEmotionalState from '@/data/requestBodiesEmotionalState.json';
 
 interface RequestBodyEmotionalState {
+	dolphin_name: string;
 	willingness_to_participate: number | null;
 	synchronous_swimming: number | null;
 	rubbing_behaviour: number | null;

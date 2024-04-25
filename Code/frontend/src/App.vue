@@ -47,8 +47,6 @@ import {
 	IonPage,
 	IonRouterOutlet,
 	IonMenu,
-	IonListHeader,
-	IonTitle,
 	IonContent,
 	IonItem,
 	IonLabel,
@@ -60,7 +58,6 @@ import {
 import { defineComponent } from 'vue';
 import { ref } from 'vue';
 import { Device, DevicePlugin } from '@capacitor/device';
-import { inject } from 'vue';
 import { useRouter } from 'vue-router';
 import axios from 'axios';
 import { baseUrl } from './utils/baseUrl';
@@ -92,38 +89,40 @@ export default defineComponent({
 		const router = useRouter();
 
 		const showAlert = async () => {
-			return new Promise(async (resolve, reject) => {
-				const alert = await alertController.create({
-					header: 'Confirmation',
-					message: 'Are you sure you want to proceed?',
-					buttons: [
-						{
-							text: 'Stay on Page',
-							role: 'cancel',
-							cssClass: 'secondary',
-							handler: () => {
-								console.log('Cancel clicked');
-								reject();
+			return new Promise((resolve, reject) => {
+				alertController
+					.create({
+						header: 'Confirmation',
+						message: 'Are you sure you want to proceed?',
+						buttons: [
+							{
+								text: 'Stay on Page',
+								role: 'cancel',
+								cssClass: 'secondary',
+								handler: () => {
+									console.log('Cancel clicked');
+									reject();
+								},
 							},
-						},
-						{
-							text: 'Lose Data',
-							handler: () => {
-								console.log('Confirm Okay');
-								localStorage.setItem('dataInBody', 'false');
-								localStorage.setItem('backButtonClicked', 'false');
-								router.back();
-								resolve(void 0);
+							{
+								text: 'Lose Data',
+								handler: () => {
+									console.log('Confirm Okay');
+									localStorage.setItem('dataInBody', 'false');
+									localStorage.setItem('backButtonClicked', 'false');
+									router.back();
+									resolve(void 0);
+								},
 							},
-						},
-					],
-				});
-
-				return alert.present();
+						],
+					})
+					.then((alert) => {
+						alert.present();
+					});
 			});
 		};
 
-		const navigateTo = (url, index) => {
+		const navigateTo = (url: string, index: number) => {
 			if (localStorage.getItem('dataInBody') === 'true') {
 				showAlert();
 				//selectedIndex.value = index; // Use .value to access or modify the value of a ref
@@ -168,7 +167,6 @@ export default defineComponent({
 		IonPage,
 		IonRouterOutlet,
 		IonMenu,
-		IonListHeader,
 		IonContent,
 		IonItem,
 		IonLabel,
@@ -194,7 +192,7 @@ export default defineComponent({
 	},
 	data() {
 		return {
-			selectedIndex: 0,
+			//selectedIndex: 0,
 			token: localStorage.getItem('token'),
 			appPages: [
 				//{ title: 'Dolphin WET', url: '/folder/Evaluate' },

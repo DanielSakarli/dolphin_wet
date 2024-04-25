@@ -19,7 +19,6 @@
 <script lang="ts">
 import {
 	IonBackButton,
-	IonButton,
 	IonContent,
 	IonHeader,
 	IonPage,
@@ -37,7 +36,6 @@ export default {
 		IonTitle,
 		IonToolbar,
 		IonBackButton,
-		IonButton,
 		IonButtons,
 	},
 };

@@ -1,4 +1,4 @@
-import { createStore, Store } from 'vuex';
+import { createStore } from 'vuex';
 
 interface State {
 	//userComment: string;
@@ -68,9 +68,11 @@ export default createStore<State>({
 	},
 	getters: {
 		//getUserComment: (state: State) => state.userComment,
-		getBodyConditionScoreComment: (state: State) => state.body_condition_score_comments,
+		getBodyConditionScoreComment: (state: State) =>
+			state.body_condition_score_comments,
 		getWeightMeasuredComment: (state: State) => state.weight_measured_comments,
-		getKcalCalculationsComment: (state: State) => state.kcal_calculations_comments,
+		getKcalCalculationsComment: (state: State) =>
+			state.kcal_calculations_comments,
 		getBloodHydrationComment: (state: State) => state.blood_hydration_comments,
 		getFishQualityComment: (state: State) => state.fish_quality_comments,
 		getFishVarietyComment: (state: State) => state.fish_variety_comments,
