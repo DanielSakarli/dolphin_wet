@@ -5,6 +5,7 @@ const bcrypt = require('bcryptjs');
 const authentication = require('../source/Authentication')
 
 const UserService = require('../services/UserService');
+const PasswordService = require('../services/PasswordService');
 
 const User = require('../models/User');
 const RoleService = require('../services/RoleService');
@@ -107,7 +108,6 @@ router.get('/logout', async function(req, res, next) {
 
 router.post('/changePassword',  async function(req, res, next) { //authentication.authenticateToken, async function(req, res, next) {
   try {
-    //let userId = req.authData.user_id;
     if(!req.body.name || req.body.userName === 0) {
       return res.status(400).send("USER_NAME_NOT_PROVIDED");
     }
@@ -126,10 +126,26 @@ router.post('/changePassword',  async function(req, res, next) { //authenticatio
     await User.query().patch({
       password_hash: newPasswordHash
     }).findById(userId);*/
+    
     res.sendStatus(200);
   }
   catch (err) {
     next(err)
+  }
+});
+
+
+router.post('/resetPassword', async function(req, res, next) {
+  try {
+    if (!req.body.email || req.body.email === 0) {
+      return res.status(400).send("EMAIL_NOT_PROVIDED");
+    }
+    
+    await PasswordService.sendNewPassword(req.body.email);
+    res.sendStatus(200);
+  }
+  catch (err) {
+    next(err);
   }
 });
 
