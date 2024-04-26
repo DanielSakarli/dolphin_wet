@@ -353,6 +353,20 @@ class EmotionalStateService {
 		throw error;
 	}
 }
+
+/**
+ * Sorts the data to be returned according to 'created at' date
+ */
+static async sortData(data) {
+	try {
+		const sortedData = data.sort((a, b) => {
+			return new Date(b.created_at) - new Date(a.created_at);
+		});
+		return sortedData;
+	} catch (error) {
+		throw error;
+	}	
+}
 }
 
 module.exports = EmotionalStateService;

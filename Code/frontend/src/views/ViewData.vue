@@ -18,12 +18,12 @@
 						cancelText="Cancel"
 						v-model="dolphinSelect"
 					>
+						<ion-select-option value="">All dolphins</ion-select-option>
 						<ion-select-option
 							v-for="dolphin in dolphinsStore.dolphinList"
 							v-bind:key="dolphin.name"
 							>{{ dolphin.name }}</ion-select-option
 						>
-						<ion-select-option value="">All dolphins</ion-select-option>
 					</ion-select>
 				</ion-item>
 				<ion-item>
@@ -37,8 +37,9 @@
 						<ion-select-option
 							v-for="(principle, index) in principles"
 							:key="index"
+							:value="principle.value"
 						>
-							{{ principle }}
+							{{ principle.display }}
 						</ion-select-option>
 						<!--<ion-select-option v-for="principle in principles">{{
 							principle
@@ -862,12 +863,24 @@ export default {
 			dolphinSelect: null as string | null,
 			principleSelect: null as string | null,
 			principles: [
-				this.$t('principleNutrition'),
-				this.$t('principleEnvironment'),
-				this.$t('principleHealth'),
-				this.$t('principleBehaviour'),
-				this.$t('principleEmotionalState'),
+				{ display: this.$t('principleNutrition'), value: 'Nutrition' },
+				{ display: this.$t('principleEnvironment'), value: 'Environment' },
+				{ display: this.$t('principleHealth'), value: 'Health' },
+				{ display: this.$t('principleBehaviour'), value: 'Behaviour' },
+				{
+					display: this.$t('principleEmotionalState'),
+					value: 'Emotional State',
+				},
 			],
+			/*principleMapping: {
+				// This mapping of the principles allows to send the english translation of the principle
+				// with the req.param in the sendCSV() method, no matter the users language.
+				[this.$t('principleNutrition')]: 'Nutrition',
+				[this.$t('principleEnvironment')]: 'Environment',
+				[this.$t('principleHealth')]: 'Health',
+				[this.$t('principleBehaviour')]: 'Behaviour',
+				[this.$t('principleEmotionalState')]: 'Mental State',
+			},*/
 			dataFeeding: null as DataFeeding | null,
 			dataHousing: null as DataHousing | null,
 			dataBehaviour: null as DataBehaviour | null,
@@ -1034,6 +1047,7 @@ export default {
 				.get(this.urlCsv, {
 					params: {
 						dolphin_name: this.dolphinSelect,
+						// Get the english translation of this.principleSelect:
 						section: this.principleSelect,
 						numMonths: this.numMonths,
 					},

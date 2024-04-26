@@ -335,7 +335,7 @@ async function csvWriter(req, res, next) {
 			});
 			}
 
-			if(section === 'Emotional State') {
+			if(section === 'Mental State') {
 				if (numMonths != '') {
 					if(dolphin_name != ''){
 						// Data of a specific dolphin_name and specific numMonths
