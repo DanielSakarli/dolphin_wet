@@ -9,9 +9,8 @@ class PasswordService {
 /**
 * @param {String} email Reset the password of the user with the given email
 */
-static async sendNewPassword(email) {
+static async sendNewPassword(email, userName) {
 try {
-	const userName = await User.query().where('email', email).select('name').first();
 	if (userName) {
 
     // Change the password in the database before sending the email:

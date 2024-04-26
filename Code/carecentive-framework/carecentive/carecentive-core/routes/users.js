@@ -141,8 +141,15 @@ router.post('/resetPassword', async function(req, res, next) {
       return res.status(400).send("EMAIL_NOT_PROVIDED");
     }
     
-    await PasswordService.sendNewPassword(req.body.email);
-    res.sendStatus(200);
+    // Check if there is a user with the given email
+    const userName = await User.query().where('email', req.body.email).select('name').first();
+    if (userName) {
+
+    await PasswordService.sendNewPassword(req.body.email, userName);
+    res.sendStatus(200); 
+    } else {
+      throw new Error("EMAIL_DOES_NOT_EXIST");
+    }
   }
   catch (err) {
     next(err);
