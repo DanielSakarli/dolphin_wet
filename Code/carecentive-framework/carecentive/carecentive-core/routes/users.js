@@ -105,24 +105,27 @@ router.get('/logout', async function(req, res, next) {
   }
 });
 
-router.post('/changePassword', authentication.authenticateToken, async function(req, res, next) {
-  
+router.post('/changePassword',  async function(req, res, next) { //authentication.authenticateToken, async function(req, res, next) {
   try {
-    let userId = req.authData.user_id;
-
+    //let userId = req.authData.user_id;
+    if(!req.body.name || req.body.userName === 0) {
+      return res.status(400).send("USER_NAME_NOT_PROVIDED");
+    }
+    if(!req.body.currentPassword || req.body.currentPassword === 0) {
+      return res.status(400).send("CURRENT_PASSWORD_NOT_PROVIDED");
+    }
     if (!req.body.newPassword || req.body.newPassword === 0) {
       return res.status(400).send("NEW_PASSWORD_NOT_PROVIDED");
     }
 
-    UserService.changePassword(userId, req.body.newPassword);
-
+    await UserService.changePassword(req.body.name, req.body.currentPassword, req.body.newPassword);
+    /*
     // Hash password
     let newPasswordHash = await bcrypt.hash(req.body.newPassword, 12)
 
     await User.query().patch({
       password_hash: newPasswordHash
-    }).findById(userId);
-
+    }).findById(userId);*/
     res.sendStatus(200);
   }
   catch (err) {

@@ -123,13 +123,17 @@ class UserService {
     }
   }
 
-  static async changePassword(userId, newPassword) {
+  static async changePassword(name, currentPassword, newPassword) {
+    // First, check that user knows the current password
+    if (await this.login(name, currentPassword)) {
+
     // Hash password
     let newPasswordHash = await bcrypt.hash(newPassword, 12)
-
+    // Change password
     await User.query().patch({
       password_hash: newPasswordHash
-    }).findById(userId);
+    }).where('name', name);
+    }
 
     return;
   }
