@@ -64,8 +64,9 @@
 									margin-bottom: 10px;
 									font-weight: 700;
 								"
+								@click="resetPassword"
 							>
-								<!--Forget Password?-->
+								Forget Password?
 							</h5>
 							<ion-button color="primary" expand="block" type="submit"
 								>Login</ion-button
@@ -172,6 +173,9 @@ export default defineComponent({
 			// or the default dolphins of the json file
 			const dolphinsStore = useDolphinsStore();
 			await dolphinsStore.fill();
+		},
+		resetPassword() {
+			this.$router.push('resetPassword');
 		},
 	},
 });

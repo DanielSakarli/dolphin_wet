@@ -407,7 +407,7 @@ async function csvWriter(req, res, next) {
 
 			 // Send email with CSV file as attachment
 			 let mailOptions = {
-				from: '"Dolphin WET App" <dolphin.wet.app@gmail.com>', // sender address
+				from: `"Dolphin WET App" <${process.env.EMAIL}>`, // sender address
 				to: userEmail.email, // list of receivers
 				subject: 'Dolphin WET App: CSV file with your data', // Subject line
 				text: 'Here is the CSV file you requested.', // plain text body

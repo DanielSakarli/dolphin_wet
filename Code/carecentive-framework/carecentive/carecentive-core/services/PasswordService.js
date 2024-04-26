@@ -40,7 +40,7 @@ try {
 	
 	    // Send email with the new password
 	    let mailOptions = {
-			from: '"Dolphin WET App" <dolphin.wet.app@gmail.com>', // sender address
+			from: `"Dolphin WET App" <${process.env.EMAIL}>`, // sender address
 			to: email, // list of receivers
 			subject: 'Dolphin WET App: Your new password.', // Subject line
 			text: `Hello ${userName.name},\n\nhere is the new password that you requested:\n
