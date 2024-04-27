@@ -61,7 +61,8 @@
 								Back to Login
 							</h5>
 							<ion-button color="primary" expand="block" type="submit"
-								><ion-icon slot="start" :icon="mailOutline"></ion-icon>Send New Password</ion-button
+								><ion-icon slot="start" :icon="mailOutline"></ion-icon>Send New
+								Password</ion-button
 							>
 							<!-- Error message, displayed in case username or password is wrong -->
 							<p v-if="errorMessage" class="error">{{ errorMessage }}</p>
@@ -105,7 +106,7 @@ export default defineComponent({
 			email: '',
 			errorMessage: '',
 			logo,
-            mailOutline,
+			mailOutline,
 		};
 	},
 	methods: {
@@ -120,12 +121,9 @@ export default defineComponent({
 				.post(baseUrl + pwResetUrl, requestBody)
 				.then(async (response) => {
 					console.log(response);
-					toast.success(
-						'Check your email inbox for the new password!',
-						{
-							autoClose: 3000,
-						}
-					);
+					toast.success('Check your email inbox for the new password!', {
+						autoClose: 3000,
+					});
 				})
 				.catch((error) => {
 					this.errorMessage = 'Invalid user email.';

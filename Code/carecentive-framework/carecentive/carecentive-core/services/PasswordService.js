@@ -43,7 +43,7 @@ try {
 			to: email, // list of receivers
 			subject: 'Dolphin WET App: Your new password.', // Subject line
 			text: `Hello ${userName.name},\n\nhere is the new password that you requested:\n
-               ${randomPassword}\n\nIf you did not request this new password, contact your administrator immediatly!\n\nYour Dolphin-WET-App`, // plain text body
+               ${randomPassword}\n\nWe strongly encourage you to change your password, since the content of this e-mail might be accessible to third-partys!\nIf you did not request this new password, contact your administrator immediatly!\n\nYour Dolphin-WET-App`, // plain text body
 	    };
 			  
 	    // Sends the mail

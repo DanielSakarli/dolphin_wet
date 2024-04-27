@@ -34,12 +34,12 @@ exports.up = function (knex) {
 				.onDelete('SET NULL')
 				.onUpdate('CASCADE');
 			table.string('user_name');		
-			table.integer('dolphin_id').unsigned().notNullable();
+			table.integer('dolphin_id').unsigned(); //.notNullable();
 			// Foreign key constrains for dolphin_id.
 			table
 				.foreign('dolphin_id')
 				.references('dolphins.dolphin_id')
-				.onDelete('CASCADE')
+				.onDelete('SET NULL')
 				.onUpdate('CASCADE');
 			table.string('dolphin_name');
 
@@ -71,12 +71,12 @@ exports.up = function (knex) {
 				.onDelete('SET NULL')
 				.onUpdate('CASCADE');
 			table.string('user_name');		
-			table.integer('dolphin_id').unsigned().notNullable();
+			table.integer('dolphin_id').unsigned(); //.notNullable();
 			// Foreign key constrains for dolphin_id.
 			table
 				.foreign('dolphin_id')
 				.references('dolphins.dolphin_id')
-				.onDelete('CASCADE')
+				.onDelete('SET NULL')
 				.onUpdate('CASCADE');
 			table.string('dolphin_name');
 
@@ -108,12 +108,12 @@ exports.up = function (knex) {
 				.onDelete('SET NULL')
 				.onUpdate('CASCADE');
 			table.string('user_name');		
-			table.integer('dolphin_id').unsigned().notNullable();
+			table.integer('dolphin_id').unsigned(); //.notNullable();
 			// Foreign key constrains for dolphin_id.
 			table
 				.foreign('dolphin_id')
 				.references('dolphins.dolphin_id')
-				.onDelete('CASCADE')
+				.onDelete('SET NULL')
 				.onUpdate('CASCADE');
 			table.string('dolphin_name');
 
@@ -145,12 +145,12 @@ exports.up = function (knex) {
 				.onDelete('SET NULL')
 				.onUpdate('CASCADE');
 			table.string('user_name');	
-			table.integer('dolphin_id').unsigned().notNullable();
+			table.integer('dolphin_id').unsigned(); //.notNullable();
 			// Foreign key constrains for dolphin_id.
 			table
 				.foreign('dolphin_id')
 				.references('dolphins.dolphin_id')
-				.onDelete('CASCADE')
+				.onDelete('SET NULL')
 				.onUpdate('CASCADE');
 			table.string('dolphin_name');
 
@@ -200,12 +200,12 @@ exports.up = function (knex) {
 				.onDelete('SET NULL')
 				.onUpdate('CASCADE');
 			table.string('user_name');	
-			table.integer('dolphin_id').unsigned().notNullable();
+			table.integer('dolphin_id').unsigned(); //.notNullable();
 			// Foreign key constrains for dolphin_id.
 			table
 				.foreign('dolphin_id')
 				.references('dolphins.dolphin_id')
-				.onDelete('CASCADE')
+				.onDelete('SET NULL')
 				.onUpdate('CASCADE');
 			table.string('dolphin_name');
 
@@ -255,12 +255,12 @@ exports.up = function (knex) {
 				.onDelete('SET NULL')
 				.onUpdate('CASCADE');
 			table.string('user_name');	
-			table.integer('dolphin_id').unsigned().notNullable();
+			table.integer('dolphin_id').unsigned(); //.notNullable();
 			// Foreign key constrains for dolphin_id.
 			table
 				.foreign('dolphin_id')
 				.references('dolphins.dolphin_id')
-				.onDelete('CASCADE')
+				.onDelete('SET NULL')
 				.onUpdate('CASCADE');
 			table.string('dolphin_name');
 
@@ -310,12 +310,12 @@ exports.up = function (knex) {
 				.onDelete('SET NULL')
 				.onUpdate('CASCADE');
 			table.string('user_name');
-			table.integer('dolphin_id').unsigned().notNullable();
+			table.integer('dolphin_id').unsigned(); //.notNullable();
 			// Foreign key constrains for dolphin_id.
 			table
 				.foreign('dolphin_id')
 				.references('dolphins.dolphin_id')
-				.onDelete('CASCADE')
+				.onDelete('SET NULL')
 				.onUpdate('CASCADE');
 			table.string('dolphin_name');
 
@@ -354,12 +354,12 @@ exports.up = function (knex) {
 				.onDelete('SET NULL')
 				.onUpdate('CASCADE');
 			table.string('user_name');
-			table.integer('dolphin_id').unsigned().notNullable();
+			table.integer('dolphin_id').unsigned(); //.notNullable();
 			// Foreign key constrains for dolphin_id.
 			table
 				.foreign('dolphin_id')
 				.references('dolphins.dolphin_id')
-				.onDelete('CASCADE')
+				.onDelete('SET NULL')
 				.onUpdate('CASCADE');
 			table.string('dolphin_name');
 
@@ -398,12 +398,12 @@ exports.up = function (knex) {
 				.onDelete('SET NULL')
 				.onUpdate('CASCADE');
 			table.string('user_name');
-			table.integer('dolphin_id').unsigned().notNullable();
+			table.integer('dolphin_id').unsigned(); //.notNullable();
 			// Foreign key constrains for dolphin_id.
 			table
 				.foreign('dolphin_id')
 				.references('dolphins.dolphin_id')
-				.onDelete('CASCADE')
+				.onDelete('SET NULL')
 				.onUpdate('CASCADE');
 			table.string('dolphin_name');
 
@@ -442,12 +442,12 @@ exports.up = function (knex) {
 				.onDelete('SET NULL')
 				.onUpdate('CASCADE');
 			table.string('user_name');	
-			table.integer('dolphin_id').unsigned().notNullable();
+			table.integer('dolphin_id').unsigned(); //.notNullable();
 			// Foreign key constrains for dolphin_id.
 			table
 				.foreign('dolphin_id')
 				.references('dolphins.dolphin_id')
-				.onDelete('CASCADE')
+				.onDelete('SET NULL')
 				.onUpdate('CASCADE');
 			table.string('dolphin_name');
 
@@ -496,12 +496,12 @@ exports.up = function (knex) {
 				.onDelete('SET NULL')
 				.onUpdate('CASCADE');
 			table.string('user_name');	
-			table.integer('dolphin_id').unsigned().notNullable();
+			table.integer('dolphin_id').unsigned(); //.notNullable();
 			// Foreign key constrains for dolphin_id.
 			table
 				.foreign('dolphin_id')
 				.references('dolphins.dolphin_id')
-				.onDelete('CASCADE')
+				.onDelete('SET NULL')
 				.onUpdate('CASCADE');
 			table.string('dolphin_name');
 
@@ -550,12 +550,12 @@ exports.up = function (knex) {
 				.onDelete('SET NULL')
 				.onUpdate('CASCADE');
 			table.string('user_name');	
-			table.integer('dolphin_id').unsigned().notNullable();
+			table.integer('dolphin_id').unsigned(); //.notNullable();
 			// Foreign key constrains for dolphin_id.
 			table
 				.foreign('dolphin_id')
 				.references('dolphins.dolphin_id')
-				.onDelete('CASCADE')
+				.onDelete('SET NULL')
 				.onUpdate('CASCADE');
 			table.string('dolphin_name');
 
@@ -604,12 +604,12 @@ exports.up = function (knex) {
 				.onDelete('SET NULL')
 				.onUpdate('CASCADE');
 			table.string('user_name');	
-			table.integer('dolphin_id').unsigned().notNullable();
+			table.integer('dolphin_id').unsigned(); //.notNullable();
 			// Foreign key constrains for dolphin_id.
 			table
 				.foreign('dolphin_id')
 				.references('dolphins.dolphin_id')
-				.onDelete('CASCADE')
+				.onDelete('SET NULL')
 				.onUpdate('CASCADE');
 			table.string('dolphin_name');
 			table.tinyint('willingness_to_participate').unsigned(); //0, 2
@@ -640,12 +640,12 @@ exports.up = function (knex) {
 				.onDelete('SET NULL')
 				.onUpdate('CASCADE');
 			table.string('user_name');	
-			table.integer('dolphin_id').unsigned().notNullable();
+			table.integer('dolphin_id').unsigned(); //.notNullable();
 			// Foreign key constrains for dolphin_id.
 			table
 				.foreign('dolphin_id')
 				.references('dolphins.dolphin_id')
-				.onDelete('CASCADE')
+				.onDelete('SET NULL')
 				.onUpdate('CASCADE');
 			table.string('dolphin_name');
 			table.tinyint('willingness_to_participate').unsigned(); //0, 2
@@ -676,12 +676,12 @@ exports.up = function (knex) {
 				.onDelete('SET NULL')
 				.onUpdate('CASCADE');
 			table.string('user_name');	
-			table.integer('dolphin_id').unsigned().notNullable();
+			table.integer('dolphin_id').unsigned(); //.notNullable();
 			// Foreign key constrains for dolphin_id.
 			table
 				.foreign('dolphin_id')
 				.references('dolphins.dolphin_id')
-				.onDelete('CASCADE')
+				.onDelete('SET NULL')
 				.onUpdate('CASCADE');
 			table.string('dolphin_name');
 			table.tinyint('willingness_to_participate').unsigned(); //0, 2
