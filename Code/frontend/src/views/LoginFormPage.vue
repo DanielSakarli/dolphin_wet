@@ -57,17 +57,21 @@
 								id="password"
 								v-model="password"
 							></ion-input>
-							<h5
-								style="
-									text-align: right;
-									color: #6370ff;
-									margin-bottom: 10px;
-									font-weight: 700;
-								"
-								@click="resetPassword"
-							>
-								Forget Password?
-							</h5>
+							<br />
+							<div style="display: flex; justify-content: space-between">
+								<h5
+									style="color: #6370ff; margin-bottom: 10px; font-weight: 700"
+									@click="changePassword"
+								>
+									Change Password?
+								</h5>
+								<h5
+									style="color: #6370ff; margin-bottom: 10px; font-weight: 700"
+									@click="resetPassword"
+								>
+									Forget Password?
+								</h5>
+							</div>
 							<ion-button color="primary" expand="block" type="submit"
 								>Login</ion-button
 							>
@@ -173,6 +177,9 @@ export default defineComponent({
 			// or the default dolphins of the json file
 			const dolphinsStore = useDolphinsStore();
 			await dolphinsStore.fill();
+		},
+		changePassword() {
+			this.$router.push('changePassword');
 		},
 		resetPassword() {
 			this.$router.push('resetPassword');

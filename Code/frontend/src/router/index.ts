@@ -28,6 +28,11 @@ const routes: Array<RouteRecordRaw> = [
 		meta: { requiresAuth: false },
 	},
 	{
+		path: '/changePassword',
+		component: () => import('@/views/ChangePassword.vue'),
+		meta: { requiresAuth: false },
+	},
+	{
 		path: '/resetPassword',
 		component: () => import('@/views/ResetPassword.vue'),
 		meta: { requiresAuth: false },

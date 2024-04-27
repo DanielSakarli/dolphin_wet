@@ -108,7 +108,7 @@ router.get('/logout', async function(req, res, next) {
 
 router.post('/changePassword',  async function(req, res, next) { //authentication.authenticateToken, async function(req, res, next) {
   try {
-    if(!req.body.name || req.body.userName === 0) {
+    if(!req.body.userName || req.body.userName === 0) {
       return res.status(400).send("USER_NAME_NOT_PROVIDED");
     }
     if(!req.body.currentPassword || req.body.currentPassword === 0) {
@@ -118,7 +118,7 @@ router.post('/changePassword',  async function(req, res, next) { //authenticatio
       return res.status(400).send("NEW_PASSWORD_NOT_PROVIDED");
     }
 
-    await UserService.changePassword(req.body.name, req.body.currentPassword, req.body.newPassword);
+    await UserService.changePassword(req.body.userName, req.body.currentPassword, req.body.newPassword);
     /*
     // Hash password
     let newPasswordHash = await bcrypt.hash(req.body.newPassword, 12)
