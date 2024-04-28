@@ -55,7 +55,7 @@ import {
 	IonSplitPane,
 	alertController,
 } from '@ionic/vue';
-import { defineComponent } from 'vue';
+import { computed, defineComponent } from 'vue';
 import { ref } from 'vue';
 import { Device, DevicePlugin } from '@capacitor/device';
 import { useRouter } from 'vue-router';
@@ -78,7 +78,7 @@ export default defineComponent({
 		const path = window.location.pathname.split('folder/')[1];
 		if (path !== undefined) {
 			this.selectedIndex = this.appPages.findIndex(
-				(page) => page.title.toLowerCase() === path.toLowerCase()
+				(page: any) => page.title.toLowerCase() === path.toLowerCase()
 			);
 		}
 		localStorage.setItem('backButtonClicked', 'false');
@@ -87,6 +87,11 @@ export default defineComponent({
 		// Handles the navigation to other routes
 		const selectedIndex = ref(0); // Create a reactive variable
 		const router = useRouter();
+		// Stay in sync with the localStorage:
+		const token = computed({
+			get: () => localStorage.getItem('token') || '',
+			set: (value: string) => localStorage.setItem('token', value),
+		});
 
 		const showAlert = async () => {
 			return new Promise((resolve, reject) => {
@@ -160,40 +165,7 @@ export default defineComponent({
 			showAlert,
 			navigateTo,
 			selectedIndex, // Make selectedIndex available in the template
-		};
-	},
-	components: {
-		IonApp,
-		IonPage,
-		IonRouterOutlet,
-		IonMenu,
-		IonContent,
-		IonItem,
-		IonLabel,
-		IonList,
-		IonMenuToggle,
-		IonSplitPane,
-	},
-	computed: {
-		isLoggedIn() {
-			console.log('token: ', localStorage.getItem('token'));
-			return !!this.token;
-		},
-	},
-	watch: {
-		token() {
-			this.token = localStorage.getItem('token');
-		},
-	},
-	methods: {
-		changeLanguage($event: any) {
-			this.$i18n.locale = $event.detail.value;
-		},
-	},
-	data() {
-		return {
-			//selectedIndex: 0,
-			token: localStorage.getItem('token'),
+			token,
 			appPages: [
 				//{ title: 'Dolphin WET', url: '/folder/Evaluate' },
 				{
@@ -215,6 +187,59 @@ export default defineComponent({
 			],
 		};
 	},
+	components: {
+		IonApp,
+		IonPage,
+		IonRouterOutlet,
+		IonMenu,
+		IonContent,
+		IonItem,
+		IonLabel,
+		IonList,
+		IonMenuToggle,
+		IonSplitPane,
+	},
+	computed: {
+		isLoggedIn(): boolean {
+			console.log('token: ', localStorage.getItem('token'));
+			return !!this.token.valueOf;
+		},
+	},
+	/*watch: {
+		token() {
+			this.token.valueOf = localStorage.getItem('token');
+		},
+	},*/
+	methods: {
+		changeLanguage($event: any) {
+			this.$i18n.locale = $event.detail.value;
+		},
+	},
+	/*data() {
+		return {
+			//selectedIndex: 0,
+			//token: localStorage.getItem('token'),
+			appPages: [
+				//{ title: 'Dolphin WET', url: '/folder/Evaluate' },
+				{
+					title: 'Evaluate',
+					url: '/folder/Evaluate',
+				},
+				{
+					title: 'Dolphins',
+					url: '/folder/Dolphins',
+				},
+				{
+					title: 'View Data',
+					url: '/folder/Data',
+				},
+				{
+					title: 'Logout',
+					url: '/home',
+				},
+			],
+		};
+	},*/
 });
 </script>
 
