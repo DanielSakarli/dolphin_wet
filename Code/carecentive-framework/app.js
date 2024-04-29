@@ -123,7 +123,7 @@ const uploadFile = require('./fileUpload');
  * However, for security purposes, it's recommended to specify the allowed origins explicitly.
  */
 //app.use(cors());
-const allowedOrigins = ['http://localhost:8100', 'http://localhost:3309'];
+const allowedOrigins = ['http://localhost:8100', 'https://localhost'];
 
 const corsOptions = {
   origin: function (origin, callback) {
@@ -143,7 +143,10 @@ app.use(cors(corsOptions));
 
 // Set headers because of server side CORS policy
 app.use(function(req, res, next) {
-	res.header("Access-Control-Allow-Origin", "http://localhost:8100");
+	const origin = req.headers.origin;
+    if (allowedOrigins.includes(origin)) {
+        res.header("Access-Control-Allow-Origin", origin);
+    }
 	res.header("Access-Control-Allow-Credentials", true);
 	res.header("Access-Control-Allow-Methods", "GET, POST, PATCH, OPTIONS");
 	res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
