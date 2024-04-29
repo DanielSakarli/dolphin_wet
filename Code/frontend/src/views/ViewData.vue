@@ -383,6 +383,13 @@
 												HealthRecord.records_external_disease_comments || 'N/A'
 											}}
 										</p>
+										<p>Eye photo path: {{ HealthRecord.eye_photo_path }}</p>
+										<p>Teeth photo path: {{ HealthRecord.teeth_photo_path }}</p>
+										<p>
+											Odontogramm photo path:
+											{{ HealthRecord.odontogramm_photo_path }}
+										</p>
+										<p>Marks photo path: {{ HealthRecord.marks_photo_path }}</p>
 									</ion-label>
 								</ion-item>
 							</ion-list>
