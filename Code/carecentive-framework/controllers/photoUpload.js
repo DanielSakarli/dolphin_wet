@@ -32,7 +32,7 @@ const storage = multer.diskStorage({
       // Save photo path in session storage for later access in good_health.js to save the photo paths in the database
       const apiUrl = process.env.PHOTO_PATH; //process.env.MYSQL_HOST + ':' + process.env.HTTP_PORT;
       if(req.body.photo_type === 'eye'){
-        console.log('I am here: ' + req.session.photo_path.eye_photo_path);
+        console.log('I am at eye: ' + req.session.photo_path.eye_photo_path);
         if(req.session.photo_path.eye_photo_path === 'empty'){ //If empty, so session storage has just been initialized
           //First photo in the list
           req.session.photo_path.eye_photo_path = apiUrl + '/api/images/' + `${uniqueSuffix}${path.extname(
@@ -50,7 +50,7 @@ const storage = multer.diskStorage({
         console.log('I am here');
         if(req.session.photo_path.teeth_photo_path === 'empty'){ //If empty, so session storage has just been initialized
           //First photo in the list
-          console.log('I am here');
+          console.log('I am at teeth');
           req.session.photo_path.teeth_photo_path = apiUrl + '/api/images/' + `${uniqueSuffix}${path.extname(
             file.originalname
           )}`;
@@ -66,7 +66,7 @@ const storage = multer.diskStorage({
         console.log('I am here');
         if(req.session.photo_path.odontogramm_photo_path === 'empty'){ //If empty, so session storage has just been initialized
           //First photo in the list
-          console.log('I am here');
+          console.log('I am at odontogramm');
           req.session.photo_path.odontogramm_photo_path = apiUrl + '/api/images/' + `${uniqueSuffix}${path.extname(
             file.originalname
           )}`;
@@ -82,6 +82,7 @@ const storage = multer.diskStorage({
         console.log('I am here: ' + req.session.photo_path.marks_photo_path);
         if(req.session.photo_path.marks_photo_path === 'empty'){ //If empty, so session storage has just been initialized
           //First photo in the list
+          console.log('I am at marks');
           req.session.photo_path.marks_photo_path = apiUrl + '/api/images/' + `${uniqueSuffix}${path.extname(
             file.originalname
           )}`;
