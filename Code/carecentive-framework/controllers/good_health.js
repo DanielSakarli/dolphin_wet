@@ -61,6 +61,7 @@ async function setResult(req, res, next) {
 					//fileData = fs.readFileSync(test_result.eye_photo_path);
 					//test_result.image = fileData;
 					//console.log(fileData);
+					console.log('test result eye path: ', test_result.eye_photo_path, 'for dolphin: ', test_result.dolphin_name);
 				}
 				
 				}
@@ -76,7 +77,7 @@ async function setResult(req, res, next) {
 					test_result.teeth_photo_path = req.session.photo_path.teeth_photo_path.toString();
 					//fileData = fs.readFileSync(test_result.teeth_photo_path);
 					//test_result.image = fileData;
-					console.log(fileData);
+					console.log('test result teeth path: ', test_result.teeth_photo_path, 'for dolphin: ', test_result.dolphin_name);
 				}
 				
 				}
@@ -92,7 +93,7 @@ async function setResult(req, res, next) {
 					test_result.odontogramm_photo_path = req.session.photo_path.odontogramm_photo_path.toString();
 					//fileData = fs.readFileSync(test_result.teeth_photo_path);
 					//test_result.image = fileData;
-					console.log(fileData);
+					console.log('test result odontogramm path: ', test_result.odontogramm_photo_path, 'for dolphin: ', test_result.dolphin_name);
 					}
 				}
 
@@ -105,6 +106,7 @@ async function setResult(req, res, next) {
 					if (test_result.dolphin_name === req.session.dolphin_name) {
 					// Append marks_photo_path to the array
 					test_result.marks_photo_path = req.session.photo_path.marks_photo_path.toString();
+					console.log('test result marks path: ', test_result.marks_photo_path, 'for dolphin: ', test_result.dolphin_name);
 					}
 				}
 			
@@ -117,7 +119,7 @@ async function setResult(req, res, next) {
 			let test_result = req.body;
 			
 			test_result = { user_id: userID, user_name: userName, ...test_result };
-			console.log(test_result);
+			console.log('No photo to be uploaded for this dolphin: ', test_result.dolphin_name);
 			const insertedResult = await GoodHealthService.loadTestResult(test_result, roleName);
 			//next();
 			res.status(201).json(insertedResult);
