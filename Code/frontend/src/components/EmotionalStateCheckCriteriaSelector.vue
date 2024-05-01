@@ -46,7 +46,7 @@
 		<!-- End of Criteria Selector -->
 
 		<!-- Description of Criteria (UserManual) -->
-		<ion-button v-if="criteria" fill="outline" @click="setOpenManual(true)">{{
+		<ion-button v-if="criteria" fill="outline" @click="setOpenManual()">{{
 			$t('userManual')
 		}}</ion-button>
 
@@ -66,9 +66,7 @@
 						>{{ $t('fourthCriteriaEmotionalState') }}
 					</ion-title>
 					<ion-buttons slot="end">
-						<ion-button @click="setOpenManual(false)">{{
-							$t('close')
-						}}</ion-button>
+						<ion-button @click="setOpenManual()">{{ $t('close') }}</ion-button>
 					</ion-buttons>
 				</ion-toolbar>
 			</ion-header>
@@ -120,7 +118,7 @@
 		</ion-modal>
 		<!-- End of Description of Criteria (UserManual)-->
 		<!--Start of Scoring Description-->
-		<ion-button v-if="criteria" fill="outline" @click="setOpenScoring(true)">{{
+		<!--<ion-button v-if="criteria" fill="outline" @click="setOpenScoring(true)">{{
 			$t('ScoringDescription')
 		}}</ion-button>
 
@@ -147,7 +145,7 @@
 				</ion-toolbar>
 			</ion-header>
 			<ion-content class="ion-padding">
-				<!--<p v-if=" criteria === 'firstCriteriaEmotionalState'">
+				<p v-if=" criteria === 'firstCriteriaEmotionalState'">
 					<h1>Body Condition Score:</h1>
 					<h3>Score 1</h3>
 					BCS of 3 = adequate
@@ -197,9 +195,9 @@
 					<h3>Score 3</h3>
 					Only 3 or less species of food are fed throughout the year, no variation along the year, 
 					diet is not adapted to individual preferences/specific need
-				</p>-->
+				</p>
 			</ion-content>
-		</ion-modal>
+		</ion-modal>-->
 		<!--End of Scoring Description-->
 		<!--Start of Reference Area-->
 		<!--<ion-button v-if="criteria" fill="outline" @click="setOpenReferenceArea(true)">{{ $t('ReferenceArea') }}</ion-button>
@@ -278,7 +276,7 @@
 				criteria === 'firstCriteriaEmotionalState'
 			"
 		>
-			<ion-card-title>{{
+			<ion-card-title class="card-title">{{
 				$t('firstSubCriteriaEmotionalState')
 			}}</ion-card-title>
 			<ion-list>
@@ -302,7 +300,7 @@
 				criteria === 'secondCriteriaEmotionalState'
 			"
 		>
-			<ion-card-title>{{
+			<ion-card-title class="card-title">{{
 				$t('secondSubCriteriaEmotionalState')
 			}}</ion-card-title>
 			<ion-list>
@@ -326,7 +324,7 @@
 				criteria === 'secondCriteriaEmotionalState'
 			"
 		>
-			<ion-card-title>{{
+			<ion-card-title class="card-title">{{
 				$t('thirdSubCriteriaEmotionalState')
 			}}</ion-card-title>
 			<ion-list>
@@ -350,7 +348,7 @@
 				criteria === 'secondCriteriaEmotionalState'
 			"
 		>
-			<ion-card-title>{{
+			<ion-card-title class="card-title">{{
 				$t('fourthSubCriteriaEmotionalState')
 			}}</ion-card-title>
 			<ion-list>
@@ -374,7 +372,7 @@
 				criteria === 'thirdCriteriaEmotionalState'
 			"
 		>
-			<ion-card-title>{{
+			<ion-card-title class="card-title">{{
 				$t('fifthSubCriteriaEmotionalState')
 			}}</ion-card-title>
 			<ion-list>
@@ -398,7 +396,7 @@
 				criteria === 'thirdCriteriaEmotionalState'
 			"
 		>
-			<ion-card-title>{{
+			<ion-card-title class="card-title">{{
 				$t('sixthSubCriteriaEmotionalState')
 			}}</ion-card-title>
 			<ion-list>
@@ -422,7 +420,7 @@
 				criteria === 'fourthCriteriaEmotionalState'
 			"
 		>
-			<ion-card-title>{{
+			<ion-card-title class="card-title">{{
 				$t('seventhSubCriteriaEmotionalState')
 			}}</ion-card-title>
 			<ion-list>
@@ -555,8 +553,8 @@ export default {
 	},
 	methods: {
 		//Method to open the manual
-		setOpenManual(isOpen: boolean) {
-			this.isOpenManual = isOpen;
+		setOpenManual() {
+			this.isOpenManual = !this.isOpenManual;
 		},
 		//Method to open scoring desciption
 		setOpenScoring(isOpen: boolean) {
@@ -897,18 +895,6 @@ export default {
 						this.criteria = 'fourthCriteriaEmotionalState';
 						break;
 					case 'fourthCriteriaEmotionalState':
-						this.criteria = 'fifthCriteriaEmotionalState';
-						break;
-					case 'fifthCriteriaEmotionalState':
-						this.criteria = 'sixthCriteriaEmotionalState';
-						break;
-					case 'sixthCriteriaEmotionalState':
-						this.criteria = 'seventhCriteriaEmotionalState';
-						break;
-					case 'seventhCriteriaEmotionalState':
-						this.criteria = 'eighthCriteriaEmotionalState';
-						break;
-					case 'eighthCriteriaEmotionalState':
 						this.criteria = 'firstCriteriaEmotionalState';
 						break;
 					default:
@@ -947,5 +933,8 @@ ion-item {
 }
 ion-card {
 	margin: 5px 15px;
+}
+.card-title {
+	margin: 5px;
 }
 </style>

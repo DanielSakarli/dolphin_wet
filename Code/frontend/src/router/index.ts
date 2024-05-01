@@ -94,9 +94,25 @@ const router = createRouter({
 // on the Evaluate, Dolphins, or View Data button of the menu
 // If login successful, the token is stored in the localStorage
 router.beforeEach((to, from, next) => {
-	// Check if the route requires authentication
 	console.log('token in router file: ', localStorage.getItem('token'));
-	if (to.matched.some((record) => record.meta.requiresAuth)) {
+	if (to.path === '/login') {
+		// Set the token to an empty string
+		localStorage.setItem('token', '');
+		console.log('token set to empty string because user entered login page');
+		next();
+	} else if (from.path === '/login') {
+		// If the user is navigating to the home or login page
+		if (
+			!localStorage.getItem('token') ||
+			localStorage.getItem('token') === ''
+		) {
+			// Redirect to the login page
+			next('/login');
+		} else {
+			next();
+		}
+	} else if (to.matched.some((record) => record.meta.requiresAuth)) {
+		// Check if the route requires authentication
 		// Check if the user is not logged in
 		if (!localStorage.getItem('token')) {
 			// Redirect to the login page

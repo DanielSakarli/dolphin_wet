@@ -51,7 +51,7 @@
 		<!-- End of Criteria Selector -->
 
 		<!-- Description of Criteria (User Manual)-->
-		<ion-button v-if="criteria" fill="outline" @click="setOpenManual(true)">{{
+		<ion-button v-if="criteria" fill="outline" @click="setOpenManual()">{{
 			$t('userManual')
 		}}</ion-button>
 
@@ -77,37 +77,47 @@
 						>{{ $t('sixthCriteriaHealth') }}
 					</ion-title>
 					<ion-buttons slot="end">
-						<ion-button @click="setOpenManual(false)">{{
-							$t('close')
-						}}</ion-button>
+						<ion-button @click="setOpenManual()">{{ $t('close') }}</ion-button>
 					</ion-buttons>
 				</ion-toolbar>
 			</ion-header>
 			<ion-content class="ion-padding">
 				<div v-if="criteria === 'firstCriteriaHealth'">
-					<h3>{{ $t('firstSubCriteriaHealth') }}</h3>
-					<li>Score 0: {{ $t('score0Health1') }}</li>
-					<li>Score 2: {{ $t('score2Health1') }}</li>
-					<h3>{{ $t('secondSubCriteriaHealth') }}</h3>
-					<li>Score 0: {{ $t('score0Health2') }}</li>
-					<li>Score 2: {{ $t('score2Health2') }}</li>
+					<h1>{{ $t('firstSubCriteriaHealth') }}</h1>
+					<h3>Score 0</h3>
+					{{ $t('score0Health1') }}
+					<h3>Score 2</h3>
+					{{ $t('score2Health1') }}
+					<h1>{{ $t('secondSubCriteriaHealth') }}</h1>
+					<h3>Score 0</h3>
+					{{ $t('score0Health2') }}
+					<h3>Score 2</h3>
+					{{ $t('score2Health2') }}
 				</div>
 				<div v-if="criteria === 'secondCriteriaHealth'">
-					<h3>{{ $t('thirdSubCriteriaHealth') }}</h3>
-					<li>Score 0: {{ $t('score0Health3') }}</li>
-					<li>Score 2: {{ $t('score2Health3') }}</li>
-					<h3>{{ $t('fourthSubCriteriaHealth') }}</h3>
-					<li>Score 0: {{ $t('score0Health4') }}</li>
-					<li>Score 2: {{ $t('score2Health4') }}</li>
-					<h3>{{ $t('fifthSubCriteriaHealth') }}</h3>
-					<li>Score 0: {{ $t('score0Health5') }}</li>
-					<li>Score 2: {{ $t('score2Health5') }}</li>
+					<h1>{{ $t('thirdSubCriteriaHealth') }}</h1>
+					<h3>Score 0</h3>
+					{{ $t('score0Health3') }}
+					<h3>Score 2</h3>
+					{{ $t('score2Health3') }}
+					<h1>{{ $t('fourthSubCriteriaHealth') }}</h1>
+					<h3>Score 0</h3>
+					{{ $t('score0Health4') }}
+					<h3>Score 2</h3>
+					{{ $t('score2Health4') }}
+					<h1>{{ $t('fifthSubCriteriaHealth') }}</h1>
+					<h3>Score 0</h3>
+					{{ $t('score0Health5') }}
+					<h3>Score 2</h3>
+					{{ $t('score2Health5') }}
 				</div>
 				<div v-if="criteria === 'thirdCriteriaHealth'">
-					<h3>{{ $t('sixthSubCriteriaHealth') }}</h3>
-					<li>Score 0: {{ $t('score0Health6') }}</li>
-					<li>Score 2: {{ $t('score2Health6') }}</li>
-					<h3>Odontogramm Template:</h3>
+					<h1>{{ $t('sixthSubCriteriaHealth') }}</h1>
+					<h3>Score 0</h3>
+					{{ $t('score0Health6') }}
+					<h3>Score 2</h3>
+					{{ $t('score2Health6') }}
+					<h2>Odontogramm Template:</h2>
 					<img
 						src="../../public/Odontogramm_template.png"
 						alt="Odontogramm Tempplate"
@@ -117,33 +127,47 @@
 						src="../../public/Odontogramm_color_schema.png"
 						alt="Odontogramm Color Schema"
 					/>
-					<h3>{{ $t('seventhSubCriteriaHealth') }}</h3>
-					<li>Score 0: {{ $t('score0Health7') }}</li>
-					<li>Score 2: {{ $t('score2Health7') }}</li>
+					<h1>{{ $t('seventhSubCriteriaHealth') }}</h1>
+					<h3>Score 0</h3>
+					{{ $t('score0Health7') }}
+					<h3>Score 2</h3>
+					{{ $t('score2Health7') }}
 				</div>
 				<div v-if="criteria === 'fourthCriteriaHealth'">
-					<h3>{{ $t('eigthSubCriteriaHealth') }}</h3>
-					<li>Score 0: {{ $t('score0Health8') }}</li>
-					<li>Score 2: {{ $t('score2Health8') }}</li>
+					<h1>{{ $t('eigthSubCriteriaHealth') }}</h1>
+					<h3>Score 0</h3>
+					{{ $t('score0Health8') }}
+					<h3>Score 2</h3>
+					{{ $t('score2Health8') }}
 				</div>
 				<div v-if="criteria === 'fifthCriteriaHealth'">
-					<h3>{{ $t('ninthSubCriteriaHealth') }}</h3>
-					<li>Score 0: {{ $t('score0Health9') }}</li>
-					<li>Score 2: {{ $t('score2Health9') }}</li>
-					<h3>{{ $t('tenthSubCriteriaHealth') }}</h3>
-					<li>Score 0: {{ $t('score0Health10') }}</li>
-					<li>Score 2: {{ $t('score2Health10') }}</li>
-					<h3>{{ $t('eleventhSubCriteriaHealth') }}</h3>
-					<li>Score 0: {{ $t('score0Health11') }}</li>
-					<li>Score 2: {{ $t('score2Health11') }}</li>
+					<h1>{{ $t('ninthSubCriteriaHealth') }}</h1>
+					<h3>Score 0</h3>
+					{{ $t('score0Health9') }}
+					<h3>Score 2</h3>
+					{{ $t('score2Health9') }}
+					<h1>{{ $t('tenthSubCriteriaHealth') }}</h1>
+					<h3>Score 0</h3>
+					{{ $t('score0Health10') }}
+					<h3>Score 2</h3>
+					{{ $t('score2Health10') }}
+					<h1>{{ $t('eleventhSubCriteriaHealth') }}</h1>
+					<h3>Score 0</h3>
+					{{ $t('score0Health11') }}
+					<h3>Score 2</h3>
+					{{ $t('score2Health11') }}
 				</div>
 				<div v-if="criteria === 'sixthCriteriaHealth'">
-					<h3>{{ $t('twelvthSubCriteriaHealth') }}</h3>
-					<li>Score 0: {{ $t('score0Health12') }}</li>
-					<li>Score 2: {{ $t('score2Health12') }}</li>
-					<h3>{{ $t('thirteenthSubCriteriaHealth') }}</h3>
-					<li>Score 0: {{ $t('score0Health13') }}</li>
-					<li>Score 2: {{ $t('score2Health13') }}</li>
+					<h1>{{ $t('twelvthSubCriteriaHealth') }}</h1>
+					<h3>Score 0</h3>
+					{{ $t('score0Health12') }}
+					<h3>Score 2</h3>
+					{{ $t('score2Health12') }}
+					<h1>{{ $t('thirteenthSubCriteriaHealth') }}</h1>
+					<h3>Score 0</h3>
+					{{ $t('score0Health13') }}
+					<h3>Score 2</h3>
+					{{ $t('score2Health13') }}
 				</div>
 				<!--<p v-if=" criteria === 'fourthCriteriaHealth'">
 					<h3>Records of previous gastric/fecal abnormalities on records</h3>
@@ -223,7 +247,7 @@
 		</ion-modal>
 		<!-- End of Description of Criteria (User Manual) -->
 		<!--Start of Scoring Description-->
-		<ion-button v-if="criteria" fill="outline" @click="setOpenScoring(true)">{{
+		<!--<ion-button v-if="criteria" fill="outline" @click="setOpenScoring(true)">{{
 			$t('ScoringDescription')
 		}}</ion-button>
 
@@ -310,7 +334,7 @@
 					<h3>Score 3</h3>
 					Evidence of previous incidents on records during last three months
 				</div>
-				<!--<p v-if=" criteria === 'fourthCriteriaHealth'">
+				<p v-if=" criteria === 'fourthCriteriaHealth'">
 					<h2>{{ $t('eigthSubCriteriaHealth') }}</h2>
 					<h3>Score 1</h3>
 					Absence of previous incidents on records during last three months 
@@ -356,9 +380,9 @@
 					Absence of previous signs/diseases on records during last three month
 					<h3>Score 3</h3>
 					Evidence of previous signs/diseases on records during last three months
-				</p>-->
+				</p>
 			</ion-content>
-		</ion-modal>
+		</ion-modal>-->
 		<!--End of Scoring Description-->
 		<!-- Start of Checkboxes-->
 		<ion-card
@@ -368,7 +392,9 @@
 				criteria === 'firstCriteriaHealth'
 			"
 		>
-			<ion-card-title>{{ $t('firstSubCriteriaHealth') }}</ion-card-title>
+			<ion-card-title class="card-title">{{
+				$t('firstSubCriteriaHealth')
+			}}</ion-card-title>
 			<ion-list>
 				<ion-item>
 					<ion-checkbox v-model="CheckboxArray[0][0]" @click="handleClick(0, 0)"
@@ -390,7 +416,9 @@
 				criteria === 'firstCriteriaHealth'
 			"
 		>
-			<ion-card-title>{{ $t('secondSubCriteriaHealth') }}</ion-card-title>
+			<ion-card-title class="card-title">{{
+				$t('secondSubCriteriaHealth')
+			}}</ion-card-title>
 			<ion-list>
 				<ion-item>
 					<ion-checkbox v-model="CheckboxArray[1][0]" @click="handleClick(1, 0)"
@@ -414,7 +442,9 @@
 				criteria === 'secondCriteriaHealth'
 			"
 		>
-			<ion-card-title>{{ $t('thirdSubCriteriaHealth') }}</ion-card-title>
+			<ion-card-title class="card-title">{{
+				$t('thirdSubCriteriaHealth')
+			}}</ion-card-title>
 			<ion-list>
 				<ion-item>
 					<ion-checkbox v-model="CheckboxArray[2][0]" @click="handleClick(2, 0)"
@@ -442,7 +472,7 @@
 				criteria === 'secondCriteriaHealth'
 			"
 		>
-			<ion-card-title style="margin-bottom: 15px"
+			<ion-card-title class="card-title" style="margin-bottom: 15px"
 				>Upload your eye photos here</ion-card-title
 			>
 			<ion-item>
@@ -456,7 +486,9 @@
 				criteria === 'secondCriteriaHealth'
 			"
 		>
-			<ion-card-title>{{ $t('fourthSubCriteriaHealth') }}</ion-card-title>
+			<ion-card-title class="card-title">{{
+				$t('fourthSubCriteriaHealth')
+			}}</ion-card-title>
 			<ion-list>
 				<ion-item>
 					<ion-checkbox v-model="CheckboxArray[3][0]" @click="handleClick(3, 0)"
@@ -479,7 +511,9 @@
 				criteria === 'secondCriteriaHealth'
 			"
 		>
-			<ion-card-title>{{ $t('fifthSubCriteriaHealth') }}</ion-card-title>
+			<ion-card-title class="card-title">{{
+				$t('fifthSubCriteriaHealth')
+			}}</ion-card-title>
 			<ion-list>
 				<ion-item>
 					<ion-checkbox v-model="CheckboxArray[4][0]" @click="handleClick(4, 0)"
@@ -501,7 +535,9 @@
 				criteria === 'thirdCriteriaHealth'
 			"
 		>
-			<ion-card-title>{{ $t('sixthSubCriteriaHealth') }}</ion-card-title>
+			<ion-card-title class="card-title">{{
+				$t('sixthSubCriteriaHealth')
+			}}</ion-card-title>
 			<ion-list>
 				<ion-item>
 					<ion-checkbox v-model="CheckboxArray[5][0]" @click="handleClick(5, 0)"
@@ -535,7 +571,7 @@
 				criteria === 'thirdCriteriaHealth'
 			"
 		>
-			<ion-card-title style="margin-bottom: 15px"
+			<ion-card-title class="card-title" style="margin-bottom: 15px"
 				>Upload your teeth photos here</ion-card-title
 			>
 			<ion-item>
@@ -549,7 +585,9 @@
 				criteria === 'thirdCriteriaHealth'
 			"
 		>
-			<ion-card-title>{{ $t('seventhSubCriteriaHealth') }}</ion-card-title>
+			<ion-card-title class="card-title">{{
+				$t('seventhSubCriteriaHealth')
+			}}</ion-card-title>
 			<ion-list>
 				<ion-item>
 					<ion-checkbox v-model="CheckboxArray[6][0]" @click="handleClick(6, 0)"
@@ -571,7 +609,7 @@
 				criteria === 'thirdCriteriaHealth'
 			"
 		>
-			<ion-card-title style="margin-bottom: 15px"
+			<ion-card-title class="card-title" style="margin-bottom: 15px"
 				>Upload your odontogramms here</ion-card-title
 			>
 			<ion-item>
@@ -585,7 +623,9 @@
 				criteria === 'fourthCriteriaHealth'
 			"
 		>
-			<ion-card-title>{{ $t('eigthSubCriteriaHealth') }}</ion-card-title>
+			<ion-card-title class="card-title">{{
+				$t('eigthSubCriteriaHealth')
+			}}</ion-card-title>
 			<ion-list>
 				<ion-item>
 					<ion-checkbox v-model="CheckboxArray[7][0]" @click="handleClick(7, 0)"
@@ -609,7 +649,9 @@
 				criteria === 'fifthCriteriaHealth'
 			"
 		>
-			<ion-card-title>{{ $t('ninthSubCriteriaHealth') }}</ion-card-title>
+			<ion-card-title class="card-title">{{
+				$t('ninthSubCriteriaHealth')
+			}}</ion-card-title>
 			<ion-list>
 				<ion-item>
 					<ion-checkbox v-model="CheckboxArray[8][0]" @click="handleClick(8, 0)"
@@ -631,7 +673,9 @@
 				criteria === 'fifthCriteriaHealth'
 			"
 		>
-			<ion-card-title>{{ $t('tenthSubCriteriaHealth') }}</ion-card-title>
+			<ion-card-title class="card-title">{{
+				$t('tenthSubCriteriaHealth')
+			}}</ion-card-title>
 			<ion-list>
 				<ion-item>
 					<ion-checkbox v-model="CheckboxArray[9][0]" @click="handleClick(9, 0)"
@@ -653,7 +697,9 @@
 				criteria === 'fifthCriteriaHealth'
 			"
 		>
-			<ion-card-title>{{ $t('eleventhSubCriteriaHealth') }}</ion-card-title>
+			<ion-card-title class="card-title">{{
+				$t('eleventhSubCriteriaHealth')
+			}}</ion-card-title>
 			<ion-list>
 				<ion-item>
 					<ion-checkbox
@@ -681,7 +727,9 @@
 				criteria === 'sixthCriteriaHealth'
 			"
 		>
-			<ion-card-title>{{ $t('twelvthSubCriteriaHealth') }}</ion-card-title>
+			<ion-card-title class="card-title">{{
+				$t('twelvthSubCriteriaHealth')
+			}}</ion-card-title>
 			<ion-list>
 				<ion-item>
 					<ion-checkbox
@@ -711,7 +759,7 @@
 				criteria === 'sixthCriteriaHealth'
 			"
 		>
-			<ion-card-title style="margin-bottom: 15px"
+			<ion-card-title class="card-title" style="margin-bottom: 15px"
 				>Upload your marks photos here</ion-card-title
 			>
 			<ion-item>
@@ -725,7 +773,9 @@
 				criteria === 'sixthCriteriaHealth'
 			"
 		>
-			<ion-card-title>{{ $t('thirteenthSubCriteriaHealth') }}</ion-card-title>
+			<ion-card-title class="card-title">{{
+				$t('thirteenthSubCriteriaHealth')
+			}}</ion-card-title>
 			<ion-list>
 				<ion-item>
 					<ion-checkbox
@@ -896,8 +946,8 @@ export default {
 	},
 
 	methods: {
-		setOpenManual(isOpen: boolean) {
-			this.isOpenManual = isOpen;
+		setOpenManual() {
+			this.isOpenManual = !this.isOpenManual;
 		},
 		setOpenScoring(isOpen: boolean) {
 			this.isOpenScoring = isOpen;
@@ -1508,6 +1558,12 @@ export default {
 						this.criteria = 'fourthCriteriaHealth';
 						break;
 					case 'fourthCriteriaHealth':
+						this.criteria = 'fifthCriteriaHealth';
+						break;
+					case 'fifthCriteriaHealth':
+						this.criteria = 'sixthCriteriaHealth';
+						break;
+					case 'sixthCriteriaHealth':
 						this.criteria = 'firstCriteriaHealth';
 						break;
 					default:
@@ -1598,6 +1654,9 @@ ion-item {
 }
 ion-card {
 	margin: 5px 15px;
+}
+.card-title {
+	margin: 5px;
 }
 </style>
 ```

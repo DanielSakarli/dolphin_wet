@@ -53,4 +53,7 @@ ion-checkbox {
 ion-card {
 	margin: 5px 15px;
 }
+ion-card-title {
+	margin: 5px;
+}
 </style>

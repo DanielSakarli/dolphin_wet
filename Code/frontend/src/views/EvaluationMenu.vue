@@ -58,6 +58,8 @@ import {
 import { download } from 'ionicons/icons';
 //import axios from 'axios';
 import { baseUrl } from '@/utils/baseUrl';
+import { Filesystem, Directory } from '@capacitor/filesystem';
+import { Share } from '@capacitor/share';
 //try to import the animalList
 //import { useDolphinsStore } from '@/store/dolphinsStore';
 
@@ -93,7 +95,24 @@ export default {
 				});
 		},*/
 		async getStandardsAndGuidelines() {
-			// Create a link
+			try {
+				// Read the file
+				const result = await Filesystem.readFile({
+					path: 'public/EAAM-Standards-and-guidelines-2019-gecomprimeerd.pdf',
+					directory: Directory.Documents,
+				});
+
+				// Share the file
+				await Share.share({
+					title: 'EAAM Standards and Guidelines',
+					text: 'Here is the EAAM Standards and Guidelines',
+					url: result.uri,
+					dialogTitle: 'Share PDF',
+				});
+			} catch (error) {
+				console.error('Error sharing file', error);
+			}
+			/*// Create a link
 			const link = document.createElement('a');
 
 			// Set the href to the path of the PDF file
@@ -112,7 +131,7 @@ export default {
 			if (document.body.contains(link)) {
 				// If it is, remove the link from the body
 				document.body.removeChild(link);
-			}
+			}*/
 		},
 		async getDolphinWETMatrix() {
 			// Create a link

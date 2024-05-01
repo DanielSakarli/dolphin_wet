@@ -57,7 +57,7 @@
 		<!-- End of Criteria Selector -->
 
 		<!-- Description of Criteria -->
-		<ion-button v-if="criteria" fill="outline" @click="setOpenManual(true)">{{
+		<ion-button v-if="criteria" fill="outline" @click="setOpenManual()">{{
 			$t('userManual')
 		}}</ion-button>
 
@@ -86,60 +86,78 @@
 						>{{ $t('seventhCriteriaEnvironment') }}
 					</ion-title>
 					<ion-buttons slot="end">
-						<ion-button @click="setOpenManual(false)">Close</ion-button>
+						<ion-button @click="setOpenManual()">Close</ion-button>
 					</ion-buttons>
 				</ion-toolbar>
 			</ion-header>
 			<ion-content class="ion-padding">
 				<div v-if="criteria === 'firstCriteriaEnvironment'">
-					<h3>{{ $t('firstSubCriteriaEnvironment') }}</h3>
-					<li>Score 0: {{ $t('score0Environment1') }}</li>
-					<li>Score 2: {{ $t('score2Environment1') }}</li>
-					<h3>{{ $t('secondSubCriteriaEnvironment') }}</h3>
-					<li>Score 0: {{ $t('score0Environment2') }}</li>
-					<li>Score 2: {{ $t('score2Environment2') }}</li>
+					<h1>{{ $t('firstSubCriteriaEnvironment') }}</h1>
+					<h3>Score 0</h3>
+					{{ $t('score0Environment1') }}
+					<h3>Score 2</h3>
+					{{ $t('score2Environment1') }}
+					<h1>{{ $t('secondSubCriteriaEnvironment') }}</h1>
+					<h3>Score 0</h3>
+					{{ $t('score0Environment2') }}
+					<h3>Score 2</h3>
+					{{ $t('score2Environment2') }}
 				</div>
 				<div v-if="criteria === 'secondCriteriaEnvironment'">
-					<h3>{{ $t('thirdSubCriteriaEnvironment') }}</h3>
-					<li>Score 0: {{ $t('score0Environment3') }}</li>
-					<li>Score 2: {{ $t('score2Environment3') }}</li>
+					<h1>{{ $t('thirdSubCriteriaEnvironment') }}</h1>
+					<h3>Score 0</h3>
+					{{ $t('score0Environment3') }}
+					<h3>Score 2</h3>
+					{{ $t('score2Environment3') }}
 				</div>
 				<div v-if="criteria === 'thirdCriteriaEnvironment'">
-					<h3>{{ $t('fourthSubCriteriaEnvironment') }}</h3>
-					<li>Score 0: {{ $t('score0Environment4') }}</li>
-					<li>Score 2: {{ $t('score2Environment4') }}</li>
+					<h1>{{ $t('fourthSubCriteriaEnvironment') }}</h1>
+					<h3>Score 0</h3>
+					{{ $t('score0Environment4') }}
+					<h3>Score 2</h3>
+					{{ $t('score2Environment4') }}
 				</div>
 				<div v-if="criteria === 'fourthCriteriaEnvironment'">
-					<h3>{{ $t('fifthSubCriteriaEnvironment') }}</h3>
-					<li>Score 0: {{ $t('score0Environment5') }}</li>
-					<li>Score 2: {{ $t('score2Environment5') }}</li>
+					<h1>{{ $t('fifthSubCriteriaEnvironment') }}</h1>
+					<h3>Score 0</h3>
+					{{ $t('score0Environment5') }}
+					<h3>Score 2</h3>
+					{{ $t('score2Environment5') }}
 				</div>
 				<div v-if="criteria === 'fifthCriteriaEnvironment'">
-					<h3>{{ $t('sixthSubCriteriaEnvironment') }}</h3>
-					<li>Score 0: {{ $t('score0Environment6') }}</li>
-					<li>Score 2: {{ $t('score2Environment6') }}</li>
+					<h1>{{ $t('sixthSubCriteriaEnvironment') }}</h1>
+					<h3>Score 0</h3>
+					{{ $t('score0Environment6') }}
+					<h3>Score 2</h3>
+					{{ $t('score2Environment6') }}
 				</div>
 				<div v-if="criteria === 'sixthCriteriaEnvironment'">
-					<h3>{{ $t('seventhSubCriteriaEnvironment') }}</h3>
-					<li>Score 0: {{ $t('score0Environment7') }}</li>
-					<li>Score 2: {{ $t('score2Environment7') }}</li>
+					<h1>{{ $t('seventhSubCriteriaEnvironment') }}</h1>
+					<h3>Score 0</h3>
+					{{ $t('score0Environment7') }}
+					<h3>Score 2</h3>
+					{{ $t('score2Environment7') }}
 				</div>
 				<div v-if="criteria === 'sixthCriteriaEnvironment'">
-					<h3>{{ $t('eigthSubCriteriaEnvironment') }}</h3>
-					<li>Score 0: {{ $t('score0Environment8') }}</li>
-					<li>Score 2: {{ $t('score2Environment8') }}</li>
+					<h1>{{ $t('eigthSubCriteriaEnvironment') }}</h1>
+					<h3>Score 0</h3>
+					{{ $t('score0Environment8') }}
+					<h3>Score 2</h3>
+					{{ $t('score2Environment8') }}
 				</div>
 				<div v-if="criteria === 'seventhCriteriaEnvironment'">
-					<h3>{{ $t('ninthSubCriteriaEnvironment') }}</h3>
-					<li>Score 0: {{ $t('score0Environment9') }}</li>
-					<li>Score 2: {{ $t('score2Environment9') }}</li>
+					<h1>{{ $t('ninthSubCriteriaEnvironment') }}</h1>
+					<h3>Score 0</h3>
+					{{ $t('score0Environment9') }}
+					<h3>Score 2</h3>
+					{{ $t('score2Environment9') }}
 				</div>
 			</ion-content>
 		</ion-modal>
 
 		<!-- End of Description of Criteria -->
 		<!--Start of Scoring Description-->
-		<ion-button v-if="criteria" fill="outline" @click="setOpenScoring(true)">{{
+		<!--<ion-button v-if="criteria" fill="outline" @click="setOpenScoring(true)">{{
 			$t('ScoringDescription')
 		}}</ion-button>
 
@@ -241,7 +259,7 @@
 					minute/day
 				</div>
 			</ion-content>
-		</ion-modal>
+		</ion-modal>-->
 		<!--End of Scoring Description-->
 		<!-- Start of Checkboxes-->
 		<ion-card
@@ -550,8 +568,8 @@ export default {
 	},
 	methods: {
 		//Method to open the manual
-		setOpenManual(isOpen: boolean) {
-			this.isOpenManual = isOpen;
+		setOpenManual() {
+			this.isOpenManual = !this.isOpenManual;
 		},
 		//Method to open scoring desciption
 		setOpenScoring(isOpen: boolean) {
@@ -910,6 +928,15 @@ export default {
 						this.criteria = 'fourthCriteriaEnvironment';
 						break;
 					case 'fourthCriteriaEnvironment':
+						this.criteria = 'fifthCriteriaEnvironment';
+						break;
+					case 'fifthCriteriaEnvironment':
+						this.criteria = 'sixthCriteriaEnvironment';
+						break;
+					case 'sixthCriteriaEnvironment':
+						this.criteria = 'seventhCriteriaEnvironment';
+						break;
+					case 'seventhCriteriaEnvironment':
 						this.criteria = 'firstCriteriaEnvironment';
 						break;
 					default:
@@ -939,5 +966,8 @@ ion-item {
 }
 ion-card {
 	margin: 5px 15px;
+}
+ion-card-title {
+	margin: 5px;
 }
 </style>

@@ -876,7 +876,7 @@ export default {
 				{ display: this.$t('principleBehaviour'), value: 'Behaviour' },
 				{
 					display: this.$t('principleEmotionalState'),
-					value: 'Emotional State',
+					value: 'Mental State',
 				},
 			],
 			/*principleMapping: {

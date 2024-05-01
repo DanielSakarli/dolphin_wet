@@ -58,7 +58,7 @@
 		<!-- End of Criteria Selector -->
 
 		<!-- Description of Criteria (UserManual) -->
-		<ion-button v-if="criteria" fill="outline" @click="setOpenManual(true)">{{
+		<ion-button v-if="criteria" fill="outline" @click="setOpenManual()">{{
 			$t('userManual')
 		}}</ion-button>
 
@@ -90,9 +90,7 @@
 						>{{ $t('eighthCriteriaBehaviour') }}
 					</ion-title>
 					<ion-buttons slot="end">
-						<ion-button @click="setOpenManual(false)">{{
-							$t('close')
-						}}</ion-button>
+						<ion-button @click="setOpenManual()">{{ $t('close') }}</ion-button>
 					</ion-buttons>
 				</ion-toolbar>
 			</ion-header>
@@ -196,7 +194,7 @@
 		</ion-modal>
 		<!-- End of Description of Criteria (UserManual)-->
 		<!--Start of Scoring Description-->
-		<ion-button v-if="criteria" fill="outline" @click="setOpenScoring(true)">{{
+		<!--<ion-button v-if="criteria" fill="outline" @click="setOpenScoring(true)">{{
 			$t('ScoringDescription')
 		}}</ion-button>
 
@@ -235,7 +233,7 @@
 				</ion-toolbar>
 			</ion-header>
 			<ion-content class="ion-padding">
-				<!--<p v-if=" criteria === 'firstCriteriaBehaviour'">
+				<p v-if=" criteria === 'firstCriteriaBehaviour'">
 					<h1>Body Condition Score:</h1>
 					<h3>Score 1</h3>
 					BCS of 3 = adequate
@@ -285,9 +283,9 @@
 					<h3>Score 3</h3>
 					Only 3 or less species of food are fed throughout the year, no variation along the year, 
 					diet is not adapted to individual preferences/specific need
-				</p>-->
+				</p>
 			</ion-content>
-		</ion-modal>
+		</ion-modal>-->
 		<!--End of Scoring Description-->
 		<!--Start of Reference Area-->
 		<!--<ion-button v-if="criteria" fill="outline" @click="setOpenReferenceArea(true)">{{ $t('ReferenceArea') }}</ion-button>
@@ -366,7 +364,9 @@
 				criteria === 'firstCriteriaBehaviour'
 			"
 		>
-			<ion-card-title>{{ $t('firstSubCriteriaBehaviour') }}</ion-card-title>
+			<ion-card-title class="card-title">{{
+				$t('firstSubCriteriaBehaviour')
+			}}</ion-card-title>
 			<ion-list>
 				<ion-item>
 					<ion-checkbox v-model="CheckboxArray[0][0]" @click="handleClick(0, 0)"
@@ -393,7 +393,9 @@
 				criteria === 'secondCriteriaBehaviour'
 			"
 		>
-			<ion-card-title>{{ $t('secondSubCriteriaBehaviour') }}</ion-card-title>
+			<ion-card-title class="card-title">{{
+				$t('secondSubCriteriaBehaviour')
+			}}</ion-card-title>
 			<ion-list>
 				<ion-item>
 					<ion-checkbox v-model="CheckboxArray[1][0]" @click="handleClick(1, 0)"
@@ -415,7 +417,9 @@
 				criteria === 'secondCriteriaBehaviour'
 			"
 		>
-			<ion-card-title>{{ $t('thirdSubCriteriaBehaviour') }}</ion-card-title>
+			<ion-card-title class="card-title">{{
+				$t('thirdSubCriteriaBehaviour')
+			}}</ion-card-title>
 			<ion-list>
 				<ion-item>
 					<ion-checkbox v-model="CheckboxArray[2][0]" @click="handleClick(2, 0)"
@@ -437,7 +441,9 @@
 				criteria === 'secondCriteriaBehaviour'
 			"
 		>
-			<ion-card-title>{{ $t('fourthSubCriteriaBehaviour') }}</ion-card-title>
+			<ion-card-title class="card-title">{{
+				$t('fourthSubCriteriaBehaviour')
+			}}</ion-card-title>
 			<ion-list>
 				<ion-item>
 					<ion-checkbox v-model="CheckboxArray[3][0]" @click="handleClick(3, 0)"
@@ -459,7 +465,9 @@
 				criteria === 'thirdCriteriaBehaviour'
 			"
 		>
-			<ion-card-title>{{ $t('fifthSubCriteriaBehaviour') }}</ion-card-title>
+			<ion-card-title class="card-title">{{
+				$t('fifthSubCriteriaBehaviour')
+			}}</ion-card-title>
 			<ion-list>
 				<ion-item>
 					<ion-checkbox v-model="CheckboxArray[4][0]" @click="handleClick(4, 0)"
@@ -481,7 +489,9 @@
 				criteria === 'fourthCriteriaBehaviour'
 			"
 		>
-			<ion-card-title>{{ $t('sixthSubCriteriaBehaviour') }}</ion-card-title>
+			<ion-card-title class="card-title">{{
+				$t('sixthSubCriteriaBehaviour')
+			}}</ion-card-title>
 			<ion-list>
 				<ion-item>
 					<ion-checkbox v-model="CheckboxArray[5][0]" @click="handleClick(5, 0)"
@@ -503,7 +513,9 @@
 				criteria === 'fourthCriteriaBehaviour'
 			"
 		>
-			<ion-card-title>{{ $t('seventhSubCriteriaBehaviour') }}</ion-card-title>
+			<ion-card-title class="card-title">{{
+				$t('seventhSubCriteriaBehaviour')
+			}}</ion-card-title>
 			<ion-list>
 				<ion-item>
 					<ion-checkbox v-model="CheckboxArray[6][0]" @click="handleClick(6, 0)"
@@ -525,7 +537,9 @@
 				criteria === 'fourthCriteriaBehaviour'
 			"
 		>
-			<ion-card-title>{{ $t('eighthSubCriteriaBehaviour') }}</ion-card-title>
+			<ion-card-title class="card-title">{{
+				$t('eighthSubCriteriaBehaviour')
+			}}</ion-card-title>
 			<ion-list>
 				<ion-item>
 					<ion-checkbox v-model="CheckboxArray[7][0]" @click="handleClick(7, 0)"
@@ -547,7 +561,9 @@
 				criteria === 'fourthCriteriaBehaviour'
 			"
 		>
-			<ion-card-title>{{ $t('ninthSubCriteriaBehaviour') }}</ion-card-title>
+			<ion-card-title class="card-title">{{
+				$t('ninthSubCriteriaBehaviour')
+			}}</ion-card-title>
 			<ion-list>
 				<ion-item>
 					<ion-checkbox v-model="CheckboxArray[8][0]" @click="handleClick(8, 0)"
@@ -569,7 +585,9 @@
 				criteria === 'fourthCriteriaBehaviour'
 			"
 		>
-			<ion-card-title>{{ $t('tenthSubCriteriaBehaviour') }}</ion-card-title>
+			<ion-card-title class="card-title">{{
+				$t('tenthSubCriteriaBehaviour')
+			}}</ion-card-title>
 			<ion-list>
 				<ion-item>
 					<ion-checkbox v-model="CheckboxArray[9][0]" @click="handleClick(9, 0)"
@@ -591,7 +609,9 @@
 				criteria === 'fifthCriteriaBehaviour'
 			"
 		>
-			<ion-card-title>{{ $t('eleventhSubCriteriaBehaviour') }}</ion-card-title>
+			<ion-card-title class="card-title">{{
+				$t('eleventhSubCriteriaBehaviour')
+			}}</ion-card-title>
 			<ion-list>
 				<ion-item>
 					<ion-checkbox
@@ -617,7 +637,9 @@
 				criteria === 'fifthCriteriaBehaviour'
 			"
 		>
-			<ion-card-title>{{ $t('twelfthSubCriteriaBehaviour') }}</ion-card-title>
+			<ion-card-title class="card-title">{{
+				$t('twelfthSubCriteriaBehaviour')
+			}}</ion-card-title>
 			<ion-list>
 				<ion-item>
 					<ion-checkbox
@@ -650,7 +672,7 @@
 				criteria === 'sixthCriteriaBehaviour'
 			"
 		>
-			<ion-card-title>{{
+			<ion-card-title class="card-title">{{
 				$t('thirteenthSubCriteriaBehaviour')
 			}}</ion-card-title>
 			<ion-list>
@@ -678,7 +700,7 @@
 				criteria === 'seventhCriteriaBehaviour'
 			"
 		>
-			<ion-card-title>{{
+			<ion-card-title class="card-title">{{
 				$t('fourteenthSubCriteriaBehaviour')
 			}}</ion-card-title>
 			<ion-list>
@@ -706,7 +728,9 @@
 				criteria === 'eighthCriteriaBehaviour'
 			"
 		>
-			<ion-card-title>{{ $t('fifteenthSubCriteriaBehaviour') }}</ion-card-title>
+			<ion-card-title class="card-title">{{
+				$t('fifteenthSubCriteriaBehaviour')
+			}}</ion-card-title>
 			<ion-list>
 				<ion-item>
 					<ion-checkbox
@@ -849,8 +873,9 @@ export default {
 	},
 	methods: {
 		//Method to open the manual
-		setOpenManual(isOpen: boolean) {
-			this.isOpenManual = isOpen;
+		setOpenManual() {
+			//this.isOpenManual = isOpen;
+			this.isOpenManual = !this.isOpenManual;
 		},
 		//Method to open scoring desciption
 		setOpenScoring(isOpen: boolean) {
@@ -1342,5 +1367,8 @@ ion-item {
 }
 ion-card {
 	margin: 5px 15px;
+}
+.card-title {
+	margin: 5px;
 }
 </style>

@@ -49,7 +49,7 @@
 		<!-- End of Criteria Selector -->
 
 		<!-- Description of Criteria (UserManual) -->
-		<ion-button v-if="criteria" fill="outline" @click="setOpenManual(true)">{{
+		<ion-button v-if="criteria" fill="outline" @click="setOpenManual()">{{
 			$t('userManual')
 		}}</ion-button>
 
@@ -69,47 +69,60 @@
 						>{{ $t('fourthCriteriaNutrition') }}
 					</ion-title>
 					<ion-buttons slot="end">
-						<ion-button @click="setOpenManual(false)">{{
-							$t('close')
-						}}</ion-button>
+						<ion-button @click="setOpenManual()">{{ $t('close') }}</ion-button>
 					</ion-buttons>
 				</ion-toolbar>
 			</ion-header>
 			<ion-content class="ion-padding">
 				<div v-if="criteria === 'firstCriteriaNutrition'">
-					<h3>{{ $t('firstSubCriteriaNutrition') }}</h3>
-					<li>Score 0: {{ $t('score0Nutrition1') }}</li>
-					<li>Score 1: {{ $t('score1Nutrition1') }}</li>
-					<li>Score 2: {{ $t('score2Nutrition1') }}</li>
-					<h3>{{ $t('secondSubCriteriaNutrition') }}</h3>
-					<li>Score 0: {{ $t('score0Nutrition2') }}</li>
-					<li>Score 2: {{ $t('score2Nutrition2') }}</li>
+					<h1>{{ $t('firstSubCriteriaNutrition') }}</h1>
+					<h3>Score 0</h3>
+					{{ $t('score0Nutrition1') }}
+					<h3>Score 1</h3>
+					{{ $t('score1Nutrition1') }}
+					<h3>Score 2</h3>
+					{{ $t('score2Nutrition1') }}
+					<h1>{{ $t('secondSubCriteriaNutrition') }}</h1>
+					<h3>Score 0</h3>
+					{{ $t('score0Nutrition2') }}
+					<h3>Score 2</h3>
+					{{ $t('score2Nutrition2') }}
 				</div>
 				<div v-if="criteria === 'secondCriteriaNutrition'">
-					<h3>{{ $t('thirdSubCriteriaNutrition') }}</h3>
-					<li>Score 0: {{ $t('score0Nutrition3') }}</li>
-					<li>Score 2: {{ $t('score2Nutrition3') }}</li>
-					<h3>{{ $t('fourthSubCriteriaNutrition') }}</h3>
-					<li>Score 0: {{ $t('score0Nutrition4') }}</li>
-					<li>Score 1: {{ $t('score1Nutrition4') }}</li>
-					<li>Score 2: {{ $t('score2Nutrition4') }}</li>
+					<h1>{{ $t('thirdSubCriteriaNutrition') }}</h1>
+					<h3>Score 0</h3>
+					{{ $t('score0Nutrition3') }}
+					<h3>Score 2</h3>
+					{{ $t('score2Nutrition3') }}
+					<h1>{{ $t('fourthSubCriteriaNutrition') }}</h1>
+					<h3>Score 0</h3>
+					{{ $t('score0Nutrition4') }}
+					<h3>Score 1</h3>
+					{{ $t('score1Nutrition4') }}
+					<h3>Score 2</h3>
+					{{ $t('score2Nutrition4') }}
 				</div>
 				<div v-if="criteria === 'thirdCriteriaNutrition'">
-					<h3>{{ $t('fifthSubCriteriaNutrition') }}</h3>
-					<li>Score 0: {{ $t('score0Nutrition5') }}</li>
-					<li>Score 2: {{ $t('score2Nutrition5') }}</li>
+					<h1>{{ $t('fifthSubCriteriaNutrition') }}</h1>
+					<h3>Score 0</h3>
+					{{ $t('score0Nutrition5') }}
+					<h3>Score 2</h3>
+					{{ $t('score2Nutrition5') }}
 				</div>
 				<div v-if="criteria === 'fourthCriteriaNutrition'">
-					<h3>{{ $t('sixthSubCriteriaNutrition') }}</h3>
-					<li>Score 0: {{ $t('score0Nutrition6') }}</li>
-					<li>Score 1: {{ $t('score1Nutrition6') }}</li>
-					<li>Score 2: {{ $t('score2Nutrition6') }}</li>
+					<h1>{{ $t('sixthSubCriteriaNutrition') }}</h1>
+					<h3>Score 0</h3>
+					{{ $t('score0Nutrition6') }}
+					<h3>Score 1</h3>
+					{{ $t('score1Nutrition6') }}
+					<h3>Score 2</h3>
+					{{ $t('score2Nutrition6') }}
 				</div>
 			</ion-content>
 		</ion-modal>
 		<!-- End of Description of Criteria (UserManual)-->
 		<!--Start of Scoring Description-->
-		<ion-button v-if="criteria" fill="outline" @click="setOpenScoring(true)">{{
+		<!--<ion-button v-if="criteria" fill="outline" @click="setOpenScoring(true)">{{
 			$t('ScoringDescription')
 		}}</ion-button>
 
@@ -190,7 +203,7 @@
 					preferences/specific need
 				</div>
 			</ion-content>
-		</ion-modal>
+		</ion-modal>-->
 		<!--End of Scoring Description-->
 		<!--Start of Reference Area-->
 		<ion-button
@@ -406,6 +419,20 @@
 			v-if="
 				dolphinSelect &&
 				dolphinSelect.length !== 0 &&
+				criteria === 'thirdCriteriaNutrition'
+			"
+		>
+			<ion-card-title>Upload your laboratory file(s) here:</ion-card-title>
+			<ion-list>
+				<ion-item>
+					<FileUpload @form-submitted="handleFormSubmittedFile" />
+				</ion-item>
+			</ion-list>
+		</ion-card>
+		<ion-card
+			v-if="
+				dolphinSelect &&
+				dolphinSelect.length !== 0 &&
 				criteria === 'fourthCriteriaNutrition'
 			"
 		>
@@ -565,8 +592,9 @@ export default {
 	},
 	methods: {
 		//Method to open the manual
-		setOpenManual(isOpen: boolean) {
-			this.isOpenManual = isOpen;
+		setOpenManual() {
+			//this.isOpenManual = isOpen;
+			this.isOpenManual = !this.isOpenManual;
 		},
 		//Method to open scoring desciption
 		setOpenScoring(isOpen: boolean) {
@@ -1012,5 +1040,8 @@ ion-item {
 }
 ion-card {
 	margin: 5px 15px;
+}
+ion-card-title {
+	margin: 5px;
 }
 </style>

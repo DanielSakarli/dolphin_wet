@@ -468,6 +468,14 @@ export default {
 						this.showDolphin = false;
 					})
 					.catch((error) => {
+						if (error.response.data.error === 'USER_NOT_AN_ADMINISTRATOR') {
+							this.showDolphin = false;
+							this.closeEditModal();
+
+							toast.error('User has no administrator rights!', {
+								autoClose: 2000,
+							});
+						}
 						console.error('Error:', error.response.data);
 					});
 			}
@@ -512,7 +520,9 @@ export default {
 					});
 					this.closeAddModal();
 					this.fetchDolphins();
+					this.showDolphin = false;
 				} catch (error) {
+					this.showDolphin = false;
 					this.errorMessage = 'Error adding dolphin.';
 				}
 			}
