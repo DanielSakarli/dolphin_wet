@@ -6,12 +6,15 @@ const multer = require('multer');
 //const { isUserAuth } = require('./authSwitch');
 let currentIndex = 0;
 
+console.log('Reached photoUpload.js');
+
 // set storage engine
 const storage = multer.diskStorage({
 	destination: (req, file, cb) => {
 		  cb(null, './uploads/images/')
 	},
 	filename: (req, file, cb) => {
+    console.log('Request body in photoUpload.js', req.body);
       const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1e9);
       //req.session.photo_type = req.body.photo_type; // Either 'eye', 'teeth', 'odontogramm', or 'marks'
       console.log('Reached filename in photoUpload.js');
