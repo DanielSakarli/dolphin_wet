@@ -1552,9 +1552,9 @@ export default {
 						// Send the photo to the server
 						await axios
 							.post(this.urlPostPhoto, desiredFormData[i], {
-								headers: {
+								/*headers: {
 									'Content-Type': 'multipart/form-data',
-								},
+								},*/
 								withCredentials: true,
 							})
 							.then((response) => {

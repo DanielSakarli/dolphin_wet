@@ -2,8 +2,8 @@ const path = require('path');
 //const fs = require('fs');
 require('dotenv').config();
 const multer = require('multer');
-const { validationResult } = require('express-validator');
-const { isUserAuth } = require('./authSwitch');
+//const { validationResult } = require('express-validator');
+//const { isUserAuth } = require('./authSwitch');
 let currentIndex = 0;
 
 // set storage engine
@@ -14,7 +14,8 @@ const storage = multer.diskStorage({
 	filename: (req, file, cb) => {
       const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1e9);
       //req.session.photo_type = req.body.photo_type; // Either 'eye', 'teeth', 'odontogramm', or 'marks'
-      
+      console.log('Reached filename in photoUpload.js');
+      console.log('request session storage: ', req.session);
       console.log('Photo type in req.session: ', req.session.photo_type);
       req.session.dolphin_name = req.body.dolphin_name; // The name of the dolphin, so picture is later on assignable to a dolphin
       console.log('Dolphin name in req.session: ',req.session.dolphin_name);
@@ -112,11 +113,11 @@ const uploadMultiple = upload.array('files');
 async function uploadPhoto(req, res, next) {
     try {
     //console.log(req.body);
-    const errors = validationResult(req);
+    /*const errors = validationResult(req);
 		if (!errors.isEmpty()) {
 			// Handle validation errors
 			return res.status(400).json({ error: errors.array() });
-		}
+		}*/
 
 		// After gone through the authenticateToken middleware
 		// the data of user is in the req.authData
@@ -146,21 +147,48 @@ async function uploadPhoto(req, res, next) {
 
     //console.log(photo_type); // Either 'eye' or 'teeth'
 
-    
+    // Wrap uploadMultiple in a new Promise
+    await new Promise((resolve, reject) => {
+      uploadMultiple(req, res, function (err) {
+        console.log('Reached photoUpload.js uploadMultiple');
+        if (err instanceof multer.MulterError) {
+          // A Multer error occurred when uploading.
+          console.log('Multer error: ', err);
+          reject({ status: 400, error: err });
+        } else if (err) {
+          // An unknown error occurred when uploading.
+          console.log('Unknown error: ', err);
+          reject({ status: 500, error: err });
+        } else {
+          // Everything went fine.
+          console.log('Photo uploaded successfully');
+          resolve({ status: 201 });
+        }
+      });
+    })
+    .then(result => {
+      res.status(result.status).json();
+    })
+    .catch(err => {
+      res.status(err.status).json();
+    });    
 
-    uploadMultiple(req, res, function (err) {
+    /*uploadMultiple(req, res, function (err) {
+      console.log('Reached photoUpload.js uploadMultiple');
       if (err instanceof multer.MulterError) {
         // A Multer error occurred when uploading.
+        console.log('Multer error: ', err);
         res.status(400).json(); //res.sendStatus(401); 
       } else if (err) {
         // An unknown error occurred when uploading.
+        console.log('Unknown error: ', err);
         res.status(500).json(); //res.sendStatus(500); 
       } else {
         // Everything went fine.
-
+        console.log('Photo uploaded successfully');
         res.status(201).json(); //res.sendStatus(201); //picture uploaded successfully
         }
-    })
+    })*/
     } catch (error) {
     console.error(error);
     // An unknown error occurred
