@@ -106,8 +106,18 @@ router.beforeEach((to, from, next) => {
 			!localStorage.getItem('token') ||
 			localStorage.getItem('token') === ''
 		) {
-			// Redirect to the login page
-			next('/login');
+			if (
+				to.path === '/home' ||
+				to.path === '/signup' ||
+				to.path === '/changePassword' ||
+				to.path === '/resetPassword'
+			) {
+				// User able to access above routes when NOT logged in
+				next();
+			} else {
+				// Redirect to the login page
+				next('/login');
+			}
 		} else {
 			next();
 		}

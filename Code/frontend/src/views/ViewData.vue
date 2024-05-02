@@ -122,7 +122,21 @@
 										</p>
 										<p class="break-words">
 											Laboratory data file:
-											{{ feedingRecord.file_path || 'N/A' }}
+											<template v-if="feedingRecord.file_path">
+												<a
+													v-for="(path, index) in feedingRecord.file_path.split(
+														','
+													)"
+													:key="index"
+													:href="path.trim()"
+													target="_blank"
+												>
+													{{ path.trim() }}
+												</a>
+											</template>
+											<template v-else>
+												{{ feedingRecord.file_path }}
+											</template>
 										</p>
 										<p>Fish variety: {{ feedingRecord.fish_variety }}</p>
 
@@ -383,13 +397,78 @@
 												HealthRecord.records_external_disease_comments || 'N/A'
 											}}
 										</p>
-										<p>Eye photo path: {{ HealthRecord.eye_photo_path }}</p>
-										<p>Teeth photo path: {{ HealthRecord.teeth_photo_path }}</p>
+										<p>
+											Eye photo path:
+											<template v-if="HealthRecord.eye_photo_path">
+												<a
+													v-for="(
+														path, index
+													) in HealthRecord.eye_photo_path.split(',')"
+													:key="index"
+													:href="path.trim()"
+													target="_blank"
+												>
+													{{ path.trim() }}
+												</a>
+											</template>
+											<template v-else>
+												{{ HealthRecord.eye_photo_path }}
+											</template>
+										</p>
+										<p>
+											Teeth photo path:
+											<template v-if="HealthRecord.teeth_photo_path">
+												<a
+													v-for="(
+														path, index
+													) in HealthRecord.teeth_photo_path.split(',')"
+													:key="index"
+													:href="path.trim()"
+													target="_blank"
+												>
+													{{ path.trim() }}
+												</a>
+											</template>
+											<template v-else>
+												{{ HealthRecord.teeth_photo_path }}
+											</template>
+										</p>
 										<p>
 											Odontogramm photo path:
-											{{ HealthRecord.odontogramm_photo_path }}
+											<template v-if="HealthRecord.odontogramm_photo_path">
+												<a
+													v-for="(
+														path, index
+													) in HealthRecord.odontogramm_photo_path.split(',')"
+													:key="index"
+													:href="path.trim()"
+													target="_blank"
+												>
+													{{ path.trim() }}
+												</a>
+											</template>
+											<template v-else>
+												{{ HealthRecord.odontogramm_photo_path }}
+											</template>
 										</p>
-										<p>Marks photo path: {{ HealthRecord.marks_photo_path }}</p>
+										<p>
+											Marks photo path:
+											<template v-if="HealthRecord.marks_photo_path">
+												<a
+													v-for="(
+														path, index
+													) in HealthRecord.marks_photo_path.split(',')"
+													:key="index"
+													:href="path.trim()"
+													target="_blank"
+												>
+													{{ path.trim() }}
+												</a>
+											</template>
+											<template v-else>
+												{{ HealthRecord.marks_photo_path }}
+											</template>
+										</p>
 									</ion-label>
 								</ion-item>
 							</ion-list>
@@ -921,6 +1000,10 @@ export default {
 	},
 
 	methods: {
+		marksPhotoPath() {
+			// get the marks photo path from the dataHealth object
+			return this.dataHealth ? this.dataHealth.marks_photo_path : undefined;
+		},
 		async showData() {
 			this.dataFeeding = null;
 			this.dataHousing = null;

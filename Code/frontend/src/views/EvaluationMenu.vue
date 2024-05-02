@@ -58,8 +58,10 @@ import {
 import { download } from 'ionicons/icons';
 //import axios from 'axios';
 import { baseUrl } from '@/utils/baseUrl';
-import { Filesystem, Directory } from '@capacitor/filesystem';
-import { Share } from '@capacitor/share';
+import { Device } from '@capacitor/device';
+import { Capacitor } from '@capacitor/core';
+//import { Filesystem, Directory } from '@capacitor/filesystem';
+//import { Share } from '@capacitor/share';
 //try to import the animalList
 //import { useDolphinsStore } from '@/store/dolphinsStore';
 
@@ -96,19 +98,36 @@ export default {
 		},*/
 		async getStandardsAndGuidelines() {
 			try {
-				// Read the file
-				const result = await Filesystem.readFile({
-					path: 'public/EAAM-Standards-and-guidelines-2019-gecomprimeerd.pdf',
-					directory: Directory.Documents,
-				});
+				// Get the platform of the device (iOS or Android)
+				const platform = (await Device.getInfo()).platform;
 
-				// Share the file
-				await Share.share({
-					title: 'EAAM Standards and Guidelines',
-					text: 'Here is the EAAM Standards and Guidelines',
-					url: result.uri,
-					dialogTitle: 'Share PDF',
-				});
+				const fileName = 'EAAM-Standards-and-guidelines-2019-gecomprimeerd.pdf'; // Update with your file name
+
+				// Construct the URL based on the platform
+				let fileUrl = '';
+				if (platform === 'ios') {
+					fileUrl = `assets/public/${fileName}`;
+				} else if (platform === 'android') {
+					// For Android, we need to use 'file://' protocol to access assets
+					fileUrl = `file:///android_asset/public/${fileName}`;
+				} else {
+					console.error('Platform not supported');
+					return;
+				}
+
+				// Convert the file URL for the WebView
+				fileUrl = Capacitor.convertFileSrc(fileUrl);
+
+				// Create an anchor element to trigger the download
+				const anchor = document.createElement('a');
+				anchor.href = fileUrl;
+				anchor.target = '_blank'; // Open the file in a new tab/window
+
+				// Trigger the download
+				anchor.click();
+
+				// Clean up: Revoke the temporary URL
+				//URL.revokeObjectURL(fileUrl);
 			} catch (error) {
 				console.error('Error sharing file', error);
 			}

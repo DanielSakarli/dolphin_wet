@@ -1,4 +1,4 @@
-const NODE_ENV = 'dev'; // or 'production'
+const NODE_ENV = 'production'; // or 'production'
 
 export const baseUrl =
 	// eslint-disable-next-line @typescript-eslint/ban-ts-comment
