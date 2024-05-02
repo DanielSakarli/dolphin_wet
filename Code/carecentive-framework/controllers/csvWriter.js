@@ -15,11 +15,6 @@ const User = require('../carecentive/carecentive-core/models/User');
 
 
 async function csvWriter(req, res, next) {
-	/*const errors = validationResult(req);
-	if (!errors.isEmpty()) {
-		// Handle validation errors
-		return res.status(400).json({ errors: errors.array() });
-	}*/
 	try {
 		// After gone through the authenticateToken middleware
 		// the user data of user is in the req.authData
@@ -403,7 +398,7 @@ async function csvWriter(req, res, next) {
 		.writeRecords(data)
 		.then(async () => {
 			console.log('...Done');
-			res.download(savePath);
+			//res.download(savePath);
 
 			 // Send email with CSV file as attachment
 			 let mailOptions = {
@@ -425,11 +420,11 @@ async function csvWriter(req, res, next) {
 					if (error) {
 					  console.error(error);
 					 reject(error); 
-					  //res.sendStatus(500);
+					  res.sendStatus(500);
 					} else {
 					  console.log('Email sent: ' + info.response);
 					  resolve(info);
-					  //res.sendStatus(200);
+					  res.sendStatus(200);
 					}
 				  });
 			  });
