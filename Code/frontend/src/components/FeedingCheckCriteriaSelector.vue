@@ -49,9 +49,9 @@
 		<!-- End of Criteria Selector -->
 
 		<!-- Description of Criteria (UserManual) -->
-		<ion-button v-if="criteria" fill="outline" @click="setOpenManual()">{{
+		<!--<ion-button v-if="criteria" fill="outline" @click="setOpenManual()">{{
 			$t('userManual')
-		}}</ion-button>
+		}}</ion-button>-->
 
 		<ion-modal :is-open="isOpenManual">
 			<ion-header>
@@ -69,12 +69,14 @@
 						>{{ $t('fourthCriteriaNutrition') }}
 					</ion-title>
 					<ion-buttons slot="end">
-						<ion-button @click="setOpenManual()">{{ $t('close') }}</ion-button>
+						<ion-button @click="setOpenManual('')">{{
+							$t('close')
+						}}</ion-button>
 					</ion-buttons>
 				</ion-toolbar>
 			</ion-header>
 			<ion-content class="ion-padding">
-				<div v-if="criteria === 'firstCriteriaNutrition'">
+				<div v-if="subcriteria === 'firstSubCriteriaNutrition'">
 					<h1>{{ $t('firstSubCriteriaNutrition') }}</h1>
 					<h3>Score 0</h3>
 					{{ $t('score0Nutrition1') }}
@@ -82,18 +84,22 @@
 					{{ $t('score1Nutrition1') }}
 					<h3>Score 2</h3>
 					{{ $t('score2Nutrition1') }}
+				</div>
+				<div v-if="subcriteria === 'secondSubCriteriaNutrition'">
 					<h1>{{ $t('secondSubCriteriaNutrition') }}</h1>
 					<h3>Score 0</h3>
 					{{ $t('score0Nutrition2') }}
 					<h3>Score 2</h3>
 					{{ $t('score2Nutrition2') }}
 				</div>
-				<div v-if="criteria === 'secondCriteriaNutrition'">
+				<div v-if="subcriteria === 'thirdSubCriteriaNutrition'">
 					<h1>{{ $t('thirdSubCriteriaNutrition') }}</h1>
 					<h3>Score 0</h3>
 					{{ $t('score0Nutrition3') }}
 					<h3>Score 2</h3>
 					{{ $t('score2Nutrition3') }}
+				</div>
+				<div v-if="subcriteria === 'fourthSubCriteriaNutrition'">
 					<h1>{{ $t('fourthSubCriteriaNutrition') }}</h1>
 					<h3>Score 0</h3>
 					{{ $t('score0Nutrition4') }}
@@ -102,14 +108,14 @@
 					<h3>Score 2</h3>
 					{{ $t('score2Nutrition4') }}
 				</div>
-				<div v-if="criteria === 'thirdCriteriaNutrition'">
+				<div v-if="subcriteria === 'fifthSubCriteriaNutrition'">
 					<h1>{{ $t('fifthSubCriteriaNutrition') }}</h1>
 					<h3>Score 0</h3>
 					{{ $t('score0Nutrition5') }}
 					<h3>Score 2</h3>
 					{{ $t('score2Nutrition5') }}
 				</div>
-				<div v-if="criteria === 'fourthCriteriaNutrition'">
+				<div v-if="subcriteria === 'sixthSubCriteriaNutrition'">
 					<h1>{{ $t('sixthSubCriteriaNutrition') }}</h1>
 					<h3>Score 0</h3>
 					{{ $t('score0Nutrition6') }}
@@ -121,90 +127,6 @@
 			</ion-content>
 		</ion-modal>
 		<!-- End of Description of Criteria (UserManual)-->
-		<!--Start of Scoring Description-->
-		<!--<ion-button v-if="criteria" fill="outline" @click="setOpenScoring(true)">{{
-			$t('ScoringDescription')
-		}}</ion-button>
-
-		<ion-modal :is-open="isOpenScoring">
-			<ion-header>
-				<ion-toolbar>
-					<ion-title v-if="criteria === 'firstCriteriaNutrition'"
-						>{{ $t('firstCriteriaNutrition') }}
-					</ion-title>
-					<ion-title v-else-if="criteria === 'secondCriteriaNutrition'"
-						>{{ $t('secondCriteriaNutrition') }}
-					</ion-title>
-					<ion-title v-else-if="criteria === 'thirdCriteriaNutrition'"
-						>{{ $t('thirdCriteriaNutrition') }}
-					</ion-title>
-					<ion-title v-else-if="criteria === 'fourthCriteriaNutrition'"
-						>{{ $t('fourthCriteriaNutrition') }}
-					</ion-title>
-					<ion-buttons slot="end">
-						<ion-button @click="setOpenScoring(false)">{{
-							$t('close')
-						}}</ion-button>
-					</ion-buttons>
-				</ion-toolbar>
-			</ion-header>
-			<ion-content class="ion-padding">
-				<div v-if="criteria === 'firstCriteriaNutrition'">
-					<h1>Body Condition Score:</h1>
-					<h3>Score 1</h3>
-					BCS of 3 = adequate
-					<h3>Score 2</h3>
-					BCS of 2 (underweight) or 4(overweight)
-					<h3>Score 3</h3>
-					BCS of 1 (emaciated) or 5(obese)
-					<h1>Weight oscillation during the year:</h1>
-					<h3>Score 1</h3>
-					Body weight oscillation (BWOS): &le;13% along the year or &le;5% in a
-					3-month period
-					<h3>Score 3</h3>
-					BWOS: &gt;13% along the year or &lt;5% in a 3-month period
-				</div>
-				<div v-if="criteria === 'secondCriteriaNutrition'">
-					<h1>Kcal calculations</h1>
-					<h3>Score 1</h3>
-					Diet designed on the basis of EAAM S&G
-					<h3>Score 3</h3>
-					Diet not designed on the basis of EAAM S&G
-					<h1>Blood parameters for adequate hydration:</h1>
-					<h3>Score 1</h3>
-					Within the range
-					<h3>Score 2</h3>
-					10% out of range
-					<h3>Score 3</h3>
-					&gt;10% out of range
-				</div>
-				<div v-if="criteria === 'thirdCriteriaNutrition'">
-					<h1>Food quality Microbiology, Physico-chemical analysis:</h1>
-					<h3>Score 1</h3>
-					Fulfilled according to EAAM S&G
-					<h3>Score 3</h3>
-					Not fulfilled according to EAAM S&G
-				</div>
-				<div v-if="criteria === 'fourthCriteriaNutrition'">
-					<h1>Food variety along the year:</h1>
-					<h3>Score 1</h3>
-					At least 5 species are fed throughout the year, each individual's diet
-					is adapted to its individual nutritional needs and preferences, amount
-					of food fed varies between sessions, part of the diet is given via
-					enrichment
-					<h3>Score 2</h3>
-					At least 3, but no more than 5 species are fed throughout the year,
-					each individual's diet is adapted to its individual nutritional needs,
-					but the amount of food provided to the dolphins during each session is
-					the same, favorite species/animal preferences are neglected
-					<h3>Score 3</h3>
-					Only 3 or less species of food are fed throughout the year, no
-					variation along the year, diet is not adapted to individual
-					preferences/specific need
-				</div>
-			</ion-content>
-		</ion-modal>-->
-		<!--End of Scoring Description-->
 		<!--Start of Reference Area-->
 		<ion-button
 			v-if="criteria"
@@ -296,6 +218,12 @@
 			"
 		>
 			<ion-card-title>{{ $t('firstSubCriteriaNutrition') }}</ion-card-title>
+			<ion-button
+				v-if="criteria"
+				fill="outline"
+				@click="setOpenManual('firstSubCriteriaNutrition')"
+				>{{ $t('userManual') }}</ion-button
+			>
 			<ion-list>
 				<ion-item>
 					<ion-checkbox v-model="CheckboxArray[0][0]" @click="handleClick(0, 0)"
@@ -323,6 +251,12 @@
 			"
 		>
 			<ion-card-title>{{ $t('secondSubCriteriaNutrition') }}</ion-card-title>
+			<ion-button
+				v-if="criteria"
+				fill="outline"
+				@click="setOpenManual('secondSubCriteriaNutrition')"
+				>{{ $t('userManual') }}</ion-button
+			>
 			<ion-list>
 				<ion-item>
 					<ion-input
@@ -349,6 +283,12 @@
 			"
 		>
 			<ion-card-title>{{ $t('thirdSubCriteriaNutrition') }}</ion-card-title>
+			<ion-button
+				v-if="criteria"
+				fill="outline"
+				@click="setOpenManual('thirdSubCriteriaNutrition')"
+				>{{ $t('userManual') }}</ion-button
+			>
 			<ion-list>
 				<ion-item>
 					<ion-checkbox v-model="CheckboxArray[1][0]" @click="handleClick(1, 0)"
@@ -371,6 +311,12 @@
 			"
 		>
 			<ion-card-title>{{ $t('fourthSubCriteriaNutrition') }}</ion-card-title>
+			<ion-button
+				v-if="criteria"
+				fill="outline"
+				@click="setOpenManual('fourthSubCriteriaNutrition')"
+				>{{ $t('userManual') }}</ion-button
+			>
 			<ion-list>
 				<ion-item>
 					<ion-checkbox v-model="CheckboxArray[2][0]" @click="handleClick(2, 0)"
@@ -398,6 +344,12 @@
 			"
 		>
 			<ion-card-title>{{ $t('fifthSubCriteriaNutrition') }}</ion-card-title>
+			<ion-button
+				v-if="criteria"
+				fill="outline"
+				@click="setOpenManual('fifthSubCriteriaNutrition')"
+				>{{ $t('userManual') }}</ion-button
+			>
 			<ion-list>
 				<ion-item>
 					<ion-checkbox v-model="CheckboxArray[3][0]" @click="handleClick(3, 0)"
@@ -434,6 +386,12 @@
 			"
 		>
 			<ion-card-title>{{ $t('sixthSubCriteriaNutrition') }}</ion-card-title>
+			<ion-button
+				v-if="criteria"
+				fill="outline"
+				@click="setOpenManual('sixthSubCriteriaNutrition')"
+				>{{ $t('userManual') }}</ion-button
+			>
 			<ion-list>
 				<ion-item>
 					<ion-checkbox v-model="CheckboxArray[4][0]" @click="handleClick(4, 0)"
@@ -589,9 +547,13 @@ export default {
 	},
 	methods: {
 		//Method to open the manual
-		setOpenManual() {
-			//this.isOpenManual = isOpen;
+		setOpenManual(subcriteria: string) {
+			//Set the subcriteria to display the correct user manual if the user manual is opened
+			this.subcriteria = subcriteria;
 			this.isOpenManual = !this.isOpenManual;
+			if (this.isOpenManual === false) {
+				this.subcriteria = ''; //set empty if user manual is closed
+			}
 		},
 		//Method to open scoring desciption
 		setOpenScoring(isOpen: boolean) {

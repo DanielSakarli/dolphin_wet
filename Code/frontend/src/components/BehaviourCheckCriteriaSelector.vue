@@ -123,6 +123,9 @@
 				</div>
 				<div v-if="criteria === 'thirdCriteriaBehaviour'">
 					<h1>{{ $t('fifthSubCriteriaBehaviour') }}</h1>
+					<h2 style="font-style: italic">
+						Do not check any boxes if the dolphin has no calf!
+					</h2>
 					<h3>Score 0</h3>
 					{{ $t('score0Behaviour5') }}
 					<h3>Score 2</h3>

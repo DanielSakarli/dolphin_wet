@@ -102,7 +102,7 @@ const storage = multer.diskStorage({
 const upload = multer({
 	storage: storage,
 	// set the size limit of picture
-	limits: { fileSize: 10000000 },
+	limits: { fileSize: 10000000 }, // 10MB, but you also need to adjust nginx to allow payload sizes of 10MB
 });
 
 const uploadMultiple = upload.array('files');
