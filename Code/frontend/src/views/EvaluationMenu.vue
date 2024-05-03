@@ -56,10 +56,11 @@ import {
 	IonIcon,
 } from '@ionic/vue';
 import { download } from 'ionicons/icons';
+import { FileOpener } from '@capawesome-team/capacitor-file-opener';
 //import axios from 'axios';
 import { baseUrl } from '@/utils/baseUrl';
 import { Device } from '@capacitor/device';
-import { Capacitor } from '@capacitor/core';
+//import { Capacitor } from '@capacitor/core';
 //import { Filesystem, Directory } from '@capacitor/filesystem';
 //import { Share } from '@capacitor/share';
 //try to import the animalList
@@ -101,7 +102,7 @@ export default {
 				// Get the platform of the device (iOS or Android)
 				const platform = (await Device.getInfo()).platform;
 
-				const fileName = 'EAAM-Standards-and-guidelines-2019-gecomprimeerd.pdf'; // Update with your file name
+				const fileName = 'Odontogramm_color_schema.png'; // Update with your file name
 
 				// Construct the URL based on the platform
 				let fileUrl = '';
@@ -110,21 +111,40 @@ export default {
 				} else if (platform === 'android') {
 					// For Android, we need to use 'file://' protocol to access assets
 					fileUrl = `file:///android_asset/public/${fileName}`;
+					/*const assetFile = await fetch(
+						`file:///android_asset/public/${fileName}`
+					);
+					const cacheDir = await Filesystem.getUri({
+						directory: Directory.Cache,
+						path: '',
+					});
+					const cacheFile = `${cacheDir.uri}/${fileName}`;
+
+					await Filesystem.writeFile({
+						path: cacheFile,
+						data: await assetFile.blob(),
+						directory: Directory.Cache,
+					});
+
+					fileUrl = cacheFile;*/
 				} else {
 					console.error('Platform not supported');
 					return;
 				}
 
+				await FileOpener.openFile({
+					path: fileUrl,
+				});
 				// Convert the file URL for the WebView
-				fileUrl = Capacitor.convertFileSrc(fileUrl);
+				//fileUrl = Capacitor.convertFileSrc(fileUrl);
 
 				// Create an anchor element to trigger the download
-				const anchor = document.createElement('a');
-				anchor.href = fileUrl;
-				anchor.target = '_blank'; // Open the file in a new tab/window
+				//const anchor = document.createElement('a');
+				//anchor.href = fileUrl;
+				//anchor.target = '_blank'; // Open the file in a new tab/window
 
 				// Trigger the download
-				anchor.click();
+				//anchor.click();
 
 				// Clean up: Revoke the temporary URL
 				//URL.revokeObjectURL(fileUrl);

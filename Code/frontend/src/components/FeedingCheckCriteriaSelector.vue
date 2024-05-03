@@ -410,9 +410,6 @@
 					>
 				</ion-item>
 				<CheckComments @update-comment="updateFishQualityComments" />
-				<ion-item>
-					<FileUpload @form-submitted="handleFormSubmittedFile" />
-				</ion-item>
 			</ion-list>
 		</ion-card>
 		<ion-card

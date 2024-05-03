@@ -1617,7 +1617,10 @@ export default {
 								console.log('Response:', response.data);
 							})
 							.catch((error) => {
-								console.error('Error:', error);
+								console.error(
+									'Error during photo Upload:',
+									JSON.stringify(error)
+								);
 							});
 					}
 					//Reset the form data
