@@ -46,9 +46,9 @@
 		<!-- End of Criteria Selector -->
 
 		<!-- Description of Criteria (UserManual) -->
-		<ion-button v-if="criteria" fill="outline" @click="setOpenManual()">{{
+		<!--<ion-button v-if="criteria" fill="outline" @click="setOpenManual()">{{
 			$t('userManual')
-		}}</ion-button>
+		}}</ion-button>-->
 
 		<ion-modal :is-open="isOpenManual">
 			<ion-header>
@@ -66,48 +66,56 @@
 						>{{ $t('fourthCriteriaEmotionalState') }}
 					</ion-title>
 					<ion-buttons slot="end">
-						<ion-button @click="setOpenManual()">{{ $t('close') }}</ion-button>
+						<ion-button @click="setOpenManual('')">{{
+							$t('close')
+						}}</ion-button>
 					</ion-buttons>
 				</ion-toolbar>
 			</ion-header>
 			<ion-content class="ion-padding">
-				<div v-if="criteria === 'firstCriteriaEmotionalState'">
+				<div v-if="subcriteria === 'firstSubCriteriaEmotionalState'">
 					<h1>{{ $t('firstSubCriteriaEmotionalState') }}</h1>
 					<h3>Score 0</h3>
 					{{ $t('score0EmotionalState1') }}
 					<h3>Score 2</h3>
 					{{ $t('score2EmotionalState1') }}
 				</div>
-				<div v-if="criteria === 'secondCriteriaEmotionalState'">
+				<div v-if="subcriteria === 'secondSubCriteriaEmotionalState'">
 					<h1>{{ $t('secondSubCriteriaEmotionalState') }}</h1>
 					<h3>Score 0</h3>
 					{{ $t('score0EmotionalState2') }}
 					<h3>Score 2</h3>
 					{{ $t('score2EmotionalState2') }}
+				</div>
+				<div v-if="subcriteria === 'thirdSubCriteriaEmotionalState'">
 					<h1>{{ $t('thirdSubCriteriaEmotionalState') }}</h1>
 					<h3>Score 0</h3>
 					{{ $t('score0EmotionalState3') }}
 					<h3>Score 2</h3>
 					{{ $t('score2EmotionalState3') }}
+				</div>
+				<div v-if="subcriteria === 'fourthSubCriteriaEmotionalState'">
 					<h1>{{ $t('fourthSubCriteriaEmotionalState') }}</h1>
 					<h3>Score 0</h3>
 					{{ $t('score0EmotionalState4') }}
 					<h3>Score 2</h3>
 					{{ $t('score2EmotionalState4') }}
 				</div>
-				<div v-if="criteria === 'thirdCriteriaEmotionalState'">
+				<div v-if="subcriteria === 'fifthSubCriteriaEmotionalState'">
 					<h1>{{ $t('fifthSubCriteriaEmotionalState') }}</h1>
 					<h3>Score 0</h3>
 					{{ $t('score0EmotionalState5') }}
 					<h3>Score 2</h3>
 					{{ $t('score2EmotionalState5') }}
+				</div>
+				<div v-if="subcriteria === 'sixthSubCriteriaEmotionalState'">
 					<h1>{{ $t('sixthSubCriteriaEmotionalState') }}</h1>
 					<h3>Score 0</h3>
 					{{ $t('score0EmotionalState6') }}
 					<h3>Score 2</h3>
 					{{ $t('score2EmotionalState6') }}
 				</div>
-				<div v-if="criteria === 'fourthCriteriaEmotionalState'">
+				<div v-if="subcriteria === 'seventhSubCriteriaEmotionalState'">
 					<h1>{{ $t('seventhSubCriteriaEmotionalState') }}</h1>
 					<h3>Score 0</h3>
 					{{ $t('score0EmotionalState7') }}
@@ -117,157 +125,6 @@
 			</ion-content>
 		</ion-modal>
 		<!-- End of Description of Criteria (UserManual)-->
-		<!--Start of Scoring Description-->
-		<!--<ion-button v-if="criteria" fill="outline" @click="setOpenScoring(true)">{{
-			$t('ScoringDescription')
-		}}</ion-button>
-
-		<ion-modal :is-open="isOpenScoring">
-			<ion-header>
-				<ion-toolbar>
-					<ion-title v-if="criteria === 'firstCriteriaEmotionalState'"
-						>{{ $t('firstCriteriaEmotionalState') }}
-					</ion-title>
-					<ion-title v-else-if="criteria === 'secondCriteriaEmotionalState'"
-						>{{ $t('secondCriteriaEmotionalState') }}
-					</ion-title>
-					<ion-title v-else-if="criteria === 'thirdCriteriaEmotionalState'"
-						>{{ $t('thirdCriteriaEmotionalState') }}
-					</ion-title>
-					<ion-title v-else-if="criteria === 'fourthCriteriaEmotionalState'"
-						>{{ $t('fourthCriteriaEmotionalState') }}
-					</ion-title>
-					<ion-buttons slot="end">
-						<ion-button @click="setOpenScoring(false)">{{
-							$t('close')
-						}}</ion-button>
-					</ion-buttons>
-				</ion-toolbar>
-			</ion-header>
-			<ion-content class="ion-padding">
-				<p v-if=" criteria === 'firstCriteriaEmotionalState'">
-					<h1>Body Condition Score:</h1>
-					<h3>Score 1</h3>
-					BCS of 3 = adequate
-					<h3>Score 2</h3>
-					BCS of 2 (underweight) or 4(overweight)
-					<h3>Score 3</h3>
-					BCS of 1 (emaciated) or 5(obese)
-					<h1>Weight oscillation during the year:</h1>
-					<h3>Score 1</h3>
-					Body weight oscillation (BWOS): &le;13% along the year or &le;5% in a 3-month period  
-					<h3>Score 3</h3>
-					BWOS: &gt;13% along the year or &lt;5% in a 3-month period
-				</p>
-				<p v-if=" criteria === 'secondCriteriaEmotionalState'">
-					<h1>Kcal calculations</h1>
-					<h3>Score 1</h3>
-					Diet designed on the basis of EAAM S&G
-					<h3>Score 3</h3>
-					Diet not designed on the basis of EAAM S&G
-					<h1>Blood parameters for adequate hydration:</h1>
-					<h3>Score 1</h3>
-					Within the range
-					<h3>Score 2</h3>
-					10% out of range
-					<h3>Score 3</h3>
-					&gt;10% out of range
-				</p>
-				<p v-if=" criteria === 'thirdCriteriaEmotionalState'">
-					<h1>Food quality Microbiology, Physico-chemical analysis:</h1>
-					<h3>Score 1</h3>
-					Fulfilled according to EAAM S&G
-					<h3>Score 3</h3>
-					Not fulfilled according to EAAM S&G
-				</p>
-				<p v-if=" criteria === 'fourthCriteriaEmotionalState'">
-					<h1>Food variety along the year:</h1>
-					<h3>Score 1</h3>
-					At least 5 species are fed throughout the year, 
-					each individual's diet is adapted to its individual EmotionalStateal needs and preferences, 
-					amount of food fed varies between sessions, 
-					part of the diet is given via enrichment
-					<h3>Score 2</h3>
-					At least 3, but no more than 5 species are fed throughout the year, 
-					each individual's diet is adapted to its individual EmotionalStateal needs, but the 
-					amount of food provided to the dolphins during each session is the same, 
-					favorite species/animal preferences are neglected
-					<h3>Score 3</h3>
-					Only 3 or less species of food are fed throughout the year, no variation along the year, 
-					diet is not adapted to individual preferences/specific need
-				</p>
-			</ion-content>
-		</ion-modal>-->
-		<!--End of Scoring Description-->
-		<!--Start of Reference Area-->
-		<!--<ion-button v-if="criteria" fill="outline" @click="setOpenReferenceArea(true)">{{ $t('ReferenceArea') }}</ion-button>
-
-		<ion-modal :is-open="isOpenReferenceArea">
-			<ion-header>
-				<ion-toolbar>
-					<ion-title>
-						{{$t('ReferenceArea')}}
-					</ion-title>
-					<ion-buttons slot="end">
-						<ion-button @click="setOpenReferenceArea(false)">{{ $t('close')}}</ion-button>
-					</ion-buttons>
-				</ion-toolbar>
-			</ion-header>
-
-			<ion-content class="ion-padding">
-				<p v-if=" criteria === 'firstCriteriaEmotionalState'">-->
-		<!--Here are the values of reference area-->
-		<!--<h3>Wanted weight area:</h3>
-					<div v-if="dolphinSelect">
-						<div v-for="selectedDolphin in dolphinSelect" :key="selectedDolphin">
-							<h4>{{ selectedDolphin }}</h4>
-							<p>
-							  Minimum: 
-							  {{ 
-								(dolphinsStore.dolphinList.find(
-								  (dolphin) => dolphin.name === selectedDolphin
-								)?.min_weight_measured) ?? null
-							  }}
-							</p>
-							<p>
-							  Maximum: 
-							  {{ 
-								(dolphinsStore.dolphinList.find(
-								  (dolphin) => dolphin.name === selectedDolphin
-								)?.max_weight_measured) ?? null
-							  }}
-							</p>
-						  </div>
-					  </div>
-				</p>
-				<p v-if=" criteria === 'secondCriteriaEmotionalState'">-->
-		<!--Here are the values of reference area-->
-		<!--<h3>Kcal calculations</h3>
-					<div v-if="dolphinSelect">
-						<div v-for="selectedDolphin in dolphinSelect" :key="selectedDolphin">
-							<h4>{{ selectedDolphin }}</h4>
-							<p>
-							  Minimum: 
-							  {{ 
-								(dolphinsStore.dolphinList.find(
-								  (dolphin) => dolphin.name === selectedDolphin
-								)?.min_kcal_calculations) ?? null
-							  }}
-							</p>
-							<p>
-							  Maximum: 
-							  {{ 
-								(dolphinsStore.dolphinList.find(
-								  (dolphin) => dolphin.name === selectedDolphin
-								)?.max_kcal_calculations) ?? null
-							  }}
-							</p>
-						</div>
-					</div>
-				</p>
-			</ion-content>
-		</ion-modal>-->
-		<!--End of Reference Area-->
 		<!-- Start of Checkboxes-->
 		<ion-card
 			v-if="
@@ -279,6 +136,12 @@
 			<ion-card-title class="card-title">{{
 				$t('firstSubCriteriaEmotionalState')
 			}}</ion-card-title>
+			<ion-button
+				v-if="criteria"
+				fill="outline"
+				@click="setOpenManual('firstSubCriteriaEmotionalState')"
+				>{{ $t('userManual') }}</ion-button
+			>
 			<ion-list>
 				<ion-item>
 					<ion-checkbox v-model="CheckboxArray[0][0]" @click="handleClick(0, 0)"
@@ -303,6 +166,12 @@
 			<ion-card-title class="card-title">{{
 				$t('secondSubCriteriaEmotionalState')
 			}}</ion-card-title>
+			<ion-button
+				v-if="criteria"
+				fill="outline"
+				@click="setOpenManual('secondSubCriteriaEmotionalState')"
+				>{{ $t('userManual') }}</ion-button
+			>
 			<ion-list>
 				<ion-item>
 					<ion-checkbox v-model="CheckboxArray[1][0]" @click="handleClick(1, 0)"
@@ -327,6 +196,12 @@
 			<ion-card-title class="card-title">{{
 				$t('thirdSubCriteriaEmotionalState')
 			}}</ion-card-title>
+			<ion-button
+				v-if="criteria"
+				fill="outline"
+				@click="setOpenManual('thirdSubCriteriaEmotionalState')"
+				>{{ $t('userManual') }}</ion-button
+			>
 			<ion-list>
 				<ion-item>
 					<ion-checkbox v-model="CheckboxArray[2][0]" @click="handleClick(2, 0)"
@@ -351,6 +226,12 @@
 			<ion-card-title class="card-title">{{
 				$t('fourthSubCriteriaEmotionalState')
 			}}</ion-card-title>
+			<ion-button
+				v-if="criteria"
+				fill="outline"
+				@click="setOpenManual('fourthSubCriteriaEmotionalState')"
+				>{{ $t('userManual') }}</ion-button
+			>
 			<ion-list>
 				<ion-item>
 					<ion-checkbox v-model="CheckboxArray[3][0]" @click="handleClick(3, 0)"
@@ -375,6 +256,12 @@
 			<ion-card-title class="card-title">{{
 				$t('fifthSubCriteriaEmotionalState')
 			}}</ion-card-title>
+			<ion-button
+				v-if="criteria"
+				fill="outline"
+				@click="setOpenManual('fifthSubCriteriaEmotionalState')"
+				>{{ $t('userManual') }}</ion-button
+			>
 			<ion-list>
 				<ion-item>
 					<ion-checkbox v-model="CheckboxArray[4][0]" @click="handleClick(4, 0)"
@@ -399,6 +286,12 @@
 			<ion-card-title class="card-title">{{
 				$t('sixthSubCriteriaEmotionalState')
 			}}</ion-card-title>
+			<ion-button
+				v-if="criteria"
+				fill="outline"
+				@click="setOpenManual('sixthSubCriteriaEmotionalState')"
+				>{{ $t('userManual') }}</ion-button
+			>
 			<ion-list>
 				<ion-item>
 					<ion-checkbox v-model="CheckboxArray[5][0]" @click="handleClick(5, 0)"
@@ -423,6 +316,12 @@
 			<ion-card-title class="card-title">{{
 				$t('seventhSubCriteriaEmotionalState')
 			}}</ion-card-title>
+			<ion-button
+				v-if="criteria"
+				fill="outline"
+				@click="setOpenManual('seventhSubCriteriaEmotionalState')"
+				>{{ $t('userManual') }}</ion-button
+			>
 			<ion-list>
 				<ion-item>
 					<ion-checkbox v-model="CheckboxArray[6][0]" @click="handleClick(6, 0)"
@@ -553,8 +452,13 @@ export default {
 	},
 	methods: {
 		//Method to open the manual
-		setOpenManual() {
+		setOpenManual(subcriteria: string) {
+			//Set the subcriteria to display the correct user manual if the user manual is opened
+			this.subcriteria = subcriteria;
 			this.isOpenManual = !this.isOpenManual;
+			if (this.isOpenManual === false) {
+				this.subcriteria = ''; //set empty if user manual is closed
+			}
 		},
 		//Method to open scoring desciption
 		setOpenScoring(isOpen: boolean) {

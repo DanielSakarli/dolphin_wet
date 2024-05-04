@@ -51,9 +51,9 @@
 		<!-- End of Criteria Selector -->
 
 		<!-- Description of Criteria (User Manual)-->
-		<ion-button v-if="criteria" fill="outline" @click="setOpenManual()">{{
+		<!--<ion-button v-if="criteria" fill="outline" @click="setOpenManual()">{{
 			$t('userManual')
-		}}</ion-button>
+		}}</ion-button>-->
 
 		<ion-modal :is-open="isOpenManual">
 			<ion-header>
@@ -73,45 +73,53 @@
 					<ion-title v-else-if="criteria === 'fifthCriteriaHealth'"
 						>{{ $t('fifthCriteriaHealth') }}
 					</ion-title>
-					<ion-title v-else-if="SubCriteria === 'sixthCriteriaHealth'"
+					<ion-title v-else-if="criteria === 'sixthCriteriaHealth'"
 						>{{ $t('sixthCriteriaHealth') }}
 					</ion-title>
 					<ion-buttons slot="end">
-						<ion-button @click="setOpenManual()">{{ $t('close') }}</ion-button>
+						<ion-button @click="setOpenManual('')">{{
+							$t('close')
+						}}</ion-button>
 					</ion-buttons>
 				</ion-toolbar>
 			</ion-header>
 			<ion-content class="ion-padding">
-				<div v-if="criteria === 'firstCriteriaHealth'">
+				<div v-if="subcriteria === 'firstSubCriteriaHealth'">
 					<h1>{{ $t('firstSubCriteriaHealth') }}</h1>
 					<h3>Score 0</h3>
 					{{ $t('score0Health1') }}
 					<h3>Score 2</h3>
 					{{ $t('score2Health1') }}
+				</div>
+				<div v-if="subcriteria === 'secondSubCriteriaHealth'">
 					<h1>{{ $t('secondSubCriteriaHealth') }}</h1>
 					<h3>Score 0</h3>
 					{{ $t('score0Health2') }}
 					<h3>Score 2</h3>
 					{{ $t('score2Health2') }}
 				</div>
-				<div v-if="criteria === 'secondCriteriaHealth'">
+				<div v-if="subcriteria === 'thirdSubCriteriaHealth'">
 					<h1>{{ $t('thirdSubCriteriaHealth') }}</h1>
 					<h3>Score 0</h3>
 					{{ $t('score0Health3') }}
 					<h3>Score 2</h3>
 					{{ $t('score2Health3') }}
+				</div>
+				<div v-if="subcriteria === 'fourthSubCriteriaHealth'">
 					<h1>{{ $t('fourthSubCriteriaHealth') }}</h1>
 					<h3>Score 0</h3>
 					{{ $t('score0Health4') }}
 					<h3>Score 2</h3>
 					{{ $t('score2Health4') }}
+				</div>
+				<div v-if="subcriteria === 'fifthSubCriteriaHealth'">
 					<h1>{{ $t('fifthSubCriteriaHealth') }}</h1>
 					<h3>Score 0</h3>
 					{{ $t('score0Health5') }}
 					<h3>Score 2</h3>
 					{{ $t('score2Health5') }}
 				</div>
-				<div v-if="criteria === 'thirdCriteriaHealth'">
+				<div v-if="subcriteria === 'sixthSubCriteriaHealth'">
 					<h1>{{ $t('sixthSubCriteriaHealth') }}</h1>
 					<h3>Score 0</h3>
 					{{ $t('score0Health6') }}
@@ -127,263 +135,59 @@
 						src="../../public/Odontogramm_color_schema.png"
 						alt="Odontogramm Color Schema"
 					/>
+				</div>
+				<div v-if="subcriteria === 'seventhSubCriteriaHealth'">
 					<h1>{{ $t('seventhSubCriteriaHealth') }}</h1>
 					<h3>Score 0</h3>
 					{{ $t('score0Health7') }}
 					<h3>Score 2</h3>
 					{{ $t('score2Health7') }}
 				</div>
-				<div v-if="criteria === 'fourthCriteriaHealth'">
+				<div v-if="subcriteria === 'eigthSubCriteriaHealth'">
 					<h1>{{ $t('eigthSubCriteriaHealth') }}</h1>
 					<h3>Score 0</h3>
 					{{ $t('score0Health8') }}
 					<h3>Score 2</h3>
 					{{ $t('score2Health8') }}
 				</div>
-				<div v-if="criteria === 'fifthCriteriaHealth'">
+				<div v-if="subcriteria === 'ninthSubCriteriaHealth'">
 					<h1>{{ $t('ninthSubCriteriaHealth') }}</h1>
 					<h3>Score 0</h3>
 					{{ $t('score0Health9') }}
 					<h3>Score 2</h3>
 					{{ $t('score2Health9') }}
+				</div>
+				<div v-if="subcriteria === 'tenthSubCriteriaHealth'">
 					<h1>{{ $t('tenthSubCriteriaHealth') }}</h1>
 					<h3>Score 0</h3>
 					{{ $t('score0Health10') }}
 					<h3>Score 2</h3>
 					{{ $t('score2Health10') }}
+				</div>
+				<div v-if="subcriteria === 'eleventhSubCriteriaHealth'">
 					<h1>{{ $t('eleventhSubCriteriaHealth') }}</h1>
 					<h3>Score 0</h3>
 					{{ $t('score0Health11') }}
 					<h3>Score 2</h3>
 					{{ $t('score2Health11') }}
 				</div>
-				<div v-if="criteria === 'sixthCriteriaHealth'">
+				<div v-if="subcriteria === 'twelvthSubCriteriaHealth'">
 					<h1>{{ $t('twelvthSubCriteriaHealth') }}</h1>
 					<h3>Score 0</h3>
 					{{ $t('score0Health12') }}
 					<h3>Score 2</h3>
 					{{ $t('score2Health12') }}
+				</div>
+				<div v-if="subcriteria === 'thirteenthSubCriteriaHealth'">
 					<h1>{{ $t('thirteenthSubCriteriaHealth') }}</h1>
 					<h3>Score 0</h3>
 					{{ $t('score0Health13') }}
 					<h3>Score 2</h3>
 					{{ $t('score2Health13') }}
 				</div>
-				<!--<p v-if=" criteria === 'fourthCriteriaHealth'">
-					<h3>Records of previous gastric/fecal abnormalities on records</h3>
-					Verification with the team of trainers and veterinarians there have been no previous lesions/diseases/behaviours reflecting or potentially causing alteration of gastrointestinal tract or associated feeding behaviour during the previous 3 months.
-				</p>
-				<p v-if=" criteria === 'fifthCriteriaHealth'">
-					<h3>Direct physical exam including blowhole visual evaluation, and respiration performance</h3>
-					Blowhole visual evaluation (movement, internal plaques, secretions, odor, discoloration/hyperpigmentation, etc.), auscultation (respiratory sounds), and apparent ventilation performance (respiratory noises, exhalation duration, ventilation relative volume, respiratory rate).
-					<h3>Please check:</h3>
-					<ul>
-						<li> Presence of foul odor</li>
-						<li> Presence of foam/mucus</li>
-						<li> Chuff without resulting in coughing</li>
-						<li> Abnormal respiratory rates</li>
-					</ul>
-					<h3>Forced expiration test</h3>
-					<h3>Records on previous respiratory diseases</h3>
-					verification with the team of trainers and veterinarians there have been no previous signs/diseases/behaviors reflecting respiratory disease during the previous 3 months.
-				</p>
-				<p v-if=" criteria === 'sixthCriteriaHealth'">
-					<h3>Direct physical exam</h3>
-					Direct physical exam of on skin and other natural openings, including global skin condition (color, number and severity of viral lesions, major wounds, cracking, relative desquamation, scars, thermal ischemic necrosis, etc.), genital slit (exudates, mucosal colour, mucosal lesions), ears (exudates, pain to touch, bulging), rostrum (wounds, callosity).  
-					<h3>Please check:</h3>
-					<h4>Skin condition (general):</h4>
-					<ul>
-						<li> Presence of pox virus, mycobacterium, or papilloma like lesions</li>
-						<li> Presence of active traumatic lesions (especially at rostrum level and fins)</li>
-						<li> Presence of hematomas</li>
-						<li> Presence of abnormal coloration, blistering, etc.</li>
-						<li> Coloration around eyes and blowhole</li>
-					</ul>
-					<h4>Genital area:</h4>
-					<ul>
-						<li> Presence of herpes/papilloma</li>
-					</ul>
-					<h3>Records on previous incidents</h3>
-					Verification with the team of trainers and veterinarians there have been no other previous signs/diseases/behaviors on records (including complete blood works (including complete hematology, biochemistry, ESR and fibrinogen determinations as well as inflammatory markers such us TWBC, WBCdiff, %Bands, %Ret, Hb, ALKP, ALB, FIB, IRON, ESR), biological data, or complementary diagnostic techniques (ultrasound, radiography, endoscopy, thermography, CT, microbiology, hormonal analysis, molecular techniques, etc.) )
-					<h3>Complete blood profile methodology</h3>
-					Perform a complete full blood profile of the dolphin within the previous 2 weeks of the welfare evaluation. Blood analysis should contain a complete panel on hematology, biochemistry, and coagulation parameters (30 in total), including most relevant markers or inflammation (see (Gulland, F. M., Dierauf, L. A., & Whitman, K. L. (Eds.). (2018). CRC Handbook of marine mammal medicine. CRC Press). 
-					<h3>Main inflammation markers:</h3>
-					<ul> 
-						<li> White blood cell count</li>
-						<li> Differential count </li>
-						<li> Immature neutrophils (bands) </li>
-						<li> Reticulocytes</li>
-						<li> Erythrocyte sedimentation rate</li>
-						<li> Fibrinogen</li>
-						<li> Albumin</li>
-						<li> Globulin</li>
-						<li> Total proteins</li>
-						<li> Alkaline Phosphatase (ALKP)</li>
-						<li> Iron</li>
-					</ul> 
-					<h3>Additional markers to evaluate red blood cell series:</h3>
-					<ul> 
-						<li> Red blood cell count</li>
-						<li> Haematocrit</li>
-						<li> Haemoglobin</li>
-					</ul>
-					<h3>Additional markers for liver and kidney function evaluation:</h3>
-					Alanine Amino Transferase (ALT), Gamma Glutamyl Transferase (GGT), Lactate Dehydrogenase (LDH), Triglycerides, Cholesterol, Total Bilirubin,
-					Blood Urea Nitrogen (BUN)/Urea, Creatinine
-					<h3>Other relevant markers and electrolytes:</h3>
-					<ul>
-						<li> Glucose</li>
-						<li> Uric acid</li>
-						<li> Creatin Kinase</li>
-						<li> Sodium, potassium, chloride, calcium, and phosphate</li> 
-					</ul>
-					Ideally the blood should be collected from fasted animals, first time in the morning and under voluntary behaviour.
-					<h3>Criteria:</h3> 
-					All 30 parameters measured should remain in the normal range for the species (according to Appendix 1 @ Gulland, F. M., Dierauf, L. A., & Whitman, K. L. (Eds.). (2018). CRC handbook of marine mammal medicine. CRC Press. (Page 1003)) and (if available) within the individual reference values/ranges according to previous analysis (at least including one year period and ideally more) under the same lab and technique.
-					In case of a relevant deviation of one or more parameters from normal average values or ranges, the veterinarian should further on study the individual in search of a potential disease that could compromise welfare.
-					<p>*</p>
-				</p>-->
 			</ion-content>
 		</ion-modal>
 		<!-- End of Description of Criteria (User Manual) -->
-		<!--Start of Scoring Description-->
-		<!--<ion-button v-if="criteria" fill="outline" @click="setOpenScoring(true)">{{
-			$t('ScoringDescription')
-		}}</ion-button>
-
-		<ion-modal :is-open="isOpenScoring">
-			<ion-header>
-				<ion-toolbar>
-					<ion-title v-if="criteria === 'firstCriteriaHealth'"
-						>{{ $t('firstCriteriaHealth') }}
-					</ion-title>
-					<ion-title v-else-if="SubCriteria === 'secondCriteriaHealth'"
-						>{{ $t('secondCriteriaHealth') }}
-					</ion-title>
-					<ion-title v-else-if="SubCriteria === 'thirdCriteriaHealth'"
-						>{{ $t('thirdCriteriaHealth') }}
-					</ion-title>
-					<ion-title v-else-if="SubCriteria === 'fourthCriteriaHealth'"
-						>{{ $t('fourthCriteriaHealth') }}
-					</ion-title>
-					<ion-title v-else-if="SubCriteria === 'fifthCriteriaHealth'"
-						>{{ $t('fifthCriteriaHealth') }}
-					</ion-title>
-					<ion-title v-else-if="SubCriteria === 'sixthCriteriaHealth'"
-						>{{ $t('sixthCriteriaHealth') }}
-					</ion-title>
-					<ion-buttons slot="end">
-						<ion-button @click="setOpenScoring(false)">{{
-							$t('close')
-						}}</ion-button>
-					</ion-buttons>
-				</ion-toolbar>
-			</ion-header>
-			<ion-content class="ion-padding">
-				<div v-if="criteria === 'firstCriteriaHealth'">
-					<h2>{{ $t('firstSubCriteriaHealth') }}</h2>
-					<h3>Score 1</h3>
-					Verification of normal movements
-					<h3>Score 3</h3>
-					Evidence of any locomotive/floating abnormalities
-				</div>
-				<div v-if="criteria === 'secondCriteriaHealth'">
-					<h2>{{ $t('secondSubCriteriaHealth') }}</h2>
-					<h3>Score 1</h3>
-					Absence of eye lesions
-					<h3>Score 3</h3>
-					Presence of eye lesions
-					<h2>{{ $t('thirdSubCriteriaHealth') }}</h2>
-					<h3>Score 1</h3>
-					Normal response
-					<h3>Score 3</h3>
-					Evidence of any abnormalities
-				</div>
-				<div v-if="criteria === 'thirdCriteriaHealth'">
-					<h2>{{ $t('fourthSubCriteriaHealth') }}</h2>
-					<h3>Score 1</h3>
-					Absence of oral lesions or painful areas in the mouth (including
-					teeth) on direct physical exam
-					<h3>Score 3</h3>
-					Presence of oral lesions or painful areas in the mouth (including
-					teeth)
-				</div>
-				<div v-if="criteria === 'fourthCriteriaHealth'">
-					<h2>{{ $t('fifthSubCriteriaHealth') }}</h2>
-					<h3>Score 1</h3>
-					Absence of previous incidents on records during last three months
-					<h3>Score 3</h3>
-					Evidence of previous incidents on records during last three months
-				</div>
-				<div v-if="criteria === 'fifthCriteriaHealth'">
-					<h2>{{ $t('sixthSubCriteriaHealth') }}</h2>
-					<h3>Score 1</h3>
-					Absence of any signs or evidence of respiratory disease during direct
-					physical exam
-					<h3>Score 3</h3>
-					Presence or signs of respiratory disease during direct physical exam
-					<h2>{{ $t('seventhSubCriteriaHealth') }}</h2>
-					<h3>Score 1</h3>
-
-					<h3>Score 3</h3>
-				</div>
-				<div v-if="criteria === 'sixthCriteriaHealth'">
-					<h2>{{ $t('eigthSubCriteriaHealth') }}</h2>
-					<h3>Score 1</h3>
-					Absence of previous incidents on records during last three months
-					<h3>Score 3</h3>
-					Evidence of previous incidents on records during last three months
-				</div>
-				<p v-if=" criteria === 'fourthCriteriaHealth'">
-					<h2>{{ $t('eigthSubCriteriaHealth') }}</h2>
-					<h3>Score 1</h3>
-					Absence of previous incidents on records during last three months 
-					<h3>Score 3</h3>
-					Evidence of previous incidents on records during last three months 
-				</p>
-				<p v-if=" criteria === 'fifthCriteriaHealth'">
-					<h2>{{ $t('ninthSubCriteriaHealth') }}</h2>
-					<h3>Score 1</h3>
-					Absence of any signs or evidence of respiratory disease during direct physical exam
-					<h3>Score 3</h3>
-					Presence or signs of respiratory disease during direct physical exam
-					<h2>{{ $t('tenthSubCriteriaHealth') }}</h2>
-					<h3>Score 1</h3>
-					Absence of abnormalities
-					<h3>Score 3</h3>
-					Evidence of any abnormalities 
-					<h2>{{ $t('eleventhSubCriteriaHealth') }}</h2>
-					<h3>Score 1</h3>
-					Absence of previous incidents on records during last three months
-					<h3>Score 3</h3>
-					Evidence of previous incidents on records during last three months 
-				</p>
-				<p v-if=" SubCriteria === 'sixthSubCriteriaHealth'">
-					<h2>{{ $t('twelfthSubCriteriaHealth') }}</h2>
-					<h3>Score 1</h3>
-					Absence of external active signs of disease on skin or other natural openings on direct physical exam
-					including global skin condition (colour, number and severity of viral lesions, major wounds, cracking,
-					relative desquamation, scars, thermal ischemic necrosis, etc. excluding rake marks), genital slit
-					(exudates, mucosal colour, mucosal lesions), ears (exudates, pain to touch, bulging), rostrum (wounds, callosity).
-					<h3>Score 3</h3>
-					Presence of external active signs of disease on skin or other natural openings on direct physical exam
-					including global skin condition (colour, number and severity of viral lesions, major wounds, cracking,
-					relative desquamation, scars, thermal ischemic necrosis, etc. excluding rake marks), genital slit
-					(exudates, mucosal colour, mucosal lesions), ears (exudates, pain to touch, bulging), rostrum (wounds, callosity).
-					<h2>{{ $t('thirteenthSubCriteriaHealth') }}</h2>
-					Including complete haematology, biochemistry, ESR and fibrinogen
-					determinations as well as inflammatory markers such us TWBC, WBCdiff,
-					%Bands, %Ret, Hb, ALKP, ALB, FIB, IRON, ESR), biological data, or
-					complementary diagnostic techniques (ultrasound, radiography, endoscopy,
-					thermography, CT, microbiology, hormonal analysis, molecular techniques, etc.)
-					<h3>Score 1</h3>
-					Absence of previous signs/diseases on records during last three month
-					<h3>Score 3</h3>
-					Evidence of previous signs/diseases on records during last three months
-				</p>
-			</ion-content>
-		</ion-modal>-->
-		<!--End of Scoring Description-->
 		<!-- Start of Checkboxes-->
 		<ion-card
 			v-if="
@@ -395,6 +199,12 @@
 			<ion-card-title class="card-title">{{
 				$t('firstSubCriteriaHealth')
 			}}</ion-card-title>
+			<ion-button
+				v-if="criteria"
+				fill="outline"
+				@click="setOpenManual('firstSubCriteriaHealth')"
+				>{{ $t('userManual') }}</ion-button
+			>
 			<ion-list>
 				<ion-item>
 					<ion-checkbox v-model="CheckboxArray[0][0]" @click="handleClick(0, 0)"
@@ -419,6 +229,12 @@
 			<ion-card-title class="card-title">{{
 				$t('secondSubCriteriaHealth')
 			}}</ion-card-title>
+			<ion-button
+				v-if="criteria"
+				fill="outline"
+				@click="setOpenManual('secondSubCriteriaHealth')"
+				>{{ $t('userManual') }}</ion-button
+			>
 			<ion-list>
 				<ion-item>
 					<ion-checkbox v-model="CheckboxArray[1][0]" @click="handleClick(1, 0)"
@@ -445,6 +261,12 @@
 			<ion-card-title class="card-title">{{
 				$t('thirdSubCriteriaHealth')
 			}}</ion-card-title>
+			<ion-button
+				v-if="criteria"
+				fill="outline"
+				@click="setOpenManual('thirdSubCriteriaHealth')"
+				>{{ $t('userManual') }}</ion-button
+			>
 			<ion-list>
 				<ion-item>
 					<ion-checkbox v-model="CheckboxArray[2][0]" @click="handleClick(2, 0)"
@@ -489,6 +311,12 @@
 			<ion-card-title class="card-title">{{
 				$t('fourthSubCriteriaHealth')
 			}}</ion-card-title>
+			<ion-button
+				v-if="criteria"
+				fill="outline"
+				@click="setOpenManual('fourthSubCriteriaHealth')"
+				>{{ $t('userManual') }}</ion-button
+			>
 			<ion-list>
 				<ion-item>
 					<ion-checkbox v-model="CheckboxArray[3][0]" @click="handleClick(3, 0)"
@@ -514,6 +342,12 @@
 			<ion-card-title class="card-title">{{
 				$t('fifthSubCriteriaHealth')
 			}}</ion-card-title>
+			<ion-button
+				v-if="criteria"
+				fill="outline"
+				@click="setOpenManual('fifthSubCriteriaHealth')"
+				>{{ $t('userManual') }}</ion-button
+			>
 			<ion-list>
 				<ion-item>
 					<ion-checkbox v-model="CheckboxArray[4][0]" @click="handleClick(4, 0)"
@@ -538,6 +372,12 @@
 			<ion-card-title class="card-title">{{
 				$t('sixthSubCriteriaHealth')
 			}}</ion-card-title>
+			<ion-button
+				v-if="criteria"
+				fill="outline"
+				@click="setOpenManual('sixthSubCriteriaHealth')"
+				>{{ $t('userManual') }}</ion-button
+			>
 			<ion-list>
 				<ion-item>
 					<ion-checkbox v-model="CheckboxArray[5][0]" @click="handleClick(5, 0)"
@@ -550,18 +390,6 @@
 					>
 				</ion-item>
 				<CheckComments @update-comment="updateMouthExamComments" />
-				<!--<ion-item>
-					<ion-label><br>Upload your teeth photos here:</ion-label>
-				</ion-item>
-				<ion-item style="display: flex; justify-content: center; align-items: center;">
-					<PhotoUpload @form-submitted="handleFormSubmittedTeethPhoto"/>
-				</ion-item>
-				<ion-item>
-					<ion-label><br>Upload your odontogramms here:</ion-label>
-				</ion-item>
-				<ion-item style="display: flex; flex-direction: column;">					
-					<PhotoUpload @form-submitted="handleFormSubmittedOdontogrammPhoto"/>
-				</ion-item>-->
 			</ion-list>
 		</ion-card>
 		<ion-card
@@ -588,6 +416,12 @@
 			<ion-card-title class="card-title">{{
 				$t('seventhSubCriteriaHealth')
 			}}</ion-card-title>
+			<ion-button
+				v-if="criteria"
+				fill="outline"
+				@click="setOpenManual('seventhSubCriteriaHealth')"
+				>{{ $t('userManual') }}</ion-button
+			>
 			<ion-list>
 				<ion-item>
 					<ion-checkbox v-model="CheckboxArray[6][0]" @click="handleClick(6, 0)"
@@ -626,6 +460,12 @@
 			<ion-card-title class="card-title">{{
 				$t('eigthSubCriteriaHealth')
 			}}</ion-card-title>
+			<ion-button
+				v-if="criteria"
+				fill="outline"
+				@click="setOpenManual('eigthSubCriteriaHealth')"
+				>{{ $t('userManual') }}</ion-button
+			>
 			<ion-list>
 				<ion-item>
 					<ion-checkbox v-model="CheckboxArray[7][0]" @click="handleClick(7, 0)"
@@ -652,6 +492,12 @@
 			<ion-card-title class="card-title">{{
 				$t('ninthSubCriteriaHealth')
 			}}</ion-card-title>
+			<ion-button
+				v-if="criteria"
+				fill="outline"
+				@click="setOpenManual('ninthSubCriteriaHealth')"
+				>{{ $t('userManual') }}</ion-button
+			>
 			<ion-list>
 				<ion-item>
 					<ion-checkbox v-model="CheckboxArray[8][0]" @click="handleClick(8, 0)"
@@ -676,6 +522,12 @@
 			<ion-card-title class="card-title">{{
 				$t('tenthSubCriteriaHealth')
 			}}</ion-card-title>
+			<ion-button
+				v-if="criteria"
+				fill="outline"
+				@click="setOpenManual('tenthSubCriteriaHealth')"
+				>{{ $t('userManual') }}</ion-button
+			>
 			<ion-list>
 				<ion-item>
 					<ion-checkbox v-model="CheckboxArray[9][0]" @click="handleClick(9, 0)"
@@ -700,6 +552,12 @@
 			<ion-card-title class="card-title">{{
 				$t('eleventhSubCriteriaHealth')
 			}}</ion-card-title>
+			<ion-button
+				v-if="criteria"
+				fill="outline"
+				@click="setOpenManual('eleventhSubCriteriaHealth')"
+				>{{ $t('userManual') }}</ion-button
+			>
 			<ion-list>
 				<ion-item>
 					<ion-checkbox
@@ -730,6 +588,12 @@
 			<ion-card-title class="card-title">{{
 				$t('twelvthSubCriteriaHealth')
 			}}</ion-card-title>
+			<ion-button
+				v-if="criteria"
+				fill="outline"
+				@click="setOpenManual('twelvthSubCriteriaHealth')"
+				>{{ $t('userManual') }}</ion-button
+			>
 			<ion-list>
 				<ion-item>
 					<ion-checkbox
@@ -746,10 +610,6 @@
 					>
 				</ion-item>
 				<CheckComments @update-comment="updateMarksComments" />
-				<!--<ion-label><br>Upload your photos here:</ion-label>
-				<ion-item>
-					<PhotoUpload @form-submitted="handleFormSubmittedMarksPhoto"/>
-				</ion-item>-->
 			</ion-list>
 		</ion-card>
 		<ion-card
@@ -776,6 +636,12 @@
 			<ion-card-title class="card-title">{{
 				$t('thirteenthSubCriteriaHealth')
 			}}</ion-card-title>
+			<ion-button
+				v-if="criteria"
+				fill="outline"
+				@click="setOpenManual('thirteenthSubCriteriaHealth')"
+				>{{ $t('userManual') }}</ion-button
+			>
 			<ion-list>
 				<ion-item>
 					<ion-checkbox
@@ -901,7 +767,7 @@ export default {
 			dolphinsStore: dolphinsStore,
 			dolphinSelect: null as string | null,
 			criteria: null as string | null,
-			SubCriteria: '',
+			subcriteria: '',
 			firstlabel: this.$t('dolphin'),
 			firstplaceholder: this.$t('selectDolphin'),
 			firstcancelText: this.$t('cancelChoice'),
@@ -946,8 +812,13 @@ export default {
 	},
 
 	methods: {
-		setOpenManual() {
+		setOpenManual(subcriteria: string) {
+			//Set the subcriteria to display the correct user manual if the user manual is opened
+			this.subcriteria = subcriteria;
 			this.isOpenManual = !this.isOpenManual;
+			if (this.isOpenManual === false) {
+				this.subcriteria = ''; //set empty if user manual is closed
+			}
 		},
 		setOpenScoring(isOpen: boolean) {
 			this.isOpenScoring = isOpen;

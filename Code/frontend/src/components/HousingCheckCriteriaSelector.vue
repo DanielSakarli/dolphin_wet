@@ -57,9 +57,9 @@
 		<!-- End of Criteria Selector -->
 
 		<!-- Description of Criteria -->
-		<ion-button v-if="criteria" fill="outline" @click="setOpenManual()">{{
+		<!--<ion-button v-if="criteria" fill="outline" @click="setOpenManual()">{{
 			$t('userManual')
-		}}</ion-button>
+		}}</ion-button>-->
 
 		<ion-modal :is-open="isOpenManual">
 			<ion-header>
@@ -86,66 +86,68 @@
 						>{{ $t('seventhCriteriaEnvironment') }}
 					</ion-title>
 					<ion-buttons slot="end">
-						<ion-button @click="setOpenManual()">Close</ion-button>
+						<ion-button @click="setOpenManual('')">Close</ion-button>
 					</ion-buttons>
 				</ion-toolbar>
 			</ion-header>
 			<ion-content class="ion-padding">
-				<div v-if="criteria === 'firstCriteriaEnvironment'">
+				<div v-if="subcriteria === 'firstSubCriteriaEnvironment'">
 					<h1>{{ $t('firstSubCriteriaEnvironment') }}</h1>
 					<h3>Score 0</h3>
 					{{ $t('score0Environment1') }}
 					<h3>Score 2</h3>
 					{{ $t('score2Environment1') }}
+				</div>
+				<div v-if="subcriteria === 'secondSubCriteriaEnvironment'">
 					<h1>{{ $t('secondSubCriteriaEnvironment') }}</h1>
 					<h3>Score 0</h3>
 					{{ $t('score0Environment2') }}
 					<h3>Score 2</h3>
 					{{ $t('score2Environment2') }}
 				</div>
-				<div v-if="criteria === 'secondCriteriaEnvironment'">
+				<div v-if="subcriteria === 'thirdSubCriteriaEnvironment'">
 					<h1>{{ $t('thirdSubCriteriaEnvironment') }}</h1>
 					<h3>Score 0</h3>
 					{{ $t('score0Environment3') }}
 					<h3>Score 2</h3>
 					{{ $t('score2Environment3') }}
 				</div>
-				<div v-if="criteria === 'thirdCriteriaEnvironment'">
+				<div v-if="subcriteria === 'fourthSubCriteriaEnvironment'">
 					<h1>{{ $t('fourthSubCriteriaEnvironment') }}</h1>
 					<h3>Score 0</h3>
 					{{ $t('score0Environment4') }}
 					<h3>Score 2</h3>
 					{{ $t('score2Environment4') }}
 				</div>
-				<div v-if="criteria === 'fourthCriteriaEnvironment'">
+				<div v-if="subcriteria === 'fifthSubCriteriaEnvironment'">
 					<h1>{{ $t('fifthSubCriteriaEnvironment') }}</h1>
 					<h3>Score 0</h3>
 					{{ $t('score0Environment5') }}
 					<h3>Score 2</h3>
 					{{ $t('score2Environment5') }}
 				</div>
-				<div v-if="criteria === 'fifthCriteriaEnvironment'">
+				<div v-if="subcriteria === 'sixthSubCriteriaEnvironment'">
 					<h1>{{ $t('sixthSubCriteriaEnvironment') }}</h1>
 					<h3>Score 0</h3>
 					{{ $t('score0Environment6') }}
 					<h3>Score 2</h3>
 					{{ $t('score2Environment6') }}
 				</div>
-				<div v-if="criteria === 'sixthCriteriaEnvironment'">
+				<div v-if="subcriteria === 'seventhSubCriteriaEnvironment'">
 					<h1>{{ $t('seventhSubCriteriaEnvironment') }}</h1>
 					<h3>Score 0</h3>
 					{{ $t('score0Environment7') }}
 					<h3>Score 2</h3>
 					{{ $t('score2Environment7') }}
 				</div>
-				<div v-if="criteria === 'sixthCriteriaEnvironment'">
+				<div v-if="subcriteria === 'eigthSubCriteriaEnvironment'">
 					<h1>{{ $t('eigthSubCriteriaEnvironment') }}</h1>
 					<h3>Score 0</h3>
 					{{ $t('score0Environment8') }}
 					<h3>Score 2</h3>
 					{{ $t('score2Environment8') }}
 				</div>
-				<div v-if="criteria === 'seventhCriteriaEnvironment'">
+				<div v-if="subcriteria === 'ninthSubCriteriaEnvironment'">
 					<h1>{{ $t('ninthSubCriteriaEnvironment') }}</h1>
 					<h3>Score 0</h3>
 					{{ $t('score0Environment9') }}
@@ -156,111 +158,6 @@
 		</ion-modal>
 
 		<!-- End of Description of Criteria -->
-		<!--Start of Scoring Description-->
-		<!--<ion-button v-if="criteria" fill="outline" @click="setOpenScoring(true)">{{
-			$t('ScoringDescription')
-		}}</ion-button>
-
-		<ion-modal :is-open="isOpenScoring">
-			<ion-header>
-				<ion-toolbar>
-					<ion-title v-if="criteria === 'firstCriteriaEnvironment'"
-						>{{ $t('firstCriteriaEnvironment') }}
-					</ion-title>
-					<ion-title v-else-if="criteria === 'secondCriteriaEnvironment'"
-						>{{ $t('secondCriteriaEnvironment') }}
-					</ion-title>
-					<ion-title v-else-if="criteria === 'thirdCriteriaEnvironment'"
-						>{{ $t('thirdCriteriaEnvironment') }}
-					</ion-title>
-					<ion-title v-else-if="criteria === 'fourthCriteriaEnvironment'"
-						>{{ $t('fourthCriteriaEnvironment') }}
-					</ion-title>
-					<ion-title v-else-if="criteria === 'fifthCriteriaEnvironment'"
-						>{{ $t('fifthCriteriaEnvironment') }}
-					</ion-title>
-					<ion-title v-else-if="criteria === 'sixthCriteriaEnvironment'"
-						>{{ $t('sixthCriteriaEnvironment') }}
-					</ion-title>
-					<ion-title v-else-if="criteria === 'seventhCriteriaEnvironment'"
-						>{{ $t('seventhCriteriaEnvironment') }}
-					</ion-title>
-					<ion-buttons slot="end">
-						<ion-button @click="setOpenScoring(false)">{{
-							$t('close')
-						}}</ion-button>
-					</ion-buttons>
-				</ion-toolbar>
-			</ion-header>
-			<ion-content class="ion-padding">
-				<div v-if="criteria === 'firstCriteriaEnvironment'">
-					<h1>Enclosures and barriers safety and maintenance:</h1>
-					<h3>Score 1</h3>
-					All criteria are met according to EAAM S&Gs (see 5.)
-					<h3>Score 3</h3>
-					At least one criterion is not met according to EAAM S&Gs (see 5.)
-					<h1>No foreign body ingestion:</h1>
-					<h3>Score 1</h3>
-					Absence on records
-					<h3>Score 3</h3>
-					Presence on records (last three months)
-				</div>
-				<div v-if="criteria === 'secondCriteriaEnvironment'">
-					<h1>
-						Pool dimension, pool design, number of pools, available access to
-						pools & group management:
-					</h1>
-					<h3>Score 1</h3>
-					All criteria are met according to EAAM S&Gs (see 5.)
-					<h3>Score 3</h3>
-					At least one criteria is not met according to EAAM S&Gs (see 5.)
-				</div>
-				<div v-if="criteria === 'thirdCriteriaEnvironment'">
-					<h1>Presence or absence based on records/ trainer interviews:</h1>
-					<h3>Score 1</h3>
-					Dolphin was not separated or only separated during medical emergencies
-					or research purposes for short periods of time (less than 1 h/day)
-					during last three months
-					<h3>Score 3</h3>
-					Dolphin was separated for longer periods of time (more than 1 h/day)
-					during last three months
-				</div>
-				<div v-if="criteria === 'fourthCriteriaEnvironment'">
-					<h1>Water quality parameters:</h1>
-					<h3>Score 1</h3>
-					All criteria are met according to EAAM S&Gs (see 9.)
-					<h3>Score 3</h3>
-					At least one criterion is not met according to EAAM S&Gs (see 9.)
-				</div>
-				<div v-if="criteria === 'fifthCriteriaEnvironment'">
-					<h1>Water temperature levels:</h1>
-					<h3>Score 1</h3>
-					All criteria are met according to EAAM S&Gs (see 9.)
-					<h3>Score 3</h3>
-					At least one criteria is not met according to EAAM S&Gs (see 9.)
-				</div>
-				<div v-if="criteria === 'sixthCriteriaEnvironment'">
-					<h1>Sufficient shade provided and accessible in case needed:</h1>
-					<h3>Score 1</h3>
-					All criteria are met according to EAAM S&Gs (see 9.)
-					<h3>Score 3</h3>
-					At least one criteria is not met according to EAAM S&Gs (see 9.)
-				</div>
-				<div v-if="criteria === 'seventhCriteriaEnvironment'">
-					<h1>
-						40dB above hearing threshold (based on German "Gutachten über die
-						Mindesanforderungen an die Haltung von Säugetieren, BMEL 2014")
-					</h1>
-					<h3>Score 1</h3>
-					no noise above 40 dB above the hearing threshold for more than 1
-					minute/day
-					<h3>Score 3</h3>
-					noise above 40 dB level above the hearing threshold for more than 1
-					minute/day
-				</div>
-			</ion-content>
-		</ion-modal>-->
-		<!--End of Scoring Description-->
 		<!-- Start of Checkboxes-->
 		<ion-card
 			v-if="
@@ -270,6 +167,12 @@
 			"
 		>
 			<ion-card-title>{{ $t('firstSubCriteriaEnvironment') }}</ion-card-title>
+			<ion-button
+				v-if="criteria"
+				fill="outline"
+				@click="setOpenManual('firstSubCriteriaEnvironment')"
+				>{{ $t('userManual') }}</ion-button
+			>
 			<ion-list>
 				<ion-item>
 					<ion-checkbox v-model="CheckboxArray[0][0]" @click="handleClick(0, 0)"
@@ -292,6 +195,12 @@
 			"
 		>
 			<ion-card-title>{{ $t('secondSubCriteriaEnvironment') }}</ion-card-title>
+			<ion-button
+				v-if="criteria"
+				fill="outline"
+				@click="setOpenManual('secondSubCriteriaEnvironment')"
+				>{{ $t('userManual') }}</ion-button
+			>
 			<ion-list>
 				<ion-item>
 					<ion-checkbox v-model="CheckboxArray[1][0]" @click="handleClick(1, 0)"
@@ -314,6 +223,12 @@
 			"
 		>
 			<ion-card-title>{{ $t('thirdSubCriteriaEnvironment') }}</ion-card-title>
+			<ion-button
+				v-if="criteria"
+				fill="outline"
+				@click="setOpenManual('thirdSubCriteriaEnvironment')"
+				>{{ $t('userManual') }}</ion-button
+			>
 			<ion-list>
 				<ion-item>
 					<ion-checkbox v-model="CheckboxArray[2][0]" @click="handleClick(2, 0)"
@@ -336,6 +251,12 @@
 			"
 		>
 			<ion-card-title>{{ $t('fourthSubCriteriaEnvironment') }}</ion-card-title>
+			<ion-button
+				v-if="criteria"
+				fill="outline"
+				@click="setOpenManual('fourthSubCriteriaEnvironment')"
+				>{{ $t('userManual') }}</ion-button
+			>
 			<ion-list>
 				<ion-item>
 					<ion-checkbox v-model="CheckboxArray[3][0]" @click="handleClick(3, 0)"
@@ -358,6 +279,12 @@
 			"
 		>
 			<ion-card-title>{{ $t('fifthSubCriteriaEnvironment') }}</ion-card-title>
+			<ion-button
+				v-if="criteria"
+				fill="outline"
+				@click="setOpenManual('fifthSubCriteriaEnvironment')"
+				>{{ $t('userManual') }}</ion-button
+			>
 			<ion-list>
 				<ion-item>
 					<ion-checkbox v-model="CheckboxArray[4][0]" @click="handleClick(4, 0)"
@@ -380,6 +307,12 @@
 			"
 		>
 			<ion-card-title>{{ $t('sixthSubCriteriaEnvironment') }}</ion-card-title>
+			<ion-button
+				v-if="criteria"
+				fill="outline"
+				@click="setOpenManual('sixthSubCriteriaEnvironment')"
+				>{{ $t('userManual') }}</ion-button
+			>
 			<ion-list>
 				<ion-item>
 					<ion-checkbox v-model="CheckboxArray[5][0]" @click="handleClick(5, 0)"
@@ -402,6 +335,12 @@
 			"
 		>
 			<ion-card-title>{{ $t('seventhSubCriteriaEnvironment') }}</ion-card-title>
+			<ion-button
+				v-if="criteria"
+				fill="outline"
+				@click="setOpenManual('seventhSubCriteriaEnvironment')"
+				>{{ $t('userManual') }}</ion-button
+			>
 			<ion-list>
 				<ion-item>
 					<ion-checkbox v-model="CheckboxArray[6][0]" @click="handleClick(6, 0)"
@@ -423,7 +362,13 @@
 				criteria === 'sixthCriteriaEnvironment'
 			"
 		>
-			<ion-card-title>{{ $t('eighthSubCriteriaEnvironment') }}</ion-card-title>
+			<ion-card-title>{{ $t('eigthSubCriteriaEnvironment') }}</ion-card-title>
+			<ion-button
+				v-if="criteria"
+				fill="outline"
+				@click="setOpenManual('eigthSubCriteriaEnvironment')"
+				>{{ $t('userManual') }}</ion-button
+			>
 			<ion-list>
 				<ion-item>
 					<ion-checkbox v-model="CheckboxArray[7][0]" @click="handleClick(7, 0)"
@@ -446,6 +391,12 @@
 			"
 		>
 			<ion-card-title>{{ $t('ninthSubCriteriaEnvironment') }}</ion-card-title>
+			<ion-button
+				v-if="criteria"
+				fill="outline"
+				@click="setOpenManual('ninthSubCriteriaEnvironment')"
+				>{{ $t('userManual') }}</ion-button
+			>
 			<ion-list>
 				<ion-item>
 					<ion-checkbox v-model="CheckboxArray[8][0]" @click="handleClick(8, 0)"
@@ -546,6 +497,7 @@ export default {
 			dolphinsStore: dolphinsStore,
 			dolphinSelect: [] as string[], //null as string | null,
 			criteria: null as string | null,
+			subcriteria: null as string | null,
 			firstlabel: this.$t('dolphin'),
 			firstplaceholder: this.$t('selectDolphin'),
 			firstcancelText: this.$t('cancelChoice'),
@@ -568,8 +520,13 @@ export default {
 	},
 	methods: {
 		//Method to open the manual
-		setOpenManual() {
+		setOpenManual(subcriteria: string) {
+			//Set the subcriteria to display the correct user manual if the user manual is opened
+			this.subcriteria = subcriteria;
 			this.isOpenManual = !this.isOpenManual;
+			if (this.isOpenManual === false) {
+				this.subcriteria = ''; //set empty if user manual is closed
+			}
 		},
 		//Method to open scoring desciption
 		setOpenScoring(isOpen: boolean) {
