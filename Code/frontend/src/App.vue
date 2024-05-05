@@ -181,6 +181,10 @@ export default defineComponent({
 					url: '/folder/Data',
 				},
 				{
+					title: 'Settings',
+					url: '/folder/Settings',
+				},
+				{
 					title: 'Logout',
 					url: '/home',
 				},

@@ -1,5 +1,6 @@
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken')
+const { isUserAuth } = require('../../../controllers/authSwitch');
 
 const User = require('../models/User');
 const Role = require('../models/Role');
@@ -137,6 +138,90 @@ class UserService {
 
     return;
   }
+
+/**
+ * Gets all users of that zoo
+ * @returns {Array or false}
+ */
+static async getUsersByRole(req, res, next) {
+  if (isUserAuth) {
+    const roleName = req.role; //Got the role from the roleAuthorizer middelware
+  // Check if role exists
+  let role = await Role.query().where('name', roleName).first();
+  if (!role) {
+    throw new Error("ROLE_DOES_NOT_EXIST");
+  }
+
+  // Get users with the specified role
+  let users = await User.query()
+  .join('user_roles', 'users.id', '=', 'user_roles.user_id')
+  .join('roles', 'user_roles.role_id', '=', 'roles.id')
+  .where('roles.name', 'like', `${roleName}%`) //gets the users which role names start with roleName but end on a wildcard
+  .select('users.*');
+
+  return users;
+  } else { 
+  throw new Error("USER_NOT_AUTHENTICATED");
+}
+}
+
+
+   /**
+   * Deletes the user
+   * @param {string} userName
+   * @returns {Array or false}
+   */
+  static async deleteUser(req, res, next) {
+		if (isUserAuth) {
+		  if (!req.body.userName || req.body.userName === 0) {
+        return res.status(400).send("USER_NAME_NOT_PROVIDED");
+      }
+      if (!req.body.adminPassword || req.body.adminPassword === 0) {
+        return res.status(400).send("ADMIN_PASSWORD_NOT_PROVIDED");
+      }
+      const roleName = req.role;
+      const { userName, adminPassword } = req.body;
+      // Role names
+      const roleNameAdmin = roleName + '_admin';
+
+      // Get role ID from role name
+      let role_admin = await Role.query().findOne({ name: roleNameAdmin });
+
+      if(!role_admin) {
+        throw new Error("ROLE_DOES_NOT_EXIST");
+      } else {
+      console.log('Shortly before comparing the role pw ');
+      // If role exists compare hashed passwords
+      if (bcrypt.compareSync(adminPassword, role_admin.password_hash)) {
+      try {
+      
+      // Check if user exists
+      let user = await User.query().where('name', userName).first();
+      if (!user) {
+        return res.status(400).send("USER_DOES_NOT_EXIST");
+      }
+
+      console.log('to be deleted user: ', user)
+      console.log('to be deleted user id: ', user.id)
+    // Delete user's roles
+    await User.relatedQuery('roles').for(user.id).unrelate();
+
+    // Delete user
+    await User.query().delete().where('id', user.id);
+
+    return  res.sendStatus(200);
+    } catch (err) {
+      return res.status(400).send("USER_DELETION_WENT_WRONG");
+    }
+    } else {
+      return res.status(400).send("ADMIN_PASSWORD_IS_WRONG");
+    
+    }
+    }
+  } else {
+    return res.status(400).send("USER_NOT_AUTHENTICATED");
+  }
+}
 
   /**
    * Returns an array of the roles for this user

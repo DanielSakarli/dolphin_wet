@@ -53,6 +53,11 @@ const routes: Array<RouteRecordRaw> = [
 		meta: { requiresAuth: true },
 	},
 	{
+		path: '/folder/Settings',
+		component: () => import('@/views/Settings.vue'),
+		meta: { requiresAuth: true },
+	},
+	{
 		path: '/detailHealth',
 		name: 'DetailHealth',
 		component: () => import('@/views/HealthIndicatorCollector.vue'),

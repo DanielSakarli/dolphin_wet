@@ -1,9 +1,19 @@
 const express = require('express');
 const router = express.Router();
-const bcrypt = require('bcryptjs');
+//const bcrypt = require('bcryptjs');
 
-const authentication = require('../source/Authentication')
+//const authentication = require('../source/Authentication')
+const { authenticateTokenWithSwitch } = require('../../../controllers/authSwitch');
 
+/**
+ * Controllers
+ */
+const { roleAuthorizerPost } = require('../../../controllers/role_authorizer');
+
+/**
+ * Services
+ */
+const { getUsersByRole, deleteUser } = require('../services/UserService');
 const UserService = require('../services/UserService');
 const PasswordService = require('../services/PasswordService');
 
@@ -99,6 +109,7 @@ router.post('/login', async function(req, res, next) {
 router.get('/logout', async function(req, res, next) {
   try {
     res.clearCookie('token');
+    res.clearCookie('session');
     res.end();
   }
   catch (err) {
@@ -119,13 +130,6 @@ router.post('/changePassword',  async function(req, res, next) { //authenticatio
     }
 
     await UserService.changePassword(req.body.userName, req.body.currentPassword, req.body.newPassword);
-    /*
-    // Hash password
-    let newPasswordHash = await bcrypt.hash(req.body.newPassword, 12)
-
-    await User.query().patch({
-      password_hash: newPasswordHash
-    }).findById(userId);*/
     
     res.sendStatus(200);
   }
@@ -146,7 +150,7 @@ router.post('/resetPassword', async function(req, res, next) {
     if (userName) {
 
     await PasswordService.sendNewPassword(req.body.email, userName);
-    res.sendStatus(200); 
+    res.sendStatus(200).json('User deleted'); 
     } else {
       throw new Error("EMAIL_DOES_NOT_EXIST");
     }
@@ -155,5 +159,17 @@ router.post('/resetPassword', async function(req, res, next) {
     next(err);
   }
 });
+
+router.get('/getUsers',
+  authenticateTokenWithSwitch,
+  roleAuthorizerPost,
+  getUsersByRole
+);
+
+router.delete('/deleteUser',
+  authenticateTokenWithSwitch,
+	roleAuthorizerPost,
+  deleteUser,
+);
 
 module.exports = router;
