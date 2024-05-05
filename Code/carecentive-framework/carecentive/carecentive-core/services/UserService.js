@@ -145,11 +145,12 @@ class UserService {
  */
 static async getUsersByRole(req, res, next) {
   if (isUserAuth) {
-    const roleName = req.role; //Got the role from the roleAuthorizer middelware
+  const roleName = req.role; //Got the role from the roleAuthorizer middelware
+  console.log(roleName);
   // Check if role exists
-  let role = await Role.query().where('name', roleName).first();
+  let role = await Role.query().where('name', roleName + '_user').first();
   if (!role) {
-    throw new Error("ROLE_DOES_NOT_EXIST");
+    return res.status(400).send("ROLE_DOES_NOT_EXIST");
   }
 
   // Get users with the specified role
@@ -159,9 +160,9 @@ static async getUsersByRole(req, res, next) {
   .where('roles.name', 'like', `${roleName}%`) //gets the users which role names start with roleName but end on a wildcard
   .select('users.*');
 
-  return users;
+  return res.status(200).send(users.map(user => ({ name: user.name, created_at: user.created_at })));
   } else { 
-  throw new Error("USER_NOT_AUTHENTICATED");
+    return res.status(400).send("USER_NOT_AUTHENTICATED");
 }
 }
 
@@ -172,7 +173,8 @@ static async getUsersByRole(req, res, next) {
    * @returns {Array or false}
    */
   static async deleteUser(req, res, next) {
-		if (isUserAuth) {
+  try {
+    if (isUserAuth) {
 		  if (!req.body.userName || req.body.userName === 0) {
         return res.status(400).send("USER_NAME_NOT_PROVIDED");
       }
@@ -188,38 +190,34 @@ static async getUsersByRole(req, res, next) {
       let role_admin = await Role.query().findOne({ name: roleNameAdmin });
 
       if(!role_admin) {
-        throw new Error("ROLE_DOES_NOT_EXIST");
+        return res.status(400).send("ROLE_DOES_NOT_EXIST");
       } else {
-      console.log('Shortly before comparing the role pw ');
       // If role exists compare hashed passwords
       if (bcrypt.compareSync(adminPassword, role_admin.password_hash)) {
-      try {
-      
+     
       // Check if user exists
       let user = await User.query().where('name', userName).first();
       if (!user) {
         return res.status(400).send("USER_DOES_NOT_EXIST");
       }
-
-      console.log('to be deleted user: ', user)
-      console.log('to be deleted user id: ', user.id)
-    // Delete user's roles
-    await User.relatedQuery('roles').for(user.id).unrelate();
-
-    // Delete user
-    await User.query().delete().where('id', user.id);
-
-    return  res.sendStatus(200);
-    } catch (err) {
-      return res.status(400).send("USER_DELETION_WENT_WRONG");
-    }
-    } else {
-      return res.status(400).send("ADMIN_PASSWORD_IS_WRONG");
     
+      // Delete user's roles
+      await User.relatedQuery('roles').for(user.id).unrelate();
+
+      // Delete user
+      await User.query().delete().where('id', user.id);
+
+      return  res.sendStatus(200).send("USER_DELETED"); 
+      } else {
+        return res.status(400).send("ADMIN_PASSWORD_IS_WRONG");
+        
+      }
+      }
+    } else {
+      return res.status(400).send("USER_NOT_AUTHENTICATED");
     }
-    }
-  } else {
-    return res.status(400).send("USER_NOT_AUTHENTICATED");
+  } catch (err) {
+    return res.status(400).send("USER_DELETION_WENT_WRONG");
   }
 }
 
