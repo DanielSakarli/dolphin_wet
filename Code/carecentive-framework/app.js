@@ -78,6 +78,7 @@ app.use(express.static(path.join(__dirname, 'public')));
  */
 const dolphins = require('./routes/dolphins');
 const uploadPhoto = require('./routes/photoPath');
+const uploadVideo = require('./routes/video_upload');
 const good_feeding = require('./routes/good_feeding');
 const good_health = require('./routes/good_health');
 const good_housing = require('./routes/good_housing');
@@ -159,7 +160,7 @@ app.use(function(req, res, next) {
 app.use(
     session({
         secret: 'secret',
-        cookie: { httpOnly: true, maxAge: 3600000, secure: true, sameSite: 'none' }, //1 hour expiring of session cookie
+        cookie: { httpOnly: true, maxAge: 3600000, secure: false, sameSite: 'lax' }, //1 hour expiring of session cookie
         saveUninitialized: true,
         store: store,
         resave: true,
@@ -169,17 +170,6 @@ app.use(
 );
 app.post('/api/setup_session_storage', (req, res, next) => {
 	try {
-		/*session({
-			secret: 'secret',
-			cookie: { httpOnly: true, maxAge: 3600000, secure: false, sameSite: 'lax' }, //300 minutes = 6 hours expiring of session cookie
-			saveUninitialized: true,
-			store: store,
-			resave: true,
-			//proxy: true,
-			name: 'session' //Try giving a name to the cookie
-		})*/
-
-		//const { photo_type, eye_photo_path, teeth_photo_path, odontogramm_photo_path, dolphin_name, file_path } = req.body;
 		// Initializing with 'empty', because if we initialize with '' the sessionStorage isn´t actually initialized
 		req.session.photo_type= 'empty';// = photo_type; // Either 'eye', 'teeth' or 'marks'
 		req.session.dolphin_name = 'empty'; //dolphin_name;
@@ -189,6 +179,7 @@ app.post('/api/setup_session_storage', (req, res, next) => {
 			odontogramm_photo_path: 'empty',
 			marks_photo_path: 'empty'
 		};
+		req.session.video_path = 'empty'; 
 		req.session.file_path = []; //file_path; // For the nutrition section, laboratory data files
 		// Index used in photoUpload.js to upload for different dolphins in the
 		// same test upload. Reset the index after photo paths are uploaded into db
@@ -230,29 +221,25 @@ app.use('/api/settings', settingsRouter);
 app.use('/api/dolphins', dolphins);
 app.use('/api/good_feeding', good_feeding);
 app.use('/api/photo', uploadPhoto);
+app.use('/api/video', uploadVideo);
 app.use('/api/good_health', good_health);
 app.use('/api/good_housing', good_housing);
 app.use('/api/behaviour', behaviour);
 app.use('/api/emotional_state', emotional_state);
-//app.post('/api/photo', uploadPhoto);
 app.post('/api/file', uploadFile);
 app.use('/api/export-csv', csvWriter);
 // For example eye, teeth, odontogramm, or rake mark image files
 app.use('/api/images', express.static(path.join(__dirname,'uploads/images'))); //gets the images with the url http://localhost:3309/images/ + filename
 // Laboratory data files: e.g. food quality
 app.use('/api/files', express.static(path.join(__dirname,'uploads/files'))); //gets the files with the url http://localhost:3309/files/ + filename
+// Video files
+app.use('/api/videos', express.static(path.join(__dirname,'uploads/videos'))); //gets the videos with the url http://localhost:3309/videos/ + filename
 
 /**
  * Custom routes
  */
 app.use('/api/activities', activityRouter);
 app.use('/api/examples', exampleRouter);
-
-// app.use('*', (req, res) =>
-// 	res.sendFile(path.join(__dirname, 'public', 'index.html'))
-// );
-
-
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

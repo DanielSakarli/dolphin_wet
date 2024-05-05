@@ -211,6 +211,7 @@ const goodHealthPostValidateRequestBody = [
 			'teeth_photo_path',
 			'odontogramm_photo_path',
 			'marks_photo_path',
+			'video_path',
 			'created_at',
 		];
 		const keys = Object.keys(value);
@@ -365,6 +366,10 @@ const goodHealthPostValidateRequestBody = [
 		.optional({ values: 'null' })
 		.isString()
 		.withMessage('Invalid marks photo path'),
+	body('video_path')
+		.optional({ values: 'null' })
+		.isString()
+		.withMessage('Invalid video path'),
 	// Timestamps
 	body('created_at')
 		.optional({ values: 'null' })

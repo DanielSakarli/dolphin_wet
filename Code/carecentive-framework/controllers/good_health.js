@@ -1,8 +1,6 @@
 const { validationResult } = require('express-validator');
 const { isUserAuth } = require('./authSwitch');
 const GoodHealthService = require('../services/GoodHealthService');
-//const fs = require('fs');
-// const path = require('path');
 
 /**
  * Controller of post request of /api/good_health.
@@ -37,9 +35,8 @@ async function setResult(req, res, next) {
 		//req.session.photo_path = {};
 		//console.log('App.use Photo_path in session storage: ' + req.session.photo_path);
 			
-		if(req.session && (req.session.photo_path.eye_photo_path != 'empty' || req.session.photo_path.teeth_photo_path != 'empty' || req.session.photo_path.odontogramm_photo_path != 'empty' || req.session.photo_path.marks_photo_path != 'empty')) {
+		if(req.session && (req.session.photo_path.eye_photo_path != 'empty' || req.session.photo_path.teeth_photo_path != 'empty' || req.session.photo_path.odontogramm_photo_path != 'empty' || req.session.photo_path.marks_photo_path != 'empty' || req.session.video_path != 'empty')) {
 			// attach userID to test result in req.body
-			let fileData;
 			let test_result = req.body;
 			test_result = { user_id: userID, user_name: userName, ...test_result };
 
@@ -110,6 +107,23 @@ async function setResult(req, res, next) {
 					}
 				}
 			
+				if(req.session.video_path != 'empty')
+					{
+						console.log('Video path in req.session in good_health.js: ' + req.session.video_path);
+					// Iterate over the arrays in test_result
+					
+						// Check if the dolphin_name in the array is 'Dolly'
+						if (test_result.dolphin_name === req.session.dolphin_name) {
+						// Append eye_photo_path to the array
+						test_result.video_path = req.session.video_path.toString();
+						//fileData = fs.readFileSync(test_result.eye_photo_path);
+						//test_result.image = fileData;
+						//console.log(fileData);
+						console.log('test result video path: ', test_result.video_path, 'for dolphin: ', test_result.dolphin_name);
+					}
+					
+					}
+
 				const insertedResult = await GoodHealthService.loadTestResult(test_result, roleName);
 				res.status(201).json(insertedResult);
 		} else {
@@ -119,9 +133,9 @@ async function setResult(req, res, next) {
 			let test_result = req.body;
 			
 			test_result = { user_id: userID, user_name: userName, ...test_result };
-			console.log('No photo to be uploaded for this dolphin: ', test_result.dolphin_name);
+			console.log('No photo or video to be uploaded for this dolphin: ', test_result.dolphin_name);
 			const insertedResult = await GoodHealthService.loadTestResult(test_result, roleName);
-			//next();
+			
 			res.status(201).json(insertedResult);
 		}
 	}
@@ -137,11 +151,6 @@ async function setResult(req, res, next) {
  */
 async function getTestResult(req, res, next) {
 	try {
-		/*const errors = validationResult(req);
-		if (!errors.isEmpty()) {
-			// Handle validation errors
-			return res.status(400).json({ errors: errors.array() });
-		}*/
 		if (isUserAuth) {
 			console.log('authdata: ', req.authData);
 			const { user_id } = req.authData;
@@ -173,7 +182,7 @@ async function getTestResult(req, res, next) {
 			res.status(200).json(queryResult);
 		}
 	} else {
-		throw new Error('USER_IS_NOT_AUTHENTICATED');
+		res.status(400).json('USER_IS_NOT_AUTHENTICATED');
 	}
 	} catch (error) {
 		next(error);

@@ -40,15 +40,15 @@ export default defineComponent({
 				// get the files from the input form
 				const filesInput = document.getElementById('files') as HTMLInputElement;
 				if (filesInput) {
-					const files = filesInput.files;
+					const videoFiles = filesInput.files;
 
 					// create a new FormData object, you can learn more here
 					// https://developer.mozilla.org/en-US/docs/Web/API/FormData/FormData
 					const formData = new FormData();
 
-					formData.append('files', files);
+					formData.append('files', videoFiles);
 
-					this.$emit('form-submitted', files);
+					this.$emit('form-submitted', videoFiles);
 				}
 			}
 		},

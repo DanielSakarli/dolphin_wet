@@ -226,6 +226,20 @@
 				criteria === 'firstCriteriaHealth'
 			"
 		>
+			<ion-card-title class="card-title" style="margin-bottom: 15px"
+				>If applicable, upload your video here</ion-card-title
+			>
+			<ion-item>
+				<VideoUpload @form-submitted="handleFormSubmittedVideo" />
+			</ion-item>
+		</ion-card>
+		<ion-card
+			v-if="
+				dolphinSelect &&
+				dolphinSelect.length !== 0 &&
+				criteria === 'firstCriteriaHealth'
+			"
+		>
 			<ion-card-title class="card-title">{{
 				$t('secondSubCriteriaHealth')
 			}}</ion-card-title>
@@ -694,6 +708,7 @@ import { camera } from 'ionicons/icons';
 import axios from 'axios';
 import CheckComments from '@/components/CheckComments.vue';
 import PhotoUpload from '@/components/PhotoUpload.vue';
+import VideoUpload from '@/components/VideoUpload.vue';
 import { useDolphinsStore } from '@/store/dolphinsStore';
 import { useEvaluationHealthStore } from '@/store/evaluationHealthStore';
 import { baseUrl } from '@/utils/baseUrl';
@@ -740,6 +755,7 @@ export default {
 		IonButton,
 		CheckComments,
 		PhotoUpload,
+		VideoUpload,
 		IonIcon,
 		IonCheckbox,
 		IonCard,
@@ -784,6 +800,7 @@ export default {
 			dolphinList: [] as { name: string }[],
 			urlPost: baseUrl + '/api/good_health',
 			urlPostPhoto: baseUrl + '/api/photo',
+			urlPostVideo: baseUrl + '/api/video',
 			normal_floatability_comments: '',
 			records_normal_floatability_comments: '',
 			inspection_eye_lesions_comments: '',
@@ -799,6 +816,7 @@ export default {
 			records_external_disease_comments: '',
 
 			formData: [] as FormData[],
+			formDataVideo: [] as FormData[],
 			sessionStorage: {
 				photo_type: '',
 				eye_photo_path: '',
@@ -807,6 +825,7 @@ export default {
 				marks_photo_path: '',
 				file_path: '',
 				dolphin_name: '',
+				video_path: '',
 			},
 		};
 	},
@@ -863,6 +882,36 @@ export default {
 			this.inspection_marks_comments = '';
 			this.records_external_disease_comments = '';
 		},
+		handleFormSubmittedVideo(files: File[]) {
+			if (files && this.dolphinSelect != '') {
+				this.sessionStorage = {
+					photo_type: '',
+					eye_photo_path: '',
+					teeth_photo_path: '',
+					odontogramm_photo_path: '',
+					marks_photo_path: '',
+					file_path: '',
+					video_path: '',
+					dolphin_name: '',
+				};
+				console.log('Form Data accessed in HealthCheckCriteriaSelector.vue:');
+				const newFormData = new FormData();
+				if (this.dolphinSelect != '') {
+					newFormData.append('dolphin_name', this.dolphinSelect || ''); // Append the dolphin name with a default value of an empty string
+				}
+				//newFormData.append('photo_type', 'eye'); //Append the photo type
+				// Then append the rest of the fields
+
+				console.log('Number of videos: ' + files.length);
+
+				for (let i = 0; i < files.length; i++) {
+					console.log(files[i]);
+					newFormData.append('files', files[i]);
+				}
+				this.formDataVideo.push(newFormData);
+				console.log(...this.formDataVideo);
+			}
+		},
 		handleFormSubmittedEyePhoto(files: File[]) {
 			if (files && this.dolphinSelect != '') {
 				this.sessionStorage = {
@@ -872,6 +921,7 @@ export default {
 					odontogramm_photo_path: '',
 					marks_photo_path: '',
 					file_path: '',
+					video_path: '',
 					dolphin_name: '',
 				};
 				console.log('Form Data accessed in HealthCheckCriteriaSelector.vue:');
@@ -901,6 +951,7 @@ export default {
 					odontogramm_photo_path: '',
 					marks_photo_path: '',
 					file_path: '',
+					video_path: '',
 					dolphin_name: '',
 				};
 				console.log('Form Data accessed in HealthCheckCriteriaSelector.vue:');
@@ -930,6 +981,7 @@ export default {
 					odontogramm_photo_path: '',
 					marks_photo_path: '',
 					file_path: '',
+					video_path: '',
 					dolphin_name: '',
 				};
 				console.log('Form Data accessed in HealthCheckCriteriaSelector.vue:');
@@ -958,6 +1010,7 @@ export default {
 					odontogramm_photo_path: '',
 					marks_photo_path: '',
 					file_path: '',
+					video_path: '',
 					dolphin_name: '',
 				};
 				console.log('Form Data accessed in HealthCheckCriteriaSelector.vue:');
@@ -1286,6 +1339,9 @@ export default {
 					await this.photoUpload(
 						evaluationHealthStore.requestBodiesHealth[i]['dolphin_name']
 					);
+					await this.videoUpload(
+						evaluationHealthStore.requestBodiesHealth[i]['dolphin_name']
+					);
 					console.log(
 						'This is sent to backend: ',
 						evaluationHealthStore.requestBodiesHealth[i]
@@ -1346,6 +1402,7 @@ export default {
 				//submitForm();
 			}
 			this.formData = []; //Reset after upload
+			this.formDataVideo = [];
 		},
 
 		/*
@@ -1482,6 +1539,52 @@ export default {
 								/*headers: {
 									'Content-Type': 'multipart/form-data',
 								},*/
+								withCredentials: true,
+							})
+							.then((response) => {
+								console.log('Response:', response.data);
+							})
+							.catch((error) => {
+								console.error(
+									'Error during photo Upload:',
+									JSON.stringify(error)
+								);
+							});
+					}
+					//Reset the form data
+					desiredFormData = [];
+					//console.log('Resetted form data: '+ this.formData);
+				}
+			}
+		},
+		async videoUpload(dolphin_name: string) {
+			// This method is called for one dolphin at a time
+			// Check if there is a photo to upload
+			if (this.formDataVideo != null) {
+				// Find the FormData object with the desired dolphin_name
+				console.log('Length formData array: ', this.formDataVideo.length);
+				let desiredFormData = [];
+				for (let i = 0; i < this.formDataVideo.length; i++) {
+					if (this.formDataVideo[i].get('dolphin_name') === dolphin_name) {
+						if (desiredFormData.length === 0) {
+							//If desiredFormData doesn't exist yet, create a new array with the form data
+							desiredFormData[0] = this.formDataVideo[i];
+						} else {
+							//If desiredFormData already exists for this dolphin, push the new form data to the array desiredFormData
+							desiredFormData.push(this.formDataVideo[i]);
+							console.log('Found the desired form data: ', ...desiredFormData);
+						}
+					}
+				}
+				console.log('Desired form data:', desiredFormData);
+				if (desiredFormData.length != 0) {
+					console.log('Form Data accessed in HealthCheckCriteriaSelector.vue');
+					console.log(...desiredFormData);
+
+					for (let i = 0; i < desiredFormData.length; i++) {
+						// Send the video to the server
+						await axios
+							.post(this.urlPostVideo, desiredFormData[i], {
 								withCredentials: true,
 							})
 							.then((response) => {

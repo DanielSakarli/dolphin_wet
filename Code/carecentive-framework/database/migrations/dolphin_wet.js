@@ -185,6 +185,7 @@ exports.up = function (knex) {
 			table.string('teeth_photo_path');
 			table.string('odontogramm_photo_path');
 			table.string('marks_photo_path');
+			table.string('video_path');
 			//table.binary('image'); //Holds image as binary data
 			table.timestamps(true, true); //Timestamp: created at, updated at
 		}),
@@ -240,6 +241,7 @@ exports.up = function (knex) {
 			table.string('teeth_photo_path');
 			table.string('odontogramm_photo_path');
 			table.string('marks_photo_path');
+			table.string('video_path');
 			//table.binary('image'); //Holds image as binary data
 			table.timestamps(true, true); //Timestamp: created at, updated at
 		}),
@@ -295,6 +297,7 @@ exports.up = function (knex) {
 			table.string('teeth_photo_path');
 			table.string('odontogramm_photo_path');
 			table.string('marks_photo_path');
+			table.string('video_path');
 			//table.binary('image'); //Holds image as binary data
 			table.timestamps(true, true); //Timestamp: created at, updated at
 		}),
