@@ -27,6 +27,10 @@ import './theme/core.css';
 import { createI18n } from 'vue-i18n';
 import { globalizationList } from './data/globalization';
 import BaseLayout from './views/BaseLayout.vue';
+import axios from 'axios';
+import { CustomAxiosInstance, CustomAxiosRequestConfig } from './axios'; // adjust the path as needed
+
+import { loadingController } from '@ionic/vue';
 
 //import VueAxios from 'vue-axios';
 
@@ -44,6 +48,60 @@ const app = createApp(App).use(IonicVue).use(router).use(i18n);
 
 app.component('base-layout', BaseLayout);
 app.use(pinia);
+
+////////////////////////////////////////////////
+// Loading component for all axios requests:
+//const LoadingController = new loadingController();
+/*interface CustomAxiosRequestConfig extends AxiosRequestConfig {
+	hideGlobalLoading?: boolean;
+	headers: AxiosRequestHeaders;
+}
+interface CustomAxiosInstance extends AxiosStatic {
+	(config: CustomAxiosRequestConfig): Promise<any>;
+}*/
+const customAxios = axios as CustomAxiosInstance;
+
+let loading: HTMLIonLoadingElement | undefined;
+
+async function showLoading() {
+	loading = await loadingController.create({
+		message: 'Please wait...',
+	});
+	await loading.present();
+}
+
+function hideLoading() {
+	if (loading) {
+		loading.dismiss();
+	}
+}
+
+axios.interceptors.request.use(
+	(config: CustomAxiosRequestConfig) => {
+		if (!config.hideGlobalLoading) {
+			showLoading();
+		}
+		return config;
+	},
+	(error) => {
+		hideLoading();
+		return Promise.reject(error);
+	}
+);
+
+axios.interceptors.response.use(
+	(response) => {
+		hideLoading();
+		return response;
+	},
+	(error) => {
+		hideLoading();
+		return Promise.reject(error);
+	}
+);
+app.config.globalProperties.$axios = customAxios;
+app.provide('loadingController', loadingController);
+////////////////////////////////////////////////
 
 //app.use(VueAxios, axios)
 //app.provide('axios', app.config.globalProperties.axios)  // provide 'axios'

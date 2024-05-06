@@ -108,8 +108,10 @@ import {
 	IonButton,
 	IonCard,
 	IonCardContent,
+	loadingController,
 } from '@ionic/vue';
 import axios from 'axios';
+import { AxiosInstance } from 'axios';
 import { baseUrl } from '@/utils/baseUrl';
 import logo from '@/../../../Logos/logo.png';
 import { useDolphinsStore } from '@/store/dolphinsStore';
@@ -135,6 +137,10 @@ export default defineComponent({
 	},
 	methods: {
 		async login() {
+			/*const loading = await loadingController.create({
+				message: 'Please wait...',
+			});
+			await loading.present();*/
 			const url = baseUrl + '/api/users/login';
 			// Reset the error message at the beginning of each login attempt
 			this.errorMessage = '';
@@ -147,9 +153,12 @@ export default defineComponent({
 				password: this.password,
 			};
 			//console.log(this.username, this.password);
-			axios
-				.post(url, requestBody, { withCredentials: true })
-				.then(async (response) => {
+			this.$axios
+				.post(url, requestBody, {
+					withCredentials: true,
+					hideGlobalLoading: true,
+				})
+				.then((response) => {
 					const token = response.data;
 					//this.$router.push('/folder/Evaluate'); //Go to Evaluation Page if Login was succesfull
 					console.log(
@@ -166,17 +175,20 @@ export default defineComponent({
 						'user_name saved in session storage: ',
 						sessionStorage.getItem('user_name')
 					);
-					await this.$router.push('/folder/Evaluate');
+					this.$router.push('/folder/Evaluate');
+					//await loading.dismiss();
 				})
 				.catch((error) => {
 					this.errorMessage = 'Invalid username or password.';
 					console.error('Error:', error.response.data);
+					//await loading.dismiss();
 				});
 
 			// Fill the dolphinsStore with the current dolphinList from /api/dolphins
 			// or the default dolphins of the json file
 			const dolphinsStore = useDolphinsStore();
 			await dolphinsStore.fill();
+			//await loading.dismiss();
 		},
 		changePassword() {
 			this.$router.push('changePassword');
