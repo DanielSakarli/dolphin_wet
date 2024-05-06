@@ -29,7 +29,7 @@ class GoodHousingService {
 	static async loadTestResult(result, roleName) {
 		try {
 			// Get the id of current dolphin by name
-			const myDolphinDao = new DolphinDAO();
+			const myDolphinDao = new DolphinDAO(roleName);
 			const dolphin_name = result.dolphin_name;
 			const dolphin_data = await myDolphinDao.getDolphinByName(dolphin_name);
 			// If the dolphin is not in the database, throws error
@@ -122,7 +122,7 @@ class GoodHousingService {
 	 */
 	static async getTestResultNMonths(name, numMonths = 3, roleName) {
 		try {
-		const myDolphinDAO = new DolphinDAO();
+		const myDolphinDAO = new DolphinDAO(roleName);
 
 		// if this dolphin is not in database,
 		// 404: not found.

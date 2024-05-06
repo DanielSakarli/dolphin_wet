@@ -31,14 +31,15 @@ async function setResult(req, res, next) {
 		// If dolphin is not existing in database,
 		// 400: bad request
 		const isDolphinExisted = await DolphinService.isDolphinExisted(
-			test_result.dolphin_name
+			test_result.dolphin_name,
+			roleName
 		);
 		if (!isDolphinExisted) {
 			res.status(400).json({ error: `Dolphin ${test_result.dolphin_name} does not exist` });
 		}
 
 		// Gets dolphin_id for test result.
-		const dolphin_obj = await DolphinService.getOneDolphin(test_result.dolphin_name);
+		const dolphin_obj = await DolphinService.getOneDolphin(test_result.dolphin_name, roleName);
 		const dolphin_id = dolphin_obj.dolphin_id;
 
 		// attach userID to test result in req.body

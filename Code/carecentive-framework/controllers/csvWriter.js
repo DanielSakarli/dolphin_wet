@@ -25,16 +25,18 @@ async function csvWriter(req, res, next) {
 			let { dolphin_name, numMonths, section } = req.query;
 			const { user_id, name } = req.authData;
 			console.log('authdata: ', req.authData);
+			console.log('dolphin name: ', dolphin_name);
 			userID = user_id;
 			userName = name;
 		// If dolphin is not existing in database,
 		// 400: bad request
 		
-		if(dolphin_name != '') {
+		if(dolphin_name && dolphin_name != '') {
 			// Only check dolphin_name is not empty. If it is empty it means that
 			// the user wants the data of all dolphins
 		const isDolphinExisted = await DolphinService.isDolphinExisted(
-			dolphin_name
+			dolphin_name,
+			roleName
 		);
 		if (!isDolphinExisted) {
 			return res.status(400).json({ error: `Dolphin ${dolphin_name} does not exist` });
