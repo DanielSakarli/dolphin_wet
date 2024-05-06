@@ -19,7 +19,7 @@ async function csvWriter(req, res, next) {
 		// After gone through the authenticateToken middleware
 		// the user data of user is in the req.authData
 		if (isUserAuth) {
-            let userID;
+            //let userID;
 			let userName;
 			const roleName = req.role;
 			let { dolphin_name, numMonths, section } = req.query;
@@ -29,11 +29,16 @@ async function csvWriter(req, res, next) {
 			userName = name;
 		// If dolphin is not existing in database,
 		// 400: bad request
+		
+		if(dolphin_name != '') {
+			// Only check dolphin_name is not empty. If it is empty it means that
+			// the user wants the data of all dolphins
 		const isDolphinExisted = await DolphinService.isDolphinExisted(
 			dolphin_name
 		);
 		if (!isDolphinExisted) {
-			res.status(400).json({ error: `Dolphin ${dolphin_name} does not exist` });
+			return res.status(400).json({ error: `Dolphin ${dolphin_name} does not exist` });
+		}
 		}
 
 	console.log('req params: ', dolphin_name, numMonths, section);
@@ -419,12 +424,12 @@ async function csvWriter(req, res, next) {
 				transporter.sendMail(mailOptions, (error, info) => {
 					if (error) {
 					  console.error(error);
-					 reject(error); 
-					  res.sendStatus(500);
+					  reject(error); 
+					  return res.sendStatus(500);
 					} else {
 					  console.log('Email sent: ' + info.response);
 					  resolve(info);
-					  res.sendStatus(200);
+					  return res.sendStatus(200);
 					}
 				  });
 			  });
@@ -434,7 +439,7 @@ async function csvWriter(req, res, next) {
 		})
 		.catch(error => {
 			console.log(error);
-			res.sendStatus(500);
+			return res.sendStatus(500);
 		});
 		} else {
 			throw new Error('USER_IS_NOT_AUTHENTICATED');
@@ -442,7 +447,7 @@ async function csvWriter(req, res, next) {
 
 		} catch (error) {
 			console.error(error);
-			res.sendStatus(500);
+			return res.sendStatus(500);
 		}
 	}
 

@@ -1146,7 +1146,7 @@ export default {
 				.then((response) => {
 					console.log('Response:', response.data);
 					toast.success('Data sent to logged in user', {
-						autoClose: 1500,
+						autoClose: 2000,
 					});
 				})
 				.catch((e) => {

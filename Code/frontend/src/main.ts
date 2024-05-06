@@ -75,7 +75,7 @@ async function showLoading() {
 			loading.dismiss();
 			loading = undefined;
 		}
-	}, 4000);
+	}, 15000); //auto-closes ion-loading after certain time if no response came yet from the server to prevent ion-loading from just running forever during a runtime-error
 }
 
 function hideLoading() {
