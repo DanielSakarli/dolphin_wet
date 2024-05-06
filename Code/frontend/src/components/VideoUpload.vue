@@ -24,6 +24,7 @@ import { IonContent } from '@ionic/vue';
 import { defineComponent } from 'vue';
 
 export default defineComponent({
+	props: ['id'],
 	components: {
 		IonContent,
 	},
@@ -39,16 +40,20 @@ export default defineComponent({
 				console.log('submitForm in VideoUpload.vue');
 				// get the files from the input form
 				const filesInput = document.getElementById('files') as HTMLInputElement;
-				if (filesInput) {
+				if (filesInput && filesInput.files) {
 					const videoFiles = filesInput.files;
 
 					// create a new FormData object, you can learn more here
 					// https://developer.mozilla.org/en-US/docs/Web/API/FormData/FormData
 					const formData = new FormData();
 
-					formData.append('files', videoFiles);
+					//for (let i = 0; i < filesInput.files.length; i++) {
+					//	const file = filesInput.files[i];
+					// Do the for loop if we enable multiple video file uploads
+					formData.append('files', videoFiles[0]);
+					//}
 
-					this.$emit('form-submitted', videoFiles);
+					this.$emit('form-submitted', { id: this.id, files: videoFiles });
 				}
 			}
 		},

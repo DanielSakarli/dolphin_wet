@@ -226,20 +226,6 @@
 				criteria === 'firstCriteriaHealth'
 			"
 		>
-			<ion-card-title class="card-title" style="margin-bottom: 15px"
-				>If applicable, upload your video here</ion-card-title
-			>
-			<ion-item>
-				<VideoUpload @form-submitted="handleFormSubmittedVideo" />
-			</ion-item>
-		</ion-card>
-		<ion-card
-			v-if="
-				dolphinSelect &&
-				dolphinSelect.length !== 0 &&
-				criteria === 'firstCriteriaHealth'
-			"
-		>
 			<ion-card-title class="card-title">{{
 				$t('secondSubCriteriaHealth')
 			}}</ion-card-title>
@@ -264,6 +250,20 @@
 					@update-comment="updateNormalFloatabilityRecordsComments"
 				/>
 			</ion-list>
+		</ion-card>
+		<ion-card
+			v-if="
+				dolphinSelect &&
+				dolphinSelect.length !== 0 &&
+				criteria === 'firstCriteriaHealth'
+			"
+		>
+			<ion-card-title class="card-title" style="margin-bottom: 15px"
+				>If applicable, upload your video here</ion-card-title
+			>
+			<ion-item>
+				<VideoUpload id="video1" @form-submitted="handleFormSubmittedVideo" />
+			</ion-item>
 		</ion-card>
 		<ion-card
 			v-if="
@@ -380,6 +380,20 @@
 			v-if="
 				dolphinSelect &&
 				dolphinSelect.length !== 0 &&
+				criteria === 'secondCriteriaHealth'
+			"
+		>
+			<ion-card-title class="card-title" style="margin-bottom: 15px"
+				>If applicable, upload your video here</ion-card-title
+			>
+			<ion-item>
+				<VideoUpload id="video2" @form-submitted="handleFormSubmittedVideo" />
+			</ion-item>
+		</ion-card>
+		<ion-card
+			v-if="
+				dolphinSelect &&
+				dolphinSelect.length !== 0 &&
 				criteria === 'thirdCriteriaHealth'
 			"
 		>
@@ -468,6 +482,20 @@
 			v-if="
 				dolphinSelect &&
 				dolphinSelect.length !== 0 &&
+				criteria === 'thirdCriteriaHealth'
+			"
+		>
+			<ion-card-title class="card-title" style="margin-bottom: 15px"
+				>If applicable, upload your video here</ion-card-title
+			>
+			<ion-item>
+				<VideoUpload id="video3" @form-submitted="handleFormSubmittedVideo" />
+			</ion-item>
+		</ion-card>
+		<ion-card
+			v-if="
+				dolphinSelect &&
+				dolphinSelect.length !== 0 &&
 				criteria === 'fourthCriteriaHealth'
 			"
 		>
@@ -495,6 +523,20 @@
 					@update-comment="updateGastricAbnormalityRecordsComments"
 				/>
 			</ion-list>
+		</ion-card>
+		<ion-card
+			v-if="
+				dolphinSelect &&
+				dolphinSelect.length !== 0 &&
+				criteria === 'fourthCriteriaHealth'
+			"
+		>
+			<ion-card-title class="card-title" style="margin-bottom: 15px"
+				>If applicable, upload your video here</ion-card-title
+			>
+			<ion-item>
+				<VideoUpload id="video4" @form-submitted="handleFormSubmittedVideo" />
+			</ion-item>
 		</ion-card>
 		<ion-card
 			v-if="
@@ -596,6 +638,20 @@
 			v-if="
 				dolphinSelect &&
 				dolphinSelect.length !== 0 &&
+				criteria === 'fifthCriteriaHealth'
+			"
+		>
+			<ion-card-title class="card-title" style="margin-bottom: 15px"
+				>If applicable, upload your video here</ion-card-title
+			>
+			<ion-item>
+				<VideoUpload id="video5" @form-submitted="handleFormSubmittedVideo" />
+			</ion-item>
+		</ion-card>
+		<ion-card
+			v-if="
+				dolphinSelect &&
+				dolphinSelect.length !== 0 &&
 				criteria === 'sixthCriteriaHealth'
 			"
 		>
@@ -673,6 +729,20 @@
 				</ion-item>
 				<CheckComments @update-comment="updateExternalDiseaseComments" />
 			</ion-list>
+		</ion-card>
+		<ion-card
+			v-if="
+				dolphinSelect &&
+				dolphinSelect.length !== 0 &&
+				criteria === 'sixthCriteriaHealth'
+			"
+		>
+			<ion-card-title class="card-title" style="margin-bottom: 15px"
+				>If applicable, upload your video here</ion-card-title
+			>
+			<ion-item>
+				<VideoUpload id="video6" @form-submitted="handleFormSubmittedVideo" />
+			</ion-item>
 		</ion-card>
 	</ion-content>
 	<!-- End of Checkboxes-->
@@ -882,7 +952,7 @@ export default {
 			this.inspection_marks_comments = '';
 			this.records_external_disease_comments = '';
 		},
-		handleFormSubmittedVideo(files: File[]) {
+		handleFormSubmittedVideo({ id, files }: { id: string; files: File[] }) {
 			if (files && this.dolphinSelect != '') {
 				this.sessionStorage = {
 					photo_type: '',
@@ -908,7 +978,22 @@ export default {
 					console.log(files[i]);
 					newFormData.append('files', files[i]);
 				}
-				this.formDataVideo.push(newFormData);
+
+				// This check prevents the video to be overwritten by one of the other video upload components
+				if (id === 'video1') {
+					this.formDataVideo.push(newFormData);
+				} else if (id === 'video2') {
+					this.formDataVideo.push(newFormData);
+				} else if (id === 'video3') {
+					this.formDataVideo.push(newFormData);
+				} else if (id === 'video4') {
+					this.formDataVideo.push(newFormData);
+				} else if (id === 'video5') {
+					this.formDataVideo.push(newFormData);
+				} else if (id === 'video6') {
+					this.formDataVideo.push(newFormData);
+				}
+
 				console.log(...this.formDataVideo);
 			}
 		},
