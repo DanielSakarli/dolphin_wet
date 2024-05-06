@@ -68,6 +68,14 @@ async function showLoading() {
 		message: 'Please wait...',
 	});
 	await loading.present();
+
+	// Dismiss loading after 4 seconds
+	setTimeout(() => {
+		if (loading) {
+			loading.dismiss();
+			loading = undefined;
+		}
+	}, 4000);
 }
 
 function hideLoading() {

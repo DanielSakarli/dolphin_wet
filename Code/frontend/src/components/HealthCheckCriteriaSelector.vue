@@ -1435,7 +1435,7 @@ export default {
 					await this.$axios
 						.post(this.urlPost, evaluationHealthStore.requestBodiesHealth[i], {
 							withCredentials: true,
-							hideGlobalLoading: false,
+							//hideGlobalLoading: false,
 						})
 						.then((response) => {
 							console.log('Response:', response.data);
@@ -1627,7 +1627,7 @@ export default {
 									'Content-Type': 'multipart/form-data',
 								},*/
 								withCredentials: true,
-								hideGlobalLoading: true,
+								//hideGlobalLoading: true,
 							})
 							.then((response) => {
 								console.log('Response:', response.data);
