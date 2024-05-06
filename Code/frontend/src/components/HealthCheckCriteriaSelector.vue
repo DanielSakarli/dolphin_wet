@@ -1120,9 +1120,10 @@ export default {
 			// Even though the req.body is not being used in the backend. I don´t
 			// know why, just leave it there, otherwise req.session will not work
 			// in the backend
-			await axios
+			await this.$axios
 				.post(baseUrl + '/api/setup_session_storage', this.sessionStorage, {
 					withCredentials: true,
+					hideGlobalLoading: true,
 				})
 				.then((response) => {
 					console.log('Response setup session storage:', response.data);
@@ -1431,9 +1432,10 @@ export default {
 						'This is sent to backend: ',
 						evaluationHealthStore.requestBodiesHealth[i]
 					);
-					await axios
+					await this.$axios
 						.post(this.urlPost, evaluationHealthStore.requestBodiesHealth[i], {
 							withCredentials: true,
+							hideGlobalLoading: false,
 						})
 						.then((response) => {
 							console.log('Response:', response.data);
@@ -1619,12 +1621,13 @@ export default {
 
 					for (let i = 0; i < desiredFormData.length; i++) {
 						// Send the photo to the server
-						await axios
+						await this.$axios
 							.post(this.urlPostPhoto, desiredFormData[i], {
 								/*headers: {
 									'Content-Type': 'multipart/form-data',
 								},*/
 								withCredentials: true,
+								hideGlobalLoading: true,
 							})
 							.then((response) => {
 								console.log('Response:', response.data);
@@ -1668,9 +1671,10 @@ export default {
 
 					for (let i = 0; i < desiredFormData.length; i++) {
 						// Send the video to the server
-						await axios
+						await this.$axios
 							.post(this.urlPostVideo, desiredFormData[i], {
 								withCredentials: true,
+								hideGlobalLoading: false,
 							})
 							.then((response) => {
 								console.log('Response:', response.data);

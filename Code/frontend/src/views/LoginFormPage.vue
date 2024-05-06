@@ -152,11 +152,11 @@ export default defineComponent({
 				username: this.username,
 				password: this.password,
 			};
-			//console.log(this.username, this.password);
+			//using this.$axios allows to use the custom config variable hideGlobslLoading whcih surpresses the global ion-loading during axios requests
 			this.$axios
 				.post(url, requestBody, {
 					withCredentials: true,
-					hideGlobalLoading: true,
+					hideGlobalLoading: false,
 				})
 				.then((response) => {
 					const token = response.data;

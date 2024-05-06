@@ -26,7 +26,7 @@ export const useDolphinsStore = defineStore('dolphinsStore', {
 			//(await import("@/views/EvaluationMenu.vue")).default
 			const dolphinUrl = baseUrl + '/api/dolphins';
 			await axios
-				.get(dolphinUrl)
+				.get(dolphinUrl, { hideGlobalLoading: true })
 				.then((response) => {
 					// if internet connection is present, the dolphinList is updated with
 					// the values from the backend

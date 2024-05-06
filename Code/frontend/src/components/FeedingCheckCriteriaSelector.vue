@@ -602,9 +602,10 @@ export default {
 		},
 		async fileUpload() {
 			// Initialize session storage
-			await axios
+			await this.$axios
 				.post(baseUrl + '/api/setup_session_storage', null, {
 					withCredentials: true,
+					hideGlobalLoading: true,
 				})
 				.then((response) => {
 					console.log('Response setup session storage:', response.data);
@@ -617,13 +618,14 @@ export default {
 				// Setup the session storage
 				console.log('Form Data accessed in FeedingCheckCriteriaSelector.vue');
 
-				// Send the photo to the server
-				axios
+				// Send the file to the server
+				this.$axios
 					.post(this.urlPostFile, this.formData, {
 						headers: {
 							'Content-Type': 'multipart/form-data',
 						},
 						withCredentials: true,
+						hideGlobalLoading: true,
 					})
 					.then((response) => {
 						console.log('Response:', response.data);
@@ -879,11 +881,11 @@ export default {
 					/*for(const data in evaluationFeedingStore.requestBodiesFeeding[i]){
 						if(evaluationFeedingStore.requestBodiesFeeding[i].content(data)){}
 					}*/
-					await axios
+					await this.$axios
 						.post(
 							this.urlPost,
 							evaluationFeedingStore.requestBodiesFeeding[i],
-							{ withCredentials: true }
+							{ withCredentials: true, hideGlobalLoading: false }
 						)
 						.then((response) => {
 							console.log('Response:', response.data);

@@ -98,7 +98,7 @@
 import { IonInput } from '@ionic/vue';
 //import { defineComponent } from 'vue';
 import { IonIcon } from '@ionic/vue';
-import axios from 'axios';
+//import axios from 'axios';
 import { baseUrl } from '@/utils/baseUrl';
 import { toast } from 'vue3-toastify';
 import 'vue3-toastify/dist/index.css';
@@ -119,7 +119,7 @@ export default {
 	},
 	async created() {
 		try {
-			const response = await axios.get(baseUrl + '/api/users/roles');
+			const response = await this.$axios.get(baseUrl + '/api/users/roles');
 			const roles = response.data;
 			// Create a new array with only the first parts of the strings, i.e. the zoos without the _admin or _user part
 			const zoos = roles.map((role: string) => role.split('_')[0]);
@@ -141,7 +141,7 @@ export default {
 				roleName: this.selectedZoo,
 				rolePassword: this.zoo_password,
 			};
-			axios
+			this.$axios
 				.post(url, requestBody, { withCredentials: true })
 				.then((response) => {
 					console.log('Response:', response.data);

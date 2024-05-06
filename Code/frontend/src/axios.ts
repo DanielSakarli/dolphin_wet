@@ -1,4 +1,4 @@
-// axios.d.ts
+// axios.ts
 import { AxiosStatic, AxiosRequestConfig, AxiosRequestHeaders } from 'axios';
 
 export interface CustomAxiosRequestConfig extends AxiosRequestConfig {
