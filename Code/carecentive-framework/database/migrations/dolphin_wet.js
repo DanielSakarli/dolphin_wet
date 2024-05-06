@@ -6,7 +6,41 @@
 exports.up = function (knex) {
 	return Promise.all([
 		// Dolphins table
-		knex.schema.createTable('dolphins', function (table) {
+		knex.schema.createTable('nuernberg_dolphins', function (table) {
+			table.increments('dolphin_id').primary();
+			table.string('name');
+			table.boolean('sex'); //1: female, 0: male
+			table.boolean('on_site'); //1: yes, 0: no
+			table.smallint('year_of_birth').unsigned();
+			table.string('place_of_birth');
+			
+			// Reference areas for the dolphins
+			table.smallint('min_weight_measured').unsigned();
+			table.smallint('max_weight_measured').unsigned();
+			table.smallint('min_kcal_calculations').unsigned();
+			table.smallint('max_kcal_calculations').unsigned();
+
+			table.timestamps(false, true); //Timestamp: created at, updated at
+		}),
+
+		knex.schema.createTable('valencia_dolphins', function (table) {
+			table.increments('dolphin_id').primary();
+			table.string('name');
+			table.boolean('sex'); //1: female, 0: male
+			table.boolean('on_site'); //1: yes, 0: no
+			table.smallint('year_of_birth').unsigned();
+			table.string('place_of_birth');
+			
+			// Reference areas for the dolphins
+			table.smallint('min_weight_measured').unsigned();
+			table.smallint('max_weight_measured').unsigned();
+			table.smallint('min_kcal_calculations').unsigned();
+			table.smallint('max_kcal_calculations').unsigned();
+
+			table.timestamps(false, true); //Timestamp: created at, updated at
+		}),
+
+		knex.schema.createTable('duisburg_dolphins', function (table) {
 			table.increments('dolphin_id').primary();
 			table.string('name');
 			table.boolean('sex'); //1: female, 0: male
@@ -38,7 +72,7 @@ exports.up = function (knex) {
 			// Foreign key constrains for dolphin_id.
 			table
 				.foreign('dolphin_id')
-				.references('dolphins.dolphin_id')
+				.references('nuernberg_dolphins.dolphin_id')
 				.onDelete('SET NULL')
 				.onUpdate('CASCADE');
 			table.string('dolphin_name');
@@ -75,7 +109,7 @@ exports.up = function (knex) {
 			// Foreign key constrains for dolphin_id.
 			table
 				.foreign('dolphin_id')
-				.references('dolphins.dolphin_id')
+				.references('valencia_dolphins.dolphin_id')
 				.onDelete('SET NULL')
 				.onUpdate('CASCADE');
 			table.string('dolphin_name');
@@ -97,8 +131,8 @@ exports.up = function (knex) {
 			table.timestamps(true, true); //Timestamp: created at, updated at
 		}),
 
-		// Duesseldorf good_feeding table
-		knex.schema.createTable('duesseldorf_good_feeding', function (table) {
+		// duisburg good_feeding table
+		knex.schema.createTable('duisburg_good_feeding', function (table) {
 			table.increments('feeding_record_id').primary();
 			table.integer('user_id').unsigned();
 			// Foreign key constrains for user_id.
@@ -112,7 +146,7 @@ exports.up = function (knex) {
 			// Foreign key constrains for dolphin_id.
 			table
 				.foreign('dolphin_id')
-				.references('dolphins.dolphin_id')
+				.references('duisburg_dolphins.dolphin_id')
 				.onDelete('SET NULL')
 				.onUpdate('CASCADE');
 			table.string('dolphin_name');
@@ -149,7 +183,7 @@ exports.up = function (knex) {
 			// Foreign key constrains for dolphin_id.
 			table
 				.foreign('dolphin_id')
-				.references('dolphins.dolphin_id')
+				.references('nuernberg_dolphins.dolphin_id')
 				.onDelete('SET NULL')
 				.onUpdate('CASCADE');
 			table.string('dolphin_name');
@@ -205,7 +239,7 @@ exports.up = function (knex) {
 			// Foreign key constrains for dolphin_id.
 			table
 				.foreign('dolphin_id')
-				.references('dolphins.dolphin_id')
+				.references('valencia_dolphins.dolphin_id')
 				.onDelete('SET NULL')
 				.onUpdate('CASCADE');
 			table.string('dolphin_name');
@@ -246,8 +280,8 @@ exports.up = function (knex) {
 			table.timestamps(true, true); //Timestamp: created at, updated at
 		}),
 
-		// duesseldorf_good_health table
-		knex.schema.createTable('duesseldorf_good_health', function (table) {
+		// duisburg_good_health table
+		knex.schema.createTable('duisburg_good_health', function (table) {
 			table.increments('health_record_id').primary();
 			table.integer('user_id').unsigned();
 			// Foreign key constrains for user_id.
@@ -261,7 +295,7 @@ exports.up = function (knex) {
 			// Foreign key constrains for dolphin_id.
 			table
 				.foreign('dolphin_id')
-				.references('dolphins.dolphin_id')
+				.references('duisburg_dolphins.dolphin_id')
 				.onDelete('SET NULL')
 				.onUpdate('CASCADE');
 			table.string('dolphin_name');
@@ -317,7 +351,7 @@ exports.up = function (knex) {
 			// Foreign key constrains for dolphin_id.
 			table
 				.foreign('dolphin_id')
-				.references('dolphins.dolphin_id')
+				.references('nuernberg_dolphins.dolphin_id')
 				.onDelete('SET NULL')
 				.onUpdate('CASCADE');
 			table.string('dolphin_name');
@@ -361,7 +395,7 @@ exports.up = function (knex) {
 			// Foreign key constrains for dolphin_id.
 			table
 				.foreign('dolphin_id')
-				.references('dolphins.dolphin_id')
+				.references('valencia_dolphins.dolphin_id')
 				.onDelete('SET NULL')
 				.onUpdate('CASCADE');
 			table.string('dolphin_name');
@@ -390,8 +424,8 @@ exports.up = function (knex) {
 			table.timestamps(true, true); //Timestamp: created at, updated at
 		}),
 
-		// duesseldorf_good_housing table
-		knex.schema.createTable('duesseldorf_good_housing', function (table) {
+		// duisburg_good_housing table
+		knex.schema.createTable('duisburg_good_housing', function (table) {
 			table.increments('housing_record_id').primary();
 			table.integer('user_id').unsigned();
 			// Foreign key constrains for user_id.
@@ -405,7 +439,7 @@ exports.up = function (knex) {
 			// Foreign key constrains for dolphin_id.
 			table
 				.foreign('dolphin_id')
-				.references('dolphins.dolphin_id')
+				.references('duisburg_dolphins.dolphin_id')
 				.onDelete('SET NULL')
 				.onUpdate('CASCADE');
 			table.string('dolphin_name');
@@ -449,7 +483,7 @@ exports.up = function (knex) {
 			// Foreign key constrains for dolphin_id.
 			table
 				.foreign('dolphin_id')
-				.references('dolphins.dolphin_id')
+				.references('nuernberg_dolphins.dolphin_id')
 				.onDelete('SET NULL')
 				.onUpdate('CASCADE');
 			table.string('dolphin_name');
@@ -488,8 +522,8 @@ exports.up = function (knex) {
 
 			table.timestamps(true, true); //Timestamp: created at, updated at
 		}),
-		// duesseldorf_good_behavior table
-		knex.schema.createTable('duesseldorf_appropriate_behaviour', function (table) {
+		// duisburg_good_behavior table
+		knex.schema.createTable('duisburg_appropriate_behaviour', function (table) {
 			table.increments('behaviour_record_id').primary();
 			table.integer('user_id').unsigned();
 			// Foreign key constrains for user_id.
@@ -503,7 +537,7 @@ exports.up = function (knex) {
 			// Foreign key constrains for dolphin_id.
 			table
 				.foreign('dolphin_id')
-				.references('dolphins.dolphin_id')
+				.references('duisburg_dolphins.dolphin_id')
 				.onDelete('SET NULL')
 				.onUpdate('CASCADE');
 			table.string('dolphin_name');
@@ -557,7 +591,7 @@ exports.up = function (knex) {
 			// Foreign key constrains for dolphin_id.
 			table
 				.foreign('dolphin_id')
-				.references('dolphins.dolphin_id')
+				.references('valencia_dolphins.dolphin_id')
 				.onDelete('SET NULL')
 				.onUpdate('CASCADE');
 			table.string('dolphin_name');
@@ -611,7 +645,7 @@ exports.up = function (knex) {
 			// Foreign key constrains for dolphin_id.
 			table
 				.foreign('dolphin_id')
-				.references('dolphins.dolphin_id')
+				.references('nuernberg_dolphins.dolphin_id')
 				.onDelete('SET NULL')
 				.onUpdate('CASCADE');
 			table.string('dolphin_name');
@@ -632,8 +666,8 @@ exports.up = function (knex) {
 			
 			table.timestamps(true, true); //Timestamp: created at, updated at
 		}),
-		// duesseldorf_emotional_state table
-		knex.schema.createTable('duesseldorf_emotional_state', function (table) {
+		// duisburg_emotional_state table
+		knex.schema.createTable('duisburg_emotional_state', function (table) {
 			table.increments('emotional_state_record_id').primary();
 			table.integer('user_id').unsigned();
 			// Foreign key constrains for user_id.
@@ -647,7 +681,7 @@ exports.up = function (knex) {
 			// Foreign key constrains for dolphin_id.
 			table
 				.foreign('dolphin_id')
-				.references('dolphins.dolphin_id')
+				.references('duisburg_dolphins.dolphin_id')
 				.onDelete('SET NULL')
 				.onUpdate('CASCADE');
 			table.string('dolphin_name');
@@ -683,7 +717,7 @@ exports.up = function (knex) {
 			// Foreign key constrains for dolphin_id.
 			table
 				.foreign('dolphin_id')
-				.references('dolphins.dolphin_id')
+				.references('valencia_dolphins.dolphin_id')
 				.onDelete('SET NULL')
 				.onUpdate('CASCADE');
 			table.string('dolphin_name');

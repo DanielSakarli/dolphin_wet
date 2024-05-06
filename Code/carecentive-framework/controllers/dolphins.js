@@ -6,7 +6,10 @@ const { validationResult } = require('express-validator');
  */
 async function getAllDolphins(req, res, next) {
 	try {
-		const dolphins = await DolphinService.getAllDolphins();
+		// send the role of the user to the service layer so the dolphins
+		// of the user´s zoo will be returned
+		const roleName = req.role;
+		const dolphins = await DolphinService.getAllDolphins(roleName);
 		res.status(200).json(dolphins);
 	} catch (error) {
 		res.status(500);
@@ -22,8 +25,8 @@ async function getSingleDolphin(req, res, next) {
 	try {
 		// Get the dolphin name in the router param.
 		const dolphinName = req.params.name;
-
-		const dolphin = await DolphinService.getOneDolphin(dolphinName);
+		const roleName = req.role;
+		const dolphin = await DolphinService.getOneDolphin(dolphinName, roleName);
 
 		res.status(200).json(dolphin);
 	} catch (error) {
@@ -42,9 +45,9 @@ async function createDolphin(req, res, next) {
 			// Handle validation errors
 			return res.status(400).json({ errors: errors.array() });
 		}
-
+		const roleName = req.role;
 		const dolphinObj = req.body;
-		const dolphinCreated = await DolphinService.createDolphin(dolphinObj);
+		const dolphinCreated = await DolphinService.createDolphin(dolphinObj, roleName);
 		res.status(201).json(dolphinCreated);
 	} catch (error) {
 		next(error);
@@ -62,12 +65,13 @@ async function updateDolphin(req, res, next) {
 			// Handle validation errors
 			return res.status(400).json({ errors: errors.array() });
 		}
-
+		const roleName = req.role;
 		const dolphinName = req.params.name;
 		const updateInfo = req.body;
 		const dolphinUpdated = await DolphinService.updateDolphin(
 			dolphinName,
-			updateInfo
+			updateInfo,
+			roleName
 		);
 		res.status(200).json(dolphinUpdated);
 	} catch (error) {
@@ -81,9 +85,10 @@ async function updateDolphin(req, res, next) {
 async function deleteDolphin(req, res, next) {
 	try {
 		const dolphinName = req.params.name;
-		await DolphinService.deleteDolphin(dolphinName);
+		const roleName = req.role;
+		await DolphinService.deleteDolphin(dolphinName, roleName);
 		// Return all existing dolphins after deleting the given one.
-		const dolphins = await DolphinService.getAllDolphins();
+		const dolphins = await DolphinService.getAllDolphins(roleName);
 		res.status(200).json(dolphins);
 	} catch (error) {
 		next(error);

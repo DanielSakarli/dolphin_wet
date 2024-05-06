@@ -1,29 +1,29 @@
 async function loadDummyGoodFeeding(knex) {
-	const dollyID = await knex('dolphins')
+	const dollyID = await knex('nuernberg_dolphins')
 		.select('dolphin_id')
 		.where('name', 'Dolly')
 		.first();
-	const donnaID = await knex('dolphins')
+	const donnaID = await knex('nuernberg_dolphins')
 		.select('dolphin_id')
 		.where('name', 'Donna')
 		.first();
-	const jennyID = await knex('dolphins')
+	const jennyID = await knex('nuernberg_dolphins')
 		.select('dolphin_id')
 		.where('name', 'Jenny')
 		.first();
-	const namiID = await knex('dolphins')
+	const namiID = await knex('nuernberg_dolphins')
 		.select('dolphin_id')
 		.where('name', 'Nami')
 		.first();
-	const NynkeID = await knex('dolphins')
+	const NynkeID = await knex('nuernberg_dolphins')
 		.select('dolphin_id')
 		.where('name', 'Nynke')
 		.first();
-	const SunnyID = await knex('dolphins')
+	const SunnyID = await knex('nuernberg_dolphins')
 		.select('dolphin_id')
 		.where('name', 'Sunny')
 		.first();
-	const dörteID = await knex('dolphins')
+	const dörteID = await knex('nuernberg_dolphins')
 		.select('dolphin_id')
 		.where('name', 'Dörte')
 		.first();

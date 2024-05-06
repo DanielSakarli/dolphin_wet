@@ -1,7 +1,7 @@
 async function loadDummyDolphins(knex) {
 	// Insert dummy dolphins.
-	await knex('dolphins').del();
-	await knex('dolphins').insert([
+	await knex('nuernberg_dolphins').del();
+	await knex('nuernberg_dolphins').insert([
 		{
 			name: 'Dolly',
 			sex: 1,

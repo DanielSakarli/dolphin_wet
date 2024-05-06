@@ -1,12 +1,19 @@
-const Dolphins = require('../models/Dolphins');
+//const Dolphins = require('../models/Dolphins');
 const { DolphinError } = require('../source/Errors');
 
 class DolphinDAO {
 	// Objection.js model of dolphin table in database.
 	#dataModel;
 
-	constructor() {
+	constructor(roleName) {
+		if (roleName) {
+			console.log('role in dolphin dao: ', roleName);
+			const location = roleName;
+			const modelName = `${location}Dolphins`;
+			console.log('model name: ', modelName)
+			const Dolphins = require(`../models/${modelName}`); 
 		this.#dataModel = Dolphins;
+		}
 	}
 
 	/**

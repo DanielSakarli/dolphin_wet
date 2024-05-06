@@ -25,7 +25,7 @@ async function loadDummyUser() {
 			name: 'john doe2',
 			email: 'john.doe2@example.email',
 			password: 'secret_password',
-			roleName: 'Duesseldorf',
+			roleName: 'Duisburg',
 			rolePassword: 'safdjhc7#s',
 		});
 	await request(app)
@@ -46,7 +46,7 @@ async function loadDummyUser() {
 			email: 'doe4@gmx.de',
 			password: '123456',
 			roleName: 'Nuernberg',
-			rolePassword: 'uzh*jq6t1_',
+			rolePassword: '1234',
 		});
 	return;
 }

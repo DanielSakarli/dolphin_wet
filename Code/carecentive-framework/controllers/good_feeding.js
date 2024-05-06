@@ -32,16 +32,18 @@ async function setResult(req, res, next) {
 		// If dolphin is not existing in database,
 		// 400: bad request
 		const isDolphinExisted = await DolphinService.isDolphinExisted(
-			test_result.dolphin_name
+			test_result.dolphin_name,
+			roleName
 		);
 		if (!isDolphinExisted) {
 			res.status(400).json({ error: `Dolphin ${test_result.dolphin_name} does not exist` });
 		}
 
 		// Gets dolphin_id for test result.
-		const dolphin_obj = await DolphinService.getOneDolphin(test_result.dolphin_name);
+		const dolphin_obj = await DolphinService.getOneDolphin(test_result.dolphin_name, roleName);
 		const dolphin_id = dolphin_obj.dolphin_id;
 
+		console.log('Finished dolphin service');
 		//console.log('Dolphins approved');
 		//console.log('Session in control layer: ', req.session);
 		// Get the file paths from the session storage
@@ -58,7 +60,7 @@ async function setResult(req, res, next) {
 							
 				const insertedResult = await GoodFeedingService.loadTestResult(test_result, roleName);
 				res.status(201).json(insertedResult);
-		}else {
+		} else {
 		///////////////////////////////////////////////////////////////////////////
 		// No file path to upload
 		// attach userID to test result in req.body

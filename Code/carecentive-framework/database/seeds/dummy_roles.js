@@ -7,10 +7,10 @@ async function loadDummyRole() {
   // These are dummy password for development and are 
   // not being used in production.
     const roles = [
-      {name: 'Nuernberg_user', password: 'uzh*jq6t1_'},
+      {name: 'Nuernberg_user', password: '1234'},
       {name: 'Nuernberg_admin', password: '12345' },
-      {name: 'Duesseldorf_user', password: 'safdjhc7#s'},
-      {name: 'Duesseldorf_admin', password: '3456'},
+      {name: 'Duisburg_user', password: 'safdjhc7#s'},
+      {name: 'Duisburg_admin', password: '3456'},
       {name: 'Valencia_user', password: 'bcu82gs_!n'},
       {name: 'Valencia_admin', password: '6789'}
     ];

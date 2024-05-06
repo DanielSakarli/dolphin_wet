@@ -50,15 +50,8 @@ app.component('base-layout', BaseLayout);
 app.use(pinia);
 
 ////////////////////////////////////////////////
-// Loading component for all axios requests:
-//const LoadingController = new loadingController();
-/*interface CustomAxiosRequestConfig extends AxiosRequestConfig {
-	hideGlobalLoading?: boolean;
-	headers: AxiosRequestHeaders;
-}
-interface CustomAxiosInstance extends AxiosStatic {
-	(config: CustomAxiosRequestConfig): Promise<any>;
-}*/
+// Ion loading component for all axios requests:
+
 const customAxios = axios as CustomAxiosInstance;
 
 let loading: HTMLIonLoadingElement | undefined;
@@ -75,7 +68,7 @@ async function showLoading() {
 			loading.dismiss();
 			loading = undefined;
 		}
-	}, 15000); //auto-closes ion-loading after certain time if no response came yet from the server to prevent ion-loading from just running forever during a runtime-error
+	}, 15000); //auto-closes ion-loading after certain time if no response came back from the server to prevent ion-loading from just running forever during a runtime-error
 }
 
 function hideLoading() {
@@ -111,9 +104,6 @@ app.config.globalProperties.$axios = customAxios;
 app.provide('loadingController', loadingController);
 ////////////////////////////////////////////////
 
-//app.use(VueAxios, axios)
-//app.provide('axios', app.config.globalProperties.axios)  // provide 'axios'
-//app.mount('#app')
 // Register component
 
 router.isReady().then(() => {

@@ -7,9 +7,9 @@ class DolphinService {
 	 * @param {String} name
 	 * @returns {Promise<Boolean>} whether the dolphin with given name is in database.
 	 */
-	static async isDolphinExisted(name) {
+	static async isDolphinExisted(name, roleName) {
 		try {
-			const myDolphinDao = new DolphinDAO();
+			const myDolphinDao = new DolphinDAO(roleName);
 			const dolphin = await myDolphinDao.getDolphinByName(name);
 			if (dolphin) {
 				return true;
@@ -25,9 +25,9 @@ class DolphinService {
 	 * Get all dolphins info from database.
 	 * @returns {Promise<Array>} an array of all dolphin info in the database.
 	 */
-	static async getAllDolphins() {
+	static async getAllDolphins(roleName) {
 		try {
-			const myDolphinDao = new DolphinDAO();
+			const myDolphinDao = new DolphinDAO(roleName);
 			const dolphins = await myDolphinDao.getAllDolphins();
 			return dolphins;
 		} catch (error) {
@@ -40,9 +40,9 @@ class DolphinService {
 	 * @param {String} name - the name of dolphin.
 	 * @returns {Promise<Object>} the info of dolphin in database.
 	 */
-	static async getOneDolphin(name) {
+	static async getOneDolphin(name, roleName) {
 		try {
-			const myDolphinDao = new DolphinDAO();
+			const myDolphinDao = new DolphinDAO(roleName);
 			const dolphin = await myDolphinDao.getDolphinByName(name);
 
 			// If dolphin with given name doesn't exist in database,
@@ -71,9 +71,9 @@ class DolphinService {
 	 * @param {Integer}	dolphin.max_kcal_calculations The max kcal calculations of dolphin
 	 * @returns {Promise<Object>} Inserted dolphin object
 	 */
-	static async createDolphin(dolphin) {
+	static async createDolphin(dolphin, roleName) {
 		try {
-			const myDolphinDao = new DolphinDAO();
+			const myDolphinDao = new DolphinDAO(roleName);
 			const dolphinCreated = await myDolphinDao.createDolphin(dolphin);
 			return dolphinCreated;
 		} catch (error) {
@@ -87,9 +87,9 @@ class DolphinService {
 	 * @param {Object} updateInfo - the information to be updated to a dolphin.
 	 * @returns {Promise<Object>} updated dolphin object
 	 */
-	static async updateDolphin(name, updateInfo) {
+	static async updateDolphin(name, updateInfo, roleName) {
 		try {
-			const myDolphinDao = new DolphinDAO();
+			const myDolphinDao = new DolphinDAO(roleName);
 			const dolphinUpdated = await myDolphinDao.updateDolphinByName(
 				name,
 				updateInfo
@@ -104,9 +104,9 @@ class DolphinService {
 	 * Delete the given dolphin in database.
 	 * @param {String} name - the name of dolphin.
 	 */
-	static async deleteDolphin(name) {
+	static async deleteDolphin(name, roleName) {
 		try {
-			const myDolphinDao = new DolphinDAO();
+			const myDolphinDao = new DolphinDAO(roleName);
 			await myDolphinDao.deleteDolphinByName(name);
 			return;
 		} catch (error) {

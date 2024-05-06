@@ -17,11 +17,13 @@ const {
 	updateDolphin,
 	deleteDolphin,
 } = require('../controllers/dolphins');
-const { roleAuthorizerGet } = require('../controllers/role_authorizer');
+const { roleAuthorizerGet, roleAuthorizerPost } = require('../controllers/role_authorizer');
 
 // Gets all dolphins.
 router.get(
 	'/',
+	authenticateTokenWithSwitch,
+	roleAuthorizerPost,
 	getAllDolphins
 );
 
@@ -29,6 +31,7 @@ router.get(
 router.post(
 	'/',
 	authenticateTokenWithSwitch,
+	roleAuthorizerPost,
 	dolphinPostValidateRequestBody,
 	createDolphin
 );
