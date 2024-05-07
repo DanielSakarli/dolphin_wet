@@ -2,11 +2,11 @@
 	<ion-content>
 		<div class="container">
 			<!--<h2>File Upload</h2>-->
-			<form id="form">
+			<form id="photoForm">
 				<div class="input-group">
 					<label for="files"> </label>
 					<input
-						id="files"
+						id="photoFiles"
 						name="files"
 						type="file"
 						multiple
@@ -41,12 +41,14 @@ export default defineComponent({
 			// I have no idea wether you need this in ionic.
 			e.preventDefault();
 
-			const form = document.getElementById('form');
+			const form = document.getElementById('photoForm');
 
 			if (form) {
 				console.log('submitForm in photoUpload.vue');
 				// get the files from the input form
-				const filesInput = document.getElementById('files') as HTMLInputElement;
+				const filesInput = document.getElementById(
+					'photoFiles'
+				) as HTMLInputElement;
 				if (filesInput) {
 					const files = filesInput.files;
 

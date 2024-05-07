@@ -1406,7 +1406,6 @@ export default {
 			//const confirmed = confirm(this.$t('savingDataNext'));
 			const confirmed = true;
 			if (confirmed) {
-				//await this.photoUpload();
 				await this.confirmTestDate();
 				await this.storeCheckedValues();
 				// Flag to only show network error alert once instead of several times after another

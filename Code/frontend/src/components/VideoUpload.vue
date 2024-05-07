@@ -2,11 +2,11 @@
 	<ion-content>
 		<div class="container">
 			<!--<h2>Video Upload</h2>-->
-			<form id="form">
+			<form id="videoForm">
 				<div class="input-group">
 					<label for="files"> </label>
 					<input
-						id="files"
+						id="videoFiles"
 						name="files"
 						type="file"
 						accept="video/*"
@@ -34,12 +34,14 @@ export default defineComponent({
 			// I have no idea wether you need this in ionic.
 			e.preventDefault();
 
-			const form = document.getElementById('form');
+			const form = document.getElementById('videoForm');
 
 			if (form) {
 				console.log('submitForm in VideoUpload.vue');
 				// get the files from the input form
-				const filesInput = document.getElementById('files') as HTMLInputElement;
+				const filesInput = document.getElementById(
+					'videoFiles'
+				) as HTMLInputElement;
 				if (filesInput && filesInput.files) {
 					const videoFiles = filesInput.files;
 
