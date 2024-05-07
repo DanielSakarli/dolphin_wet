@@ -2,7 +2,7 @@ const { Model } = require('objection');
 
 class GoodHealth extends Model {
 	static get tableName() {
-		return 'duesseldorf_emotional_state';
+		return 'duisburg_emotional_state';
 	}
 
 	static get idColumn() {

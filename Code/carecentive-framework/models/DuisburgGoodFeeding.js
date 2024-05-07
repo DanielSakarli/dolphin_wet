@@ -2,7 +2,7 @@ const { Model } = require('objection');
 
 class GoodFeeding extends Model {
 	static get tableName() {
-		return 'duesseldorf_good_feeding';
+		return 'duisburg_good_feeding';
 	}
 
 	static get idColumn() {

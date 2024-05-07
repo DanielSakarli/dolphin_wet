@@ -108,10 +108,9 @@ import {
 	IonButton,
 	IonCard,
 	IonCardContent,
-	loadingController,
+	//loadingController,
 } from '@ionic/vue';
-import axios from 'axios';
-import { AxiosInstance } from 'axios';
+//import axios from 'axios';
 import { baseUrl } from '@/utils/baseUrl';
 import logo from '@/../../../Logos/logo.png';
 import { useDolphinsStore } from '@/store/dolphinsStore';

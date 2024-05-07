@@ -57,6 +57,7 @@ class GoodFeedingService {
 			const modelName = `${location}GoodFeeding`;
 			const GoodFeeding = require(`../models/${modelName}`); // Get the respective model, depending on which zoo the user works at
 			console.log('Got to the feeding service layer');
+			console.log('Feeding model: ', modelName);
 			////////////////////////////////////////////////
 
 
@@ -67,7 +68,6 @@ class GoodFeedingService {
 					...result,
 					created_at: new Date(result.created_at),
 				});
-				return insertedResult;
 			} else {
 				const insertedResult = await GoodFeeding.query().insert({
 				dolphin_id,
@@ -75,7 +75,7 @@ class GoodFeedingService {
 				created_at: new Date().toISOString().split('.')[0],
 
 			});
-			
+			console.log('results inserted in service layer');
 			return insertedResult;
 			}
 		}
