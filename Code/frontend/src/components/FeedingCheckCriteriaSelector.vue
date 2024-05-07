@@ -447,7 +447,7 @@ import {
 	IonIcon,
 	alertController,
 } from '@ionic/vue';
-import axios from 'axios';
+//import axios from 'axios';
 import CheckComments from '@/components/CheckComments.vue';
 import { useDolphinsStore } from '@/store/dolphinsStore';
 import { useEvaluationFeedingStore } from '@/store/evaluationFeedingStore';
@@ -460,7 +460,7 @@ import 'vue3-toastify/dist/index.css';
 const dolphinsStore = useDolphinsStore();
 dolphinsStore.fill();
 const evaluationFeedingStore = useEvaluationFeedingStore();
-//dolphinsStore.fill();
+
 let dataInBody; //Variable which gets saved in localstorage with either true or false, depending if data is in checkboxes or evaluationFeedingStore
 const token = localStorage.getItem('token'); //Get current JWT token of the user
 console.log('Token accessed from localStorage: ', token);

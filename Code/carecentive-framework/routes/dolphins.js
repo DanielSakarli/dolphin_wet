@@ -39,6 +39,8 @@ router.post(
 // Gets a single dolphin.
 router.get(
 	'/:name',
+	authenticateTokenWithSwitch,
+	roleAuthorizerPost,
 	getSingleDolphin
 );
 

@@ -13,17 +13,25 @@ import { baseUrl } from '@/utils/baseUrl';
 export const useDolphinsStore = defineStore('dolphinsStore', {
 	state: () => {
 		return {
-			dolphinList,
+			// return empty array if fill() method cannot be executed due to internet connectivity
+			// as soon as fill() was once executed successfully, the dolphinList will be filled with the values from the backend
+			dolphinList: [] as string[], //[sessionStorage.getItem('roleName')],
 		};
 	},
 
 	actions: {
 		async fill() {
-			// Only set this.dolphinList to the values from the JSON file if this.dolphinList is empty
-			if (!this.dolphinList.length) {
-				this.dolphinList = dolphinList; // default values from animalList.json
+			//sessionStorage.setItem('roleName', 'nuernberg');
+			const roleName = sessionStorage.getItem('roleName');
+
+			if (roleName) {
+				this.dolphinList = dolphinList[roleName as keyof typeof dolphinList];
 			}
-			//(await import("@/views/EvaluationMenu.vue")).default
+			// Only set this.dolphinList to the values from the JSON file if this.dolphinList is empty
+			/*if (!this.dolphinList.length) {
+				this.dolphinList = dolphinList; //.map((name: string) => ({ name })); // default values from animalList.json
+			}*/
+
 			const dolphinUrl = baseUrl + '/api/dolphins';
 			await axios
 				.get(dolphinUrl, {

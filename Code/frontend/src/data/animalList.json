@@ -1,86 +1,24 @@
-[
-    {
-        "dolphin_id": 1,
-        "name": "Dolly",
-        "sex": 0,
-        "on_site": 1,
-        "year_of_birth": "2007",
-        "place_of_birth": "Duisburg Zoo",
-        "min_body_condition_score": 13,
-        "max_body_condition_score": 18,
-        "min_kcal_calculations": 4200,
-        "max_kcal_calculations": 4700
-    },
-    {
-        "dolphin_id": 2,
-        "name": "Donna",
-        "sex": 0,
-        "on_site": 1,
-        "year_of_birth": "2007",
-        "place_of_birth": "Duisburg Zoo",
-        "min_weight_measured": 15,
-        "max_weight_measured": 19,
-        "min_kcal_calculations": 4600,
-        "max_kcal_calculations": 4800
-    },
-    {
-        "dolphin_id": 3,
-        "name": "Jenny",
-        "sex": 0,
-        "on_site": 1,
-        "year_of_birth": "1987",
-        "place_of_birth": "Wild Born",
-        "min_weight_measured": 13,
-        "max_weight_measured": 16,
-        "min_kcal_calculations": 4200,
-        "max_kcal_calculations": 4400
-    },
-    {
-        "dolphin_id": 4,
-        "name": "Nami",
-        "sex": 0,
-        "on_site": 1,
-        "year_of_birth": "2014",
-        "place_of_birth": "Nuremburg Zoo",
-        "min_weight_measured": 15,
-        "max_weight_measured": 18,
-        "min_kcal_calculations": 4600,
-        "max_kcal_calculations": 4800
-    },
-    {
-        "dolphin_id": 5,
-        "name": "Nynke",
-        "sex": 0,
-        "on_site": 1,
-        "year_of_birth": "1983",
-        "place_of_birth": "Wild Born",
-        "min_weight_measured": 18,
-        "max_weight_measured": 20,
-        "min_kcal_calculations": 4800,
-        "max_kcal_calculations": 5000
-    },
-    {
-        "dolphin_id": 6,
-        "name": "Sunny",
-        "sex": 0,
-        "on_site": 1,
-        "year_of_birth": "1999",
-        "place_of_birth": "Heidepark Soltau",
-        "min_weight_measured": 15,
-        "max_weight_measured": 18,
-        "min_kcal_calculations": 4600,
-        "max_kcal_calculations": 4800
-    },
-    {
-        "dolphin_id": 7,
-        "name": "Dörte",
-        "sex": 0,
-        "on_site": 1,
-        "year_of_birth": "2011",
-        "place_of_birth": "Duisburg Zoo",
-        "min_weight_measured": 15,
-        "max_weight_measured": 17,
-        "min_kcal_calculations": 3200,
-        "max_kcal_calculations": 3900
-    }
-]
+{
+    "Nuernberg": [
+        "Dolly",
+        "Donna",
+        "Jenny",
+        "Nami",
+        "Nynke",
+        "Sunny",
+        "Dörte"
+    ],
+    "Valencia": [
+        "testdolphin1",
+        "testdolphin2",
+        "testdolphin3",
+        "testdolphin4"
+    ],
+    "Duisburg": [
+        "testdolphin1",
+        "testdolphin2",
+        "testdolphin3",
+        "testdolphin4",
+        "testdolphin5"
+    ]
+}

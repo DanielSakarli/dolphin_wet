@@ -90,7 +90,7 @@ class DolphinDAO {
 				);
 			}
 
-			const dolphinInserted = await Dolphins.query().insert(dolphin);
+			const dolphinInserted = await this.#dataModel.query().insert(dolphin);
 			return dolphinInserted;
 		} catch (error) {
 			throw error;

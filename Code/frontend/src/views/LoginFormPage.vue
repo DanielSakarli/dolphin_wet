@@ -153,13 +153,13 @@ export default defineComponent({
 				password: this.password,
 			};
 			//using this.$axios allows to use the custom config variable hideGlobslLoading whcih surpresses the global ion-loading during axios requests
-			this.$axios
+			await this.$axios
 				.post(url, requestBody, {
 					withCredentials: true,
 					hideGlobalLoading: false,
 				})
 				.then((response) => {
-					const token = response.data;
+					const token = response.data.token;
 					//this.$router.push('/folder/Evaluate'); //Go to Evaluation Page if Login was succesfull
 					console.log(
 						'Token that I get as a response from the server when I log in: ',
@@ -171,9 +171,14 @@ export default defineComponent({
 						localStorage.getItem('token')
 					);
 					sessionStorage.setItem('user_name', this.username);
+					sessionStorage.setItem('roleName', response.data.roleName);
 					console.log(
 						'user_name saved in session storage: ',
 						sessionStorage.getItem('user_name')
+					);
+					console.log(
+						'role name in session storage: ',
+						sessionStorage.getItem('roleName')
 					);
 					this.$router.push('/folder/Evaluate');
 					//await loading.dismiss();

@@ -90,7 +90,7 @@ router.post('/login', async function(req, res, next) {
       return res.status(400).send("PASSWORD_NOT_PROVIDED.");
     }
 
-    let token = await UserService.login(username, password)
+    let { token, roleName } = await UserService.login(username, password)
 
     ///////TEST////////
     res.setHeader('Set-Cookie', 'token=' + token + '; Secure; HttpOnly; SameSite=None; Path=/; Max-Age=3600');
@@ -99,7 +99,7 @@ router.post('/login', async function(req, res, next) {
     // Try commenting out this line
     // res.cookie('token', token, { httpOnly:true });
     
-    return res.json(token);
+    return res.json({ token, roleName });
   }
   catch (err) {
     next(err)

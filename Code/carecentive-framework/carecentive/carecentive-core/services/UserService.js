@@ -116,8 +116,14 @@ class UserService {
         "user_id": user[0].id,
         "name": user[0].name,
       }, process.env.JWT_TOKEN_SECRET, { expiresIn: '12h' });
-
-      return token;
+    
+    // Get the role of the user
+    let roleName = await UserService.getRoles(user[0].id);
+    // Split the string and just get the first part, i.e. the name of the zoo
+    roleName = roleName[0].name.split('_')[0];
+   
+      console.log('role name in user service js: ', roleName);
+      return { token, roleName };
     }
     else {
       throw new Error("INVALID_NAME_OR_PASSWORD");

@@ -67,7 +67,7 @@ async function setResult(req, res, next) {
 			let test_result = req.body;
 			
 			test_result = { user_id: userID, user_name: userName, ...test_result };
-			//console.log(test_result);
+			console.log('no photo to be uploaded: ', test_result);
 			const insertedResult = await GoodFeedingService.loadTestResult(test_result, roleName);
 			res.status(201).json(insertedResult);
 		}
