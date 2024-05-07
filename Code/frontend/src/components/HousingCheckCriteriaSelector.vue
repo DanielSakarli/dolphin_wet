@@ -14,10 +14,10 @@
 				>
 					<ion-select-option value="all">All dolphins</ion-select-option>
 					<ion-select-option
-						v-for="dolphin in dolphinsStore.dolphinList"
+						v-for="dolphin in dolphinList"
 						v-bind:key="dolphin.name"
 					>
-						{{ dolphin.name }}
+						{{ (dolphin as Dolphin).name }}
 					</ion-select-option>
 				</ion-select>
 			</ion-item>
@@ -458,6 +458,18 @@ const dolphinsStore = useDolphinsStore();
 const evaluationHousingStore = useEvaluationHousingStore();
 let dataInBody; //Variable which gets saved in localstorage with either true or false, depending if data is in checkboxes or evaluationHousingStore
 
+interface Dolphin {
+	dolphin_id: number;
+	name: string;
+	sex: number;
+	on_site: number;
+	year_of_birth: number;
+	min_weight_measured: number;
+	max_weight_measured: number;
+	min_kcal_calculations: number;
+	max_kcal_calculations: number;
+}
+
 export default {
 	components: {
 		IonItem,
@@ -484,6 +496,7 @@ export default {
 		// reference areas are the ones from the animalList.json
 		//await dolphinsStore.fill();
 		const dolphinsStore = useDolphinsStore();
+		console.log('DolphinsStore: ', dolphinsStore);
 		// The fill method resets the bodies
 		evaluationHousingStore.fill(dolphinsStore.dolphinList);
 		// Reset here data while page is mounted
@@ -495,6 +508,7 @@ export default {
 		return {
 			language: 'en',
 			dolphinsStore: dolphinsStore,
+			dolphinList: dolphinsStore.dolphinList as Dolphin[],
 			dolphinSelect: [] as string[], //null as string | null,
 			criteria: null as string | null,
 			subcriteria: null as string | null,
@@ -550,10 +564,18 @@ export default {
 		// ion-select method to check if all dolphins are selected
 		checkAllDolphinsSelected() {
 			if (this.dolphinSelect.includes('all')) {
+				this.dolphinSelect = this.dolphinList.map(
+					(dolphin: Dolphin) => dolphin.name
+				);
+			}
+			/*if (this.dolphinSelect.includes('all')) {
+				this.dolphinSelect = [...this.dolphinsStore.dolphinList];
+			}*/
+			/*if (this.dolphinSelect.includes('all')) {
 				this.dolphinSelect = this.dolphinsStore.dolphinList.map(
 					(dolphin) => dolphin.name
 				);
-			}
+			}*/
 		},
 		// Method to collect the checked checkboxes and give request Body the scores
 		storeCheckedValues() {

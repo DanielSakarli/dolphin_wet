@@ -10,12 +10,24 @@ import { baseUrl } from '@/utils/baseUrl';
 // If no internet connection is present, the dolphinList is not updated and the
 // default values are used.
 
+interface Dolphin {
+	dolphin_id: number;
+	name: string;
+	sex: number;
+	on_site: number;
+	year_of_birth: number;
+	min_weight_measured: number;
+	max_weight_measured: number;
+	min_kcal_calculations: number;
+	max_kcal_calculations: number;
+}
+
 export const useDolphinsStore = defineStore('dolphinsStore', {
 	state: () => {
 		return {
 			// return empty array if fill() method cannot be executed due to internet connectivity
 			// as soon as fill() was once executed successfully, the dolphinList will be filled with the values from the backend
-			dolphinList: [] as string[], //[sessionStorage.getItem('roleName')],
+			dolphinList: [] as Dolphin[], //[sessionStorage.getItem('roleName')],
 		};
 	},
 
