@@ -56,7 +56,6 @@ class GoodFeedingService {
 			const location = roleName;
 			const modelName = `${location}GoodFeeding`;
 			const GoodFeeding = require(`../models/${modelName}`); // Get the respective model, depending on which zoo the user works at
-			console.log('Got to the feeding service layer');
 			console.log('Feeding model: ', modelName);
 			////////////////////////////////////////////////
 
@@ -75,7 +74,6 @@ class GoodFeedingService {
 				created_at: new Date().toISOString().split('.')[0],
 
 			});
-			console.log('results inserted in service layer');
 			return insertedResult;
 			}
 		}

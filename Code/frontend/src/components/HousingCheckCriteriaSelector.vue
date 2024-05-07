@@ -446,7 +446,7 @@ import {
 	IonIcon,
 	alertController,
 } from '@ionic/vue';
-import axios from 'axios';
+//import axios from 'axios';
 import CheckComments from '@/components/CheckComments.vue';
 import { useDolphinsStore } from '@/store/dolphinsStore';
 import { useEvaluationHousingStore } from '@/store/evaluationHousingStore';
@@ -799,6 +799,9 @@ export default {
 		async storeData() {
 			const confirmed = true; //confirm(this.$t('savingDataNext'));
 			if (confirmed) {
+				//Check if the date of the test is the current date
+				await this.confirmTestDate();
+				//Store the checked values in the request body
 				this.storeCheckedValues();
 				// Flag to only show network error alert once instead of several times after another
 				let alertShown = false;
@@ -808,7 +811,7 @@ export default {
 					i < evaluationHousingStore.requestBodiesHousing.length;
 					i++
 				) {
-					await axios
+					await this.$axios
 						.post(
 							this.urlPost,
 							evaluationHousingStore.requestBodiesHousing[i],
