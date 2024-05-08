@@ -160,7 +160,7 @@ app.use(function(req, res, next) {
 app.use(
     session({
         secret: 'secret',
-        cookie: { httpOnly: true, maxAge: 3600000, secure: false, sameSite: 'lax' }, //1 hour expiring of session cookie
+        cookie: { httpOnly: true, maxAge: 3600000, secure: true, sameSite: 'none' }, //1 hour expiring of session cookie
         saveUninitialized: true,
         store: store,
         resave: true,
