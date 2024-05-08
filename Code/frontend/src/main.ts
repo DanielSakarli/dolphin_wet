@@ -28,7 +28,6 @@ import { createI18n } from 'vue-i18n';
 import { globalizationList } from './data/globalization';
 import BaseLayout from './views/BaseLayout.vue';
 import axios from 'axios';
-import { CustomAxiosInstance, CustomAxiosRequestConfig } from './axios'; // adjust the path as needed
 
 import { loadingController } from '@ionic/vue';
 
@@ -51,9 +50,6 @@ app.use(pinia);
 
 ////////////////////////////////////////////////
 // Ion loading component for all axios requests:
-
-const customAxios = axios as CustomAxiosInstance;
-
 let loading: HTMLIonLoadingElement | undefined;
 
 async function showLoading() {
@@ -78,7 +74,7 @@ function hideLoading() {
 }
 
 axios.interceptors.request.use(
-	(config: CustomAxiosRequestConfig) => {
+	(config) => {
 		if (!config.hideGlobalLoading) {
 			showLoading();
 		}
@@ -100,7 +96,7 @@ axios.interceptors.response.use(
 		return Promise.reject(error);
 	}
 );
-app.config.globalProperties.$axios = customAxios;
+app.config.globalProperties.$axios = axios; // with this the custom axios is now globally available with this.$axios
 app.provide('loadingController', loadingController);
 ////////////////////////////////////////////////
 

@@ -607,10 +607,10 @@ export default {
 					withCredentials: true,
 					hideGlobalLoading: true,
 				})
-				.then((response) => {
+				.then((response: any) => {
 					console.log('Response setup session storage:', response.data);
 				})
-				.catch((error) => {
+				.catch((error: any) => {
 					console.error('Error:', error);
 				});
 			// Check if there is a photo to upload
@@ -627,10 +627,10 @@ export default {
 						withCredentials: true,
 						hideGlobalLoading: true,
 					})
-					.then((response) => {
+					.then((response: any) => {
 						console.log('Response:', response.data);
 					})
-					.catch((error) => {
+					.catch((error: any) => {
 						console.error('Error:', error);
 					});
 
@@ -887,7 +887,7 @@ export default {
 							evaluationFeedingStore.requestBodiesFeeding[i],
 							{ withCredentials: true, hideGlobalLoading: false }
 						)
-						.then((response) => {
+						.then((response: any) => {
 							console.log('Response:', response.data);
 							if (
 								i ===
@@ -913,7 +913,7 @@ export default {
 								localStorage.setItem('created_at', '');
 							}
 						})
-						.catch((error) => {
+						.catch((error: any) => {
 							const targetUrl = `/detailFeeding`;
 							if (error.message === 'Network Error' && !alertShown) {
 								alertShown = true;

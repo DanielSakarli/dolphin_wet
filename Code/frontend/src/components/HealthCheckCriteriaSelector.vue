@@ -775,7 +775,6 @@
 <script lang="ts">
 import { camera } from 'ionicons/icons';
 //import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
-import axios from 'axios';
 import CheckComments from '@/components/CheckComments.vue';
 import PhotoUpload from '@/components/PhotoUpload.vue';
 import VideoUpload from '@/components/VideoUpload.vue';
@@ -1125,10 +1124,10 @@ export default {
 					withCredentials: true,
 					hideGlobalLoading: true,
 				})
-				.then((response) => {
+				.then((response: any) => {
 					console.log('Response setup session storage:', response.data);
 				})
-				.catch((error) => {
+				.catch((error: any) => {
 					console.error('Error:', error);
 				});
 		},
@@ -1436,7 +1435,7 @@ export default {
 							withCredentials: true,
 							//hideGlobalLoading: false,
 						})
-						.then((response) => {
+						.then((response: any) => {
 							console.log('Response:', response.data);
 							if (i === evaluationHealthStore.requestBodiesHealth.length - 1) {
 								const targetUrl = '/detailHealth'; //'/folder/Evaluate';
@@ -1459,7 +1458,7 @@ export default {
 								localStorage.setItem('created_at', '');
 							}
 						})
-						.catch((error) => {
+						.catch((error: any) => {
 							console.error('Error:', error.response.data);
 							const targetUrl = `/detailHealth`;
 							if (error.message === 'Network Error' && !alertShown) {
@@ -1628,10 +1627,10 @@ export default {
 								withCredentials: true,
 								//hideGlobalLoading: true,
 							})
-							.then((response) => {
+							.then((response: any) => {
 								console.log('Response:', response.data);
 							})
-							.catch((error) => {
+							.catch((error: any) => {
 								console.error(
 									'Error during photo Upload:',
 									JSON.stringify(error)
@@ -1675,10 +1674,10 @@ export default {
 								withCredentials: true,
 								hideGlobalLoading: false,
 							})
-							.then((response) => {
+							.then((response: any) => {
 								console.log('Response:', response.data);
 							})
-							.catch((error) => {
+							.catch((error: any) => {
 								console.error(
 									'Error during photo Upload:',
 									JSON.stringify(error)

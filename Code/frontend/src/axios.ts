@@ -1,7 +1,14 @@
 // axios.ts
-import { AxiosStatic, AxiosRequestConfig, AxiosRequestHeaders } from 'axios';
+// This file is used to extend AxiosRequestConfig with a custom property hideGlobalLoading.
+import 'axios';
 
-export interface CustomAxiosRequestConfig extends AxiosRequestConfig {
+declare module 'axios' {
+	export interface AxiosRequestConfig {
+		hideGlobalLoading?: boolean;
+	}
+}
+
+/*export interface CustomAxiosRequestConfig extends AxiosRequestConfig {
 	hideGlobalLoading?: boolean;
 	headers: AxiosRequestHeaders;
 }
@@ -9,3 +16,9 @@ export interface CustomAxiosRequestConfig extends AxiosRequestConfig {
 export interface CustomAxiosInstance extends AxiosStatic {
 	(config: CustomAxiosRequestConfig): Promise<any>;
 }
+
+// TEST
+const customAxios = axios.create();
+
+export default customAxios;
+*/
