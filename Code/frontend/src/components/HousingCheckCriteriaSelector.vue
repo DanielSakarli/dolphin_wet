@@ -839,7 +839,7 @@ export default {
 							evaluationHousingStore.requestBodiesHousing[i],
 							{ withCredentials: true }
 						)
-						.then((response) => {
+						.then((response: any) => {
 							console.log('Response:', response.data);
 							if (
 								i ===
@@ -865,7 +865,7 @@ export default {
 								this.criteria = null;
 							}
 						})
-						.catch((error) => {
+						.catch((error: any) => {
 							console.error('Error:', error.response.data);
 							const targetUrl = `/detailHousing`;
 							if (error.message === 'Network Error' && !alertShown) {
