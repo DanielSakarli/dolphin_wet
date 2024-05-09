@@ -2,7 +2,7 @@ apply plugin: 'com.android.application'
 
 android {
     namespace "io.ionic.starter"
-    compileSdkVersion 34//rootProject.ext.compileSdkVersion
+    compileSdkVersion 34 //rootProject.ext.compileSdkVersion
     defaultConfig {
         applicationId "io.ionic.starter"
         minSdkVersion rootProject.ext.minSdkVersion

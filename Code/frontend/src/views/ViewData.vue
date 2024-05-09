@@ -469,6 +469,24 @@
 												{{ HealthRecord.marks_photo_path }}
 											</template>
 										</p>
+										<p>
+											Video path:
+											<template v-if="HealthRecord.video_path">
+												<a
+													v-for="(path, index) in HealthRecord.video_path.split(
+														','
+													)"
+													:key="index"
+													:href="path.trim()"
+													target="_blank"
+												>
+													{{ path.trim() }}
+												</a>
+											</template>
+											<template v-else>
+												{{ HealthRecord.video_path }}
+											</template>
+										</p>
 									</ion-label>
 								</ion-item>
 							</ion-list>
@@ -867,6 +885,7 @@ interface HealthRecord {
 	teeth_photo_path: string | null;
 	odontogramm_photo_path: string | null;
 	marks_photo_path: string | null;
+	video_path: string | null;
 	created_at: string;
 	updated_at: string;
 }
@@ -1013,14 +1032,14 @@ export default {
 			if (this.principleSelect === this.$t('principleNutrition')) {
 				this.urlFeeding =
 					this.urlFeeding + this.dolphinSelect + '&numMonths=' + this.numMonths; //default value numMonths=3
-				await axios
+				await this.$axios
 					.get(this.urlFeeding, { withCredentials: true })
-					.then((response) => {
+					.then((response: any) => {
 						this.dataFeeding = response.data;
 						console.log('Response:', response.data);
 						this.urlFeeding = baseUrl + '/api/good_feeding?name='; //reset the url
 					})
-					.catch((e) => {
+					.catch((e: any) => {
 						console.error(e);
 						if (
 							e.message === 'Network Error' ||

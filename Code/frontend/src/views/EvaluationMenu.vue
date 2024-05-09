@@ -56,10 +56,11 @@ import {
 	IonIcon,
 } from '@ionic/vue';
 import { download } from 'ionicons/icons';
-import { FileOpener } from '@capawesome-team/capacitor-file-opener';
+import { Browser } from '@capacitor/browser';
+//import { FileOpener } from '@capawesome-team/capacitor-file-opener';
 //import axios from 'axios';
 import { baseUrl } from '@/utils/baseUrl';
-import { Device } from '@capacitor/device';
+//import { Device } from '@capacitor/device';
 //import { Capacitor } from '@capacitor/core';
 //import { Filesystem, Directory } from '@capacitor/filesystem';
 //import { Share } from '@capacitor/share';
@@ -98,14 +99,17 @@ export default {
 				});
 		},*/
 		async getStandardsAndGuidelines() {
+			// Get the platform of the device (iOS or Android)
+			//const platform = (await Device.getInfo()).platform;
 			try {
-				// Get the platform of the device (iOS or Android)
-				const platform = (await Device.getInfo()).platform;
-
-				const fileName = 'Odontogramm_color_schema.png'; // Update with your file name
-
-				// Construct the URL based on the platform
-				let fileUrl = '';
+				const fileName = 'EAAM-Standards-and-guidelines-2019.pdf'; // file name of the file saved on the server
+				const fileUrl = baseUrl + '/api/files/' + fileName;
+				await Browser.open({ url: fileUrl });
+			} catch (error) {
+				console.error('Error: ', error);
+			}
+			// Construct the URL based on the platform
+			/*let fileUrl = '';
 				if (platform === 'ios') {
 					fileUrl = `assets/public/${fileName}`;
 				} else if (platform === 'android') {
@@ -127,30 +131,28 @@ export default {
 					});
 
 					fileUrl = cacheFile;*/
-				} else {
+			/*} else {
 					console.error('Platform not supported');
 					return;
 				}
 
 				await FileOpener.openFile({
 					path: fileUrl,
-				});
-				// Convert the file URL for the WebView
-				//fileUrl = Capacitor.convertFileSrc(fileUrl);
+				});*/
+			// Convert the file URL for the WebView
+			//fileUrl = Capacitor.convertFileSrc(fileUrl);
 
-				// Create an anchor element to trigger the download
-				//const anchor = document.createElement('a');
-				//anchor.href = fileUrl;
-				//anchor.target = '_blank'; // Open the file in a new tab/window
+			// Create an anchor element to trigger the download
+			//const anchor = document.createElement('a');
+			//anchor.href = fileUrl;
+			//anchor.target = '_blank'; // Open the file in a new tab/window
 
-				// Trigger the download
-				//anchor.click();
+			// Trigger the download
+			//anchor.click();
 
-				// Clean up: Revoke the temporary URL
-				//URL.revokeObjectURL(fileUrl);
-			} catch (error) {
-				console.error('Error sharing file', error);
-			}
+			// Clean up: Revoke the temporary URL
+			//URL.revokeObjectURL(fileUrl);
+
 			/*// Create a link
 			const link = document.createElement('a');
 
@@ -173,8 +175,15 @@ export default {
 			}*/
 		},
 		async getDolphinWETMatrix() {
+			try {
+				const fileName = 'Dolphin_WET_Matrix.pdf'; // file name of the file saved on the server
+				const fileUrl = baseUrl + '/api/files/' + fileName;
+				await Browser.open({ url: fileUrl });
+			} catch (error) {
+				console.error('Error: ', error);
+			}
 			// Create a link
-			const link = document.createElement('a');
+			/*const link = document.createElement('a');
 
 			// Set the href to the path of the PDF file
 			link.href = '../../public/Dolphin_WET_Matrix.pdf';
@@ -191,7 +200,7 @@ export default {
 			if (document.body.contains(link)) {
 				// If it is, remove the link from the body
 				document.body.removeChild(link);
-			}
+			}*/
 		},
 		isLoggedIn() {
 			if (sessionStorage.getItem('token')) {

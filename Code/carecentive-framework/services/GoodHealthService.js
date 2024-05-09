@@ -139,6 +139,7 @@ class GoodHealthService {
 					'teeth_photo_path',
 					'odontogramm_photo_path',
 					'marks_photo_path',
+					'video_path',
 					'created_at',
 					'updated_at'
 				)
@@ -215,6 +216,7 @@ class GoodHealthService {
 					'teeth_photo_path',
 					'odontogramm_photo_path',
 					'marks_photo_path',
+					'video_path',
 					'created_at',
 					'updated_at'
 				)
