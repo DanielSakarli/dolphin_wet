@@ -48,7 +48,6 @@ import {
 import FeedingCheckCriteriaSelector from '@/components/FeedingCheckCriteriaSelector.vue';
 import selectedDolphin from '@/components/FeedingCheckCriteriaSelector.vue';
 import { defineComponent } from 'vue';
-import axios from 'axios';
 import { baseUrl } from '@/utils/baseUrl';
 import { mapActions } from 'vuex';
 
@@ -186,11 +185,11 @@ export default defineComponent({
 						withCredentials: true,
 						hideGlobalLoading: true,
 					})
-					.then((response) => {
+					.then((response: any) => {
 						console.log('Response:', response.data);
 						this.confirmRefresh();
 					})
-					.catch((error) => {
+					.catch((error: any) => {
 						console.error('Error:', error.response.data);
 					});
 			}

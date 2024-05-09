@@ -235,10 +235,7 @@ export default {
 	data() {
 		return {
 			currentUser: '',
-			users: {
-				name: '',
-				created_at: '',
-			},
+			users: [] as Array<{ name: string; created_at: string }>,
 			adminPassword: '',
 			deleteModalOpen: false,
 			errorMessage: '',

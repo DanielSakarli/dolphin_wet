@@ -157,7 +157,7 @@ export default defineComponent({
 					withCredentials: true,
 					hideGlobalLoading: false,
 				})
-				.then((response) => {
+				.then((response: any) => {
 					const token = response.data.token;
 					//this.$router.push('/folder/Evaluate'); //Go to Evaluation Page if Login was succesfull
 					console.log(
@@ -182,7 +182,7 @@ export default defineComponent({
 					this.$router.push('/folder/Evaluate');
 					//await loading.dismiss();
 				})
-				.catch((error) => {
+				.catch((error: any) => {
 					this.errorMessage = 'Invalid username or password.';
 					console.error('Error:', error.response.data);
 					//await loading.dismiss();

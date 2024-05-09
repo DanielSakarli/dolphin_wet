@@ -143,7 +143,7 @@ export default {
 			};
 			this.$axios
 				.post(url, requestBody, { withCredentials: true })
-				.then((response) => {
+				.then((response: any) => {
 					console.log('Response:', response.data);
 					toast.success('User registered successfully.', {
 						autoClose: 1000,
@@ -152,7 +152,7 @@ export default {
 						this.$router.push('/login');
 					}, 2000);
 				})
-				.catch((error) => {
+				.catch((error: any) => {
 					if (error.response.data.error === 'USER_ALREADY_EXISTS') {
 						toast.error('Username already exists! Choose a different one.', {
 							autoClose: 2000,

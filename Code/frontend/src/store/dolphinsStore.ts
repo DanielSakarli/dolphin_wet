@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia';
 import axios from 'axios';
-import dolphinList from '@/data/animalList.json';
+import animalList from '@/data/animalList.json';
 import { baseUrl } from '@/utils/baseUrl';
 
 // In this file the dolphinList is taken from the animalList.json with the default
@@ -33,12 +33,6 @@ export const useDolphinsStore = defineStore('dolphinsStore', {
 
 	actions: {
 		async fill() {
-			//sessionStorage.setItem('roleName', 'nuernberg');
-			const roleName = sessionStorage.getItem('roleName');
-
-			if (roleName) {
-				this.dolphinList = dolphinList[roleName as keyof typeof dolphinList];
-			}
 			// Only set this.dolphinList to the values from the JSON file if this.dolphinList is empty
 			/*if (!this.dolphinList.length) {
 				this.dolphinList = dolphinList; //.map((name: string) => ({ name })); // default values from animalList.json
@@ -57,9 +51,28 @@ export const useDolphinsStore = defineStore('dolphinsStore', {
 					return this.dolphinList;
 				})
 				.catch((e) => {
-					// if no internet connection is present, the default values are used
+					// if no internet connection is present, return the default values
 					console.error(e);
-					return this.dolphinList;
+					const roleName = sessionStorage.getItem('roleName');
+
+					type AnimalListKeys = 'Nuernberg' | 'Valencia' | 'Duisburg';
+					if (roleName) {
+						const dolphinNames = animalList[roleName as AnimalListKeys];
+
+						this.dolphinList = dolphinNames.map((name: string) => {
+							return {
+								dolphin_id: -1,
+								name: name,
+								sex: -1,
+								on_site: -1,
+								year_of_birth: -1,
+								min_weight_measured: -1,
+								max_weight_measured: -1,
+								min_kcal_calculations: -1,
+								max_kcal_calculations: -1,
+							};
+						});
+					}
 				});
 		},
 	},
