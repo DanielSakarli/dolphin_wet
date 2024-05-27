@@ -37,7 +37,7 @@ jobs:
 
     - name: Install iOS dependencies
       run: cd ios && pod install && cd ..
-      working-directory: Code/frontend
+      working-directory: Code/frontend/ios/App
 
     - name: Build iOS App
       run: npx cap open ios

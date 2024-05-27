@@ -901,7 +901,7 @@ import { baseUrl } from '@/utils/baseUrl';
 import { toast } from 'vue3-toastify';
 import 'vue3-toastify/dist/index.css';
 
-const dolphinsStore = useDolphinsStore();
+const dolphinsStore = useDolphinsStore(); //Gets the current dolphins of the user´s zoo
 const evaluationBehaviourStore = useEvaluationBehaviourStore();
 let dataInBody; //Variable which gets saved in localstorage with either true or false, depending if data is in checkboxes or evaluationBehaviourStore
 const token = localStorage.getItem('token'); //Get current JWT token of the user
