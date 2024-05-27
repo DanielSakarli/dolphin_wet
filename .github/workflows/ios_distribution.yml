@@ -55,12 +55,10 @@ jobs:
       working-directory: Code/frontend
 
     - name: Archive iOS App
-      run: |
-        xcodebuild -workspace ios/App/App.xcworkspace -scheme App -sdk iphoneos -configuration AppStoreDistribution archive -archivePath $PWD/build/App.xcarchive
-        xcodebuild -exportArchive -archivePath $PWD/build/App.xcarchive -exportOptionsPlist exportOptions.plist -exportPath $PWD/build
-      env:
-        DEVELOPMENT_TEAM: ${{ secrets.DEVELOPMENT_TEAM }}
-        CODE_SIGN_IDENTITY: ${{ secrets.CODE_SIGN_IDENTITY }}
+      run: xcodebuild -exportArchive -archivePath $PWD/build/App.xcarchive -exportOptionsPlist exportOptions.plist -exportPath $PWD/build
+      #env:
+      #  DEVELOPMENT_TEAM: ${{ secrets.DEVELOPMENT_TEAM }}
+      #  CODE_SIGN_IDENTITY: ${{ secrets.CODE_SIGN_IDENTITY }}
       working-directory: Code/frontend
 
     - name: Upload Build Artifact
