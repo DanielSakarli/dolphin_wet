@@ -56,6 +56,8 @@ jobs:
         MATCH_PASSWORD: ${{ secrets.MATCH_PASSWORD }}
         FASTLANE_USER: ${{ secrets.FASTLANE_USER }}
         FASTLANE_PASSWORD: ${{ secrets.FASTLANE_PASSWORD }}
+        API_KEY_ID: ${{ secrets.API_KEY_ID }}
+        API_ISSUER_ID: ${{ secrets.API_ISSUER_ID }}
 
     - name: Upload Build Artifact
       uses: actions/upload-artifact@v2
