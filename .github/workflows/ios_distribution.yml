@@ -5,7 +5,7 @@
 
 name: ios_distribution
 
-on: [push] #, pull_request
+on: [push, pull] #, pull_request
 
 jobs:
   build:
