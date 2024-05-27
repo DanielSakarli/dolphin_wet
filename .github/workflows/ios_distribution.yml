@@ -60,7 +60,7 @@ jobs:
       #env:
       #  DEVELOPMENT_TEAM: ${{ secrets.DEVELOPMENT_TEAM }}
       #  CODE_SIGN_IDENTITY: ${{ secrets.CODE_SIGN_IDENTITY }}
-      working-directory: Code/frontend
+      working-directory: Code/frontend/ios
 
     - name: Upload Build Artifact
       uses: actions/upload-artifact@v2
