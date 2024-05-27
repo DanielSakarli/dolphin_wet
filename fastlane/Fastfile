@@ -3,7 +3,7 @@ default_platform(:ios)
 platform :ios do
   desc "Build and archive the app"
   lane :build do
-    match(type: "appstore", readonly: true) # Fetches signing certificates and provisioning profiles from a Git repo
+    match(type: "appstore", readonly: false) # Fetches signing certificates and provisioning profiles from a Git repo
 
     gym(
       workspace: "ios/App/App.xcworkspace",
