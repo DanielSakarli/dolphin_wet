@@ -52,6 +52,9 @@ jobs:
 
     - name: Build and sign iOS App
       run: fastlane ios build
+      env:
+        FASTLANE_USER: ${{ secrets.FASTLANE_USER }}
+        FASTLANE_PASSWORD: ${{ secrets.FASTLANE_PASSWORD }}
 
     - name: Upload Build Artifact
       uses: actions/upload-artifact@v2
