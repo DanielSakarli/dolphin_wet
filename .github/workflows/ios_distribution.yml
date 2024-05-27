@@ -36,7 +36,7 @@ jobs:
       run: sudo gem install cocoapods
 
     - name: Install iOS dependencies
-      run: cd ios && pod install && cd ..
+      run: pod install #cd ios && pod install && cd ..
       working-directory: Code/frontend/ios/App
 
     - name: Build iOS App
