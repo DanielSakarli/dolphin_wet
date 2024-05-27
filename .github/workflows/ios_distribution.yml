@@ -24,13 +24,13 @@ jobs:
       run: npm ci
       working-directory: Code/frontend
 
-    #- name: Add iOS platform
-    #  run: npx cap add ios
-    #  working-directory: Code/frontend
-
-    - name: Sync with iOS platform
-      run: npx cap sync ios
+    - name: Add iOS platform
+      run: npx cap add ios
       working-directory: Code/frontend
+
+    #- name: Sync with iOS platform
+    #  run: npx cap sync ios
+    #  working-directory: Code/frontend
 
     - name: Build Ionic App
       run: npm run build
@@ -64,7 +64,7 @@ jobs:
       #env:
       #  DEVELOPMENT_TEAM: ${{ secrets.DEVELOPMENT_TEAM }}
       #  CODE_SIGN_IDENTITY: ${{ secrets.CODE_SIGN_IDENTITY }}
-      working-directory: Code/frontend/ios
+      working-directory: Code/frontend
 
     - name: Upload Build Artifact
       uses: actions/upload-artifact@v2
