@@ -20,12 +20,12 @@ jobs:
       with:
         node-version: '18.16.0'
 
-    - name: Add iOS platform
-      run: npx cap add ios
-      working-directory: Code/frontend
-
     - name: Install dependencies
       run: npm ci
+      working-directory: Code/frontend
+
+    - name: Add iOS platform
+      run: npx cap add ios
       working-directory: Code/frontend
 
     - name: Build Ionic App
