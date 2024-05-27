@@ -47,27 +47,14 @@ jobs:
       run: pod install #cd ios && pod install && cd ..
       working-directory: Code/frontend/ios/App
 
-    - name: Clean Build Folder
-      run: xcodebuild clean -workspace ios/App/App.xcworkspace -scheme App
-      working-directory: Code/frontend
+    - name: Install Fastlane
+      run: sudo gem install fastlane -NV
 
-    - name: Build iOS App
-      run: xcodebuild -workspace ios/App/App.xcworkspace -scheme App -sdk iphoneos -configuration AppStoreDistribution archive -archivePath $PWD/build/App.xcarchive -allowProvisioningUpdates CODE_SIGN_STYLE="Manual" DEVELOPMENT_TEAM=$DEVELOPMENT_TEAM CODE_SIGN_IDENTITY=$CODE_SIGN_IDENTITY #npx cap open ios
-      env:
-        DEVELOPMENT_TEAM: ${{ secrets.DEVELOPMENT_TEAM }}
-        CODE_SIGN_IDENTITY: ${{ secrets.CODE_SIGN_IDENTITY }}  #CODE_SIGNING_REQUIRED: YES
-        PROVISIONING_PROFILE_SPECIFIER: ${{ secrets.PROVISIONING_PROFILE_SPECIFIER }}
-      working-directory: Code/frontend
-
-    - name: Archive iOS App
-      run: xcodebuild -exportArchive -archivePath $PWD/build/App.xcarchive -exportOptionsPlist exportOptions.plist -exportPath $PWD/build
-      #env:
-      #  DEVELOPMENT_TEAM: ${{ secrets.DEVELOPMENT_TEAM }}
-      #  CODE_SIGN_IDENTITY: ${{ secrets.CODE_SIGN_IDENTITY }}
-      working-directory: Code/frontend
+    - name: Build and sign iOS App
+      run: fastlane ios build
 
     - name: Upload Build Artifact
       uses: actions/upload-artifact@v2
       with:
         name: iOS App
-        path: ${{ github.workspace }}/Code/frontend/build/App.ipa
+        path: ${{ github.workspace }}/Code/frontend/build/App.xcarchive
