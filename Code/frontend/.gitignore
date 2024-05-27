@@ -31,4 +31,4 @@ npm-debug.log*
 /plugins
 /www
 
-package-lock.json
+# package-lock.json # Commented out, so that it is in the GIT repo. Need that for the "npm ci" command within my Github workflow
