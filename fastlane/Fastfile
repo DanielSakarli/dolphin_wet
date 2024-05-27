@@ -1,10 +1,8 @@
 default_platform(:ios)
 
 platform :ios do
-  desc "Clean, build, and archive the app"
+  desc "Build and archive the app"
   lane :build do
-    sh("xcodebuild clean -workspace ios/App/App.xcworkspace -scheme App")
-
     match(type: "appstore", readonly: true) # Fetches signing certificates and provisioning profiles from a Git repo
 
     gym(
@@ -13,7 +11,7 @@ platform :ios do
       sdk: "iphoneos",
       configuration: "AppStoreDistribution",
       archive_path: "./build/App.xcarchive",
-      clean: true,
+      clean: true, # Set to false to skip cleaning
       export_options: {
         method: "app-store",
         provisioningProfiles: {
