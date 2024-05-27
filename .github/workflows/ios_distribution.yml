@@ -53,6 +53,7 @@ jobs:
     - name: Build and sign iOS App
       run: fastlane ios build
       env:
+        MATCH_PASSWORD: ${{ secrets.MATCH_PASSWORD }}
         FASTLANE_USER: ${{ secrets.FASTLANE_USER }}
         FASTLANE_PASSWORD: ${{ secrets.FASTLANE_PASSWORD }}
 
