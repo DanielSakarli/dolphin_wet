@@ -40,12 +40,12 @@ jobs:
       working-directory: Code/frontend/ios/App
 
     - name: Build iOS App
-      run: xcodebuild -workspace ios/App/App.xcworkspace -scheme App -sdk iphoneos -configuration AppStoreDistribution archive -archivePath $PWD/build/App.xcarchive -allowProvisioningUpdates DEVELOPMENT_TEAM=$DEVELOPMENT_TEAM CODE_SIGN_IDENTITY=$CODE_SIGN_IDENTITY #npx cap open ios
-      env:
-        DEVELOPMENT_TEAM: ${{ secrets.DEVELOPMENT_TEAM }}
-        CODE_SIGN_IDENTITY: ${{ secrets.CODE_SIGN_IDENTITY }}
-        #CODE_SIGNING_REQUIRED: YES
-      working-directory: Code/frontend
+    run: |
+      xcodebuild -workspace ios/App/App.xcworkspace -scheme App -sdk iphoneos -configuration AppStoreDistribution archive -archivePath $PWD/build/App.xcarchive -allowProvisioningUpdates CODE_SIGN_STYLE="Manual" DEVELOPMENT_TEAM=$DEVELOPMENT_TEAM CODE_SIGN_IDENTITY=$CODE_SIGN_IDENTITY
+    env:
+      DEVELOPMENT_TEAM: ${{ secrets.DEVELOPMENT_TEAM }}
+      CODE_SIGN_IDENTITY: ${{ secrets.CODE_SIGN_IDENTITY }}
+    working-directory: Code/frontend
 
     - name: Archive iOS App
       run: |
