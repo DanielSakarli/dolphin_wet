@@ -31,7 +31,7 @@ platform :ios do
     match(type: "appstore", readonly: false, git_url: "https://github.com/DanielSakarli/dolphin_wet", app_identifier: "com.dolphinwetapp.dolphinwet") # Fetches signing certificates and provisioning profiles from a Git repo
 
     gym(
-      workspace: "#{Dir.pwd}/ios/App/App.xcworkspace",
+      workspace: "#{Dir.pwd}/../Code/frontend/ios/App/App.xcworkspace", #navigating to the correct path of the xcworkspace
       scheme: "App",
       sdk: "iphoneos",
       configuration: "AppStoreDistribution",
