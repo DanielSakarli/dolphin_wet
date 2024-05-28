@@ -41,7 +41,8 @@ platform :ios do
         method: "app-store",
         provisioningProfiles: {
             "com.dolphinwetapp.dolphinwet": "match AppStore com.dolphinwetapp.dolphinwet"
-        }
+        },
+        developmentTeam: ENV['DEVELOPMENT_TEAM_ID']
       }
     )
 
