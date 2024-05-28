@@ -1,16 +1,24 @@
+require 'base64'
+
 default_platform(:ios)
 
 platform :ios do
   desc "Build and archive the app"
   lane :build do
+    # Decode the Base64-encoded key and write it to a file
+    File.open("AuthKey_#{ENV['API_KEY_ID']}.p8", 'wb') do |file|
+      file.write(Base64.decode64(ENV['API_AUTH_KEY']))
+    end
+
     api_key = app_store_connect_api_key(
       key_id: ENV["API_KEY_ID"],
       issuer_id: ENV["API_ISSUER_ID"],
+      #Change the location of the key file, encode it using base64, push it to git repo and then decode it in the github action workflow
       key_filepath: "./AuthKey_#{ENV['API_KEY_ID']}.p8",
       duration: 1200, # optional
       in_house: false, # optional but may be required if using match/sigh
     )
-    
+
     match(type: "appstore", readonly: false, git_url: "https://github.com/DanielSakarli/dolphin_wet") # Fetches signing certificates and provisioning profiles from a Git repo
 
     gym(
@@ -27,5 +35,8 @@ platform :ios do
         }
       }
     )
+
+    # Delete the key file after it's used
+    File.delete("AuthKey_#{ENV['API_KEY_ID']}.p8")
   end
 end
