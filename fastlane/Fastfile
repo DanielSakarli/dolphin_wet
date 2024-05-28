@@ -22,7 +22,7 @@ platform :ios do
       key_id: ENV["API_KEY_ID"],
       issuer_id: ENV["API_ISSUER_ID"],
       #Change the location of the key file, encode it using base64, push it to git repo and then decode it in the github action workflow
-      key_filepath: "./AuthKey_#{ENV['API_KEY_ID']}.p8",
+      key_filepath: "#{Dir.pwd}/AuthKey_#{ENV['API_KEY_ID']}.p8",
       duration: 1200, # optional
       in_house: false, # optional but may be required if using match/sigh
     )
