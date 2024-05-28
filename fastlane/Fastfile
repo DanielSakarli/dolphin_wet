@@ -27,7 +27,7 @@ platform :ios do
       in_house: false, # optional but may be required if using match/sigh
     )
 
-    match(type: "appstore", readonly: false, git_url: "https://github.com/DanielSakarli/dolphin_wet") # Fetches signing certificates and provisioning profiles from a Git repo
+    match(type: "appstore", readonly: false, git_url: "https://github.com/DanielSakarli/dolphin_wet", app_identifier: "com.dolphinwetapp.dolphinwet") # Fetches signing certificates and provisioning profiles from a Git repo
 
     gym(
       workspace: "ios/App/App.xcworkspace",
