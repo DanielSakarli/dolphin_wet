@@ -131,7 +131,6 @@ export default defineComponent({
 			if (localStorage.getItem('dataInBody') === 'true') {
 				showAlert();
 				//selectedIndex.value = index; // Use .value to access or modify the value of a ref
-				//router.push(url);
 			} else {
 				selectedIndex.value = index; // Use .value to access or modify the value of a ref
 				console.log('url: ', url);
