@@ -6,6 +6,7 @@ platform :ios do
   desc "Build and archive the app"
   lane :build do
     puts "API_KEY_ID: #{ENV['API_KEY_ID']}"
+    puts "API_ISSUER_ID: #{ENV['API_ISSUER_ID']}"
     # Decode the Base64-encoded key and write it to a file
     File.open("AuthKey_#{ENV['API_KEY_ID']}.p8", 'wb') do |file|
       file.write(Base64.decode64(ENV['API_AUTH_KEY']))
