@@ -44,7 +44,7 @@ jobs:
       run: sudo gem install cocoapods
 
     - name: Install iOS dependencies
-      run: pod install #cd ios && pod install && cd ..
+      run: pod install
       working-directory: Code/frontend/ios/App
 
     - name: Install Fastlane
