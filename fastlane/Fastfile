@@ -8,6 +8,7 @@ platform :ios do
     API_KEY_ID = ENV['API_KEY_ID']
     API_ISSUER_ID = ENV['API_ISSUER_ID']
     DEVELOPMENT_TEAM_ID = ENV['DEVELOPMENT_TEAM_ID']
+    MATCH_PASSWORD = ENV['MATCH_PASSWORD']
 
     puts "API_KEY_ID: #{API_KEY_ID}"
     puts "API_ISSUER_ID: #{API_ISSUER_ID}"
@@ -40,7 +41,8 @@ platform :ios do
       readonly: false,
       git_url: "https://github.com/DanielSakarli/dolphin_wet",
       app_identifier: "com.dolphinwetapp.dolphinwet",
-      team_id: DEVELOPMENT_TEAM_ID
+      team_id: DEVELOPMENT_TEAM_ID,
+      keychain_password: MATCH_PASSWORD,
     ) 
 
     # Build and archive the app using gym
