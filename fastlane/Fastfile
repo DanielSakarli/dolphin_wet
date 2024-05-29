@@ -43,8 +43,7 @@ platform :ios do
         provisioningProfiles: {
             "com.dolphinwetapp.dolphinwet": "match AppStore com.dolphinwetapp.dolphinwet"
         },
-        teamID: ENV['DEVELOPMENT_TEAM_ID'],
-        developmentTeam: ENV['DEVELOPMENT_TEAM_ID'] #Found in apple developer account
+        developmentTeam: ENV['DEVELOPMENT_TEAM_ID'] #Find in apple developer account
       }
     )
 
