@@ -10,6 +10,7 @@ platform :ios do
     puts "API_KEY_ID: #{API_KEY_ID}"
     puts "API_ISSUER_ID: #{API_ISSUER_ID}"
     puts "API_AUTH_KEY: #{ENV['API_AUTH_KEY']}"
+    puts "Development Team ID: #{ENV['DEVELOPMENT_TEAM_ID']}"
     File.open("AuthKey_#{API_KEY_ID}.p8", 'wb') do |file|
       file.write(Base64.decode64(ENV['API_AUTH_KEY']))
     end
@@ -28,7 +29,7 @@ platform :ios do
     )
 
     
-    match(type: "appstore", readonly: false, git_url: "https://github.com/DanielSakarli/dolphin_wet", app_identifier: "com.dolphinwetapp.dolphinwet") # Fetches signing certificates and provisioning profiles from a Git repo
+    match(type: "appstore", readonly: false, git_url: "https://github.com/DanielSakarli/dolphin_wet", app_identifier: "com.dolphinwetapp.dolphinwet", team_id: ENV['DEVELOPMENT_TEAM_ID']) # Fetches signing certificates and provisioning profiles from a Git repo
 
     gym(
       workspace: "#{Dir.pwd}/../Code/frontend/ios/App/App.xcworkspace", #navigating to the correct path of the xcworkspace
@@ -42,6 +43,7 @@ platform :ios do
         provisioningProfiles: {
             "com.dolphinwetapp.dolphinwet": "match AppStore com.dolphinwetapp.dolphinwet"
         },
+        teamID: ENV['DEVELOPMENT_TEAM_ID'],
         developmentTeam: ENV['DEVELOPMENT_TEAM_ID'] #Found in apple developer account
       }
     )
