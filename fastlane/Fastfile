@@ -15,6 +15,9 @@ platform :ios do
     puts "API_AUTH_KEY: #{ENV['API_AUTH_KEY']}"
     puts "Development Team ID: #{ENV['DEVELOPMENT_TEAM_ID']}"
     
+    # Specify Xcode version
+    xcversion(version: "15.0.1")
+
     # Decode and write the API auth key
     File.open("AuthKey_#{API_KEY_ID}.p8", 'wb') do |file|
       file.write(Base64.decode64(ENV['API_AUTH_KEY']))
