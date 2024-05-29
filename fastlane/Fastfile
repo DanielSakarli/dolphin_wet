@@ -48,7 +48,7 @@ platform :ios do
       keychain_password: MATCH_PASSWORD,
     ) 
 
-    # Build and archive the app using gym
+    # Build and archive the app using gym 
     gym(
       workspace: "#{Dir.pwd}/../Code/frontend/ios/App/App.xcworkspace", #navigating to the correct path of the xcworkspace
       scheme: "App",
