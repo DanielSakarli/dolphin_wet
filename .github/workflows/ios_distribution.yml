@@ -42,10 +42,6 @@ jobs:
 
     - name: Install CocoaPods
       run: sudo gem install cocoapods
-      
-    - name: Do a pre-build
-      run: expo prebuild -p ios
-      working-directory: Code/frontend
 
     - name: Install iOS dependencies
       run: pod install
