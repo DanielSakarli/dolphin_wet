@@ -52,7 +52,7 @@ platform :ios do
       git_branch: MATCH_BRANCH, # branch to be cloned
     ) 
 
-    # Build and archive the app using gym 
+    # Build and archive the app using gym
     gym(
       workspace: "#{Dir.pwd}/../Code/frontend/ios/App/App.xcworkspace", #navigating to the correct path of the xcworkspace
       scheme: "App",
