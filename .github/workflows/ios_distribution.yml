@@ -48,8 +48,13 @@ jobs:
       run: sudo gem install cocoapods
 
     - name: Install iOS dependencies
-      run: pod install
+      run: |
+        DEVELOPMENT_TEAM_ID=${{ secrets.DEVELOPMENT_TEAM_ID }}
+        pod install
       working-directory: Code/frontend/ios/App
+      env:
+        DEVELOPMENT_TEAM_ID: ${{ secrets.DEVELOPMENT_TEAM_ID }}
+        PROVISIONING_PROFILE_SPECIFIER: ${{ secrets.PROVISIONING_PROFILE_SPECIFIER }}
 
     - name: Install Fastlane
       run: sudo gem install fastlane -NV
@@ -71,7 +76,7 @@ jobs:
         sed -i '' "s/PROVISIONING_PROFILE_SPECIFIER = [^;]*;/ProvisioningStyle = Automatic;/g" $PROJECT_FILE_PATH
 
         # Ensure all targets are set to use automatic signing
-        TARGETS=("App" "CapacitorKeyboard" "CapacitorHaptics")
+        TARGETS=("CapacitorApp" "CapacitorKeyboard" "CapacitorHaptics")
         for TARGET in "${TARGETS[@]}"
         do
           sed -i '' "s/DEVELOPMENT_TEAM = [^;]*;/DEVELOPMENT_TEAM = $DEVELOPMENT_TEAM_ID;/g" "$PROJECT_FILE_PATH"
