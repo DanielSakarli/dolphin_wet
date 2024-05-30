@@ -68,7 +68,7 @@ platform :ios do
         signingStyle: "automatic",
         developmentTeam: DEVELOPMENT_TEAM_ID #Found in apple developer account
       }
-    )
+    ) 
 
     # Delete the key file after it's used
     File.delete("AuthKey_#{ENV['API_KEY_ID']}.p8")
