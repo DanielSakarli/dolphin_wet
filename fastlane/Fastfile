@@ -9,6 +9,7 @@ platform :ios do
     API_ISSUER_ID = ENV['API_ISSUER_ID']
     DEVELOPMENT_TEAM_ID = ENV['DEVELOPMENT_TEAM_ID']
     MATCH_PASSWORD = ENV['MATCH_PASSWORD']
+    GH_TOKEN = ENV['GH_TOKEN']
 
     puts "API_KEY_ID: #{API_KEY_ID}"
     puts "API_ISSUER_ID: #{API_ISSUER_ID}"
@@ -42,10 +43,12 @@ platform :ios do
     match(
       type: "appstore",
       readonly: false,
-      git_url: "https://github.com/DanielSakarli/dolphin_wet",
+      git_url: "https://#{GH_TOKEN}@github.com/DanielSakarli/dolphin_wet",
       app_identifier: "com.dolphinwetapp.dolphinwet",
       team_id: DEVELOPMENT_TEAM_ID,
       keychain_password: MATCH_PASSWORD,
+      api_key: api_key, # ensure correct api key is uesd for App Store Connect
+      clone_branch_directly: true, #clones the repo, more reliant in CI environments
     ) 
 
     # Build and archive the app using gym 
@@ -61,7 +64,7 @@ platform :ios do
         provisioningProfiles: {
             "com.dolphinwetapp.dolphinwet": "match AppStore com.dolphinwetapp.dolphinwet"
         },
-        developmentTeam: DEVELOPMENT_TEAM_ID #Find in apple developer account
+        developmentTeam: DEVELOPMENT_TEAM_ID #Found in apple developer account
       }
     )
 

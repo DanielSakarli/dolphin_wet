@@ -69,6 +69,15 @@ jobs:
         echo "Set DEVELOPMENT_TEAM to $DEVELOPMENT_TEAM_ID and enabled automatic signing in $PROJECT_FILE_PATH"
       shell: bash
 
+    - name: Configure Git for Authentication
+      run: |
+        git config --global user.email "daniel-sakarli@hotmail.de"
+        git config --global user.name "DanielSakarli"
+        git remote set-url origin https://github.com/${{ github.repository }}
+        git remote set-url --push origin https://${{ secrets.GH_TOKEN }}@github.com/${{ github.repository }}.git
+      env:
+        GH_TOKEN: ${{ secrets.GH_TOKEN }}
+
     - name: Build and sign iOS App
       run: |
         echo "API_KEY_ID is set to: ${API_KEY_ID:0:4}***"
@@ -81,6 +90,7 @@ jobs:
         API_ISSUER_ID: ${{ secrets.API_ISSUER_ID }}
         API_AUTH_KEY: ${{ secrets.API_AUTH_KEY }}
         DEVELOPMENT_TEAM_ID: ${{ secrets.DEVELOPMENT_TEAM_ID }}
+        GH_TOKEN: ${{ secrets.GH_TOKEN }}
 
     - name: Upload Build Artifact
       uses: actions/upload-artifact@v2
