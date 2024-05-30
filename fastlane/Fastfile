@@ -65,6 +65,7 @@ platform :ios do
         provisioningProfiles: {
             "com.dolphinwetapp.dolphinwet": "match AppStore com.dolphinwetapp.dolphinwet"
         },
+        signingStyle: "automatic",
         developmentTeam: DEVELOPMENT_TEAM_ID #Found in apple developer account
       }
     )
