@@ -10,6 +10,7 @@ platform :ios do
     DEVELOPMENT_TEAM_ID = ENV['DEVELOPMENT_TEAM_ID']
     MATCH_PASSWORD = ENV['MATCH_PASSWORD']
     GH_TOKEN = ENV['GH_TOKEN']
+    MATCH_BRANCH = 'new_branch' # change to the branch you are working on right now
 
     puts "API_KEY_ID: #{API_KEY_ID}"
     puts "API_ISSUER_ID: #{API_ISSUER_ID}"
@@ -48,7 +49,7 @@ platform :ios do
       team_id: DEVELOPMENT_TEAM_ID,
       keychain_password: MATCH_PASSWORD,
       api_key: api_key, # ensure correct api key is uesd for App Store Connect
-      clone_branch_directly: true, #clones the repo, more reliant in CI environments
+      branch: MATCH_BRANCH, # branch to be cloned
     ) 
 
     # Build and archive the app using gym 
