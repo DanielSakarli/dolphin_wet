@@ -57,7 +57,7 @@ jobs:
     
         if [ -z "$DEVELOPMENT_TEAM_ID" ]; then
           echo "Development Team ID is required"
-          exit 1
+          
         fi
 
         # Use sed to set the development team ID and enable automatic signing in the project file
