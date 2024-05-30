@@ -59,7 +59,8 @@ platform :ios do
       sdk: "iphoneos",
       configuration: "AppStoreDistribution",
       archive_path: "#{Dir.pwd}/build/App.xcarchive",
-      clean: true, # Set to false to skip cleaning
+      clean: true, # Set to false to skip cleaning,
+      allow_provisioning_updates: true,
       export_options: {
         method: "app-store",
         provisioningProfiles: {
