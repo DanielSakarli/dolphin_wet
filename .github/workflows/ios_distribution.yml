@@ -91,7 +91,7 @@ jobs:
     - name: Adjust setting in Pods.xcodeproj file
       run: |
         DEVELOPMENT_TEAM_ID="${{ secrets.DEVELOPMENT_TEAM_ID }}"
-        #PROVISIONING_PROFILE_SPECIFIER="${{ secrets.PROVISIONING_PROFILE_SPECIFIER }}"
+        PROVISIONING_PROFILE_SPECIFIER="${{ secrets.PROVISIONING_PROFILE_SPECIFIER }}"
         
         # Make changes to the pods project file
         sed -i '' 's/CODE_SIGN_IDENTITY = "";/CODE_SIGN_IDENTITY = "iPhone Distribution";/g' Code/frontend/ios/App/Pods/Pods.xcodeproj/project.pbxproj
@@ -99,7 +99,7 @@ jobs:
         sed -i '' 's/CODE_SIGN_STYLE = Automatic;/CODE_SIGN_STYLE = Manual;/g' Code/frontend/ios/App/Pods/Pods.xcodeproj/project.pbxproj
         sed -i '' "s/DEVELOPMENT_TEAM = [^;]*;/DEVELOPMENT_TEAM = $DEVELOPMENT_TEAM_ID;/g" Code/frontend/ios/App/Pods/Pods.xcodeproj/project.pbxproj
         sed -i '' "s/DevelopmentTeam = [^;]*;/DevelopmentTeam = $DEVELOPMENT_TEAM_ID;/g" Code/frontend/ios/App/Pods/Pods.xcodeproj/project.pbxproj
-        #sed -i '' 's/PROVISIONING_PROFILE_SPECIFIER = "***";/PROVISIONING_PROFILE_SPECIFIER = "";/g' Code/frontend/ios/App/Pods/Pods.xcodeproj/project.pbxproj
+        sed -i '' 's/PROVISIONING_PROFILE_SPECIFIER = "***";/PROVISIONING_PROFILE_SPECIFIER = "";/g' Code/frontend/ios/App/Pods/Pods.xcodeproj/project.pbxproj
 
         # Verify the changes
         echo "Verifying the project file changes for the team ID..."
