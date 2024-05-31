@@ -62,8 +62,8 @@ jobs:
 
     - name: Set Development Team ID and Enable Automatic Signing for All Targets
       run: |
-        DEVELOPMENT_TEAM_ID="${{ secrets.DEVELOPMENT_TEAM_ID }}"
-        PROVISIONING_PROFILE_SPECIFIER="${{ secrets.PROVISIONING_PROFILE_SPECIFIER }}"
+        DEVELOPMENT_TEAM_ID=${{ secrets.DEVELOPMENT_TEAM_ID }}
+        PROVISIONING_PROFILE_SPECIFIER=${{ secrets.PROVISIONING_PROFILE_SPECIFIER }}
         PROJECT_FILE_PATH="Code/frontend/ios/App/App.xcodeproj/project.pbxproj"
     
         if [ -z "$DEVELOPMENT_TEAM_ID" ]; then
@@ -90,8 +90,8 @@ jobs:
 
     - name: Adjust setting in Pods.xcodeproj file
       run: |
-        DEVELOPMENT_TEAM_ID="${{ secrets.DEVELOPMENT_TEAM_ID }}"
-        PROVISIONING_PROFILE_SPECIFIER="${{ secrets.PROVISIONING_PROFILE_SPECIFIER }}"
+        DEVELOPMENT_TEAM_ID=${{ secrets.DEVELOPMENT_TEAM_ID }}
+        PROVISIONING_PROFILE_SPECIFIER=${{ secrets.PROVISIONING_PROFILE_SPECIFIER }}
         
         # Make changes to the pods project file
         sed -i '' 's/CODE_SIGN_IDENTITY = "";/CODE_SIGN_IDENTITY = "iPhone Distribution";/g' Code/frontend/ios/App/Pods/Pods.xcodeproj/project.pbxproj
