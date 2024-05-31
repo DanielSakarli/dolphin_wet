@@ -129,7 +129,7 @@ jobs:
     - name: Build and sign iOS App
       run: |
         echo "API_KEY_ID is set to: ${API_KEY_ID:0:4}***"
-        exec fastlane ios build
+        fastlane ios build
       working-directory: Code/frontend/ios/App
       env:
         MATCH_PASSWORD: ${{ secrets.MATCH_PASSWORD }}
