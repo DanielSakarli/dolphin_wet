@@ -60,13 +60,13 @@ platform :ios do
       configuration: "AppStoreDistribution",
       archive_path: "#{Dir.pwd}/build/App.xcarchive",
       clean: true,
-      codesigning_identity: "Daniel Sakarli", #certificate´s name which is saved in the keychain  "-", # Use the automatic signing
+      #codesigning_identity: "Daniel Sakarli", #certificate´s name which is saved in the keychain  "-", # Use the automatic signing
       export_options: {
         method: "app-store",
-        provisioningProfiles: {
+        #provisioningProfiles: {
           #Try commenting out to enable automatic signing for all targets
           #"com.dolphinwetapp.dolphinwet": "match AppStore com.dolphinwetapp.dolphinwet"
-        },
+        #},
         signingStyle: "automatic",
         developmentTeam: DEVELOPMENT_TEAM_ID
       },
