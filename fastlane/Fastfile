@@ -74,5 +74,4 @@ platform :ios do
 
     # Delete the key file after it's used
     File.delete("AuthKey_#{ENV['API_KEY_ID']}.p8")
-  end
 end
