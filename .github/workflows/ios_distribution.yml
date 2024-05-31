@@ -120,11 +120,11 @@ jobs:
       env:
         MATCH_PASSWORD: ${{ secrets.MATCH_PASSWORD }}
   
-    - name: Decrypt Certificates and Profiles
-      run: exec fastlane match appstore --readonly
-      working-directory: Code/frontend/ios/App
-      env:
-        MATCH_PASSWORD: ${{ secrets.MATCH_PASSWORD }}
+    #- name: Decrypt Certificates and Profiles
+    #  run: fastlane match appstore --readonly
+    #  working-directory: Code/frontend/ios/App
+    #  env:
+    #    MATCH_PASSWORD: ${{ secrets.MATCH_PASSWORD }}
   
     - name: Build and sign iOS App
       run: |
