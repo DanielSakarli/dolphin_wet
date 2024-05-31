@@ -103,6 +103,13 @@ jobs:
       env:
         GH_TOKEN: ${{ secrets.GH_TOKEN }}
 
+    - name: Ensure Keychain Does Not Exist
+      run: |
+        if security list-keychains | grep -q "ios-build.keychain"; then
+          echo "Keychain exists, deleting it."
+          security delete-keychain ios-build.keychain
+        fi
+
     - name: Create Keychain
       run: |
         security create-keychain -p ${{ secrets.MATCH_PASSWORD }} ios-build.keychain          security set-keychain-settings -t 3600 -l ~/Library/Keychains/ios-build.keychain
