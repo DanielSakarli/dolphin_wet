@@ -75,7 +75,7 @@ jobs:
         sed -i '' "s/ProvisioningStyle = Manual;/ProvisioningStyle = Automatic;/g" $PROJECT_FILE_PATH
         sed -i '' "s/PROVISIONING_PROFILE_SPECIFIER = [^;]*;/ProvisioningStyle = Automatic;/g" $PROJECT_FILE_PATH
         sed -i '' "s/CODE_SIGN_IDENTITY = \"iPhone Developer\";/CODE_SIGN_IDENTITY = \"iPhone Distribution\";/g" $PROJECT_FILE_PATH
-        
+
         # Ensure all targets are set to use automatic signing
         TARGETS=("CapacitorApp" "CapacitorKeyboard" "CapacitorHaptics")
         for TARGET in "${TARGETS[@]}"
@@ -102,6 +102,21 @@ jobs:
       env:
         GH_TOKEN: ${{ secrets.GH_TOKEN }}
 
+    - name: Create Keychain
+      run: |
+        security create-keychain -p ${{ secrets.MATCH_PASSWORD }} ios-build.keychain
+        security set-keychain-settings -t 3600 -l ~/Library/Keychains/ios-build.keychain
+        security unlock-keychain -p ${{ secrets.MATCH_PASSWORD }} ~/Library/Keychains/ios-build.keychain
+        security list-keychains -s ~/Library/Keychains/ios-build.keychain
+        security list-keychains -d user # List keychains to verify
+      env:
+        MATCH_PASSWORD: ${{ secrets.MATCH_PASSWORD }}
+  
+    - name: Decrypt Certificates and Profiles
+      env:
+        MATCH_PASSWORD: ${{ secrets.MATCH_PASSWORD }}
+      run: bundle exec fastlane match appstore --readonly
+  
     - name: Build and sign iOS App
       run: |
         echo "API_KEY_ID is set to: ${API_KEY_ID:0:4}***"

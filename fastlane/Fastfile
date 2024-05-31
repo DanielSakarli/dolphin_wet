@@ -4,13 +4,13 @@ default_platform(:ios)
 
 platform :ios do
   desc "Build and archive the app"
-  lane :build do
     API_KEY_ID = ENV['API_KEY_ID']
     API_ISSUER_ID = ENV['API_ISSUER_ID']
     DEVELOPMENT_TEAM_ID = ENV['DEVELOPMENT_TEAM_ID']
     MATCH_PASSWORD = ENV['MATCH_PASSWORD']
     GH_TOKEN = ENV['GH_TOKEN']
     MATCH_BRANCH = 'new_branch' # change to the branch you are working on right now
+    KEYCHAIN_NAME = "ios-build.keychain" # specify the keychain name
 
     puts "API_KEY_ID: #{API_KEY_ID}"
     puts "API_ISSUER_ID: #{API_ISSUER_ID}"
@@ -34,7 +34,6 @@ platform :ios do
     api_key = app_store_connect_api_key(
       key_id: API_KEY_ID,
       issuer_id: API_ISSUER_ID,
-      #Change the location of the key file, encode it using base64, push it to git repo and then decode it in the github action workflow
       key_filepath: "#{Dir.pwd}/AuthKey_#{API_KEY_ID}.p8",
       duration: 1200,
       in_house: false, # optional but may be required if using match/sigh
@@ -47,28 +46,30 @@ platform :ios do
       git_url: "https://#{GH_TOKEN}@github.com/DanielSakarli/dolphin_wet",
       app_identifier: "com.dolphinwetapp.dolphinwet",
       team_id: DEVELOPMENT_TEAM_ID,
+      keychain_name: KEYCHAIN_NAME, # specify the keychain to be used
       keychain_password: MATCH_PASSWORD,
-      api_key: api_key, # ensure correct api key is uesd for App Store Connect
-      git_branch: MATCH_BRANCH, # branch to be cloned
+      api_key: api_key,
+      git_branch: MATCH_BRANCH,
     ) 
 
     # Build and archive the app using gym
     gym(
-      workspace: "#{Dir.pwd}/../Code/frontend/ios/App/App.xcworkspace", #navigating to the correct path of the xcworkspace
+      workspace: "#{Dir.pwd}/../Code/frontend/ios/App/App.xcworkspace",
       scheme: "App",
       sdk: "iphoneos",
       configuration: "AppStoreDistribution",
       archive_path: "#{Dir.pwd}/build/App.xcarchive",
-      clean: true, # Set to false to skip cleaning,
-      codesigning_identity: "-", # Use the automatic signing --> manages and updates the provisioning profile
+      clean: true,
+      codesigning_identity: "-", # Use the automatic signing
       export_options: {
         method: "app-store",
         provisioningProfiles: {
-            "com.dolphinwetapp.dolphinwet": "match AppStore com.dolphinwetapp.dolphinwet"
+          "com.dolphinwetapp.dolphinwet": "match AppStore com.dolphinwetapp.dolphinwet"
         },
         signingStyle: "automatic",
-        developmentTeam: DEVELOPMENT_TEAM_ID #Found in apple developer account
-      }
+        developmentTeam: DEVELOPMENT_TEAM_ID
+      },
+      keychain_name: KEYCHAIN_NAME, # specify the keychain to be used
     ) 
 
     # Delete the key file after it's used
