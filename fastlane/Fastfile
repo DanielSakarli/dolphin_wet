@@ -63,11 +63,11 @@ platform :ios do
       codesigning_identity: "iPhone Distribution", # Type of the certificate #"Daniel Sakarli", #certificate´s name which is saved in the keychain  "-", # Use the automatic signing
       export_options: {
         method: "app-store",
-        #provisioningProfiles: {
+        provisioningProfiles: {
           #Try commenting out to enable automatic signing for all targets
-          #"com.dolphinwetapp.dolphinwet": "match AppStore com.dolphinwetapp.dolphinwet"
-        #},
-        signingStyle: "automatic",
+          "com.dolphinwetapp.dolphinwet": "match AppStore com.dolphinwetapp.dolphinwet"
+        },
+        signingStyle: "manual",
         developmentTeam: DEVELOPMENT_TEAM_ID
       },
      # keychain_name: KEYCHAIN_NAME, # specify the keychain to be used
