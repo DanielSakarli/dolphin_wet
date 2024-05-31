@@ -82,7 +82,7 @@ jobs:
         echo "Verifying the project file changes for team ID..."
         grep -C 3 "DEVELOPMENT_TEAM = $DEVELOPMENT_TEAM_ID" $PROJECT_FILE_PATH
         echo "Verifying the project file changes for provisioning profile..."
-        grep -C 3 "PROVISIONING_PROFILE_SPECIFIER = "$PROVISIONING_PROFILE_SPECIFIER"" $PROJECT_FILE_PATH
+        grep -C 3 "PROVISIONING_PROFILE_SPECIFIER" $PROJECT_FILE_PATH
       shell: bash
 
     #- name: Output Pods.xcodeproj file
