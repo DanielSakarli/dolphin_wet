@@ -105,14 +105,15 @@ jobs:
 
     - name: Ensure Keychain Does Not Exist
       run: |
-        if security list-keychains | grep -q "ios-build.keychain"; then
+        if security list-keychains | grep -q "~/Library/Keychains/ios-build.keychain"; then
           echo "Keychain exists, deleting it."
-          security delete-keychain ios-build.keychain
+          security delete-keychain ~/Library/Keychains/ios-build.keychain
         fi
 
     - name: Create Keychain
       run: |
-        security create-keychain -p ${{ secrets.MATCH_PASSWORD }} ios-build.keychain          security set-keychain-settings -t 3600 -l ~/Library/Keychains/ios-build.keychain
+        security create-keychain -p ${{ secrets.MATCH_PASSWORD }} ios-build.keychain          
+        security set-keychain-settings -t 3600 -l ~/Library/Keychains/ios-build.keychain
         security unlock-keychain -p ${{ secrets.MATCH_PASSWORD }} ~/Library/Keychains/ios-build.keychain
         security list-keychains -s ~/Library/Keychains/ios-build.keychain
         security list-keychains -d user # List keychains to verify
