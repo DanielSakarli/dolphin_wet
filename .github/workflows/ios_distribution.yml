@@ -58,6 +58,10 @@ jobs:
 
     - name: Install Bundler
       run: gem install bundler
+      working-directory: Code/frontend/ios/App
+
+    - name: Debug - List Directory Contents
+      run: ls -al Code/frontend/ios/App
   
     - name: Install Fastlane
       run: bundle install
