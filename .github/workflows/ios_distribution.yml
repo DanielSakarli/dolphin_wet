@@ -55,17 +55,10 @@ jobs:
       env:
         DEVELOPMENT_TEAM_ID: ${{ secrets.DEVELOPMENT_TEAM_ID }}
         PROVISIONING_PROFILE_SPECIFIER: ${{ secrets.PROVISIONING_PROFILE_SPECIFIER }}
-
-    - name: Install Bundler
-      run: gem install bundler
-      #working-directory: Code/frontend/ios/App
-
-    - name: Debug - List Directory Contents
-      run: ls -al #Code/frontend/ios/App
   
     - name: Install Fastlane
-      run: bundle install
-      #working-directory: Code/frontend/ios/App
+      run: sudo gem install fastlane -NV
+      working-directory: Code/frontend/ios/App
 
     - name: Set Development Team ID and Enable Automatic Signing for All Targets
       run: |
@@ -120,7 +113,7 @@ jobs:
         MATCH_PASSWORD: ${{ secrets.MATCH_PASSWORD }}
   
     - name: Decrypt Certificates and Profiles
-      run: bundle exec fastlane match appstore --readonly
+      run: exec fastlane match appstore --readonly
       working-directory: Code/frontend/ios/App
       env:
         MATCH_PASSWORD: ${{ secrets.MATCH_PASSWORD }}
@@ -128,7 +121,7 @@ jobs:
     - name: Build and sign iOS App
       run: |
         echo "API_KEY_ID is set to: ${API_KEY_ID:0:4}***"
-        bundle exec fastlane ios build
+        exec fastlane ios build
       working-directory: Code/frontend/ios/App
       env:
         MATCH_PASSWORD: ${{ secrets.MATCH_PASSWORD }}
