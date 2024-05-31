@@ -99,7 +99,7 @@ jobs:
         sed -i '' 's/CODE_SIGN_STYLE = Automatic;/CODE_SIGN_STYLE = Manual;/g' Code/frontend/ios/App/Pods/Pods.xcodeproj/project.pbxproj
         sed -i '' "s/DEVELOPMENT_TEAM = [^;]*;/DEVELOPMENT_TEAM = $DEVELOPMENT_TEAM_ID;/g" Code/frontend/ios/App/Pods/Pods.xcodeproj/project.pbxproj
         sed -i '' "s/DevelopmentTeam = [^;]*;/DevelopmentTeam = $DEVELOPMENT_TEAM_ID;/g" Code/frontend/ios/App/Pods/Pods.xcodeproj/project.pbxproj
-        sed -i '' 's/PROVISIONING_PROFILE_SPECIFIER = "***";/PROVISIONING_PROFILE_SPECIFIER = "";/g' Code/frontend/ios/App/Pods/Pods.xcodeproj/project.pbxproj
+        sed -i '' 's/PROVISIONING_PROFILE_SPECIFIER = "\*\*\*";/PROVISIONING_PROFILE_SPECIFIER = "";/g' Code/frontend/ios/App/Pods/Pods.xcodeproj/project.pbxproj
 
         # Verify the changes
         echo "Verifying the project file changes for the team ID..."
