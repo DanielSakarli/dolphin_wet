@@ -74,13 +74,14 @@ jobs:
         # Use sed to set the development team ID and enable automatic signing in the project file
         sed -i '' "s/DEVELOPMENT_TEAM = [^;]*;/DEVELOPMENT_TEAM = $DEVELOPMENT_TEAM_ID;/g" $PROJECT_FILE_PATH
         # sed -i '' "s/ProvisioningStyle = Automatic;/ProvisioningStyle = Manual;/g" $PROJECT_FILE_PATH
-        sed -i '' "s/PROVISIONING_PROFILE_SPECIFIER="TO_BE_REPLACED_DURING_BUILD_PROVISIONING_PROFILE";/PROVISIONING_PROFILE_SPECIFIER = $PROVISIONING_PROFILE_SPECIFIER;/g" $PROJECT_FILE_PATH
+        sed -i '' "s/PROVISIONING_PROFILE_SPECIFIER = "TO_BE_REPLACED_DURING_BUILD_PROVISIONING_PROFILE";/PROVISIONING_PROFILE_SPECIFIER = $PROVISIONING_PROFILE_SPECIFIER;/g" $PROJECT_FILE_PATH
         sed -i '' "s/CODE_SIGN_IDENTITY = \"iPhone Developer\";/CODE_SIGN_IDENTITY = \"iPhone Distribution\";/g" $PROJECT_FILE_PATH
         sed -i '' "s/CODE_SIGN_STYLE = Automatic;/CODE_SIGN_STYLE = Manual;/g" $PROJECT_FILE_PATH
     
         # Verify the changes
-        echo "Verifying the project file changes..."
+        echo "Verifying the project file changes for team ID..."
         grep -C 3 "DEVELOPMENT_TEAM = $DEVELOPMENT_TEAM_ID" $PROJECT_FILE_PATH
+        echo "Verifying the project file changes for provisioning profile..."
         grep -C 3 "PROVISIONING_PROFILE_SPECIFIER = $PROVISIONING_PROFILE_SPECIFIER" $PROJECT_FILE_PATH
       shell: bash
 
@@ -98,7 +99,7 @@ jobs:
         sed -i '' 's/CODE_SIGN_STYLE = Automatic;/CODE_SIGN_STYLE = Manual;/g' Code/frontend/ios/App/Pods/Pods.xcodeproj/project.pbxproj
         sed -i '' "s/DEVELOPMENT_TEAM = [^;]*;/DEVELOPMENT_TEAM = $DEVELOPMENT_TEAM_ID;/g" Code/frontend/ios/App/Pods/Pods.xcodeproj/project.pbxproj
         sed -i '' "s/DevelopmentTeam = [^;]*;/DevelopmentTeam = $DEVELOPMENT_TEAM_ID;/g" Code/frontend/ios/App/Pods/Pods.xcodeproj/project.pbxproj
-        sed -i '' "s/PROVISIONING_PROFILE_SPECIFIER="TO_BE_REPLACED_DURING_BUILD_PROVISIONING_PROFILE";/PROVISIONING_PROFILE_SPECIFIER = $PROVISIONING_PROFILE_SPECIFIER;/g" Code/frontend/ios/App/Pods/Pods.xcodeproj/project.pbxproj
+        sed -i '' "s/PROVISIONING_PROFILE_SPECIFIER = "TO_BE_REPLACED_DURING_BUILD_PROVISIONING_PROFILE";/PROVISIONING_PROFILE_SPECIFIER = $PROVISIONING_PROFILE_SPECIFIER;/g" Code/frontend/ios/App/Pods/Pods.xcodeproj/project.pbxproj
 
         # Verify the changes
         echo "Verifying the project file changes for the team ID..."
