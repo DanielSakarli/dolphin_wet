@@ -62,8 +62,8 @@ jobs:
 
     - name: Set Development Team ID and Enable Automatic Signing for All Targets
       run: |
-        DEVELOPMENT_TEAM_ID=${{ secrets.DEVELOPMENT_TEAM_ID }}
-        PROVISIONING_PROFILE_SPECIFIER=${{ secrets.PROVISIONING_PROFILE_SPECIFIER }}
+        DEVELOPMENT_TEAM_ID="${{ secrets.DEVELOPMENT_TEAM_ID }}"
+        PROVISIONING_PROFILE_SPECIFIER="${{ secrets.PROVISIONING_PROFILE_SPECIFIER }}"
         PROJECT_FILE_PATH="Code/frontend/ios/App/App.xcodeproj/project.pbxproj"
     
         if [ -z "$DEVELOPMENT_TEAM_ID" ]; then
@@ -105,7 +105,7 @@ jobs:
         grep -C 3 "DEVELOPMENT_TEAM = $DEVELOPMENT_TEAM_ID" Code/frontend/ios/App/Pods/Pods.xcodeproj/project.pbxproj
         grep -C 3 "CODE_SIGN_STYLE = $CODE_SIGN_STYLE" Code/frontend/ios/App/Pods/Pods.xcodeproj/project.pbxproj
       shell: bash
-      
+
     - name: Configure Git for Authentication
       run: |
         git config --global user.email "daniel-sakarli@hotmail.de"
