@@ -96,8 +96,21 @@ jobs:
         grep -C 3 "ProvisioningStyle = $ProvisioningStyle" $PROJECT_FILE_PATH
       shell: bash
 
-    - name: Output Pods.xcodeproj file
-      run: cat Code/frontend/ios/App/Pods/Pods.xcodeproj/project.pbxproj
+    #- name: Output Pods.xcodeproj file
+    #  run: cat Code/frontend/ios/App/Pods/Pods.xcodeproj/project.pbxproj
+
+    - name: Adjust setting in Pods.xcodeproj file
+      run: |
+        sed -i '' 's/CODE_SIGN_IDENTITY = "";/CODE_SIGN_IDENTITY = "iPhone Distribution";/g' Code/frontend/ios/App/Pods/Pods.xcodeproj/project.pbxproj
+        sed -i '' 's/CODE_SIGN_IDENTITY\[sdk=iphoneos\*\] = "";/CODE_SIGN_IDENTITY\[sdk=iphoneos\*\] = "iPhone Distribution";/g' Code/frontend/ios/App/Pods/Pods.xcodeproj/project.pbxproj
+        sed -i '' 's/CODE_SIGN_STYLE = Automatic;/CODE_SIGN_STYLE = Manual;/g' Code/frontend/ios/App/Pods/Pods.xcodeproj/project.pbxproj
+        sed -i '' "s/DEVELOPMENT_TEAM = [^;]*;/DEVELOPMENT_TEAM = $DEVELOPMENT_TEAM_ID;/g" Code/frontend/ios/App/Pods/Pods.xcodeproj/project.pbxproj
+        sed -i '' "s/DevelopmentTeam = [^;]*;/DevelopmentTeam = $DEVELOPMENT_TEAM_ID;/g" Code/frontend/ios/App/Pods/Pods.xcodeproj/project.pbxproj
+        
+        # Verify the changes
+        echo "Verifying the project file changes..."
+        grep -C 3 "DEVELOPMENT_TEAM = $DEVELOPMENT_TEAM_ID" Code/frontend/ios/App/Pods/Pods.xcodeproj/project.pbxproj
+        grep -C 3 "CODE_SIGN_STYLE = $CODE_SIGN_STYLE" Code/frontend/ios/App/Pods/Pods.xcodeproj/project.pbxproj
 
     - name: Configure Git for Authentication
       run: |
