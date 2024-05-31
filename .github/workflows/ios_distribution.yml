@@ -101,8 +101,9 @@ jobs:
         sed -i '' "s/PROVISIONING_PROFILE_SPECIFIER="TO_BE_REPLACED_DURING_BUILD_PROVISIONING_PROFILE";/PROVISIONING_PROFILE_SPECIFIER = $PROVISIONING_PROFILE_SPECIFIER;/g" Code/frontend/ios/App/Pods/Pods.xcodeproj/project.pbxproj
 
         # Verify the changes
-        echo "Verifying the project file changes..."
+        echo "Verifying the project file changes for the team ID..."
         grep -C 3 "DEVELOPMENT_TEAM = $DEVELOPMENT_TEAM_ID" Code/frontend/ios/App/Pods/Pods.xcodeproj/project.pbxproj
+        echo "Verifying the project file changes for the code sign style..."
         grep -C 3 "CODE_SIGN_STYLE = $CODE_SIGN_STYLE" Code/frontend/ios/App/Pods/Pods.xcodeproj/project.pbxproj
       shell: bash
 
