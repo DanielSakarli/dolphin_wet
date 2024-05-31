@@ -73,7 +73,6 @@ jobs:
 
         # Use sed to set the development team ID and enable automatic signing in the project file
         sed -i '' "s/DEVELOPMENT_TEAM = [^;]*;/DEVELOPMENT_TEAM = $DEVELOPMENT_TEAM_ID;/g" $PROJECT_FILE_PATH
-        sed -i '' "s/DevelopmentTeam = [^;]*;/DevelopmentTeam = $DEVELOPMENT_TEAM_ID;/g" $PROJECT_FILE_PATH
         # sed -i '' "s/ProvisioningStyle = Automatic;/ProvisioningStyle = Manual;/g" $PROJECT_FILE_PATH
         sed -i '' "s/PROVISIONING_PROFILE_SPECIFIER = [^;]*;/PROVISIONING_PROFILE_SPECIFIER = $PROVISIONING_PROFILE_SPECIFIER;/g" $PROJECT_FILE_PATH
         sed -i '' "s/CODE_SIGN_IDENTITY = \"iPhone Developer\";/CODE_SIGN_IDENTITY = \"iPhone Distribution\";/g" $PROJECT_FILE_PATH
@@ -82,7 +81,7 @@ jobs:
         # Verify the changes
         echo "Verifying the project file changes..."
         grep -C 3 "DEVELOPMENT_TEAM = $DEVELOPMENT_TEAM_ID" $PROJECT_FILE_PATH
-        grep -C 3 "ProvisioningStyle = $ProvisioningStyle" $PROJECT_FILE_PATH
+        grep -C 3 "PROVISIONING_PROFILE_SPECIFIER = $PROVISIONING_PROFILE_SPECIFIER" $PROJECT_FILE_PATH
       shell: bash
 
     #- name: Output Pods.xcodeproj file
@@ -90,17 +89,23 @@ jobs:
 
     - name: Adjust setting in Pods.xcodeproj file
       run: |
+        DEVELOPMENT_TEAM_ID=${{ secrets.DEVELOPMENT_TEAM_ID }}
+        PROVISIONING_PROFILE_SPECIFIER=${{ secrets.PROVISIONING_PROFILE_SPECIFIER }}
+        
+        # Make changes to the pods project file
         sed -i '' 's/CODE_SIGN_IDENTITY = "";/CODE_SIGN_IDENTITY = "iPhone Distribution";/g' Code/frontend/ios/App/Pods/Pods.xcodeproj/project.pbxproj
         sed -i '' 's/CODE_SIGN_IDENTITY\[sdk=iphoneos\*\] = "";/CODE_SIGN_IDENTITY\[sdk=iphoneos\*\] = "iPhone Distribution";/g' Code/frontend/ios/App/Pods/Pods.xcodeproj/project.pbxproj
         sed -i '' 's/CODE_SIGN_STYLE = Automatic;/CODE_SIGN_STYLE = Manual;/g' Code/frontend/ios/App/Pods/Pods.xcodeproj/project.pbxproj
         sed -i '' "s/DEVELOPMENT_TEAM = [^;]*;/DEVELOPMENT_TEAM = $DEVELOPMENT_TEAM_ID;/g" Code/frontend/ios/App/Pods/Pods.xcodeproj/project.pbxproj
         sed -i '' "s/DevelopmentTeam = [^;]*;/DevelopmentTeam = $DEVELOPMENT_TEAM_ID;/g" Code/frontend/ios/App/Pods/Pods.xcodeproj/project.pbxproj
-        
+        sed -i '' "s/PROVISIONING_PROFILE_SPECIFIER = [^;]*;/PROVISIONING_PROFILE_SPECIFIER = $PROVISIONING_PROFILE_SPECIFIER;/g" Code/frontend/ios/App/Pods/Pods.xcodeproj/project.pbxproj
+
         # Verify the changes
         echo "Verifying the project file changes..."
         grep -C 3 "DEVELOPMENT_TEAM = $DEVELOPMENT_TEAM_ID" Code/frontend/ios/App/Pods/Pods.xcodeproj/project.pbxproj
         grep -C 3 "CODE_SIGN_STYLE = $CODE_SIGN_STYLE" Code/frontend/ios/App/Pods/Pods.xcodeproj/project.pbxproj
-
+      shell: bash
+      
     - name: Configure Git for Authentication
       run: |
         git config --global user.email "daniel-sakarli@hotmail.de"
