@@ -65,7 +65,7 @@ platform :ios do
         method: "app-store",
         provisioningProfiles: {
           #Try commenting out to enable automatic signing for all targets
-          "com.dolphinwetapp.dolphinwet": "match AppStore com.dolphinwetapp.dolphinwet"
+          #"com.dolphinwetapp.dolphinwet": "match AppStore com.dolphinwetapp.dolphinwet"
         },
         signingStyle: "automatic",
         developmentTeam: DEVELOPMENT_TEAM_ID
