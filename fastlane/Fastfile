@@ -67,7 +67,7 @@ platform :ios do
           #Try commenting out to enable automatic signing for all targets
           "com.dolphinwetapp.dolphinwet": "match AppStore com.dolphinwetapp.dolphinwet"
         },
-        signingStyle: "manual",
+        signingStyle: "automatic",
         developmentTeam: DEVELOPMENT_TEAM_ID
       },
      # keychain_name: KEYCHAIN_NAME, # specify the keychain to be used
