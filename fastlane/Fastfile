@@ -68,9 +68,12 @@ platform :ios do
       in_house: false, # optional but may be required if using match/sigh
     )
 
-    # Ensure the WWDR certificate is installed
+    
     #sh("ls #{Dir.pwd}/../fastlane/plugin/wwdr_cert")
     #fastlane_require "#{Dir.pwd}/../fastlane/plugin/wwdr_cert/AppleWWDRCA.cer"
+    
+    # Ensure the WWDR certificate is installed
+    # Gets the Pluginfile of the fastlane and installs the WWDR certificate
     WWDRCert::Actions::InstallWWDRCertAction.run
     
     # match fetches signing certificates and provisioning profiles 
