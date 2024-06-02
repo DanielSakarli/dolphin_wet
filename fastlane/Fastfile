@@ -26,25 +26,7 @@ platform :ios do
       timeout: 3600,
       lock_when_sleeps: true
     )
-
-    sh("ls #{Dir.pwd}/../certs/distribution")
-    sh("file #{Dir.pwd}/../certs/distribution/V5THZ4JXS9.cer")
-    sh("file #{Dir.pwd}/../certs/distribution/V5THZ4JXS9.p12")
-    sh("cat #{Dir.pwd}/../certs/distribution/V5THZ4JXS9.cer")
-    sh("cat #{Dir.pwd}/../certs/distribution/V5THZ4JXS9.p12")
-    # Import the .cer certificate into the keychain
-    #import_certificate(
-    #  certificate_path: "#{Dir.pwd}/../certs/distribution/V5THZ4JXS9.cer",
-    #  keychain_name: "temp_keychain"
-    #)
-
-    # Import the .p12 certificate into the keychain
-    #import_certificate(
-    #  certificate_path: "#{Dir.pwd}/../certs/distribution/V5THZ4JXS9.p12",
-    #  certificate_password: MATCH_PASSWORD,
-    #  keychain_name: "temp_keychain"
-    #)
-
+   
     # Specify Xcode version
     xcversion(version: "15.0.1")
 
@@ -76,7 +58,7 @@ platform :ios do
     # Gets the Pluginfile of the fastlane and installs the WWDR certificate
     #WWDRCert::Actions::InstallWWDRCertAction.run
     # Import the WWDR certificate into the keychain
-    sh("security import #{Dir.pwd}/../fastlane/plugin/wwdr_cert/AppleWWDRCA.cer -k ~/Library/Keychains/login.keychain-db")
+    sh("security import #{Dir.pwd}/../fastlane/plugin/wwdr_cert/AppleWWDRCA.cer -k ~/Library/Keychains/temp_keychain-db")
 
     # match fetches signing certificates and provisioning profiles 
     match(
