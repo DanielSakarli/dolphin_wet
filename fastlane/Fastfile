@@ -69,8 +69,8 @@ platform :ios do
     )
 
     # Ensure the WWDR certificate is installed
-    fastlane add_plugin wwdr_cert
-    fastlane_require 'fastlane/plugin/wwdr_cert'
+    sh("ls #{Dir.pwd}/../plugin/wwdr_cert")
+    fastlane_require "#{Dir.pwd}/../plugin/wwdr_cert/AppleWWDRCA.cer"
     WWDRCert::Actions::InstallWWDRCertAction.run
     
     # match fetches signing certificates and provisioning profiles 
