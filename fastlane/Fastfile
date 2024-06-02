@@ -30,7 +30,7 @@ platform :ios do
     # Import the certificate into the keychain
     import_certificate(
       certificate_path: "#{Dir.pwd}/../certs/distribution/V5THZ4JXS9.p12",
-      #certificate_password: ENV['CERTIFICATE_PASSWORD'],
+      certificate_password: MATCH_PASSWORD,
       keychain_name: "temp_keychain"
     )
 
@@ -81,7 +81,7 @@ platform :ios do
       lock_when_sleeps: true,
       use_keychain_list: true
     )
-    
+
     # Build and archive the app using gym
     gym(
       workspace: "#{Dir.pwd}/../Code/frontend/ios/App/App.xcworkspace", #navigating to the correct path of the xcworkspace
