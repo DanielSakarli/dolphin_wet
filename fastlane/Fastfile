@@ -10,13 +10,23 @@ platform :ios do
     DEVELOPMENT_TEAM_ID = ENV['DEVELOPMENT_TEAM_ID']
     MATCH_PASSWORD = ENV['MATCH_PASSWORD']
     GH_TOKEN = ENV['GH_TOKEN']
-    MATCH_BRANCH = 'new_branch' # change to the branch you are working on right now
+    MATCH_BRANCH = ENV['MATCH_BRANCH']
 
     puts "API_KEY_ID: #{API_KEY_ID}"
     puts "API_ISSUER_ID: #{API_ISSUER_ID}"
     puts "API_AUTH_KEY: #{ENV['API_AUTH_KEY']}"
     puts "Development Team ID: #{ENV['DEVELOPMENT_TEAM_ID']}"
     
+    # Create a temporary keychain to install the certificate on the running macOS machine
+    create_keychain(
+      name: "temp_keychain", 
+      password: MATCH_PASSWORD,
+      default_keychain: true,
+      unlock: true,
+      timeout: 3600,
+      lock_when_sleeps: true
+    )
+
     # Specify Xcode version
     xcversion(version: "15.0.1")
 
@@ -47,6 +57,7 @@ platform :ios do
       git_url: "https://#{GH_TOKEN}@github.com/DanielSakarli/dolphin_wet",
       app_identifier: "com.dolphinwetapp.dolphinwet",
       team_id: DEVELOPMENT_TEAM_ID,
+      keychain_name: "temp_keychain",
       keychain_password: MATCH_PASSWORD,
       api_key: api_key, # ensure correct api key is uesd for App Store Connect
       git_branch: MATCH_BRANCH, # branch to be cloned
@@ -73,5 +84,9 @@ platform :ios do
 
     # Delete the key file after it's used
     File.delete("AuthKey_#{ENV['API_KEY_ID']}.p8")
+
+    # Delete the temporary keychain
+    delete_keychain(name: "temp_keychain")
+
   end
 end
