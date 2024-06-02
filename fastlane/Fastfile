@@ -27,6 +27,13 @@ platform :ios do
       lock_when_sleeps: true
     )
 
+    # Import the certificate into the keychain
+    import_certificate(
+      certificate_path: "#{Dir.pwd}/../certs/distribution/V5THZ4JXS9.p12",
+      #certificate_password: ENV['CERTIFICATE_PASSWORD'],
+      keychain_name: "temp_keychain"
+    )
+
     # Specify Xcode version
     xcversion(version: "15.0.1")
 
@@ -63,6 +70,18 @@ platform :ios do
       git_branch: MATCH_BRANCH, # branch to be cloned
     ) 
 
+    # Ensure the WWDR certificate is installed
+    fastlane_require 'fastlane/plugin/wwdr_cert'
+    WWDRCert::Actions::InstallWWDRCertAction.run
+
+    # Set key partition list (required for accessing the keychain)
+    set_keychain_settings(
+      keychain_name: "temp_keychain",
+      timeout: 3600,
+      lock_when_sleeps: true,
+      use_keychain_list: true
+    )
+    
     # Build and archive the app using gym
     gym(
       workspace: "#{Dir.pwd}/../Code/frontend/ios/App/App.xcworkspace", #navigating to the correct path of the xcworkspace
