@@ -89,7 +89,7 @@ platform :ios do
       keychain_password: MATCH_PASSWORD,
       api_key: api_key, # ensure correct api key is uesd for App Store Connect
       git_branch: MATCH_BRANCH, # branch to be cloned
-    ) 
+    )
 
     
 
