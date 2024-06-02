@@ -74,8 +74,10 @@ platform :ios do
     
     # Ensure the WWDR certificate is installed
     # Gets the Pluginfile of the fastlane and installs the WWDR certificate
-    WWDRCert::Actions::InstallWWDRCertAction.run
-    
+    #WWDRCert::Actions::InstallWWDRCertAction.run
+    # Import the WWDR certificate into the keychain
+    sh("security import #{Dir.pwd}/../fastlane/plugin/wwdr_cert/AppleWWDRCA.cer -k ~/Library/Keychains/login.keychain-db")
+
     # match fetches signing certificates and provisioning profiles 
     match(
       type: "appstore",
