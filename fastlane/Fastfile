@@ -11,6 +11,7 @@ platform :ios do
     MATCH_PASSWORD = ENV['MATCH_PASSWORD']
     GH_TOKEN = ENV['GH_TOKEN']
     MATCH_BRANCH = ENV['MATCH_BRANCH']
+    FASTLANE_USER = ENV['FASTLANE_USER']
     PROFILE_NAME = ENV['PROVISIONING_PROFILE_SPECIFIER'] # the name of the provisioning profile
 
     puts "MATCH_BRANCH: #{MATCH_BRANCH}"
@@ -125,8 +126,19 @@ platform :ios do
         #team_id: DEVELOPMENT_TEAM_ID,
       #},
       output_directory: "#{Dir.pwd}/build",
-      output_name: "App.ipa"
+      output_name: "Dolphin_WET_App.ipa"
     )
+
+    sh("ls #{Dir.pwd}/../Code/frontend/ios/App/App.xcworkspace")
+
+    upload_to_testflight(
+      ipa: "#{Dir.pwd}/build/Dolphin_WET_App.ipa",
+      username: FASTLANE_USER,
+      app_identifier: "com.dolphinwetapp.dolphinwet",
+      team_id: DEVELOPMENT_TEAM_ID,
+      skip_submission: true
+    )
+
     # Delete the key file after it's used
     File.delete("AuthKey_#{ENV['API_KEY_ID']}.p8")
 
