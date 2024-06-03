@@ -83,7 +83,7 @@ platform :ios do
       configuration: "AppStoreDistribution",
       archive_path: "#{Dir.pwd}/build/App.xcarchive",
       clean: true, # Set to false to skip cleaning,
-      codesigning_identity: "-", # Use the automatic signing --> manages and updates the provisioning profile
+      codesigning_identity: "", # Use the automatic signing --> manages and updates the provisioning profile
       export_method: "app-store",
       export_options: {
         method: "app-store",
