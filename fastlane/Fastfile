@@ -1,4 +1,5 @@
 require 'base64'
+require 'match'
 
 default_platform(:ios)
 
@@ -33,6 +34,13 @@ platform :ios do
     sh("cat #{Dir.pwd}/../certs/distribution/V5THZ4JXS9.cer")
     sh("cat #{Dir.pwd}/../certs/distribution/V5THZ4JXS9.p12")
     
+    # Decrypt the certificate
+    storage = Match::Storage.from_params({storage_mode: "git", git_url: "https://#{GH_TOKEN}@github.com/DanielSakarli/dolphin_wet", shallow_clone: false, git_branch: MATCH_BRANCH, clone_branch_directly: false})
+    storage.download
+    encryption = Match::Encryption.for_storage_mode("git", { git_url: "https://#{GH_TOKEN}@github.com/DanielSakarli/dolphin_wet", working_directory: storage.working_directory})
+    encryption.decrypt_files
+    storage.working_directory
+
     # Import the .cer certificate into the keychain
     import_certificate(
       certificate_path: "#{Dir.pwd}/../certs/distribution/V5THZ4JXS9.cer",
