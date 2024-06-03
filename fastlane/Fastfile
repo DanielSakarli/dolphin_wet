@@ -18,7 +18,7 @@ platform :ios do
     puts "Development Team ID: #{ENV['DEVELOPMENT_TEAM_ID']}"
     
     # Specify Xcode version
-    xcversion(version: "15.0.1")
+    #xcversion(version: "15.0.1")
 
     # Decode and write the API auth key
     File.open("AuthKey_#{API_KEY_ID}.p8", 'wb') do |file|
@@ -50,7 +50,7 @@ platform :ios do
       keychain_password: MATCH_PASSWORD,
       api_key: api_key, # ensure correct api key is uesd for App Store Connect
       git_branch: MATCH_BRANCH, # branch to be cloned
-      force_for_new_devices: true # Forces match to recreate certificates and profiles
+      #force_for_new_devices: true # Forces match to recreate certificates and profiles
     ) 
 
     # Build and archive the app using gym
