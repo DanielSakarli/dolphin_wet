@@ -26,6 +26,16 @@ platform :ios do
       file.write(Base64.decode64(ENV['API_AUTH_KEY']))
     end
 
+    # Create a temporary keychain to install the certificate on the running macOS machine
+    create_keychain(
+      name: "temp_keychain", 
+      password: MATCH_PASSWORD,
+      default_keychain: true,
+      unlock: true,
+      timeout: 3600,
+      lock_when_sleeps: true
+    )
+
     puts "Current directory: #{Dir.pwd}"
     puts "Directory contents: #{Dir.entries('.')}"
     puts "Key file name: AuthKey_#{API_KEY_ID}.p8"
@@ -40,7 +50,12 @@ platform :ios do
       duration: 1200,
       in_house: false, # optional but may be required if using match/sigh
     )
-
+    
+    # Import the WWDR certificate into the keychain
+    puts "Keychains:"
+    sh("ls ~/Library/Keychains")
+    sh("security import #{Dir.pwd}/../fastlane/plugin/wwdr_cert/AppleWWDRCA.cer -k ~/Library/Keychains/temp_keychain-db")
+    
     # match fetches signing certificates and provisioning profiles 
     match(
       type: "appstore",
@@ -48,6 +63,7 @@ platform :ios do
       git_url: "https://#{GH_TOKEN}@github.com/DanielSakarli/dolphin_wet",
       app_identifier: "com.dolphinwetapp.dolphinwet",
       team_id: DEVELOPMENT_TEAM_ID,
+      keychain_name: "temp_keychain",
       keychain_password: MATCH_PASSWORD,
       api_key: api_key, # ensure correct api key is uesd for App Store Connect
       git_branch: MATCH_BRANCH, # branch to be cloned
@@ -74,5 +90,8 @@ platform :ios do
     )
     # Delete the key file after it's used
     File.delete("AuthKey_#{ENV['API_KEY_ID']}.p8")
+
+    # Delete the temporary keychain
+    delete_keychain(name: "temp_keychain")
   end
 end
