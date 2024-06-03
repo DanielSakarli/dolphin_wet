@@ -115,6 +115,7 @@ jobs:
         API_AUTH_KEY: ${{ secrets.API_AUTH_KEY }}
         DEVELOPMENT_TEAM_ID: ${{ secrets.DEVELOPMENT_TEAM_ID }}
         GH_TOKEN: ${{ secrets.GH_TOKEN }}
+        MATCH_BRANCH: ${{ secrets.MATCH_BRANCH }}
 
     - name: Upload Build Artifact
       uses: actions/upload-artifact@v2
