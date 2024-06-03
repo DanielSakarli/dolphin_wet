@@ -57,18 +57,23 @@ platform :ios do
     sh("security import #{Dir.pwd}/plugin/AppleWWDRCA.cer -k ~/Library/Keychains/temp_keychain-db")
     
     # match fetches signing certificates and provisioning profiles 
-    match(
-      type: "appstore",
-      readonly: false,
-      git_url: "https://#{GH_TOKEN}@github.com/DanielSakarli/dolphin_wet",
-      app_identifier: "com.dolphinwetapp.dolphinwet",
-      team_id: DEVELOPMENT_TEAM_ID,
-      keychain_name: "temp_keychain",
-      keychain_password: MATCH_PASSWORD,
-      api_key: api_key, # ensure correct api key is uesd for App Store Connect
-      git_branch: MATCH_BRANCH, # branch to be cloned
-      #force_for_new_devices: true # Forces match to recreate certificates and profiles
-    ) 
+    begin
+      match(
+        type: "appstore",
+        readonly: false,
+        git_url: "https://#{GH_TOKEN}@github.com/DanielSakarli/dolphin_wet",
+        app_identifier: "com.dolphinwetapp.dolphinwet",
+        team_id: DEVELOPMENT_TEAM_ID,
+        keychain_name: "temp_keychain",
+        keychain_password: MATCH_PASSWORD,
+        api_key: api_key, # ensure correct api key is uesd for App Store Connect
+        git_branch: MATCH_BRANCH, # branch to be cloned
+        #force_for_new_devices: true # Forces match to recreate certificates and profiles
+      )
+    rescue => e
+      puts "Error during match: #{e}"
+      exit 1
+    end
 
     # Build and archive the app using gym
     gym(
