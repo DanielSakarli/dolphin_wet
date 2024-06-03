@@ -19,20 +19,20 @@ platform :ios do
     puts "Development Team ID: #{ENV['DEVELOPMENT_TEAM_ID']}"
     
     # Create a temporary keychain to install the certificate on the running macOS machine
-    create_keychain(
-      name: "temp_keychain", 
-      password: MATCH_PASSWORD,
-      default_keychain: true,
-      unlock: true,
-      timeout: 3600,
-      lock_when_sleeps: true
-    )
+    #create_keychain(
+    #  name: "temp_keychain", 
+    #  password: MATCH_PASSWORD,
+    #  default_keychain: true,
+    #  unlock: true,
+    #  timeout: 3600,
+    #  lock_when_sleeps: true
+    #)
 
     sh("ls #{Dir.pwd}/../certs/distribution")
-    sh("file #{Dir.pwd}/../certs/distribution/V5THZ4JXS9.cer")
-    sh("file #{Dir.pwd}/../certs/distribution/V5THZ4JXS9.p12")
-    sh("cat #{Dir.pwd}/../certs/distribution/V5THZ4JXS9.cer")
-    sh("cat #{Dir.pwd}/../certs/distribution/V5THZ4JXS9.p12")
+    #sh("file #{Dir.pwd}/../certs/distribution/V5THZ4JXS9.cer")
+    #sh("file #{Dir.pwd}/../certs/distribution/V5THZ4JXS9.p12")
+    #sh("cat #{Dir.pwd}/../certs/distribution/V5THZ4JXS9.cer")
+    #sh("cat #{Dir.pwd}/../certs/distribution/V5THZ4JXS9.p12")
     
     # Decrypt the certificate
     #puts "Arrived at the decryption section"
@@ -80,8 +80,8 @@ platform :ios do
       duration: 1200,
       in_house: false, # optional but may be required if using match/sigh
     )
-
-    
+    puts "Keychains:"
+    sh("ls ~/Library/Keychains")
     #sh("ls #{Dir.pwd}/../fastlane/plugin/wwdr_cert")
     #fastlane_require "#{Dir.pwd}/../fastlane/plugin/wwdr_cert/AppleWWDRCA.cer"
     
@@ -89,14 +89,15 @@ platform :ios do
     # Gets the Pluginfile of the fastlane and installs the WWDR certificate
     #WWDRCert::Actions::InstallWWDRCertAction.run
     # Import the WWDR certificate into the keychain
-    sh("security import #{Dir.pwd}/../fastlane/plugin/wwdr_cert/AppleWWDRCA.cer -k ~/Library/Keychains/temp_keychain-db")
+    #sh("security import #{Dir.pwd}/../fastlane/plugin/wwdr_cert/AppleWWDRCA.cer -k ~/Library/Keychains/temp_keychain-db")
 
     # Debugging: Check if the WWDR certificate is correctly imported
-    sh("security find-certificate -a -c 'Apple Worldwide Developer Relations Certification Authority' ~/Library/Keychains/temp_keychain-db")
+    #sh("security find-certificate -a -c 'Apple Worldwide Developer Relations Certification Authority' ~/Library/Keychains/temp_keychain-db")
 
     # Debugging: Check if the keychain is unlocked
-    sh("security show-keychain-info ~/Library/Keychains/temp_keychain-db")
+    #sh("security show-keychain-info ~/Library/Keychains/temp_keychain-db")
 
+    
     # match fetches signing certificates and provisioning profiles 
     match(
       type: "appstore",
