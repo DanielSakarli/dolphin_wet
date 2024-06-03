@@ -138,7 +138,7 @@ platform :ios do
       team_id: DEVELOPMENT_TEAM_ID,
       skip_submission: true
     )
-
+ 
     # Delete the key file after it's used
     File.delete("AuthKey_#{ENV['API_KEY_ID']}.p8")
 
