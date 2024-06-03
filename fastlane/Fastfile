@@ -115,15 +115,15 @@ platform :ios do
       clean: true, # Set to false to skip cleaning,
       codesigning_identity: "", # Use the automatic signing --> manages and updates the provisioning profile
       export_method: "app-store",
-      export_options: {
-        method: "app-store",
-        provisioningProfiles: {
-            "com.dolphinwetapp.dolphinwet": "match AppStore com.dolphinwetapp.dolphinwet"
-        },
-        signingStyle: "automatic",
-        developmentTeam: DEVELOPMENT_TEAM_ID, #Found in apple developer account
-        team_id: DEVELOPMENT_TEAM_ID,
-      },
+      export_options: export_options_path,# {
+        #method: "app-store",
+        #provisioningProfiles: {
+        #    "com.dolphinwetapp.dolphinwet": "match AppStore com.dolphinwetapp.dolphinwet"
+        #},
+        #signingStyle: "automatic",
+        #developmentTeam: DEVELOPMENT_TEAM_ID, #Found in apple developer account
+        #team_id: DEVELOPMENT_TEAM_ID,
+      #},
       output_directory: "#{Dir.pwd}/build",
       output_name: "App.ipa"
     )
