@@ -54,7 +54,7 @@ platform :ios do
     # Import the WWDR certificate into the keychain
     puts "Keychains:"
     sh("ls ~/Library/Keychains")
-    sh("security import #{Dir.pwd}/../fastlane/plugin/wwdr_cert/AppleWWDRCA.cer -k ~/Library/Keychains/temp_keychain-db")
+    sh("security import #{Dir.pwd}/plugin/wwdr_cert/AppleWWDRCA.cer -k ~/Library/Keychains/temp_keychain-db")
     
     # match fetches signing certificates and provisioning profiles 
     match(
