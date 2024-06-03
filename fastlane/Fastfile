@@ -35,6 +35,7 @@ platform :ios do
     sh("cat #{Dir.pwd}/../certs/distribution/V5THZ4JXS9.p12")
     
     # Decrypt the certificate
+    puts "Arrived at the decryption section"
     storage = Match::Storage.from_params({storage_mode: "git", git_url: "https://#{GH_TOKEN}@github.com/DanielSakarli/dolphin_wet", shallow_clone: false, git_branch: MATCH_BRANCH, clone_branch_directly: false})
     storage.download
     encryption = Match::Encryption.for_storage_mode("git", { git_url: "https://#{GH_TOKEN}@github.com/DanielSakarli/dolphin_wet", working_directory: storage.working_directory})
