@@ -41,6 +41,8 @@ platform :ios do
     encryption.decrypt_files
     storage.working_directory
 
+    puts "Storage working directory: #{storage.working_directory}"
+
     # Import the .cer certificate into the keychain
     import_certificate(
       certificate_path: "#{Dir.pwd}/../certs/distribution/V5THZ4JXS9.cer",
