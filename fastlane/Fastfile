@@ -106,7 +106,7 @@ platform :ios do
       app_identifier: "com.dolphinwetapp.dolphinwet",
       team_id: DEVELOPMENT_TEAM_ID,
       #keychain_name: "temp_keychain",
-      #keychain_password: MATCH_PASSWORD,
+      keychain_password: MATCH_PASSWORD,
       api_key: api_key, # ensure correct api key is uesd for App Store Connect
       git_branch: MATCH_BRANCH, # branch to be cloned
       #Try this if cloning git repo takes too long:
