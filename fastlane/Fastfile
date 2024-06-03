@@ -11,7 +11,7 @@ platform :ios do
     MATCH_PASSWORD = ENV['MATCH_PASSWORD']
     GH_TOKEN = ENV['GH_TOKEN']
     MATCH_BRANCH = ENV['MATCH_BRANCH']
-
+    
     puts "API_KEY_ID: #{API_KEY_ID}"
     puts "API_ISSUER_ID: #{API_ISSUER_ID}"
     puts "API_AUTH_KEY: #{ENV['API_AUTH_KEY']}"
