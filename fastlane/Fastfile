@@ -32,18 +32,19 @@ platform :ios do
     sh("file #{Dir.pwd}/../certs/distribution/V5THZ4JXS9.p12")
     sh("cat #{Dir.pwd}/../certs/distribution/V5THZ4JXS9.cer")
     sh("cat #{Dir.pwd}/../certs/distribution/V5THZ4JXS9.p12")
+    
     # Import the .cer certificate into the keychain
-    #import_certificate(
-    #  certificate_path: "#{Dir.pwd}/../certs/distribution/V5THZ4JXS9.cer",
-    #  keychain_name: "temp_keychain"
-    #)
+    import_certificate(
+      certificate_path: "#{Dir.pwd}/../certs/distribution/V5THZ4JXS9.cer",
+      keychain_name: "temp_keychain"
+    )
 
     # Import the .p12 certificate into the keychain
-    #import_certificate(
-    #  certificate_path: "#{Dir.pwd}/../certs/distribution/V5THZ4JXS9.p12",
-    #  certificate_password: MATCH_PASSWORD,
-    #  keychain_name: "temp_keychain"
-    #)
+    import_certificate(
+      certificate_path: "#{Dir.pwd}/../certs/distribution/V5THZ4JXS9.p12",
+      certificate_password: MATCH_PASSWORD,
+      keychain_name: "temp_keychain"
+    )
 
     # Specify Xcode version
     xcversion(version: "15.0.1")
@@ -83,7 +84,7 @@ platform :ios do
 
     # Debugging: Check if the keychain is unlocked
     sh("security show-keychain-info ~/Library/Keychains/temp_keychain-db")
-    
+
     # match fetches signing certificates and provisioning profiles 
     match(
       type: "appstore",
