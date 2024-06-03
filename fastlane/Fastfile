@@ -11,6 +11,8 @@ platform :ios do
     MATCH_PASSWORD = ENV['MATCH_PASSWORD']
     GH_TOKEN = ENV['GH_TOKEN']
     MATCH_BRANCH = ENV['MATCH_BRANCH']
+    PROFILE_NAME = ENV['PROVISIONING_PROFILE_SPECIFIER'] # the name of the provisioning profile
+
     puts "MATCH_BRANCH: #{MATCH_BRANCH}"
     puts "API_KEY_ID: #{API_KEY_ID}"
     puts "API_ISSUER_ID: #{API_ISSUER_ID}"
@@ -73,6 +75,34 @@ platform :ios do
     rescue => e
       puts "Error during match: #{e}"
       exit 1
+    end
+
+    # Dynamically create exportOptions.plist file
+    export_options_path = "#{Dir.pwd}/../Code/frontend/exportOptions.plist"
+    File.open(export_options_path, 'w') do |file|
+      file.write <<-XML
+      <?xml version="1.0" encoding="UTF-8"?>
+      <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+      <plist version="1.0">
+      <dict>
+          <key>method</key>
+          <string>app-store</string>
+          <key>teamID</key>
+          <string>#{DEVELOPMENT_TEAM_ID}</string>
+          <key>uploadSymbols</key>
+          <true/>
+          <key>uploadBitcode</key>
+          <false/>
+          <key>compileBitcode</key>
+          <false/>
+          <key>provisioningProfiles</key>
+          <dict>
+              <key>com.dolphinwetapp.dolphinwet</key>
+              <string>#{PROFILE_NAME}</string>
+          </dict>
+      </dict>
+      </plist>
+      XML
     end
 
     # Build and archive the app using gym
