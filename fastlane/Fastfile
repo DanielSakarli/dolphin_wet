@@ -35,27 +35,28 @@ platform :ios do
     sh("cat #{Dir.pwd}/../certs/distribution/V5THZ4JXS9.p12")
     
     # Decrypt the certificate
-    puts "Arrived at the decryption section"
-    storage = Match::Storage.from_params({storage_mode: "git", git_url: "https://#{GH_TOKEN}@github.com/DanielSakarli/dolphin_wet", shallow_clone: false, git_branch: MATCH_BRANCH, clone_branch_directly: false})
-    storage.download
-    encryption = Match::Encryption.for_storage_mode("git", { git_url: "https://#{GH_TOKEN}@github.com/DanielSakarli/dolphin_wet", working_directory: storage.working_directory})
-    encryption.decrypt_files
-    storage.working_directory
+    #puts "Arrived at the decryption section"
+    #storage = Match::Storage.from_params({storage_mode: "git", git_url: "https://#{GH_TOKEN}@github.com/DanielSakarli/dolphin_wet", shallow_clone: false, git_branch: MATCH_BRANCH, clone_branch_directly: false})
+    #storage.download
+    #puts "Accessed Git repo"
+    #encryption = Match::Encryption.for_storage_mode("git", { git_url: "https://#{GH_TOKEN}@github.com/DanielSakarli/dolphin_wet", working_directory: storage.working_directory})
+    #encryption.decrypt_files
+    #storage.working_directory
 
-    puts "Storage working directory: #{storage.working_directory}"
+    #puts "Storage working directory: #{storage.working_directory}"
 
     # Import the .cer certificate into the keychain
-    import_certificate(
-      certificate_path: "#{Dir.pwd}/../certs/distribution/V5THZ4JXS9.cer",
-      keychain_name: "temp_keychain"
-    )
+    #import_certificate(
+    #  certificate_path: "#{Dir.pwd}/../certs/distribution/V5THZ4JXS9.cer",
+    #  keychain_name: "temp_keychain"
+    #)
 
     # Import the .p12 certificate into the keychain
-    import_certificate(
-      certificate_path: "#{Dir.pwd}/../certs/distribution/V5THZ4JXS9.p12",
-      certificate_password: MATCH_PASSWORD,
-      keychain_name: "temp_keychain"
-    )
+    #import_certificate(
+    #  certificate_path: "#{Dir.pwd}/../certs/distribution/V5THZ4JXS9.p12",
+    #  certificate_password: MATCH_PASSWORD,
+    #  keychain_name: "temp_keychain"
+    #)
 
     # Specify Xcode version
     xcversion(version: "15.0.1")
@@ -108,7 +109,7 @@ platform :ios do
       api_key: api_key, # ensure correct api key is uesd for App Store Connect
       git_branch: MATCH_BRANCH, # branch to be cloned
       #Try this if cloning git repo takes too long:
-      clone_branch_directly: true, # clone the branch directly
+      #clone_branch_directly: true, # clone the branch directly
     )
 
     
