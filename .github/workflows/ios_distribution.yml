@@ -83,7 +83,7 @@ jobs:
           sed -i '' "s/DEVELOPMENT_TEAM = [^;]*;/DEVELOPMENT_TEAM = $DEVELOPMENT_TEAM_ID;/g" "$PROJECT_FILE_PATH"
           sed -i '' "s/DevelopmentTeam = [^;]*;/DevelopmentTeam = $DEVELOPMENT_TEAM_ID;/g" "$PROJECT_FILE_PATH"
           sed -i '' "s/ProvisioningStyle = Manual;/ProvisioningStyle = Automatic;/g" "$PROJECT_FILE_PATH"
-          sed -i '' "s/PROVISIONING_PROFILE_SPECIFIER = [^;]*;/ProvisioningStyle = Automatic;/g" "$PROJECT_FILE_PATH"
+          #sed -i '' "s/PROVISIONING_PROFILE_SPECIFIER = [^;]*;/ProvisioningStyle = Automatic;/g" "$PROJECT_FILE_PATH"
         done
     
         echo "Set DEVELOPMENT_TEAM to $DEVELOPMENT_TEAM_ID and enabled automatic signing in $PROJECT_FILE_PATH for all targets"

@@ -1,6 +1,6 @@
 require_relative '../../node_modules/@capacitor/ios/scripts/pods_helpers'
 
-platform :ios, '17.0' #change 13.0 to 17.0 as it´s used in the xcodebuild of the workflow
+platform :ios, '13.0'
 use_frameworks!
 
 # workaround to avoid Xcode caching of Pods that requires
@@ -36,8 +36,8 @@ post_install do |installer|
       # Set code signing settings
       config.build_settings['CODE_SIGN_STYLE'] = 'Automatic'
       config.build_settings['DEVELOPMENT_TEAM'] = ENV['DEVELOPMENT_TEAM_ID']
-      config.build_settings['CODE_SIGN_IDENTITY'] = ''
-      config.build_settings['PROVISIONING_PROFILE_SPECIFIER'] = ENV['PROVISIONING_PROFILE_SPECIFIER'] || 'match App AppStore com.dolphinwetapp.dolphinwet'
+      config.build_settings['CODE_SIGN_IDENTITY'] = 'Apple Distribution'
+      config.build_settings['PROVISIONING_PROFILE_SPECIFIER'] = 'match AppStore com.dolphinwetapp.dolphinwet'
     end
   end
   ################################################################################
