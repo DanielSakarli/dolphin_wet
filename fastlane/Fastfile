@@ -28,7 +28,7 @@ platform :ios do
     #  lock_when_sleeps: true
     #)
 
-    sh("ls #{Dir.pwd}/../certs/distribution")
+    #sh("ls #{Dir.pwd}/../certs/distribution")
     #sh("file #{Dir.pwd}/../certs/distribution/V5THZ4JXS9.cer")
     #sh("file #{Dir.pwd}/../certs/distribution/V5THZ4JXS9.p12")
     #sh("cat #{Dir.pwd}/../certs/distribution/V5THZ4JXS9.cer")
