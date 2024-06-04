@@ -116,9 +116,10 @@ jobs:
         DEVELOPMENT_TEAM_ID: ${{ secrets.DEVELOPMENT_TEAM_ID }}
         GH_TOKEN: ${{ secrets.GH_TOKEN }}
         MATCH_BRANCH: ${{ secrets.MATCH_BRANCH }}
+        PROVISIONING_PROFILE_SPECIFIER: ${{ secrets.PROVISIONING_PROFILE_SPECIFIER }}
 
     - name: Upload Build Artifact
       uses: actions/upload-artifact@v2
       with:
         name: iOS App
-        path: ${{ github.workspace }}/Code/frontend/build/App.xcarchive
+        path: ${{ github.workspace }}/fastlane/build/App.xcarchive

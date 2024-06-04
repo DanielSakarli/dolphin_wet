@@ -19,7 +19,7 @@ platform :ios do
     puts "API_ISSUER_ID: #{API_ISSUER_ID}"
     puts "API_AUTH_KEY: #{ENV['API_AUTH_KEY']}"
     puts "Development Team ID: #{ENV['DEVELOPMENT_TEAM_ID']}"
-
+    puts "provisioning profile: #{PROFILE_NAME}"
 
     # Specify Xcode version
     #xcversion(version: "15.0.1")
