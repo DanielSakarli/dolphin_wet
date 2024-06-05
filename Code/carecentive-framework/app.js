@@ -77,7 +77,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(function(err, req, res, next) {
 	console.log('Incoming Reuqest Headers:', req.headers);
 	console.log('Incoming Request Body:', req.body);
-	next();
+	//next();
 	if (err) {
 		console.log('Error:', err.stack); // Log error stack trace to the console
 		res.status(500).send('Something broke!');
