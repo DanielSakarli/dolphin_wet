@@ -261,6 +261,7 @@ platform :ios do
       output_name: "Dolphin_WET_App_Debug.ipa"
     )
 
+    
     sh("ls #{Dir.pwd}/../Code/frontend/ios/App/App.xcworkspace")
 
     # Remove TestFlight upload for the debug version
