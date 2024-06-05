@@ -78,12 +78,12 @@ app.use(function(err, req, res, next) {
 	console.log('Incoming Reuqest Headers:', req.headers);
 	console.log('Incoming Request Body:', req.body);
 	//next();
-	if (err) {
+	/*if (err) {
 		console.log('Error:', err.stack); // Log error stack trace to the console
 		res.status(500).send('Something broke!');
 	  } else {
 		next();
-	  }
+	  }*/
 });
 
 
@@ -141,7 +141,7 @@ const uploadFile = require('./fileUpload');
  * However, for security purposes, it's recommended to specify the allowed origins explicitly.
  */
 //app.use(cors());
-const allowedOrigins = ['http://localhost:8100', 'https://localhost'];
+const allowedOrigins = ['http://localhost:8100', 'https://localhost', 'capacitor://localhost'];
 
 const corsOptions = {
   origin: function (origin, callback) {
