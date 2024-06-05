@@ -94,7 +94,7 @@ router.post('/login', async function(req, res, next) {
     let { token, roleName } = await UserService.login(username, password)
     console.log("Token set in login method: ", token);
     ///////TEST////////
-    res.setHeader('Set-Cookie', 'token=' + token + '; Secure; HttpOnly; SameSite=None; Path=/; Max-Age=3600');
+    res.setHeader('Set-Cookie', 'token=' + token + '; Domain=88395-17112.pph-server.de; Secure; HttpOnly; SameSite=None; Path=/; Max-Age=3600');
     ///////////////////
 
     // Try commenting out this line
