@@ -3,7 +3,7 @@ require 'base64'
 default_platform(:ios)
 
 platform :ios do
-  desc "Build and archive the app"
+  desc "Build and archive the release version of the app and upload it to TestFlight"
   lane :build do
     API_KEY_ID = ENV['API_KEY_ID']
     API_ISSUER_ID = ENV['API_ISSUER_ID']
@@ -145,4 +145,139 @@ platform :ios do
     # Delete the temporary keychain
     delete_keychain(name: "temp_keychain")
   end
+
+
+  desc "Build and archive the debug version of the app"
+  lane :build_debug do
+    API_KEY_ID = ENV['API_KEY_ID']
+    API_ISSUER_ID = ENV['API_ISSUER_ID']
+    DEVELOPMENT_TEAM_ID = ENV['DEVELOPMENT_TEAM_ID']
+    MATCH_PASSWORD = ENV['MATCH_PASSWORD']
+    GH_TOKEN = ENV['GH_TOKEN']
+    MATCH_BRANCH = ENV['MATCH_BRANCH']
+    FASTLANE_USER = ENV['FASTLANE_USER']
+    PROFILE_NAME = ENV['PROVISIONING_PROFILE_SPECIFIER'] # the name of the provisioning profile
+
+    puts "MATCH_BRANCH: #{MATCH_BRANCH}"
+    puts "API_KEY_ID: #{API_KEY_ID}"
+    puts "API_ISSUER_ID: #{API_ISSUER_ID}"
+    puts "API_AUTH_KEY: #{ENV['API_AUTH_KEY']}"
+    puts "Development Team ID: #{ENV['DEVELOPMENT_TEAM_ID']}"
+    puts "provisioning profile: #{PROFILE_NAME}"
+
+    # Decode and write the API auth key
+    File.open("AuthKey_#{API_KEY_ID}.p8", 'wb') do |file|
+      file.write(Base64.decode64(ENV['API_AUTH_KEY']))
+    end
+
+    # Create a temporary keychain to install the certificate on the running macOS machine
+    create_keychain(
+      name: "temp_keychain", 
+      password: MATCH_PASSWORD,
+      default_keychain: true,
+      unlock: true,
+      timeout: 3600,
+      lock_when_sleeps: true
+    )
+
+    puts "Current directory: #{Dir.pwd}"
+    puts "Directory contents: #{Dir.entries('.')}"
+    puts "Key file name: AuthKey_#{API_KEY_ID}.p8"
+    puts "Key file permissions: #{File.stat("AuthKey_#{API_KEY_ID}.p8").mode.to_s(8)}"
+
+    # Fetch API key for App Store Connect
+    api_key = app_store_connect_api_key(
+      key_id: API_KEY_ID,
+      issuer_id: API_ISSUER_ID,
+      key_filepath: "#{Dir.pwd}/AuthKey_#{API_KEY_ID}.p8",
+      duration: 1200,
+      in_house: false
+    )
+    
+    # Import the WWDR certificate into the keychain
+    puts "Keychains:"
+    sh("ls ~/Library/Keychains")
+    sh("security import #{Dir.pwd}/plugin/AppleWWDRCA.cer -k ~/Library/Keychains/temp_keychain-db")
+    
+    # match fetches signing certificates and provisioning profiles 
+    begin
+      match(
+        type: "development",
+        readonly: false,
+        git_url: "https://#{GH_TOKEN}@github.com/DanielSakarli/dolphin_wet_certificates",
+        app_identifier: "com.dolphinwetapp.dolphinwet",
+        team_id: DEVELOPMENT_TEAM_ID,
+        keychain_name: "temp_keychain",
+        keychain_password: MATCH_PASSWORD,
+        api_key: api_key,
+        force_for_new_devices: true # Forces match to create certificates and profiles if they don't exist
+      )
+    rescue => e
+      puts "Error during match: #{e}"
+      exit 1
+    end
+
+    # Dynamically create exportOptions.plist file
+    export_options_path = "#{Dir.pwd}/../Code/frontend/exportOptions.plist"
+    File.open(export_options_path, 'w') do |file|
+      file.write <<-XML
+      <?xml version="1.0" encoding="UTF-8"?>
+      <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+      <plist version="1.0">
+      <dict>
+          <key>method</key>
+          <string>development</string>
+          <key>teamID</key>
+          <string>#{DEVELOPMENT_TEAM_ID}</string>
+          <key>uploadSymbols</key>
+          <true/>
+          <key>uploadBitcode</key>
+          <false/>
+          <key>compileBitcode</key>
+          <false/>
+          <key>provisioningProfiles</key>
+          <dict>
+              <key>com.dolphinwetapp.dolphinwet</key>
+              <string>#{PROFILE_NAME}</string>
+          </dict>
+      </dict>
+      </plist>
+      XML
+    end
+
+    # Build and archive the app using gym
+    gym(
+      workspace: "#{Dir.pwd}/../Code/frontend/ios/App/App.xcworkspace",
+      scheme: "App",
+      sdk: "iphoneos",
+      configuration: "Debug",
+      archive_path: "#{Dir.pwd}/build/App.xcarchive",
+      clean: true,
+      codesigning_identity: "",
+      export_method: "development",
+      export_options: export_options_path,
+      output_directory: "#{Dir.pwd}/build",
+      output_name: "Dolphin_WET_App_Debug.ipa"
+    )
+
+    sh("ls #{Dir.pwd}/../Code/frontend/ios/App/App.xcworkspace")
+
+    # Remove TestFlight upload for the debug version
+    # upload_to_testflight(
+    #   ipa: "#{Dir.pwd}/build/Dolphin_WET_App_Debug.ipa",
+    #   username: FASTLANE_USER,
+    #   app_identifier: "com.dolphinwetapp.dolphinwet",
+    #   team_id: DEVELOPMENT_TEAM_ID,
+    #   skip_submission: true
+    # )
+
+    # Delete the key file after it's used
+    File.delete("AuthKey_#{ENV['API_KEY_ID']}.p8")
+
+    # Delete the temporary keychain
+    delete_keychain(name: "temp_keychain")
+  end
+end
+
+
 end
