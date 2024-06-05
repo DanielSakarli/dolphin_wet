@@ -117,6 +117,7 @@ jobs:
         GH_TOKEN: ${{ secrets.GH_TOKEN }}
         MATCH_BRANCH: ${{ secrets.MATCH_BRANCH }}
         PROVISIONING_PROFILE_SPECIFIER: ${{ secrets.PROVISIONING_PROFILE_SPECIFIER }}
+        DEVICE_UDID: ${{ secrets.DEVICE_UDID }}
 
     - name: Upload Build Artifact
       uses: actions/upload-artifact@v2

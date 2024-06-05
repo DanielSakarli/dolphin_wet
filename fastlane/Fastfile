@@ -157,6 +157,7 @@ platform :ios do
     MATCH_BRANCH = ENV['MATCH_BRANCH']
     FASTLANE_USER = ENV['FASTLANE_USER']
     PROFILE_NAME = ENV['PROVISIONING_PROFILE_SPECIFIER'] # the name of the provisioning profile
+    DEVICE_UDID = ENV['DEVICE_UDID']
 
     puts "MATCH_BRANCH: #{MATCH_BRANCH}"
     puts "API_KEY_ID: #{API_KEY_ID}"
@@ -271,11 +272,21 @@ platform :ios do
     #   skip_submission: true
     # )
 
+     # Upload IPA to Firebase
+     firebase_app_distribution(
+      app: "com.dolphinwetapp.dolphinwet",
+      ipa_path: "#{Dir.pwd}/build/Dolphin_WET_App_Debug.ipa",
+      devices: [DEVICE_UDID],
+      release_notes: "First tesing version",
+      debug: true,
+      firebase_cli_token: ENV['FIREBASE_CLI_TOKEN']
+    )
+
     # Delete the key file after it's used
     File.delete("AuthKey_#{ENV['API_KEY_ID']}.p8")
 
     # Delete the temporary keychain
     delete_keychain(name: "temp_keychain")
   end
-  
+
 end
