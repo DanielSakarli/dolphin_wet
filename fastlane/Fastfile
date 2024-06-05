@@ -273,14 +273,13 @@ platform :ios do
     #   skip_submission: true
     # )
 
-     # Upload IPA to Firebase
-     firebase_app_distribution(
-      app: "com.dolphinwetapp.dolphinwet",
-      ipa_path: "#{Dir.pwd}/build/Dolphin_WET_App_Debug.ipa",
-      devices: [DEVICE_UDID],
-      release_notes: "First tesing version",
-      debug: true,
-      firebase_cli_token: ENV['FIREBASE_CLI_TOKEN']
+    # Upload IPA to App Center
+    appcenter_upload(
+      app_name: "Dolphin WET App",
+      owner_name: "Daniel_Sakarli",
+      ipa: "#{Dir.pwd}/build/Dolphin_WET_App_Debug.ipa",
+      destinations: "Collaborators", # or the name of your distribution group
+      release_notes: "First testing version"
     )
 
     # Delete the key file after it's used
