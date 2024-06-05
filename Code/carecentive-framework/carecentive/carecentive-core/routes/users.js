@@ -79,6 +79,7 @@ router.post('/register', async function(req, res, next) {
 
 router.post('/login', async function(req, res, next) {
   try {
+    console.log('Login Request:', req.body)
     let username = req.body.username
     let password = req.body.password
 
@@ -91,7 +92,7 @@ router.post('/login', async function(req, res, next) {
     }
 
     let { token, roleName } = await UserService.login(username, password)
-
+    console.log("Token set in login method: ", token);
     ///////TEST////////
     res.setHeader('Set-Cookie', 'token=' + token + '; Secure; HttpOnly; SameSite=None; Path=/; Max-Age=3600');
     ///////////////////
@@ -102,6 +103,7 @@ router.post('/login', async function(req, res, next) {
     return res.json({ token, roleName });
   }
   catch (err) {
+    console.log("Error during login method")
     next(err)
   }
 });
