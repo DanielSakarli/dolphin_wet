@@ -119,8 +119,8 @@ jobs:
         PROVISIONING_PROFILE_SPECIFIER: ${{ secrets.PROVISIONING_PROFILE_SPECIFIER }}
         DEVICE_UDID: ${{ secrets.DEVICE_UDID }}
 
-    - name: Upload Build Artifact
+    - name: Upload IPA
       uses: actions/upload-artifact@v2
       with:
         name: iOS App
-        path: ${{ github.workspace }}/fastlane/build/App.xcarchive
+        path: "${{ github.workspace }}/fastlane/build/Dolphin_WET_App_Debug.ipa"

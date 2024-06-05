@@ -274,13 +274,13 @@ platform :ios do
     # )
 
     # Upload IPA to App Center
-    appcenter_upload(
-      app_name: "Dolphin WET App",
-      owner_name: "Daniel_Sakarli",
-      ipa: "#{Dir.pwd}/build/Dolphin_WET_App_Debug.ipa",
-      destinations: "Collaborators", # or the name of your distribution group
-      release_notes: "First testing version"
-    )
+    #appcenter_upload(
+    #  app_name: "Dolphin WET App",
+    #  owner_name: "Daniel_Sakarli",
+    #  ipa: "#{Dir.pwd}/build/Dolphin_WET_App_Debug.ipa",
+    #  destinations: "Collaborators", # or the name of your distribution group
+    #  release_notes: "First testing version"
+    #)
 
     # Delete the key file after it's used
     File.delete("AuthKey_#{ENV['API_KEY_ID']}.p8")
