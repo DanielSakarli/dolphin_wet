@@ -78,7 +78,12 @@ app.use(function(req, res, next) {
 	console.log('Incoming Reuqest Headers:', req.headers);
 	console.log('Incoming Request Body:', req.body);
 	next();
-
+	if (err) {
+		console.error('Error:', err.stack); // Log error stack trace to the console
+		res.status(500).send('Something broke!');
+	  } else {
+		next();
+	  }
 });
 
 
