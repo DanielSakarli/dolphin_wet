@@ -73,6 +73,14 @@ app.use(express.static(path.join(__dirname, 'public')));
 	name: 'session' //Try giving a name to the cookie
 }));*/
 
+// Trying to visualize the headers of incoming requests:
+app.use((req, res, next) => {
+	console.log('Incoming Reuqest Headers:', req.headers);
+	next();
+
+})
+
+
 /**
  * Dolphin Wet Routers
  */
