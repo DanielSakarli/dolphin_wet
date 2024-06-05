@@ -106,6 +106,23 @@ async function setResult(req, res, next) {
 					console.log('test result marks path: ', test_result.marks_photo_path, 'for dolphin: ', test_result.dolphin_name);
 					}
 				}
+
+				if(req.session.photo_path.silhouette_photo_path != 'empty')
+					{
+						console.log('Photo path in req.session in good_health.js: ' + req.session.photo_path.silhouette_photo_path);
+					// Iterate over the arrays in test_result
+					
+						// Check if the dolphin_name in the array is e.g. 'Dolly'
+						if (test_result.dolphin_name === req.session.dolphin_name) {
+						// Append silhouette_photo_path to the array
+						test_result.silhouette_photo_path = req.session.photo_path.silhouette_photo_path.toString();
+						//fileData = fs.readFileSync(test_result.silhouette_photo_path);
+						//test_result.image = fileData;
+						//console.log(fileData);
+						console.log('test result silhouette path: ', test_result.silhouette_photo_path, 'for dolphin: ', test_result.dolphin_name);
+					}
+					
+					}
 			
 				if(req.session.video_path != 'empty')
 					{

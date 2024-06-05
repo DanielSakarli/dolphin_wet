@@ -94,6 +94,21 @@ const storage = multer.diskStorage({
         }
         console.log(req.session.photo_path.marks_photo_path);
     }
+    if(req.body.photo_type === 'silhouette'){
+      console.log('I am at silhouette: ' + req.session.photo_path.silhouette_photo_path);
+      if(req.session.photo_path.silhouette_photo_path === 'empty'){ //If empty, session storage has just been initialized
+        //First photo in the list
+        req.session.photo_path.silhouette_photo_path = apiUrl + '/api/images/' + `${uniqueSuffix}${path.extname(
+          file.originalname
+        )}`;
+      } else {
+        //Commaseparated list of photo paths if several photos to upload
+        req.session.photo_path.silhouette_photo_path = req.session.photo_path.silhouette_photo_path + ',' + apiUrl + '/api/images/' + `${uniqueSuffix}${path.extname(
+          file.originalname
+        )}`;
+      }
+      console.log(req.session.photo_path.silhouette_photo_path);
+    }
     currentIndex++; //increment the index to get the next photo filename
 	},
 });
@@ -115,41 +130,11 @@ const uploadMultiple = upload.array('files');
  * @returns {Object} The inserted test result
  */
 async function uploadPhoto(req, res, next) {
-    try {
-    //console.log(req.body);
-    /*const errors = validationResult(req);
-		if (!errors.isEmpty()) {
-			// Handle validation errors
-			return res.status(400).json({ error: errors.array() });
-		}*/
-
-		// After gone through the authenticateToken middleware
-		// the data of user is in the req.authData
-		let userID;
-		let userName;
-		//if (isUserAuth) {
-			//const { user_id, name } = req.authData;
-			//console.log('authdata: ', req.authData);
-			//userID = user_id;
-			//userName = name;
-		//} else {
-			//userID = 1;
-		//}
-    
+    try {    
     console.log('currentIndex: ', currentIndex);
-    //console.log('marks photo path in photoUpload.js: ',req.session.photo_path.marks_photo_path);
-    /*req.session.photo_type = ''; // Reset the photo_path in session storage, so no duplicate photo paths
-    req.session.dolphin_name = '';
-    req.session.photo_path = {
-      eye_photo_path: '',
-      teeth_photo_path: '',
-      odontogramm_photo_path: '',
-      //marks_photo_path: ''
-    };*/
     currentIndex = 0; // Reset the index before each photo upload
     //console.log('Photo path accessed  from session storage: ' + photo_path.eye_photo_path.toString());
-
-    //console.log(photo_type); // Either 'eye' or 'teeth'
+    //console.log(photo_type);
 
     // Wrap uploadMultiple in a new Promise
     await new Promise((resolve, reject) => {
@@ -175,24 +160,7 @@ async function uploadPhoto(req, res, next) {
     })
     .catch(err => {
       res.status(err.status).json();
-    });    
-
-    /*uploadMultiple(req, res, function (err) {
-      console.log('Reached photoUpload.js uploadMultiple');
-      if (err instanceof multer.MulterError) {
-        // A Multer error occurred when uploading.
-        console.log('Multer error: ', err);
-        res.status(400).json(); //res.sendStatus(401); 
-      } else if (err) {
-        // An unknown error occurred when uploading.
-        console.log('Unknown error: ', err);
-        res.status(500).json(); //res.sendStatus(500); 
-      } else {
-        // Everything went fine.
-        console.log('Photo uploaded successfully');
-        res.status(201).json(); //res.sendStatus(201); //picture uploaded successfully
-        }
-    })*/
+    });
     } catch (error) {
     console.error(error);
     // An unknown error occurred

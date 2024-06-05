@@ -703,6 +703,20 @@
 				criteria === 'sixthCriteriaHealth'
 			"
 		>
+			<ion-card-title class="card-title" style="margin-bottom: 15px"
+				>Upload your silhouette drawings here</ion-card-title
+			>
+			<ion-item>
+				<PhotoUpload @form-submitted="handleFormSubmittedSilhouettePhoto" />
+			</ion-item>
+		</ion-card>
+		<ion-card
+			v-if="
+				dolphinSelect &&
+				dolphinSelect.length !== 0 &&
+				criteria === 'sixthCriteriaHealth'
+			"
+		>
 			<ion-card-title class="card-title">{{
 				$t('thirteenthSubCriteriaHealth')
 			}}</ion-card-title>
@@ -892,6 +906,7 @@ export default {
 				teeth_photo_path: '',
 				odontogramm_photo_path: '',
 				marks_photo_path: '',
+				silhouette_photo_path: '',
 				file_path: '',
 				dolphin_name: '',
 				video_path: '',
@@ -959,6 +974,7 @@ export default {
 					teeth_photo_path: '',
 					odontogramm_photo_path: '',
 					marks_photo_path: '',
+					silhouette_photo_path: '',
 					file_path: '',
 					video_path: '',
 					dolphin_name: '',
@@ -1004,6 +1020,7 @@ export default {
 					teeth_photo_path: '',
 					odontogramm_photo_path: '',
 					marks_photo_path: '',
+					silhouette_photo_path: '',
 					file_path: '',
 					video_path: '',
 					dolphin_name: '',
@@ -1034,6 +1051,7 @@ export default {
 					teeth_photo_path: '',
 					odontogramm_photo_path: '',
 					marks_photo_path: '',
+					silhouette_photo_path: '',
 					file_path: '',
 					video_path: '',
 					dolphin_name: '',
@@ -1064,6 +1082,7 @@ export default {
 					teeth_photo_path: '',
 					odontogramm_photo_path: '',
 					marks_photo_path: '',
+					silhouette_photo_path: '',
 					file_path: '',
 					video_path: '',
 					dolphin_name: '',
@@ -1093,6 +1112,7 @@ export default {
 					teeth_photo_path: '',
 					odontogramm_photo_path: '',
 					marks_photo_path: '',
+					silhouette_photo_path: '',
 					file_path: '',
 					video_path: '',
 					dolphin_name: '',
@@ -1103,6 +1123,36 @@ export default {
 					newFormData.append('dolphin_name', this.dolphinSelect || ''); // Append the dolphin name with a default value of an empty string
 				}
 				newFormData.append('photo_type', 'marks'); //Append the photo type
+				// Then append the rest of the fields
+
+				console.log('Number of pictures: ' + files.length);
+
+				for (let i = 0; i < files.length; i++) {
+					console.log(files[i]);
+					newFormData.append('files', files[i]);
+				}
+				this.formData.push(newFormData);
+			}
+		},
+		handleFormSubmittedSilhouettePhoto(files: File[]) {
+			if (files && this.dolphinSelect != '') {
+				this.sessionStorage = {
+					photo_type: '',
+					eye_photo_path: '',
+					teeth_photo_path: '',
+					odontogramm_photo_path: '',
+					marks_photo_path: '',
+					silhouette_photo_path: '',
+					file_path: '',
+					video_path: '',
+					dolphin_name: '',
+				};
+				console.log('Form Data accessed in HealthCheckCriteriaSelector.vue:');
+				const newFormData = new FormData();
+				if (this.dolphinSelect != '') {
+					newFormData.append('dolphin_name', this.dolphinSelect || ''); // Append the dolphin name with a default value of an empty string
+				}
+				newFormData.append('photo_type', 'silhouette'); //Append the photo type
 				// Then append the rest of the fields
 
 				console.log('Number of pictures: ' + files.length);

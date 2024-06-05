@@ -194,7 +194,8 @@ app.post('/api/setup_session_storage', (req, res, next) => {
 			eye_photo_path: 'empty',
 			teeth_photo_path: 'empty',
 			odontogramm_photo_path: 'empty',
-			marks_photo_path: 'empty'
+			marks_photo_path: 'empty',
+			silhouette_photo_path: 'empty'
 		};
 		req.session.video_path = 'empty'; 
 		req.session.file_path = []; //file_path; // For the nutrition section, laboratory data files
