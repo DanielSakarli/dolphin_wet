@@ -76,9 +76,12 @@ app.use(express.static(path.join(__dirname, 'public')));
 // Trying to visualize the headers of incoming requests:
 app.use(function(req, res, next) {
 	console.log('Incoming Reuqest Headers:', req.headers);
+	console.log('Incoming Request Body:', req.body);
 	next();
 
 });
+
+
 
 
 
