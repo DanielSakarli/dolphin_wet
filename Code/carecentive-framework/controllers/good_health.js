@@ -114,6 +114,7 @@ async function setResult(req, res, next) {
 					
 						// Check if the dolphin_name in the array is e.g. 'Dolly'
 						if (test_result.dolphin_name === req.session.dolphin_name) {
+						console.log('Dolphin for which silhouette photo will be uploaded');
 						// Append silhouette_photo_path to the array
 						test_result.silhouette_photo_path = req.session.photo_path.silhouette_photo_path.toString();
 						//fileData = fs.readFileSync(test_result.silhouette_photo_path);
