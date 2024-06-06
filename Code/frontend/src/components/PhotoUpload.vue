@@ -2,11 +2,11 @@
 	<ion-content>
 		<div class="container">
 			<!--<h2>File Upload</h2>-->
-			<form id="`photoForm-${id}`">
+			<form :id="`photoForm-${id}`">
 				<div class="input-group">
-					<label for="`photoFiles-${id}`"> </label>
+					<label :for="`photoFiles-${id}`"> </label>
 					<input
-						id="`photoFiles-${id}`"
+						:id="`photoFiles-${id}`"
 						name="files"
 						type="file"
 						multiple
