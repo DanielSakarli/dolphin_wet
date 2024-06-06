@@ -35,7 +35,7 @@ async function setResult(req, res, next) {
 		//req.session.photo_path = {};
 		//console.log('App.use Photo_path in session storage: ' + req.session.photo_path);
 			
-		if(req.session && (req.session.photo_path.eye_photo_path != 'empty' || req.session.photo_path.teeth_photo_path != 'empty' || req.session.photo_path.odontogramm_photo_path != 'empty' || req.session.photo_path.marks_photo_path != 'empty' || req.session.video_path != 'empty')) {
+		if(req.session && (req.session.photo_path.eye_photo_path != 'empty' || req.session.photo_path.teeth_photo_path != 'empty' || req.session.photo_path.odontogramm_photo_path != 'empty' || req.session.photo_path.marks_photo_path != 'empty' || req.session.silhouette_photo_path != 'empty' || req.session.video_path != 'empty')) {
 			// attach userID to test result in req.body
 			let test_result = req.body;
 			test_result = { user_id: userID, user_name: userName, ...test_result };

@@ -27,6 +27,7 @@ import { defineComponent } from 'vue';
 //import axios from 'axios';
 
 export default defineComponent({
+	props: ['id'],
 	components: {
 		IonContent,
 	},
@@ -93,7 +94,7 @@ export default defineComponent({
 					//console.log(formData.get('files'));
 					//console.log(file);
 
-					this.$emit('form-submitted', files);
+					this.$emit('form-submitted', { id: this.id, files: files });
 				}
 			}
 		},

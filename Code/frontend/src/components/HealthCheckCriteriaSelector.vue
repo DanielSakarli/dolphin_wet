@@ -312,7 +312,7 @@
 				>Upload your eye photos here</ion-card-title
 			>
 			<ion-item>
-				<PhotoUpload @form-submitted="handleFormSubmittedEyePhoto" />
+				<PhotoUpload id="eye" @form-submitted="handleFormSubmittedEyePhoto" />
 			</ion-item>
 		</ion-card>
 		<ion-card
@@ -431,7 +431,10 @@
 				>Upload your teeth photos here</ion-card-title
 			>
 			<ion-item>
-				<PhotoUpload @form-submitted="handleFormSubmittedTeethPhoto" />
+				<PhotoUpload
+					id="teeth"
+					@form-submitted="handleFormSubmittedTeethPhoto"
+				/>
 			</ion-item>
 		</ion-card>
 		<ion-card
@@ -475,7 +478,10 @@
 				>Upload your odontogramms here</ion-card-title
 			>
 			<ion-item>
-				<PhotoUpload @form-submitted="handleFormSubmittedOdontogrammPhoto" />
+				<PhotoUpload
+					id="odontogramm"
+					@form-submitted="handleFormSubmittedOdontogrammPhoto"
+				/>
 			</ion-item>
 		</ion-card>
 		<ion-card
@@ -693,7 +699,10 @@
 				>Upload your marks photos here</ion-card-title
 			>
 			<ion-item>
-				<PhotoUpload @form-submitted="handleFormSubmittedMarksPhoto" />
+				<PhotoUpload
+					id="marks"
+					@form-submitted="handleFormSubmittedMarksPhoto"
+				/>
 			</ion-item>
 		</ion-card>
 		<ion-card
@@ -707,7 +716,10 @@
 				>Upload your silhouette drawings here</ion-card-title
 			>
 			<ion-item>
-				<PhotoUpload @form-submitted="handleFormSubmittedSilhouettePhoto" />
+				<PhotoUpload
+					id="silhouette"
+					@form-submitted="handleFormSubmittedSilhouettePhoto"
+				/>
 			</ion-item>
 		</ion-card>
 		<ion-card
@@ -1012,7 +1024,7 @@ export default {
 				console.log(...this.formDataVideo);
 			}
 		},
-		handleFormSubmittedEyePhoto(files: File[]) {
+		handleFormSubmittedEyePhoto({ id, files }: { id: string; files: File[] }) {
 			if (files && this.dolphinSelect != '') {
 				this.sessionStorage = {
 					photo_type: '',
@@ -1039,11 +1051,21 @@ export default {
 					console.log(files[i]);
 					newFormData.append('files', files[i]);
 				}
-				this.formData.push(newFormData);
+				// This check prevents the video to be overwritten by one of the other video upload components
+				if (id === 'eye') {
+					this.formData.push(newFormData);
+				}
+				//this.formData.push(newFormData);
 				console.log(...this.formData);
 			}
 		},
-		handleFormSubmittedOdontogrammPhoto(files: File[]) {
+		handleFormSubmittedOdontogrammPhoto({
+			id,
+			files,
+		}: {
+			id: string;
+			files: File[];
+		}) {
 			if (files && this.dolphinSelect != '') {
 				this.sessionStorage = {
 					photo_type: '',
@@ -1070,11 +1092,21 @@ export default {
 					console.log(files[i]);
 					newFormData.append('files', files[i]);
 				}
-				this.formData.push(newFormData);
+				// This check prevents the video to be overwritten by one of the other video upload components
+				if (id === 'odontogramm') {
+					this.formData.push(newFormData);
+				}
+				//this.formData.push(newFormData);
 				console.log(...this.formData);
 			}
 		},
-		handleFormSubmittedTeethPhoto(files: File[]) {
+		handleFormSubmittedTeethPhoto({
+			id,
+			files,
+		}: {
+			id: string;
+			files: File[];
+		}) {
 			if (files && this.dolphinSelect != '') {
 				this.sessionStorage = {
 					photo_type: '',
@@ -1101,10 +1133,20 @@ export default {
 					console.log(files[i]);
 					newFormData.append('files', files[i]);
 				}
-				this.formData.push(newFormData);
+				// This check prevents the video to be overwritten by one of the other video upload components
+				if (id === 'teeth') {
+					this.formData.push(newFormData);
+				}
+				//this.formData.push(newFormData);
 			}
 		},
-		handleFormSubmittedMarksPhoto(files: File[]) {
+		handleFormSubmittedMarksPhoto({
+			id,
+			files,
+		}: {
+			id: string;
+			files: File[];
+		}) {
 			if (files && this.dolphinSelect != '') {
 				this.sessionStorage = {
 					photo_type: '',
@@ -1131,10 +1173,20 @@ export default {
 					console.log(files[i]);
 					newFormData.append('files', files[i]);
 				}
-				this.formData.push(newFormData);
+				// This check prevents the video to be overwritten by one of the other video upload components
+				if (id === 'marks') {
+					this.formData.push(newFormData);
+				}
+				//this.formData.push(newFormData);
 			}
 		},
-		handleFormSubmittedSilhouettePhoto(files: File[]) {
+		handleFormSubmittedSilhouettePhoto({
+			id,
+			files,
+		}: {
+			id: string;
+			files: File[];
+		}) {
 			if (files && this.dolphinSelect != '') {
 				this.sessionStorage = {
 					photo_type: '',
@@ -1161,7 +1213,11 @@ export default {
 					console.log(files[i]);
 					newFormData.append('files', files[i]);
 				}
-				this.formData.push(newFormData);
+				// This check prevents the video to be overwritten by one of the other video upload components
+				if (id === 'silhouette') {
+					this.formData.push(newFormData);
+				}
+				//this.formData.push(newFormData);
 			}
 		},
 		async setupSessionStorage() {
