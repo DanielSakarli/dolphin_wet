@@ -2,11 +2,11 @@
 	<ion-content>
 		<div class="container">
 			<!--<h2>File Upload</h2>-->
-			<form id="photoForm">
+			<form id="`photoForm-${id}`">
 				<div class="input-group">
-					<label for="files"> </label>
+					<label for="`photoFiles-${id}`"> </label>
 					<input
-						id="photoFiles"
+						id="`photoFiles-${id}`"
 						name="files"
 						type="file"
 						multiple
@@ -31,26 +31,23 @@ export default defineComponent({
 	components: {
 		IonContent,
 	},
-	data() {
-		return {
-			//form: null,
-		};
-	},
 	methods: {
 		submitForm(e: Event) {
 			// prevents the default behavior of the browser, which is to perform a full page reload.
 			// I have no idea wether you need this in ionic.
 			e.preventDefault();
+			const formId = `photoForm-${this.id}`;
+			const filesInputId = `photoFiles-${this.id}`;
 
-			const form = document.getElementById('photoForm');
+			const form = document.getElementById(formId);
 
 			if (form) {
 				console.log('submitForm in photoUpload.vue');
 				// get the files from the input form
 				const filesInput = document.getElementById(
-					'photoFiles'
+					filesInputId
 				) as HTMLInputElement;
-				if (filesInput) {
+				if (filesInput && filesInput.files) {
 					const files = filesInput.files;
 
 					// create a new FormData object, you can learn more here

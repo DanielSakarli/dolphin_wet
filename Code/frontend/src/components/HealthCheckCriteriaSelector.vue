@@ -312,7 +312,7 @@
 				>Upload your eye photos here</ion-card-title
 			>
 			<ion-item>
-				<PhotoUpload id="eye" @form-submitted="handleFormSubmittedEyePhoto" />
+				<PhotoUpload id="eye" @form-submitted="handleFormSubmittedPhoto" />
 			</ion-item>
 		</ion-card>
 		<ion-card
@@ -431,10 +431,7 @@
 				>Upload your teeth photos here</ion-card-title
 			>
 			<ion-item>
-				<PhotoUpload
-					id="teeth"
-					@form-submitted="handleFormSubmittedTeethPhoto"
-				/>
+				<PhotoUpload id="teeth" @form-submitted="handleFormSubmittedPhoto" />
 			</ion-item>
 		</ion-card>
 		<ion-card
@@ -480,7 +477,7 @@
 			<ion-item>
 				<PhotoUpload
 					id="odontogramm"
-					@form-submitted="handleFormSubmittedOdontogrammPhoto"
+					@form-submitted="handleFormSubmittedPhoto"
 				/>
 			</ion-item>
 		</ion-card>
@@ -699,10 +696,7 @@
 				>Upload your marks photos here</ion-card-title
 			>
 			<ion-item>
-				<PhotoUpload
-					id="marks"
-					@form-submitted="handleFormSubmittedMarksPhoto"
-				/>
+				<PhotoUpload id="marks" @form-submitted="handleFormSubmittedPhoto" />
 			</ion-item>
 		</ion-card>
 		<ion-card
@@ -718,7 +712,7 @@
 			<ion-item>
 				<PhotoUpload
 					id="silhouette"
-					@form-submitted="handleFormSubmittedSilhouettePhoto"
+					@form-submitted="handleFormSubmittedPhoto"
 				/>
 			</ion-item>
 		</ion-card>
@@ -1024,7 +1018,7 @@ export default {
 				console.log(...this.formDataVideo);
 			}
 		},
-		handleFormSubmittedEyePhoto({ id, files }: { id: string; files: File[] }) {
+		handleFormSubmittedPhoto({ id, files }: { id: string; files: File[] }) {
 			if (files && this.dolphinSelect != '') {
 				this.sessionStorage = {
 					photo_type: '',
@@ -1042,19 +1036,28 @@ export default {
 				if (this.dolphinSelect != '') {
 					newFormData.append('dolphin_name', this.dolphinSelect || ''); // Append the dolphin name with a default value of an empty string
 				}
-				newFormData.append('photo_type', 'eye'); //Append the photo type
-				// Then append the rest of the fields
 
+				// Then append the rest of the fields
 				console.log('Number of pictures: ' + files.length);
+
+				// This check prevents the photo to be overwritten by one of the other photo uploads
+				if (id === 'eye') {
+					newFormData.append('photo_type', 'eye'); //Append the photo type
+				} else if (id === 'teeth') {
+					newFormData.append('photo_type', 'teeth'); //Append the photo type
+				} else if (id === 'odontogramm') {
+					newFormData.append('photo_type', 'odontogramm'); //Append the photo type
+				} else if (id === 'marks') {
+					newFormData.append('photo_type', 'marks'); //Append the photo type
+				} else if (id === 'silhouette') {
+					newFormData.append('photo_type', 'silhouette'); //Append the photo type
+				}
 
 				for (let i = 0; i < files.length; i++) {
 					console.log(files[i]);
 					newFormData.append('files', files[i]);
 				}
-				// This check prevents the video to be overwritten by one of the other video upload components
-				if (id === 'eye') {
-					this.formData.push(newFormData);
-				}
+				this.formData.push(newFormData);
 				//this.formData.push(newFormData);
 				console.log(...this.formData);
 			}
