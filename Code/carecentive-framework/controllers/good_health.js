@@ -106,7 +106,6 @@ async function setResult(req, res, next) {
 					console.log('test result marks path: ', test_result.marks_photo_path, 'for dolphin: ', test_result.dolphin_name);
 					}
 				}
-
 				if(req.session.photo_path.silhouette_photo_path != 'empty')
 					{
 						console.log('Photo path in req.session in good_health.js: ' + req.session.photo_path.silhouette_photo_path);

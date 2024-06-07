@@ -312,6 +312,18 @@
 				>Upload your eye photos here</ion-card-title
 			>
 			<ion-item>
+				<ion-thumbnail slot="start">
+					<img
+						v-if="previewImageUrl && previewImageUrl != ''"
+						:src="previewImageUrl"
+					/>
+				</ion-thumbnail>
+				<ion-button type="button" fill="clear" @click="takePhoto">
+					<ion-icon slot="start" :icon="camera"></ion-icon>
+					{{ $t('photo') }}
+				</ion-button>
+			</ion-item>
+			<ion-item>
 				<PhotoUpload id="eye" @form-submitted="handleFormSubmittedPhoto" />
 			</ion-item>
 		</ion-card>
@@ -794,7 +806,7 @@
 
 <script lang="ts">
 import { camera } from 'ionicons/icons';
-//import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
+import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
 import CheckComments from '@/components/CheckComments.vue';
 import PhotoUpload from '@/components/PhotoUpload.vue';
 import VideoUpload from '@/components/VideoUpload.vue';
@@ -1664,6 +1676,7 @@ export default {
 				this.storeCheckedValues();
 				console.log(evaluationHealthStore.requestBodiesHealth);
 
+				this.previewImageUrl = ''; //Reset the preview image
 				toast.success("Saved temporarily. Click 'Finish Tests' in the end!", {
 					autoClose: 1000,
 				});
@@ -1685,9 +1698,9 @@ export default {
 					case 'fifthCriteriaHealth':
 						this.criteria = 'sixthCriteriaHealth';
 						break;
-					case 'sixthCriteriaHealth':
+					/*case 'sixthCriteriaHealth':
 						this.criteria = 'firstCriteriaHealth';
-						break;
+						break;*/
 					default:
 						this.criteria = 'firstCriteriaHealth';
 				}
@@ -1715,7 +1728,6 @@ export default {
 							desiredFormData.push(this.formData[i]);
 							console.log('Found the desired form data: ', ...desiredFormData);
 						}
-						//break;
 					}
 				}
 
@@ -1748,13 +1760,14 @@ export default {
 					}
 					//Reset the form data
 					desiredFormData = [];
+					this.previewImageUrl = '';
 					//console.log('Resetted form data: '+ this.formData);
 				}
 			}
 		},
 		async videoUpload(dolphin_name: string) {
 			// This method is called for one dolphin at a time
-			// Check if there is a photo to upload
+			// Check if there is a video to upload
 			if (this.formDataVideo != null) {
 				// Find the FormData object with the desired dolphin_name
 				console.log('Length formData array: ', this.formDataVideo.length);
@@ -1788,7 +1801,7 @@ export default {
 							})
 							.catch((error: any) => {
 								console.error(
-									'Error during photo Upload:',
+									'Error during video Upload:',
 									JSON.stringify(error)
 								);
 							});
@@ -1799,17 +1812,38 @@ export default {
 				}
 			}
 		},
-		/*
-		async takePhoto(){
+
+		async takePhoto({ id }: { id: string }) {
 			const photo = await Camera.getPhoto({
 				resultType: CameraResultType.Uri,
 				source: CameraSource.Camera,
-				quality: 60
+				allowEditing: false,
+				quality: 90,
 			});
-			if (photo.webPath !== undefined) {
-				this.previewImageUrl = photo.webPath;
-			}	
-		}*/
+
+			if (this.dolphinSelect != '' && photo.webPath) {
+				this.previewImageUrl = photo.webPath; //Preview of the image on the mobile phone´s screen
+				const newFormData = new FormData();
+
+				// This check prevents the photo to be overwritten by one of the other photo uploads
+				if (id === 'eye') {
+					newFormData.append('photo_type', 'eye'); //Append the photo type
+				} else if (id === 'teeth') {
+					newFormData.append('photo_type', 'teeth'); //Append the photo type
+				} else if (id === 'odontogramm') {
+					newFormData.append('photo_type', 'odontogramm'); //Append the photo type
+				} else if (id === 'marks') {
+					newFormData.append('photo_type', 'marks'); //Append the photo type
+				} else if (id === 'silhouette') {
+					newFormData.append('photo_type', 'silhouette'); //Append the photo type
+				}
+
+				newFormData.append('dolphin_name', this.dolphinSelect || ''); // Append the dolphin name with a default value of an empty string
+				newFormData.append('files', photo.webPath); //Append the photo to the formdata
+				this.formData.push(newFormData);
+				console.log(...this.formData);
+			}
+		},
 		/*emitSubCriteriaUpdated() {
             const SubCriteria = this.SubCriteria;
             

@@ -1,7 +1,7 @@
 import { CapacitorConfig } from '@capacitor/cli';
 
 const config: CapacitorConfig = {
-	appId: 'com.dolphinwetapp.dolphinwet',
+	appId: 'io.ionic.starter',
 
 	appName: 'Dolphin WET',
 

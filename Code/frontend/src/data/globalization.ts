@@ -1,6 +1,6 @@
 export const globalizationList = {
 	de: {
-		photo: 'Foto hinzufügen',
+		photo: 'Kamera öffnen',
 		//Transaltion App Menu
 		menu: 'Menü',
 		evaluation: 'Evaluation',
@@ -160,7 +160,7 @@ export const globalizationList = {
 		savingDataNext: 'Möchten Sie die Daten speichern und fortfahren?',
 	},
 	en: {
-		photo: 'Add photo',
+		photo: 'Open camera',
 		//Transaltion App Menu
 		menu: 'Menu',
 		evaluation: 'Evaluation',
