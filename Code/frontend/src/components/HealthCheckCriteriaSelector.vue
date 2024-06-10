@@ -264,6 +264,9 @@
 			<ion-item>
 				<VideoUpload id="video1" @form-submitted="handleFormSubmittedVideo" />
 			</ion-item>
+			<ion-item>
+				Total file size: {{ totalFileSize.toFixed(2) }} MB / 10 MB
+			</ion-item>
 		</ion-card>
 		<ion-card
 			v-if="
@@ -314,17 +317,24 @@
 			<ion-item>
 				<ion-thumbnail slot="start">
 					<img
-						v-if="previewImageUrl && previewImageUrl != ''"
+						v-if="
+							lastPictureType === 'eye' &&
+							previewImageUrl &&
+							previewImageUrl != ''
+						"
 						:src="previewImageUrl"
 					/>
 				</ion-thumbnail>
-				<ion-button type="button" fill="clear" @click="takePhoto">
+				<ion-button type="button" fill="clear" @click="takePhoto('eye')">
 					<ion-icon slot="start" :icon="camera"></ion-icon>
 					{{ $t('photo') }}
 				</ion-button>
 			</ion-item>
 			<ion-item>
 				<PhotoUpload id="eye" @form-submitted="handleFormSubmittedPhoto" />
+			</ion-item>
+			<ion-item>
+				Total file size: {{ totalFileSize.toFixed(2) }} MB / 10 MB
 			</ion-item>
 		</ion-card>
 		<ion-card
@@ -401,6 +411,9 @@
 			<ion-item>
 				<VideoUpload id="video2" @form-submitted="handleFormSubmittedVideo" />
 			</ion-item>
+			<ion-item>
+				Total file size: {{ totalFileSize.toFixed(2) }} MB / 10 MB
+			</ion-item>
 		</ion-card>
 		<ion-card
 			v-if="
@@ -443,7 +456,26 @@
 				>Upload your teeth photos here</ion-card-title
 			>
 			<ion-item>
+				<ion-thumbnail slot="start">
+					<img
+						v-if="
+							lastPictureType === 'teeth' &&
+							previewImageUrl &&
+							previewImageUrl != ''
+						"
+						:src="previewImageUrl"
+					/>
+				</ion-thumbnail>
+				<ion-button type="button" fill="clear" @click="takePhoto('teeth')">
+					<ion-icon slot="start" :icon="camera"></ion-icon>
+					{{ $t('photo') }}
+				</ion-button>
+			</ion-item>
+			<ion-item>
 				<PhotoUpload id="teeth" @form-submitted="handleFormSubmittedPhoto" />
+			</ion-item>
+			<ion-item>
+				Total file size: {{ totalFileSize.toFixed(2) }} MB / 10 MB
 			</ion-item>
 		</ion-card>
 		<ion-card
@@ -487,10 +519,33 @@
 				>Upload your odontogramms here</ion-card-title
 			>
 			<ion-item>
+				<ion-thumbnail slot="start">
+					<img
+						v-if="
+							lastPictureType === 'odontogramm' &&
+							previewImageUrl &&
+							previewImageUrl != ''
+						"
+						:src="previewImageUrl"
+					/>
+				</ion-thumbnail>
+				<ion-button
+					type="button"
+					fill="clear"
+					@click="takePhoto('odontogramm')"
+				>
+					<ion-icon slot="start" :icon="camera"></ion-icon>
+					{{ $t('photo') }}
+				</ion-button>
+			</ion-item>
+			<ion-item>
 				<PhotoUpload
 					id="odontogramm"
 					@form-submitted="handleFormSubmittedPhoto"
 				/>
+			</ion-item>
+			<ion-item>
+				Total file size: {{ totalFileSize.toFixed(2) }} MB / 10 MB
 			</ion-item>
 		</ion-card>
 		<ion-card
@@ -505,6 +560,9 @@
 			>
 			<ion-item>
 				<VideoUpload id="video3" @form-submitted="handleFormSubmittedVideo" />
+			</ion-item>
+			<ion-item>
+				Total file size: {{ totalFileSize.toFixed(2) }} MB / 10 MB
 			</ion-item>
 		</ion-card>
 		<ion-card
@@ -551,6 +609,9 @@
 			>
 			<ion-item>
 				<VideoUpload id="video4" @form-submitted="handleFormSubmittedVideo" />
+			</ion-item>
+			<ion-item>
+				Total file size: {{ totalFileSize.toFixed(2) }} MB / 10 MB
 			</ion-item>
 		</ion-card>
 		<ion-card
@@ -662,6 +723,9 @@
 			<ion-item>
 				<VideoUpload id="video5" @form-submitted="handleFormSubmittedVideo" />
 			</ion-item>
+			<ion-item>
+				Total file size: {{ totalFileSize.toFixed(2) }} MB / 10 MB
+			</ion-item>
 		</ion-card>
 		<ion-card
 			v-if="
@@ -708,7 +772,26 @@
 				>Upload your marks photos here</ion-card-title
 			>
 			<ion-item>
+				<ion-thumbnail slot="start">
+					<img
+						v-if="
+							lastPictureType === 'marks' &&
+							previewImageUrl &&
+							previewImageUrl != ''
+						"
+						:src="previewImageUrl"
+					/>
+				</ion-thumbnail>
+				<ion-button type="button" fill="clear" @click="takePhoto('marks')">
+					<ion-icon slot="start" :icon="camera"></ion-icon>
+					{{ $t('photo') }}
+				</ion-button>
+			</ion-item>
+			<ion-item>
 				<PhotoUpload id="marks" @form-submitted="handleFormSubmittedPhoto" />
+			</ion-item>
+			<ion-item>
+				Total file size: {{ totalFileSize.toFixed(2) }} MB / 10 MB
 			</ion-item>
 		</ion-card>
 		<ion-card
@@ -722,10 +805,29 @@
 				>Upload your silhouette drawings here</ion-card-title
 			>
 			<ion-item>
+				<ion-thumbnail slot="start">
+					<img
+						v-if="
+							lastPictureType === 'silhouette' &&
+							previewImageUrl &&
+							previewImageUrl != ''
+						"
+						:src="previewImageUrl"
+					/>
+				</ion-thumbnail>
+				<ion-button type="button" fill="clear" @click="takePhoto('silhouette')">
+					<ion-icon slot="start" :icon="camera"></ion-icon>
+					{{ $t('photo') }}
+				</ion-button>
+			</ion-item>
+			<ion-item>
 				<PhotoUpload
 					id="silhouette"
 					@form-submitted="handleFormSubmittedPhoto"
 				/>
+			</ion-item>
+			<ion-item>
+				Total file size: {{ totalFileSize.toFixed(2) }} MB / 10 MB
 			</ion-item>
 		</ion-card>
 		<ion-card
@@ -774,6 +876,9 @@
 			>
 			<ion-item>
 				<VideoUpload id="video6" @form-submitted="handleFormSubmittedVideo" />
+			</ion-item>
+			<ion-item>
+				Total file size: {{ totalFileSize.toFixed(2) }} MB / 10 MB
 			</ion-item>
 		</ion-card>
 	</ion-content>
@@ -898,6 +1003,7 @@ export default {
 			CheckboxArray: Array.from({ length: 13 }, () => Array(3).fill(false)),
 			camera,
 			previewImageUrl: '',
+			lastPictureType: '',
 			dolphinList: [] as { name: string }[],
 			urlPost: baseUrl + '/api/good_health',
 			urlPostPhoto: baseUrl + '/api/photo',
@@ -929,6 +1035,7 @@ export default {
 				dolphin_name: '',
 				video_path: '',
 			},
+			totalFileSize: 0,
 		};
 	},
 
@@ -1012,19 +1119,44 @@ export default {
 					newFormData.append('files', files[i]);
 				}
 
-				// This check prevents the video to be overwritten by one of the other video upload components
-				if (id === 'video1') {
-					this.formDataVideo.push(newFormData);
-				} else if (id === 'video2') {
-					this.formDataVideo.push(newFormData);
-				} else if (id === 'video3') {
-					this.formDataVideo.push(newFormData);
-				} else if (id === 'video4') {
-					this.formDataVideo.push(newFormData);
-				} else if (id === 'video5') {
-					this.formDataVideo.push(newFormData);
-				} else if (id === 'video6') {
-					this.formDataVideo.push(newFormData);
+				// Keep track of total file size
+				let totalSize = this.totalFileSize;
+				for (let i = 0; i < files.length; i++) {
+					console.log(files[i]);
+					// Add the size of each file to the total
+					// 1 MB = 1048576 bytes
+					totalSize += files[i].size / 1048576;
+					newFormData.append('files', files[i]);
+				}
+
+				// If all the files exceed 10 MB the last file to be uploaded will not be uploaded
+				if (totalSize < 10) {
+					// This check prevents the video to be overwritten by one of the other video upload components
+					if (id === 'video1') {
+						this.formDataVideo.push(newFormData);
+					} else if (id === 'video2') {
+						this.formDataVideo.push(newFormData);
+					} else if (id === 'video3') {
+						this.formDataVideo.push(newFormData);
+					} else if (id === 'video4') {
+						this.formDataVideo.push(newFormData);
+					} else if (id === 'video5') {
+						this.formDataVideo.push(newFormData);
+					} else if (id === 'video6') {
+						this.formDataVideo.push(newFormData);
+					}
+
+					this.totalFileSize = totalSize;
+					console.log(...this.formData);
+					console.log('Total file size: ', this.totalFileSize);
+				} else {
+					//Don´t assign here totalSize to this.totalFileSize because picture wasn´t uploaded
+					toast.error(
+						'Total file size exceeds 10 MB! Lastly added file will not be uploaded',
+						{
+							autoClose: 4000,
+						}
+					);
 				}
 
 				console.log(...this.formDataVideo);
@@ -1065,13 +1197,31 @@ export default {
 					newFormData.append('photo_type', 'silhouette'); //Append the photo type
 				}
 
+				// Keep track of total file size
+				let totalSize = this.totalFileSize;
 				for (let i = 0; i < files.length; i++) {
 					console.log(files[i]);
+					// Add the size of each file to the total
+					// 1 MB = 1048576 bytes
+					totalSize += files[i].size / 1048576;
 					newFormData.append('files', files[i]);
 				}
-				this.formData.push(newFormData);
-				//this.formData.push(newFormData);
-				console.log(...this.formData);
+
+				// If all the files exceed 10 MB the last file to be uploaded will not be uploaded
+				if (totalSize < 10) {
+					this.formData.push(newFormData);
+					this.totalFileSize = totalSize;
+					console.log(...this.formData);
+					console.log('Total file size: ', this.totalFileSize);
+				} else {
+					//Don´t assign here totalSize to this.totalFileSize because picture wasn´t uploaded
+					toast.error(
+						'Total file size exceeds 10 MB! Lastly added file will not be uploaded',
+						{
+							autoClose: 4000,
+						}
+					);
+				}
 			}
 		},
 		handleFormSubmittedOdontogrammPhoto({
@@ -1761,6 +1911,8 @@ export default {
 					//Reset the form data
 					desiredFormData = [];
 					this.previewImageUrl = '';
+					this.lastPictureType = '';
+					this.totalFileSize = 0;
 					//console.log('Resetted form data: '+ this.formData);
 				}
 			}
@@ -1808,12 +1960,13 @@ export default {
 					}
 					//Reset the form data
 					desiredFormData = [];
+					this.totalFileSize = 0;
 					//console.log('Resetted form data: '+ this.formData);
 				}
 			}
 		},
 
-		async takePhoto({ id }: { id: string }) {
+		async takePhoto(id: string) {
 			const photo = await Camera.getPhoto({
 				resultType: CameraResultType.Uri,
 				source: CameraSource.Camera,
@@ -1839,8 +1992,15 @@ export default {
 				}
 
 				newFormData.append('dolphin_name', this.dolphinSelect || ''); // Append the dolphin name with a default value of an empty string
-				newFormData.append('files', photo.webPath); //Append the photo to the formdata
-				this.formData.push(newFormData);
+
+				// Convert the photo webPath to a blob which can be appended to the formData
+				const response = await fetch(photo.webPath);
+				const blob = await response.blob();
+				const file = new File([blob], 'photo.jpg', { type: blob.type }); //name of file irrelevant. Will be newly named in backend
+
+				newFormData.append('files', file);
+				this.formData.push(newFormData); //this.formData will be sent to backend server
+				this.lastPictureType = id; //Save the last picture type for the preview on the ion page
 				console.log(...this.formData);
 			}
 		},

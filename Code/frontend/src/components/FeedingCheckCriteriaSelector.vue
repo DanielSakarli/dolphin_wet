@@ -376,6 +376,9 @@
 				<ion-item>
 					<FileUpload @form-submitted="handleFormSubmittedFile" />
 				</ion-item>
+				<ion-item>
+					Total file size: {{ totalFileSize.toFixed(2) }} MB / 10 MB
+				</ion-item>
 			</ion-list>
 		</ion-card>
 		<ion-card
@@ -543,6 +546,7 @@ export default {
 				file_path: '',
 				dolphin_name: '',
 			},
+			totalFileSize: 0,
 		};
 	},
 	methods: {
@@ -636,6 +640,8 @@ export default {
 
 				//Reset the form data
 				this.formData = null;
+				// Reset the total file size
+				this.totalFileSize = 0;
 				console.log('Resetted form data: ' + this.formData);
 			}
 		},
