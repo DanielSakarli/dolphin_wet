@@ -537,7 +537,8 @@ export default {
 			blood_hydration_comments: '',
 			fish_quality_comments: '',
 			fish_variety_comments: '',
-			formData: null as FormData | null,
+			//formData: null as FormData | null,
+			formData: [] as FormData[],
 			setupSessionStorage: {
 				photo_type: '',
 				eye_photo_path: '',
@@ -590,17 +591,41 @@ export default {
 					dolphin_name: '',
 				};
 				console.log('Form Data accessed in HealthCheckCriteriaSelector.vue:');
-				this.formData = new FormData();
+				//this.formData = new FormData();
+				const newFormData = new FormData();
 				const dolphinNames = this.dolphinSelect.join(',');
 				if (this.dolphinSelect.length !== 0) {
-					this.formData.append('dolphin_name', dolphinNames); // Append the dolphin name as a comma-separated string
+					//this.formData.append('dolphin_name', dolphinNames); // Append the dolphin name as a comma-separated string
+					newFormData.append('dolphin_name', dolphinNames); // Append the dolphin name as a comma-separated string
 				}
 
 				// Then append the rest of the fields
+				// Keep track of total file size
+				let totalSize = this.totalFileSize;
 				console.log('Number of pictures: ' + files.length);
 				for (let i = 0; i < files.length; i++) {
 					console.log(files[i]);
-					this.formData.append('files', files[i]);
+					// Add the size of each file to the total
+					// 1 MB = 1048576 bytes
+					totalSize += files[i].size / 1048576;
+					//this.formData.append('files', files[i]);
+					newFormData.append('files', files[i]);
+				}
+
+				// If all the files exceed 10 MB the last file to be uploaded will not be uploaded
+				if (totalSize < 10) {
+					this.formData.push(newFormData);
+					this.totalFileSize = totalSize;
+					console.log(...this.formData);
+					console.log('Total file size: ', this.totalFileSize);
+				} else {
+					//Don´t assign here totalSize to this.totalFileSize because picture wasn´t uploaded
+					toast.error(
+						'Total file size exceeds 10 MB! Lastly added file will not be uploaded',
+						{
+							autoClose: 4000,
+						}
+					);
 				}
 			}
 		},
@@ -639,7 +664,7 @@ export default {
 					});
 
 				//Reset the form data
-				this.formData = null;
+				this.formData = []; //null;
 				// Reset the total file size
 				this.totalFileSize = 0;
 				console.log('Resetted form data: ' + this.formData);
