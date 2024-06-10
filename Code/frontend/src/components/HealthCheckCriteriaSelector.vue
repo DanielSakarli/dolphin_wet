@@ -185,6 +185,27 @@
 					<h3>Score 2</h3>
 					{{ $t('score2Health13') }}
 				</div>
+				<div v-if="subcriteria === 'rakeMarksScoring'">
+					<h1>{{ $t('rakeMarksScoring') }}</h1>
+					<h4>{{ $t('rakeMarksScoringMale') }}</h4>
+					<img
+						src="../../DolphinWET_RakeMarkScoring_male_DANIEL.svg"
+						alt="Silhouette of male dolphin for drawing the rake marks."
+					/>
+					<ion-button fill="clear" size="large" @click="getSVGFemaleDolphin">
+						Download SVG file
+						<ion-icon slot="start" :icon="download"></ion-icon>
+					</ion-button>
+					<h4>{{ $t('rakeMarksScoringFemale') }}</h4>
+					<img
+						src="../../DolphinWET_RakeMarkScoring_female_DANIEL.svg"
+						alt="Silhouette of female dolphin for drawing the rake marks."
+					/>
+					<ion-button fill="clear" size="large" @click="getSVGMaleDolphin">
+						Download SVG file
+						<ion-icon slot="start" :icon="download"></ion-icon>
+					</ion-button>
+				</div>
 			</ion-content>
 		</ion-modal>
 		<!-- End of Description of Criteria (User Manual) -->
@@ -801,8 +822,14 @@
 				criteria === 'sixthCriteriaHealth'
 			"
 		>
-			<ion-card-title class="card-title" style="margin-bottom: 15px"
-				>Upload your silhouette drawings here</ion-card-title
+			<ion-card-title class="card-title" style="margin-bottom: 15px">{{
+				$t('rakeMarksScoring')
+			}}</ion-card-title>
+			<ion-button
+				v-if="criteria"
+				fill="outline"
+				@click="setOpenManual('rakeMarksScoring')"
+				>{{ $t('userManual') }}</ion-button
 			>
 			<ion-item>
 				<ion-thumbnail slot="start">
@@ -910,7 +937,7 @@
 </template>
 
 <script lang="ts">
-import { camera } from 'ionicons/icons';
+import { camera, download } from 'ionicons/icons';
 import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
 import CheckComments from '@/components/CheckComments.vue';
 import PhotoUpload from '@/components/PhotoUpload.vue';
@@ -920,6 +947,7 @@ import { useEvaluationHealthStore } from '@/store/evaluationHealthStore';
 import { baseUrl } from '@/utils/baseUrl';
 import { toast } from 'vue3-toastify';
 import 'vue3-toastify/dist/index.css';
+import { Browser } from '@capacitor/browser';
 
 let dataInBody; //Variable which gets saved in localstorage with either true or false, depending if data is in checkboxes or evaluationFeedingStore
 const dolphinsStore = useDolphinsStore();
@@ -1036,6 +1064,7 @@ export default {
 				video_path: '',
 			},
 			totalFileSize: 0,
+			download,
 		};
 	},
 
@@ -1222,167 +1251,6 @@ export default {
 						}
 					);
 				}
-			}
-		},
-		handleFormSubmittedOdontogrammPhoto({
-			id,
-			files,
-		}: {
-			id: string;
-			files: File[];
-		}) {
-			if (files && this.dolphinSelect != '') {
-				this.sessionStorage = {
-					photo_type: '',
-					eye_photo_path: '',
-					teeth_photo_path: '',
-					odontogramm_photo_path: '',
-					marks_photo_path: '',
-					silhouette_photo_path: '',
-					file_path: '',
-					video_path: '',
-					dolphin_name: '',
-				};
-				console.log('Form Data accessed in HealthCheckCriteriaSelector.vue:');
-				const newFormData = new FormData();
-				if (this.dolphinSelect != '') {
-					newFormData.append('dolphin_name', this.dolphinSelect || ''); // Append the dolphin name with a default value of an empty string
-				}
-				newFormData.append('photo_type', 'odontogramm'); //Append the photo type
-				// Then append the rest of the fields
-
-				console.log('Number of pictures: ' + files.length);
-
-				for (let i = 0; i < files.length; i++) {
-					console.log(files[i]);
-					newFormData.append('files', files[i]);
-				}
-				// This check prevents the video to be overwritten by one of the other video upload components
-				if (id === 'odontogramm') {
-					this.formData.push(newFormData);
-				}
-				//this.formData.push(newFormData);
-				console.log(...this.formData);
-			}
-		},
-		handleFormSubmittedTeethPhoto({
-			id,
-			files,
-		}: {
-			id: string;
-			files: File[];
-		}) {
-			if (files && this.dolphinSelect != '') {
-				this.sessionStorage = {
-					photo_type: '',
-					eye_photo_path: '',
-					teeth_photo_path: '',
-					odontogramm_photo_path: '',
-					marks_photo_path: '',
-					silhouette_photo_path: '',
-					file_path: '',
-					video_path: '',
-					dolphin_name: '',
-				};
-				console.log('Form Data accessed in HealthCheckCriteriaSelector.vue:');
-				const newFormData = new FormData();
-				if (this.dolphinSelect != '') {
-					newFormData.append('dolphin_name', this.dolphinSelect || ''); // Append the dolphin name with a default value of an empty string
-				}
-				newFormData.append('photo_type', 'teeth'); //Append the photo type
-				// Then append the rest of the fields
-
-				console.log('Number of pictures: ' + files.length);
-
-				for (let i = 0; i < files.length; i++) {
-					console.log(files[i]);
-					newFormData.append('files', files[i]);
-				}
-				// This check prevents the video to be overwritten by one of the other video upload components
-				if (id === 'teeth') {
-					this.formData.push(newFormData);
-				}
-				//this.formData.push(newFormData);
-			}
-		},
-		handleFormSubmittedMarksPhoto({
-			id,
-			files,
-		}: {
-			id: string;
-			files: File[];
-		}) {
-			if (files && this.dolphinSelect != '') {
-				this.sessionStorage = {
-					photo_type: '',
-					eye_photo_path: '',
-					teeth_photo_path: '',
-					odontogramm_photo_path: '',
-					marks_photo_path: '',
-					silhouette_photo_path: '',
-					file_path: '',
-					video_path: '',
-					dolphin_name: '',
-				};
-				console.log('Form Data accessed in HealthCheckCriteriaSelector.vue:');
-				const newFormData = new FormData();
-				if (this.dolphinSelect != '') {
-					newFormData.append('dolphin_name', this.dolphinSelect || ''); // Append the dolphin name with a default value of an empty string
-				}
-				newFormData.append('photo_type', 'marks'); //Append the photo type
-				// Then append the rest of the fields
-
-				console.log('Number of pictures: ' + files.length);
-
-				for (let i = 0; i < files.length; i++) {
-					console.log(files[i]);
-					newFormData.append('files', files[i]);
-				}
-				// This check prevents the video to be overwritten by one of the other video upload components
-				if (id === 'marks') {
-					this.formData.push(newFormData);
-				}
-				//this.formData.push(newFormData);
-			}
-		},
-		handleFormSubmittedSilhouettePhoto({
-			id,
-			files,
-		}: {
-			id: string;
-			files: File[];
-		}) {
-			if (files && this.dolphinSelect != '') {
-				this.sessionStorage = {
-					photo_type: '',
-					eye_photo_path: '',
-					teeth_photo_path: '',
-					odontogramm_photo_path: '',
-					marks_photo_path: '',
-					silhouette_photo_path: '',
-					file_path: '',
-					video_path: '',
-					dolphin_name: '',
-				};
-				console.log('Form Data accessed in HealthCheckCriteriaSelector.vue:');
-				const newFormData = new FormData();
-				if (this.dolphinSelect != '') {
-					newFormData.append('dolphin_name', this.dolphinSelect || ''); // Append the dolphin name with a default value of an empty string
-				}
-				newFormData.append('photo_type', 'silhouette'); //Append the photo type
-				// Then append the rest of the fields
-
-				console.log('Number of pictures: ' + files.length);
-
-				for (let i = 0; i < files.length; i++) {
-					console.log(files[i]);
-					newFormData.append('files', files[i]);
-				}
-				// This check prevents the video to be overwritten by one of the other video upload components
-				if (id === 'silhouette') {
-					this.formData.push(newFormData);
-				}
-				//this.formData.push(newFormData);
 			}
 		},
 		async setupSessionStorage() {
@@ -1591,6 +1459,24 @@ export default {
 		},
 		updateExternalDiseaseComments(comment: string) {
 			this.records_external_disease_comments = comment;
+		},
+		async getSVGFemaleDolphin() {
+			try {
+				const fileName = 'DolphinWET_RakeMarkScoring_female_DANIEL.svg'; // file name of the file saved on the server
+				const fileUrl = baseUrl + '/api/files/' + fileName;
+				await Browser.open({ url: fileUrl });
+			} catch (error) {
+				console.error('Error: ', error);
+			}
+		},
+		async getSVGMaleDolphin() {
+			try {
+				const fileName = 'DolphinWET_RakeMarkScoring_male_DANIEL.svg'; // file name of the file saved on the server
+				const fileUrl = baseUrl + '/api/files/' + fileName;
+				await Browser.open({ url: fileUrl });
+			} catch (error) {
+				console.error('Error: ', error);
+			}
 		},
 		//Method to show the alert to confirm the test date
 		async confirmTestDate() {

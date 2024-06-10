@@ -28,6 +28,10 @@
 				>{{ $t('principleEmotionalState') }}</ion-button
 			>
 		</ion-content>
+		<ion-button fill="clear" size="large" @click="getUserManual">
+			User Manual
+			<ion-icon slot="start" :icon="download"></ion-icon>
+		</ion-button>
 		<ion-button fill="clear" size="large" @click="getStandardsAndGuidelines">
 			Standards & Guidelines
 			<ion-icon slot="start" :icon="download"></ion-icon>
@@ -98,6 +102,17 @@ export default {
 					console.error(e);
 				});
 		},*/
+		async getUserManual() {
+			// Get the platform of the device (iOS or Android)
+			//const platform = (await Device.getInfo()).platform;
+			try {
+				const fileName = '2024-05-27_Dolphin_WET_Handbook.pdf'; // file name of the file saved on the server
+				const fileUrl = baseUrl + '/api/files/' + fileName;
+				await Browser.open({ url: fileUrl });
+			} catch (error) {
+				console.error('Error: ', error);
+			}
+		},
 		async getStandardsAndGuidelines() {
 			// Get the platform of the device (iOS or Android)
 			//const platform = (await Device.getInfo()).platform;
