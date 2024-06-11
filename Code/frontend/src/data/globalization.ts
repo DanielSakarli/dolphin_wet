@@ -11,6 +11,10 @@ export const globalizationList = {
 		principleNutrition: 'Ernährung',
 		principleEnvironment: 'Umwelt',
 		//General translations at evaluation pages
+		dataUploadSuccessfull: 'Daten erfolgreich hochgeladen.',
+		dataUploadFailed: 'Sicherung der Daten fehlgeschlagen!',
+		dataSavedTemporary:
+			"Temporär gespeichert. Klicken Sie am Ende 'Test beenden'!",
 		criteria: 'Kriterium',
 		selectCriteria: 'Kriterium auswählen',
 		subcriteria: 'Sub-Kriterium',
@@ -22,7 +26,7 @@ export const globalizationList = {
 		dolphin: 'Delfin',
 		subcardTitle: 'Subcard Title',
 		selectDolphin: 'Delfin auswählen',
-		cancelChoice: 'Auswahl abbrechen',
+		cancelChoice: 'Abbrechen',
 
 		met: 'Erfüllt',
 		notMet: 'Nicht erfüllt',
@@ -156,7 +160,7 @@ export const globalizationList = {
 		fourthCriteriaNutrition: 'Adequate food variety',
 		// SubCriteria Nutrition
 		firstSubCriteriaNutrition: 'Body Condition Score (BCS)',
-		secondSubCriteriaNutrition: 'Weigth oscillation throughout the year',
+		secondSubCriteriaNutrition: 'Weight oscillation throughout the year',
 		thirdSubCriteriaNutrition: 'Kilocalories',
 		fourthSubCriteriaNutrition: 'Blood parameters for adequate hydration',
 		fifthSubCriteriaNutrition:
@@ -436,6 +440,9 @@ export const globalizationList = {
 		dolphin5: 'Dolphin 5',
 		dolphin6: 'Dolphin 6',
 		//General translations at evaluation pages
+		dataUploadSuccessfull: 'Data uploaded successfully',
+		dataUploadFailed: 'Data upload failed! Check internet connectivity.',
+		dataSavedTemporary: "Saved temporarily. Click 'Finish Tests' in the end!",
 		criteria: 'Criteria',
 		selectCriteria: 'Select Criteria',
 		subcriteria: 'Subcriteria',
