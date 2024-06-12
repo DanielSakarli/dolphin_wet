@@ -189,7 +189,7 @@
 					<h1>{{ $t('rakeMarksScoring') }}</h1>
 					<h4>{{ $t('rakeMarksScoringMale') }}</h4>
 					<img
-						src="../../DolphinWET_RakeMarkScoring_male_DANIEL.svg"
+						src="../../public/DolphinWET_RakeMarkScoring_male_DANIEL.svg"
 						alt="Silhouette of male dolphin for drawing the rake marks."
 					/>
 					<ion-button fill="clear" size="large" @click="getSVGFemaleDolphin">
@@ -198,7 +198,7 @@
 					</ion-button>
 					<h4>{{ $t('rakeMarksScoringFemale') }}</h4>
 					<img
-						src="../../DolphinWET_RakeMarkScoring_female_DANIEL.svg"
+						src="../../public/DolphinWET_RakeMarkScoring_female_DANIEL.svg"
 						alt="Silhouette of female dolphin for drawing the rake marks."
 					/>
 					<ion-button fill="clear" size="large" @click="getSVGMaleDolphin">
@@ -1415,7 +1415,7 @@ export default {
 				}
 			}
 			// Reset the data in checkboxes and comments
-			this.resetData();
+			//this.resetData();
 			// There is non-saved data (not sent to backend yet)
 			dataInBody = true;
 			localStorage.setItem('dataInBody', dataInBody.toString());
@@ -1564,6 +1564,8 @@ export default {
 			if (confirmed) {
 				await this.confirmTestDate();
 				await this.storeCheckedValues();
+				//Reset data saved in checkboxes and comment strings. Doesn´t affect the request body
+				this.resetData();
 				// Flag to only show network error alert once instead of several times after another
 				let alertShown = false;
 				console.log(this.CheckboxArray);
@@ -1734,9 +1736,9 @@ export default {
 					case 'fifthCriteriaHealth':
 						this.criteria = 'sixthCriteriaHealth';
 						break;
-					/*case 'sixthCriteriaHealth':
-						this.criteria = 'firstCriteriaHealth';
-						break;*/
+					case 'sixthCriteriaHealth':
+						this.criteria = 'sixthCriteriaHealth';
+						break;
 					default:
 						this.criteria = 'firstCriteriaHealth';
 				}

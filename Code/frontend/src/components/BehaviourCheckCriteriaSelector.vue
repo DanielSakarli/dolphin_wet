@@ -1185,7 +1185,8 @@ export default {
 					}
 				}
 			}
-			this.resetData();
+			// Try commenting out the resetData when the user clicks on "Next Test"
+			//this.resetData();
 			dataInBody = true;
 			localStorage.setItem('dataInBody', dataInBody.toString());
 		},
@@ -1341,10 +1342,13 @@ export default {
 			//const confirmed = confirm(this.$t('savingDataNext')); //Where is the variable savingDataNext initialized and what does it do?
 			const confirmed = true;
 			if (confirmed) {
-				//Check if the date of the test is the current date
+				// Check if the date of the test is the current date
 				await this.confirmTestDate();
-				//Store the checked values in the request body
-				this.storeCheckedValues();
+				// Store the checked values in the request body
+				await this.storeCheckedValues();
+				// Reset the data in the comment fields and checkboxes
+				// This doesn´t reset the request body
+				this.resetData();
 				console.log(this.CheckboxArray);
 				// Flag to only show network error alert once instead of several times after another
 				let alertShown = false;

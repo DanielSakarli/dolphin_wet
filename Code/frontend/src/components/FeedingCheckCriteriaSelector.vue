@@ -771,7 +771,7 @@ export default {
 					}
 				}
 			}
-			this.resetData();
+			//this.resetData();
 			dataInBody = true;
 			localStorage.setItem('dataInBody', dataInBody.toString());
 		},
@@ -899,7 +899,9 @@ export default {
 				//Check if the date of the test is the current date
 				await this.confirmTestDate();
 				//Store the checked values in the request body
-				this.storeCheckedValues();
+				await this.storeCheckedValues();
+				//Reset data saved in checkboxes and comment strings. Doesn´t affect the request body
+				this.resetData();
 				console.log(this.CheckboxArray);
 				// Flag to only show network error alert once instead of several times after another
 				let alertShown = false;
@@ -990,7 +992,7 @@ export default {
 						this.criteria = 'fourthCriteriaNutrition';
 						break;
 					case 'fourthCriteriaNutrition':
-						this.criteria = 'firstCriteriaNutrition';
+						this.criteria = 'fourthCriteriaNutrition';
 						break;
 					default:
 						this.criteria = 'firstCriteriaNutrition';
