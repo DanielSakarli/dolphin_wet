@@ -791,6 +791,9 @@ export default {
 			this.blood_hydration_comments = '';
 			this.fish_quality_comments = '';
 			this.fish_variety_comments = '';
+
+			// Reset the total file size
+			this.totalFileSize = 0;
 		},
 		//Methods to update the comments
 		updateBodyConditionScoreComments(comment: string) {

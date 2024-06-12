@@ -1119,6 +1119,11 @@ export default {
 			this.records_respiratory_disease_comments = '';
 			this.inspection_marks_comments = '';
 			this.records_external_disease_comments = '';
+
+			// Reset image related variables
+			this.previewImageUrl = '';
+			this.lastPictureType = '';
+			this.totalFileSize = 0;
 		},
 		handleFormSubmittedVideo({ id, files }: { id: string; files: File[] }) {
 			if (files && this.dolphinSelect != '') {
@@ -1864,30 +1869,56 @@ export default {
 
 			if (this.dolphinSelect != '' && photo.webPath) {
 				this.previewImageUrl = photo.webPath; //Preview of the image on the mobile phone´s screen
-				const newFormData = new FormData();
-
-				// This check prevents the photo to be overwritten by one of the other photo uploads
-				if (id === 'eye') {
-					newFormData.append('photo_type', 'eye'); //Append the photo type
-				} else if (id === 'teeth') {
-					newFormData.append('photo_type', 'teeth'); //Append the photo type
-				} else if (id === 'odontogramm') {
-					newFormData.append('photo_type', 'odontogramm'); //Append the photo type
-				} else if (id === 'marks') {
-					newFormData.append('photo_type', 'marks'); //Append the photo type
-				} else if (id === 'silhouette') {
-					newFormData.append('photo_type', 'silhouette'); //Append the photo type
-				}
-
-				newFormData.append('dolphin_name', this.dolphinSelect || ''); // Append the dolphin name with a default value of an empty string
 
 				// Convert the photo webPath to a blob which can be appended to the formData
 				const response = await fetch(photo.webPath);
 				const blob = await response.blob();
 				const file = new File([blob], 'photo.jpg', { type: blob.type }); //name of file irrelevant. Will be newly named in backend
 
-				newFormData.append('files', file);
-				this.formData.push(newFormData); //this.formData will be sent to backend server
+				// Keep track of total file size
+				let totalSize = this.totalFileSize;
+
+				// Add the size of each file to the total
+				// 1 MB = 1048576 bytes
+				totalSize += file.size / 1048576;
+
+				// If all the files exceed 10 MB the last file to be uploaded will not be uploaded
+				if (totalSize < 10) {
+					const newFormData = new FormData();
+
+					// This check prevents the photo to be overwritten by one of the other photo uploads
+					if (id === 'eye') {
+						newFormData.append('photo_type', 'eye'); //Append the photo type
+					} else if (id === 'teeth') {
+						newFormData.append('photo_type', 'teeth'); //Append the photo type
+					} else if (id === 'odontogramm') {
+						newFormData.append('photo_type', 'odontogramm'); //Append the photo type
+					} else if (id === 'marks') {
+						newFormData.append('photo_type', 'marks'); //Append the photo type
+					} else if (id === 'silhouette') {
+						newFormData.append('photo_type', 'silhouette'); //Append the photo type
+					}
+
+					//Append dolphin name and the file taken by the camera
+					newFormData.append('dolphin_name', this.dolphinSelect || ''); // Append the dolphin name with a default value of an empty string
+					newFormData.append('files', file);
+
+					//this.formData will be sent to backend
+					this.formData.push(newFormData);
+					//Display the new total file size for the user (including the picture size taken by the camera)
+					this.totalFileSize = totalSize;
+					console.log(...this.formData);
+					console.log('Total file size: ', this.totalFileSize);
+				} else {
+					//Don´t assign here totalSize to this.totalFileSize because picture wasn´t uploaded
+					toast.error(
+						'Total file size exceeds 10 MB! Lastly added file will not be uploaded',
+						{
+							autoClose: 4000,
+						}
+					);
+				}
+
 				this.lastPictureType = id; //Save the last picture type for the preview on the ion page
 				console.log(...this.formData);
 			}
