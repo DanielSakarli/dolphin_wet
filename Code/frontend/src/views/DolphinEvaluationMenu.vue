@@ -33,82 +33,93 @@
 				</ion-header>
 				<ion-content>
 					<form @submit.prevent="submitEdit">
-						<ion-item>
-							<ion-label position="stacked">Name</ion-label>
-							<ion-input
-								v-model="currentDolphinValues.name"
-								id="name"
-								placeholder="Enter name"
-							></ion-input>
-						</ion-item>
-						<ion-item>
-							<ion-label position="stacked">Sex</ion-label>
-							<ion-input
-								v-model="currentDolphinValues.sex"
-								id="sex"
-								placeholder="Enter sex"
-							></ion-input>
-						</ion-item>
-						<ion-item>
-							<ion-label position="stacked">On Site</ion-label>
-							<ion-input
-								v-model="currentDolphinValues.on_site"
-								id="on_site"
-								placeholder="Enter status (1: on-site, 0: not on-site)"
-							></ion-input>
-						</ion-item>
-						<ion-item>
-							<ion-label position="stacked">Year of Birth</ion-label>
-							<ion-input
-								v-model="currentDolphinValues.year_of_birth"
-								id="year_of_birth"
-								placeholder="Enter year of birth"
-							></ion-input>
-						</ion-item>
-						<ion-item>
-							<ion-label position="stacked">Place of Birth</ion-label>
-							<ion-input
-								v-model="currentDolphinValues.place_of_birth"
-								id="place_of_birth"
-								placeholder="Enter place of birth"
-							></ion-input>
-						</ion-item>
-						<ion-item>
-							<ion-label position="stacked">Minimum Wanted Weight</ion-label>
-							<ion-input
-								v-model="currentDolphinValues.min_weight_measured"
-								id="min_weight_measured"
-								placeholder="Enter minimum wanted weight"
-							></ion-input>
-						</ion-item>
-						<ion-item>
-							<ion-label position="stacked">Maximum Wanted Weight</ion-label>
-							<ion-input
-								v-model="currentDolphinValues.max_weight_measured"
-								id="max_weight_measured"
-								placeholder="Enter maximum wanted weight"
-							></ion-input>
-						</ion-item>
-						<ion-item>
-							<ion-label position="stacked"
-								>Minimum Kcal Calculations</ion-label
-							>
-							<ion-input
-								v-model="currentDolphinValues.min_kcal_calculations"
-								id="min_kcal_calculations"
-								placeholder="Enter minimum kcal calculations"
-							></ion-input>
-						</ion-item>
-						<ion-item>
-							<ion-label position="stacked"
-								>Maximum Kcal Calculations</ion-label
-							>
-							<ion-input
-								v-model="currentDolphinValues.max_kcal_calculations"
-								id="max_kcal_calculations"
-								placeholder="Enter maximum kcal calculations"
-							></ion-input>
-						</ion-item>
+						<ion-list>
+							<ion-item>
+								<!--<ion-label position="stacked">Name</ion-label>-->
+								<ion-input
+									v-model="currentDolphinValues.name"
+									id="name"
+									label="Name*"
+									label-placement="stacked"
+									placeholder="Enter name"
+								></ion-input>
+							</ion-item>
+							<ion-item>
+								<ion-input
+									v-model="currentDolphinValues.sex"
+									id="sex"
+									label="Sex*"
+									label-placement="stacked"
+									placeholder="Enter sex"
+								></ion-input>
+							</ion-item>
+							<ion-item>
+								<ion-input
+									v-model="currentDolphinValues.on_site"
+									id="on_site"
+									label="On Site*"
+									label-placement="stacked"
+									placeholder="Enter status (1: on-site, 0: not on-site)"
+								></ion-input>
+							</ion-item>
+							<ion-item>
+								<ion-input
+									v-model="currentDolphinValues.year_of_birth"
+									id="year_of_birth"
+									label="Year of Birth*"
+									label-placement="stacked"
+									placeholder="Enter year of birth"
+								></ion-input>
+							</ion-item>
+							<ion-item>
+								<ion-input
+									v-model="currentDolphinValues.place_of_birth"
+									id="place_of_birth"
+									label="Place of Birth*"
+									label-placement="stacked"
+									placeholder="Enter place of birth"
+								></ion-input>
+							</ion-item>
+							<ion-item>
+								<ion-input
+									v-model="currentDolphinValues.min_weight_measured"
+									id="min_weight_measured"
+									label="Minimum Wanted Weight"
+									label-placement="stacked"
+									placeholder="Enter minimum wanted weight"
+								></ion-input>
+							</ion-item>
+							<ion-item>
+								<ion-input
+									v-model="currentDolphinValues.max_weight_measured"
+									id="max_weight_measured"
+									label="Maximum Wanted Weight"
+									label-placement="stacked"
+									placeholder="Enter maximum wanted weight"
+								></ion-input>
+							</ion-item>
+							<ion-item>
+								<ion-input
+									v-model="currentDolphinValues.min_kcal_calculations"
+									id="min_kcal_calculations"
+									label="Minimum Kcal Calculations"
+									label-placement="stacked"
+									placeholder="Enter minimum kcal calculations"
+								></ion-input>
+							</ion-item>
+							<ion-item>
+								<ion-input
+									v-model="currentDolphinValues.max_kcal_calculations"
+									id="max_kcal_calculations"
+									label="Maximum Kcal Calculations"
+									label-placement="stacked"
+									placeholder="Enter maximum kcal calculations"
+								></ion-input>
+							</ion-item>
+						</ion-list>
+						<ion-text style="margin: 15px; font-size: 0.9em"
+							>* necessary fields</ion-text
+						>
 						<ion-button expand="full" type="submit"> Save Changes </ion-button>
 					</form>
 				</ion-content>
@@ -943,3 +954,15 @@ export default {
 	},
 };
 </script>
+
+<style scoped>
+ion-item {
+	margin: 5px;
+}
+ion-card {
+	margin: 5px 15px;
+}
+ion-card-title {
+	margin: 5px;
+}
+</style>

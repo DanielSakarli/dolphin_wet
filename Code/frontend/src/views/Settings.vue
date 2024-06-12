@@ -27,15 +27,29 @@
 				<ion-content>
 					<form @submit.prevent="deleteUser">
 						<ion-item>
-							<ion-radio-group v-model="currentUser">
+							<ion-radio-group
+								v-model="currentUser"
+								:allow-empty-selection="true"
+							>
 								<ion-list>
+									<ion-item v-for="(user, index) in users" :key="index">
+										<ion-radio :value="user.name" label-placement="start">{{
+											user.name
+										}}</ion-radio>
+									</ion-item>
+								</ion-list>
+								<!--<ion-list>
 									<ion-item v-for="(user, index) in users" :key="index">
 										<ion-label :style="{ marginRight: '10px' }">{{
 											user.name
 										}}</ion-label>
-										<ion-radio :value="user.name"></ion-radio>
-									</ion-item>
-								</ion-list>
+								<ion-radio
+									:value="users.name"
+									value="start"
+									label-placement="stacked"
+								></ion-radio>
+								</ion-item>
+								</ion-list>-->
 							</ion-radio-group>
 						</ion-item>
 						<ion-item>

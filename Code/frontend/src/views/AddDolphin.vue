@@ -12,46 +12,54 @@
 			<form @submit.prevent="addDolphin">
 				<ion-list>
 					<ion-item>
-						<ion-label position="stacked">Dolphin name*</ion-label>
 						<ion-input
 							v-model="dolphin.name"
 							type="text"
+							label="Dolphin name*"
+							label-placement="stacked"
 							placeholder="Dolphin name"
 						/>
 					</ion-item>
 					<ion-item>
-						<ion-label position="stacked">Dolphin sex*</ion-label>
 						<ion-input
 							v-model="dolphin.sex"
 							type="number"
+							label="Dolphin sex*"
+							label-placement="stacked"
 							placeholder="Dolphin sex? 0: male, 1: female."
 						/>
 					</ion-item>
 					<ion-item>
-						<ion-label position="stacked">On site*</ion-label>
 						<ion-input
 							v-model="dolphin.on_site"
 							type="number"
+							label="On site*"
+							label-placement="stacked"
 							placeholder="On site? 0: no, 1: yes."
 						/>
 					</ion-item>
 					<ion-item>
-						<ion-label position="stacked">Year of birth*</ion-label>
 						<ion-input
 							v-model="dolphin.year_of_birth"
 							type="number"
+							label="Year of birth*"
+							label-placement="stacked"
 							placeholder="Year of birth"
 						/>
 					</ion-item>
 					<ion-item>
-						<ion-label position="stacked">Place of birth*</ion-label>
 						<ion-input
 							v-model="dolphin.place_of_birth"
 							type="text"
+							label="Place of birth*"
+							label-placement="stacked"
 							placeholder="Place of birth"
 						/>
 					</ion-item>
 				</ion-list>
+				<ion-text style="margin: 15px; font-size: 0.9em"
+					>* necessary fields</ion-text
+				>
 				<ion-button expand="full" type="submit">Add Dolphin</ion-button>
 			</form>
 
@@ -67,8 +75,13 @@ import {
 	IonButton,
 	IonInput,
 	IonItem,
-	IonLabel,
 	IonList,
+	IonHeader,
+	IonContent,
+	IonToolbar,
+	IonButtons,
+	IonTitle,
+	IonText,
 } from '@ionic/vue';
 import axios from 'axios';
 //import apiClient from '@/utils/apiClient.js';
@@ -83,8 +96,13 @@ export default {
 		IonButton,
 		IonInput,
 		IonItem,
-		IonLabel,
 		IonList,
+		IonHeader,
+		IonContent,
+		IonToolbar,
+		IonButtons,
+		IonTitle,
+		IonText,
 	},
 	data() {
 		return {

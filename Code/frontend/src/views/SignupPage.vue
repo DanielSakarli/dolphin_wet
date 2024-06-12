@@ -95,9 +95,14 @@
 </template>
 
 <script lang="ts">
-import { IonInput } from '@ionic/vue';
 //import { defineComponent } from 'vue';
-import { IonIcon } from '@ionic/vue';
+import {
+	IonIcon,
+	IonInput,
+	IonCard,
+	IonCardContent,
+	IonButton,
+} from '@ionic/vue';
 //import axios from 'axios';
 import { baseUrl } from '@/utils/baseUrl';
 import { toast } from 'vue3-toastify';
@@ -106,7 +111,7 @@ import 'vue3-toastify/dist/index.css';
 const url = baseUrl + '/api/users/register';
 
 export default {
-	components: { IonInput, IonIcon },
+	components: { IonInput, IonIcon, IonCard, IonCardContent, IonButton },
 	data() {
 		return {
 			username: '',
