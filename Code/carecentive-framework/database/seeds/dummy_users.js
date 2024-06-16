@@ -1,5 +1,6 @@
 const request = require('supertest');
 const app = require('../../app');
+require('dotenv').config();
 
 async function loadDummyUser() {
 	// Insert dummy users.
@@ -16,7 +17,7 @@ async function loadDummyUser() {
 			email: 'john.doe@example.email',
 			password: 'secret_password',
 			roleName: 'Valencia',
-			rolePassword: 'bcu82gs_!n',
+			rolePassword: process.env.VALENCIA_USER_PASSWORD,
 		});
 	await request(app)
 		.post('/api/users/register')
@@ -26,7 +27,7 @@ async function loadDummyUser() {
 			email: 'john.doe2@example.email',
 			password: 'secret_password',
 			roleName: 'Duisburg',
-			rolePassword: 'safdjhc7#s',
+			rolePassword: process.env.DUISBURG_USER_PASSWORD,
 		});
 	await request(app)
 		.post('/api/users/register')
@@ -36,7 +37,7 @@ async function loadDummyUser() {
 			email: 'john.doe@example.email',
 			password: 'secret_password',
 			roleName: 'Valencia',
-			rolePassword: 'bcu82gs_!n',
+			rolePassword: process.env.VALENCIA_USER_PASSWORD,
 		});
 		await request(app)
 		.post('/api/users/register')
@@ -46,7 +47,7 @@ async function loadDummyUser() {
 			email: 'doe4@gmx.de',
 			password: '123456',
 			roleName: 'Nuernberg',
-			rolePassword: '1234',
+			rolePassword: process.env.NUERNBERG_USER_PASSWORD,
 		});
 	return;
 }
