@@ -100,12 +100,14 @@ const router = createRouter({
 // If login successful, the token is stored in the localStorage
 router.beforeEach((to, from, next) => {
 	console.log('token in router file: ', localStorage.getItem('token'));
-	if (to.path === '/login') {
+	if (to.path === '/login' || to.path === '/home') {
 		// Set the token to an empty string
 		localStorage.setItem('token', '');
-		console.log('token set to empty string because user entered login page');
+		console.log(
+			'token set to empty string because user entered login or home page'
+		);
 		next();
-	} else if (from.path === '/login') {
+	} else if (from.path === '/login' || from.path === '/home') {
 		// If the user is navigating to the home or login page
 		if (
 			!localStorage.getItem('token') ||
