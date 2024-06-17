@@ -17,7 +17,7 @@ async function detectMarks(imagePath) {
 
     const totalPixels = width * height;
     const redPercentage = (redPixelCount / totalPixels) * 100;
-
+    console.log("Calculated the percentage of red marks within the dolphin silhouette: ", redPercentage);
     return redPercentage;
 }
 
