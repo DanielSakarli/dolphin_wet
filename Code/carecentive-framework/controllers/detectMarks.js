@@ -63,6 +63,7 @@ async function detectMarks(imagePath) {
                             if (isWhiteOrRed(startRed, startGreen, startBlue) && !visited[(y + 2) * width + (x + 2)]) {
                                 silhouettes.push(floodFill(x + 2, y + 2));
                             }
+                        }
                         /*const startIdx = (y * width + (x - 1)) * 4;
                         const startRed = image.bitmap.data[startIdx];
                         const startGreen = image.bitmap.data[startIdx + 1];
