@@ -3,7 +3,7 @@ const NODE_ENV = 'production'; // or 'production'
 export const baseUrl =
 	// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 	// @ts-ignore
-	NODE_ENV === 'dev'
+	NODE_ENV === 'production'
 		? 'https://88395-17112.pph-server.de'
 		: 'http://localhost:3309';
 
