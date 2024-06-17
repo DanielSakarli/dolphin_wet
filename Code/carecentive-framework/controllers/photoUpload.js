@@ -2,6 +2,7 @@ const path = require('path');
 //const fs = require('fs');
 require('dotenv').config();
 const multer = require('multer');
+const { detectMarks } = require('./detectMarks');
 //const { validationResult } = require('express-validator');
 //const { isUserAuth } = require('./authSwitch');
 let currentIndex = 0;
@@ -155,7 +156,15 @@ async function uploadPhoto(req, res, next) {
         }
       });
     })
-    .then(result => {
+    .then(async result => {
+      if (req.body.photo_type === 'silhouette') {
+        for (let i = 0; i < req.files.length; i++) {
+          const filePath = './uploads/images/' + req.files[i].filename;
+          console.log('File path:', filePath);
+          const marksPercentage = await detectMarks(filePath);
+          console.log('Marks percentage in the dolphin silhouette:', marksPercentage);
+        }
+      }
       res.status(result.status).json();
     })
     .catch(err => {
