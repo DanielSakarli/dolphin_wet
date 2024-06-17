@@ -8,8 +8,8 @@ async function detectMarks(imagePath) {
 
         const isBlack = (red, green, blue) => red < 50 && green < 50 && blue < 50;
         const isRed = (red, green, blue) => red > 200 && green < 100 && blue < 100;
+        const isWhiteOrRed = (red, green, blue) => (red > 200 && green < 100 && blue < 100) || (red > 200 && green > 200 && blue > 200);
 
-        // Flood fill algorithm to find all the pixels inside the black silhouette outline
         const floodFill = (x, y) => {
             const stack = [[x, y]];
             let redPixelCount = 0;
@@ -25,7 +25,8 @@ async function detectMarks(imagePath) {
                 const green = image.bitmap.data[idx + 1];
                 const blue = image.bitmap.data[idx + 2];
 
-                if (isBlack(red, green, blue)) continue;
+                // Only proceed if it's not a black pixel (outline) and is a white or red pixel
+                if (!isWhiteOrRed(red, green, blue) && !isBlack(red, green, blue)) continue;
 
                 if (isRed(red, green, blue)) {
                     redPixelCount++;
@@ -40,7 +41,7 @@ async function detectMarks(imagePath) {
                 if (currY < height - 1) stack.push([currX, currY + 1]);
             }
 
-            const redPercentage = (redPixelCount / silhouettePixelCount) * 100;
+            const redPercentage = silhouettePixelCount === 0 ? 0 : (redPixelCount / silhouettePixelCount) * 100;
             return { redPercentage, redPixelCount, silhouettePixelCount };
         };
 
@@ -65,7 +66,16 @@ async function detectMarks(imagePath) {
                     if (startY >= height) {
                         continue;
                     }
-                    silhouettes.push(floodFill(startX, startY));
+
+                    // Ensure the starting point is inside the silhouette
+                    const startIdx = (startY * width + startX) * 4;
+                    const startRed = image.bitmap.data[startIdx];
+                    const startGreen = image.bitmap.data[startIdx + 1];
+                    const startBlue = image.bitmap.data[startIdx + 2];
+
+                    if (isWhiteOrRed(startRed, startGreen, startBlue)) {
+                        silhouettes.push(floodFill(startX, startY));
+                    }
                 }
             }
         }
