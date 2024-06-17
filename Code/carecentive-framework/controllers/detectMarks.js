@@ -54,14 +54,14 @@ async function detectMarks(imagePath) {
                     // Flood fill should start from a white or red pixel within the silhouette
                     // I think floodfill shouldn´t start on the pixel left to the current pixel but on the right-buttom of the current pixel
                     if (x > 0 && y > 0) {
-                        if (x < width - 2 && y < height - 2) {
-                            const startIdx = ((y + 2) * width + (x + 2)) * 4;
+                        if (x < width - 8 && y < height - 8) {
+                            const startIdx = ((y + 8) * width + (x + 8)) * 4;
                             const startRed = image.bitmap.data[startIdx];
                             const startGreen = image.bitmap.data[startIdx + 1];
                             const startBlue = image.bitmap.data[startIdx + 2];
                         
-                            if (isWhiteOrRed(startRed, startGreen, startBlue) && !visited[(y + 2) * width + (x + 2)]) {
-                                silhouettes.push(floodFill(x + 2, y + 2));
+                            if (isWhiteOrRed(startRed, startGreen, startBlue) && !visited[(y + 8) * width + (x + 8)]) {
+                                silhouettes.push(floodFill(x + 8, y + 8));
                             }
                         }
                         /*const startIdx = (y * width + (x - 1)) * 4;
