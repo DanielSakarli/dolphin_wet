@@ -25,27 +25,23 @@ async function detectMarks(imagePath) {
                 const green = image.bitmap.data[idx + 1];
                 const blue = image.bitmap.data[idx + 2];
 
-                // Only proceed if it's not a black pixel (outline) and is a white or red pixel
-                if (!isWhiteOrRed(red, green, blue) && !isBlack(red, green, blue)) continue;
+                if (isBlack(red, green, blue)) continue;
 
-                if (isRed(red, green, blue)) {
-                    redPixelCount++;
+                if (isWhiteOrRed(red, green, blue)) {
+                    if (isRed(red, green, blue)) redPixelCount++;
+                    silhouettePixelCount++;
                 }
 
-                silhouettePixelCount++;
-
-                // Add neighboring pixels to the stack
-                if (currX > 0) stack.push([currX - 1, currY]);
-                if (currX < width - 1) stack.push([currX + 1, currY]);
-                if (currY > 0) stack.push([currX, currY - 1]);
-                if (currY < height - 1) stack.push([currX, currY + 1]);
+                if (currX > 0 && !visited[currY * width + (currX - 1)]) stack.push([currX - 1, currY]);
+                if (currX < width - 1 && !visited[currY * width + (currX + 1)]) stack.push([currX + 1, currY]);
+                if (currY > 0 && !visited[(currY - 1) * width + currX]) stack.push([currX, currY - 1]);
+                if (currY < height - 1 && !visited[(currY + 1) * width + currX]) stack.push([currX, currY + 1]);
             }
 
             const redPercentage = silhouettePixelCount === 0 ? 0 : (redPixelCount / silhouettePixelCount) * 100;
             return { redPercentage, redPixelCount, silhouettePixelCount };
         };
 
-        // Scan the image to find starting points for each silhouette
         const silhouettes = [];
         for (let y = 0; y < height; y++) {
             for (let x = 0; x < width; x++) {
@@ -54,32 +50,32 @@ async function detectMarks(imagePath) {
                 const green = image.bitmap.data[idx + 1];
                 const blue = image.bitmap.data[idx + 2];
 
-                // If a black pixel is found and it hasn't been visited, it's part of a new silhouette
                 if (isBlack(red, green, blue) && !visited[y * width + x]) {
-                    // Find an interior point to start the flood fill
-                    let startX = x + 1;
-                    let startY = y;
-                    if (startX >= width) {
-                        startX = x;
-                        startY = y + 1;
-                    }
-                    if (startY >= height) {
-                        continue;
-                    }
+                    // Flood fill should start from a white or red pixel within the silhouette
+                    if (x > 0 && y > 0) {
+                        const startIdx = (y * width + (x - 1)) * 4;
+                        const startRed = image.bitmap.data[startIdx];
+                        const startGreen = image.bitmap.data[startIdx + 1];
+                        const startBlue = image.bitmap.data[startIdx + 2];
 
-                    // Ensure the starting point is inside the silhouette
-                    const startIdx = (startY * width + startX) * 4;
-                    const startRed = image.bitmap.data[startIdx];
-                    const startGreen = image.bitmap.data[startIdx + 1];
-                    const startBlue = image.bitmap.data[startIdx + 2];
+                        if (isWhiteOrRed(startRed, startGreen, startBlue) && !visited[y * width + (x - 1)]) {
+                            silhouettes.push(floodFill(x - 1, y));
+                        }
+                    } else if (y > 0) {
+                        const startIdx = ((y - 1) * width + x) * 4;
+                        const startRed = image.bitmap.data[startIdx];
+                        const startGreen = image.bitmap.data[startIdx + 1];
+                        const startBlue = image.bitmap.data[startIdx + 2];
 
-                    if (isWhiteOrRed(startRed, startGreen, startBlue)) {
-                        silhouettes.push(floodFill(startX, startY));
+                        if (isWhiteOrRed(startRed, startGreen, startBlue) && !visited[(y - 1) * width + x]) {
+                            silhouettes.push(floodFill(x, y - 1));
+                        }
                     }
                 }
             }
         }
 
+        console.log("Marks percentage in the dolphin silhouettes:", silhouettes);
         return silhouettes;
     } catch (error) {
         console.error('Error processing image:', error);
