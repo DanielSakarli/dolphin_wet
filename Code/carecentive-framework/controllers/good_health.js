@@ -123,8 +123,8 @@ async function setResult(req, res, next) {
 						const marksPercentage = await detectMarks(filePath);
           				console.log('Marks percentage in the dolphin silhouette:', marksPercentage);
 						// Append percentage of rake marks to the array
-						console.log("Total red percentage: ", marksPercentage.redPercentage)
-						test_result.total_rake_marks_percentage = marksPercentage.redPercentage;
+						console.log("Total red percentage: ", marksPercentage.totalRedPercentage)
+						test_result.total_rake_marks_percentage = marksPercentage.totalRedPercentage;
 						// Append silhouette_photo_path to the array
 						test_result.silhouette_photo_path = req.session.photo_path.silhouette_photo_path.toString();
 						
