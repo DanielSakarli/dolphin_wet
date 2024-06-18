@@ -221,6 +221,11 @@ exports.up = function (knex) {
 			table.string('marks_photo_path');
 			table.string('silhouette_photo_path');
 			table.string('video_path');
+
+			// Percentage of rake marks on the dolphin body
+			table.double('total_rake_marks_percentage').unsigned(); //old and new rake marks combined
+			table.double('old_rake_marks_percentage').unsigned(); //old rake marks
+
 			//table.binary('image'); //Holds image as binary data
 			table.timestamps(true, true); //Timestamp: created at, updated at
 		}),
@@ -278,6 +283,11 @@ exports.up = function (knex) {
 			table.string('marks_photo_path');
 			table.string('silhouette_photo_path');
 			table.string('video_path');
+
+			// Percentage of rake marks on the dolphin body
+			table.double('total_rake_marks_percentage').unsigned(); //old and new rake marks combined
+			table.double('old_rake_marks_percentage').unsigned(); //old rake marks
+
 			//table.binary('image'); //Holds image as binary data
 			table.timestamps(true, true); //Timestamp: created at, updated at
 		}),
@@ -335,6 +345,10 @@ exports.up = function (knex) {
 			table.string('marks_photo_path');
 			table.string('silhouette_photo_path');
 			table.string('video_path');
+
+			// Percentage of rake marks on the dolphin body
+			table.double('total_rake_marks_percentage').unsigned(); //old and new rake marks combined
+			table.double('old_rake_marks_percentage').unsigned(); //old rake marks
 			//table.binary('image'); //Holds image as binary data
 			table.timestamps(true, true); //Timestamp: created at, updated at
 		}),

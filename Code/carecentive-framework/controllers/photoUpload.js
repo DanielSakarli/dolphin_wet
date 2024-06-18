@@ -157,14 +157,6 @@ async function uploadPhoto(req, res, next) {
       });
     })
     .then(async result => {
-      if (req.body.photo_type === 'silhouette') {
-        for (let i = 0; i < req.files.length; i++) {
-          const filePath = './uploads/images/' + req.files[i].filename;
-          console.log('File path:', filePath);
-          const marksPercentage = await detectMarks(filePath);
-          console.log('Marks percentage in the dolphin silhouette:', marksPercentage);
-        }
-      }
       res.status(result.status).json();
     })
     .catch(err => {

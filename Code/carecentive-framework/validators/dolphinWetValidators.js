@@ -375,6 +375,14 @@ const goodHealthPostValidateRequestBody = [
 		.optional({ values: 'null' })
 		.isString()
 		.withMessage('Invalid video path'),
+	body('total_rake_marks_percentage')
+		.optional({ values: 'null' })
+		.isFloat({ min: 0, max: 100 })
+		.withMessage('Invalid total rake marks percentage'),
+	body('old_rake_marks_percentage')
+		.optional({ values: 'null' })
+		.isFloat({ min: 0, max: 100 })
+		.withMessage('Invalid old rake marks percentage'),
 	// Timestamps
 	body('created_at')
 		.optional({ values: 'null' })

@@ -1,6 +1,7 @@
 const { validationResult } = require('express-validator');
 const { isUserAuth } = require('./authSwitch');
 const GoodHealthService = require('../services/GoodHealthService');
+const { detectMarks } = require('./detectMarks');
 
 /**
  * Controller of post request of /api/good_health.
@@ -114,6 +115,11 @@ async function setResult(req, res, next) {
 						// Check if the dolphin_name in the array is e.g. 'Dolly'
 						if (test_result.dolphin_name === req.session.dolphin_name) {
 						console.log('Dolphin for which silhouette photo will be uploaded');
+						
+						const filePath = path.basename(req.session.photo_path.silhouette_photo_path);
+						console.log('File path in good_health.js: ', filePath);
+						const marksPercentage = await detectMarks(filePath);
+          				console.log('Marks percentage in the dolphin silhouette:', marksPercentage);
 						// Append silhouette_photo_path to the array
 						test_result.silhouette_photo_path = req.session.photo_path.silhouette_photo_path.toString();
 						//fileData = fs.readFileSync(test_result.silhouette_photo_path);
