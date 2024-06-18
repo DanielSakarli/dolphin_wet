@@ -72,11 +72,14 @@ async function detectMarks(imagePath) {
         console.log("Total pixel count:", totalPixels);
 
         // Return detailed information for each area
-        return areas.map(area => ({
-            redPercentage: area.silhouettePixelCount === 0 ? 0 : (area.redPixelCount / area.silhouettePixelCount) * 100,
-            redPixelCount: area.redPixelCount,
-            silhouettePixelCount: area.silhouettePixelCount
-        }));
+        return {
+            areas: areas.map(area => ({
+                redPercentage: area.silhouettePixelCount === 0 ? 0 : (area.redPixelCount / area.silhouettePixelCount) * 100,
+                redPixelCount: area.redPixelCount,
+                silhouettePixelCount: area.silhouettePixelCount
+            })),
+            totalRedPercentage: redPercentage
+        };
     } catch (error) {
         console.error('Error processing image:', error);
         throw error;
