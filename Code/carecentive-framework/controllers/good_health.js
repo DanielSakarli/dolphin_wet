@@ -117,6 +117,7 @@ async function setResult(req, res, next) {
 						if (test_result.dolphin_name === req.session.dolphin_name) {
 						console.log('Dolphin for which silhouette photo will be uploaded');
 						
+						// Get the percentage of rake marks on the dolphin with the silhouette image file
 						const filePath = './uploads/images/' + path.basename(req.session.photo_path.silhouette_photo_path);
 						console.log('File path in good_health.js: ', filePath);
 						const marksPercentage = await detectMarks(filePath);
