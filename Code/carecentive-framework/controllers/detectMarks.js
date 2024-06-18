@@ -8,7 +8,8 @@ async function detectMarks(imagePath) {
 
         const isBlack = (red, green, blue) => red < 50 && green < 50 && blue < 50;
         const isRed = (red, green, blue) => red > 200 && green < 100 && blue < 100;
-        const isWhiteOrRed = (red, green, blue) => (red > 200 && green < 100 && blue < 100) || (red > 200 && green > 200 && blue > 200);
+        const isWhite = (red, green, blue) => red > 200 && green > 200 && blue > 200;
+        const isWhiteOrRed = (red, green, blue) => isRed(red, green, blue) || isWhite(red, green, blue);
 
         const floodFill = (x, y) => {
             const stack = [[x, y]];
@@ -26,9 +27,7 @@ async function detectMarks(imagePath) {
 
                 if (isBlack(red, green, blue)) continue;
 
-                if (isWhiteOrRed(red, green, blue)) {
-                    pixelCount++;
-                }
+                pixelCount++;
 
                 if (currX > 0 && !visited[currY * width + (currX - 1)]) stack.push([currX - 1, currY]);
                 if (currX < width - 1 && !visited[currY * width + (currX + 1)]) stack.push([currX + 1, currY]);
@@ -65,11 +64,6 @@ async function detectMarks(imagePath) {
 }
 
 module.exports = { detectMarks };
-
-// Run the function (uncomment the lines below if you want to test it)
-// detectMarks('/mnt/data/test.png')
-//     .then(result => console.log(result))
-//     .catch(error => console.error(error));
 
 
 
