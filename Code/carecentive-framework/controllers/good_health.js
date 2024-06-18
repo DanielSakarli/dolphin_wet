@@ -117,7 +117,7 @@ async function setResult(req, res, next) {
 						if (test_result.dolphin_name === req.session.dolphin_name) {
 						console.log('Dolphin for which silhouette photo will be uploaded');
 						
-						const filePath = path.basename(req.session.photo_path.silhouette_photo_path);
+						const filePath = './uploads/images/' + path.basename(req.session.photo_path.silhouette_photo_path);
 						console.log('File path in good_health.js: ', filePath);
 						const marksPercentage = await detectMarks(filePath);
           				console.log('Marks percentage in the dolphin silhouette:', marksPercentage);

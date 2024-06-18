@@ -157,6 +157,7 @@ async function uploadPhoto(req, res, next) {
       });
     })
     .then(async result => {
+      
       res.status(result.status).json();
     })
     .catch(err => {
