@@ -43,8 +43,8 @@ async function setResult(req, res, next) {
 			
 		if(req.session && (req.session.photo_path.eye_photo_path != 'empty' || req.session.photo_path.teeth_photo_path != 'empty' || req.session.photo_path.odontogramm_photo_path != 'empty' || req.session.photo_path.marks_photo_path != 'empty' || req.session.silhouette_photo_path != 'empty' || req.session.video_path != 'empty')) {
 			// attach userID to test result in req.body
-			//let test_result = req.body;
-			//test_result = { user_id: userID, user_name: userName, ...test_result };
+			let test_result = req.body;
+			test_result = { user_id: userID, user_name: userName, ...test_result };
 
 			/*console.log('Photo path in req.session in good_health.js: ' + req.session.photo_path.eye_photo_path);
 			console.log('Photo path in req.session in good_health.js: ' + req.session.photo_path.teeth_photo_path);	
@@ -159,9 +159,9 @@ async function setResult(req, res, next) {
 		///////////////////////////////////////////////////////////////////////////
 		// NO photo path to upload
 		// attach userID to test result in req.body
-			//let test_result = req.body;
+			let test_result = req.body;
 			
-			//test_result = { user_id: userID, user_name: userName, ...test_result };
+			test_result = { user_id: userID, user_name: userName, ...test_result };
 			console.log('No photo or video to be uploaded for this dolphin: ', test_result.dolphin_name);
 			const insertedResult = await GoodHealthService.loadTestResult(test_result, roleName);
 			
