@@ -78,7 +78,7 @@ async function detectMarks(imagePath) {
                 redPixelCount: area.redPixelCount,
                 silhouettePixelCount: area.silhouettePixelCount
             })),
-            totalRedPercentage: redPercentage
+            totalRedPercentage: parseFloat(redPercentage.toFixed(2))
         };
     } catch (error) {
         console.error('Error processing image:', error);

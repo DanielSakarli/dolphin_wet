@@ -398,6 +398,14 @@
 											}}
 										</p>
 										<p>
+											Current rake marks percentage:
+											{{ HealthRecord.total_rake_marks_percentage }}
+										</p>
+										<p>
+											Old rake marks percentage:
+											{{ HealthRecord.old_rake_marks_percentage }}
+										</p>
+										<p>
 											Eye photo path:
 											<template v-if="HealthRecord.eye_photo_path">
 												<a
@@ -905,6 +913,8 @@ interface HealthRecord {
 	marks_photo_path: string | null;
 	silhouette_photo_path: string | null;
 	video_path: string | null;
+	total_rake_marks_percentage: number | null;
+	old_rake_marks_percentage: number | null;
 	created_at: string;
 	updated_at: string;
 }

@@ -106,8 +106,8 @@ class GoodHealthService {
 			////////////////////////////////////////////////
 
 			let result = await GoodHealth.query()
-				.select(
-					'health_record_id',
+				.select('*'
+					/*'health_record_id',
 					'user_id',
 					'user_name',
 					'dolphin_id',
@@ -144,7 +144,7 @@ class GoodHealthService {
 					'marks_photo_path',
 					'video_path',
 					'created_at',
-					'updated_at'
+					'updated_at'*/
 				)
 				.where('dolphin_name', '=', name)
 				.where(
@@ -183,8 +183,8 @@ class GoodHealthService {
 			////////////////////////////////////////////////
 
 			let result = await GoodHealth.query()
-				.select(
-					'health_record_id',
+				.select('*'
+					/*'health_record_id',
 					'user_id',
 					'user_name',
 					'dolphin_id',
@@ -221,7 +221,7 @@ class GoodHealthService {
 					'marks_photo_path',
 					'video_path',
 					'created_at',
-					'updated_at'
+					'updated_at'*/
 				)
 				.where(
 					raw(
