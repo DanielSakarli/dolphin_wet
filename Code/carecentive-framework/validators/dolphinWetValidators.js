@@ -207,6 +207,9 @@ const goodHealthPostValidateRequestBody = [
 			'inspection_marks_comments',
 			'records_external_disease',
 			'records_external_disease_comments',
+			'bwo_score',
+			'bwo_3_months',
+			'bwo_12_months',
 			'eye_photo_path',
 			'teeth_photo_path',
 			'odontogramm_photo_path',
@@ -297,6 +300,20 @@ const goodHealthPostValidateRequestBody = [
 		.isInt({ min: 0, max: 2 })
 		.toInt()
 		.withMessage('Invalid records external disease value'),
+	body('bwo_score')
+		.optional({ values: 'null' })
+		.isInt({ min: 0, max: 2 })
+		.toInt()
+		.withMessage('Invalid body weight oscillation score'),
+	body('bwo_3_months')
+		.optional({ values: 'null' })
+		.isFloat({ min: 0, max: 100 })
+		.withMessage('Invalid body weight oscillation percentage 3 months'),
+	body('bwo_12_months')
+		.optional({ values: 'null' })
+		.isFloat({ min: 0, max: 100 })
+		.withMessage('Invalid body weight oscillation percentage 12 months'),
+
 	// Comments
 	body('normal_floatability_comments')
 		.optional({ values: 'null' })

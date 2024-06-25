@@ -214,6 +214,9 @@ exports.up = function (knex) {
 			table.string('inspection_marks_comments');
 			table.tinyint('records_external_disease').unsigned();
 			table.string('records_external_disease_comments');
+			table.tinyint('bwo_score').unsigned(); // Body weight oscillation score
+			table.double('bwo_3_months').unsigned(); //Body weight oscillation over the last 3 months
+			table.double('bwo_12_months').unsigned(); //Body weight oscillation over the last 12 months
 
 			table.string('eye_photo_path');
 			table.string('teeth_photo_path');
@@ -276,6 +279,9 @@ exports.up = function (knex) {
 			table.string('inspection_marks_comments');
 			table.tinyint('records_external_disease').unsigned();
 			table.string('records_external_disease_comments');
+			table.tinyint('bwo_score').unsigned(); // Body weight oscillation score
+			table.double('bwo_3_months').unsigned(); //Body weight oscillation over the last 3 months
+			table.double('bwo_12_months').unsigned(); //Body weight oscillation over the last 12 months
 
 			table.string('eye_photo_path');
 			table.string('teeth_photo_path');
@@ -338,6 +344,9 @@ exports.up = function (knex) {
 			table.string('inspection_marks_comments');
 			table.tinyint('records_external_disease').unsigned();
 			table.string('records_external_disease_comments');
+			table.tinyint('bwo_score').unsigned(); // Body weight oscillation score
+			table.double('bwo_3_months').unsigned(); //Body weight oscillation over the last 3 months
+			table.double('bwo_12_months').unsigned(); //Body weight oscillation over the last 12 months
 
 			table.string('eye_photo_path');
 			table.string('teeth_photo_path');
