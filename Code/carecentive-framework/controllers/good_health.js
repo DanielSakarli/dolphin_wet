@@ -35,47 +35,6 @@ async function setResult(req, res, next) {
 			test_result = { userID, user_name: userName, ...test_result };
 		
 
-		////////////////// BWOS CALCULATION ////////////////////////
-		// get the past data for the body weight oscillation calculation
-		const dataPast3Months = await GoodHealthService.getTestResultNMonths(test_result.dolphin_name, 3, roleName);
-		const dataPast12Months = await GoodHealthService.getTestResultNMonths(test_result.dolphin_name, 12, roleName);
-		
-		// Filter out any items where weight is null or undefined
-		const validWeights3Months = dataPast3Months
-			.map(item => item.weight)
-			.filter(weight => weight != null); // This removes both null and undefined values
-		const validWeights12Months = dataPast12Months
-			.map(item => item.weight)
-			.filter(weight => weight != null); // This removes both null and undefined values
-
-		const maxWeight3Months = validWeights3Months.length > 0 ? Math.max(...validWeights3Months) : 0;
-		const minWeight3Months = validWeights3Months.length > 0 ? Math.min(...validWeights3Months) : 0;
-		const maxWeight12Months = validWeights12Months.length > 0 ? Math.max(...validWeights12Months) : 0;
-		const minWeight12Months = validWeights12Months.length > 0 ? Math.min(...validWeights12Months) : 0;
-
-		// Calculate the average weight over the past 3 and 12 months, ensuring no division by zero
-		const sumWeights3Months = validWeights3Months.reduce((acc, curr) => acc + curr, 0);
-		const avgWeight3Months = validWeights3Months.length > 0 ? sumWeights3Months / validWeights3Months.length : 0;
-		const sumWeights12Months = validWeights12Months.reduce((acc, curr) => acc + curr, 0);
-		const avgWeight12Months = validWeights12Months.length > 0 ? sumWeights12Months / validWeights12Months.length : 0;
-
-		// Calculate body weight oscillation
-		const bwo3Months = (maxWeight3Months - minWeight3Months) / avgWeight3Months * 100;
-		const bwo12Months = (maxWeight12Months - minWeight12Months) / avgWeight12Months * 100;
-
-		// Calculate the BWO score (set to 0 when none of the two conditions are fulfilled)
-		const bwoScore = (bwo3Months <= 5 && bwo12Months <= 13) ? 0 : (bwo3Months > 5 && bwo12Months > 13) ? 2 : 0;
-
-		// Insert the BWO score into the test result
-		test_result = { bwo_score: bwoScore, bwo_3_months: bwo3Months, bwo_12_months: bwo12Months, ...test_result };
-
-		console.log(`Average weight in the past 3 months: ${avgWeight3Months.toFixed(2)}`);
-		console.log(`Maximum weight in the past 3 months: ${maxWeight3Months}`);
-		console.log(`Minimum weight in the past 3 months: ${minWeight3Months}`);
-		console.log(`Body weight oscillation score: ${bwoScore}`);
-		
-		////////////////// BWOS CALCULATION ////////////////////////
-
 		///////////////////////////////////////////////////////////////////////////
 		// Get the photo paths from the session storage
 		// Reset the photo_path in session storage, so no duplicate photo paths
