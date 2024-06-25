@@ -55,11 +55,11 @@ async function setResult(req, res, next) {
 		
 		// Filter out any items where weight is null or undefined
 		const validWeights3Months = dataPast3Months
-			.map(item => item.weight)
-			.filter(weight => weight != null); // This removes both null and undefined values
+			.map(item => item.weight_measured)
+			.filter(weight_measured => weight_measured != null); // This removes both null and undefined values
 		const validWeights12Months = dataPast12Months
-			.map(item => item.weight)
-			.filter(weight => weight != null); // This removes both null and undefined values
+			.map(item => item.weight_measured)
+			.filter(weight_measured => weight_measured != null); // This removes both null and undefined values
 
 		const maxWeight3Months = validWeights3Months.length > 0 ? Math.max(...validWeights3Months) : 0;
 		const minWeight3Months = validWeights3Months.length > 0 ? Math.min(...validWeights3Months) : 0;
