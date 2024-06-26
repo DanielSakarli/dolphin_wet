@@ -147,13 +147,13 @@ class GoodFeedingService {
 		};
 	
 		// Calculate BWO for past 3 and 12 months
-		const bwo3Months = calculateBWO(maxWeight3Months, minWeight3Months, avgWeight3Months);
-		const bwo12Months = calculateBWO(maxWeight12Months, minWeight12Months, avgWeight12Months);
+		let bwo3Months = calculateBWO(maxWeight3Months, minWeight3Months, avgWeight3Months);
+   		let bwo12Months = calculateBWO(maxWeight12Months, minWeight12Months, avgWeight12Months);
 	
 		// Round BWO values to 2 decimal places
 		bwo3Months = parseFloat(bwo3Months.toFixed(2));
 		bwo12Months = parseFloat(bwo12Months.toFixed(2));
-		
+
 		// Logging the calculated BWO
 		console.log("BWO 3 months: ", bwo3Months);
 		console.log("BWO 12 months: ", bwo12Months);
