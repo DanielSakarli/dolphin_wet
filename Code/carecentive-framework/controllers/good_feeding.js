@@ -48,7 +48,7 @@ async function setResult(req, res, next) {
 		//console.log('Session in control layer: ', req.session);
 
 		// Calculate the body weight oscillation
-		const temp = await GoodFeedingService.bwosCalculation(test_result);
+		const temp = await GoodFeedingService.bwosCalculation(test_result, roleName);
 		console.log("data returned", temp);
 		test_result = { ...test_result, ...temp}; 
 

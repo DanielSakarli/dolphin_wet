@@ -87,7 +87,7 @@ class GoodFeedingService {
 	/**
 	 * Body weight oscillation calculation
 	 */
-	static async bwosCalculation(test_result) {
+	static async bwosCalculation(test_result, roleName) {
 		try {
 		console.log('Arrived at bwos calc in service layer');
 		// get the past data for the body weight oscillation calculation
