@@ -88,6 +88,9 @@ const goodFeedingPostValidateRequestBody = [
 			'fish_quality_comments',
 			'fish_variety',
 			'fish_variety_comments',
+			'bwo_score',
+			'bwo_3_months',
+			'bwo_12_months',
 			'created_at',
 			//'weight',
 		];
