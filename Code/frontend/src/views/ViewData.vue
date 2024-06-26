@@ -149,12 +149,12 @@
 											{{ feedingRecord.bwo_score }}
 										</p>
 										<p>
-											Body weight oscillation past 3 months:
-											{{ feedingRecord.bwo_3_months }} %
+											Body weight oscillation past 3 months [%]:
+											{{ feedingRecord.bwo_3_months }}
 										</p>
 										<p>
-											Body weight oscillation past 12 months:
-											{{ feedingRecord.bwo_12_months }} %
+											Body weight oscillation past 12 months [%]:
+											{{ feedingRecord.bwo_12_months }}
 										</p>
 										<!--<p>Updated At: {{ feedingRecord.updated_at }}</p>-->
 									</ion-label>
