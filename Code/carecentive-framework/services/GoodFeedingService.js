@@ -62,12 +62,14 @@ class GoodFeedingService {
 
 			//console.log("Date sent to backend: ", result.created_at);
 			if (result.created_at !== "") {
+				console.log("Results to be inserted: ", result)
 				const insertedResult = await GoodFeeding.query().insert({
 					dolphin_id,
 					...result,
 					created_at: new Date(result.created_at),
 				});
 			} else {
+				console.log("Results to be inserted: ", result)
 				const insertedResult = await GoodFeeding.query().insert({
 				dolphin_id,
 				...result,
