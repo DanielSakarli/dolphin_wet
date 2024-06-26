@@ -52,36 +52,45 @@ async function setResult(req, res, next) {
 		// get the past data for the body weight oscillation calculation
 		const dataPast3Months = await GoodFeedingService.getTestResultNMonths(test_result.dolphin_name, 3, roleName);
 		const dataPast12Months = await GoodFeedingService.getTestResultNMonths(test_result.dolphin_name, 12, roleName);
-		
+		console.log('Data past 3 months: ', dataPast3Months);
+		console.log('Data past 12 months: ', dataPast12Months);
+
 		// Filter out any items where weight is null or undefined
 		const validWeights3Months = dataPast3Months
 			.map(item => item.weight_measured)
 			.filter(weight_measured => weight_measured != null); // This removes both null and undefined values
+		console.log('Valid weights 3 months: ', validWeights3Months);
 		const validWeights12Months = dataPast12Months
 			.map(item => item.weight_measured)
 			.filter(weight_measured => weight_measured != null); // This removes both null and undefined values
+		console.log('Valid weights 12 months: ', validWeights12Months);
 
 		const maxWeight3Months = validWeights3Months.length > 0 ? Math.max(...validWeights3Months) : 0;
+		console.log('Max weight 3 months: ', maxWeight3Months);
 		const minWeight3Months = validWeights3Months.length > 0 ? Math.min(...validWeights3Months) : 0;
+		console.log('Min weight 3 months: ', minWeight3Months);
 		const maxWeight12Months = validWeights12Months.length > 0 ? Math.max(...validWeights12Months) : 0;
 		const minWeight12Months = validWeights12Months.length > 0 ? Math.min(...validWeights12Months) : 0;
 
 		// Calculate the average weight over the past 3 and 12 months, ensuring no division by zero
 		const sumWeights3Months = validWeights3Months.reduce((acc, curr) => acc + curr, 0);
+		console.log('Sum weights 3 months: ', sumWeights3Months);
 		const avgWeight3Months = validWeights3Months.length > 0 ? sumWeights3Months / validWeights3Months.length : 0;
+		console.log('Average weight 3 months: ', avgWeight3Months);
 		const sumWeights12Months = validWeights12Months.reduce((acc, curr) => acc + curr, 0);
 		const avgWeight12Months = validWeights12Months.length > 0 ? sumWeights12Months / validWeights12Months.length : 0;
 
 		// Calculate body weight oscillation
 		const bwo3Months = (maxWeight3Months - minWeight3Months) / avgWeight3Months * 100;
+		console.log("BWO 3 months: ", bwo3Months);
 		const bwo12Months = (maxWeight12Months - minWeight12Months) / avgWeight12Months * 100;
 
 		// Calculate the BWO score (set to 0 when none of the two conditions are fulfilled)
 		const bwoScore = (bwo3Months <= 5 && bwo12Months <= 13) ? 0 : (bwo3Months > 5 && bwo12Months > 13) ? 2 : 0;
-
+		console.log('BWO score: ', bwoScore);
 		// Insert the BWO score into the test result
 		test_result = { bwo_score: bwoScore, bwo_3_months: bwo3Months, bwo_12_months: bwo12Months, ...test_result };
-
+	
 		console.log(`Average weight in the past 3 months: ${avgWeight3Months.toFixed(2)}`);
 		console.log(`Maximum weight in the past 3 months: ${maxWeight3Months}`);
 		console.log(`Minimum weight in the past 3 months: ${minWeight3Months}`);
