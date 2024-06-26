@@ -144,7 +144,18 @@
 											Fish variety comments:
 											{{ feedingRecord.fish_variety_comments || 'N/A' }}
 										</p>
-
+										<p>
+											Body weight oscillation score:
+											{{ feedingRecord.bwo_score }}
+										</p>
+										<p>
+											Body weight oscillation past 3 months:
+											{{ feedingRecord.bwo_3_months }} %
+										</p>
+										<p>
+											Body weight oscillation past 12 months:
+											{{ feedingRecord.bwo_12_months }} %
+										</p>
 										<!--<p>Updated At: {{ feedingRecord.updated_at }}</p>-->
 									</ion-label>
 								</ion-item>
@@ -839,8 +850,11 @@ interface FeedingRecord {
 	kcal_calculations_comments: string | null;
 	blood_hydration_comments: string | null;
 	fish_quality_comments: string | null;
-	file_path: string | null;
 	fish_variety_comments: string | null;
+	bwo_score: number;
+	bwo_3_months: number;
+	bwo_12_months: number;
+	file_path: string | null;
 	created_at: string;
 	updated_at: string;
 }
