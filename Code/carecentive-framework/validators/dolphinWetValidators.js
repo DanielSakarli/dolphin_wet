@@ -161,6 +161,19 @@ const goodFeedingPostValidateRequestBody = [
 		.optional({ values: 'null' })
 		.isString()
 		.withMessage('Invalid comments for fish variety'),
+	body('bwo_score')
+		.optional({ values: 'null' })
+		.isInt({ min: 0, max: 2 })
+		.toInt()
+		.withMessage('Invalid body weight oscillation score'),
+	body('bwo_3_months')
+		.optional({ values: 'null' })
+		.isFloat({ min: 0, max: 100 })
+		.withMessage('Invalid body weight oscillation percentage 3 months'),
+	body('bwo_12_months')
+		.optional({ values: 'null' })
+		.isFloat({ min: 0, max: 100 })
+		.withMessage('Invalid body weight oscillation percentage 12 months'),
 	body('file_path')
 		.optional({ values: 'null' })
 		.isString()
@@ -300,19 +313,6 @@ const goodHealthPostValidateRequestBody = [
 		.isInt({ min: 0, max: 2 })
 		.toInt()
 		.withMessage('Invalid records external disease value'),
-	body('bwo_score')
-		.optional({ values: 'null' })
-		.isInt({ min: 0, max: 2 })
-		.toInt()
-		.withMessage('Invalid body weight oscillation score'),
-	body('bwo_3_months')
-		.optional({ values: 'null' })
-		.isFloat({ min: 0, max: 100 })
-		.withMessage('Invalid body weight oscillation percentage 3 months'),
-	body('bwo_12_months')
-		.optional({ values: 'null' })
-		.isFloat({ min: 0, max: 100 })
-		.withMessage('Invalid body weight oscillation percentage 12 months'),
 
 	// Comments
 	body('normal_floatability_comments')
