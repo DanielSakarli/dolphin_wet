@@ -55,42 +55,66 @@ async function setResult(req, res, next) {
 		console.log('Data past 3 months: ', dataPast3Months);
 		console.log('Data past 12 months: ', dataPast12Months);
 
-		// Filter out any items where weight is null or undefined
-		const validWeights3Months = dataPast3Months
-			.map(item => item.weight_measured)
-			.filter(weight_measured => weight_measured != null); // This removes both null and undefined values
+		// Helper function to extract valid weights
+		const extractValidWeights = (data) => {
+			return Object.values(data)
+				.flat()  // Flatten the array of arrays
+				.map(item => item.weight_measured)  // Map to weight_measured values
+				.filter(weight => weight != null);  // Filter out null or undefined values
+		};
+	
+		// Extract valid weights for past 3 and 12 months
+		const validWeights3Months = extractValidWeights(dataPast3Months);
+		const validWeights12Months = extractValidWeights(dataPast12Months);
+		
+		// Logging the extracted valid weights
 		console.log('Valid weights 3 months: ', validWeights3Months);
-		const validWeights12Months = dataPast12Months
-			.map(item => item.weight_measured)
-			.filter(weight_measured => weight_measured != null); // This removes both null and undefined values
 		console.log('Valid weights 12 months: ', validWeights12Months);
-
-		const maxWeight3Months = validWeights3Months.length > 0 ? Math.max(...validWeights3Months) : 0;
+	
+		// Helper function to calculate weight statistics
+		const calculateWeightStats = (weights) => {
+			if (weights.length === 0) return { max: 0, min: 0, avg: 0 };
+			const max = Math.max(...weights);
+			const min = Math.min(...weights);
+			const sum = weights.reduce((acc, curr) => acc + curr, 0);
+			const avg = sum / weights.length;
+			return { max, min, avg };
+		};
+	
+		// Calculate statistics for past 3 and 12 months
+		const { max: maxWeight3Months, min: minWeight3Months, avg: avgWeight3Months } = calculateWeightStats(validWeights3Months);
+		const { max: maxWeight12Months, min: minWeight12Months, avg: avgWeight12Months } = calculateWeightStats(validWeights12Months);
+		
+		// Logging the calculated weight statistics
 		console.log('Max weight 3 months: ', maxWeight3Months);
-		const minWeight3Months = validWeights3Months.length > 0 ? Math.min(...validWeights3Months) : 0;
 		console.log('Min weight 3 months: ', minWeight3Months);
-		const maxWeight12Months = validWeights12Months.length > 0 ? Math.max(...validWeights12Months) : 0;
-		const minWeight12Months = validWeights12Months.length > 0 ? Math.min(...validWeights12Months) : 0;
-
-		// Calculate the average weight over the past 3 and 12 months, ensuring no division by zero
-		const sumWeights3Months = validWeights3Months.reduce((acc, curr) => acc + curr, 0);
-		console.log('Sum weights 3 months: ', sumWeights3Months);
-		const avgWeight3Months = validWeights3Months.length > 0 ? sumWeights3Months / validWeights3Months.length : 0;
-		console.log('Average weight 3 months: ', avgWeight3Months);
-		const sumWeights12Months = validWeights12Months.reduce((acc, curr) => acc + curr, 0);
-		const avgWeight12Months = validWeights12Months.length > 0 ? sumWeights12Months / validWeights12Months.length : 0;
-
-		// Calculate body weight oscillation
-		const bwo3Months = (maxWeight3Months - minWeight3Months) / avgWeight3Months * 100;
+		console.log('Avg weight 3 months: ', avgWeight3Months);
+		console.log('Max weight 12 months: ', maxWeight12Months);
+		console.log('Min weight 12 months: ', minWeight12Months);
+		console.log('Avg weight 12 months: ', avgWeight12Months);
+	
+		// Helper function to calculate body weight oscillation (BWO)
+		const calculateBWO = (max, min, avg) => {
+			if (avg === 0) return 0; // Avoid division by zero
+			return ((max - min) / avg) * 100;
+		};
+	
+		// Calculate BWO for past 3 and 12 months
+		const bwo3Months = calculateBWO(maxWeight3Months, minWeight3Months, avgWeight3Months);
+		const bwo12Months = calculateBWO(maxWeight12Months, minWeight12Months, avgWeight12Months);
+	
+		// Logging the calculated BWO
 		console.log("BWO 3 months: ", bwo3Months);
-		const bwo12Months = (maxWeight12Months - minWeight12Months) / avgWeight12Months * 100;
-
-		// Calculate the BWO score (set to 0 when none of the two conditions are fulfilled)
+		console.log("BWO 12 months: ", bwo12Months);
+	
+		// Calculate BWO score
 		const bwoScore = (bwo3Months <= 5 && bwo12Months <= 13) ? 0 : (bwo3Months > 5 && bwo12Months > 13) ? 2 : 0;
 		console.log('BWO score: ', bwoScore);
-		// Insert the BWO score into the test result
-		test_result = { bwo_score: bwoScore, bwo_3_months: bwo3Months, bwo_12_months: bwo12Months, ...test_result };
 	
+		// Insert the BWO score into the test result
+		test_result = { ...test_result, bwo_score: bwoScore, bwo_3_months: bwo3Months, bwo_12_months: bwo12Months };
+	
+		// Final logs for clarity
 		console.log(`Average weight in the past 3 months: ${avgWeight3Months.toFixed(2)}`);
 		console.log(`Maximum weight in the past 3 months: ${maxWeight3Months}`);
 		console.log(`Minimum weight in the past 3 months: ${minWeight3Months}`);
