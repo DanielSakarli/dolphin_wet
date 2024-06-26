@@ -89,7 +89,7 @@ class GoodFeedingService {
 	 */
 	static async bwosCalculation(test_result) {
 		try {
-			
+		console.log('Arrived at bwos calc in service layer');
 		// get the past data for the body weight oscillation calculation
 		const dataPast3Months = await GoodFeedingService.getTestResultNMonths(test_result.dolphin_name, 3, roleName);
 		const dataPast12Months = await GoodFeedingService.getTestResultNMonths(test_result.dolphin_name, 12, roleName);

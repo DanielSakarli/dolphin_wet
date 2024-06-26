@@ -48,8 +48,9 @@ async function setResult(req, res, next) {
 		//console.log('Session in control layer: ', req.session);
 
 		// Calculate the body weight oscillation
-		test_result = { ...await GoodFeedingService.bwosCalculation(test_result)};
-		
+		const temp = await GoodFeedingService.bwosCalculation(test_result);
+		console.log("data returned", temp);
+		test_result = { ...test_result, ...temp}; 
 
 		// Get the file paths from the session storage
 		if(req.session.file_path && req.session.file_path != '') {
