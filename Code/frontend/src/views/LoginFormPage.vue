@@ -41,9 +41,9 @@
 							<ion-input
 								ref="input"
 								fill="solid"
-								label="Username"
+								:label="$t('userNameLabel')"
 								label-placement="floating"
-								helper-text="Enter a valid username"
+								:helper-text="$t('userNameHelperText')"
 								id="username"
 								v-model="username"
 							></ion-input>
@@ -51,9 +51,9 @@
 								ref="input"
 								type="password"
 								fill="solid"
-								label="Password"
+								:label="$t('passwordLabel')"
 								label-placement="floating"
-								helper-text="Enter your password"
+								:helper-text="$t('passwordHelperText')"
 								id="password"
 								v-model="password"
 							></ion-input>
@@ -63,22 +63,22 @@
 									style="color: #6370ff; margin-bottom: 10px; font-weight: 700"
 									@click="changePassword"
 								>
-									Change Password?
+									{{ $t('changePassword') }}
 								</h5>
 								<h5
 									style="color: #6370ff; margin-bottom: 10px; font-weight: 700"
 									@click="resetPassword"
 								>
-									Forget Password?
+									{{ $t('forgotPassword') }}
 								</h5>
 							</div>
-							<ion-button color="primary" expand="block" type="submit"
-								>Login</ion-button
-							>
+							<ion-button color="primary" expand="block" type="submit">{{
+								$t('login')
+							}}</ion-button>
 							<!-- Error message, displayed in case username or password is wrong -->
 							<p v-if="errorMessage" class="error">{{ errorMessage }}</p>
 							<p style="text-align: center">
-								----------------- or -------------------
+								----------------- {{ $t('or') }} -------------------
 							</p>
 							<ion-button
 								color="light"
@@ -89,7 +89,7 @@
 								"
 								expand="block"
 								router-link="/signup"
-								>Sign up</ion-button
+								>{{ $t('signUp') }}</ion-button
 							>
 						</form>
 					</ion-card-content>

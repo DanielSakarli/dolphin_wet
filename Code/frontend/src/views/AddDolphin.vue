@@ -2,9 +2,9 @@
 	<ion-page>
 		<ion-header>
 			<ion-toolbar>
-				<ion-title>Add Dolphin</ion-title>
+				<ion-title>{{ $t('addDolphin') }}</ion-title>
 				<ion-buttons slot="end">
-					<ion-button @click="closeAddModal">Close</ion-button>
+					<ion-button @click="closeAddModal">{{ $t('close') }}</ion-button>
 				</ion-buttons>
 			</ion-toolbar>
 		</ion-header>
@@ -15,51 +15,51 @@
 						<ion-input
 							v-model="dolphin.name"
 							type="text"
-							label="Dolphin name*"
+							:label="$t('dolphinNameLabel')"
 							label-placement="stacked"
-							placeholder="Dolphin name"
+							:placeholder="$t('dolphinNamePlaceholder')"
 						/>
 					</ion-item>
 					<ion-item>
 						<ion-input
 							v-model="dolphin.sex"
 							type="number"
-							label="Dolphin sex*"
+							:label="$t('dolphinSexLabel')"
 							label-placement="stacked"
-							placeholder="Dolphin sex? 0: male, 1: female."
+							:placeholder="$t('dolphinSexPlaceholder')"
 						/>
 					</ion-item>
 					<ion-item>
 						<ion-input
 							v-model="dolphin.on_site"
 							type="number"
-							label="On site*"
+							:label="$t('onSiteLabel')"
 							label-placement="stacked"
-							placeholder="On site? 0: no, 1: yes."
+							:placeholder="$t('onSitePlaceholder')"
 						/>
 					</ion-item>
 					<ion-item>
 						<ion-input
 							v-model="dolphin.year_of_birth"
 							type="number"
-							label="Year of birth*"
+							:label="$t('birthYearLabel')"
 							label-placement="stacked"
-							placeholder="Year of birth"
+							:placeholder="$t('birthYearPlaceholder')"
 						/>
 					</ion-item>
 					<ion-item>
 						<ion-input
 							v-model="dolphin.place_of_birth"
 							type="text"
-							label="Place of birth*"
+							:label="$t('birthPlaceLabel')"
 							label-placement="stacked"
-							placeholder="Place of birth"
+							:placeholder="$t('birthPlacePlaceholder')"
 						/>
 					</ion-item>
 				</ion-list>
-				<ion-text style="margin: 15px; font-size: 0.9em"
-					>* necessary fields</ion-text
-				>
+				<ion-text style="margin: 15px; font-size: 0.9em">{{
+					$t('necessaryFields')
+				}}</ion-text>
 				<ion-button expand="full" type="submit">Add Dolphin</ion-button>
 			</form>
 

@@ -37,15 +37,15 @@
 				<ion-card>
 					<ion-icon name="heart" aria-hidden="true"></ion-icon>
 					<ion-card-content>
-						<h2>For which user should the password be resetted?</h2>
+						<h2>{{ $t('userChangePassword') }}</h2>
 						<br />
 						<form @submit.prevent="resetPassword">
 							<ion-input
 								ref="input"
 								fill="solid"
-								label="User email"
+								:label="$t('userEmailLabel')"
 								label-placement="floating"
-								helper-text="Enter a valid user email"
+								:helper-text="$t('userEmailHelperText')"
 								id="email"
 								v-model="email"
 							></ion-input>
@@ -58,11 +58,11 @@
 								"
 								@click="loginPage"
 							>
-								Back to Login
+								{{ $t('backToLoginPage') }}
 							</h5>
 							<ion-button color="primary" expand="block" type="submit"
-								><ion-icon slot="start" :icon="mailOutline"></ion-icon>Send New
-								Password</ion-button
+								><ion-icon slot="start" :icon="mailOutline"></ion-icon
+								>{{ $t('sendNewPassword') }}</ion-button
 							>
 							<!-- Error message, displayed in case username or password is wrong -->
 							<p v-if="errorMessage" class="error">{{ errorMessage }}</p>

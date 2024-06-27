@@ -17,7 +17,8 @@
 					@click="selectDolphin(dolphin)"
 				>
 					<ion-label
-						>{{ dolphin?.name }} (Born: {{ dolphin?.year_of_birth }})</ion-label
+						>{{ dolphin?.name }} ({{ $t('born') }}:
+						{{ dolphin?.year_of_birth }})</ion-label
 					>
 				</ion-item>
 			</ion-list>
@@ -25,9 +26,9 @@
 			<ion-modal :is-open="editModalOpen">
 				<ion-header>
 					<ion-toolbar>
-						<ion-title>Edit Dolphin</ion-title>
+						<ion-title>{{ $t('editDolphin') }}</ion-title>
 						<ion-buttons slot="end">
-							<ion-button @click="closeEditModal">Close</ion-button>
+							<ion-button @click="closeEditModal">{{ $t('close') }}</ion-button>
 						</ion-buttons>
 					</ion-toolbar>
 				</ion-header>
@@ -39,87 +40,87 @@
 								<ion-input
 									v-model="currentDolphinValues.name"
 									id="name"
-									label="Name*"
+									:label="$t('nameLabel')"
 									label-placement="stacked"
-									placeholder="Enter name"
+									:placeholder="$t('namePlaceholder')"
 								></ion-input>
 							</ion-item>
 							<ion-item>
 								<ion-input
 									v-model="currentDolphinValues.sex"
 									id="sex"
-									label="Sex*"
+									:label="$t('dolphinSexLabel')"
 									label-placement="stacked"
-									placeholder="Enter sex"
+									:placeholder="$t('dolphinSexPlaceholder')"
 								></ion-input>
 							</ion-item>
 							<ion-item>
 								<ion-input
 									v-model="currentDolphinValues.on_site"
 									id="on_site"
-									label="On Site*"
+									:label="$t('onSiteLabel')"
 									label-placement="stacked"
-									placeholder="Enter status (1: on-site, 0: not on-site)"
+									:placeholder="$t('onSitePlaceholder')"
 								></ion-input>
 							</ion-item>
 							<ion-item>
 								<ion-input
 									v-model="currentDolphinValues.year_of_birth"
 									id="year_of_birth"
-									label="Year of Birth*"
+									:label="$t('birthYearLabel')"
 									label-placement="stacked"
-									placeholder="Enter year of birth"
+									:placeholder="$t('birthYearPlaceholder')"
 								></ion-input>
 							</ion-item>
 							<ion-item>
 								<ion-input
 									v-model="currentDolphinValues.place_of_birth"
 									id="place_of_birth"
-									label="Place of Birth*"
+									:label="$t('birthPlaceLabel')"
 									label-placement="stacked"
-									placeholder="Enter place of birth"
+									:placeholder="$t('birthPlacePlaceholder')"
 								></ion-input>
 							</ion-item>
 							<ion-item>
 								<ion-input
 									v-model="currentDolphinValues.min_weight_measured"
 									id="min_weight_measured"
-									label="Minimum Wanted Weight"
+									:label="$t('minWantedWeightLabel')"
 									label-placement="stacked"
-									placeholder="Enter minimum wanted weight"
+									:placeholder="$t('minWantedWeightPlaceholder')"
 								></ion-input>
 							</ion-item>
 							<ion-item>
 								<ion-input
 									v-model="currentDolphinValues.max_weight_measured"
 									id="max_weight_measured"
-									label="Maximum Wanted Weight"
+									:label="$t('maxWantedWeightLabel')"
 									label-placement="stacked"
-									placeholder="Enter maximum wanted weight"
+									:placeholder="$t('maxWantedWeightPlaceholder')"
 								></ion-input>
 							</ion-item>
 							<ion-item>
 								<ion-input
 									v-model="currentDolphinValues.min_kcal_calculations"
 									id="min_kcal_calculations"
-									label="Minimum Kcal Calculations"
+									:label="$t('minKcalCalculationLabel')"
 									label-placement="stacked"
-									placeholder="Enter minimum kcal calculations"
+									:placeholder="$t('minKcalCalculationPlaceholder')"
 								></ion-input>
 							</ion-item>
 							<ion-item>
 								<ion-input
 									v-model="currentDolphinValues.max_kcal_calculations"
 									id="max_kcal_calculations"
-									label="Maximum Kcal Calculations"
+									:label="$t('maxKcalCalculationLabel')"
 									label-placement="stacked"
-									placeholder="Enter maximum kcal calculations"
+									:placeholder="$t('maxKcalCalculationPlaceholder')"
 								></ion-input>
 							</ion-item>
 						</ion-list>
-						<ion-text style="margin: 15px; font-size: 0.9em"
-							>* necessary fields</ion-text
-						>
+						<ion-text style="margin: 15px; font-size: 0.9em">{{
+							$t('necessaryFields')
+						}}</ion-text>
 						<ion-button expand="full" type="submit"> Save Changes </ion-button>
 					</form>
 				</ion-content>
@@ -128,43 +129,47 @@
 			<ion-card v-if="showDolphin">
 				<ion-card-title>{{ currentDolphin.name }}</ion-card-title>
 				<ion-item>
-					<ion-label>Sex:</ion-label>
+					<ion-label>{{ $t('dolphinSex') }}</ion-label>
 					<ion-text>{{ currentDolphin.sex == 0 ? 'Male' : 'Female' }}</ion-text>
 				</ion-item>
 				<ion-item>
-					<ion-label>On Site:</ion-label>
+					<ion-label>{{ $t('onSite') }}</ion-label>
 					<ion-text>{{ currentDolphin.on_site == 0 ? 'No' : 'Yes' }}</ion-text>
 				</ion-item>
 				<ion-item>
-					<ion-label>Year of Birth:</ion-label>
+					<ion-label>{{ $t('birthYear') }}</ion-label>
 					<ion-text>{{ currentDolphin.year_of_birth }}</ion-text>
 				</ion-item>
 				<ion-item>
-					<ion-label>Place of Birth:</ion-label>
+					<ion-label>{{ $t('birthPlace') }}</ion-label>
 					<ion-text>{{ currentDolphin.place_of_birth }}</ion-text>
 				</ion-item>
 				<ion-item>
-					<ion-label>Minimum Wanted Weight:</ion-label>
+					<ion-label>{{ $t('minWantedWeight') }}</ion-label>
 					<ion-text>{{ currentDolphin.min_weight_measured }}</ion-text>
 				</ion-item>
 				<ion-item>
-					<ion-label>Maximum Wanted Weight:</ion-label>
+					<ion-label>{{ $t('maxWantedWeight') }}</ion-label>
 					<ion-text>{{ currentDolphin.max_weight_measured }}</ion-text>
 				</ion-item>
 				<ion-item>
-					<ion-label>Minimum Kcal Calculations:</ion-label>
+					<ion-label>{{ $t('minKcalCalculation') }}</ion-label>
 					<ion-text>{{ currentDolphin.min_kcal_calculations }}</ion-text>
 				</ion-item>
 				<ion-item>
-					<ion-label>Maximum Kcal Calculations:</ion-label>
+					<ion-label>{{ $t('maxKcalCalculation') }}</ion-label>
 					<ion-text>{{ currentDolphin.max_kcal_calculations }}</ion-text>
 				</ion-item>
 				<ion-row>
 					<ion-col size="6">
-						<ion-button expand="full" @click="openEditModal">Edit</ion-button>
+						<ion-button expand="full" @click="openEditModal">{{
+							$t('edit')
+						}}</ion-button>
 					</ion-col>
 					<ion-col size="6" class="ion-text-end">
-						<ion-button expand="full" @click="deleteDolphin">Delete</ion-button>
+						<ion-button expand="full" @click="deleteDolphin">{{
+							$t('delete')
+						}}</ion-button>
 					</ion-col>
 				</ion-row>
 			</ion-card>
@@ -174,14 +179,16 @@
 			<ion-toolbar>
 				<ion-buttons slot="start">
 					<ion-button @click="prevDolphin" :disabled="!prevDolphinAvailable">
-						Prev
+						{{ $t('previous') }}
 					</ion-button>
 				</ion-buttons>
 				<ion-buttons slot="end">
-					<ion-button @click="reloadDolphins">Reload Data</ion-button>
-					<ion-button @click="openAddModal">Add</ion-button>
+					<ion-button @click="reloadDolphins">{{
+						$t('updateData')
+					}}</ion-button>
+					<ion-button @click="openAddModal">{{ $t('add') }}</ion-button>
 					<ion-button @click="nextDolphin" :disabled="!nextDolphinAvailable">
-						Next
+						{{ $t('next') }}
 					</ion-button>
 				</ion-buttons>
 			</ion-toolbar>

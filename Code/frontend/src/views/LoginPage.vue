@@ -27,14 +27,14 @@
 				color="light"
 				expand="block"
 				router-link="/login"
-				>Login</ion-button
+				>{{ $t('login') }}</ion-button
 			>
 			<ion-button
 				color="tertiary"
 				style="border: 2px solid white; border-radius: 15px; margin-top: 10px"
 				expand="block"
 				router-link="/signup"
-				>Sign Up</ion-button
+				>{{ $t('signUp') }}</ion-button
 			>
 		</div>
 	</ion-page>

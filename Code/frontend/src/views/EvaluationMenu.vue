@@ -29,7 +29,7 @@
 			>
 		</ion-content>
 		<ion-button fill="clear" size="large" @click="getUserManual">
-			User Manual
+			{{ $t('userManual') }}
 			<ion-icon slot="start" :icon="download"></ion-icon>
 		</ion-button>
 		<ion-button fill="clear" size="large" @click="getStandardsAndGuidelines">

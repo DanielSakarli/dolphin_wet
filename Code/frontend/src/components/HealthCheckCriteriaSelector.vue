@@ -125,12 +125,12 @@
 					{{ $t('score0Health6') }}
 					<h3>Score 2</h3>
 					{{ $t('score2Health6') }}
-					<h2>Odontogramm Template:</h2>
+					<h2>{{ $t('odontogramm_template') }}</h2>
 					<img
 						src="../../public/Odontogramm_template.png"
 						alt="Odontogramm Tempplate"
 					/>
-					<h4>Odontogramm Color Schema:</h4>
+					<h4>{{ $t('odontogramm_color_schema') }}</h4>
 					<img
 						src="../../public/Odontogramm_color_schema.png"
 						alt="Odontogramm Color Schema"
@@ -193,7 +193,7 @@
 						alt="Silhouette of male dolphin for drawing the rake marks."
 					/>
 					<ion-button fill="clear" size="large" @click="getSVGFemaleDolphin">
-						Download SVG file
+						{{ $t('downloadFile') }}
 						<ion-icon slot="start" :icon="download"></ion-icon>
 					</ion-button>
 					<h4>{{ $t('rakeMarksScoringFemale') }}</h4>
@@ -202,7 +202,7 @@
 						alt="Silhouette of female dolphin for drawing the rake marks."
 					/>
 					<ion-button fill="clear" size="large" @click="getSVGMaleDolphin">
-						Download SVG file
+						{{ $t('downloadFile') }}
 						<ion-icon slot="start" :icon="download"></ion-icon>
 					</ion-button>
 				</div>
@@ -279,14 +279,14 @@
 				criteria === 'firstCriteriaHealth'
 			"
 		>
-			<ion-card-title class="card-title" style="margin-bottom: 15px"
-				>If applicable, upload your video here</ion-card-title
-			>
+			<ion-card-title class="card-title" style="margin-bottom: 15px">{{
+				$t('video')
+			}}</ion-card-title>
 			<ion-item>
 				<VideoUpload id="video1" @form-submitted="handleFormSubmittedVideo" />
 			</ion-item>
 			<ion-item>
-				Total file size: {{ totalFileSize.toFixed(2) }} MB / 10 MB
+				{{ $t('fileSize') }}{{ totalFileSize.toFixed(2) }} MB / 10 MB
 			</ion-item>
 		</ion-card>
 		<ion-card
@@ -332,9 +332,9 @@
 				criteria === 'secondCriteriaHealth'
 			"
 		>
-			<ion-card-title class="card-title" style="margin-bottom: 15px"
-				>Upload your eye photos here</ion-card-title
-			>
+			<ion-card-title class="card-title" style="margin-bottom: 15px">{{
+				$t('eyePhotos')
+			}}</ion-card-title>
 			<ion-item>
 				<ion-thumbnail slot="start">
 					<img
@@ -355,7 +355,7 @@
 				<PhotoUpload id="eye" @form-submitted="handleFormSubmittedPhoto" />
 			</ion-item>
 			<ion-item>
-				Total file size: {{ totalFileSize.toFixed(2) }} MB / 10 MB
+				{{ $t('fileSize') }}{{ totalFileSize.toFixed(2) }} MB / 10 MB
 			</ion-item>
 		</ion-card>
 		<ion-card
@@ -426,14 +426,14 @@
 				criteria === 'secondCriteriaHealth'
 			"
 		>
-			<ion-card-title class="card-title" style="margin-bottom: 15px"
-				>If applicable, upload your video here</ion-card-title
-			>
+			<ion-card-title class="card-title" style="margin-bottom: 15px">{{
+				$t('video')
+			}}</ion-card-title>
 			<ion-item>
 				<VideoUpload id="video2" @form-submitted="handleFormSubmittedVideo" />
 			</ion-item>
 			<ion-item>
-				Total file size: {{ totalFileSize.toFixed(2) }} MB / 10 MB
+				{{ $t('fileSize') }}{{ totalFileSize.toFixed(2) }} MB / 10 MB
 			</ion-item>
 		</ion-card>
 		<ion-card
@@ -473,9 +473,9 @@
 				criteria === 'thirdCriteriaHealth'
 			"
 		>
-			<ion-card-title class="card-title" style="margin-bottom: 15px"
-				>Upload your teeth photos here</ion-card-title
-			>
+			<ion-card-title class="card-title" style="margin-bottom: 15px">{{
+				$t('teethPhotos')
+			}}</ion-card-title>
 			<ion-item>
 				<ion-thumbnail slot="start">
 					<img
@@ -496,7 +496,7 @@
 				<PhotoUpload id="teeth" @form-submitted="handleFormSubmittedPhoto" />
 			</ion-item>
 			<ion-item>
-				Total file size: {{ totalFileSize.toFixed(2) }} MB / 10 MB
+				{{ $t('fileSize') }}{{ totalFileSize.toFixed(2) }} MB / 10 MB
 			</ion-item>
 		</ion-card>
 		<ion-card
@@ -536,9 +536,9 @@
 				criteria === 'thirdCriteriaHealth'
 			"
 		>
-			<ion-card-title class="card-title" style="margin-bottom: 15px"
-				>Upload your odontogramms here</ion-card-title
-			>
+			<ion-card-title class="card-title" style="margin-bottom: 15px">{{
+				$t('odontogrammPhotos')
+			}}</ion-card-title>
 			<ion-item>
 				<ion-thumbnail slot="start">
 					<img
@@ -566,7 +566,7 @@
 				/>
 			</ion-item>
 			<ion-item>
-				Total file size: {{ totalFileSize.toFixed(2) }} MB / 10 MB
+				{{ $t('fileSize') }}{{ totalFileSize.toFixed(2) }} MB / 10 MB
 			</ion-item>
 		</ion-card>
 		<ion-card
@@ -576,14 +576,14 @@
 				criteria === 'thirdCriteriaHealth'
 			"
 		>
-			<ion-card-title class="card-title" style="margin-bottom: 15px"
-				>If applicable, upload your video here</ion-card-title
-			>
+			<ion-card-title class="card-title" style="margin-bottom: 15px">{{
+				$t('video')
+			}}</ion-card-title>
 			<ion-item>
 				<VideoUpload id="video3" @form-submitted="handleFormSubmittedVideo" />
 			</ion-item>
 			<ion-item>
-				Total file size: {{ totalFileSize.toFixed(2) }} MB / 10 MB
+				{{ $t('fileSize') }}{{ totalFileSize.toFixed(2) }} MB / 10 MB
 			</ion-item>
 		</ion-card>
 		<ion-card
@@ -625,14 +625,14 @@
 				criteria === 'fourthCriteriaHealth'
 			"
 		>
-			<ion-card-title class="card-title" style="margin-bottom: 15px"
-				>If applicable, upload your video here</ion-card-title
-			>
+			<ion-card-title class="card-title" style="margin-bottom: 15px">{{
+				$t('video')
+			}}</ion-card-title>
 			<ion-item>
 				<VideoUpload id="video4" @form-submitted="handleFormSubmittedVideo" />
 			</ion-item>
 			<ion-item>
-				Total file size: {{ totalFileSize.toFixed(2) }} MB / 10 MB
+				{{ $t('fileSize') }}{{ totalFileSize.toFixed(2) }} MB / 10 MB
 			</ion-item>
 		</ion-card>
 		<ion-card
@@ -738,14 +738,14 @@
 				criteria === 'fifthCriteriaHealth'
 			"
 		>
-			<ion-card-title class="card-title" style="margin-bottom: 15px"
-				>If applicable, upload your video here</ion-card-title
-			>
+			<ion-card-title class="card-title" style="margin-bottom: 15px">{{
+				$t('video')
+			}}</ion-card-title>
 			<ion-item>
 				<VideoUpload id="video5" @form-submitted="handleFormSubmittedVideo" />
 			</ion-item>
 			<ion-item>
-				Total file size: {{ totalFileSize.toFixed(2) }} MB / 10 MB
+				{{ $t('fileSize') }}{{ totalFileSize.toFixed(2) }} MB / 10 MB
 			</ion-item>
 		</ion-card>
 		<ion-card
@@ -789,9 +789,9 @@
 				criteria === 'sixthCriteriaHealth'
 			"
 		>
-			<ion-card-title class="card-title" style="margin-bottom: 15px"
-				>Upload your marks photos here</ion-card-title
-			>
+			<ion-card-title class="card-title" style="margin-bottom: 15px">{{
+				$t('rakeMarksPhotos')
+			}}</ion-card-title>
 			<ion-item>
 				<ion-thumbnail slot="start">
 					<img
@@ -812,7 +812,7 @@
 				<PhotoUpload id="marks" @form-submitted="handleFormSubmittedPhoto" />
 			</ion-item>
 			<ion-item>
-				Total file size: {{ totalFileSize.toFixed(2) }} MB / 10 MB
+				{{ $t('fileSize') }}{{ totalFileSize.toFixed(2) }} MB / 10 MB
 			</ion-item>
 		</ion-card>
 		<ion-card
@@ -854,7 +854,7 @@
 				/>
 			</ion-item>
 			<ion-item>
-				Total file size: {{ totalFileSize.toFixed(2) }} MB / 10 MB
+				{{ $t('fileSize') }}{{ totalFileSize.toFixed(2) }} MB / 10 MB
 			</ion-item>
 		</ion-card>
 		<ion-card
@@ -898,14 +898,14 @@
 				criteria === 'sixthCriteriaHealth'
 			"
 		>
-			<ion-card-title class="card-title" style="margin-bottom: 15px"
-				>If applicable, upload your video here</ion-card-title
-			>
+			<ion-card-title class="card-title" style="margin-bottom: 15px">{{
+				$t('video')
+			}}</ion-card-title>
 			<ion-item>
 				<VideoUpload id="video6" @form-submitted="handleFormSubmittedVideo" />
 			</ion-item>
 			<ion-item>
-				Total file size: {{ totalFileSize.toFixed(2) }} MB / 10 MB
+				{{ $t('fileSize') }}{{ totalFileSize.toFixed(2) }} MB / 10 MB
 			</ion-item>
 		</ion-card>
 	</ion-content>

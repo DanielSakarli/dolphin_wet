@@ -1,6 +1,6 @@
 <template>
 	<ion-page>
-		<base-layout pageTitle="Change Password">
+		<base-layout :pageTitle="$t('changePasswordTitle')">
 			<h3
 				style="
 					position: fixed;
@@ -37,15 +37,15 @@
 				<ion-card>
 					<ion-icon name="heart" aria-hidden="true"></ion-icon>
 					<ion-card-content>
-						<h2>For which user should the password be changed?</h2>
+						<h2>{{ $t('userChangePassword') }}</h2>
 						<br />
 						<form @submit.prevent="changePassword">
 							<ion-input
 								ref="input"
 								fill="solid"
-								label="Username"
+								:label="$t('userNameLabel')"
 								label-placement="floating"
-								helper-text="Enter a valid username"
+								:helper-text="$t('userNameHelperText')"
 								id="userName"
 								v-model="userName"
 							></ion-input>
@@ -53,9 +53,9 @@
 								ref="input"
 								fill="solid"
 								type="password"
-								label="Current password"
+								:label="$t('currentPasswordLabel')"
 								label-placement="floating"
-								helper-text="Enter your current password."
+								:helper-text="$t('currentPasswordHelperText')"
 								id="currentPassword"
 								v-model="currentPassword"
 							></ion-input>
@@ -63,9 +63,9 @@
 								ref="input"
 								fill="solid"
 								type="password"
-								label="New password"
+								:label="$t('newPasswordLabel')"
 								label-placement="floating"
-								helper-text="Enter your new password"
+								:helper-text="$t('newPasswordHelperText')"
 								id="newPassword"
 								v-model="newPassword"
 							></ion-input>
@@ -78,11 +78,11 @@
 								"
 								@click="loginPage"
 							>
-								Back to Login
+								{{ $t('backToLoginPage') }}
 							</h5>
-							<ion-button color="primary" expand="block" type="submit"
-								>Change Password</ion-button
-							>
+							<ion-button color="primary" expand="block" type="submit">{{
+								$t('changePasswordTitle')
+							}}</ion-button>
 							<!-- Error message, displayed in case username or password is wrong -->
 							<p v-if="errorMessage" class="error">{{ errorMessage }}</p>
 						</form>

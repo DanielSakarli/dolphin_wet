@@ -12,7 +12,9 @@
 					multiple
 					@ionChange="checkAllDolphinsSelected"
 				>
-					<ion-select-option value="all">All dolphins</ion-select-option>
+					<ion-select-option value="all">{{
+						$t('allDolphins')
+					}}</ion-select-option>
 					<ion-select-option
 						v-for="dolphin in dolphinList"
 						v-bind:key="dolphin.name"

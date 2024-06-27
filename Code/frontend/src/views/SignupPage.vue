@@ -10,7 +10,7 @@
 				color: aliceblue;
 			"
 		>
-			Create <br />
+			Create<br />
 			Account
 		</h2>
 		<div
@@ -21,41 +21,41 @@
 				<ion-icon name="heart" aria-hidden="true"></ion-icon>
 				<ion-card-content>
 					<p style="text-align: center">
-						---------- Your information --------<br />
+						---------- {{ $t('yourInformation') }} --------<br />
 					</p>
 					<ion-input
 						v-model="username"
 						ref="input"
 						type="text"
 						fill="solid"
-						label="Name"
+						:label="$t('name')"
 						label-placement="floating"
-						helper-text="Enter your name"
+						:helper-text="$t('namePlaceholder')"
 					></ion-input>
 					<ion-input
 						v-model="email"
 						ref="input"
 						type="email"
 						fill="solid"
-						label="E-mail"
+						:label="$t('emailLabel')"
 						label-placement="floating"
-						helper-text="Enter a valid e-mail"
+						:helper-text="$t('emailHelperText')"
 					></ion-input>
 					<ion-input
 						v-model="password"
 						ref="input"
 						type="password"
 						fill="solid"
-						label="Your password"
+						:label="$t('passwordLabel')"
 						label-placement="floating"
-						helper-text="Enter your password"
+						:helper-text="$t('passwordHelperText')"
 					></ion-input>
 					<p style="text-align: center">
-						-------------- Your zoo ------------<br />
+						-------------- {{ $t('yourZoo') }} ------------<br />
 					</p>
-					<p>Select your zoo:<br /></p>
+					<p>{{ $t('selectZoo') }}<br /></p>
 					<select v-model="selectedZoo">
-						<option disabled value="">Please select a zoo</option>
+						<option disabled value="">{{ $t('selectZooHelperText') }}</option>
 						<option v-for="zoo in zoos" :key="zoo" :value="zoo">
 							{{ zoo }}
 						</option>
@@ -66,15 +66,15 @@
 						ref="input"
 						type="password"
 						fill="solid"
-						label="Zoo password"
+						:label="$t('adminPassword')"
 						label-placement="floating"
-						helper-text="Ask your administrator for the zoo´s password"
+						:helper-text="$t('adminPasswordHelperTextAsk')"
 					></ion-input>
-					<ion-button @click="registerUser" color="primary" expand="block"
-						>Sign up</ion-button
-					>
+					<ion-button @click="registerUser" color="primary" expand="block">{{
+						$t('signUp')
+					}}</ion-button>
 					<p style="text-align: center">
-						----------------- or -------------------
+						----------------- {{ $t('or') }} -------------------
 					</p>
 					<router-link to="/login"
 						><ion-button
@@ -85,7 +85,7 @@
 								margin-top: 10px;
 							"
 							expand="block"
-							>Log in</ion-button
+							>{{ $t('login') }}</ion-button
 						></router-link
 					>
 				</ion-card-content>

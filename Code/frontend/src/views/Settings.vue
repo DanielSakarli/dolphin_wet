@@ -11,16 +11,18 @@
 		<ion-content>
 			<ion-list>
 				<ion-item button @click="toggleDeleteModal">
-					<ion-label> Delete an user </ion-label>
+					<ion-label> {{ $t('deleteUser') }}</ion-label>
 				</ion-item>
 			</ion-list>
 			<!-- Delete User Button -->
 			<ion-modal :is-open="deleteModalOpen">
 				<ion-header>
 					<ion-toolbar>
-						<ion-title>Delete User</ion-title>
+						<ion-title>{{ $t('deleteUser') }}</ion-title>
 						<ion-buttons slot="end">
-							<ion-button @click="toggleDeleteModal">Close</ion-button>
+							<ion-button @click="toggleDeleteModal">{{
+								$t('close')
+							}}</ion-button>
 						</ion-buttons>
 					</ion-toolbar>
 				</ion-header>
@@ -57,14 +59,16 @@
 								ref="input"
 								type="password"
 								fill="solid"
-								label="Zoo administrator password"
+								:label="$t('adminPasswordLabel')"
 								label-placement="floating"
-								helper-text="Enter the zoo´s administrator password"
+								:helper-text="$t('adminPasswordHelperText')"
 								id="password"
 								v-model="adminPassword"
 							></ion-input>
 						</ion-item>
-						<ion-button expand="full" type="submit"> Delete User </ion-button>
+						<ion-button expand="full" type="submit">
+							{{ $t('deleteUser') }}
+						</ion-button>
 					</form>
 				</ion-content>
 			</ion-modal>

@@ -152,7 +152,7 @@
 			<ion-content class="ion-padding">
 				<div v-if="criteria === 'firstCriteriaNutrition'">
 					<!--Here are the values of reference area-->
-					<h3>Wanted weight area:</h3>
+					<h3>{{ $t('weightArea') }}</h3>
 					<div v-if="dolphinSelect">
 						<div
 							v-for="selectedDolphin in dolphinSelect"
@@ -160,7 +160,7 @@
 						>
 							<h4>{{ selectedDolphin }}</h4>
 							<p>
-								Minimum:
+								{{ $t('minimum') }}
 								{{
 									dolphinsStore.dolphinList.find(
 										(dolphin) => dolphin.name === selectedDolphin
@@ -168,7 +168,7 @@
 								}}
 							</p>
 							<p>
-								Maximum:
+								{{ $t('maximum') }}
 								{{
 									dolphinsStore.dolphinList.find(
 										(dolphin) => dolphin.name === selectedDolphin
@@ -180,7 +180,7 @@
 				</div>
 				<div v-if="criteria === 'secondCriteriaNutrition'">
 					<!--Here are the values of reference area-->
-					<h3>Kcal calculations</h3>
+					<h3>{{ $t('kcalCalculation') }}</h3>
 					<div v-if="dolphinSelect">
 						<div
 							v-for="selectedDolphin in dolphinSelect"
@@ -188,7 +188,7 @@
 						>
 							<h4>{{ selectedDolphin }}</h4>
 							<p>
-								Minimum:
+								{{ $t('minimum') }}
 								{{
 									dolphinsStore.dolphinList.find(
 										(dolphin) => dolphin.name === selectedDolphin
@@ -196,7 +196,7 @@
 								}}
 							</p>
 							<p>
-								Maximum:
+								{{ $t('maximum') }}
 								{{
 									dolphinsStore.dolphinList.find(
 										(dolphin) => dolphin.name === selectedDolphin
@@ -371,13 +371,13 @@
 				criteria === 'thirdCriteriaNutrition'
 			"
 		>
-			<ion-card-title>Upload your laboratory file(s) here:</ion-card-title>
+			<ion-card-title>{{ $t('laboratoryFile') }}</ion-card-title>
 			<ion-list>
 				<ion-item>
 					<FileUpload @form-submitted="handleFormSubmittedFile" />
 				</ion-item>
 				<ion-item>
-					Total file size: {{ totalFileSize.toFixed(2) }} MB / 10 MB
+					{{ $t('fileSize') }}{{ totalFileSize.toFixed(2) }} MB / 10 MB
 				</ion-item>
 			</ion-list>
 		</ion-card>
