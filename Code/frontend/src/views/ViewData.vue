@@ -18,7 +18,9 @@
 						cancelText="Cancel"
 						v-model="dolphinSelect"
 					>
-						<ion-select-option value="">All dolphins</ion-select-option>
+						<ion-select-option value="">{{
+							$t('allDolphins')
+						}}</ion-select-option>
 						<ion-select-option
 							v-for="dolphin in dolphinsStore.dolphinList"
 							v-bind:key="dolphin.name"
@@ -55,20 +57,29 @@
 						cancelText="Cancel"
 						v-model="numMonths"
 					>
-						<ion-select-option value="1">1 month</ion-select-option>
-						<ion-select-option value="2">2 months</ion-select-option>
-						<ion-select-option value="3">3 months</ion-select-option>
+						<ion-select-option value="1">{{
+							$t('oneMonth')
+						}}</ion-select-option>
+						<ion-select-option value="2">{{
+							$t('twoMonths')
+						}}</ion-select-option>
+						<ion-select-option value="3">{{
+							$t('threeMonths')
+						}}</ion-select-option>
 						<!--If numMonths === 10, all data is send from backend to frontend-->
-						<ion-select-option value="10">All data</ion-select-option>
+						<ion-select-option value="10">{{
+							$t('allData')
+						}}</ion-select-option>
 					</ion-select>
 				</ion-item>
 			</ion-list>
 			<ion-button expand="block" @click="showData">
-				<ion-icon slot="start" :icon="reload"></ion-icon>Show Data</ion-button
+				<ion-icon slot="start" :icon="reload"></ion-icon
+				>{{ $t('showData') }}</ion-button
 			>
 			<ion-button expand="block" @click="sendCSV">
-				<ion-icon slot="start" :icon="mailOutline"></ion-icon>Send csv File via
-				E-Mail</ion-button
+				<ion-icon slot="start" :icon="mailOutline"></ion-icon
+				>{{ $t('sendCSV') }}</ion-button
 			>
 			<ion-card v-if="dataFeeding">
 				<ion-list>
@@ -82,46 +93,57 @@
 								>
 									<ion-label>
 										<p>
-											<span class="bold-text">Record created at:</span>
+											<span class="bold-text">{{ $t('recordCreatedAt') }}</span>
 											{{ feedingRecord.created_at }}
 										</p>
-										<p>Dolphin name: {{ feedingRecord.dolphin_name }}</p>
-										<p>User ID: {{ feedingRecord.user_id }}</p>
 										<p>
-											Body condition score:
+											{{ $t('dolphinNamePlaceholder') }}:
+											{{ feedingRecord.dolphin_name }}
+										</p>
+										<p>{{ $t('userID') }}: {{ feedingRecord.user_id }}</p>
+										<p>
+											{{ $t('bodyConditionScore') }}:
 											{{ feedingRecord.body_condition_score }}
 										</p>
 										<p>
-											Body condition score comments:
+											{{ $t('bodyConditionScoreComments') }}:
 											{{ feedingRecord.body_condition_score_comments || 'N/A' }}
 										</p>
 										<p>
-											Weight measured [kg]: {{ feedingRecord.weight_measured }}
+											{{ $t('weightLabel') }}
+											{{ feedingRecord.weight_measured }}
 										</p>
 										<p>
-											Weight measured comments:
+											{{ $t('weightComments') }}:
 											{{ feedingRecord.weight_measured_comments || 'N/A' }}
 										</p>
 										<p>
-											Kcal calculations: {{ feedingRecord.kcal_calculations }}
+											{{ $t('kcalCalculation')
+											}}{{ feedingRecord.kcal_calculations }}
 										</p>
 										<p>
-											Kcal calculation comments:
+											{{ $t('kcalCalculationComments') }}:
 											{{ feedingRecord.kcal_calculations_comments || 'N/A' }}
 										</p>
-										<p>Blood hydration: {{ feedingRecord.blood_hydration }}</p>
+										<p>
+											{{ $t('bloodHydration') }}: '{{
+												feedingRecord.blood_hydration
+											}}
+										</p>
 
 										<p>
-											Blood hydration comments:
+											{{ $t('bloodHydrationComments') }}:
 											{{ feedingRecord.blood_hydration_comments || 'N/A' }}
 										</p>
-										<p>Fish quality: {{ feedingRecord.fish_quality }}</p>
 										<p>
-											Fish quality comments:
+											{{ $t('fishQuality') }}: {{ feedingRecord.fish_quality }}
+										</p>
+										<p>
+											{{ $t('fishQualityComments') }}:
 											{{ feedingRecord.fish_quality_comments || 'N/A' }}
 										</p>
 										<p class="break-words">
-											Laboratory data file:
+											{{ $t('laboratoryDataFile') }}:
 											<template v-if="feedingRecord.file_path">
 												<a
 													v-for="(path, index) in feedingRecord.file_path.split(
@@ -138,22 +160,24 @@
 												{{ feedingRecord.file_path }}
 											</template>
 										</p>
-										<p>Fish variety: {{ feedingRecord.fish_variety }}</p>
+										<p>
+											{{ $t('fishVariety') }}: {{ feedingRecord.fish_variety }}
+										</p>
 
 										<p>
-											Fish variety comments:
+											{{ $t('fishVarietyComments') }}:
 											{{ feedingRecord.fish_variety_comments || 'N/A' }}
 										</p>
 										<p>
-											Body weight oscillation score:
+											{{ $t('bodyWeightOscillationScore') }}:
 											{{ feedingRecord.bwo_score }}
 										</p>
 										<p>
-											Body weight oscillation past 3 months [%]:
+											{{ $t('bodyWeightOscillation3Months') }}:
 											{{ feedingRecord.bwo_3_months }}
 										</p>
 										<p>
-											Body weight oscillation past 12 months [%]:
+											{{ $t('bodyWeightOscillation12Months') }}:
 											{{ feedingRecord.bwo_12_months }}
 										</p>
 										<!--<p>Updated At: {{ feedingRecord.updated_at }}</p>-->
@@ -161,7 +185,7 @@
 								</ion-item>
 							</ion-list>
 							<ion-label v-else>
-								<p>No data available for this month and year.</p>
+								<p>{{ $t('doData') }}</p>
 							</ion-label>
 						</ion-list>
 					</ion-item>
@@ -179,87 +203,102 @@
 								>
 									<ion-label>
 										<p>
-											<span class="bold-text">Record created at:</span
+											<span class="bold-text"
+												>{{ $t('recordCreatedAt') }}: </span
 											>{{ HousingRecord.created_at }}
 										</p>
-										<p>Dolphin name: {{ HousingRecord.dolphin_name }}</p>
 										<p>
-											Enclosure barrier safety:
+											{{ $t('dolphinNamePlaceholder') }}:
+											{{ HousingRecord.dolphin_name }}
+										</p>
+										<p>
+											{{ $t('enclosureBarrierSafety') }}:
 											{{ HousingRecord.enclosure_barrier_safety }}
 										</p>
 										<p>
-											Enclosure barrier safety comments:
+											{{ $t('enclosureBarrierSafetyComments') }}:
 											{{
 												HousingRecord.enclosure_barrier_safety_comments || 'N/A'
 											}}
 										</p>
 										<p>
-											Foreign body ingestion:
+											{{ $t('foreignBodyIngestion') }}:
 											{{ HousingRecord.foreign_body_ingestion }}
 										</p>
 										<p>
-											Foreign body ingestion comments:
+											{{ $t('foreignBodyIngestionComments') }}:
+
 											{{
 												HousingRecord.foreign_body_ingestion_comments || 'N/A'
 											}}
 										</p>
-										<p>Pool design: {{ HousingRecord.pool_design }}</p>
+										<p>
+											{{ $t('poolDesign') }}: {{ HousingRecord.pool_design }}
+										</p>
 
 										<p>
-											Pool design comments:
+											{{ $t('poolDesignComments') }}:
 											{{ HousingRecord.pool_design_comments || 'N/A' }}
 										</p>
 										<p>
-											Forced loneliness: {{ HousingRecord.forced_loneliness }}
+											{{ $t('forcedLoneliness') }}:
+											{{ HousingRecord.forced_loneliness }}
 										</p>
 
 										<p>
-											Forced loneliness comments:
+											{{ $t('forcedLonelinessComments') }}:
 											{{ HousingRecord.forced_loneliness_comments || 'N/A' }}
 										</p>
-										<p>Water quality: {{ HousingRecord.water_quality }}</p>
+										<p>
+											{{ $t('waterQuality') }}:
+											{{ HousingRecord.water_quality }}
+										</p>
 
 										<p>
-											Water quality comments:
+											{{ $t('waterQualityComments') }}:
 											{{ HousingRecord.water_quality_comments || 'N/A' }}
 										</p>
 										<p>
-											Water temperature: {{ HousingRecord.water_temperature }}
+											{{ $t('waterTemperature') }}:
+											{{ HousingRecord.water_temperature }}
 										</p>
 
 										<p>
-											Water temperature comments:
+											{{ $t('waterTemperatureComments') }}:
 											{{ HousingRecord.water_temperature_comments || 'N/A' }}
 										</p>
 										<p>
-											Sufficient shade: {{ HousingRecord.sufficient_shade }}
+											{{ $t('sufficientShade') }}:
+											{{ HousingRecord.sufficient_shade }}
 										</p>
 
 										<p>
-											Sufficient shade comments:
+											{{ $t('sufficientShadeComments') }}:
 											{{ HousingRecord.sufficient_shade_comments || 'N/A' }}
 										</p>
 										<p>
-											Reflecting colours: {{ HousingRecord.reflecting_colours }}
+											{{ $t('reflectingColours') }}:
+											{{ HousingRecord.reflecting_colours }}
 										</p>
 
 										<p>
-											Reflecting colours comments:
+											{{ $t('reflectingColoursComments') }}:
 											{{ HousingRecord.reflecting_colours_comments || 'N/A' }}
 										</p>
 										<p>
-											Acoustic comfort: {{ HousingRecord.acoustic_comfort }}
+											{{ $t('acousticComfort') }}:
+											{{ HousingRecord.acoustic_comfort }}
 										</p>
 
 										<p>
-											Acoustic comfort comments:
+											{{ $t('acousticComfortComments') }}:
 											{{ HousingRecord.acoustic_comfort_comments || 'N/A' }}
 										</p>
 									</ion-label>
 								</ion-item>
 							</ion-list>
 							<ion-label v-else>
-								<p>No data available for this month and year.</p>
+								<p>{{ $t('noData') }}</p>
 							</ion-label>
 						</ion-list>
 					</ion-item>
@@ -277,147 +316,161 @@
 								>
 									<ion-label>
 										<p>
-											<span class="bold-text">Record created at:</span>
+											<span class="bold-text"
+												>{{ $t('recordCreatedAt') }}:</span
+											>
 											{{ HealthRecord.created_at }}
 										</p>
 
-										<p>Dolphin name: {{ HealthRecord.dolphin_name }}</p>
 										<p>
-											Normal floatability:
+											{{ $t('dolphinNamePlaceholder') }}:
+											{{ HealthRecord.dolphin_name }}
+										</p>
+										<p>
+											{{ $t('normalFloatability') }}:
 											{{ HealthRecord.normal_floatability }}
 										</p>
 										<p>
-											Normal floatability comments:
+											{{ $t('normalFloatabilityComments') }}:
 											{{ HealthRecord.normal_floatability_comments || 'N/A' }}
 										</p>
 										<p>
-											Records normal floatability:
+											{{ $t('recordsNormalFloatability') }}:
 											{{ HealthRecord.records_normal_floatability }}
 										</p>
 										<p>
-											Records normal floatability comments:
+											{{ $t('recordsNormalFloatabilityComments') }}:
+
 											{{
 												HealthRecord.records_normal_floatability_comments ||
 												'N/A'
 											}}
 										</p>
 										<p>
-											Inspection eye lesions:
+											{{ $t('inspectionEyeLesions') }}:
 											{{ HealthRecord.inspection_eye_lesions }}
 										</p>
 
 										<p>
-											Inspection eye lesions comments:
+											{{ $t('inspectionEyeLesionsComments') }}:
+
 											{{
 												HealthRecord.inspection_eye_lesions_comments || 'N/A'
 											}}
 										</p>
 										<p>
-											Response visual cues:
+											{{ $t('responseVisualCues') }}:
 											{{ HealthRecord.response_visual_cues }}
 										</p>
 
 										<p>
-											Response visual cues comments:
+											{{ $t('responseVisualCuesComments') }}:
 											{{ HealthRecord.response_visual_cues_comments || 'N/A' }}
 										</p>
 										<p>
-											Records eye lesions:
+											{{ $t('recordsEyeLesions') }}:
 											{{ HealthRecord.records_eye_lesions }}
 										</p>
 
 										<p>
-											Records eye lesions comments:
+											{{ $t('recordsEyeLesionsComments') }}:
+
 											{{ HealthRecord.records_eye_lesions_comments || 'N/A' }}
 										</p>
-										<p>Mouth exam: {{ HealthRecord.mouth_exam }}</p>
+										<p>{{ $t('mouthExam') }}: {{ HealthRecord.mouth_exam }}</p>
 
 										<p>
-											Mouth exam comments:
+											{{ $t('mouthExamComments') }}:
 											{{ HealthRecord.mouth_exam_comments || 'N/A' }}
 										</p>
 										<p>
-											Records oral lesions:
+											{{ $t('recordsOralLesions') }}:
 											{{ HealthRecord.records_oral_lesions }}
 										</p>
 
 										<p>
-											Records oral lesions comments:
+											{{ $t('recordsOralLesionsComments') }}:
+
 											{{ HealthRecord.records_oral_lesions_comments || 'N/A' }}
 										</p>
 										<p>
-											Records gastric abnormality:
+											{{ $t('recordsGastricAbnormality') }}:
 											{{ HealthRecord.records_gastric_abnormality }}
 										</p>
 
 										<p>
-											Records gastric abnormality comments:
+											{{ $t('recordsGastricAbnormalityComments') }}:
+
 											{{
 												HealthRecord.records_gastric_abnormality_comments ||
 												'N/A'
 											}}
 										</p>
 										<p>
-											Inspection respiratory disease:
+											{{ $t('inspectionRespiratoryDisease') }}:
 											{{ HealthRecord.inspection_respiratory }}
 										</p>
 
 										<p>
-											Inspection respiratory disease comments:
+											{{ $t('inspectionRespiratoryDiseaseComments') }}:
+
 											{{
 												HealthRecord.inspection_respiratory_comments || 'N/A'
 											}}
 										</p>
 										<p>
-											Forced expiration:
+											{{ $t('forcedExpiration') }}:
 											{{ HealthRecord.force_expiration }}
 										</p>
 
 										<p>
-											Forced expiration comments:
+											{{ $t('forcedExpirationComments') }}:
+
 											{{ HealthRecord.force_expiration_comments || 'N/A' }}
 										</p>
 										<p>
-											Records respiratory disease:
+											{{ $t('recordsRespiratoryDisease') }}:
 											{{ HealthRecord.records_respiratory_disease }}
 										</p>
 
 										<p>
-											Records respiratory disease comments:
+											{{ $t('recordsRespiratoryDiseaseComments') }}:
+
 											{{
 												HealthRecord.records_respiratory_disease_comments ||
 												'N/A'
 											}}
 										</p>
 										<p>
-											Inspection rake marks:
+											{{ $t('inspectionRakeMarks') }}:
 											{{ HealthRecord.inspection_marks }}
 										</p>
 
 										<p>
-											Inspection rake marks comments:
+											{{ $t('inspectionRakeMarksComments') }}:
 											{{ HealthRecord.inspection_marks_comments || 'N/A' }}
 										</p>
 										<p>
-											Records external diseases:
+											{{ $t('recordsExternalDisease') }}:
 											{{ HealthRecord.records_external_disease }}
 										</p>
 										<p>
-											Records external diseases comments:
+											{{ $t('recordsExternalDiseaseComments') }}:
+
 											{{
 												HealthRecord.records_external_disease_comments || 'N/A'
 											}}
 										</p>
 										<p>
-											Current rake marks percentage:
+											{{ $t('currentRakeMarks') }}:
 											{{ HealthRecord.total_rake_marks_percentage }}
 										</p>
 										<p>
-											Old rake marks percentage:
+											{{ $t('oldRakeMarks') }}:
 											{{ HealthRecord.old_rake_marks_percentage }}
 										</p>
 										<p>
-											Eye photo path:
+											{{ $t('eyePhotoPath') }}:
 											<template v-if="HealthRecord.eye_photo_path">
 												<a
 													v-for="(
@@ -435,7 +488,7 @@
 											</template>
 										</p>
 										<p>
-											Teeth photo path:
+											{{ $t('teethPhotoPath') }}:
 											<template v-if="HealthRecord.teeth_photo_path">
 												<a
 													v-for="(
@@ -453,7 +506,7 @@
 											</template>
 										</p>
 										<p>
-											Odontogramm photo path:
+											{{ $t('odontogrammPhotoPath') }}:
 											<template v-if="HealthRecord.odontogramm_photo_path">
 												<a
 													v-for="(
@@ -471,7 +524,7 @@
 											</template>
 										</p>
 										<p>
-											Marks photo path:
+											{{ $t('rakeMarksPhotoPath') }}:
 											<template v-if="HealthRecord.marks_photo_path">
 												<a
 													v-for="(
@@ -489,7 +542,7 @@
 											</template>
 										</p>
 										<p>
-											Silhouette photo path:
+											{{ $t('silhouettePhotoPath') }}:
 											<template v-if="HealthRecord.silhouette_photo_path">
 												<a
 													v-for="(
@@ -507,7 +560,7 @@
 											</template>
 										</p>
 										<p>
-											Video path:
+											{{ $t('videoPath') }}:
 											<template v-if="HealthRecord.video_path">
 												<a
 													v-for="(path, index) in HealthRecord.video_path.split(
@@ -528,7 +581,7 @@
 								</ion-item>
 							</ion-list>
 							<ion-label v-else>
-								<p>No data available for this month and year.</p>
+								<p>{{ $t('noData') }}</p>
 							</ion-label>
 						</ion-list>
 					</ion-item>
@@ -546,149 +599,172 @@
 								>
 									<ion-label>
 										<p>
-											<span class="bold-text">Record created at:</span>
+											<span class="bold-text"
+												>{{ $t('recordCreatedAt') }}:</span
+											>
 											{{ BehaviourRecord.created_at }}
 										</p>
 
-										<p>Dolphin Name: {{ BehaviourRecord.dolphin_name }}</p>
 										<p>
-											Environmental Enrichment:
+											{{ $t('dolphinNamePlaceholder') }}:
+											{{ BehaviourRecord.dolphin_name }}
+										</p>
+										<p>
+											{{ $t('environmentalEnrichment') }}:
 											{{ BehaviourRecord.environmental_enrichment }}
 										</p>
 										<p>
-											Affiliative Behaviour:
-											{{ BehaviourRecord.affiliative_behaviour }}
-										</p>
-										<p>Play Behaviour: {{ BehaviourRecord.play_behaviour }}</p>
-										<p>
-											Socio Sexual Behaviour:
-											{{ BehaviourRecord.socio_sexual_behaviour }}
-										</p>
-										<p>
-											Maternal Behaviour:
-											{{ BehaviourRecord.maternal_behaviour }}
-										</p>
-										<p>
-											Displacement Behaviour:
-											{{ BehaviourRecord.displacement_behaviour }}
-										</p>
-										<p>
-											Oral Stereotypic Behaviour:
-											{{ BehaviourRecord.oral_stereotypic_behaviour }}
-										</p>
-										<p>
-											Repetitive Body Movement:
-											{{ BehaviourRecord.repetitive_body_movement }}
-										</p>
-										<p>
-											Self Grooming Behaviour:
-											{{ BehaviourRecord.self_grooming_behaviour }}
-										</p>
-										<p>
-											Regurgitation Reingestion:
-											{{ BehaviourRecord.regurgitation_reingestion }}
-										</p>
-										<p>Rake Marks: {{ BehaviourRecord.rake_marks }}</p>
-										<p>
-											Displaying Aggressive Behaviour:
-											{{ BehaviourRecord.displaying_aggressive_behaviour }}
-										</p>
-										<p>
-											Reveiving Aggressive Behaviour:
-											{{ BehaviourRecord.receiving_aggressive_behaviour }}
-										</p>
-										<p>
-											Social Isolation: {{ BehaviourRecord.social_isolation }}
-										</p>
-										<p>
-											Avoidance Pool Areas:
-											{{ BehaviourRecord.avoidance_pool_areas }}
-										</p>
-										<p>
-											Environmental Enrichment Comments:
+											{{ $t('environmentalEnrichmentComments') }}:
+
 											{{
 												BehaviourRecord.environmental_enrichment_comments ||
 												'N/A'
 											}}
 										</p>
 										<p>
-											Affiliative Behaviour Comments:
+											{{ $t('affiliativeBehaviour') }}:
+											{{ BehaviourRecord.affiliative_behaviour }}
+										</p>
+										<p>
+											{{ $t('affiliativeBehaviourComments') }}:
+
 											{{
 												BehaviourRecord.affiliative_behaviour_comments || 'N/A'
 											}}
 										</p>
 										<p>
-											Play Behaviour Comments:
+											{{ $t('playBehaviour') }}:
+											{{ BehaviourRecord.play_behaviour }}
+										</p>
+										<p>
+											{{ $t('playBehaviourComments') }}:
+
 											{{ BehaviourRecord.play_behaviour_comments || 'N/A' }}
 										</p>
 										<p>
-											Socio Sexual Behaviour Comments:
+											{{ $t('socioSexualBehaviour') }}:
+											{{ BehaviourRecord.socio_sexual_behaviour }}
+										</p>
+										<p>
+											{{ $t('socioSexualBehaviourComments') }}:
+
 											{{
 												BehaviourRecord.socio_sexual_behaviour_comments || 'N/A'
 											}}
 										</p>
 										<p>
-											Maternal Behaviour Comments:
+											{{ $t('maternalBehaviour') }}:
+											{{ BehaviourRecord.maternal_behaviour }}
+										</p>
+										<p>
+											{{ $t('maternalBehaviourComments') }}:
+
 											{{ BehaviourRecord.maternal_behaviour_comments || 'N/A' }}
 										</p>
 										<p>
-											Displacement Behaviour Comments:
+											{{ $t('displecementBehaviour') }}:
+											{{ BehaviourRecord.displacement_behaviour }}
+										</p>
+										<p>
+											{{ $t('displecementBehaviourComments') }}:
+
 											{{
 												BehaviourRecord.displacement_behaviour_comments || 'N/A'
 											}}
 										</p>
 										<p>
-											Oral Stereotypic Behaviour Comments:
+											{{ $t('oralStereotypicBehaviour') }}:
+											{{ BehaviourRecord.oral_stereotypic_behaviour }}
+										</p>
+										<p>
+											{{ $t('oralStereotypicBehaviourComments') }}:
+
 											{{
 												BehaviourRecord.oral_stereotypic_behaviour_comments ||
 												'N/A'
 											}}
 										</p>
 										<p>
-											Repetitive Body Movement Comments:
+											{{ $t('repetitiveBodyMovement') }}:
+											{{ BehaviourRecord.repetitive_body_movement }}
+										</p>
+										<p>
+											{{ $t('repetitiveBodyMovementComments') }}:
+
 											{{
 												BehaviourRecord.repetitive_body_movement_comments ||
 												'N/A'
 											}}
 										</p>
 										<p>
-											Self Grooming Behaviour Comments:
+											{{ $t('selfGroomingBehaviour') }}:
+											{{ BehaviourRecord.self_grooming_behaviour }}
+										</p>
+										<p>
+											{{ $t('selfGroomingBehaviourComments') }}:
+
 											{{
 												BehaviourRecord.self_grooming_behaviour_comments ||
 												'N/A'
 											}}
 										</p>
 										<p>
-											Regurgitation Reingestion Comments:
+											{{ $t('regurgitationReingestion') }}:
+											{{ BehaviourRecord.regurgitation_reingestion }}
+										</p>
+										<p>
+											{{ $t('regurgitationReingestionComments') }}:
 											{{
 												BehaviourRecord.regurgitation_reingestion_comments ||
 												'N/A'
 											}}
 										</p>
 										<p>
-											Rake Marks Comments:
+											{{ $t('rakeMarks') }}: {{ BehaviourRecord.rake_marks }}
+										</p>
+										<p>
+											{{ $t('rakeMarksComments') }}:
 											{{ BehaviourRecord.rake_marks_comments || 'N/A' }}
 										</p>
 										<p>
-											Displaying Aggressive Behaviour Comments:
+											{{ $t('displayingAggressiveBehaviour') }}:
+											{{ BehaviourRecord.displaying_aggressive_behaviour }}
+										</p>
+										<p>
+											{{ $t('displayingAggressiveBehaviourComments') }}:
 											{{
 												BehaviourRecord.displaying_aggressive_behaviour_comments ||
 												'N/A'
 											}}
 										</p>
 										<p>
-											Receiving Aggressive Behaviour Comments:
+											{{ $t('receivingAggressiveBehaviour') }}:
+											{{ BehaviourRecord.receiving_aggressive_behaviour }}
+										</p>
+										<p>
+											{{ $t('receivingAggressiveBehaviourComments') }}:
+
 											{{
 												BehaviourRecord.receiving_aggressive_behaviour_comments ||
 												'N/A'
 											}}
 										</p>
 										<p>
-											Social Isolation Comments:
+											{{ $t('socialIsolation') }}:
+											{{ BehaviourRecord.social_isolation }}
+										</p>
+										<p>
+											{{ $t('socialIsolationComments') }}:
 											{{ BehaviourRecord.social_isolation_comments || 'N/A' }}
 										</p>
 										<p>
-											Avoidance Pool Areas Comments:
+											{{ $t('avoidancePoolAreas') }}:
+											{{ BehaviourRecord.avoidance_pool_areas }}
+										</p>
+
+										<p>
+											{{ $t('avoidancePoolAreasComments') }}:
+
 											{{
 												BehaviourRecord.avoidance_pool_areas_comments || 'N/A'
 											}}
@@ -697,7 +773,7 @@
 								</ion-item>
 							</ion-list>
 							<ion-label v-else>
-								<p>No data available for this month and year.</p>
+								<p>{{ $t('noData') }}</p>
 							</ion-label>
 						</ion-list>
 					</ion-item>
@@ -718,76 +794,89 @@
 								>
 									<ion-label>
 										<p>
-											<span class="bold-text">Record created at:</span>
+											<span class="bold-text"
+												>{{ $t('recordCreatedAt') }}:</span
+											>
 											{{ EmotionalStateRecord.created_at }}
 										</p>
 
-										<p>Dolphin Name: {{ EmotionalStateRecord.dolphin_name }}</p>
 										<p>
-											Willingness to participate:
+											{{ $t('dolphinNamePlaceholder') }}:
+											{{ EmotionalStateRecord.dolphin_name }}
+										</p>
+										<p>
+											{{ $t('willingnessToParticipate') }}:
 											{{ EmotionalStateRecord.willingness_to_participate }}
 										</p>
 										<p>
-											Synchronous swimming:
-											{{ EmotionalStateRecord.synchronous_swimming }}
-										</p>
-										<p>
-											Rubbing behaviour:
-											{{ EmotionalStateRecord.rubbing_behaviour }}
-										</p>
-										<p>
-											Anticipatory behaviour:
-											{{ EmotionalStateRecord.anticipatory_behaviour }}
-										</p>
-										<p>
-											Fast swimming:
-											{{ EmotionalStateRecord.fast_swimming }}
-										</p>
-										<p>
-											Tail slapping:
-											{{ EmotionalStateRecord.tail_slapping }}
-										</p>
-										<p>
-											Choice and control:
-											{{ EmotionalStateRecord.choice_and_control }}
-										</p>
-										<p>
-											Willingness to participate comments:
+											{{ $t('willingnessToParticipateComments') }}:
+
 											{{
 												EmotionalStateRecord.willingness_to_participate_comments ||
 												'N/A'
 											}}
 										</p>
 										<p>
-											Synchronous swimming comments:
+											{{ $t('synchronousSwimming') }}:
+											{{ EmotionalStateRecord.synchronous_swimming }}
+										</p>
+										<p>
+											{{ $t('synchronousSwimmingComments') }}:
+
 											{{
 												EmotionalStateRecord.synchronous_swimming_comments ||
 												'N/A'
 											}}
 										</p>
 										<p>
-											Rubbing behaviour comments:
+											{{ $t('rubbingBehaviour') }}:
+											{{ EmotionalStateRecord.rubbing_behaviour }}
+										</p>
+										<p>
+											{{ $t('rubbingBehaviourComments') }}:
+
 											{{
 												EmotionalStateRecord.rubbing_behaviour_comments || 'N/A'
 											}}
 										</p>
 										<p>
-											Anticipatory behaviour comments:
+											{{ $t('anticipatoryBehaviour') }}:
+											{{ EmotionalStateRecord.anticipatory_behaviour }}
+										</p>
+										<p>
+											{{ $t('anticipatoryBehaviourComments') }}:
+
 											{{
 												EmotionalStateRecord.anticipatory_behaviour_comments ||
 												'N/A'
 											}}
 										</p>
 										<p>
-											Fast swimming comments:
+											{{ $t('fastSwimming') }}:
+											{{ EmotionalStateRecord.fast_swimming }}
+										</p>
+										<p>
+											{{ $t('fastSwimmingComments') }}:
+
 											{{ EmotionalStateRecord.fast_swimming_comments || 'N/A' }}
 										</p>
 										<p>
-											Tail slapping comments:
+											{{ $t('tailSlapping') }}:
+											{{ EmotionalStateRecord.tail_slapping }}
+										</p>
+										<p>
+											{{ $t('tailSlappingComments') }}:
+
 											{{ EmotionalStateRecord.tail_slapping_comments || 'N/A' }}
 										</p>
 										<p>
-											Choice and control comments:
+											{{ $t('choiceAndControl') }}:
+											{{ EmotionalStateRecord.choice_and_control }}
+										</p>
+
+										<p>
+											{{ $t('choiceAndControlComments') }}:
+
 											{{
 												EmotionalStateRecord.choice_and_control_comments ||
 												'N/A'
@@ -797,7 +886,7 @@
 								</ion-item>
 							</ion-list>
 							<ion-label v-else>
-								<p>No data available for this month and year.</p>
+								<p>{{ $t('noData') }}</p>
 							</ion-label>
 						</ion-list>
 					</ion-item>

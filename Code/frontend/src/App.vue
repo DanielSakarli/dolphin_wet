@@ -5,10 +5,26 @@
 				<ion-menu content-id="main-content" type="overlay">
 					<ion-content>
 						<ion-list id="page-list">
+							<ion-menu-toggle
+								:auto-hide="false"
+								v-for="(p, i) in translatedAppPages"
+								:key="i"
+							>
+								<ion-item
+									@click="navigateTo(p.url, i)"
+									lines="none"
+									:detail="false"
+									class="hydrated"
+									:class="{ selected: selectedIndex === i }"
+								>
+									<ion-label>{{ p.title }}</ion-label>
+									<!-- Updated to display the translated title -->
+								</ion-item>
+							</ion-menu-toggle>
 							<!--<ion-list-header @click="navigateTo('/folder/Evaluate', 0)"
 								>Dolphin WET</ion-list-header
 							>-->
-							<ion-menu-toggle
+							<!--<ion-menu-toggle
 								:auto-hide="false"
 								v-for="(p, i) in appPages"
 								:key="i"
@@ -20,7 +36,7 @@
 									class="hydrated"
 									:class="{ selected: selectedIndex === i }"
 								>
-									<!--<ion-item
+									<ion-item
 								@click="selectedIndex = i"
 								router-direction="root"
 								:router-link="p.url"
@@ -29,9 +45,9 @@
 								class="hydrated"
 								:class="{ selected: selectedIndex === i }"
 							>-->
-									<ion-label>{{ p.title }}</ion-label>
+							<!--<ion-label>{{ p.key }}</ion-label>
 								</ion-item>
-							</ion-menu-toggle>
+							</ion-menu-toggle>-->
 						</ion-list>
 					</ion-content>
 				</ion-menu>
@@ -61,6 +77,7 @@ import { Device, DevicePlugin } from '@capacitor/device';
 import { useRouter } from 'vue-router';
 import axios from 'axios';
 import { baseUrl } from './utils/baseUrl';
+import { useI18n } from 'vue-i18n';
 
 export default defineComponent({
 	name: 'App',
@@ -83,7 +100,136 @@ export default defineComponent({
 		}
 		localStorage.setItem('backButtonClicked', 'false');
 	},
-	setup() {
+	methods: {
+		async showAlert() {
+			return new Promise((resolve, reject) => {
+				alertController
+					.create({
+						header: this.$t('confirmationHeader'),
+						message: this.$t('confirmationMessage'),
+						buttons: [
+							{
+								text: this.$t('stayOnPage'),
+								role: 'cancel',
+								cssClass: 'secondary',
+								handler: () => {
+									console.log('Cancel clicked');
+									reject();
+								},
+							},
+							{
+								text: this.$t('loseData'),
+								handler: () => {
+									console.log('Confirm Okay');
+									localStorage.setItem('dataInBody', 'false');
+									localStorage.setItem('backButtonClicked', 'false');
+									this.$router.back();
+									resolve(void 0);
+								},
+							},
+						],
+					})
+					.then((alert) => {
+						alert.present();
+					});
+			});
+		},
+		navigateTo(url: string, index: number) {
+			if (localStorage.getItem('dataInBody') === 'true') {
+				this.showAlert();
+				//this.selectedIndex = index; // Use .value to access or modify the value of a ref
+			} else {
+				this.selectedIndex = index; // Use .value to access or modify the value of a ref
+				console.log('url: ', url);
+				console.log('index: ', index);
+				if (url === '/home') {
+					// Page needs a full reload when pressing on 'Logout' and
+					// then go to /home, but I don´t know why
+					this.$router.push(url); //.then(() => window.location.reload());
+					//Clear storages when user logs out
+					localStorage.setItem('token', '');
+					localStorage.setItem('dataInBody', 'false');
+					localStorage.setItem('backButtonClicked', 'false');
+					// Call the log out method of the carecentive-framework, so that
+					// the token cookie gets deleted:
+					axios
+						.get(baseUrl + '/api/users/logout', { withCredentials: true })
+						.then((response) => {
+							console.log('Response:', response.data);
+						})
+						.catch((error) => {
+							console.error('Error:', error.response.data);
+						});
+				} else {
+					//Otherwise a normal router.push(url) is sufficient
+					this.$router.push(url);
+				}
+			}
+		},
+		changeLanguage($event: any) {
+			this.$i18n.locale = $event.detail.value;
+		},
+	},
+	data() {
+		return {
+			selectedIndex: 0,
+			appPages: [
+				{
+					key: 'evaluate',
+					url: '/folder/Evaluate',
+				},
+				{
+					key: 'dolphins',
+					url: '/folder/Dolphins',
+				},
+				{
+					key: 'viewData',
+					url: '/folder/Data',
+				},
+				{
+					key: 'settings',
+					url: '/folder/Settings',
+				},
+				{
+					key: 'logout',
+					url: '/home',
+				},
+			],
+			token: '',
+		};
+	},
+	components: {
+		IonApp,
+		IonPage,
+		IonRouterOutlet,
+		IonMenu,
+		IonContent,
+		IonItem,
+		IonLabel,
+		IonList,
+		IonMenuToggle,
+		IonSplitPane,
+	},
+	computed: {
+		isLoggedIn(): boolean {
+			console.log('token: ', localStorage.getItem('token'));
+			return !!this.token.valueOf;
+		},
+		translatedAppPages() {
+			return this.appPages.map((page) => ({
+				...page,
+				title: this.$t(page.key),
+			}));
+		},
+		/*translatedAppPages() {
+			return this.appPages.map((page) => ({
+				...page,
+				display: this.$t(page.display),
+			}));
+		},*/
+	},
+	/*setup() {
+		const { t } = useI18n(); // Use the i18n instance to get the translation function
 		// Handles the navigation to other routes
 		const selectedIndex = ref(0); // Create a reactive variable
 		const router = useRouter();
@@ -93,11 +239,11 @@ export default defineComponent({
 			set: (value: string) => localStorage.setItem('token', value),
 		});
 
-		const showAlert = async () => {
+		/*const showAlert = async () => {
 			return new Promise((resolve, reject) => {
 				alertController
 					.create({
-						header: 'Confirmation',
+						header: t('confirmationHeader'),
 						message: 'Are you sure you want to proceed?',
 						buttons: [
 							{
@@ -161,63 +307,65 @@ export default defineComponent({
 		};
 
 		return {
-			showAlert,
+			//showAlert,
 			navigateTo,
 			selectedIndex, // Make selectedIndex available in the template
 			token,
 			appPages: [
-				//{ title: 'Dolphin WET', url: '/folder/Evaluate' },
 				{
-					title: 'Evaluate',
+					display: 'evaluate',
+					value: 'Evaluate',
 					url: '/folder/Evaluate',
 				},
 				{
-					title: 'Dolphins',
+					display: 'dolphins',
+					value: 'Dolphins',
 					url: '/folder/Dolphins',
 				},
 				{
-					title: 'View Data',
+					display: 'viewData',
+					value: 'View Data',
 					url: '/folder/Data',
 				},
 				{
-					title: 'Settings',
+					display: 'settings',
+					value: 'Settings',
 					url: '/folder/Settings',
 				},
 				{
-					title: 'Logout',
+					display: 'logout',
+					value: 'Logout',
+					url: '/home',
+				},
+				/*{title: this.$t('evaluate'),
+					url: '/folder/Evaluate',
+				},
+				{
+					title: 'Dolphins', //t('dolphins'),
+					url: '/folder/Dolphins',
+				},
+				{
+					title: 'View Data', // t('viewData'),
+					url: '/folder/Data',
+				},
+				{
+					title: 'Settings', //t('settings'),
+					url: '/folder/Settings',
+				},
+				{
+					title: 'Logout', //t('logout'),
 					url: '/home',
 				},
 			],
-		};
-	},
-	components: {
-		IonApp,
-		IonPage,
-		IonRouterOutlet,
-		IonMenu,
-		IonContent,
-		IonItem,
-		IonLabel,
-		IonList,
-		IonMenuToggle,
-		IonSplitPane,
-	},
-	computed: {
-		isLoggedIn(): boolean {
-			console.log('token: ', localStorage.getItem('token'));
-			return !!this.token.valueOf;
-		},
-	},
+		};*/
+	//},
+
 	/*watch: {
 		token() {
 			this.token.valueOf = localStorage.getItem('token');
 		},
 	},*/
-	methods: {
-		changeLanguage($event: any) {
-			this.$i18n.locale = $event.detail.value;
-		},
-	},
+
 	/*data() {
 		return {
 			//selectedIndex: 0,
