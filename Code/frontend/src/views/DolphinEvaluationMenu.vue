@@ -298,7 +298,7 @@ export default {
 					)
 					.then((response) => {
 						if (localStorage.getItem('reload_data_button_pressed') === 'true') {
-							toast.success('Dolphin data up to date.', {
+							toast.success(this.$t('dolphinDataReloaded'), {
 								autoClose: 1500,
 							});
 							localStorage.setItem('reload_data_button_pressed', 'false');
@@ -311,7 +311,7 @@ export default {
 					.catch((e) => {
 						console.error(e);
 
-						toast.error('Error while getting the dolphin data.', {
+						toast.error(this.$t('dolphinDataReloadError'), {
 							autoClose: 2000,
 						});
 					});
@@ -338,7 +338,7 @@ export default {
 							console.log('Response:', response.data);
 							this.fetchDolphins();
 							this.showDolphin = false;
-							toast.success(`Dolphin ${deleteDolphin} successfully deleted!`, {
+							toast.success(`${this.$t('dolphinDeleted')}: ${deleteDolphin}`, {
 								autoClose: 1700,
 							});
 							deleteDolphin = '';
@@ -346,7 +346,7 @@ export default {
 						.catch((error) => {
 							console.error('Error:', error.response.data);
 							if (error.response.data.error === 'USER_NOT_AN_ADMINISTRATOR') {
-								toast.error('User has no administrator rights!', {
+								toast.error(this.$t('userNotAdmin'), {
 									autoClose: 2000,
 								});
 							}
@@ -475,7 +475,7 @@ export default {
 						this.closeEditModal();
 						console.log('Current dolphin: ', this.currentDolphin?.name);
 						this.fetchDolphins();
-						toast.success('Dolphin data has been updated.', {
+						toast.success(this.$t('dolphinDataUpdated'), {
 							autoClose: 1500,
 						});
 						// Set current dolphin name to null and then again to name
@@ -490,7 +490,7 @@ export default {
 							this.showDolphin = false;
 							this.closeEditModal();
 
-							toast.error('User has no administrator rights!', {
+							toast.error(this.$t('userNotAdmin'), {
 								autoClose: 2000,
 							});
 						}

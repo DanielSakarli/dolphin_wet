@@ -156,7 +156,7 @@ export default {
 					.catch((e) => {
 						console.error(e);
 
-						toast.error('Error while getting the user data.', {
+						toast.error(this.$t('getUserDataError'), {
 							autoClose: 2000,
 						});
 					});
@@ -180,30 +180,30 @@ export default {
 							console.log('Response:', response.data);
 							this.fetchUsers();
 
-							toast.success(`User ${this.currentUser} successfully deleted!`, {
-								autoClose: 1700,
+							toast.success(`${this.$t('userDeleted')}: ${this.currentUser}`, {
+								autoClose: 2000,
 							});
 							this.currentUser = '';
 						})
 						.catch((error) => {
 							console.error('Error:', error.response);
 							if (error.response.data === 'USER_NOT_AN_ADMINISTRATOR') {
-								toast.error('User has no administrator rights!', {
+								toast.error(this.$t('userNotAdmin'), {
 									autoClose: 2000,
 								});
 							}
 							if (error.response.data === 'ADMIN_PASSWORD_IS_WRONG') {
-								toast.error('Administrator password is wrong!', {
+								toast.error(this.$t('adminPasswordError'), {
 									autoClose: 2000,
 								});
 							}
 							if (error.response.data === 'USER_NAME_NOT_PROVIDED') {
-								toast.error('Provide the user to be deleted.', {
+								toast.error(this.$t('userNotProvided'), {
 									autoClose: 2000,
 								});
 							}
 							if (error.response.data === 'ADMIN_PASSWORD_NOT_PROVIDED') {
-								toast.error('Provide an administrator password.', {
+								toast.error(this.$t('adminPasswordNotProvided'), {
 									autoClose: 2000,
 								});
 							}

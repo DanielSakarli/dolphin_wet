@@ -1187,12 +1187,9 @@ export default {
 					console.log('Total file size: ', this.totalFileSize);
 				} else {
 					//Don´t assign here totalSize to this.totalFileSize because picture wasn´t uploaded
-					toast.error(
-						'Total file size exceeds 10 MB! Lastly added file will not be uploaded',
-						{
-							autoClose: 4000,
-						}
-					);
+					toast.error(this.$t('toastFileSize'), {
+						autoClose: 4000,
+					});
 				}
 
 				console.log(...this.formDataVideo);
@@ -1251,12 +1248,9 @@ export default {
 					console.log('Total file size: ', this.totalFileSize);
 				} else {
 					//Don´t assign here totalSize to this.totalFileSize because picture wasn´t uploaded
-					toast.error(
-						'Total file size exceeds 10 MB! Lastly added file will not be uploaded',
-						{
-							autoClose: 4000,
-						}
-					);
+					toast.error(this.$t('toastFileSize'), {
+						autoClose: 4000,
+					});
 				}
 			}
 		},
@@ -1605,7 +1599,7 @@ export default {
 							console.log('Response:', response.data);
 							if (i === evaluationHealthStore.requestBodiesHealth.length - 1) {
 								const targetUrl = '/detailHealth'; //'/folder/Evaluate';
-								toast.success('Data uploaded successfully', {
+								toast.success(this.$t('dataUploadSuccessfull'), {
 									autoClose: 1000,
 								});
 								setTimeout(() => {
@@ -1630,12 +1624,9 @@ export default {
 							if (error.message === 'Network Error' && !alertShown) {
 								alertShown = true;
 								//console.log('Inside error catch block');
-								toast.error(
-									'Data upload failed! Check internet connectivity.',
-									{
-										autoClose: 2000,
-									}
-								);
+								toast.error(this.$t('dataUploadFailed'), {
+									autoClose: 2000,
+								});
 								setTimeout(() => {
 									dataInBody = false;
 									localStorage.setItem('dataInBody', dataInBody.toString());
@@ -1722,7 +1713,7 @@ export default {
 				console.log(evaluationHealthStore.requestBodiesHealth);
 
 				this.previewImageUrl = ''; //Reset the preview image
-				toast.success("Saved temporarily. Click 'Finish Tests' in the end!", {
+				toast.success(this.$t('dataSavedTemporary'), {
 					autoClose: 1000,
 				});
 
@@ -1913,12 +1904,9 @@ export default {
 					console.log('Total file size: ', this.totalFileSize);
 				} else {
 					//Don´t assign here totalSize to this.totalFileSize because picture wasn´t uploaded
-					toast.error(
-						'Total file size exceeds 10 MB! Lastly added file will not be uploaded',
-						{
-							autoClose: 4000,
-						}
-					);
+					toast.error(this.$t('toastFileSize'), {
+						autoClose: 4000,
+					});
 				}
 
 				this.lastPictureType = id; //Save the last picture type for the preview on the ion page

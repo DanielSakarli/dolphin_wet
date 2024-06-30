@@ -121,7 +121,7 @@ export default defineComponent({
 				.post(baseUrl + pwResetUrl, requestBody)
 				.then(async (response) => {
 					console.log(response);
-					toast.success('Check your email inbox for the new password!', {
+					toast.success(this.$t('passwordReseted'), {
 						autoClose: 3000,
 					});
 				})

@@ -150,7 +150,7 @@ export default {
 				.post(url, requestBody, { withCredentials: true })
 				.then((response: any) => {
 					console.log('Response:', response.data);
-					toast.success('User registered successfully.', {
+					toast.success(this.$t('userRegistered'), {
 						autoClose: 1000,
 					});
 					setTimeout(() => {
@@ -159,32 +159,32 @@ export default {
 				})
 				.catch((error: any) => {
 					if (error.response.data.error === 'USER_ALREADY_EXISTS') {
-						toast.error('Username already exists! Choose a different one.', {
+						toast.error(this.$t('userExists'), {
 							autoClose: 2000,
 						});
 					}
 					if (error.response.data === 'NAME_MUST_BE_PROVIDED.') {
-						toast.error('Please enter your name!', {
+						toast.error(this.$t('nameNotProvided'), {
 							autoClose: 2000,
 						});
 					}
 					if (error.response.data === 'EMAIL_MUST_BE_PROVIDED.') {
-						toast.error('Please enter your e-mail!', {
+						toast.error(this.$t('emailNotProvided'), {
 							autoClose: 2000,
 						});
 					}
 					if (error.response.data === 'PASSWORD_MUST_BE_PROVIDED.') {
-						toast.error('Please enter your password!', {
+						toast.error(this.$t('passwordNotProvided'), {
 							autoClose: 2000,
 						});
 					}
 					if (error.response.data === 'ROLE_NAME_MUST_BE_PROVIDED.') {
-						toast.error('Please select a zoo!', {
+						toast.error(this.$t('zooNotProvided'), {
 							autoClose: 2000,
 						});
 					}
 					if (error.response.data === 'ROLE_PASSWORD_MUST_BE_PROVIDED.') {
-						toast.error('Please enter the zoo´s password!', {
+						toast.error(this.$t('zooPasswordNotProvided'), {
 							autoClose: 2000,
 						});
 					}

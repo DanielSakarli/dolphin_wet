@@ -1178,12 +1178,12 @@ export default {
 							e.message.includes('net::ERR_CONNECTION_REFUSED')
 						) {
 							// It's a network error
-							toast.error('Check your internet connectivity.', {
+							toast.error(this.$t('networkError'), {
 								autoClose: 2000,
 							});
 						}
 						if (e.response.data.error === 'USER_NOT_AN_ADMINISTRATOR') {
-							toast.error('User has no administrator rights!', {
+							toast.error(this.$t('userNotAdmin'), {
 								autoClose: 2000,
 							});
 						}
@@ -1203,7 +1203,7 @@ export default {
 					.catch((e) => {
 						console.error(e);
 						if (e.response.data.error === 'USER_NOT_AN_ADMINISTRATOR') {
-							toast.error('User has no administrator rights!', {
+							toast.error(this.$t('userNotAdmin'), {
 								autoClose: 2000,
 							});
 						}
@@ -1225,7 +1225,7 @@ export default {
 					.catch((e) => {
 						console.error(e);
 						if (e.response.data.error === 'USER_NOT_AN_ADMINISTRATOR') {
-							toast.error('User has no administrator rights!', {
+							toast.error(this.$t('userNotAdmin'), {
 								autoClose: 2000,
 							});
 						}
@@ -1244,7 +1244,7 @@ export default {
 					.catch((e) => {
 						console.error(e);
 						if (e.response.data.error === 'USER_NOT_AN_ADMINISTRATOR') {
-							toast.error('User has no administrator rights!', {
+							toast.error(this.$t('userNotAdmin'), {
 								autoClose: 2000,
 							});
 						}
@@ -1266,7 +1266,7 @@ export default {
 					.catch((e) => {
 						console.error(e);
 						if (e.response.data.error === 'USER_NOT_AN_ADMINISTRATOR') {
-							toast.error('User has no administrator rights!', {
+							toast.error(this.$t('userNotAdmin'), {
 								autoClose: 2000,
 							});
 						}
@@ -1296,7 +1296,7 @@ export default {
 				})
 				.then((response) => {
 					console.log('Response:', response.data);
-					toast.success('Data sent to logged in user', {
+					toast.success(this.$t('dataSent'), {
 						autoClose: 2000,
 					});
 				})
@@ -1306,12 +1306,12 @@ export default {
 						e.message.includes('net::ERR_CONNECTION_REFUSED')
 					) {
 						// It's a network error
-						toast.error('Check your internet connectivity.', {
+						toast.error(this.$t('networkError'), {
 							autoClose: 2000,
 						});
 					}
 					if (e.response.data.error === 'USER_NOT_AN_ADMINISTRATOR') {
-						toast.error('User has no administrator rights!', {
+						toast.error(this.$t('userNotAdmin'), {
 							autoClose: 2000,
 						});
 					}

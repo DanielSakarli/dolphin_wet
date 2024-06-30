@@ -142,7 +142,7 @@ export default defineComponent({
 				.then(async (response) => {
 					console.log(response);
 					this.errorMessage = '';
-					toast.success('Password successfully changed.', {
+					toast.success(this.$t('passwordChanged'), {
 						autoClose: 3000,
 					});
 				})

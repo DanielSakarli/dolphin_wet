@@ -1,5 +1,32 @@
 export const globalizationList = {
 	de: {
+		// Toast pop-uos:
+		toastFileSize:
+			'Größe aller Dateien über 10 MB! Zuletzt hinzugefügte Datei wird nicht hochgeladen!',
+		dolphinAdded: 'Delfin erfolgreich hinzugefügt!',
+		dolphinAddError: 'Delfin konnte nicht hinzugefügt werden!',
+		passwordChanged: 'Passwort erfolgreich geändert!',
+		dolphinDataReloaded: 'Delfindaten erfolgreich neu geladen!',
+		dolphinDataReloadError: 'Delfindaten konnten nicht neu geladen werden!',
+		dolphinDeleted: 'Delfin erfolgreich gelöscht',
+		userNotAdmin: 'Nutzer hat keine Administrator-Rechte!',
+		dolphinDataUpdated: 'Delfindaten erfolgreich aktualisiert!',
+		passwordReseted:
+			'Überprüfen Sie Ihr E-Mail-Postfach für das neue Password!',
+		getUserDataError: 'Nutzerdaten konnten nicht geladen werden!',
+		userDeleted: 'Nutzer erfolgreich gelöscht',
+		adminPasswordError: 'Admin-Passwort ist falsch!',
+		userNotProvided: 'Geben Sie einen User an.',
+		adminPasswordNotProvided: 'Geben Sie das Admin-Passwort an.',
+		userRegistered: 'Nutzer erfolgreich registriert.',
+		userExists: 'Benutzername existiert bereits. Wählen Sie einen anderen!',
+		nameNotProvided: 'Geben Sie einen Benutzernamen an.',
+		emailNotProvided: 'Geben Sie eine E-Mail-Adresse an.',
+		passwordNotProvided: 'Geben Sie ein Passwort an.',
+		zooNotProvided: 'Wählen Sie einen Zoo aus.',
+		zooPasswordNotProvided: 'Geben Sie das Zoo-Passwort an.',
+		networkError: 'Überprüfen Sie Ihre Internetverbindung.',
+		dataSent: 'Die Daten wurden an den eingeloggten Nutzer gesendet.',
 		// App.vue:
 		evaluate: 'Evaluierung',
 		dolphins: 'Delfine',
@@ -7,6 +34,9 @@ export const globalizationList = {
 		settings: 'Einstellungen',
 		logout: 'Ausloggen',
 		confirmationHeader: 'Bestätigung',
+		confirmationMessage: 'Wollen Sie wirklich die Daten löschen?',
+		stayOnPage: 'Auf Seite bleiben',
+		loseData: 'Daten löschen',
 		// Generell
 		photo: 'Kamera öffnen',
 		video: 'Laden Sie Ihr Video hier hoch, falls zutreffend.',

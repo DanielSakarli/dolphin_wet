@@ -130,19 +130,19 @@ export default {
 					)
 					.then((response) => {
 						this.closeAddModal(); //goes back to the dolphin page
-						toast.success('Dolphin successfully added.', {
+						toast.success(this.$t('dolphinAdded'), {
 							autoClose: 1500,
 						});
 						console.log('Response:', response.data);
 					})
 					.catch((error) => {
 						if (error.message === 'Network Error') {
-							toast.error('Check your internet connectivity!', {
+							toast.error(this.$t('dataUploadFailed'), {
 								autoClose: 1500,
 							});
 						}
 						if (error.message != 'Network Error') {
-							toast.error('Error adding dolphin.', {
+							toast.error(this.$t('dolphinAddError'), {
 								autoClose: 1500,
 							});
 						}

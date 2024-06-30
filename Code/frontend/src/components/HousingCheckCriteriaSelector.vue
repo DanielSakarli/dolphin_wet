@@ -850,7 +850,7 @@ export default {
 								evaluationHousingStore.requestBodiesHousing.length - 1
 							) {
 								const targetUrl = '/detailHousing'; //'/folder/Evaluate';
-								toast.success('Data uploaded successfully', {
+								toast.success(this.$t('dataUploadSuccessfull', {
 									autoClose: 1000,
 								});
 								setTimeout(() => {
@@ -876,7 +876,7 @@ export default {
 								//console.log('Inside error catch block');
 								alertShown = true;
 								toast.error(
-									'Data upload failed! Check internet connectivity.',
+									this.$t('dataUploadFailed'),
 									{
 										autoClose: 2000,
 									}
@@ -898,7 +898,7 @@ export default {
 				this.storeCheckedValues();
 				console.log(evaluationHousingStore.requestBodiesHousing);
 
-				toast.success("Saved temporarily. Click 'Finish Tests' in the end!", {
+				toast.success(this.$t('dataSavedTemporary'), {
 					autoClose: 1000,
 				});
 

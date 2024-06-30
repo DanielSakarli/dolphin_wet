@@ -620,12 +620,9 @@ export default {
 					console.log('Total file size: ', this.totalFileSize);
 				} else {
 					//Don´t assign here totalSize to this.totalFileSize because picture wasn´t uploaded
-					toast.error(
-						'Total file size exceeds 10 MB! Lastly added file will not be uploaded',
-						{
-							autoClose: 4000,
-						}
-					);
+					toast.error(this.$t('toastFileSize'), {
+						autoClose: 4000,
+					});
 				}
 			}
 		},
@@ -930,7 +927,7 @@ export default {
 								evaluationFeedingStore.requestBodiesFeeding.length - 1
 							) {
 								const targetUrl = '/detailFeeding'; //'/folder/Evaluate';
-								toast.success('Data uploaded successfully', {
+								toast.success(this.$t('dataUploadSuccessfull'), {
 									autoClose: 1000,
 								});
 								setTimeout(() => {
@@ -954,12 +951,9 @@ export default {
 							if (error.message === 'Network Error' && !alertShown) {
 								alertShown = true;
 								//console.log('Inside error catch block');
-								toast.error(
-									"Data upload failed! Check internet connectivity and click again on 'Finish Tests'.",
-									{
-										autoClose: 3000,
-									}
-								);
+								toast.error(this.$t('dataUploadFailed'), {
+									autoClose: 3000,
+								});
 								setTimeout(() => {
 									dataInBody = false;
 									localStorage.setItem('dataInBody', dataInBody.toString());
@@ -979,7 +973,7 @@ export default {
 				this.storeCheckedValues();
 				console.log(evaluationFeedingStore.requestBodiesFeeding);
 
-				toast.success("Saved temporarily. Click 'Finish Tests' in the end!", {
+				toast.success(this.$t('dataSavedTemporary'), {
 					autoClose: 1000,
 				});
 

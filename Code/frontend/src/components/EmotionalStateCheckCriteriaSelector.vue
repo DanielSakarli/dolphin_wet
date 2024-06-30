@@ -738,7 +738,7 @@ export default {
 									1
 							) {
 								const targetUrl = '/detailEmotionalState';
-								toast.success('Data uploaded successfully', {
+								toast.success(this.$t('dataUploadSuccessfull'), {
 									autoClose: 1000,
 								});
 								setTimeout(() => {
@@ -762,12 +762,9 @@ export default {
 							if (error.message === 'Network Error' && !alertShown) {
 								alertShown = true;
 								//console.log('Inside error catch block');
-								toast.error(
-									'Data upload failed! Check internet connectivity.',
-									{
-										autoClose: 2000,
-									}
-								);
+								toast.error(this.$t('dataUploadFailed'), {
+									autoClose: 2000,
+								});
 								setTimeout(() => {
 									dataInBody = false;
 									localStorage.setItem('dataInBody', dataInBody.toString());
@@ -785,7 +782,7 @@ export default {
 				this.storeCheckedValues();
 				console.log(evaluationEmotionalStateStore.requestBodiesEmotionalState);
 
-				toast.success("Saved temporarily. Click 'Finish Tests' in the end!", {
+				toast.success(this.$t('dataSavedTemporary'), {
 					autoClose: 1000,
 				});
 
