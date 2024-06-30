@@ -361,11 +361,11 @@ export default {
 				console.log('Reached the alert message');
 				alertController
 					.create({
-						header: 'Confirmation',
-						message: 'Are you sure you want to delete the dolphin?',
+						header: this.$t('confirmationHeader'),
+						message: this.$t('deleteDolphin'),
 						buttons: [
 							{
-								text: 'Cancel',
+								text: this.$t('cancelChoice'),
 								role: 'cancel',
 								cssClass: 'secondary',
 								handler: () => {
@@ -374,7 +374,7 @@ export default {
 								},
 							},
 							{
-								text: 'Delete',
+								text: this.$t('delete'),
 								handler: () => {
 									console.log('Confirm Okay');
 									resolve(void 0);

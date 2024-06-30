@@ -80,11 +80,11 @@ export default defineComponent({
 			return new Promise((resolve, reject) => {
 				alertController
 					.create({
-						header: 'Confirmation',
-						message: 'Are you sure you want to proceed?',
+						header: this.$t('confirmationHeader'),
+						message: this.$t('confirmationMessage'),
 						buttons: [
 							{
-								text: 'Stay on Page',
+								text: this.$t('stayOnPage'),
 								role: 'cancel',
 								cssClass: 'secondary',
 								handler: () => {
@@ -103,15 +103,17 @@ export default defineComponent({
 								},
 							},
 							{
-								text: 'Lose Data',
+								text: this.$t('loseData'),
 								handler: () => {
 									console.log('Confirm Okay');
 									//this.$router.back();
 									localStorage.setItem('dataInBody', 'false');
-									(this.$refs.housingCheckRef as any).resetData();
 									//localStorage.setItem('backButtonClicked', 'false');
 									//console.log('backButtonClicked: ', localStorage.getItem('backButtonClicked'));
 									this.$router.push('/folder/Evaluate');
+									(this.$refs.housingCheckRef as any).resetData();
+									//localStorage.setItem('backButtonClicked', 'false');
+									//console.log('backButtonClicked: ', localStorage.getItem('backButtonClicked'));
 									resolve(void 0);
 								},
 							},

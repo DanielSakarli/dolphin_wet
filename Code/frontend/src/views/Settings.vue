@@ -217,11 +217,11 @@ export default {
 				console.log('Reached the alert message');
 				alertController
 					.create({
-						header: 'Confirmation',
-						message: 'Are you sure you want to delete the user?',
+						header: this.$t('confirmation'),
+						message: this.$t('deleteUserConfirmation'),
 						buttons: [
 							{
-								text: 'Cancel',
+								text: this.$t('cancel'),
 								role: 'cancel',
 								cssClass: 'secondary',
 								handler: () => {
@@ -230,7 +230,7 @@ export default {
 								},
 							},
 							{
-								text: 'Delete',
+								text: this.$t('delete'),
 								handler: () => {
 									console.log('Confirm Okay');
 									resolve(void 0);

@@ -1266,11 +1266,11 @@ export default {
 			return new Promise((resolve) => {
 				alertController
 					.create({
-						header: 'Confirmation',
-						message: 'Is the data you entered current?',
+						header: this.$t('confirmationHeader'),
+						message: this.$t('dataCurrent'),
 						buttons: [
 							{
-								text: 'Yes',
+								text: this.$t('yes'),
 								role: 'cancel',
 								cssClass: 'secondary',
 								handler: () => {
@@ -1279,7 +1279,7 @@ export default {
 								},
 							},
 							{
-								text: 'No',
+								text: this.$t('no'),
 								handler: () => {
 									(async () => {
 										await this.showDateInputAlert();
@@ -1299,7 +1299,7 @@ export default {
 			return new Promise((resolve, reject) => {
 				alertController
 					.create({
-						header: 'Enter Date',
+						header: this.$t('enterDate'),
 						inputs: [
 							{
 								name: 'date',
@@ -1308,7 +1308,7 @@ export default {
 						],
 						buttons: [
 							{
-								text: 'Cancel',
+								text: this.$t('cancelChoice'),
 								role: '',
 								cssClass: 'secondary',
 								handler: () => {
@@ -1318,7 +1318,7 @@ export default {
 								},
 							},
 							{
-								text: 'Confirm',
+								text: this.$t('confirm'),
 								handler: (data) => {
 									console.log('Test date changed');
 									// Convert the date to dd/mm/yyyy format
