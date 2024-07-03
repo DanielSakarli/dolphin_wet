@@ -127,7 +127,8 @@ async function setResult(req, res, next) {
           				console.log('Marks percentage in the dolphin silhouette:', marksPercentage);
 						
 						// Append percentage of rake marks to the array
-						console.log("Total red percentage: ", marksPercentage.totalRedPercentage)
+						console.log("Total red percentage: ", marksPercentage.totalRedPercentage);
+						console.log("Total blue percentage: ", marksPercentage.totalBluePercentage);
 						test_result.total_rake_marks_percentage = parseFloat(marksPercentage.totalRedPercentage.toFixed(2)); // Rounds after the second digit after the decimal point
 						
 						// Append silhouette_photo_path to the array
