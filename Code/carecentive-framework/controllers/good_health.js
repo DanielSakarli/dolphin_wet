@@ -130,9 +130,11 @@ async function setResult(req, res, next) {
 						console.log("Total red percentage: ", marksPercentage.totalRedPercentage);
 						console.log("Total blue percentage: ", marksPercentage.totalBluePercentage);
 						test_result.total_rake_marks_percentage = parseFloat(marksPercentage.totalRedPercentage.toFixed(2)); // Rounds after the second digit after the decimal point
-						
+						test_result.old_rake_marks_percentage = parseFloat(marksPercentage.totalBluePercentage.toFixed(2));
+
 						// Append silhouette_photo_path to the array
 						test_result.silhouette_photo_path = req.session.photo_path.silhouette_photo_path.toString();
+
 						console.log('test result silhouette path: ', test_result.silhouette_photo_path, 'for dolphin: ', test_result.dolphin_name);
 					}
 					}
