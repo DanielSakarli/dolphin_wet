@@ -542,7 +542,6 @@ exports.up = function (knex) {
 			table.string('regurgitation_reingestion_comments');
 			table.tinyint('rake_marks').unsigned(); //1, 2, 3
 			table.string('rake_marks_comments');
-			//And a photo for the rake_marks!
 			table.tinyint('displaying_aggressive_behaviour').unsigned(); //1, 3
 			table.string('displaying_aggressive_behaviour_comments');
 			table.tinyint('receiving_aggressive_behaviour').unsigned(); //1, 3

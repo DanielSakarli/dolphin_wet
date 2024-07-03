@@ -108,20 +108,22 @@ async function csvWriter(req, res, next) {
 			{id: 'dolphin_id', title: 'Dolphin ID'},
 			{id: 'dolphin_name', title: 'Dolphin Name'},
 			{id: 'body_condition_score', title: 'Body Condition Score'},
-			{id: 'weight_measured', title: 'Weight Measured'},
-			{id: 'kcal_calculations', title: 'Kcal Calculations'},
-			{id: 'blood_hydration', title: 'Blood Hydration'},
-			{id: 'fish_quality', title: 'Fish Quality'},
-			{id: 'fish_variety', title: 'Fish Variety'},
-			{id: 'file_path', title: 'File Path'},
 			{id: 'body_condition_score_comments', title: 'Body Condition Score Comments'},
+			{id: 'weight_measured', title: 'Weight Measured'},
 			{id: 'weight_measured_comments', title: 'Weight Measured Comments'},
+			{id: 'kcal_calculations', title: 'Kcal Calculations'},
 			{id: 'kcal_calculations_comments', title: 'Kcal Calculations Comments'},
+			{id: 'blood_hydration', title: 'Blood Hydration'},
 			{id: 'blood_hydration_comments', title: 'Blood Hydration Comments'},
+			{id: 'fish_quality', title: 'Fish Quality'},
 			{id: 'fish_quality_comments', title: 'Fish Quality Comments'},
+			{id: 'fish_variety', title: 'Fish Variety'},
 			{id: 'fish_variety_comments', title: 'Fish Variety Comments'},
+			{id: 'bwo_score', title: 'Body Weight Oscillation Score'},
+			{id: 'bwo_3_months', title: 'Body Weight Oscillation past 3 months [%]'},
+			{id: 'bwo_12_months', title: 'Body Weight Oscillation past 12 months [%]'},
+			{id: 'file_path', title: 'File Path'},
 			{id: 'created_at', title: 'Created At'},
-			{id: 'updated_at', title: 'Updated At'}
 		]
 	});
 	}
@@ -141,7 +143,7 @@ async function csvWriter(req, res, next) {
 			for (const month in resultHousing) {
 				data.push(...resultHousing[month]);
 			}
-			resultHousing = null; //reset feeding results
+			resultHousing = null; //reset housing results
 		} else {
 			if(dolphin_name != '')
 			{
@@ -150,9 +152,8 @@ async function csvWriter(req, res, next) {
 				resultHousing = await GoodHousingService.getAllTestResults(roleName);
 			}
 	
-			//console.log('result feeding: ', resultFeeding);
-			data = resultHousing; //save the results of feeding tests in data
-			resultHousing = null; //reset feedig results
+			data = resultHousing; //save the results of housing tests in data
+			resultHousing = null; //reset housing results
 		}
 	savePath = 'csv/Housing_' + Date.now() + '.csv'
 		csvWriter = createCsvWriter({
@@ -164,24 +165,24 @@ async function csvWriter(req, res, next) {
 				{id: 'dolphin_id', title: 'Dolphin ID'},
 				{id: 'dolphin_name', title: 'Dolphin Name'},
 				{id: 'enclosure_barrier_safety', title: 'Enclosure Barrier Safety'},
-				{id: 'foreign_body_ingestion', title: 'Foreign Body Ingestion'},
-				{id: 'pool_design', title: 'Pool Design'},
-				{id: 'forced_loneliness', title: 'Forced Loneliness'},
-				{id: 'water_quality', title: 'Water Quality'},
-				{id: 'water_temperature', title: 'Water Temperature'},
-				{id: 'sufficient_shade', title: 'Sufficient Shade'},
-				{id: 'acoustic_comfort', title: 'Acoustic Comfort'},
-				//Comments
 				{id: 'enclosure_barrier_safety_comments', title: 'Enclosure Barrier Safety Comments'},
+				{id: 'foreign_body_ingestion', title: 'Foreign Body Ingestion'},
 				{id: 'foreign_body_ingestion_comments', title: 'Foreign Body Ingestion Comments'},
+				{id: 'pool_design', title: 'Pool Design'},
 				{id: 'pool_design_comments', title: 'Pool Design Comments'},
+				{id: 'forced_loneliness', title: 'Forced Loneliness'},
 				{id: 'forced_loneliness_comments', title: 'Forced Loneliness Comments'},
+				{id: 'water_quality', title: 'Water Quality'},
 				{id: 'water_quality_comments', title: 'Water Quality Comments'},
+				{id: 'water_temperature', title: 'Water Temperature'},
 				{id: 'water_temperature_comments', title: 'Water Temperature Comments'},
+				{id: 'sufficient_shade', title: 'Sufficient Shade'},
 				{id: 'sufficient_shade_comments', title: 'Sufficient Shade Comments'},
-				{id: 'acoustic_comfort_comments', title: 'Acoustic Comfort Comments'},
+				{id: 'reflecting_colours', title: 'Reflecting Colours'},
+				{id: 'reflecting_colours_comments', title: 'Reflecting Colours Comments'},
+				{id: 'acoustic_comfort', title: 'Acoustic Comfort'},
+				{id: 'acoustic_comfort_comments', title: 'Acoustic Comfort Comments'},				
 				{id: 'created_at', title: 'Created At'},
-				{id: 'updated_at', title: 'Updated At'}
 			]
 		});
 	}
@@ -224,38 +225,38 @@ async function csvWriter(req, res, next) {
 					{id: 'dolphin_id', title: 'Dolphin ID'},
 					{id: 'dolphin_name', title: 'Dolphin Name'},
 					{id: 'normal_floatability', title: 'Normal Floatability'},
-					{id: 'records_normal_floatability', title: 'Records Normal Floatability'},
-					{id: 'inspection_eye_lesions', title: 'Inspection Eye Lesions'},
-					{id: 'response_visual_cues', title: 'Response Visual Cues'},
-					{id: 'records_eye_lesions', title: 'Records Eye Lesions'},
-					{id: 'mouth_exam', title: 'Mouth Exam'},
-					{id: 'records_oral_lesions', title: 'Records Oral Lesions'},
-					{id: 'records_gastric_abnormality', title: 'Records Gastric Abnormality'},
-					{id: 'inspection_respiratory', title: 'Inspection Respiratory Disease'},
-					{id: 'force_expiration', title: 'Forced Expiration'},
-					{id: 'records_respiratory_disease', title: 'Records Respiratory Disease'},
-					{id: 'inspection_marks', title: 'Rake marks'},
-					{id: 'records_external_disease', title: 'Records External Disease Signs'},
-
-					//Comments
 					{id: 'normal_floatability_comments', title: 'Normal Floatability Comments'},
+					{id: 'records_normal_floatability', title: 'Records Normal Floatability'},
 					{id: 'records_normal_floatability_comments', title: 'Records Normal Floatability Comments'},
+					{id: 'inspection_eye_lesions', title: 'Inspection Eye Lesions'},
 					{id: 'inspection_eye_lesions_comments', title: 'Inspection Eye Lesions Comments'},
+					{id: 'response_visual_cues', title: 'Response Visual Cues'},
 					{id: 'response_visual_cues_comments', title: 'Response Visual Cues Comments'},
+					{id: 'records_eye_lesions', title: 'Records Eye Lesions'},
 					{id: 'records_eye_lesions_comments', title: 'Records Eye Lesions Comments'},
+					{id: 'mouth_exam', title: 'Mouth Exam'},
 					{id: 'mouth_exam_comments', title: 'Mouth Exam Comments'},
+					{id: 'records_oral_lesions', title: 'Records Oral Lesions'},
 					{id: 'records_oral_lesions_comments', title: 'Records Oral Lesions Comments'},
+					{id: 'records_gastric_abnormality', title: 'Records Gastric Abnormality'},
 					{id: 'records_gastric_abnormality_comments', title: 'Records Gastric Abnormality Comments'},
+					{id: 'inspection_respiratory', title: 'Inspection Respiratory Disease'},
 					{id: 'inspection_respiratory_comments', title: 'Inspection Respiratory Disease Comments'},
+					{id: 'force_expiration', title: 'Forced Expiration'},
 					{id: 'force_expiration_comments', title: 'Forced Expiration Comments'},
+					{id: 'records_respiratory_disease', title: 'Records Respiratory Disease'},
 					{id: 'records_respiratory_disease_comments', title: 'Records Respiratory Disease Comments'},
+					{id: 'inspection_marks', title: 'Rake marks'},
 					{id: 'inspection_marks_comments', title: 'Rake marks Comments'},
+					{id: 'records_external_disease', title: 'Records External Disease Signs'},
 					{id: 'records_external_disease_comments', title: 'Records External Disease Signs Comments'},
-					
 					//Photo paths
 					{id: 'eye_photo_path', title: 'Eye Photo Path'},
 					{id: 'teeth_photo_path', title: 'Teeth Photo Path'},
+					{id: 'odontogramm_photo_path', title: 'Odontogramm Photo Path'},
 					{id: 'marks_photo_path', title: 'Marks Photo Path'},
+					{id: 'silhouette_photo_path', title: 'Silhouette Photo Path'},
+					{id: 'video_path', title: 'Video Path'},
 					{id: 'created_at', title: 'Created At'}
 				]
 			});
@@ -300,39 +301,37 @@ async function csvWriter(req, res, next) {
 					{id: 'dolphin_name', title: 'Dolphin Name'},
 					// Data
 					{id: 'environmental_enrichment', title: 'Environmental Enrichment'},
-					{id: 'affiliative_behaviour', title: 'Affiliative Behaviour'},
-					{id: 'play_behaviour', title: 'Play Behaviour'},
-					{id: 'socio_sexual_behaviour', title: 'Socio Sexual Behaviour'},
-					{id: 'maternal_behaviour', title: 'Maternal Behaviour'},
-					{id: 'displacement_behaviour', title: 'Displacement Behaviour'},
-					{id: 'oral_stereotypic_behaviour', title: 'Oral Stereotypic Behaviour'},
-					{id: 'repetitive_body_movement', title: 'Repetitive Body Movement'},
-					{id: 'self_grooming_behaviour', title: 'Self Grooming Behaviour'},
-					{id: 'regurgitation_reingestion', title: 'Regurgitation Reingestion'},
-					{id: 'rake_marks', title: 'Rake Marks'},
-					{id: 'displaying_aggressive_behaviour', title: 'Displaying Aggressive Behaviour'},
-					{id: 'receiving_aggressive_behaviour', title: 'Receiving Aggressive Behaviour'},
-					{id: 'social_isolation', title: 'Social Isolation'},
-					{id: 'avoidance_pool_areas', title: 'Avoidance Pool Areas'},
-					// Comments
 					{id: 'environmental_enrichment_comments', title: 'Environmental Enrichment Comments'},
+					{id: 'affiliative_behaviour', title: 'Affiliative Behaviour'},
 					{id: 'affiliative_behaviour_comments', title: 'Affiliative Behaviour Comments'},
+					{id: 'play_behaviour', title: 'Play Behaviour'},
 					{id: 'play_behaviour_comments', title: 'Play Behaviour Comments'},
+					{id: 'socio_sexual_behaviour', title: 'Socio Sexual Behaviour'},
 					{id: 'socio_sexual_behaviour_comments', title: 'Socio Sexual Behaviour Comments'},
+					{id: 'maternal_behaviour', title: 'Maternal Behaviour'},
 					{id: 'maternal_behaviour_comments', title: 'Maternal Behaviour Comments'},
+					{id: 'displacement_behaviour', title: 'Displacement Behaviour'},
 					{id: 'displacement_behaviour_comments', title: 'Displacement Behaviour Comments'},
+					{id: 'oral_stereotypic_behaviour', title: 'Oral Stereotypic Behaviour'},
 					{id: 'oral_stereotypic_behaviour_comments', title: 'Oral Stereotypic Behaviour Comments'},
+					{id: 'repetitive_body_movement', title: 'Repetitive Body Movement'},
 					{id: 'repetitive_body_movement_comments', title: 'Repetitive Body Movement Comments'},
+					{id: 'self_grooming_behaviour', title: 'Self Grooming Behaviour'},
 					{id: 'self_grooming_behaviour_comments', title: 'Self Grooming Behaviour Comments'},
+					{id: 'regurgitation_reingestion', title: 'Regurgitation Reingestion'},
 					{id: 'regurgitation_reingestion_comments', title: 'Regurgitation Reingestion Comments'},
+					{id: 'rake_marks', title: 'Rake Marks'},
 					{id: 'rake_marks_comments', title: 'Rake Marks Comments'},
+					{id: 'displaying_aggressive_behaviour', title: 'Displaying Aggressive Behaviour'},
 					{id: 'displaying_aggressive_behaviour_comments', title: 'Displaying Aggressive Behaviour Comments'},
+					{id: 'receiving_aggressive_behaviour', title: 'Receiving Aggressive Behaviour'},
 					{id: 'receiving_aggressive_behaviour_comments', title: 'Receiving Aggressive Behaviour Comments'},
+					{id: 'social_isolation', title: 'Social Isolation'},
 					{id: 'social_isolation_comments', title: 'Social Isolation Comments'},
+					{id: 'avoidance_pool_areas', title: 'Avoidance Pool Areas'},
 					{id: 'avoidance_pool_areas_comments', title: 'Avoidance Pool Areas Comments'},
 					// Timestamps
 					{id: 'created_at', title: 'Created At'},
-					{id: 'updated_at', title: 'Updated At'}
 				]
 			});
 			}
@@ -376,25 +375,21 @@ async function csvWriter(req, res, next) {
 						{id: 'dolphin_name', title: 'Dolphin Name'},
 						// Data
 						{id: 'willingness_to_participate', title: 'Willingness to Participate'},
-						{id: 'synchronous_swimming', title: 'Synchronous Swimming'},
-						{id: 'rubbing_behaviour', title: 'Rubbing Behaviour'},
-						{id: 'anticipatory_behaviour', title: 'Anticipatory Behaviour'},
-						{id: 'fast_swimming', title: 'Fast Swimming'},
-						{id: 'tail_slapping', title: 'Tail Slapping'},
-						{id: 'choice_and_control', title: 'Choice and Control'},
-						
-						// Comments
 						{id: 'willingness_to_participate_comments', title: 'Willingness to Participate Comments'},
+						{id: 'synchronous_swimming', title: 'Synchronous Swimming'},
 						{id: 'synchronous_swimming_comments', title: 'Synchronous Swimming Comments'},
+						{id: 'rubbing_behaviour', title: 'Rubbing Behaviour'},
 						{id: 'rubbing_behaviour_comments', title: 'Rubbing Behaviour Comments'},
+						{id: 'anticipatory_behaviour', title: 'Anticipatory Behaviour'},
 						{id: 'anticipatory_behaviour_comments', title: 'Anticipatory Behaviour Comments'},
+						{id: 'fast_swimming', title: 'Fast Swimming'},
 						{id: 'fast_swimming_comments', title: 'Fast Swimming Comments'},
+						{id: 'tail_slapping', title: 'Tail Slapping'},
 						{id: 'tail_slapping_comments', title: 'Tail Slapping Comments'},
+						{id: 'choice_and_control', title: 'Choice and Control'},
 						{id: 'choice_and_control_comments', title: 'Choice and Control Comments'},
-						
 						// Timestamps
 						{id: 'created_at', title: 'Created At'},
-						{id: 'updated_at', title: 'Updated At'}
 					]
 				});
 				}

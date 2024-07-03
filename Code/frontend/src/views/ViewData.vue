@@ -1161,7 +1161,8 @@ export default {
 			this.dataBehaviour = null;
 			this.dataHealth = null;
 			this.dataEmotionalState = null;
-			if (this.principleSelect === this.$t('principleNutrition')) {
+			console.log('Selected principle: ', this.principleSelect);
+			if (this.principleSelect === 'Nutrition') {
 				this.urlFeeding =
 					this.urlFeeding + this.dolphinSelect + '&numMonths=' + this.numMonths; //default value numMonths=3
 				await this.$axios
@@ -1190,7 +1191,7 @@ export default {
 
 						this.urlFeeding = baseUrl + '/api/good_feeding?name='; //reset the url
 					});
-			} else if (this.principleSelect === this.$t('principleEnvironment')) {
+			} else if (this.principleSelect === 'Environment') {
 				this.urlHousing =
 					this.urlHousing + this.dolphinSelect + '&numMonths=' + this.numMonths; //default value numMonths=3
 				await axios
@@ -1209,7 +1210,7 @@ export default {
 						}
 						this.urlHousing = baseUrl + '/api/good_housing?name='; //reset the url
 					});
-			} else if (this.principleSelect === this.$t('principleBehaviour')) {
+			} else if (this.principleSelect === 'Behaviour') {
 				this.urlBehaviour =
 					this.urlBehaviour +
 					this.dolphinSelect +
@@ -1231,7 +1232,7 @@ export default {
 						}
 						this.urlBehaviour = baseUrl + '/api/behaviour?name='; //reset the url
 					});
-			} else if (this.principleSelect === this.$t('principleHealth')) {
+			} else if (this.principleSelect === 'Health') {
 				this.urlHealth =
 					this.urlHealth + this.dolphinSelect + '&numMonths=' + this.numMonths; //default value numMonths=3
 				await axios
@@ -1250,7 +1251,7 @@ export default {
 						}
 						this.urlHealth = baseUrl + '/api/good_health?name='; //reset the url
 					});
-			} else if (this.principleSelect === this.$t('principleEmotionalState')) {
+			} else if (this.principleSelect === 'Mental State') {
 				this.urlEmotionalState =
 					this.urlEmotionalState +
 					this.dolphinSelect +
