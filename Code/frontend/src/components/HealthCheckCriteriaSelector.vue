@@ -1733,7 +1733,12 @@ export default {
 						this.criteria = 'sixthCriteriaHealth';
 						break;
 					case 'sixthCriteriaHealth':
-						this.criteria = 'sixthCriteriaHealth';
+						// De-select the criteria selector, so that no ion-card is shown when principle is finished
+						// and do a toast pop up message that principle has ended
+						this.criteria = '';
+						toast.success(this.$t('principleFinished'), {
+							autoClose: 5000,
+						});
 						break;
 					default:
 						this.criteria = 'firstCriteriaHealth';

@@ -12,10 +12,10 @@
 			<ion-list>
 				<ion-item>
 					<ion-select
-						label="Dolphins"
-						placeholder="select Dolphin"
+						:label="$t('dolphins')"
+						:placeholder="$t('selectDolphin')"
 						okText="OK"
-						cancelText="Cancel"
+						:cancelText="$t('cancel')"
 						v-model="dolphinSelect"
 					>
 						<ion-select-option value="">{{
@@ -30,10 +30,10 @@
 				</ion-item>
 				<ion-item>
 					<ion-select
-						label="Principle"
-						placeholder="select Principle"
+						:label="$t('principle')"
+						:placeholder="$t('selectPrinciple')"
 						okText="OK"
-						cancelText="Cancel"
+						:cancelText="$t('cancel')"
 						v-model="principleSelect"
 					>
 						<ion-select-option
@@ -51,10 +51,10 @@
 				<!--Put here the button for choosing how long ago the data should be displayed (1, 2, 3, ... months and so on)-->
 				<ion-item>
 					<ion-select
-						label="Time Period"
-						placeholder="select Time Period"
+						:label="$t('timePeriod')"
+						:placeholder="$t('selectTimePeriod')"
 						okText="OK"
-						cancelText="Cancel"
+						:cancelText="$t('cancel')"
 						v-model="numMonths"
 					>
 						<ion-select-option value="1">{{

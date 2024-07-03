@@ -44,10 +44,11 @@ export const useDolphinsStore = defineStore('dolphinsStore', {
 					withCredentials: true,
 					hideGlobalLoading: true,
 				})
-				.then((response) => {
+				.then(async (response) => {
 					// if internet connection is present, the dolphinList is updated with
 					// the values from the backend
 					this.dolphinList = response.data;
+					await this.sortDolphinList();
 					return this.dolphinList;
 				})
 				.catch((e) => {
@@ -72,8 +73,12 @@ export const useDolphinsStore = defineStore('dolphinsStore', {
 								max_kcal_calculations: -1,
 							};
 						});
+						this.sortDolphinList();
 					}
 				});
+		},
+		async sortDolphinList() {
+			this.dolphinList.sort((a, b) => a.name.localeCompare(b.name));
 		},
 	},
 });

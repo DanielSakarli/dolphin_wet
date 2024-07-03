@@ -689,7 +689,7 @@ export default {
 				}
 			}
 
-			this.resetData();
+			//this.resetData();
 			dataInBody = true;
 			localStorage.setItem('dataInBody', dataInBody.toString());
 		},
@@ -848,7 +848,7 @@ export default {
 								evaluationHousingStore.requestBodiesHousing.length - 1
 							) {
 								const targetUrl = '/detailHousing'; //'/folder/Evaluate';
-								toast.success(this.$t('dataUploadSuccessfull', {
+								toast.success(this.$t('dataUploadSuccessfull'), {
 									autoClose: 1000,
 								});
 								setTimeout(() => {
@@ -873,12 +873,9 @@ export default {
 							if (error.message === 'Network Error' && !alertShown) {
 								//console.log('Inside error catch block');
 								alertShown = true;
-								toast.error(
-									this.$t('dataUploadFailed'),
-									{
-										autoClose: 2000,
-									}
-								);
+								toast.error(this.$t('dataUploadFailed'), {
+									autoClose: 2000,
+								});
 								setTimeout(() => {
 									dataInBody = false;
 									localStorage.setItem('dataInBody', dataInBody.toString());
@@ -921,7 +918,12 @@ export default {
 						this.criteria = 'seventhCriteriaEnvironment';
 						break;
 					case 'seventhCriteriaEnvironment':
-						this.criteria = 'seventhCriteriaEnvironment';
+						// De-select the criteria selector, so that no ion-card is shown when principle is finished
+						// and do a toast pop up message that principle has ended
+						this.criteria = '';
+						toast.success(this.$t('principleFinished'), {
+							autoClose: 5000,
+						});
 						break;
 					default:
 						this.criteria = 'firstCriteriaEnvironment';
