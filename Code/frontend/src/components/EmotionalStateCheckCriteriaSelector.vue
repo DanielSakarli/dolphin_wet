@@ -712,8 +712,7 @@ export default {
 				await this.confirmTestDate();
 				//Store the checked values in the request body
 				await this.storeCheckedValues();
-				//Reset data saved in checkboxes and comment strings. Doesn´t affect the request body
-				this.resetData();
+
 				console.log(this.CheckboxArray);
 				// Flag to only show network error alert once instead of several times after another
 				let alertShown = false;
@@ -748,7 +747,10 @@ export default {
 									localStorage.setItem('dataInBody', dataInBody.toString());
 									localStorage.setItem('backButtonClicked', 'false');
 									this.$router.push(targetUrl);
+									//Reset data saved in checkboxes and comment strings. Doesn´t affect the request body
+									this.resetData();
 								}, 2000);
+
 								// evaluationEmotionalStateStore.resetBodies();
 								// The fill method now resets the data in evaluationEmotionalStateStore
 								evaluationEmotionalStateStore.fill(dolphinsStore.dolphinList);
