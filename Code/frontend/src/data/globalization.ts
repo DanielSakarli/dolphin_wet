@@ -1053,9 +1053,7 @@ export const globalizationList = {
 		score2Health13:
 			'Evidence of previous signs/diseases in the records during the last 3 months',
 		rakeMarksScoring: 'Upload your silhouette drawings here',
-		rakeMarksScoringMale: 'Silhouette for male dolphins to draw the rake marks',
-		rakeMarksScoringFemale:
-			'Silhouette for female dolphins to draw the rake marks',
+		rakeMarksScoringTitle: 'Silhouette for dolphins to draw the rake marks',
 		/////// END OF HEALTH /////////
 		///////////////////////////////
 

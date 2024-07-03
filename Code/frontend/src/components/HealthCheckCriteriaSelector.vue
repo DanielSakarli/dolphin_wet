@@ -187,21 +187,12 @@
 				</div>
 				<div v-if="subcriteria === 'rakeMarksScoring'">
 					<h1>{{ $t('rakeMarksScoring') }}</h1>
-					<h4>{{ $t('rakeMarksScoringMale') }}</h4>
+					<h4>{{ $t('rakeMarksScoringTitle') }}</h4>
 					<img
-						src="../../public/DolphinWET_RakeMarkScoring_male_DANIEL.svg"
-						alt="Silhouette of male dolphin for drawing the rake marks."
+						src="../../public/dolphin_silhouette_for_rake_marks.png"
+						alt="Silhouette of a dolphin for the drawing of rake marks."
 					/>
-					<ion-button fill="clear" size="large" @click="getSVGFemaleDolphin">
-						{{ $t('downloadFile') }}
-						<ion-icon slot="start" :icon="download"></ion-icon>
-					</ion-button>
-					<h4>{{ $t('rakeMarksScoringFemale') }}</h4>
-					<img
-						src="../../public/DolphinWET_RakeMarkScoring_female_DANIEL.svg"
-						alt="Silhouette of female dolphin for drawing the rake marks."
-					/>
-					<ion-button fill="clear" size="large" @click="getSVGMaleDolphin">
+					<ion-button fill="clear" size="large" @click="getPNGDolphin">
 						{{ $t('downloadFile') }}
 						<ion-icon slot="start" :icon="download"></ion-icon>
 					</ion-button>
@@ -1461,18 +1452,9 @@ export default {
 		updateExternalDiseaseComments(comment: string) {
 			this.records_external_disease_comments = comment;
 		},
-		async getSVGFemaleDolphin() {
+		async getPNGDolphin() {
 			try {
-				const fileName = 'DolphinWET_RakeMarkScoring_female_DANIEL.svg'; // file name of the file saved on the server
-				const fileUrl = baseUrl + '/api/files/' + fileName;
-				await Browser.open({ url: fileUrl });
-			} catch (error) {
-				console.error('Error: ', error);
-			}
-		},
-		async getSVGMaleDolphin() {
-			try {
-				const fileName = 'DolphinWET_RakeMarkScoring_male_DANIEL.svg'; // file name of the file saved on the server
+				const fileName = 'dolphin_silhouette_for_rake_marks.png'; // file name of the file saved on the server
 				const fileUrl = baseUrl + '/api/files/' + fileName;
 				await Browser.open({ url: fileUrl });
 			} catch (error) {
