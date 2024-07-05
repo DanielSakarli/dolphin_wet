@@ -59,7 +59,7 @@
 								ref="input"
 								type="password"
 								fill="solid"
-								:label="$t('adminPasswordLabel')"
+								:label="$t('adminPassword')"
 								label-placement="floating"
 								:helper-text="$t('adminPasswordHelperText')"
 								id="password"
