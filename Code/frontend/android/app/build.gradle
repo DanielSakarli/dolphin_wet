@@ -6,8 +6,8 @@ android {
     defaultConfig {
         applicationId "com.dolphinwet.app"
         minSdkVersion rootProject.ext.minSdkVersion
-        targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 3
+        targetSdkVersion 34 //rootProject.ext.targetSdkVersion
+        versionCode 5
         versionName "1.0.2"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         aaptOptions {
