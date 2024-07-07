@@ -221,7 +221,7 @@ export default {
 						message: this.$t('deleteUserConfirmation'),
 						buttons: [
 							{
-								text: this.$t('cancel'),
+								text: this.$t('cancelChoice'),
 								role: 'cancel',
 								cssClass: 'secondary',
 								handler: () => {

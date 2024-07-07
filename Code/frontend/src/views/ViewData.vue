@@ -15,7 +15,7 @@
 						:label="$t('dolphins')"
 						:placeholder="$t('selectDolphin')"
 						okText="OK"
-						:cancelText="$t('cancel')"
+						:cancelText="$t('cancelChoice')"
 						v-model="dolphinSelect"
 					>
 						<ion-select-option value="">{{
@@ -33,7 +33,7 @@
 						:label="$t('principle')"
 						:placeholder="$t('selectPrinciple')"
 						okText="OK"
-						:cancelText="$t('cancel')"
+						:cancelText="$t('cancelChoice')"
 						v-model="principleSelect"
 					>
 						<ion-select-option
@@ -54,7 +54,7 @@
 						:label="$t('timePeriod')"
 						:placeholder="$t('selectTimePeriod')"
 						okText="OK"
-						:cancelText="$t('cancel')"
+						:cancelText="$t('cancelChoice')"
 						v-model="numMonths"
 					>
 						<ion-select-option value="1">{{
@@ -662,11 +662,11 @@
 											{{ BehaviourRecord.maternal_behaviour_comments || 'N/A' }}
 										</p>
 										<p>
-											{{ $t('displecementBehaviour') }}:
+											{{ $t('displacementBehaviour') }}:
 											{{ BehaviourRecord.displacement_behaviour }}
 										</p>
 										<p>
-											{{ $t('displecementBehaviourComments') }}:
+											{{ $t('displacementBehaviourComments') }}:
 
 											{{
 												BehaviourRecord.displacement_behaviour_comments || 'N/A'
