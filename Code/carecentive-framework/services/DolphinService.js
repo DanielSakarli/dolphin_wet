@@ -112,21 +112,21 @@ class DolphinService {
 		try {
 			const roleNameAdmin = roleName + "_admin";
 			console.log('roleNameAdmin: ', roleNameAdmin);
-			
+
 			// Get role ID from role name
 			let role_admin = await Role.query().findOne({ name: roleNameAdmin });
 
 
 		if(!role_admin) {
-			return res.status(400).send("ROLE_DOES_NOT_EXIST");
+			throw new Error('ROLE_DOES_NOT_EXIST');
 		} else {
 			// If role exists compare hashed passwords
 			if (bcrypt.compareSync(adminPassword, role_admin.password_hash)) {
 				const myDolphinDao = new DolphinDAO(roleName);
 				await myDolphinDao.deleteDolphinByName(dolphinName);
-				return;
+				return dolphinName;
 			} else{
-				return res.status(400).send("USER_NOT_ADMIN");
+				throw new Error('ADMIN_PASSWORD_IS_WRONG');
 			}
 			}
 		}
