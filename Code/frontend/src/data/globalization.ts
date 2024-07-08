@@ -39,6 +39,7 @@ export const globalizationList = {
 		yes: 'Ja',
 		no: 'Nein',
 		deleteDolphin: 'Wollen Sie den Delfin wirklich löschen?',
+		deleteDolphinButton: 'Delfin löschen',
 		deleteUserConfirmation: 'Wollen Sie den Benutzer wirklich löschen?',
 		// App.vue:
 		evaluate: 'Evaluierung',
@@ -721,6 +722,7 @@ export const globalizationList = {
 		yes: 'Yes',
 		no: 'No',
 		deleteDolphin: 'Are you sure that you want to delete the dolphin?',
+		deleteDolphinButton: 'Delete dolphin',
 		deleteUserConfirmation: 'Are you sure that you want to delete the user?',
 
 		// App.vue:
@@ -1407,6 +1409,7 @@ export const globalizationList = {
 		yes: 'Yes',
 		no: 'No',
 		deleteDolphin: 'Are you sure that you want to delete the dolphin?',
+		deleteDolphinButton: 'Delete dolphin',
 		deleteUserConfirmation: 'Are you sure that you want to delete the user?',
 
 		// App.vue:

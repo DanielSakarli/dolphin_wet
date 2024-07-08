@@ -85,12 +85,16 @@ async function updateDolphin(req, res, next) {
 async function deleteDolphin(req, res, next) {
 	try {
 		const dolphinName = req.params.name;
+		const adminPassword = req.body.adminPassword;
 		const roleName = req.role;
-		await DolphinService.deleteDolphin(dolphinName, roleName);
-		// Return all existing dolphins after deleting the given one.
-		const dolphins = await DolphinService.getAllDolphins(roleName);
-		res.status(200).json(dolphins);
-	} catch (error) {
+		// Delete the given dolphin.
+			await DolphinService.deleteDolphin(dolphinName, roleName, adminPassword);
+			// Return all existing dolphins after deleting the given one.
+			const dolphins = await DolphinService.getAllDolphins(roleName);
+			res.status(200).json(dolphins);
+		
+	}
+	catch (error) {
 		next(error);
 	}
 }

@@ -28,7 +28,9 @@
 					<ion-toolbar>
 						<ion-title>{{ $t('editDolphin') }}</ion-title>
 						<ion-buttons slot="end">
-							<ion-button @click="closeEditModal">{{ $t('close') }}</ion-button>
+							<ion-button @click="toggleEditModal">{{
+								$t('close')
+							}}</ion-button>
 						</ion-buttons>
 					</ion-toolbar>
 				</ion-header>
@@ -162,18 +164,19 @@
 				</ion-item>
 				<ion-row>
 					<ion-col size="6">
-						<ion-button expand="full" @click="openEditModal">{{
+						<ion-button expand="full" @click="toggleEditModal">{{
 							$t('edit')
 						}}</ion-button>
 					</ion-col>
 					<ion-col size="6" class="ion-text-end">
-						<ion-button expand="full" @click="deleteDolphin">{{
+						<ion-button expand="full" @click="toggleDeleteModal">{{
 							$t('delete')
 						}}</ion-button>
 					</ion-col>
 				</ion-row>
 			</ion-card>
 		</ion-content>
+
 
 		<ion-footer>
 			<ion-toolbar>
@@ -192,6 +195,41 @@
 					</ion-button>
 				</ion-buttons>
 			</ion-toolbar>
+			<!-- Delete Dolphin Modal -->
+			<ion-modal :is-open="deleteModalOpen">
+				<ion-header>
+					<ion-toolbar>
+						<ion-title>{{ $t('deleteDolphin') }}</ion-title>
+						<ion-buttons slot="end">
+							<ion-button @click="toggleDeleteModal">{{
+								$t('close')
+							}}</ion-button>
+						</ion-buttons>
+					</ion-toolbar>
+				</ion-header>
+				<ion-content>
+					<form @submit.prevent="deleteDolphin">
+						<br />
+						<br />
+						<ion-item>
+							<ion-input
+								ref="input"
+								type="password"
+								fill="solid"
+								:label="$t('adminPassword')"
+								label-placement="floating"
+								:helper-text="$t('adminPasswordHelperText')"
+								id="password"
+								v-model="adminPassword"
+							></ion-input>
+						</ion-item>
+						<br />
+						<ion-button expand="full" type="submit">
+							{{ $t('deleteDolphinButton') }}
+						</ion-button>
+					</form>
+				</ion-content>
+			</ion-modal>
 			<ion-modal :is-open="addModalOpen">
 				<AddDolphin @close-modal="dolphinAdded" />
 			</ion-modal>
@@ -333,7 +371,10 @@ export default {
 					let deleteDolphin = this.currentDolphinValues.name;
 					const urlDelete = baseUrl + `/api/dolphins/${deleteDolphin}`;
 					axios
-						.delete(urlDelete, { withCredentials: true })
+						.delete(urlDelete, {
+							data: { adminPassword: this.adminPassword },
+							withCredentials: true,
+						})
 						.then((response) => {
 							console.log('Response:', response.data);
 							this.fetchDolphins();
@@ -428,12 +469,11 @@ export default {
 			return this.currentDolphinIndex !== null && this.currentDolphinIndex > 0;
 		},
 		// Open the edit modal
-		openEditModal() {
-			this.editModalOpen = true;
+		toggleEditModal() {
+			this.editModalOpen = !this.editModalOpen;
 		},
-		// Close the edit modal
-		closeEditModal() {
-			this.editModalOpen = false;
+		toggleDeleteModal() {
+			this.deleteModalOpen = !this.deleteModalOpen;
 		},
 		// Submit edited dolphin values
 		async submitEdit(event: Event) {
@@ -472,7 +512,7 @@ export default {
 					.patch(urlPatch, dolphinCopy, { withCredentials: true })
 					.then((response) => {
 						console.log('Response:', response.data);
-						this.closeEditModal();
+						this.toggleEditModal();
 						console.log('Current dolphin: ', this.currentDolphin?.name);
 						this.fetchDolphins();
 						toast.success(this.$t('dolphinDataUpdated'), {
@@ -488,7 +528,7 @@ export default {
 					.catch((error) => {
 						if (error.response.data.error === 'USER_NOT_AN_ADMINISTRATOR') {
 							this.showDolphin = false;
-							this.closeEditModal();
+							this.toggleEditModal();
 
 							toast.error(this.$t('userNotAdmin'), {
 								autoClose: 2000,
@@ -631,6 +671,8 @@ export default {
 			showDolphin: false,
 			currentDolphinIndex: 0,
 			editModalOpen: false,
+			deleteModalOpen: false,
+			adminPassword: '',
 			isLoading: false,
 		};
 	},

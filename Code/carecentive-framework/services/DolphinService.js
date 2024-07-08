@@ -1,5 +1,7 @@
 const DolphinDAO = require('../dao/dolphinDao');
 const { DolphinError } = require('../source/Errors');
+const bcrypt = require('bcryptjs');
+const Role = require('@carecentive/carecentive-core/models/Role');
 
 class DolphinService {
 	/**
@@ -102,14 +104,30 @@ class DolphinService {
 
 	/**
 	 * Delete the given dolphin in database.
-	 * @param {String} name - the name of dolphin.
+	 * @param {String} dolphinName - the name of dolphin.
+	 * @param {String} roleName - the name of role/zoo.
+	 * @param {String} adminPassword - the password of admin.
 	 */
-	static async deleteDolphin(name, roleName) {
+	static async deleteDolphin(dolphinName, roleName, adminPassword) {
 		try {
-			const myDolphinDao = new DolphinDAO(roleName);
-			await myDolphinDao.deleteDolphinByName(name);
-			return;
-		} catch (error) {
+			roleNameAdmin = roleName + "_admin";
+			// Get role ID from role name
+			let role_admin = await Role.query().findOne({ name: roleNameAdmin });
+
+		if(!role_admin) {
+			return res.status(400).send("ROLE_DOES_NOT_EXIST");
+		} else {
+			// If role exists compare hashed passwords
+			if (bcrypt.compareSync(adminPassword, role_admin.password_hash)) {
+				const myDolphinDao = new DolphinDAO(roleName);
+				await myDolphinDao.deleteDolphinByName(dolphinName);
+				return;
+			} else{
+				return res.status(400).send("USER_NOT_ADMIN");
+			}
+			}
+		}
+			catch (error) {
 			throw error;
 		}
 	}
