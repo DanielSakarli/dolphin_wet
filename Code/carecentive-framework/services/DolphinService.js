@@ -112,6 +112,7 @@ class DolphinService {
 		try {
 			const roleNameAdmin = roleName + "_admin";
 			console.log('roleNameAdmin: ', roleNameAdmin);
+			
 			// Get role ID from role name
 			let role_admin = await Role.query().findOne({ name: roleNameAdmin });
 
