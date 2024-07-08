@@ -110,9 +110,11 @@ class DolphinService {
 	 */
 	static async deleteDolphin(dolphinName, roleName, adminPassword) {
 		try {
-			roleNameAdmin = roleName + "_admin";
+			const roleNameAdmin = roleName + "_admin";
+			console.log('roleNameAdmin: ', roleNameAdmin);
 			// Get role ID from role name
 			let role_admin = await Role.query().findOne({ name: roleNameAdmin });
+
 
 		if(!role_admin) {
 			return res.status(400).send("ROLE_DOES_NOT_EXIST");
