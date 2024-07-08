@@ -60,6 +60,8 @@ export const globalizationList = {
 		odontogrammPhotos: 'Laden Sie hier die Odontogramme hoch',
 		rakeMarksPhotos: 'Laden Sie hier die Rake Marks Fotos hoch',
 		calfRemark: 'Nichts anklicken, falls Delfin kein Kalb hat!',
+		bwosRemark:
+			'Tragen Sie ebenfalls (falls vorhanden) vergangene Gewichtsmessungen ein, klicken Sie auf "Beende Prinzip" und wählen Sie das Datum der jeweiligen Gewichtserfassung aus.',
 		weightArea: 'Gewünschter Gewichtsbereich: ',
 		minimum: 'Minimum: ',
 		maximum: 'Maximum: ',
@@ -280,7 +282,8 @@ export const globalizationList = {
 		principleNutrition: 'Prinzip Ernährung',
 		principleEnvironment: 'Prinzip Becken/Gehege',
 		//General translations at evaluation pages
-		dataUploadSuccessfull: 'Daten erfolgreich hochgeladen.',
+		dataUploadSuccessfull:
+			'Daten erfolgreich hochgeladen. Sie können zur Homepage, indem Sie auf den Zurück-Knopf klicken.',
 		dataUploadFailed: 'Sicherung der Daten fehlgeschlagen!',
 		dataSavedTemporary:
 			"Temporär gespeichert. Klicken Sie am Ende 'Beende Prinzip'!",
@@ -620,9 +623,9 @@ export const globalizationList = {
 		score2Environment8:
 			'Mindestens ein Kriterium ist gemäß Abschnitt 5 der EAAM Standards and Guidelines nicht erfüllt',
 		score0Environment9:
-			'Kein Lärm über der Hörschwelle von 40 dB für mehr als 1 Minute/Tag',
+			'Kein Lärm unter Wasser über der Hörschwelle von 40 dB für mehr als 1 Minute/Tag',
 		score2Environment9:
-			'Lärm über der Hörschwelle von 40 dB für mehr als 1 Minute/Tag',
+			'Lärm unter Wasser über der Hörschwelle von 40 dB für mehr als 1 Minute/Tag',
 		////// END OF ENVIRONMENT /////
 		///////////////////////////////
 
@@ -744,6 +747,8 @@ export const globalizationList = {
 		odontogrammPhotos: 'Upload your odontogramm here',
 		rakeMarksPhotos: 'Upload your rake mark photos here',
 		calfRemark: 'Do not click any checkbox if the dolphin has no calf!',
+		bwosRemark:
+			'Also enter (if applicable) past weight measurements. Then, click on "Finish Principle" and select the date of the respective weight measurement.',
 		weightArea: 'Desired weight range: ',
 		minimum: 'Minima: ',
 		maximum: 'Maxima: ',
@@ -964,7 +969,8 @@ export const globalizationList = {
 		principleNutrition: 'Nutrition',
 		principleEnvironment: 'Environment',
 		//General translations at evaluation pages
-		dataUploadSuccessfull: 'Data uploaded successfully',
+		dataUploadSuccessfull:
+			'Data uploaded successfully. You can go back to the homepage by clicking on the back button.',
 		dataUploadFailed: 'Data upload failed! Check internet connectivity.',
 		dataSavedTemporary:
 			"Saved temporarily. Click 'Finish Principle' in the end!",
@@ -1309,9 +1315,9 @@ export const globalizationList = {
 		score2Environment8:
 			'At least one criterion is not met according Section 5 of to the EAAM Standards and Guidelines',
 		score0Environment9:
-			'No noise above the 40 dB hearing threshold for more than 1 min/day',
+			'No noise under water above the 40 dB hearing threshold for more than 1 min/day',
 		score2Environment9:
-			'Noise above the 40 dB hearing threshold for more than 1 min/day',
+			'Noise under water above the 40 dB hearing threshold for more than 1 min/day',
 		////// END OF ENVIRONMENT /////
 		///////////////////////////////
 
@@ -1431,6 +1437,8 @@ export const globalizationList = {
 		odontogrammPhotos: 'Upload your odontogramm here',
 		rakeMarksPhotos: 'Upload your rake mark photos here',
 		calfRemark: 'Do not click any checkbox if the dolphin has no calf!',
+		bwosRemark:
+			'Also enter (if applicable) past weight measurements. Then, click on "Finish Principle" and select the date of the respective weight measurement.',
 		weightArea: 'Desired weight range: ',
 		minimum: 'Minima: ',
 		maximum: 'Maxima: ',
@@ -1652,7 +1660,8 @@ export const globalizationList = {
 		principleNutrition: 'Nutrición',
 		principleEnvironment: 'Ambiente',
 		//General translations at evaluation pages
-		dataUploadSuccessfull: 'Datos cargados exitosamente',
+		dataUploadSuccessfull:
+			'Datos cargados exitosamente. You can go back to the homepage by clicking on the back button.',
 		dataUploadFailed:
 			'Fallo en la carga de datos! Verifica la conexión a internet.',
 		dataSavedTemporary: `Guardado temporalmente. Haz clic en 'Finalizar pruebas' al final`,
@@ -1998,9 +2007,9 @@ export const globalizationList = {
 		score2Environment8:
 			'At least one criterion is not met according Section 5 of to the EAAM Standards and Guidelines',
 		score0Environment9:
-			'No noise above the 40 dB hearing threshold for more than 1 min/day',
+			'No noise under water above the 40 dB hearing threshold for more than 1 min/day',
 		score2Environment9:
-			'Noise above the 40 dB hearing threshold for more than 1 min/day',
+			'Noise under water above the 40 dB hearing threshold for more than 1 min/day',
 		////// END OF ENVIRONMENT /////
 		///////////////////////////////
 

@@ -413,8 +413,25 @@
 				<CheckComments @update-comment="updateAcousticComfortComments" />
 			</ion-list>
 		</ion-card>
-		<!-- End of Checkboxes-->
+		<div
+			v-if="dolphinSelect && dolphinSelect.length !== 0 && criteria !== null"
+			class="button-container"
+		>
+			<ion-button fill="clear" size="large" @click="getUserManual">
+				{{ $t('userManual') }}
+				<ion-icon slot="start" :icon="download"></ion-icon>
+			</ion-button>
+			<ion-button fill="clear" size="large" @click="getStandardsAndGuidelines">
+				Standards & Guidelines
+				<ion-icon slot="start" :icon="download"></ion-icon>
+			</ion-button>
+			<ion-button fill="clear" size="large" @click="getDolphinWETMatrix">
+				Dolphin WET Matrix
+				<ion-icon slot="start" :icon="download"></ion-icon>
+			</ion-button>
+		</div>
 	</ion-content>
+	<!-- End of Checkboxes-->
 	<ion-footer>
 		<ion-toolbar>
 			<ion-button color="light" slot="start" @click="storeData">
@@ -454,6 +471,8 @@ import { useDolphinsStore } from '@/store/dolphinsStore';
 import { useEvaluationHousingStore } from '@/store/evaluationHousingStore';
 import { baseUrl } from '@/utils/baseUrl';
 import { toast } from 'vue3-toastify';
+import { download } from 'ionicons/icons';
+import { Browser } from '@capacitor/browser';
 import 'vue3-toastify/dist/index.css';
 
 const dolphinsStore = useDolphinsStore();
@@ -509,6 +528,7 @@ export default {
 	data() {
 		return {
 			language: 'en',
+			download,
 			dolphinsStore: dolphinsStore,
 			dolphinList: dolphinsStore.dolphinList as Dolphin[],
 			dolphinSelect: [] as string[], //null as string | null,
@@ -894,34 +914,48 @@ export default {
 				this.storeCheckedValues();
 				console.log(evaluationHousingStore.requestBodiesHousing);
 
-				toast.success(this.$t('dataSavedTemporary'), {
-					autoClose: 1000,
-				});
-
 				// Doing the same dolphinSelect with the next criteria in the list:
 				switch (this.criteria) {
 					case 'firstCriteriaEnvironment':
 						this.criteria = 'secondCriteriaEnvironment';
+						toast.success(this.$t('dataSavedTemporary'), {
+							autoClose: 1000,
+						});
 						break;
 					case 'secondCriteriaEnvironment':
 						this.criteria = 'thirdCriteriaEnvironment';
+						toast.success(this.$t('dataSavedTemporary'), {
+							autoClose: 1000,
+						});
 						break;
 					case 'thirdCriteriaEnvironment':
 						this.criteria = 'fourthCriteriaEnvironment';
+						toast.success(this.$t('dataSavedTemporary'), {
+							autoClose: 1000,
+						});
 						break;
 					case 'fourthCriteriaEnvironment':
 						this.criteria = 'fifthCriteriaEnvironment';
+						toast.success(this.$t('dataSavedTemporary'), {
+							autoClose: 1000,
+						});
 						break;
 					case 'fifthCriteriaEnvironment':
 						this.criteria = 'sixthCriteriaEnvironment';
+						toast.success(this.$t('dataSavedTemporary'), {
+							autoClose: 1000,
+						});
 						break;
 					case 'sixthCriteriaEnvironment':
 						this.criteria = 'seventhCriteriaEnvironment';
+						toast.success(this.$t('dataSavedTemporary'), {
+							autoClose: 1000,
+						});
 						break;
 					case 'seventhCriteriaEnvironment':
 						// De-select the criteria selector, so that no ion-card is shown when principle is finished
 						// and do a toast pop up message that principle has ended
-						this.criteria = '';
+						this.criteria = 'seventhCriteriaEnvironment';
 						toast.success(this.$t('principleFinished'), {
 							autoClose: 5000,
 						});
@@ -943,6 +977,38 @@ export default {
 			//console.log(this.dolphins);
 			//console.log(evaluationHousingStore.requestBodiesHousing);
 		},
+
+		async getUserManual() {
+			// Get the platform of the device (iOS or Android)
+			//const platform = (await Device.getInfo()).platform;
+			try {
+				const fileName = '2024-05-27_Dolphin_WET_Handbook.pdf'; // file name of the file saved on the server
+				const fileUrl = baseUrl + '/api/files/' + fileName;
+				await Browser.open({ url: fileUrl });
+			} catch (error) {
+				console.error('Error: ', error);
+			}
+		},
+		async getStandardsAndGuidelines() {
+			// Get the platform of the device (iOS or Android)
+			//const platform = (await Device.getInfo()).platform;
+			try {
+				const fileName = 'EAAM-Standards-and-guidelines-2019.pdf'; // file name of the file saved on the server
+				const fileUrl = baseUrl + '/api/files/' + fileName;
+				await Browser.open({ url: fileUrl });
+			} catch (error) {
+				console.error('Error: ', error);
+			}
+		},
+		async getDolphinWETMatrix() {
+			try {
+				const fileName = 'Dolphin_WET_Matrix.pdf'; // file name of the file saved on the server
+				const fileUrl = baseUrl + '/api/files/' + fileName;
+				await Browser.open({ url: fileUrl });
+			} catch (error) {
+				console.error('Error: ', error);
+			}
+		},
 	},
 };
 </script>
@@ -956,5 +1022,9 @@ ion-card {
 }
 ion-card-title {
 	margin: 5px;
+}
+.button-container {
+	display: flex;
+	flex-direction: column;
 }
 </style>

@@ -378,6 +378,7 @@ export default {
 							console.log('Response:', response.data);
 							this.fetchDolphins();
 							this.showDolphin = false;
+							this.toggleDeleteModal();
 							toast.success(`${this.$t('dolphinDeleted')}: ${deleteDolphin}`, {
 								autoClose: 1700,
 							});
@@ -395,7 +396,7 @@ export default {
 									autoClose: 2000,
 								});
 							}
-							if (error.response.data.error === 'ADMIN_PASSWORD_NOT_PROVIDED') {
+							if (error.response.data === 'ADMIN_PASSWORD_NOT_PROVIDED') {
 								toast.error(this.$t('adminPasswordNotProvided'), {
 									autoClose: 2000,
 								});

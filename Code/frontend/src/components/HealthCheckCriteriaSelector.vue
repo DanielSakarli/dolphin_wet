@@ -899,6 +899,23 @@
 				{{ $t('fileSize') }}{{ totalFileSize.toFixed(2) }} MB / 10 MB
 			</ion-item>
 		</ion-card>
+		<div
+			v-if="dolphinSelect && dolphinSelect.length !== 0 && criteria !== null"
+			class="button-container"
+		>
+			<ion-button fill="clear" size="large" @click="getUserManual">
+				{{ $t('userManual') }}
+				<ion-icon slot="start" :icon="download"></ion-icon>
+			</ion-button>
+			<ion-button fill="clear" size="large" @click="getStandardsAndGuidelines">
+				Standards & Guidelines
+				<ion-icon slot="start" :icon="download"></ion-icon>
+			</ion-button>
+			<ion-button fill="clear" size="large" @click="getDolphinWETMatrix">
+				Dolphin WET Matrix
+				<ion-icon slot="start" :icon="download"></ion-icon>
+			</ion-button>
+		</div>
 	</ion-content>
 	<!-- End of Checkboxes-->
 
@@ -1007,6 +1024,7 @@ export default {
 	data() {
 		return {
 			language: 'en',
+			download,
 			dolphinsStore: dolphinsStore,
 			dolphinSelect: null as string | null,
 			criteria: null as string | null,
@@ -1057,7 +1075,6 @@ export default {
 				video_path: '',
 			},
 			totalFileSize: 0,
-			download,
 		};
 	},
 
@@ -1695,31 +1712,43 @@ export default {
 				console.log(evaluationHealthStore.requestBodiesHealth);
 
 				this.previewImageUrl = ''; //Reset the preview image
-				toast.success(this.$t('dataSavedTemporary'), {
-					autoClose: 1000,
-				});
 
 				// Doing the same dolphinSelect with the next criteria in the list:
 				switch (this.criteria) {
 					case 'firstCriteriaHealth':
 						this.criteria = 'secondCriteriaHealth';
+						toast.success(this.$t('dataSavedTemporary'), {
+							autoClose: 1000,
+						});
 						break;
 					case 'secondCriteriaHealth':
 						this.criteria = 'thirdCriteriaHealth';
+						toast.success(this.$t('dataSavedTemporary'), {
+							autoClose: 1000,
+						});
 						break;
 					case 'thirdCriteriaHealth':
 						this.criteria = 'fourthCriteriaHealth';
+						toast.success(this.$t('dataSavedTemporary'), {
+							autoClose: 1000,
+						});
 						break;
 					case 'fourthCriteriaHealth':
 						this.criteria = 'fifthCriteriaHealth';
+						toast.success(this.$t('dataSavedTemporary'), {
+							autoClose: 1000,
+						});
 						break;
 					case 'fifthCriteriaHealth':
 						this.criteria = 'sixthCriteriaHealth';
+						toast.success(this.$t('dataSavedTemporary'), {
+							autoClose: 1000,
+						});
 						break;
 					case 'sixthCriteriaHealth':
 						// De-select the criteria selector, so that no ion-card is shown when principle is finished
 						// and do a toast pop up message that principle has ended
-						this.criteria = '';
+						this.criteria = 'sixthCriteriaHealth';
 						toast.success(this.$t('principleFinished'), {
 							autoClose: 5000,
 						});
@@ -1905,6 +1934,38 @@ export default {
             
             this.$emit('SubCriteria-updated', SubCriteria);
         }*/
+
+		async getUserManual() {
+			// Get the platform of the device (iOS or Android)
+			//const platform = (await Device.getInfo()).platform;
+			try {
+				const fileName = '2024-05-27_Dolphin_WET_Handbook.pdf'; // file name of the file saved on the server
+				const fileUrl = baseUrl + '/api/files/' + fileName;
+				await Browser.open({ url: fileUrl });
+			} catch (error) {
+				console.error('Error: ', error);
+			}
+		},
+		async getStandardsAndGuidelines() {
+			// Get the platform of the device (iOS or Android)
+			//const platform = (await Device.getInfo()).platform;
+			try {
+				const fileName = 'EAAM-Standards-and-guidelines-2019.pdf'; // file name of the file saved on the server
+				const fileUrl = baseUrl + '/api/files/' + fileName;
+				await Browser.open({ url: fileUrl });
+			} catch (error) {
+				console.error('Error: ', error);
+			}
+		},
+		async getDolphinWETMatrix() {
+			try {
+				const fileName = 'Dolphin_WET_Matrix.pdf'; // file name of the file saved on the server
+				const fileUrl = baseUrl + '/api/files/' + fileName;
+				await Browser.open({ url: fileUrl });
+			} catch (error) {
+				console.error('Error: ', error);
+			}
+		},
 	},
 };
 </script>
@@ -1920,6 +1981,10 @@ ion-card {
 }
 .card-title {
 	margin: 5px;
+}
+.button-container {
+	display: flex;
+	flex-direction: column;
 }
 </style>
 ```

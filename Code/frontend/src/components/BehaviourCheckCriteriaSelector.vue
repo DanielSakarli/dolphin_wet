@@ -858,8 +858,26 @@
 				<CheckComments @update-comment="updateAvoidancePoolAreasComments" />
 			</ion-list>
 		</ion-card>
+		<div
+			v-if="dolphinSelect && dolphinSelect.length !== 0 && criteria !== null"
+			class="button-container"
+		>
+			<ion-button fill="clear" size="large" @click="getUserManual">
+				{{ $t('userManual') }}
+				<ion-icon slot="start" :icon="download"></ion-icon>
+			</ion-button>
+			<ion-button fill="clear" size="large" @click="getStandardsAndGuidelines">
+				Standards & Guidelines
+				<ion-icon slot="start" :icon="download"></ion-icon>
+			</ion-button>
+			<ion-button fill="clear" size="large" @click="getDolphinWETMatrix">
+				Dolphin WET Matrix
+				<ion-icon slot="start" :icon="download"></ion-icon>
+			</ion-button>
+		</div>
 	</ion-content>
 	<!-- End of Checkboxes-->
+
 	<ion-footer>
 		<ion-toolbar>
 			<ion-button color="light" slot="start" @click="storeData">
@@ -899,6 +917,8 @@ import { useDolphinsStore } from '@/store/dolphinsStore';
 import { useEvaluationBehaviourStore } from '@/store/evaluationBehaviourStore';
 import { baseUrl } from '@/utils/baseUrl';
 import { toast } from 'vue3-toastify';
+import { download } from 'ionicons/icons';
+import { Browser } from '@capacitor/browser';
 import 'vue3-toastify/dist/index.css';
 
 const dolphinsStore = useDolphinsStore(); //Gets the current dolphins of the user´s zoo
@@ -947,6 +967,7 @@ export default {
 			// Variables:
 			language: 'en',
 			dialog: false,
+			download,
 			dolphinsStore: dolphinsStore,
 			dolphinSelect: null as string | null,
 			criteria: null as string | null,
@@ -1418,37 +1439,52 @@ export default {
 				this.storeCheckedValues();
 				console.log(evaluationBehaviourStore.requestBodiesBehaviour);
 
-				toast.success(this.$t('dataSavedTemporary'), {
-					autoClose: 1000,
-				});
-
 				// Doing the same dolphinSelect with the next criteria in the list:
 				switch (this.criteria) {
 					case 'firstCriteriaBehaviour':
 						this.criteria = 'secondCriteriaBehaviour';
+						toast.success(this.$t('dataSavedTemporary'), {
+							autoClose: 1000,
+						});
 						break;
 					case 'secondCriteriaBehaviour':
 						this.criteria = 'thirdCriteriaBehaviour';
+						toast.success(this.$t('dataSavedTemporary'), {
+							autoClose: 1000,
+						});
 						break;
 					case 'thirdCriteriaBehaviour':
 						this.criteria = 'fourthCriteriaBehaviour';
+						toast.success(this.$t('dataSavedTemporary'), {
+							autoClose: 1000,
+						});
 						break;
 					case 'fourthCriteriaBehaviour':
 						this.criteria = 'fifthCriteriaBehaviour';
+						toast.success(this.$t('dataSavedTemporary'), {
+							autoClose: 1000,
+						});
 						break;
 					case 'fifthCriteriaBehaviour':
 						this.criteria = 'sixthCriteriaBehaviour';
+						toast.success(this.$t('dataSavedTemporary'), {
+							autoClose: 1000,
+						});
 						break;
 					case 'sixthCriteriaBehaviour':
 						this.criteria = 'seventhCriteriaBehaviour';
+						toast.success(this.$t('dataSavedTemporary'), {
+							autoClose: 1000,
+						});
 						break;
 					case 'seventhCriteriaBehaviour':
 						this.criteria = 'eighthCriteriaBehaviour';
+						toast.success(this.$t('dataSavedTemporary'), {
+							autoClose: 1000,
+						});
 						break;
 					case 'eighthCriteriaBehaviour':
-						// De-select the criteria selector, so that no ion-card is shown when principle is finished
-						// and do a toast pop up message that principle has ended
-						this.criteria = '';
+						this.criteria = 'eighthCriteriaBehaviour';
 						toast.success(this.$t('principleFinished'), {
 							autoClose: 5000,
 						});
@@ -1468,6 +1504,38 @@ export default {
 			//console.log(this.dolphinsStore.dolphinList);
 			//console.log(this.dolphins);
 			//console.log(evaluationBehaviourStore.requestBodiesBehaviour);
+		},
+
+		async getUserManual() {
+			// Get the platform of the device (iOS or Android)
+			//const platform = (await Device.getInfo()).platform;
+			try {
+				const fileName = '2024-05-27_Dolphin_WET_Handbook.pdf'; // file name of the file saved on the server
+				const fileUrl = baseUrl + '/api/files/' + fileName;
+				await Browser.open({ url: fileUrl });
+			} catch (error) {
+				console.error('Error: ', error);
+			}
+		},
+		async getStandardsAndGuidelines() {
+			// Get the platform of the device (iOS or Android)
+			//const platform = (await Device.getInfo()).platform;
+			try {
+				const fileName = 'EAAM-Standards-and-guidelines-2019.pdf'; // file name of the file saved on the server
+				const fileUrl = baseUrl + '/api/files/' + fileName;
+				await Browser.open({ url: fileUrl });
+			} catch (error) {
+				console.error('Error: ', error);
+			}
+		},
+		async getDolphinWETMatrix() {
+			try {
+				const fileName = 'Dolphin_WET_Matrix.pdf'; // file name of the file saved on the server
+				const fileUrl = baseUrl + '/api/files/' + fileName;
+				await Browser.open({ url: fileUrl });
+			} catch (error) {
+				console.error('Error: ', error);
+			}
 		},
 		/*async showDolphins() {
 			await axios.get(this.urlDolphins)
@@ -1492,5 +1560,9 @@ ion-card {
 }
 .card-title {
 	margin: 5px;
+}
+.button-container {
+	display: flex;
+	flex-direction: column;
 }
 </style>
