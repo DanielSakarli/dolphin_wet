@@ -135,6 +135,11 @@
 						src="../../public/Odontogramm_color_schema.png"
 						alt="Odontogramm Color Schema"
 					/>
+					<br />
+					<ion-button fill="clear" size="large" @click="getOdontogramm">
+						{{ $t('getOdontogrammTemplate') }}
+						<ion-icon slot="start" :icon="download"></ion-icon>
+					</ion-button>
 				</div>
 				<div v-if="subcriteria === 'seventhSubCriteriaHealth'">
 					<h1>{{ $t('seventhSubCriteriaHealth') }}</h1>
@@ -1934,7 +1939,17 @@ export default {
             
             this.$emit('SubCriteria-updated', SubCriteria);
         }*/
-
+		async getOdontogramm() {
+			// Get the platform of the device (iOS or Android)
+			//const platform = (await Device.getInfo()).platform;
+			try {
+				const fileName = 'Odontogramm_template.png'; // file name of the file saved on the server
+				const fileUrl = baseUrl + '/api/files/' + fileName;
+				await Browser.open({ url: fileUrl });
+			} catch (error) {
+				console.error('Error: ', error);
+			}
+		},
 		async getUserManual() {
 			// Get the platform of the device (iOS or Android)
 			//const platform = (await Device.getInfo()).platform;
