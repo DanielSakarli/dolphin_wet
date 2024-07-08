@@ -87,7 +87,12 @@ async function deleteDolphin(req, res, next) {
 		const dolphinName = req.params.name;
 		const adminPassword = req.body.adminPassword;
 		const roleName = req.role;
-		// Delete the given dolphin.
+
+		// Check if user provided an admin password
+		if (!req.body.adminPassword || req.body.adminPassword === 0) {
+			return res.status(400).send("ADMIN_PASSWORD_NOT_PROVIDED");
+		  }
+		// Delete the given dolphin
 			await DolphinService.deleteDolphin(dolphinName, roleName, adminPassword);
 			// Return all existing dolphins after deleting the given one.
 			const dolphins = await DolphinService.getAllDolphins(roleName);

@@ -177,7 +177,6 @@
 			</ion-card>
 		</ion-content>
 
-
 		<ion-footer>
 			<ion-toolbar>
 				<ion-buttons slot="start">
@@ -388,6 +387,16 @@ export default {
 							console.error('Error:', error.response.data);
 							if (error.response.data.error === 'USER_NOT_AN_ADMINISTRATOR') {
 								toast.error(this.$t('userNotAdmin'), {
+									autoClose: 2000,
+								});
+							}
+							if (error.response.data.error === 'ADMIN_PASSWORD_IS_WRONG') {
+								toast.error(this.$t('adminPasswordError'), {
+									autoClose: 2000,
+								});
+							}
+							if (error.response.data.error === 'ADMIN_PASSWORD_NOT_PROVIDED') {
+								toast.error(this.$t('adminPasswordNotProvided'), {
 									autoClose: 2000,
 								});
 							}
