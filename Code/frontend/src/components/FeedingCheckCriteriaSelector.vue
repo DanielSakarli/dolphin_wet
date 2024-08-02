@@ -3,6 +3,7 @@
 	<!-- Criteria Selector v-on:click="showDolphins" @click="showDolphins"-->
 	<ion-content>
 		<ion-list>
+			<!-- Dolphin Selector -->
 			<ion-item>
 				<ion-select
 					:label="firstlabel"
@@ -11,7 +12,7 @@
 					:cancelText="firstcancelText"
 					v-model="dolphinSelect"
 					multiple
-					@ionChange="checkAllDolphinsSelected"
+					@ionChange="handleDolphinChange"
 				>
 					<ion-select-option value="all">All dolphins</ion-select-option>
 					<ion-select-option
@@ -537,6 +538,7 @@ export default {
 			download,
 			dolphinsStore: dolphinsStore,
 			dolphinSelect: [] as string[], //null as string | null,
+			oldDolphinSelect: [] as string[], //null as string | null,
 			criteria: null as string | null,
 			subcriteria: '',
 			firstlabel: this.$t('dolphin'),
@@ -548,7 +550,7 @@ export default {
 			isOpenScoring: false,
 			isOpenReferenceArea: false,
 			weightLabel: this.$t('weightLabel'),
-			weight_measured: undefined,
+			weight_measured: undefined as number | undefined,
 			weightPlaceholder: this.$t('weightPlaceholder'),
 			CheckboxArray: Array.from({ length: 5 }, () => Array(3).fill(false)),
 			urlDolphins: baseUrl + '/api/dolphins', //'https://88395-17112.pph-server.de/api/dolphins', //the api route to get the dolphins
@@ -596,12 +598,181 @@ export default {
 			this.isOpenReferenceArea = isOpen;
 		},
 		// ion-select method to check if all dolphins are selected
-		checkAllDolphinsSelected() {
+		/*checkAllDolphinsSelected() {
 			if (this.dolphinSelect.includes('all')) {
 				this.dolphinSelect = this.dolphinsStore.dolphinList.map(
 					(dolphin) => dolphin.name
 				);
 			}
+		},*/
+		//Method to handle the change of the selected dolphins
+		async handleDolphinChange() {
+			console.log('Dolphin changed: ', this.dolphinSelect);
+			if (this.dolphinSelect.includes('all')) {
+				this.dolphinSelect = this.dolphinsStore.dolphinList.map(
+					(dolphin) => dolphin.name
+				);
+			}
+			await this.switchDolphin();
+			// Saves the current dolphin name as the old name for later use
+			// Important when switching the dolphin to save the data of the old dolphin
+			this.oldDolphinSelect = this.dolphinSelect;
+		},
+		//Method to switch the dolphin
+		async switchDolphin() {
+			// Save the current data if the user switches the dolphin without clicking on the next button
+			await this.fileUpload();
+			await this.storeCheckedValues(true); //true is passed so the method knows it has been called from the switchDolphin method
+
+			// Reset checkboxes before filling them again with current data
+			for (let i = 0; i <= 4; i++) {
+				for (let j = 0; j < 3; j++) {
+					if (this.CheckboxArray[i][j] === true) {
+						this.CheckboxArray[i][j] = false;
+					}
+				}
+			}
+			// Reset comments before filling them again with current data
+			this.body_condition_score_comments = '';
+			this.weight_measured_comments = '';
+			this.kcal_calculations_comments = '';
+			this.blood_hydration_comments = '';
+			this.fish_quality_comments = '';
+			this.fish_variety_comments = '';
+
+			console.log(
+				'The requestBody in switchDolphin: ',
+				evaluationFeedingStore.requestBodiesFeeding
+			);
+			// Get the data of the selected dolphin, if user has already entered some data for the selected dolphin
+			for (
+				let k = 0;
+				k < evaluationFeedingStore.requestBodiesFeeding.length;
+				k++
+			) {
+				//k stands for the different dolphins. It iterates through the array of dolphins in requestBodiesFeeding.json
+				// Select the k-th requestBody which is equivalent to this.dolphinSelect
+				if (
+					this.dolphinSelect.includes(
+						evaluationFeedingStore.requestBodiesFeeding[k]['dolphin_name']
+					)
+				) {
+					// Now the correct dolphin is selected
+					console.log(
+						'Dolphin selected: ',
+						evaluationFeedingStore.requestBodiesFeeding[k]['dolphin_name']
+					);
+
+					// Here the data from the requestBodiesFeeding is assigned to the checkboxes
+
+					// Assigns null to the requestBodie if this.weight_measured is undefined
+					this.weight_measured =
+						evaluationFeedingStore.requestBodiesFeeding[k]['weight_measured'] ??
+						undefined;
+
+					for (let i = 0; i < this.CheckboxArray.length; i++) {
+						for (let j = 0; j < this.CheckboxArray[i].length; j++) {
+							// Get the data from the requestBodiesFeeding BCScore
+							const bodyConditionScore =
+								evaluationFeedingStore.requestBodiesFeeding[k][
+									'body_condition_score'
+								];
+							const kcalCalculations =
+								evaluationFeedingStore.requestBodiesFeeding[k][
+									'kcal_calculations'
+								];
+							const bloodHydration =
+								evaluationFeedingStore.requestBodiesFeeding[k][
+									'blood_hydration'
+								];
+							const fishQuality =
+								evaluationFeedingStore.requestBodiesFeeding[k]['fish_quality'];
+							const fishVariety =
+								evaluationFeedingStore.requestBodiesFeeding[k]['fish_variety'];
+
+							if (bodyConditionScore !== null) {
+								// Assign the value of the body condition score to the checkbox array
+								const j = bodyConditionScore;
+								this.CheckboxArray[0][j] = true;
+							} else if (kcalCalculations !== null) {
+								const j = kcalCalculations;
+								this.CheckboxArray[1][j] = true;
+							} else if (bloodHydration !== null) {
+								const j = bloodHydration;
+								this.CheckboxArray[2][j] = true;
+							} else if (fishQuality !== null) {
+								const j = fishQuality;
+								this.CheckboxArray[3][j] = true;
+							} else if (fishVariety !== null) {
+								const j = fishVariety;
+								this.CheckboxArray[4][j] = true;
+							}
+						}
+					}
+					// Code here the comments into the request body
+					// First check with if statement if comments had been updated or not. If we don´t do that we override the comments with
+					// an empty string if we click on 'Next Test'
+					console.log('The comments: ', this.body_condition_score_comments);
+					/*this.body_condition_score_comments =
+						evaluationFeedingStore.requestBodiesFeeding[k][
+							'body_condition_score_comments'
+						];
+					console.log('The comments: ', this.body_condition_score_comments);*/
+					this.$emit('update-comment');
+					if (this.weight_measured_comments != '') {
+						evaluationFeedingStore.requestBodiesFeeding[k][
+							'weight_measured_comments'
+						] = this.weight_measured_comments;
+					}
+					if (this.kcal_calculations_comments != '') {
+						evaluationFeedingStore.requestBodiesFeeding[k][
+							'kcal_calculations_comments'
+						] = this.kcal_calculations_comments;
+					}
+					if (this.blood_hydration_comments != '') {
+						evaluationFeedingStore.requestBodiesFeeding[k][
+							'blood_hydration_comments'
+						] = this.blood_hydration_comments;
+					}
+					if (this.fish_quality_comments != '') {
+						evaluationFeedingStore.requestBodiesFeeding[k][
+							'fish_quality_comments'
+						] = this.fish_quality_comments;
+					}
+					if (this.fish_variety_comments != '') {
+						evaluationFeedingStore.requestBodiesFeeding[k][
+							'fish_variety_comments'
+						] = this.fish_variety_comments;
+					}
+
+					if (localStorage.getItem('created_at') !== '') {
+						evaluationFeedingStore.requestBodiesFeeding[k]['created_at'] =
+							localStorage.getItem('created_at') as string;
+					}
+				}
+			}
+			// Code here the inverse of the storeCheckedValues method with the help of dolphin data
+			// So, that the checkboxes are checked if the user has already entered some data for the selected dolphin
+
+			/*if (dolphinData) {
+						this.CheckboxArray = this.CheckboxArray.map((criteria) =>
+							criteria.map((_, index) =>
+								Boolean(
+									dolphinData[
+										criteria[index].label.toLowerCase().replace(/ /g, '_')
+									]
+								)
+							)
+						);
+					} else {
+						this.CheckboxArray.forEach((criteria) => {
+							criteria.fill(false);
+						});
+					}
+				});
+
+				evaluationFeedingStore.setCurrentDolphin(selectedDolphins);
+			);*/
 		},
 		handleFormSubmittedFile(files: File[]) {
 			if (files && this.dolphinSelect.length !== 0) {
@@ -708,7 +879,30 @@ export default {
 			//console.log('Dolphin selected: ', this.dolphinSelect);
 		},
 		// Method to collect the checked checkboxes and give request Body the scores
-		storeCheckedValues() {
+		storeCheckedValues(calledFromSwitchDolphins = false) {
+			///////////////////////////////////////////////////////////////////////////
+			// This part checks from where the store method is called
+			// If it is called from the switchDolphin method, the data shall be saved
+			// for the previously selected dolphin!
+			let dolphinSelect;
+			if (calledFromSwitchDolphins === true) {
+				console.log('storeCheckedValues called from switchDolphin method');
+				if (this.oldDolphinSelect === undefined) {
+					// If there is no old dolphin select, then the CURRENT dolphin select is used
+					console.log('No old dolphin select found.');
+					dolphinSelect = this.dolphinSelect;
+				} else {
+					// If there is an old dolphin select, then the OLD dolphin select is used
+					console.log('Old dolphin select found:', this.oldDolphinSelect);
+					dolphinSelect = this.oldDolphinSelect;
+				}
+			} else {
+				console.log('storeCheckedValues called from next button click.');
+				dolphinSelect = this.dolphinSelect;
+			}
+			console.log('Current data saved for: ', dolphinSelect);
+			///////////////////////////////////////////////////////////////////////////
+
 			console.log(
 				'This is the dolphinsStore: ',
 				this.dolphinsStore.dolphinList
@@ -720,7 +914,7 @@ export default {
 			) {
 				//k stands for the different dolphins. It iterates through the array of dolphins in requestBodiesFeeding.json
 				if (
-					this.dolphinSelect.includes(
+					dolphinSelect.includes(
 						evaluationFeedingStore.requestBodiesFeeding[k]['dolphin_name']
 					)
 				) {
@@ -734,6 +928,12 @@ export default {
 								evaluationFeedingStore.requestBodiesFeeding[k][
 									'body_condition_score'
 								] = j;
+								console.log(
+									'BCS in storeCheckedValues: ',
+									evaluationFeedingStore.requestBodiesFeeding[k][
+										'body_condition_score'
+									]
+								);
 							} else if (this.CheckboxArray[i][j] === true && i === 1) {
 								evaluationFeedingStore.requestBodiesFeeding[k][
 									'kcal_calculations'

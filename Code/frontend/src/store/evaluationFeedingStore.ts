@@ -64,5 +64,14 @@ export const useEvaluationFeedingStore = defineStore('evaluationFeedingStore', {
 				requestBodiesFeeding[i]['created_at'] = '';
 			}
 		},
+		// Retrieves the data for a specific dolphin by its name
+		getDolphinData(dolphinName: string): RequestBodyFeeding | null {
+			// Find the dolphin data by its name in the requestBodiesFeeding array
+			const dolphinData = this.requestBodiesFeeding.find(
+				(dolphin) => dolphin.dolphin_name === dolphinName
+			);
+			// Return the dolphin data if found, otherwise return null
+			return dolphinData || null;
+		},
 	},
 });
