@@ -26,6 +26,12 @@ export default defineComponent({
 		IonTextarea,
 		//FeedingCheckCriteriaSelector,
 	},
+	props: {
+		updateComment: {
+			type: String,
+			default: '',
+		},
+	},
 	methods: {
 		...mapActions(['updateUserComment']),
 		updateUserComment(event: any) {
@@ -38,10 +44,14 @@ export default defineComponent({
 		return {
 			commentLabel: this.$t('comments'),
 			helperTextComments: this.$t('helperTextComments'),
-			userComment: '', //data property that will be updated whenever the user types into the textarea --> bind it with v-model in FeedingCheckCriteriaSelector.vue
+			userComment: this.updateComment, //data property that will be updated whenever the user types into the textarea --> bind it with v-model in FeedingCheckCriteriaSelector.vue
 		};
 	},
 	watch: {
+		updateComment(newComment) {
+			// Update userComment if the prop changes
+			this.userComment = newComment;
+		},
 		userComment(newComment) {
 			this.$emit('update-comment', newComment);
 		},

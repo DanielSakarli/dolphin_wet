@@ -244,7 +244,10 @@
 						>Score 2</ion-checkbox
 					>
 				</ion-item>
-				<CheckComments @update-comment="updateBodyConditionScoreComments" />
+				<CheckComments
+					:update-comment="body_condition_score_comments"
+					@update-comment="updateBodyConditionScoreComments"
+				/>
 			</ion-list>
 		</ion-card>
 		<ion-card
@@ -718,32 +721,30 @@ export default {
 							'body_condition_score_comments'
 						];
 					console.log('The comments: ', this.body_condition_score_comments);*/
-					this.$emit('update-comment');
-					if (this.weight_measured_comments != '') {
+					this.body_condition_score_comments =
+						evaluationFeedingStore.requestBodiesFeeding[k][
+							'body_condition_score_comments'
+						] ?? '';
+					this.weight_measured_comments =
 						evaluationFeedingStore.requestBodiesFeeding[k][
 							'weight_measured_comments'
-						] = this.weight_measured_comments;
-					}
-					if (this.kcal_calculations_comments != '') {
+						] ?? '';
+					this.kcal_calculations_comments =
 						evaluationFeedingStore.requestBodiesFeeding[k][
 							'kcal_calculations_comments'
-						] = this.kcal_calculations_comments;
-					}
-					if (this.blood_hydration_comments != '') {
+						] ?? '';
+					this.blood_hydration_comments =
 						evaluationFeedingStore.requestBodiesFeeding[k][
 							'blood_hydration_comments'
-						] = this.blood_hydration_comments;
-					}
-					if (this.fish_quality_comments != '') {
+						] ?? '';
+					this.fish_quality_comments =
 						evaluationFeedingStore.requestBodiesFeeding[k][
 							'fish_quality_comments'
-						] = this.fish_quality_comments;
-					}
-					if (this.fish_variety_comments != '') {
+						] ?? '';
+					this.fish_variety_comments =
 						evaluationFeedingStore.requestBodiesFeeding[k][
 							'fish_variety_comments'
-						] = this.fish_variety_comments;
-					}
+						] ?? '';
 
 					if (localStorage.getItem('created_at') !== '') {
 						evaluationFeedingStore.requestBodiesFeeding[k]['created_at'] =
