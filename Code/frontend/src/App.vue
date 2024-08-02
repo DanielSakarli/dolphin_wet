@@ -120,7 +120,7 @@ export default defineComponent({
 							{
 								text: this.$t('loseData'),
 								handler: () => {
-									console.log('Confirm Okay');
+									console.log('Confirm Okay App.vue');
 									localStorage.setItem('dataInBody', 'false');
 									localStorage.setItem('backButtonClicked', 'false');
 									this.$router.back();

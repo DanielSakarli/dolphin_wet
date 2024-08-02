@@ -84,42 +84,44 @@ export const useEvaluationBehaviourStore = defineStore(
 				return this.requestBodiesBehaviour;
 			},
 			resetBodies() {
-				for (let i = 0; i < requestBodiesBehaviour.length; i++) {
-					requestBodiesBehaviour[i]['environmental_enrichment'] = null;
-					requestBodiesBehaviour[i]['affiliative_behaviour'] = null;
-					requestBodiesBehaviour[i]['play_behaviour'] = null;
-					requestBodiesBehaviour[i]['socio_sexual_behaviour'] = null;
-					requestBodiesBehaviour[i]['maternal_behaviour'] = null;
-					requestBodiesBehaviour[i]['displacement_behaviour'] = null;
-					requestBodiesBehaviour[i]['oral_stereotypic_behaviour'] = null;
-					requestBodiesBehaviour[i]['repetitive_body_movement'] = null;
-					requestBodiesBehaviour[i]['self_grooming_behaviour'] = null;
-					requestBodiesBehaviour[i]['regurgitation_reingestion'] = null;
-					requestBodiesBehaviour[i]['rake_marks'] = null;
-					requestBodiesBehaviour[i]['displaying_aggressive_behaviour'] = null;
-					requestBodiesBehaviour[i]['receiving_aggressive_behaviour'] = null;
-					requestBodiesBehaviour[i]['social_isolation'] = null;
-					requestBodiesBehaviour[i]['avoidance_pool_areas'] = null;
-					requestBodiesBehaviour[i]['environmental_enrichment_comments'] = '';
-					requestBodiesBehaviour[i]['affiliative_behaviour_comments'] = '';
-					requestBodiesBehaviour[i]['play_behaviour_comments'] = '';
-					requestBodiesBehaviour[i]['socio_sexual_behaviour_comments'] = '';
-					requestBodiesBehaviour[i]['maternal_behaviour_comments'] = '';
-					requestBodiesBehaviour[i]['displacement_behaviour_comments'] = '';
-					requestBodiesBehaviour[i]['oral_stereotypic_behaviour_comments'] = '';
-					requestBodiesBehaviour[i]['repetitive_body_movement_comments'] = '';
-					requestBodiesBehaviour[i]['self_grooming_behaviour_comments'] = '';
-					requestBodiesBehaviour[i]['regurgitation_reingestion_comments'] = '';
-					requestBodiesBehaviour[i]['rake_marks_comments'] = '';
-					requestBodiesBehaviour[i][
-						'displaying_aggressive_behaviour_comments'
-					] = '';
-					requestBodiesBehaviour[i]['receiving_aggressive_behaviour_comments'] =
-						'';
-					requestBodiesBehaviour[i]['social_isolation_comments'] = '';
-					requestBodiesBehaviour[i]['avoidance_pool_areas_comments'] = '';
-					requestBodiesBehaviour[i]['created_at'] = '';
-				}
+				console.log('resetBodies called in evaluationBehaviourStore.ts');
+				this.requestBodiesBehaviour = this.requestBodiesBehaviour.map(
+					(body) => ({
+						...body,
+						environmental_enrichment: null,
+						affiliative_behaviour: null,
+						play_behaviour: null,
+						socio_sexual_behaviour: null,
+						maternal_behaviour: null,
+						displacement_behaviour: null,
+						oral_stereotypic_behaviour: null,
+						repetitive_body_movement: null,
+						self_grooming_behaviour: null,
+						regurgitation_reingestion: null,
+						rake_marks: null,
+						displaying_aggressive_behaviour: null,
+						receiving_aggressive_behaviour: null,
+						social_isolation: null,
+						avoidance_pool_areas: null,
+						environmental_enrichment_comments: '',
+						affiliative_behaviour_comments: '',
+						play_behaviour_comments: '',
+						socio_sexual_behaviour_comments: '',
+						maternal_behaviour_comments: '',
+						displacement_behaviour_comments: '',
+						oral_stereotypic_behaviour_comments: '',
+						repetitive_body_movement_comments: '',
+						self_grooming_behaviour_comments: '',
+						regurgitation_reingestion_comments: '',
+						rake_marks_comments: '',
+						displaying_aggressive_behaviour_comments: '',
+						receiving_aggressive_behaviour_comments: '',
+						social_isolation_comments: '',
+						avoidance_pool_areas_comments: '',
+						created_at: '',
+					})
+				);
+				return this.requestBodiesBehaviour;
 			},
 		},
 	}

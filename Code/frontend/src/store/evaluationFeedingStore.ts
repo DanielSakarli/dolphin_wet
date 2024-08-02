@@ -48,21 +48,24 @@ export const useEvaluationFeedingStore = defineStore('evaluationFeedingStore', {
 		},
 
 		resetBodies() {
-			for (let i = 0; i < requestBodiesFeeding.length; i++) {
-				requestBodiesFeeding[i]['body_condition_score'] = null;
-				requestBodiesFeeding[i]['blood_hydration'] = null;
-				requestBodiesFeeding[i]['weight_measured'] = null;
-				requestBodiesFeeding[i]['kcal_calculations'] = null;
-				requestBodiesFeeding[i]['fish_quality'] = null;
-				requestBodiesFeeding[i]['fish_variety'] = null;
-				requestBodiesFeeding[i]['body_condition_score_comments'] = '';
-				requestBodiesFeeding[i]['weight_measured_comments'] = '';
-				requestBodiesFeeding[i]['kcal_calculations_comments'] = '';
-				requestBodiesFeeding[i]['blood_hydration_comments'] = '';
-				requestBodiesFeeding[i]['fish_quality_comments'] = '';
-				requestBodiesFeeding[i]['fish_variety_comments'] = '';
-				requestBodiesFeeding[i]['created_at'] = '';
-			}
+			console.log('resetBodies called in evaluationFeedingStore.ts');
+			this.requestBodiesFeeding = this.requestBodiesFeeding.map((body) => ({
+				...body,
+				body_condition_score: null,
+				blood_hydration: null,
+				weight_measured: null,
+				kcal_calculations: null,
+				fish_quality: null,
+				fish_variety: null,
+				body_condition_score_comments: '',
+				weight_measured_comments: '',
+				kcal_calculations_comments: '',
+				blood_hydration_comments: '',
+				fish_quality_comments: '',
+				fish_variety_comments: '',
+				created_at: '',
+			}));
+			return this.requestBodiesFeeding;
 		},
 		// Retrieves the data for a specific dolphin by its name
 		getDolphinData(dolphinName: string): RequestBodyFeeding | null {

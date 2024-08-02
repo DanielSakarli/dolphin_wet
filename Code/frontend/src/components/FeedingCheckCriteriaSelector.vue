@@ -279,7 +279,10 @@
 						:readonly="true"
 					></ion-input>
 				</ion-item>
-				<CheckComments @update-comment="updateWeightMeasuredComments" />
+				<CheckComments
+					:update-comment="weight_measured_comments"
+					@update-comment="updateWeightMeasuredComments"
+				/>
 			</ion-list>
 		</ion-card>
 		<ion-card
@@ -307,7 +310,10 @@
 						>Score 2</ion-checkbox
 					>
 				</ion-item>
-				<CheckComments @update-comment="updateKcalCalculationsComments" />
+				<CheckComments
+					:update-comment="kcal_calculations_comments"
+					@update-comment="updateKcalCalculationsComments"
+				/>
 			</ion-list>
 		</ion-card>
 		<ion-card
@@ -340,7 +346,10 @@
 						>Score 2</ion-checkbox
 					>
 				</ion-item>
-				<CheckComments @update-comment="updateBloodHydrationComments" />
+				<CheckComments
+					:update-comment="blood_hydration_comments"
+					@update-comment="updateBloodHydrationComments"
+				/>
 			</ion-list>
 		</ion-card>
 		<ion-card
@@ -368,7 +377,10 @@
 						>Score 2</ion-checkbox
 					>
 				</ion-item>
-				<CheckComments @update-comment="updateFishQualityComments" />
+				<CheckComments
+					:update-comment="fish_quality_comments"
+					@update-comment="updateFishQualityComments"
+				/>
 			</ion-list>
 		</ion-card>
 		<ion-card
@@ -418,7 +430,10 @@
 						>Score 2</ion-checkbox
 					>
 				</ion-item>
-				<CheckComments @update-comment="updateFishVarietyComments" />
+				<CheckComments
+					:update-comment="fish_variety_comments"
+					@update-comment="updateFishVarietyComments"
+				/>
 			</ion-list>
 		</ion-card>
 		<div
@@ -752,28 +767,6 @@ export default {
 					}
 				}
 			}
-			// Code here the inverse of the storeCheckedValues method with the help of dolphin data
-			// So, that the checkboxes are checked if the user has already entered some data for the selected dolphin
-
-			/*if (dolphinData) {
-						this.CheckboxArray = this.CheckboxArray.map((criteria) =>
-							criteria.map((_, index) =>
-								Boolean(
-									dolphinData[
-										criteria[index].label.toLowerCase().replace(/ /g, '_')
-									]
-								)
-							)
-						);
-					} else {
-						this.CheckboxArray.forEach((criteria) => {
-							criteria.fill(false);
-						});
-					}
-				});
-
-				evaluationFeedingStore.setCurrentDolphin(selectedDolphins);
-			);*/
 		},
 		handleFormSubmittedFile(files: File[]) {
 			if (files && this.dolphinSelect.length !== 0) {
@@ -915,6 +908,7 @@ export default {
 			) {
 				//k stands for the different dolphins. It iterates through the array of dolphins in requestBodiesFeeding.json
 				if (
+					dolphinSelect &&
 					dolphinSelect.includes(
 						evaluationFeedingStore.requestBodiesFeeding[k]['dolphin_name']
 					)
@@ -997,6 +991,9 @@ export default {
 			localStorage.setItem('dataInBody', dataInBody.toString());
 		},
 		async resetData() {
+			// Reset request body
+			evaluationFeedingStore.resetBodies();
+
 			// Reset checkboxes
 			for (let i = 0; i <= 4; i++) {
 				for (let j = 0; j < 3; j++) {

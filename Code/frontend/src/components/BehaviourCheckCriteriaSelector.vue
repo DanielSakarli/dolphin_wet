@@ -10,7 +10,10 @@
 					okText="OK"
 					:cancelText="firstcancelText"
 					v-model="dolphinSelect"
+					multiple
+					@ionChange="handleDolphinChange"
 				>
+					<ion-select-option value="all">All dolphins</ion-select-option>
 					<ion-select-option
 						v-for="dolphin in dolphinsStore.dolphinList"
 						v-bind:key="dolphin.name"
@@ -408,7 +411,10 @@
 						>Score 2</ion-checkbox
 					>
 				</ion-item>
-				<CheckComments @update-comment="updateEnvironmentEnrichmentComments" />
+				<CheckComments
+					:update-comment="environmentEnrichmentComments"
+					@update-comment="updateEnvironmentEnrichmentComments"
+				/>
 			</ion-list>
 		</ion-card>
 		<ion-card
@@ -438,7 +444,10 @@
 						>Score 2</ion-checkbox
 					>
 				</ion-item>
-				<CheckComments @update-comment="updateAffiliativeBehaviourComments" />
+				<CheckComments
+					:update-comment="affiliativeBehaviourComments"
+					@update-comment="updateAffiliativeBehaviourComments"
+				/>
 			</ion-list>
 		</ion-card>
 		<ion-card
@@ -468,7 +477,10 @@
 						>Score 2</ion-checkbox
 					>
 				</ion-item>
-				<CheckComments @update-comment="updatePlayBehaviourComments" />
+				<CheckComments
+					:update-comment="playBehaviourComments"
+					@update-comment="updatePlayBehaviourComments"
+				/>
 			</ion-list>
 		</ion-card>
 		<ion-card
@@ -498,7 +510,10 @@
 						>Score 2</ion-checkbox
 					>
 				</ion-item>
-				<CheckComments @update-comment="updateSocioSexualComments" />
+				<CheckComments
+					:update-comment="socioSexualComments"
+					@update-comment="updateSocioSexualComments"
+				/>
 			</ion-list>
 		</ion-card>
 		<ion-card
@@ -528,7 +543,10 @@
 						>Score 2</ion-checkbox
 					>
 				</ion-item>
-				<CheckComments @update-comment="updateMaternalBehaviourComments" />
+				<CheckComments
+					:update-comment="maternalBehaviourComments"
+					@update-comment="updateMaternalBehaviourComments"
+				/>
 			</ion-list>
 		</ion-card>
 		<ion-card
@@ -558,7 +576,10 @@
 						>Score 2</ion-checkbox
 					>
 				</ion-item>
-				<CheckComments @update-comment="updateDisplacementBehaviourComments" />
+				<CheckComments
+					:update-comment="displacementBehaviourComments"
+					@update-comment="updateDisplacementBehaviourComments"
+				/>
 			</ion-list>
 		</ion-card>
 		<ion-card
@@ -588,7 +609,10 @@
 						>Score 2</ion-checkbox
 					>
 				</ion-item>
-				<CheckComments @update-comment="updateOralBehaviourComments" />
+				<CheckComments
+					:update-comment="oralBehaviourComments"
+					@update-comment="updateOralBehaviourComments"
+				/>
 			</ion-list>
 		</ion-card>
 		<ion-card
@@ -618,7 +642,10 @@
 						>Score 2</ion-checkbox
 					>
 				</ion-item>
-				<CheckComments @update-comment="updateRepetitiveMovementComments" />
+				<CheckComments
+					:update-comment="repetitiveMovementComments"
+					@update-comment="updateRepetitiveMovementComments"
+				/>
 			</ion-list>
 		</ion-card>
 		<ion-card
@@ -648,7 +675,10 @@
 						>Score 2</ion-checkbox
 					>
 				</ion-item>
-				<CheckComments @update-comment="updateSelfGroomingComments" />
+				<CheckComments
+					:update-comment="selfGroomingComments"
+					@update-comment="updateSelfGroomingComments"
+				/>
 			</ion-list>
 		</ion-card>
 		<ion-card
@@ -678,7 +708,10 @@
 						>Score 2</ion-checkbox
 					>
 				</ion-item>
-				<CheckComments @update-comment="updateRegurgitationComments" />
+				<CheckComments
+					:update-comment="regurgitationComments"
+					@update-comment="updateRegurgitationComments"
+				/>
 			</ion-list>
 		</ion-card>
 		<ion-card
@@ -712,7 +745,10 @@
 						>Score 2</ion-checkbox
 					>
 				</ion-item>
-				<CheckComments @update-comment="updateReceivingAggressiveComments" />
+				<CheckComments
+					:update-comment="receivingAggressiveComments"
+					@update-comment="updateReceivingAggressiveComments"
+				/>
 			</ion-list>
 		</ion-card>
 		<ion-card
@@ -753,7 +789,10 @@
 						>Score 2</ion-checkbox
 					>
 				</ion-item>
-				<CheckComments @update-comment="updateRakeMarksComments" />
+				<CheckComments
+					:update-comment="rakeMarksComments"
+					@update-comment="updateRakeMarksComments"
+				/>
 			</ion-list>
 		</ion-card>
 		<ion-card
@@ -787,7 +826,10 @@
 						>Score 2</ion-checkbox
 					>
 				</ion-item>
-				<CheckComments @update-comment="updateDisplayingAggressiveComments" />
+				<CheckComments
+					:update-comment="displayingAggressiveComments"
+					@update-comment="updateDisplayingAggressiveComments"
+				/>
 			</ion-list>
 		</ion-card>
 		<ion-card
@@ -821,7 +863,10 @@
 						>Score 2</ion-checkbox
 					>
 				</ion-item>
-				<CheckComments @update-comment="updateSocialIsolationComments" />
+				<CheckComments
+					:update-comment="socialIsolationComments"
+					@update-comment="updateSocialIsolationComments"
+				/>
 			</ion-list>
 		</ion-card>
 		<ion-card
@@ -855,7 +900,10 @@
 						>Score 2</ion-checkbox
 					>
 				</ion-item>
-				<CheckComments @update-comment="updateAvoidancePoolAreasComments" />
+				<CheckComments
+					:update-comment="avoidancePoolAreasComments"
+					@update-comment="updateAvoidancePoolAreasComments"
+				/>
 			</ion-list>
 		</ion-card>
 		<div
@@ -969,7 +1017,9 @@ export default {
 			dialog: false,
 			download,
 			dolphinsStore: dolphinsStore,
-			dolphinSelect: null as string | null,
+			//dolphinSelect: null as string | null,
+			dolphinSelect: [] as string[], //null as string | null,
+			oldDolphinSelect: [] as string[], //null as string | null,
 			criteria: null as string | null,
 			subcriteria: '',
 			firstlabel: this.$t('dolphin'),
@@ -1041,7 +1091,34 @@ export default {
 			localStorage.setItem('dataInBody', dataInBody.toString());
 		},
 		// Method to collect the checked checkboxes and give request body the scores
-		storeCheckedValues() {
+		storeCheckedValues(calledFromSwitchDolphins = false) {
+			///////////////////////////////////////////////////////////////////////////
+			// This part checks from where the store method is called
+			// If it is called from the switchDolphin method, the data shall be saved
+			// for the previously selected dolphin!
+			let dolphinSelect;
+			if (calledFromSwitchDolphins === true) {
+				console.log('storeCheckedValues called from switchDolphin method');
+				if (this.oldDolphinSelect === undefined) {
+					// If there is no old dolphin select, then the CURRENT dolphin select is used
+					console.log('No old dolphin select found.');
+					dolphinSelect = this.dolphinSelect;
+				} else {
+					// If there is an old dolphin select, then the OLD dolphin select is used
+					console.log('Old dolphin select found:', this.oldDolphinSelect);
+					dolphinSelect = this.oldDolphinSelect;
+				}
+			} else {
+				console.log('storeCheckedValues called from next button click.');
+				dolphinSelect = this.dolphinSelect;
+			}
+			console.log('Current data saved for: ', dolphinSelect);
+			///////////////////////////////////////////////////////////////////////////
+
+			console.log(
+				'This is the dolphinsStore: ',
+				this.dolphinsStore.dolphinList
+			);
 			for (
 				let k = 0;
 				k < evaluationBehaviourStore.requestBodiesBehaviour.length;
@@ -1049,11 +1126,9 @@ export default {
 			) {
 				//k stands for the different dolphins. It iterates through the array of dolphins in requestBodiesBehaviour.json
 				if (
-					this.dolphinSelect &&
-					this.dolphinSelect.includes(
-						evaluationBehaviourStore.requestBodiesBehaviour[k][
-							'dolphin_name'
-						] as string
+					dolphinSelect &&
+					dolphinSelect.includes(
+						evaluationBehaviourStore.requestBodiesBehaviour[k]['dolphin_name']
 					)
 				) {
 					for (let i = 0; i < this.CheckboxArray.length; i++) {
@@ -1212,6 +1287,9 @@ export default {
 			localStorage.setItem('dataInBody', dataInBody.toString());
 		},
 		async resetData() {
+			// Reset request body
+			evaluationBehaviourStore.resetBodies();
+
 			// Reset checkboxes
 			for (let i = 0; i <= 14; i++) {
 				for (let j = 0; j < 3; j++) {
@@ -1409,7 +1487,7 @@ export default {
 								// The fill method now resets the bodies
 								//evaluationBehaviourStore.resetBodies();
 								evaluationBehaviourStore.fill(dolphinsStore.dolphinList);
-								this.dolphinSelect = null;
+								this.dolphinSelect = [];
 								this.criteria = null;
 								localStorage.setItem('created_at', '');
 							}
@@ -1498,14 +1576,256 @@ export default {
 				this.$router.push(targetUrl);
 			}
 		},
-		//Method to get the Dolphins
-		showDolphins() {
-			//this.dolphins = this.dolphinsStore.dolphinList;
-			//console.log(this.dolphinsStore.dolphinList);
-			//console.log(this.dolphins);
-			//console.log(evaluationBehaviourStore.requestBodiesBehaviour);
+		//Method to handle the change of the selected dolphins
+		async handleDolphinChange() {
+			console.log('Dolphin changed: ', this.dolphinSelect);
+			if (this.dolphinSelect.includes('all')) {
+				this.dolphinSelect = this.dolphinsStore.dolphinList.map(
+					(dolphin) => dolphin.name
+				);
+			}
+			await this.switchDolphin();
+			// Saves the current dolphin name as the old name for later use
+			// Important when switching the dolphin to save the data of the old dolphin
+			this.oldDolphinSelect = this.dolphinSelect;
 		},
+		//Method to switch the dolphin
+		async switchDolphin() {
+			// Save the current data if the user switches the dolphin without clicking on the next button
+			await this.storeCheckedValues(true); //true is passed so the method knows it has been called from the switchDolphin method
 
+			// Reset checkboxes before filling them again with current data
+			// Reset checkboxes
+			for (let i = 0; i <= 14; i++) {
+				for (let j = 0; j < 3; j++) {
+					if (this.CheckboxArray[i][j] === true) {
+						this.CheckboxArray[i][j] = false;
+					}
+				}
+			}
+
+			// Reset comments before filling them again with current data
+			this.environmentEnrichmentComments = '';
+			this.affiliativeBehaviourComments = '';
+			this.playBehaviourComments = '';
+			this.socioSexualComments = '';
+			this.maternalBehaviourComments = '';
+			this.displacementBehaviourComments = '';
+			this.oralBehaviourComments = '';
+			this.repetitiveMovementComments = '';
+			this.selfGroomingComments = '';
+			this.regurgitationComments = '';
+			this.receivingAggressiveComments = '';
+			this.rakeMarksComments = '';
+			this.displayingAggressiveComments = '';
+			this.socialIsolationComments = '';
+			this.avoidancePoolAreasComments = '';
+
+			console.log(
+				'The requestBody in switchDolphin: ',
+				evaluationBehaviourStore.requestBodiesBehaviour
+			);
+			// Get the data of the selected dolphin, if user has already entered some data for the selected dolphin
+			for (
+				let k = 0;
+				k < evaluationBehaviourStore.requestBodiesBehaviour.length;
+				k++
+			) {
+				//k stands for the different dolphins. It iterates through the array of dolphins in requestBodiesBehaviour.json
+				// Select the k-th requestBody which is equivalent to this.dolphinSelect
+				if (
+					this.dolphinSelect.includes(
+						evaluationBehaviourStore.requestBodiesBehaviour[k]['dolphin_name']
+					)
+				) {
+					// Now the correct dolphin is selected
+					console.log(
+						'Dolphin selected: ',
+						evaluationBehaviourStore.requestBodiesBehaviour[k]['dolphin_name']
+					);
+
+					// Here the data from the requestBodiesBehaviour is assigned to the checkboxes
+
+					for (let i = 0; i < this.CheckboxArray.length; i++) {
+						for (let j = 0; j < this.CheckboxArray[i].length; j++) {
+							// Get the data from the requestBodiesBehaviour BCScore
+							const environmentalEnrichment =
+								evaluationBehaviourStore.requestBodiesBehaviour[k][
+									'environmental_enrichment'
+								];
+							const affiliativeBehaviour =
+								evaluationBehaviourStore.requestBodiesBehaviour[k][
+									'affiliative_behaviour'
+								];
+							const playBehaviour =
+								evaluationBehaviourStore.requestBodiesBehaviour[k][
+									'play_behaviour'
+								];
+							const socioSexualBehaviour =
+								evaluationBehaviourStore.requestBodiesBehaviour[k][
+									'socio_sexual_behaviour'
+								];
+							const maternalBehaviour =
+								evaluationBehaviourStore.requestBodiesBehaviour[k][
+									'maternal_behaviour'
+								];
+							const displacementBehaviour =
+								evaluationBehaviourStore.requestBodiesBehaviour[k][
+									'displacement_behaviour'
+								];
+							const oralBehaviour =
+								evaluationBehaviourStore.requestBodiesBehaviour[k][
+									'oral_stereotypic_behaviour'
+								];
+							const repetitiveMovement =
+								evaluationBehaviourStore.requestBodiesBehaviour[k][
+									'repetitive_body_movement'
+								];
+							const selfGrooming =
+								evaluationBehaviourStore.requestBodiesBehaviour[k][
+									'self_grooming_behaviour'
+								];
+							const regurgitation =
+								evaluationBehaviourStore.requestBodiesBehaviour[k][
+									'regurgitation_reingestion'
+								];
+							const rakeMarks =
+								evaluationBehaviourStore.requestBodiesBehaviour[k][
+									'rake_marks'
+								];
+							const displayingAggressive =
+								evaluationBehaviourStore.requestBodiesBehaviour[k][
+									'displaying_aggressive_behaviour'
+								];
+							const receivingAggressive =
+								evaluationBehaviourStore.requestBodiesBehaviour[k][
+									'receiving_aggressive_behaviour'
+								];
+							const socialIsolation =
+								evaluationBehaviourStore.requestBodiesBehaviour[k][
+									'social_isolation'
+								];
+							const avoidancePoolAreas =
+								evaluationBehaviourStore.requestBodiesBehaviour[k][
+									'avoidance_pool_areas'
+								];
+
+							if (environmentalEnrichment !== null) {
+								// Assign the value of the body condition score to the checkbox array
+								const j = environmentalEnrichment;
+								this.CheckboxArray[0][j] = true;
+							} else if (affiliativeBehaviour !== null) {
+								const j = affiliativeBehaviour;
+								this.CheckboxArray[1][j] = true;
+							} else if (playBehaviour !== null) {
+								const j = playBehaviour;
+								this.CheckboxArray[2][j] = true;
+							} else if (socioSexualBehaviour !== null) {
+								const j = socioSexualBehaviour;
+								this.CheckboxArray[3][j] = true;
+							} else if (maternalBehaviour !== null) {
+								const j = maternalBehaviour;
+								this.CheckboxArray[4][j] = true;
+							} else if (displacementBehaviour !== null) {
+								const j = displacementBehaviour;
+								this.CheckboxArray[5][j] = true;
+							} else if (oralBehaviour !== null) {
+								const j = oralBehaviour;
+								this.CheckboxArray[6][j] = true;
+							} else if (repetitiveMovement !== null) {
+								const j = repetitiveMovement;
+								this.CheckboxArray[7][j] = true;
+							} else if (selfGrooming !== null) {
+								const j = selfGrooming;
+								this.CheckboxArray[8][j] = true;
+							} else if (regurgitation !== null) {
+								const j = regurgitation;
+								this.CheckboxArray[9][j] = true;
+							} else if (receivingAggressive !== null) {
+								const j = receivingAggressive;
+								this.CheckboxArray[10][j] = true;
+							} else if (rakeMarks !== null) {
+								const j = rakeMarks;
+								this.CheckboxArray[11][j] = true;
+							} else if (displayingAggressive !== null) {
+								const j = displayingAggressive;
+								this.CheckboxArray[12][j] = true;
+							} else if (socialIsolation !== null) {
+								const j = socialIsolation;
+								this.CheckboxArray[13][j] = true;
+							} else if (avoidancePoolAreas !== null) {
+								const j = avoidancePoolAreas;
+								this.CheckboxArray[14][j] = true;
+							}
+						}
+					}
+					// Code here the comments into the request body
+					// First check with if statement if comments had been updated or not. If we don´t do that we override the comments with
+					// an empty string if we click on 'Next Test'
+					this.environmentEnrichmentComments =
+						evaluationBehaviourStore.requestBodiesBehaviour[k][
+							'environmental_enrichment_comments'
+						] ?? '';
+					this.affiliativeBehaviourComments =
+						evaluationBehaviourStore.requestBodiesBehaviour[k][
+							'affiliative_behaviour_comments'
+						] ?? '';
+					this.playBehaviourComments =
+						evaluationBehaviourStore.requestBodiesBehaviour[k][
+							'play_behaviour_comments'
+						] ?? '';
+					this.socioSexualComments =
+						evaluationBehaviourStore.requestBodiesBehaviour[k][
+							'socio_sexual_behaviour_comments'
+						] ?? '';
+					this.displacementBehaviourComments =
+						evaluationBehaviourStore.requestBodiesBehaviour[k][
+							'displacement_behaviour_comments'
+						] ?? '';
+					this.oralBehaviourComments =
+						evaluationBehaviourStore.requestBodiesBehaviour[k][
+							'oral_stereotypic_behaviour_comments'
+						] ?? '';
+					this.repetitiveMovementComments =
+						evaluationBehaviourStore.requestBodiesBehaviour[k][
+							'repetitive_body_movement_comments'
+						] ?? '';
+					this.selfGroomingComments =
+						evaluationBehaviourStore.requestBodiesBehaviour[k][
+							'self_grooming_behaviour_comments'
+						] ?? '';
+					this.regurgitationComments =
+						evaluationBehaviourStore.requestBodiesBehaviour[k][
+							'regurgitation_reingestion_comments'
+						] ?? '';
+					this.rakeMarksComments =
+						evaluationBehaviourStore.requestBodiesBehaviour[k][
+							'rake_marks_comments'
+						] ?? '';
+					this.displayingAggressiveComments =
+						evaluationBehaviourStore.requestBodiesBehaviour[k][
+							'displaying_aggressive_behaviour_comments'
+						] ?? '';
+					this.receivingAggressiveComments =
+						evaluationBehaviourStore.requestBodiesBehaviour[k][
+							'receiving_aggressive_behaviour_comments'
+						] ?? '';
+					this.socialIsolationComments =
+						evaluationBehaviourStore.requestBodiesBehaviour[k][
+							'social_isolation_comments'
+						] ?? '';
+					this.avoidancePoolAreasComments =
+						evaluationBehaviourStore.requestBodiesBehaviour[k][
+							'avoidance_pool_areas_comments'
+						] ?? '';
+
+					if (localStorage.getItem('created_at') !== '') {
+						evaluationBehaviourStore.requestBodiesBehaviour[k]['created_at'] =
+							localStorage.getItem('created_at') as string;
+					}
+				}
+			}
+		},
 		async getUserManual() {
 			// Get the platform of the device (iOS or Android)
 			//const platform = (await Device.getInfo()).platform;
