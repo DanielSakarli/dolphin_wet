@@ -10,6 +10,7 @@
 					okText="OK"
 					:cancelText="firstcancelText"
 					v-model="dolphinSelect"
+					@ionChange="handleDolphinChange"
 				>
 					<ion-select-option
 						v-for="dolphin in dolphinsStore.dolphinList"
@@ -153,7 +154,10 @@
 						>Score 2</ion-checkbox
 					>
 				</ion-item>
-				<CheckComments @update-comment="updateWillingnessParticipateComments" />
+				<CheckComments
+					:update-comment="willingnessParticipateComments"
+					@update-comment="updateWillingnessParticipateComments"
+				/>
 			</ion-list>
 		</ion-card>
 		<ion-card
@@ -183,7 +187,10 @@
 						>Score 2</ion-checkbox
 					>
 				</ion-item>
-				<CheckComments @update-comment="updateSynchronousSwimmingComments" />
+				<CheckComments
+					:update-comment="synchronousSwimmingComments"
+					@update-comment="updateSynchronousSwimmingComments"
+				/>
 			</ion-list>
 		</ion-card>
 		<ion-card
@@ -213,7 +220,10 @@
 						>Score 2</ion-checkbox
 					>
 				</ion-item>
-				<CheckComments @update-comment="updateGentleRubbingComments" />
+				<CheckComments
+					:update-comment="gentleRubbingComments"
+					@update-comment="updateGentleRubbingComments"
+				/>
 			</ion-list>
 		</ion-card>
 		<ion-card
@@ -243,7 +253,10 @@
 						>Score 2</ion-checkbox
 					>
 				</ion-item>
-				<CheckComments @update-comment="updateAnticipatoryBehaviourComments" />
+				<CheckComments
+					:update-comment="anticipatoryBehaviourComments"
+					@update-comment="updateAnticipatoryBehaviourComments"
+				/>
 			</ion-list>
 		</ion-card>
 		<ion-card
@@ -273,7 +286,10 @@
 						>Score 2</ion-checkbox
 					>
 				</ion-item>
-				<CheckComments @update-comment="updateFastSwimmingComments" />
+				<CheckComments
+					:update-comment="fastSwimmingComments"
+					@update-comment="updateFastSwimmingComments"
+				/>
 			</ion-list>
 		</ion-card>
 		<ion-card
@@ -303,7 +319,10 @@
 						>Score 2</ion-checkbox
 					>
 				</ion-item>
-				<CheckComments @update-comment="updateTailSlappingComments" />
+				<CheckComments
+					:update-comment="tailSlappingComments"
+					@update-comment="updateTailSlappingComments"
+				/>
 			</ion-list>
 		</ion-card>
 		<ion-card
@@ -333,7 +352,10 @@
 						>Score 2</ion-checkbox
 					>
 				</ion-item>
-				<CheckComments @update-comment="updateChoiceControlComments" />
+				<CheckComments
+					:update-comment="choiceControlComments"
+					@update-comment="updateChoiceControlComments"
+				/>
 			</ion-list>
 		</ion-card>
 		<div
@@ -447,6 +469,7 @@ export default {
 			download,
 			dolphinsStore: dolphinsStore,
 			dolphinSelect: null as string | null,
+			oldDolphinSelect: null as string | null,
 			criteria: null as string | null,
 			subcriteria: '',
 			firstlabel: this.$t('dolphin'),
@@ -510,7 +533,29 @@ export default {
 			localStorage.setItem('dataInBody', dataInBody.toString());
 		},
 		// Method to collect the checked checkboxes and give request body the scores
-		storeCheckedValues() {
+		storeCheckedValues(calledFromSwitchDolphins = false) {
+			///////////////////////////////////////////////////////////////////////////
+			// This part checks from where the store method is called
+			// If it is called from the switchDolphin method, the data shall be saved
+			// for the previously selected dolphin!
+			let dolphinSelect;
+			if (calledFromSwitchDolphins === true) {
+				console.log('storeCheckedValues called from switchDolphin method');
+				if (this.oldDolphinSelect === undefined) {
+					// If there is no old dolphin select, then the CURRENT dolphin select is used
+					console.log('No old dolphin select found.');
+					dolphinSelect = this.dolphinSelect;
+				} else {
+					// If there is an old dolphin select, then the OLD dolphin select is used
+					console.log('Old dolphin select found:', this.oldDolphinSelect);
+					dolphinSelect = this.oldDolphinSelect;
+				}
+			} else {
+				console.log('storeCheckedValues called from next button click.');
+				dolphinSelect = this.dolphinSelect;
+			}
+			console.log('Current data saved for: ', dolphinSelect);
+			///////////////////////////////////////////////////////////////////////////
 			for (
 				let k = 0;
 				k < evaluationEmotionalStateStore.requestBodiesEmotionalState.length;
@@ -518,8 +563,8 @@ export default {
 			) {
 				//k stands for the different dolphins. It iterates through the array of dolphins in requestBodiesEmotionalState.json
 				if (
-					this.dolphinSelect &&
-					this.dolphinSelect.includes(
+					dolphinSelect &&
+					dolphinSelect.includes(
 						evaluationEmotionalStateStore.requestBodiesEmotionalState[k][
 							'dolphin_name'
 						]
@@ -609,6 +654,9 @@ export default {
 			localStorage.setItem('dataInBody', dataInBody.toString());
 		},
 		async resetData() {
+			// Reset request body
+			evaluationEmotionalStateStore.resetBodies();
+
 			// Reset checkboxes
 			for (let i = 0; i <= 6; i++) {
 				for (let j = 0; j < 3; j++) {
@@ -840,24 +888,162 @@ export default {
 				this.$router.push(targetUrl);
 			}
 		},
-		//Method to get the Dolphins
-		showDolphins() {
-			//this.dolphins = this.dolphinsStore.dolphinList;
-			//console.log(this.dolphinsStore.dolphinList);
-			//console.log(this.dolphins);
-			//console.log(evaluationEmotionalStateStore.requestBodiesEmotionalState);
+		//Method to handle the change of the selected dolphins
+		async handleDolphinChange() {
+			console.log('Dolphin changed: ', this.dolphinSelect);
+			await this.switchDolphin();
+			// Saves the current dolphin name as the old name for later use
+			// Important when switching the dolphin to save the data of the old dolphin
+			this.oldDolphinSelect = this.dolphinSelect;
 		},
-		/*async showDolphins() {
-			await axios.get(this.urlDolphins)
-				.then ((response) => {
-        		//console.log('Response:', response.data);
-				this.dolphinList = response.data;
-    			})
-			 	.catch ((e) => {
-				console.error(e);
-				});
-		},*/
+		//Method to switch the dolphin
+		async switchDolphin() {
+			// Save the current data if the user switches the dolphin without clicking on the next button
+			await this.storeCheckedValues(true); //true is passed so the method knows it has been called from the switchDolphin method
 
+			// Reset checkboxes before filling them again with current data
+			for (let i = 0; i <= 6; i++) {
+				for (let j = 0; j < 3; j++) {
+					if (this.CheckboxArray[i][j] === true) {
+						this.CheckboxArray[i][j] = false;
+					}
+				}
+			}
+			// Reset comments before filling them again with current data
+			this.willingnessParticipateComments = '';
+			this.synchronousSwimmingComments = '';
+			this.gentleRubbingComments = '';
+			this.anticipatoryBehaviourComments = '';
+			this.fastSwimmingComments = '';
+			this.tailSlappingComments = '';
+			this.choiceControlComments = '';
+
+			console.log(
+				'The requestBody in switchDolphin: ',
+				evaluationEmotionalStateStore.requestBodiesEmotionalState
+			);
+			// Get the data of the selected dolphin, if user has already entered some data for the selected dolphin
+			for (
+				let k = 0;
+				k < evaluationEmotionalStateStore.requestBodiesEmotionalState.length;
+				k++
+			) {
+				//k stands for the different dolphins. It iterates through the array of dolphins in requestBodiesEmotionalState.json
+				// Select the k-th requestBody which is equivalent to this.dolphinSelect
+				if (
+					this.dolphinSelect &&
+					this.dolphinSelect.includes(
+						evaluationEmotionalStateStore.requestBodiesEmotionalState[k][
+							'dolphin_name'
+						]
+					)
+				) {
+					// Now the correct dolphin is selected
+					console.log(
+						'Dolphin selected: ',
+						evaluationEmotionalStateStore.requestBodiesEmotionalState[k][
+							'dolphin_name'
+						]
+					);
+
+					// Here the data from the requestBodiesEmotionalState is assigned to the checkboxes
+					for (let i = 0; i < this.CheckboxArray.length; i++) {
+						for (let j = 0; j < this.CheckboxArray[i].length; j++) {
+							// Get the data from the requestBodiesEmotionalState BCScore
+							const willingnessToParticipate =
+								evaluationEmotionalStateStore.requestBodiesEmotionalState[k][
+									'willingness_to_participate'
+								];
+							const synchronousSwimming =
+								evaluationEmotionalStateStore.requestBodiesEmotionalState[k][
+									'synchronous_swimming'
+								];
+							const rubbingBehaviour =
+								evaluationEmotionalStateStore.requestBodiesEmotionalState[k][
+									'rubbing_behaviour'
+								];
+							const anticipatoryBehaviour =
+								evaluationEmotionalStateStore.requestBodiesEmotionalState[k][
+									'anticipatory_behaviour'
+								];
+							const fastSwimming =
+								evaluationEmotionalStateStore.requestBodiesEmotionalState[k][
+									'fast_swimming'
+								];
+							const tailSlapping =
+								evaluationEmotionalStateStore.requestBodiesEmotionalState[k][
+									'tail_slapping'
+								];
+							const choiceAndControl =
+								evaluationEmotionalStateStore.requestBodiesEmotionalState[k][
+									'choice_and_control'
+								];
+							if (willingnessToParticipate !== null) {
+								// Assign the value of the body condition score to the checkbox array
+								const j = willingnessToParticipate;
+								this.CheckboxArray[0][j] = true;
+							} else if (synchronousSwimming !== null) {
+								const j = synchronousSwimming;
+								this.CheckboxArray[1][j] = true;
+							} else if (rubbingBehaviour !== null) {
+								const j = rubbingBehaviour;
+								this.CheckboxArray[2][j] = true;
+							} else if (anticipatoryBehaviour !== null) {
+								const j = anticipatoryBehaviour;
+								this.CheckboxArray[3][j] = true;
+							} else if (fastSwimming !== null) {
+								const j = fastSwimming;
+								this.CheckboxArray[4][j] = true;
+							} else if (tailSlapping !== null) {
+								const j = tailSlapping;
+								this.CheckboxArray[5][j] = true;
+							} else if (choiceAndControl !== null) {
+								const j = choiceAndControl;
+								this.CheckboxArray[6][j] = true;
+							}
+						}
+					}
+					// Code here the comments into the request body
+					// First check with if statement if comments had been updated or not. If we don´t do that we override the comments with
+					// an empty string if we click on 'Next Test'
+
+					this.willingnessParticipateComments =
+						evaluationEmotionalStateStore.requestBodiesEmotionalState[k][
+							'willingness_to_participate_comments'
+						] ?? '';
+					this.synchronousSwimmingComments =
+						evaluationEmotionalStateStore.requestBodiesEmotionalState[k][
+							'synchronous_swimming_comments'
+						] ?? '';
+					this.gentleRubbingComments =
+						evaluationEmotionalStateStore.requestBodiesEmotionalState[k][
+							'rubbing_behaviour_comments'
+						] ?? '';
+					this.anticipatoryBehaviourComments =
+						evaluationEmotionalStateStore.requestBodiesEmotionalState[k][
+							'anticipatory_behaviour_comments'
+						] ?? '';
+					this.fastSwimmingComments =
+						evaluationEmotionalStateStore.requestBodiesEmotionalState[k][
+							'fast_swimming_comments'
+						] ?? '';
+					this.tailSlappingComments =
+						evaluationEmotionalStateStore.requestBodiesEmotionalState[k][
+							'tail_slapping_comments'
+						] ?? '';
+					this.choiceControlComments =
+						evaluationEmotionalStateStore.requestBodiesEmotionalState[k][
+							'choice_and_control_comments'
+						] ?? '';
+
+					if (localStorage.getItem('created_at') !== '') {
+						evaluationEmotionalStateStore.requestBodiesEmotionalState[k][
+							'created_at'
+						] = localStorage.getItem('created_at') as string;
+					}
+				}
+			}
+		},
 		async getUserManual() {
 			// Get the platform of the device (iOS or Android)
 			//const platform = (await Device.getInfo()).platform;

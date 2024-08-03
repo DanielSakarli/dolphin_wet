@@ -913,7 +913,7 @@ export default {
 						evaluationFeedingStore.requestBodiesFeeding[k]['dolphin_name']
 					)
 				) {
-					// Assigns null to the requestBodie if this.weight_measured is undefined
+					// Assigns null to the requestBodies if this.weight_measured is undefined
 					evaluationFeedingStore.requestBodiesFeeding[k]['weight_measured'] =
 						this.weight_measured !== undefined ? this.weight_measured : null;
 
