@@ -982,22 +982,28 @@ export default {
 								// Assign the value of the body condition score to the checkbox array
 								const j = willingnessToParticipate;
 								this.CheckboxArray[0][j] = true;
-							} else if (synchronousSwimming !== null) {
+							}
+							if (synchronousSwimming !== null) {
 								const j = synchronousSwimming;
 								this.CheckboxArray[1][j] = true;
-							} else if (rubbingBehaviour !== null) {
+							}
+							if (rubbingBehaviour !== null) {
 								const j = rubbingBehaviour;
 								this.CheckboxArray[2][j] = true;
-							} else if (anticipatoryBehaviour !== null) {
+							}
+							if (anticipatoryBehaviour !== null) {
 								const j = anticipatoryBehaviour;
 								this.CheckboxArray[3][j] = true;
-							} else if (fastSwimming !== null) {
+							}
+							if (fastSwimming !== null) {
 								const j = fastSwimming;
 								this.CheckboxArray[4][j] = true;
-							} else if (tailSlapping !== null) {
+							}
+							if (tailSlapping !== null) {
 								const j = tailSlapping;
 								this.CheckboxArray[5][j] = true;
-							} else if (choiceAndControl !== null) {
+							}
+							if (choiceAndControl !== null) {
 								const j = choiceAndControl;
 								this.CheckboxArray[6][j] = true;
 							}

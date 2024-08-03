@@ -14,7 +14,7 @@
 					multiple
 					@ionChange="handleDolphinChange"
 				>
-					<ion-select-option value="all">All dolphins</ion-select-option>
+					<ion-select-option value="all">{{ $t('allDolphins') }}</ion-select-option>
 					<ion-select-option
 						v-for="dolphin in dolphinsStore.dolphinList"
 						v-bind:key="dolphin.name"
@@ -723,16 +723,20 @@ export default {
 								const j = bodyConditionScore;
 								this.CheckboxArray[0][j] = true;
 								console.log('Body condition score displayed: ', j);
-							} else if (kcalCalculations !== null) {
+							}
+							if (kcalCalculations !== null) {
 								const j = kcalCalculations;
 								this.CheckboxArray[1][j] = true;
-							} else if (bloodHydration !== null) {
+							}
+							if (bloodHydration !== null) {
 								const j = bloodHydration;
 								this.CheckboxArray[2][j] = true;
-							} else if (fishQuality !== null) {
+							}
+							if (fishQuality !== null) {
 								const j = fishQuality;
 								this.CheckboxArray[3][j] = true;
-							} else if (fishVariety !== null) {
+							}
+							if (fishVariety !== null) {
 								const j = fishVariety;
 								this.CheckboxArray[4][j] = true;
 							}

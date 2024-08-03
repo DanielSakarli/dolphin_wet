@@ -1714,46 +1714,60 @@ export default {
 								// Assign the value of the body condition score to the checkbox array
 								const j = environmentalEnrichment;
 								this.CheckboxArray[0][j] = true;
-							} else if (affiliativeBehaviour !== null) {
+							}
+							if (affiliativeBehaviour !== null) {
 								const j = affiliativeBehaviour;
 								this.CheckboxArray[1][j] = true;
-							} else if (playBehaviour !== null) {
+							}
+							if (playBehaviour !== null) {
 								const j = playBehaviour;
 								this.CheckboxArray[2][j] = true;
-							} else if (socioSexualBehaviour !== null) {
+							}
+							if (socioSexualBehaviour !== null) {
 								const j = socioSexualBehaviour;
 								this.CheckboxArray[3][j] = true;
-							} else if (maternalBehaviour !== null) {
+							}
+							if (maternalBehaviour !== null) {
 								const j = maternalBehaviour;
 								this.CheckboxArray[4][j] = true;
-							} else if (displacementBehaviour !== null) {
+							}
+							if (displacementBehaviour !== null) {
 								const j = displacementBehaviour;
 								this.CheckboxArray[5][j] = true;
-							} else if (oralBehaviour !== null) {
+							}
+							if (oralBehaviour !== null) {
 								const j = oralBehaviour;
 								this.CheckboxArray[6][j] = true;
-							} else if (repetitiveMovement !== null) {
+							}
+							if (repetitiveMovement !== null) {
 								const j = repetitiveMovement;
 								this.CheckboxArray[7][j] = true;
-							} else if (selfGrooming !== null) {
+							}
+							if (selfGrooming !== null) {
 								const j = selfGrooming;
 								this.CheckboxArray[8][j] = true;
-							} else if (regurgitation !== null) {
+							}
+							if (regurgitation !== null) {
 								const j = regurgitation;
 								this.CheckboxArray[9][j] = true;
-							} else if (receivingAggressive !== null) {
+							}
+							if (receivingAggressive !== null) {
 								const j = receivingAggressive;
 								this.CheckboxArray[10][j] = true;
-							} else if (rakeMarks !== null) {
+							}
+							if (rakeMarks !== null) {
 								const j = rakeMarks;
 								this.CheckboxArray[11][j] = true;
-							} else if (displayingAggressive !== null) {
+							}
+							if (displayingAggressive !== null) {
 								const j = displayingAggressive;
 								this.CheckboxArray[12][j] = true;
-							} else if (socialIsolation !== null) {
+							}
+							if (socialIsolation !== null) {
 								const j = socialIsolation;
 								this.CheckboxArray[13][j] = true;
-							} else if (avoidancePoolAreas !== null) {
+							}
+							if (avoidancePoolAreas !== null) {
 								const j = avoidancePoolAreas;
 								this.CheckboxArray[14][j] = true;
 							}

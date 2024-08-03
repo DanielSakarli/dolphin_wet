@@ -1147,6 +1147,9 @@ export default {
 		},
 		async resetData() {
 			console.log('resetData() called');
+			// Reset request body
+			evaluationHealthStore.resetBodies();
+
 			// Reset the checkboxes
 			for (let i = 0; i <= 12; i++) {
 				for (let j = 0; j < 3; j++) {

@@ -10,7 +10,7 @@
 					:cancelText="firstcancelText"
 					v-model="dolphinSelect"
 					multiple
-					@ionChange="checkAllDolphinsSelected"
+					@ionChange="handleDolphinChange"
 				>
 					<ion-select-option value="all">{{
 						$t('allDolphins')
@@ -186,7 +186,10 @@
 						>Score 2</ion-checkbox
 					>
 				</ion-item>
-				<CheckComments @update-comment="updateEnclosureSafetyComments" />
+				<CheckComments
+					:update-comment="enclosure_barrier_safety_comments"
+					@update-comment="updateEnclosureSafetyComments"
+				/>
 			</ion-list>
 		</ion-card>
 		<ion-card
@@ -214,7 +217,10 @@
 						>Score 2</ion-checkbox
 					>
 				</ion-item>
-				<CheckComments @update-comment="updateForeignBodyComments" />
+				<CheckComments
+					:update-comment="foreign_body_ingestion_comments"
+					@update-comment="updateForeignBodyComments"
+				/>
 			</ion-list>
 		</ion-card>
 		<ion-card
@@ -242,7 +248,10 @@
 						>Score 2</ion-checkbox
 					>
 				</ion-item>
-				<CheckComments @update-comment="updatePoolDesignComments" />
+				<CheckComments
+					:update-comment="pool_design_comments"
+					@update-comment="updatePoolDesignComments"
+				/>
 			</ion-list>
 		</ion-card>
 		<ion-card
@@ -270,7 +279,10 @@
 						>Score 2</ion-checkbox
 					>
 				</ion-item>
-				<CheckComments @update-comment="updateForcedLonelinessComments" />
+				<CheckComments
+					:update-comment="forced_loneliness_comments"
+					@update-comment="updateForcedLonelinessComments"
+				/>
 			</ion-list>
 		</ion-card>
 		<ion-card
@@ -298,7 +310,10 @@
 						>Score 2</ion-checkbox
 					>
 				</ion-item>
-				<CheckComments @update-comment="updateWaterQualityComments" />
+				<CheckComments
+					:update-comment="water_quality_comments"
+					@update-comment="updateWaterQualityComments"
+				/>
 			</ion-list>
 		</ion-card>
 		<ion-card
@@ -326,7 +341,10 @@
 						>Score 2</ion-checkbox
 					>
 				</ion-item>
-				<CheckComments @update-comment="updateWaterTemperatureComments" />
+				<CheckComments
+					:update-comment="water_temperature_comments"
+					@update-comment="updateWaterTemperatureComments"
+				/>
 			</ion-list>
 		</ion-card>
 		<ion-card
@@ -354,7 +372,10 @@
 						>Score 2</ion-checkbox
 					>
 				</ion-item>
-				<CheckComments @update-comment="updateSufficientShadeComments" />
+				<CheckComments
+					:update-comment="sufficient_shade_comments"
+					@update-comment="updateSufficientShadeComments"
+				/>
 			</ion-list>
 		</ion-card>
 		<ion-card
@@ -382,7 +403,10 @@
 						>Score 2</ion-checkbox
 					>
 				</ion-item>
-				<CheckComments @update-comment="updateReflectingColoursComments" />
+				<CheckComments
+					:update-comment="reflecting_colours_comments"
+					@update-comment="updateReflectingColoursComments"
+				/>
 			</ion-list>
 		</ion-card>
 		<ion-card
@@ -410,7 +434,10 @@
 						>Score 2</ion-checkbox
 					>
 				</ion-item>
-				<CheckComments @update-comment="updateAcousticComfortComments" />
+				<CheckComments
+					:update-comment="acoustic_comfort_comments"
+					@update-comment="updateAcousticComfortComments"
+				/>
 			</ion-list>
 		</ion-card>
 		<div
@@ -531,7 +558,8 @@ export default {
 			download,
 			dolphinsStore: dolphinsStore,
 			dolphinList: dolphinsStore.dolphinList as Dolphin[],
-			dolphinSelect: [] as string[], //null as string | null,
+			dolphinSelect: [] as string[],
+			oldDolphinSelect: [] as string[],
 			criteria: null as string | null,
 			subcriteria: null as string | null,
 			firstlabel: this.$t('dolphin'),
@@ -600,14 +628,37 @@ export default {
 			}*/
 		},
 		// Method to collect the checked checkboxes and give request Body the scores
-		storeCheckedValues() {
+		async storeCheckedValues(calledFromSwitchDolphins = false) {
+			///////////////////////////////////////////////////////////////////////////
+			// This part checks from where the store method is called
+			// If it is called from the switchDolphin method, the data shall be saved
+			// for the previously selected dolphin!
+			let dolphinSelect;
+			if (calledFromSwitchDolphins === true) {
+				console.log('storeCheckedValues called from switchDolphin method');
+				if (this.oldDolphinSelect === undefined) {
+					// If there is no old dolphin select, then the CURRENT dolphin select is used
+					console.log('No old dolphin select found.');
+					dolphinSelect = this.dolphinSelect;
+				} else {
+					// If there is an old dolphin select, then the OLD dolphin select is used
+					console.log('Old dolphin select found:', this.oldDolphinSelect);
+					dolphinSelect = this.oldDolphinSelect;
+				}
+			} else {
+				console.log('storeCheckedValues called from next button click.');
+				dolphinSelect = this.dolphinSelect;
+			}
+			console.log('Current data saved for: ', dolphinSelect);
+			///////////////////////////////////////////////////////////////////////////
 			for (
 				let k = 0;
 				k < evaluationHousingStore.requestBodiesHousing.length;
 				k++
 			) {
 				if (
-					this.dolphinSelect.includes(
+					dolphinSelect &&
+					dolphinSelect.includes(
 						evaluationHousingStore.requestBodiesHousing[k]['dolphin_name']
 					)
 				) {
@@ -714,6 +765,9 @@ export default {
 			localStorage.setItem('dataInBody', dataInBody.toString());
 		},
 		async resetData() {
+			// Reset request body
+			evaluationHousingStore.resetBodies();
+
 			// Reset checkboxes
 			for (let i = 0; i <= 8; i++) {
 				for (let j = 0; j < 3; j++) {
@@ -970,12 +1024,191 @@ export default {
 				this.$router.push(targetUrl);
 			}
 		},
-		//Method to get the Dolphins
-		showDolphins() {
-			//this.dolphins = this.dolphinsStore.dolphinList;
-			//console.log(this.dolphinsStore.dolphinList);
-			//console.log(this.dolphins);
-			//console.log(evaluationHousingStore.requestBodiesHousing);
+		//Method to handle the change of the selected dolphins
+		async handleDolphinChange() {
+			console.log('Dolphin changed: ', this.dolphinSelect);
+			if (this.dolphinSelect.includes('all')) {
+				this.dolphinSelect = this.dolphinsStore.dolphinList.map(
+					(dolphin) => dolphin.name
+				);
+			}
+			await this.switchDolphin();
+			// Saves the current dolphin name as the old name for later use
+			// Important when switching the dolphin to save the data of the old dolphin
+			this.oldDolphinSelect = this.dolphinSelect;
+		},
+		//Method to switch the dolphin
+		async switchDolphin() {
+			// Save the current data if the user switches the dolphin without clicking on the next button
+			await this.storeCheckedValues(true); //true is passed so the method knows it has been called from the switchDolphin method
+
+			// Reset checkboxes before filling them again with current data
+			// Reset checkboxes
+			for (let i = 0; i <= 8; i++) {
+				for (let j = 0; j < 3; j++) {
+					if (this.CheckboxArray[i][j] === true) {
+						this.CheckboxArray[i][j] = false;
+					}
+				}
+			}
+
+			// Reset comments before filling them again with current data
+			this.enclosure_barrier_safety_comments = '';
+			this.foreign_body_ingestion_comments = '';
+			this.pool_design_comments = '';
+			this.forced_loneliness_comments = '';
+			this.water_quality_comments = '';
+			this.water_temperature_comments = '';
+			this.sufficient_shade_comments = '';
+			this.reflecting_colours_comments = '';
+			this.acoustic_comfort_comments = '';
+
+			console.log(
+				'The requestBody in switchDolphin: ',
+				evaluationHousingStore.requestBodiesHousing
+			);
+			// Get the data of the selected dolphin, if user has already entered some data for the selected dolphin
+			for (
+				let k = 0;
+				k < evaluationHousingStore.requestBodiesHousing.length;
+				k++
+			) {
+				//k stands for the different dolphins. It iterates through the array of dolphins in requestBodiesHousing.json
+				// Select the k-th requestBody which is equivalent to this.dolphinSelect
+				if (
+					this.dolphinSelect.includes(
+						evaluationHousingStore.requestBodiesHousing[k]['dolphin_name']
+					)
+				) {
+					// Now the correct dolphin is selected
+					console.log(
+						'Dolphin selected: ',
+						evaluationHousingStore.requestBodiesHousing[k]['dolphin_name']
+					);
+
+					// Here the data from the requestBodiesHousing is assigned to the checkboxes
+
+					for (let i = 0; i < this.CheckboxArray.length; i++) {
+						for (let j = 0; j < this.CheckboxArray[i].length; j++) {
+							// Get the data from the requestBodiesHousing BCScore
+							const enclosure_barrier_safety =
+								evaluationHousingStore.requestBodiesHousing[k][
+									'enclosure_barrier_safety'
+								];
+							const foreign_body_ingestion =
+								evaluationHousingStore.requestBodiesHousing[k][
+									'foreign_body_ingestion'
+								];
+							const pool_design =
+								evaluationHousingStore.requestBodiesHousing[k]['pool_design'];
+							const forced_loneliness =
+								evaluationHousingStore.requestBodiesHousing[k][
+									'forced_loneliness'
+								];
+							const water_quality =
+								evaluationHousingStore.requestBodiesHousing[k]['water_quality'];
+							const water_temperature =
+								evaluationHousingStore.requestBodiesHousing[k][
+									'water_temperature'
+								];
+							const sufficient_shade =
+								evaluationHousingStore.requestBodiesHousing[k][
+									'sufficient_shade'
+								];
+							const reflecting_colours =
+								evaluationHousingStore.requestBodiesHousing[k][
+									'reflecting_colours'
+								];
+							const acoustic_comfort =
+								evaluationHousingStore.requestBodiesHousing[k][
+									'acoustic_comfort'
+								];
+
+							if (enclosure_barrier_safety !== null) {
+								// Assign the value of the body condition score to the checkbox array
+								const j = enclosure_barrier_safety;
+								this.CheckboxArray[0][j] = true;
+							}
+							if (foreign_body_ingestion !== null) {
+								const j = foreign_body_ingestion;
+								this.CheckboxArray[1][j] = true;
+							}
+							if (pool_design !== null) {
+								const j = pool_design;
+								this.CheckboxArray[2][j] = true;
+							}
+							if (forced_loneliness !== null) {
+								const j = forced_loneliness;
+								this.CheckboxArray[3][j] = true;
+							}
+							if (water_quality !== null) {
+								const j = water_quality;
+								this.CheckboxArray[4][j] = true;
+							}
+							if (water_temperature !== null) {
+								const j = water_temperature;
+								this.CheckboxArray[5][j] = true;
+							}
+							if (sufficient_shade !== null) {
+								const j = sufficient_shade;
+								this.CheckboxArray[6][j] = true;
+							}
+							if (reflecting_colours !== null) {
+								const j = reflecting_colours;
+								this.CheckboxArray[7][j] = true;
+							}
+							if (acoustic_comfort !== null) {
+								const j = acoustic_comfort;
+								this.CheckboxArray[8][j] = true;
+							}
+						}
+					}
+					// Code here the comments into the request body
+					// First check with if statement if comments had been updated or not. If we don´t do that we override the comments with
+					// an empty string if we click on 'Next Test'
+					this.enclosure_barrier_safety_comments =
+						evaluationHousingStore.requestBodiesHousing[k][
+							'enclosure_barrier_safety_comments'
+						] ?? '';
+					this.foreign_body_ingestion_comments =
+						evaluationHousingStore.requestBodiesHousing[k][
+							'foreign_body_ingestion_comments'
+						] ?? '';
+					this.pool_design_comments =
+						evaluationHousingStore.requestBodiesHousing[k][
+							'pool_design_comments'
+						] ?? '';
+					this.forced_loneliness_comments =
+						evaluationHousingStore.requestBodiesHousing[k][
+							'forced_loneliness_comments'
+						] ?? '';
+					this.water_quality_comments =
+						evaluationHousingStore.requestBodiesHousing[k][
+							'water_quality_comments'
+						] ?? '';
+					this.water_temperature_comments =
+						evaluationHousingStore.requestBodiesHousing[k][
+							'water_temperature_comments'
+						] ?? '';
+					this.sufficient_shade_comments =
+						evaluationHousingStore.requestBodiesHousing[k][
+							'sufficient_shade_comments'
+						] ?? '';
+					this.reflecting_colours_comments =
+						evaluationHousingStore.requestBodiesHousing[k][
+							'reflecting_colours_comments'
+						] ?? '';
+					this.acoustic_comfort_comments =
+						evaluationHousingStore.requestBodiesHousing[k][
+							'acoustic_comfort_comments'
+						] ?? '';
+
+					if (localStorage.getItem('created_at') !== '') {
+						evaluationHousingStore.requestBodiesHousing[k]['created_at'] =
+							localStorage.getItem('created_at') as string;
+					}
+				}
+			}
 		},
 
 		async getUserManual() {
