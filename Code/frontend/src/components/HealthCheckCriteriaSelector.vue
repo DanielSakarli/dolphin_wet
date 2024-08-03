@@ -1320,7 +1320,7 @@ export default {
 				});
 		},
 		// Method to collect the checked checkboxes and give request body the scores
-		storeCheckedValues(calledFromSwitchDolphins = false) {
+		async storeCheckedValues(calledFromSwitchDolphins = false) {
 			///////////////////////////////////////////////////////////////////////////
 			// This part checks from where the store method is called
 			// If it is called from the switchDolphin method, the data shall be saved
@@ -1895,8 +1895,8 @@ export default {
 				//k stands for the different dolphins. It iterates through the array of dolphins in requestBodiesHealth.json
 				// Select the k-th requestBody which is equivalent to this.dolphinSelect
 				if (
-					dolphinSelect &&
-					dolphinSelect.includes(
+					this.dolphinSelect &&
+					this.dolphinSelect.includes(
 						evaluationHealthStore.requestBodiesHealth[k]['dolphin_name']
 					)
 				) {
@@ -1960,44 +1960,62 @@ export default {
 								evaluationHealthStore.requestBodiesHealth[k][
 									'records_external_disease'
 								];
+							console.log(
+								'Records normal floatability value: ',
+								recordsNormalFloatability
+							);
 							if (normalFloatability !== null) {
 								// Assign the value of the body condition score to the checkbox array
 								const j = normalFloatability;
 								this.CheckboxArray[0][j] = true;
-							} else if (recordsNormalFloatability !== null) {
+								console.log('Normal floatability value: ', j);
+							}
+							if (recordsNormalFloatability !== null) {
 								const j = recordsNormalFloatability;
 								this.CheckboxArray[1][j] = true;
-							} else if (inspectionEyeLesions !== null) {
+								console.log('Records normal floatability value second: ', j);
+							}
+							if (inspectionEyeLesions !== null) {
 								const j = inspectionEyeLesions;
 								this.CheckboxArray[2][j] = true;
-							} else if (responseVisualCues !== null) {
+							}
+							if (responseVisualCues !== null) {
 								const j = responseVisualCues;
 								this.CheckboxArray[3][j] = true;
-							} else if (recordsEyeLesions !== null) {
+							}
+							if (recordsEyeLesions !== null) {
 								const j = recordsEyeLesions;
 								this.CheckboxArray[4][j] = true;
-							} else if (mouthExam !== null) {
+							}
+							if (mouthExam !== null) {
 								const j = mouthExam;
 								this.CheckboxArray[5][j] = true;
-							} else if (recordsOralLesions !== null) {
+							}
+							if (recordsOralLesions !== null) {
 								const j = recordsOralLesions;
 								this.CheckboxArray[6][j] = true;
-							} else if (recordsGastricAbnormality !== null) {
+							}
+							if (recordsGastricAbnormality !== null) {
 								const j = recordsGastricAbnormality;
 								this.CheckboxArray[7][j] = true;
-							} else if (inspectionRespiratory !== null) {
+							}
+							if (inspectionRespiratory !== null) {
 								const j = inspectionRespiratory;
 								this.CheckboxArray[8][j] = true;
-							} else if (forceExpiration !== null) {
+							}
+							if (forceExpiration !== null) {
 								const j = forceExpiration;
 								this.CheckboxArray[9][j] = true;
-							} else if (recordsRespiratoryDisease !== null) {
+							}
+							if (recordsRespiratoryDisease !== null) {
 								const j = recordsRespiratoryDisease;
 								this.CheckboxArray[10][j] = true;
-							} else if (inspectionMarks !== null) {
+							}
+							if (inspectionMarks !== null) {
 								const j = inspectionMarks;
 								this.CheckboxArray[11][j] = true;
-							} else if (recordsExternalDisease !== null) {
+							}
+							if (recordsExternalDisease !== null) {
 								const j = recordsExternalDisease;
 								this.CheckboxArray[12][j] = true;
 							}
