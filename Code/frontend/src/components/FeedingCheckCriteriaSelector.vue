@@ -502,7 +502,7 @@ import { Browser } from '@capacitor/browser';
 import 'vue3-toastify/dist/index.css';
 
 const dolphinsStore = useDolphinsStore();
-dolphinsStore.fill();
+//dolphinsStore.fill();
 const evaluationFeedingStore = useEvaluationFeedingStore();
 
 let dataInBody; //Variable which gets saved in localstorage with either true or false, depending if data is in checkboxes or evaluationFeedingStore
@@ -538,11 +538,12 @@ export default {
 		// reference areas are the ones from the animalList.json. Also it adds the dolphins
 		// which are added by the user and not in the animalList.json
 
-		this.dolphinsStore = useDolphinsStore();
-		await this.dolphinsStore.fill();
+		// this.dolphinsStore = useDolphinsStore();
+		// await this.dolphinsStore.fill();
 		//evaluationFeedingStore.resetBodies();
 		// The fill method now resets the bodies
-		evaluationFeedingStore.fill(this.dolphinsStore.dolphinList);
+		const dolphinsStore = useDolphinsStore();
+		evaluationFeedingStore.fill(dolphinsStore.dolphinList);
 		// Reset here data while page is mounted
 		localStorage.setItem('backButtonClicked', 'false');
 		localStorage.setItem('dataInBody', 'false');
@@ -615,14 +616,6 @@ export default {
 			}
 			this.isOpenReferenceArea = isOpen;
 		},
-		// ion-select method to check if all dolphins are selected
-		/*checkAllDolphinsSelected() {
-			if (this.dolphinSelect.includes('all')) {
-				this.dolphinSelect = this.dolphinsStore.dolphinList.map(
-					(dolphin) => dolphin.name
-				);
-			}
-		},*/
 		//Method to handle the change of the selected dolphins
 		async handleDolphinChange() {
 			console.log('Dolphin changed: ', this.dolphinSelect);
@@ -638,6 +631,22 @@ export default {
 		},
 		//Method to switch the dolphin
 		async switchDolphin() {
+			///////////////////////////////////////////////////////////////////////////
+			// This part ensures that the data is saved
+			// for the previously selected dolphin
+			let dolphinSelect;
+			if (this.oldDolphinSelect === undefined) {
+				// If there is no old dolphin select, then the CURRENT dolphin select is used
+				console.log('No old dolphin select found.');
+				dolphinSelect = this.dolphinSelect;
+			} else {
+				// If there is an old dolphin select, then the OLD dolphin select is used
+				console.log('Old dolphin select found:', this.oldDolphinSelect);
+				dolphinSelect = this.oldDolphinSelect;
+			}
+
+			console.log('Current data saved for: ', dolphinSelect);
+			///////////////////////////////////////////////////////////////////////////
 			// Save the current data if the user switches the dolphin without clicking on the next button
 			await this.fileUpload();
 			await this.storeCheckedValues(true); //true is passed so the method knows it has been called from the switchDolphin method
@@ -650,6 +659,7 @@ export default {
 					}
 				}
 			}
+
 			// Reset comments before filling them again with current data
 			this.body_condition_score_comments = '';
 			this.weight_measured_comments = '';
@@ -657,7 +667,7 @@ export default {
 			this.blood_hydration_comments = '';
 			this.fish_quality_comments = '';
 			this.fish_variety_comments = '';
-
+			console.log('Reseted the checkboxes and comment fields.');
 			console.log(
 				'The requestBody in switchDolphin: ',
 				evaluationFeedingStore.requestBodiesFeeding
@@ -677,7 +687,7 @@ export default {
 				) {
 					// Now the correct dolphin is selected
 					console.log(
-						'Dolphin selected: ',
+						'Dolphin currently selected: ',
 						evaluationFeedingStore.requestBodiesFeeding[k]['dolphin_name']
 					);
 
@@ -712,6 +722,7 @@ export default {
 								// Assign the value of the body condition score to the checkbox array
 								const j = bodyConditionScore;
 								this.CheckboxArray[0][j] = true;
+								console.log('Body condition score displayed: ', j);
 							} else if (kcalCalculations !== null) {
 								const j = kcalCalculations;
 								this.CheckboxArray[1][j] = true;
@@ -873,7 +884,7 @@ export default {
 			//console.log('Dolphin selected: ', this.dolphinSelect);
 		},
 		// Method to collect the checked checkboxes and give request Body the scores
-		storeCheckedValues(calledFromSwitchDolphins = false) {
+		async storeCheckedValues(calledFromSwitchDolphins = false) {
 			///////////////////////////////////////////////////////////////////////////
 			// This part checks from where the store method is called
 			// If it is called from the switchDolphin method, the data shall be saved

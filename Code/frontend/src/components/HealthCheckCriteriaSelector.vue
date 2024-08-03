@@ -9,6 +9,7 @@
 					okText="OK"
 					:cancelText="firstcancelText"
 					v-model="dolphinSelect"
+					@ionChange="handleDolphinChange"
 				>
 					<ion-select-option
 						v-for="dolphin in dolphinsStore.dolphinList"
@@ -233,7 +234,10 @@
 						>Score 2</ion-checkbox
 					>
 				</ion-item>
-				<CheckComments @update-comment="updateNormalFloatabilityComments" />
+				<CheckComments
+					:update-comment="normal_floatability_comments"
+					@update-comment="updateNormalFloatabilityComments"
+				/>
 			</ion-list>
 		</ion-card>
 		<ion-card
@@ -264,6 +268,7 @@
 					>
 				</ion-item>
 				<CheckComments
+					:update-comment="records_normal_floatability_comments"
 					@update-comment="updateNormalFloatabilityRecordsComments"
 				/>
 			</ion-list>
@@ -312,7 +317,10 @@
 						>Score 2</ion-checkbox
 					>
 				</ion-item>
-				<CheckComments @update-comment="updateEyeLesionsComments" />
+				<CheckComments
+					:update-comment="inspection_eye_lesions_comments"
+					@update-comment="updateEyeLesionsComments"
+				/>
 				<!--<ion-item>
 					<ion-label><br>Upload your eye photos here:</ion-label>
 				</ion-item>
@@ -381,7 +389,10 @@
 						>Score 2</ion-checkbox
 					>
 				</ion-item>
-				<CheckComments @update-comment="updateVisualCuesComments" />
+				<CheckComments
+					:update-comment="response_visual_cues_comments"
+					@update-comment="updateVisualCuesComments"
+				/>
 				<ion-item> </ion-item>
 			</ion-list>
 		</ion-card>
@@ -412,7 +423,10 @@
 						>Score 2</ion-checkbox
 					>
 				</ion-item>
-				<CheckComments @update-comment="updateEyeLesionsRecordsComments" />
+				<CheckComments
+					:update-comment="records_eye_lesions_comments"
+					@update-comment="updateEyeLesionsRecordsComments"
+				/>
 			</ion-list>
 		</ion-card>
 		<ion-card
@@ -459,7 +473,10 @@
 						>Score 2</ion-checkbox
 					>
 				</ion-item>
-				<CheckComments @update-comment="updateMouthExamComments" />
+				<CheckComments
+					:update-comment="mouth_exam_comments"
+					@update-comment="updateMouthExamComments"
+				/>
 			</ion-list>
 		</ion-card>
 		<ion-card
@@ -522,7 +539,10 @@
 						>Score 2</ion-checkbox
 					>
 				</ion-item>
-				<CheckComments @update-comment="updateOralLesionsRecordsComments" />
+				<CheckComments
+					:update-comment="records_oral_lesions_comments"
+					@update-comment="updateOralLesionsRecordsComments"
+				/>
 			</ion-list>
 		</ion-card>
 		<ion-card
@@ -610,6 +630,7 @@
 					>
 				</ion-item>
 				<CheckComments
+					:update-comment="records_gastric_abnormality_comments"
 					@update-comment="updateGastricAbnormalityRecordsComments"
 				/>
 			</ion-list>
@@ -658,7 +679,10 @@
 						>Score 2</ion-checkbox
 					>
 				</ion-item>
-				<CheckComments @update-comment="updateRespiratoryDiseaseComments" />
+				<CheckComments
+					:update-comment="inspection_respiratory_comments"
+					@update-comment="updateRespiratoryDiseaseComments"
+				/>
 			</ion-list>
 		</ion-card>
 		<ion-card
@@ -688,7 +712,10 @@
 						>Score 2</ion-checkbox
 					>
 				</ion-item>
-				<CheckComments @update-comment="updateForceExpirationComments" />
+				<CheckComments
+					:update-comment="force_expiration_comments"
+					@update-comment="updateForceExpirationComments"
+				/>
 			</ion-list>
 		</ion-card>
 		<ion-card
@@ -723,6 +750,7 @@
 					>
 				</ion-item>
 				<CheckComments
+					:update-comment="records_respiratory_disease_comments"
 					@update-comment="updateRespiratoryDiseaseRecordsComments"
 				/>
 			</ion-list>
@@ -775,7 +803,10 @@
 						>Score 2</ion-checkbox
 					>
 				</ion-item>
-				<CheckComments @update-comment="updateMarksComments" />
+				<CheckComments
+					:update-comment="inspection_marks_comments"
+					@update-comment="updateMarksComments"
+				/>
 			</ion-list>
 		</ion-card>
 		<ion-card
@@ -884,7 +915,10 @@
 						>Score 2</ion-checkbox
 					>
 				</ion-item>
-				<CheckComments @update-comment="updateExternalDiseaseComments" />
+				<CheckComments
+					:update-comment="records_external_disease_comments"
+					@update-comment="updateExternalDiseaseComments"
+				/>
 			</ion-list>
 		</ion-card>
 		<ion-card
@@ -1032,6 +1066,7 @@ export default {
 			download,
 			dolphinsStore: dolphinsStore,
 			dolphinSelect: null as string | null,
+			oldDolphinSelect: null as string | null,
 			criteria: null as string | null,
 			subcriteria: '',
 			firstlabel: this.$t('dolphin'),
@@ -1284,21 +1319,46 @@ export default {
 					console.error('Error:', error);
 				});
 		},
-		// Method to collect the checked checkboxes and give request Body the scores
-		storeCheckedValues() {
+		// Method to collect the checked checkboxes and give request body the scores
+		storeCheckedValues(calledFromSwitchDolphins = false) {
+			///////////////////////////////////////////////////////////////////////////
+			// This part checks from where the store method is called
+			// If it is called from the switchDolphin method, the data shall be saved
+			// for the previously selected dolphin!
+			let dolphinSelect;
+			if (calledFromSwitchDolphins === true) {
+				console.log('storeCheckedValues called from switchDolphin method');
+				if (this.oldDolphinSelect === undefined) {
+					// If there is no old dolphin select, then the CURRENT dolphin select is used
+					console.log('No old dolphin select found.');
+					dolphinSelect = this.dolphinSelect;
+				} else {
+					// If there is an old dolphin select, then the OLD dolphin select is used
+					console.log('Old dolphin select found:', this.oldDolphinSelect);
+					dolphinSelect = this.oldDolphinSelect;
+				}
+			} else {
+				console.log('storeCheckedValues called from next button click.');
+				dolphinSelect = this.dolphinSelect;
+			}
+			console.log('Current data saved for: ', dolphinSelect);
+			///////////////////////////////////////////////////////////////////////////
 			for (
 				let k = 0;
 				k < evaluationHealthStore.requestBodiesHealth.length;
 				k++
 			) {
+				//k stands for the different dolphins. It iterates through the array of dolphins in requestBodiesEmotionalState.json
 				if (
-					this.dolphinSelect ===
-					evaluationHealthStore.requestBodiesHealth[k]['dolphin_name']
+					dolphinSelect &&
+					dolphinSelect.includes(
+						evaluationHealthStore.requestBodiesHealth[k]['dolphin_name']
+					)
 				) {
-					if (this.dolphinSelect !== null) {
+					/*if (dolphinSelect !== null) {
 						evaluationHealthStore.requestBodiesHealth[k]['dolphin_name'] =
-							this.dolphinSelect;
-					}
+							dolphinSelect;
+					}*/
 					for (let i = 0; i < this.CheckboxArray.length; i++) {
 						for (let j = 0; j < this.CheckboxArray[i].length; j++) {
 							if (this.CheckboxArray[i][j] === true && i === 0) {
@@ -1766,6 +1826,244 @@ export default {
 				//this.criteria = null;
 				const targetUrl = `/detailHealth`;
 				this.$router.push(targetUrl);
+			}
+		},
+		//Method to handle the change of the selected dolphins
+		async handleDolphinChange() {
+			console.log('Dolphin changed: ', this.dolphinSelect);
+			await this.switchDolphin();
+			// Saves the current dolphin name as the old name for later use
+			// Important when switching the dolphin to save the data of the old dolphin
+			this.oldDolphinSelect = this.dolphinSelect;
+		},
+		//Method to switch the dolphin
+		async switchDolphin() {
+			// Save the current data if the user switches the dolphin without clicking on the next button
+			await this.storeCheckedValues(true); //true is passed so the method knows it has been called from the switchDolphin method
+			///////////////////////////////////////////////////////////////////////////
+			// This part ensures that the data is saved
+			// for the previously selected dolphin
+			let dolphinSelect;
+			if (this.oldDolphinSelect === undefined) {
+				// If there is no old dolphin select, then the CURRENT dolphin select is used
+				console.log('No old dolphin select found.');
+				dolphinSelect = this.dolphinSelect;
+			} else {
+				// If there is an old dolphin select, then the OLD dolphin select is used
+				console.log('Old dolphin select found:', this.oldDolphinSelect);
+				dolphinSelect = this.oldDolphinSelect;
+			}
+
+			console.log('Current data saved for: ', dolphinSelect);
+			///////////////////////////////////////////////////////////////////////////
+			await this.photoUpload(dolphinSelect ?? '');
+			await this.videoUpload(dolphinSelect ?? '');
+
+			// Reset checkboxes before filling them again with current data
+			for (let i = 0; i <= 12; i++) {
+				for (let j = 0; j < 3; j++) {
+					if (this.CheckboxArray[i][j] === true) {
+						this.CheckboxArray[i][j] = false;
+					}
+				}
+			}
+			// Reset comments before filling them again with current data
+			this.normal_floatability_comments = '';
+			this.records_normal_floatability_comments = '';
+			this.inspection_eye_lesions_comments = '';
+			this.response_visual_cues_comments = '';
+			this.records_eye_lesions_comments = '';
+			this.mouth_exam_comments = '';
+			this.records_oral_lesions_comments = '';
+			this.records_gastric_abnormality_comments = '';
+			this.inspection_respiratory_comments = '';
+			this.force_expiration_comments = '';
+			this.records_respiratory_disease_comments = '';
+			this.inspection_marks_comments = '';
+			this.records_external_disease_comments = '';
+
+			console.log(
+				'The requestBody in switchDolphin: ',
+				evaluationHealthStore.requestBodiesHealth
+			);
+			// Get the data of the selected dolphin, if user has already entered some data for the selected dolphin
+			for (
+				let k = 0;
+				k < evaluationHealthStore.requestBodiesHealth.length;
+				k++
+			) {
+				//k stands for the different dolphins. It iterates through the array of dolphins in requestBodiesHealth.json
+				// Select the k-th requestBody which is equivalent to this.dolphinSelect
+				if (
+					dolphinSelect &&
+					dolphinSelect.includes(
+						evaluationHealthStore.requestBodiesHealth[k]['dolphin_name']
+					)
+				) {
+					// Now the correct dolphin is selected
+					console.log(
+						'Dolphin selected: ',
+						evaluationHealthStore.requestBodiesHealth[k]['dolphin_name']
+					);
+
+					// Here the data from the requestBodiesHealth is assigned to the checkboxes
+					for (let i = 0; i < this.CheckboxArray.length; i++) {
+						for (let j = 0; j < this.CheckboxArray[i].length; j++) {
+							// Get the data from the requestBodiesHealth BCScore
+							const normalFloatability =
+								evaluationHealthStore.requestBodiesHealth[k][
+									'normal_floatability'
+								];
+							const recordsNormalFloatability =
+								evaluationHealthStore.requestBodiesHealth[k][
+									'records_normal_floatability'
+								];
+							const inspectionEyeLesions =
+								evaluationHealthStore.requestBodiesHealth[k][
+									'inspection_eye_lesions'
+								];
+							const responseVisualCues =
+								evaluationHealthStore.requestBodiesHealth[k][
+									'response_visual_cues'
+								];
+							const recordsEyeLesions =
+								evaluationHealthStore.requestBodiesHealth[k][
+									'records_eye_lesions'
+								];
+							const mouthExam =
+								evaluationHealthStore.requestBodiesHealth[k]['mouth_exam'];
+							const recordsOralLesions =
+								evaluationHealthStore.requestBodiesHealth[k][
+									'records_oral_lesions'
+								];
+							const recordsGastricAbnormality =
+								evaluationHealthStore.requestBodiesHealth[k][
+									'records_gastric_abnormality'
+								];
+							const inspectionRespiratory =
+								evaluationHealthStore.requestBodiesHealth[k][
+									'inspection_respiratory'
+								];
+							const forceExpiration =
+								evaluationHealthStore.requestBodiesHealth[k][
+									'force_expiration'
+								];
+							const recordsRespiratoryDisease =
+								evaluationHealthStore.requestBodiesHealth[k][
+									'records_respiratory_disease'
+								];
+							const inspectionMarks =
+								evaluationHealthStore.requestBodiesHealth[k][
+									'inspection_marks'
+								];
+							const recordsExternalDisease =
+								evaluationHealthStore.requestBodiesHealth[k][
+									'records_external_disease'
+								];
+							if (normalFloatability !== null) {
+								// Assign the value of the body condition score to the checkbox array
+								const j = normalFloatability;
+								this.CheckboxArray[0][j] = true;
+							} else if (recordsNormalFloatability !== null) {
+								const j = recordsNormalFloatability;
+								this.CheckboxArray[1][j] = true;
+							} else if (inspectionEyeLesions !== null) {
+								const j = inspectionEyeLesions;
+								this.CheckboxArray[2][j] = true;
+							} else if (responseVisualCues !== null) {
+								const j = responseVisualCues;
+								this.CheckboxArray[3][j] = true;
+							} else if (recordsEyeLesions !== null) {
+								const j = recordsEyeLesions;
+								this.CheckboxArray[4][j] = true;
+							} else if (mouthExam !== null) {
+								const j = mouthExam;
+								this.CheckboxArray[5][j] = true;
+							} else if (recordsOralLesions !== null) {
+								const j = recordsOralLesions;
+								this.CheckboxArray[6][j] = true;
+							} else if (recordsGastricAbnormality !== null) {
+								const j = recordsGastricAbnormality;
+								this.CheckboxArray[7][j] = true;
+							} else if (inspectionRespiratory !== null) {
+								const j = inspectionRespiratory;
+								this.CheckboxArray[8][j] = true;
+							} else if (forceExpiration !== null) {
+								const j = forceExpiration;
+								this.CheckboxArray[9][j] = true;
+							} else if (recordsRespiratoryDisease !== null) {
+								const j = recordsRespiratoryDisease;
+								this.CheckboxArray[10][j] = true;
+							} else if (inspectionMarks !== null) {
+								const j = inspectionMarks;
+								this.CheckboxArray[11][j] = true;
+							} else if (recordsExternalDisease !== null) {
+								const j = recordsExternalDisease;
+								this.CheckboxArray[12][j] = true;
+							}
+						}
+					}
+					// Code here the comments into the request body
+					// First check with if statement if comments had been updated or not. If we don´t do that we override the comments with
+					// an empty string if we click on 'Next Test'
+					this.normal_floatability_comments =
+						evaluationHealthStore.requestBodiesHealth[k][
+							'normal_floatability_comments'
+						] ?? '';
+					this.records_normal_floatability_comments =
+						evaluationHealthStore.requestBodiesHealth[k][
+							'records_normal_floatability_comments'
+						] ?? '';
+					this.inspection_eye_lesions_comments =
+						evaluationHealthStore.requestBodiesHealth[k][
+							'inspection_eye_lesions_comments'
+						] ?? '';
+					this.response_visual_cues_comments =
+						evaluationHealthStore.requestBodiesHealth[k][
+							'response_visual_cues_comments'
+						] ?? '';
+					this.records_eye_lesions_comments =
+						evaluationHealthStore.requestBodiesHealth[k][
+							'records_eye_lesions_comments'
+						] ?? '';
+					this.mouth_exam_comments =
+						evaluationHealthStore.requestBodiesHealth[k][
+							'mouth_exam_comments'
+						] ?? '';
+					this.records_oral_lesions_comments =
+						evaluationHealthStore.requestBodiesHealth[k][
+							'records_oral_lesions_comments'
+						] ?? '';
+					this.records_gastric_abnormality_comments =
+						evaluationHealthStore.requestBodiesHealth[k][
+							'records_gastric_abnormality_comments'
+						] ?? '';
+					this.inspection_respiratory_comments =
+						evaluationHealthStore.requestBodiesHealth[k][
+							'inspection_respiratory_comments'
+						] ?? '';
+					this.force_expiration_comments =
+						evaluationHealthStore.requestBodiesHealth[k][
+							'force_expiration_comments'
+						] ?? '';
+					this.records_respiratory_disease_comments =
+						evaluationHealthStore.requestBodiesHealth[k][
+							'records_respiratory_disease_comments'
+						] ?? '';
+					this.inspection_marks_comments =
+						evaluationHealthStore.requestBodiesHealth[k][
+							'inspection_marks_comments'
+						] ?? '';
+					this.records_external_disease_comments =
+						evaluationHealthStore.requestBodiesHealth[k][
+							'records_external_disease_comments'
+						] ?? '';
+
+					if (localStorage.getItem('created_at') !== '') {
+						evaluationHealthStore.requestBodiesHealth[k]['created_at'] =
+							localStorage.getItem('created_at') as string;
+					}
+				}
 			}
 		},
 		async photoUpload(dolphin_name: string) {
