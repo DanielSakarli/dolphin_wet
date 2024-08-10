@@ -336,7 +336,7 @@ export default {
 					.then((response) => {
 						if (localStorage.getItem('reload_data_button_pressed') === 'true') {
 							toast.success(this.$t('dolphinDataReloaded'), {
-								autoClose: 1500,
+								autoClose: 2500,
 							});
 							localStorage.setItem('reload_data_button_pressed', 'false');
 						}
@@ -349,7 +349,7 @@ export default {
 						console.error(e);
 
 						toast.error(this.$t('dolphinDataReloadError'), {
-							autoClose: 2000,
+							autoClose: 3000,
 						});
 					});
 			} catch (error) {
@@ -380,7 +380,7 @@ export default {
 							this.showDolphin = false;
 							this.toggleDeleteModal();
 							toast.success(`${this.$t('dolphinDeleted')}: ${deleteDolphin}`, {
-								autoClose: 1700,
+								autoClose: 3700,
 							});
 							deleteDolphin = '';
 						})
@@ -388,17 +388,17 @@ export default {
 							console.error('Error:', error.response.data);
 							if (error.response.data.error === 'USER_NOT_AN_ADMINISTRATOR') {
 								toast.error(this.$t('userNotAdmin'), {
-									autoClose: 2000,
+									autoClose: 3000,
 								});
 							}
 							if (error.response.data.error === 'ADMIN_PASSWORD_IS_WRONG') {
 								toast.error(this.$t('adminPasswordError'), {
-									autoClose: 2000,
+									autoClose: 3000,
 								});
 							}
 							if (error.response.data === 'ADMIN_PASSWORD_NOT_PROVIDED') {
 								toast.error(this.$t('adminPasswordNotProvided'), {
-									autoClose: 2000,
+									autoClose: 3000,
 								});
 							}
 							deleteDolphin = '';
@@ -526,7 +526,7 @@ export default {
 						console.log('Current dolphin: ', this.currentDolphin?.name);
 						this.fetchDolphins();
 						toast.success(this.$t('dolphinDataUpdated'), {
-							autoClose: 1500,
+							autoClose: 3000,
 						});
 						// Set current dolphin name to null and then again to name
 						// Because than the ion-card with the new dolphin data will be updated
@@ -541,7 +541,7 @@ export default {
 							this.toggleEditModal();
 
 							toast.error(this.$t('userNotAdmin'), {
-								autoClose: 2000,
+								autoClose: 3000,
 							});
 						}
 						console.error('Error:', error.response.data);

@@ -29,7 +29,7 @@
 					:label="secondlabel"
 					:placeholder="secondplaceholder"
 					okText="OK"
-					@IonChange="criteria = $event.target.value"
+					@IonChange="handleCriteriaChange"
 					:cancelText="firstcancelText"
 				>
 					<ion-select-option value="firstCriteriaEnvironment">{{
@@ -924,7 +924,7 @@ export default {
 							) {
 								const targetUrl = '/detailHousing'; //'/folder/Evaluate';
 								toast.success(this.$t('dataUploadSuccessfull'), {
-									autoClose: 1000,
+									autoClose: 3000,
 								});
 								setTimeout(() => {
 									// Set flag to false, so if user wants to go to another route he can
@@ -951,7 +951,7 @@ export default {
 								//console.log('Inside error catch block');
 								alertShown = true;
 								toast.error(this.$t('dataUploadFailed'), {
-									autoClose: 2000,
+									autoClose: 4000,
 								});
 								setTimeout(() => {
 									dataInBody = false;
@@ -975,37 +975,37 @@ export default {
 					case 'firstCriteriaEnvironment':
 						this.criteria = 'secondCriteriaEnvironment';
 						toast.success(this.$t('dataSavedTemporary'), {
-							autoClose: 1000,
+							autoClose: 3000,
 						});
 						break;
 					case 'secondCriteriaEnvironment':
 						this.criteria = 'thirdCriteriaEnvironment';
 						toast.success(this.$t('dataSavedTemporary'), {
-							autoClose: 1000,
+							autoClose: 3000,
 						});
 						break;
 					case 'thirdCriteriaEnvironment':
 						this.criteria = 'fourthCriteriaEnvironment';
 						toast.success(this.$t('dataSavedTemporary'), {
-							autoClose: 1000,
+							autoClose: 3000,
 						});
 						break;
 					case 'fourthCriteriaEnvironment':
 						this.criteria = 'fifthCriteriaEnvironment';
 						toast.success(this.$t('dataSavedTemporary'), {
-							autoClose: 1000,
+							autoClose: 3000,
 						});
 						break;
 					case 'fifthCriteriaEnvironment':
 						this.criteria = 'sixthCriteriaEnvironment';
 						toast.success(this.$t('dataSavedTemporary'), {
-							autoClose: 1000,
+							autoClose: 3000,
 						});
 						break;
 					case 'sixthCriteriaEnvironment':
 						this.criteria = 'seventhCriteriaEnvironment';
 						toast.success(this.$t('dataSavedTemporary'), {
-							autoClose: 1000,
+							autoClose: 3000,
 						});
 						break;
 					case 'seventhCriteriaEnvironment':
@@ -1026,6 +1026,16 @@ export default {
 				this.$router.push(targetUrl);
 			}
 		},
+		async handleCriteriaChange(event: any) {
+			await this.storeCheckedValues();
+			if (this.criteria != null) {
+				toast.success(this.$t('dataSavedTemporary'), {
+					autoClose: 2000,
+				});
+			}
+			this.criteria = event?.target?.value;
+			console.log('Criteria changed: ', this.criteria);
+		},
 		//Method to handle the change of the selected dolphins
 		async handleDolphinChange() {
 			console.log('Dolphin changed: ', this.dolphinSelect);
@@ -1043,7 +1053,11 @@ export default {
 		async switchDolphin() {
 			// Save the current data if the user switches the dolphin without clicking on the next button
 			await this.storeCheckedValues(true); //true is passed so the method knows it has been called from the switchDolphin method
-
+			if (this.oldDolphinSelect.length !== 0) {
+				toast.success(this.$t('dataSavedTemporary'), {
+					autoClose: 2000,
+				});
+			}
 			// Reset checkboxes before filling them again with current data
 			// Reset checkboxes
 			for (let i = 0; i <= 8; i++) {

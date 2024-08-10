@@ -1180,12 +1180,12 @@ export default {
 						) {
 							// It's a network error
 							toast.error(this.$t('networkError'), {
-								autoClose: 2000,
+								autoClose: 3000,
 							});
 						}
 						if (e.response.data.error === 'USER_NOT_AN_ADMINISTRATOR') {
 							toast.error(this.$t('userNotAdmin'), {
-								autoClose: 2000,
+								autoClose: 3000,
 							});
 						}
 
@@ -1205,7 +1205,7 @@ export default {
 						console.error(e);
 						if (e.response.data.error === 'USER_NOT_AN_ADMINISTRATOR') {
 							toast.error(this.$t('userNotAdmin'), {
-								autoClose: 2000,
+								autoClose: 3000,
 							});
 						}
 						this.urlHousing = baseUrl + '/api/good_housing?name='; //reset the url
@@ -1227,7 +1227,7 @@ export default {
 						console.error(e);
 						if (e.response.data.error === 'USER_NOT_AN_ADMINISTRATOR') {
 							toast.error(this.$t('userNotAdmin'), {
-								autoClose: 2000,
+								autoClose: 3000,
 							});
 						}
 						this.urlBehaviour = baseUrl + '/api/behaviour?name='; //reset the url
@@ -1246,7 +1246,7 @@ export default {
 						console.error(e);
 						if (e.response.data.error === 'USER_NOT_AN_ADMINISTRATOR') {
 							toast.error(this.$t('userNotAdmin'), {
-								autoClose: 2000,
+								autoClose: 3000,
 							});
 						}
 						this.urlHealth = baseUrl + '/api/good_health?name='; //reset the url
@@ -1268,7 +1268,7 @@ export default {
 						console.error(e);
 						if (e.response.data.error === 'USER_NOT_AN_ADMINISTRATOR') {
 							toast.error(this.$t('userNotAdmin'), {
-								autoClose: 2000,
+								autoClose: 3000,
 							});
 						}
 						this.urlEmotionalState = baseUrl + '/api/emotional_state?name='; //reset the url
@@ -1298,7 +1298,7 @@ export default {
 				.then((response) => {
 					console.log('Response:', response.data);
 					toast.success(this.$t('dataSent'), {
-						autoClose: 2000,
+						autoClose: 3000,
 					});
 				})
 				.catch((e) => {
@@ -1308,12 +1308,12 @@ export default {
 					) {
 						// It's a network error
 						toast.error(this.$t('networkError'), {
-							autoClose: 2000,
+							autoClose: 3000,
 						});
 					}
 					if (e.response.data.error === 'USER_NOT_AN_ADMINISTRATOR') {
 						toast.error(this.$t('userNotAdmin'), {
-							autoClose: 2000,
+							autoClose: 3000,
 						});
 					}
 					console.error(e);

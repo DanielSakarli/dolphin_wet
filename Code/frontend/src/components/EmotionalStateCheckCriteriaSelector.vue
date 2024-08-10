@@ -23,7 +23,7 @@
 			<ion-item>
 				<ion-select
 					:value="criteria"
-					@IonChange="criteria = $event.target.value"
+					@IonChange="handleCriteriaChange"
 					:label="secondlabel"
 					:placeholder="secondplaceholder"
 					okText="OK"
@@ -806,7 +806,7 @@ export default {
 							) {
 								const targetUrl = '/detailEmotionalState';
 								toast.success(this.$t('dataUploadSuccessfull'), {
-									autoClose: 1000,
+									autoClose: 3000,
 								});
 								setTimeout(() => {
 									// Set flag to false, so if user wants to go to another route he can
@@ -833,7 +833,7 @@ export default {
 								alertShown = true;
 								//console.log('Inside error catch block');
 								toast.error(this.$t('dataUploadFailed'), {
-									autoClose: 2000,
+									autoClose: 4000,
 								});
 								setTimeout(() => {
 									dataInBody = false;
@@ -857,19 +857,19 @@ export default {
 					case 'firstCriteriaEmotionalState':
 						this.criteria = 'secondCriteriaEmotionalState';
 						toast.success(this.$t('dataSavedTemporary'), {
-							autoClose: 1000,
+							autoClose: 3000,
 						});
 						break;
 					case 'secondCriteriaEmotionalState':
 						this.criteria = 'thirdCriteriaEmotionalState';
 						toast.success(this.$t('dataSavedTemporary'), {
-							autoClose: 1000,
+							autoClose: 3000,
 						});
 						break;
 					case 'thirdCriteriaEmotionalState':
 						this.criteria = 'fourthCriteriaEmotionalState';
 						toast.success(this.$t('dataSavedTemporary'), {
-							autoClose: 1000,
+							autoClose: 3000,
 						});
 						break;
 					case 'fourthCriteriaEmotionalState':
@@ -888,6 +888,16 @@ export default {
 				this.$router.push(targetUrl);
 			}
 		},
+		async handleCriteriaChange(event: any) {
+			await this.storeCheckedValues();
+			if (this.criteria !== null) {
+				toast.success(this.$t('dataSavedTemporary'), {
+					autoClose: 2000,
+				});
+			}
+			this.criteria = event?.target?.value;
+			console.log('Criteria changed: ', this.criteria);
+		},
 		//Method to handle the change of the selected dolphins
 		async handleDolphinChange() {
 			console.log('Dolphin changed: ', this.dolphinSelect);
@@ -900,7 +910,11 @@ export default {
 		async switchDolphin() {
 			// Save the current data if the user switches the dolphin without clicking on the next button
 			await this.storeCheckedValues(true); //true is passed so the method knows it has been called from the switchDolphin method
-
+			if (this.oldDolphinSelect !== null) {
+				toast.success(this.$t('dataSavedTemporary'), {
+					autoClose: 2000,
+				});
+			}
 			// Reset checkboxes before filling them again with current data
 			for (let i = 0; i <= 6; i++) {
 				for (let j = 0; j < 3; j++) {

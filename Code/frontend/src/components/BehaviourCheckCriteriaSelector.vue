@@ -23,9 +23,10 @@
 				</ion-select>
 			</ion-item>
 			<ion-item>
+				<!-- @IonChange="criteria = $event.target.value" -->
 				<ion-select
 					:value="criteria"
-					@IonChange="criteria = $event.target.value"
+					@IonChange="handleCriteriaChange"
 					:label="secondlabel"
 					:placeholder="secondplaceholder"
 					okText="OK"
@@ -1091,7 +1092,7 @@ export default {
 			localStorage.setItem('dataInBody', dataInBody.toString());
 		},
 		// Method to collect the checked checkboxes and give request body the scores
-		storeCheckedValues(calledFromSwitchDolphins = false) {
+		async storeCheckedValues(calledFromSwitchDolphins = false) {
 			///////////////////////////////////////////////////////////////////////////
 			// This part checks from where the store method is called
 			// If it is called from the switchDolphin method, the data shall be saved
@@ -1470,7 +1471,7 @@ export default {
 								const targetUrl = '/detailBehaviour';
 
 								toast.success(this.$t('dataUploadSuccessfull'), {
-									autoClose: 1000,
+									autoClose: 3000,
 								});
 								setTimeout(() => {
 									// Set flag to false, so if user wants to go to another route he can
@@ -1498,7 +1499,7 @@ export default {
 								alertShown = true;
 								//console.log('Inside error catch block');
 								toast.error(this.$t('dataUploadFailed'), {
-									autoClose: 2000,
+									autoClose: 4000,
 								});
 								setTimeout(() => {
 									dataInBody = false;
@@ -1522,43 +1523,43 @@ export default {
 					case 'firstCriteriaBehaviour':
 						this.criteria = 'secondCriteriaBehaviour';
 						toast.success(this.$t('dataSavedTemporary'), {
-							autoClose: 1000,
+							autoClose: 3000,
 						});
 						break;
 					case 'secondCriteriaBehaviour':
 						this.criteria = 'thirdCriteriaBehaviour';
 						toast.success(this.$t('dataSavedTemporary'), {
-							autoClose: 1000,
+							autoClose: 3000,
 						});
 						break;
 					case 'thirdCriteriaBehaviour':
 						this.criteria = 'fourthCriteriaBehaviour';
 						toast.success(this.$t('dataSavedTemporary'), {
-							autoClose: 1000,
+							autoClose: 3000,
 						});
 						break;
 					case 'fourthCriteriaBehaviour':
 						this.criteria = 'fifthCriteriaBehaviour';
 						toast.success(this.$t('dataSavedTemporary'), {
-							autoClose: 1000,
+							autoClose: 3000,
 						});
 						break;
 					case 'fifthCriteriaBehaviour':
 						this.criteria = 'sixthCriteriaBehaviour';
 						toast.success(this.$t('dataSavedTemporary'), {
-							autoClose: 1000,
+							autoClose: 3000,
 						});
 						break;
 					case 'sixthCriteriaBehaviour':
 						this.criteria = 'seventhCriteriaBehaviour';
 						toast.success(this.$t('dataSavedTemporary'), {
-							autoClose: 1000,
+							autoClose: 3000,
 						});
 						break;
 					case 'seventhCriteriaBehaviour':
 						this.criteria = 'eighthCriteriaBehaviour';
 						toast.success(this.$t('dataSavedTemporary'), {
-							autoClose: 1000,
+							autoClose: 3000,
 						});
 						break;
 					case 'eighthCriteriaBehaviour':
@@ -1575,6 +1576,16 @@ export default {
 				// need to be protected from losing data
 				this.$router.push(targetUrl);
 			}
+		},
+		async handleCriteriaChange(event: any) {
+			await this.storeCheckedValues();
+			if (this.criteria != null) {
+				toast.success(this.$t('dataSavedTemporary'), {
+					autoClose: 2000,
+				});
+			}
+			this.criteria = event?.target?.value;
+			console.log('Criteria changed: ', this.criteria);
 		},
 		//Method to handle the change of the selected dolphins
 		async handleDolphinChange() {
@@ -1593,7 +1604,11 @@ export default {
 		async switchDolphin() {
 			// Save the current data if the user switches the dolphin without clicking on the next button
 			await this.storeCheckedValues(true); //true is passed so the method knows it has been called from the switchDolphin method
-
+			if (this.oldDolphinSelect.length !== 0) {
+				toast.success(this.$t('dataSavedTemporary'), {
+					autoClose: 2000,
+				});
+			}
 			// Reset checkboxes before filling them again with current data
 			// Reset checkboxes
 			for (let i = 0; i <= 14; i++) {

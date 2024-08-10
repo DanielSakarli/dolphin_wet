@@ -143,7 +143,7 @@ export default defineComponent({
 					console.log(response);
 					this.errorMessage = '';
 					toast.success(this.$t('passwordChanged'), {
-						autoClose: 3000,
+						autoClose: 4000,
 					});
 				})
 				.catch((error) => {

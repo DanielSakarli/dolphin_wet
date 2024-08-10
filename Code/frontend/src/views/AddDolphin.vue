@@ -131,19 +131,19 @@ export default {
 					.then((response) => {
 						this.closeAddModal(); //goes back to the dolphin page
 						toast.success(this.$t('dolphinAdded'), {
-							autoClose: 1500,
+							autoClose: 2500,
 						});
 						console.log('Response:', response.data);
 					})
 					.catch((error) => {
 						if (error.message === 'Network Error') {
 							toast.error(this.$t('dataUploadFailed'), {
-								autoClose: 1500,
+								autoClose: 2500,
 							});
 						}
 						if (error.message != 'Network Error') {
 							toast.error(this.$t('dolphinAddError'), {
-								autoClose: 1500,
+								autoClose: 2500,
 							});
 						}
 						console.log('Error:', error);

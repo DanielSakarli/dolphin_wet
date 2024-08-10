@@ -122,7 +122,7 @@ export default defineComponent({
 				.then(async (response) => {
 					console.log(response);
 					toast.success(this.$t('passwordReseted'), {
-						autoClose: 3000,
+						autoClose: 4000,
 					});
 				})
 				.catch((error) => {

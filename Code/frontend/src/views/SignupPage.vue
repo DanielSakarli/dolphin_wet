@@ -151,41 +151,41 @@ export default {
 				.then((response: any) => {
 					console.log('Response:', response.data);
 					toast.success(this.$t('userRegistered'), {
-						autoClose: 1000,
+						autoClose: 2000,
 					});
 					setTimeout(() => {
 						this.$router.push('/login');
-					}, 2000);
+					}, 2500);
 				})
 				.catch((error: any) => {
 					if (error.response.data.error === 'USER_ALREADY_EXISTS') {
 						toast.error(this.$t('userExists'), {
-							autoClose: 2000,
+							autoClose: 3000,
 						});
 					}
 					if (error.response.data === 'NAME_MUST_BE_PROVIDED.') {
 						toast.error(this.$t('nameNotProvided'), {
-							autoClose: 2000,
+							autoClose: 3000,
 						});
 					}
 					if (error.response.data === 'EMAIL_MUST_BE_PROVIDED.') {
 						toast.error(this.$t('emailNotProvided'), {
-							autoClose: 2000,
+							autoClose: 3000,
 						});
 					}
 					if (error.response.data === 'PASSWORD_MUST_BE_PROVIDED.') {
 						toast.error(this.$t('passwordNotProvided'), {
-							autoClose: 2000,
+							autoClose: 3000,
 						});
 					}
 					if (error.response.data === 'ROLE_NAME_MUST_BE_PROVIDED.') {
 						toast.error(this.$t('zooNotProvided'), {
-							autoClose: 2000,
+							autoClose: 3000,
 						});
 					}
 					if (error.response.data === 'ROLE_PASSWORD_MUST_BE_PROVIDED.') {
 						toast.error(this.$t('zooPasswordNotProvided'), {
-							autoClose: 2000,
+							autoClose: 3000,
 						});
 					}
 

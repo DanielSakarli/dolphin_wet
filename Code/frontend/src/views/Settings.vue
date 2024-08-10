@@ -157,7 +157,7 @@ export default {
 						console.error(e);
 
 						toast.error(this.$t('getUserDataError'), {
-							autoClose: 2000,
+							autoClose: 3000,
 						});
 					});
 			} catch (error) {
@@ -181,7 +181,7 @@ export default {
 							this.fetchUsers();
 
 							toast.success(`${this.$t('userDeleted')}: ${this.currentUser}`, {
-								autoClose: 2000,
+								autoClose: 3000,
 							});
 							this.currentUser = '';
 						})
@@ -189,22 +189,22 @@ export default {
 							console.error('Error:', error.response);
 							if (error.response.data === 'USER_NOT_AN_ADMINISTRATOR') {
 								toast.error(this.$t('userNotAdmin'), {
-									autoClose: 2000,
+									autoClose: 3000,
 								});
 							}
 							if (error.response.data === 'ADMIN_PASSWORD_IS_WRONG') {
 								toast.error(this.$t('adminPasswordError'), {
-									autoClose: 2000,
+									autoClose: 3000,
 								});
 							}
 							if (error.response.data === 'USER_NAME_NOT_PROVIDED') {
 								toast.error(this.$t('userNotProvided'), {
-									autoClose: 2000,
+									autoClose: 3000,
 								});
 							}
 							if (error.response.data === 'ADMIN_PASSWORD_NOT_PROVIDED') {
 								toast.error(this.$t('adminPasswordNotProvided'), {
-									autoClose: 2000,
+									autoClose: 3000,
 								});
 							}
 						});
