@@ -13,6 +13,7 @@ const EmotionalStateService = require('../services/EmotionalStateService');
 //const { validationResult } = require('express-validator');
 const { isUserAuth } = require('./authSwitch');
 const User = require('../carecentive/carecentive-core/models/User');
+//const { tr } = require('vuetify/locale');
 
 
 async function csvWriter(req, res, next) {
@@ -72,6 +73,8 @@ async function csvWriter(req, res, next) {
 	
 	
 	if(section === 'Nutrition') {
+		
+
 	if (numMonths != '') {
 		if(dolphin_name != ''){
 			// Data of a specific dolphin_name and specific numMonths
@@ -98,10 +101,18 @@ async function csvWriter(req, res, next) {
 		data = resultFeeding; //save the results of feeding tests in data
 		resultFeeding = null; //reset feedig results
 	}
+
 	savePath = 'csv/Feeding_' + Date.now() + '.csv';
+
+	// Write the header note at the beginning of the file
+	const headerNote = 'Attention, there might be several data points during the same day. Filter for the days.\n';
+	fs.writeFileSync(savePath, headerNote);  // Write the custom header note
+
+
 	csvWriter = createCsvWriter({
 		
 		path: savePath,
+		append: true,
 		header: [
 			{id: 'feeding_record_id', title: 'Feeding Record ID'},
 			{id: 'user_id', title: 'User ID'},
@@ -131,6 +142,7 @@ async function csvWriter(req, res, next) {
 
 
 	if(section === 'Environment') {
+
 		if (numMonths != '') {
 			if(dolphin_name != ''){
 				// Data of a specific dolphin_name and specific numMonths
@@ -157,8 +169,13 @@ async function csvWriter(req, res, next) {
 			resultHousing = null; //reset housing results
 		}
 	savePath = 'csv/Housing_' + Date.now() + '.csv'
+	// Write the header note at the beginning of the file
+	const headerNote = 'Attention, there might be several data points during the same day. Filter for the days.\n';
+	fs.writeFileSync(savePath, headerNote);  // Write the custom header note
+	
 		csvWriter = createCsvWriter({
 			path: savePath,
+			append: true,
 			header: [
 				{id: 'housing_record_id', title: 'Housing Record ID'},
 				{id: 'user_id', title: 'User ID'},
@@ -217,8 +234,13 @@ async function csvWriter(req, res, next) {
 				resultHealth = null; //reset feedig results
 			}
 			savePath = 'csv/Health_' + Date.now() + '.csv';
+			// Write the header note at the beginning of the file
+			const headerNote = 'Attention, there might be several data points during the same day. Filter for the days.\n';
+			fs.writeFileSync(savePath, headerNote);  // Write the custom header note
+
 			csvWriter = createCsvWriter({
 				path: savePath,
+				append: true,
 				header: [
 					{id: 'health_record_id', title: 'Health Record ID'},
 					{id: 'user_id', title: 'User ID'},
@@ -291,9 +313,14 @@ async function csvWriter(req, res, next) {
 				resultBehaviour = null; //reset Behaviour results
 			}
 			savePath = 'csv/Behaviour_' + Date.now() + '.csv';
+			// Write the header note at the beginning of the file
+			const headerNote = 'Attention, there might be several data points during the same day. Filter for the days.\n';
+			fs.writeFileSync(savePath, headerNote);  // Write the custom header note
+
 			csvWriter = createCsvWriter({
 				
 				path: savePath,
+				append: true,
 				header: [
 					{id: 'behaviour_record_id', title: 'Behaviour Record ID'},
 					{id: 'user_id', title: 'User ID'},
@@ -365,9 +392,14 @@ async function csvWriter(req, res, next) {
 					resultEmotions = null; //reset emotions results
 				}
 				savePath = 'csv/Mental_State_' + Date.now() + '.csv';
+				// Write the header note at the beginning of the file
+				const headerNote = 'Attention, there might be several data points during the same day. Filter for the days.\n';
+				fs.writeFileSync(savePath, headerNote);  // Write the custom header note
+
 				csvWriter = createCsvWriter({
 					
 					path: savePath,
+					append: true,
 					header: [
 						{id: 'emotional_state_record_id', title: 'Mental State Record ID'},
 						{id: 'user_id', title: 'User ID'},
@@ -398,10 +430,6 @@ async function csvWriter(req, res, next) {
 	data.sort((a, b) => a.created_at - b.created_at);
 	console.log('data: ', ...data);
 
-	// Write the custom line followed by CSV data
-	const headerNote = 'Attention, there might be several data points during the same day. Filter for the days.\n';
-	fs.appendFileSync(savePath, headerNote); // Append the custom header to the file
-
 	csvWriter
 		.writeRecords(data)
 		.then(async () => {
@@ -413,7 +441,7 @@ async function csvWriter(req, res, next) {
 				from: `"Dolphin WET App" <${process.env.EMAIL}>`, // sender address
 				to: userEmail.email, // list of receivers
 				subject: 'Dolphin WET App: CSV file with your data', // Subject line
-				text: 'Here is the CSV file you requested.', // plain text body
+				text: 'Here is the CSV file you requested.\n Please be aware that there might be several data entries for the same dolphin and the same date. Therefore, filter for the dates when analyzing your data. This happens, because every time a user clicks on "Finish Principle" the data is sent for this dolphin and time.\nKind regards,\nYour Dolphin-WET app\nIf you did not request this file, please update your password immediatly. If you have no affiliation with the Dolphin Welfare Evaluation Tool, please contact us by replying to this mail and afterwerds deleting it.', // plain text body
 				attachments: [
 				  {
 					filename: path.basename(savePath),
