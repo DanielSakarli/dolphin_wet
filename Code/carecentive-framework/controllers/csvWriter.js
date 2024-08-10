@@ -400,7 +400,7 @@ async function csvWriter(req, res, next) {
 
 	// Write the custom line followed by CSV data
 	const headerNote = 'Attention, there might be several data points during the same day. Filter for the days.\n';
-	fs.writeFileSync(savePath, headerNote); // Write the custom header to the file
+	fs.appendFileSync(savePath, headerNote); // Append the custom header to the file
 
 	csvWriter
 		.writeRecords(data)
