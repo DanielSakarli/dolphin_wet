@@ -88,7 +88,9 @@
 						>{{ $t('seventhCriteriaEnvironment') }}
 					</ion-title>
 					<ion-buttons slot="end">
-						<ion-button @click="setOpenManual('')">Close</ion-button>
+						<ion-button @click="setOpenManual('')">{{
+							$t('close')
+						}}</ion-button>
 					</ion-buttons>
 				</ion-toolbar>
 			</ion-header>

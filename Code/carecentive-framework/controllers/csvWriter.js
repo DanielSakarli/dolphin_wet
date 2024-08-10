@@ -2,7 +2,8 @@ const path = require('path');
 const nodemailer = require('nodemailer');
 const dotenv = require('dotenv');
 dotenv.config();
-const createCsvWriter = require('csv-writer').createObjectCsvWriter;
+const createCsvWriter = require('csv-writer').createObjectCsvWriter; // write data to CSV file
+const fs = require('fs');  // handle file operations
 const DolphinService = require('../services/DolphinService');
 const GoodFeedingService = require('../services/GoodFeedingService');
 const GoodHousingService = require('../services/GoodHousingService');
@@ -396,6 +397,11 @@ async function csvWriter(req, res, next) {
 
 	data.sort((a, b) => a.created_at - b.created_at);
 	console.log('data: ', ...data);
+
+	// Write the custom line followed by CSV data
+	const headerNote = 'Attention, there might be several data points during the same day. Filter for the days.\n';
+	fs.writeFileSync(savePath, headerNote); // Write the custom header to the file
+
 	csvWriter
 		.writeRecords(data)
 		.then(async () => {

@@ -476,9 +476,9 @@ export const globalizationList = {
 		////////////////////////////
 		// Criteria Behaviour
 		topicBehaviour: 'Verhalten',
-		firstCriteriaBehaviour: 'Auffälliges Erkundungsverhalten',
+		firstCriteriaBehaviour: 'Erkundungsverhalten',
 		secondCriteriaBehaviour:
-			'Affektives Verhalten, Spiel oder sozio-sexuelles Verhalten',
+			'Affiliatives Verhalten, Spiel oder sozio-sexuelles Verhalten',
 		thirdCriteriaBehaviour: 'Mütterliches Verhalten in begründeten Fällen',
 		fourthCriteriaBehaviour:
 			'Fehlen von sich wiederholenden abnormen Verhaltensweisen',
