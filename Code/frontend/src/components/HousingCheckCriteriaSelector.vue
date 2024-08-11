@@ -10,7 +10,7 @@
 					:cancelText="firstcancelText"
 					v-model="dolphinSelect"
 					multiple
-					@ionChange="handleDolphinChange"
+					@ionChange="handleDolphinChange(false)"
 				>
 					<ion-select-option value="all">{{
 						$t('allDolphins')
@@ -630,14 +630,17 @@ export default {
 			}*/
 		},
 		// Method to collect the checked checkboxes and give request Body the scores
-		async storeCheckedValues(calledFromSwitchDolphins = false) {
+		async storeCheckedValues(calledFromConfirmRefresh = false) {
 			///////////////////////////////////////////////////////////////////////////
 			// This part checks from where the store method is called
 			// If it is called from the switchDolphin method, the data shall be saved
 			// for the previously selected dolphin!
 			let dolphinSelect;
-			if (calledFromSwitchDolphins === true) {
-				console.log('storeCheckedValues called from switchDolphin method');
+			if (calledFromConfirmRefresh === true) {
+				console.log('storeCheckedValues called from next button click.');
+				dolphinSelect = this.dolphinSelect;
+			} else {
+				console.log('storeCheckedValues called from dolphinSwitch method');
 				if (this.oldDolphinSelect === undefined) {
 					// If there is no old dolphin select, then the CURRENT dolphin select is used
 					console.log('No old dolphin select found.');
@@ -647,9 +650,6 @@ export default {
 					console.log('Old dolphin select found:', this.oldDolphinSelect);
 					dolphinSelect = this.oldDolphinSelect;
 				}
-			} else {
-				console.log('storeCheckedValues called from next button click.');
-				dolphinSelect = this.dolphinSelect;
 			}
 			console.log('Current data saved for: ', dolphinSelect);
 			///////////////////////////////////////////////////////////////////////////
@@ -964,67 +964,89 @@ export default {
 				}
 			}
 		},
-		confirmRefresh() {
-			const confirmed = true; //confirm(this.$t('savingDataNext'));
-			if (confirmed) {
-				this.storeCheckedValues();
-				console.log(evaluationHousingStore.requestBodiesHousing);
+		async confirmRefresh() {
+			//await this.storeCheckedValues();
+			console.log(evaluationHousingStore.requestBodiesHousing);
+			await this.handleDolphinChange(true);
 
-				// Doing the same dolphinSelect with the next criteria in the list:
-				switch (this.criteria) {
-					case 'firstCriteriaEnvironment':
-						this.criteria = 'secondCriteriaEnvironment';
-						toast.success(this.$t('dataSavedTemporary'), {
-							autoClose: 3000,
-						});
-						break;
-					case 'secondCriteriaEnvironment':
-						this.criteria = 'thirdCriteriaEnvironment';
-						toast.success(this.$t('dataSavedTemporary'), {
-							autoClose: 3000,
-						});
-						break;
-					case 'thirdCriteriaEnvironment':
-						this.criteria = 'fourthCriteriaEnvironment';
-						toast.success(this.$t('dataSavedTemporary'), {
-							autoClose: 3000,
-						});
-						break;
-					case 'fourthCriteriaEnvironment':
-						this.criteria = 'fifthCriteriaEnvironment';
-						toast.success(this.$t('dataSavedTemporary'), {
-							autoClose: 3000,
-						});
-						break;
-					case 'fifthCriteriaEnvironment':
-						this.criteria = 'sixthCriteriaEnvironment';
-						toast.success(this.$t('dataSavedTemporary'), {
-							autoClose: 3000,
-						});
-						break;
-					case 'sixthCriteriaEnvironment':
-						this.criteria = 'seventhCriteriaEnvironment';
-						toast.success(this.$t('dataSavedTemporary'), {
-							autoClose: 3000,
-						});
-						break;
-					case 'seventhCriteriaEnvironment':
-						// De-select the criteria selector, so that no ion-card is shown when principle is finished
-						// and do a toast pop up message that principle has ended
-						this.criteria = 'seventhCriteriaEnvironment';
+			// Switching between dolphins only makes sense if only one or
+			// no dolphin is currently selected
+			if (this.dolphinSelect.length === 1 || this.dolphinSelect.length === 0) {
+				console.log('Inside dolphin selector');
+				// Find the index of the currently selected dolphin
+				const currentIndex = this.dolphinList.findIndex(
+					(dolphin) => dolphin.name === this.dolphinSelect[0] //takes the first value of this.dolphinSelect since there is anyway only one dolphin or no dolphin selected while we are here switching the dolphins
+				);
+
+				if (currentIndex !== -1) {
+					// Check if there is a next dolphin in the list
+					if (currentIndex < this.dolphinList.length - 1) {
+						// Select the next dolphin in the dolphinList
+						this.dolphinSelect = [this.dolphinList[currentIndex + 1].name];
+					} else {
+						// If it was the last dolphin, de-select or loop back to the first dolphin
+						this.dolphinSelect = []; // Optionally loop back to the first dolphin
 						toast.success(this.$t('principleFinished'), {
 							autoClose: 5000,
 						});
-						break;
-					default:
-						this.criteria = 'firstCriteriaEnvironment';
+					}
+				} else {
+					// If no dolphin is selected or the current selection is not found, start from the first dolphin
+					this.dolphinSelect = [this.dolphinList[0].name];
 				}
-
-				//this.dolphinSelect = null;
-				//this.criteria = null;
-				const targetUrl = `/detailHousing`;
-				this.$router.push(targetUrl);
 			}
+			// Doing the same dolphinSelect with the next criteria in the list:
+			/*switch (this.criteria) {
+				case 'firstCriteriaEnvironment':
+					this.criteria = 'secondCriteriaEnvironment';
+					toast.success(this.$t('dataSavedTemporary'), {
+						autoClose: 3000,
+					});
+					break;
+				case 'secondCriteriaEnvironment':
+					this.criteria = 'thirdCriteriaEnvironment';
+					toast.success(this.$t('dataSavedTemporary'), {
+						autoClose: 3000,
+					});
+					break;
+				case 'thirdCriteriaEnvironment':
+					this.criteria = 'fourthCriteriaEnvironment';
+					toast.success(this.$t('dataSavedTemporary'), {
+						autoClose: 3000,
+					});
+					break;
+				case 'fourthCriteriaEnvironment':
+					this.criteria = 'fifthCriteriaEnvironment';
+					toast.success(this.$t('dataSavedTemporary'), {
+						autoClose: 3000,
+					});
+					break;
+				case 'fifthCriteriaEnvironment':
+					this.criteria = 'sixthCriteriaEnvironment';
+					toast.success(this.$t('dataSavedTemporary'), {
+						autoClose: 3000,
+					});
+					break;
+				case 'sixthCriteriaEnvironment':
+					this.criteria = 'seventhCriteriaEnvironment';
+					toast.success(this.$t('dataSavedTemporary'), {
+						autoClose: 3000,
+					});
+					break;
+				case 'seventhCriteriaEnvironment':
+					// De-select the criteria selector, so that no ion-card is shown when principle is finished
+					// and do a toast pop up message that principle has ended
+					this.criteria = 'seventhCriteriaEnvironment';
+					toast.success(this.$t('principleFinished'), {
+						autoClose: 5000,
+					});
+					break;
+				default:
+					this.criteria = 'firstCriteriaEnvironment';
+			}*/
+
+			//const targetUrl = `/detailHousing`;
+			//this.$router.push(targetUrl);
 		},
 		async handleCriteriaChange(event: any) {
 			await this.storeCheckedValues();
@@ -1037,29 +1059,64 @@ export default {
 			console.log('Criteria changed: ', this.criteria);
 		},
 		//Method to handle the change of the selected dolphins
-		async handleDolphinChange() {
+		async handleDolphinChange(calledFromConfirmRefresh = false) {
 			console.log('Dolphin changed: ', this.dolphinSelect);
 			if (this.dolphinSelect.includes('all')) {
 				this.dolphinSelect = this.dolphinsStore.dolphinList.map(
 					(dolphin) => dolphin.name
 				);
 			}
-			await this.switchDolphin();
+			await this.switchDolphin(calledFromConfirmRefresh); //passes the boolean value to the switchDolphin method
 			// Saves the current dolphin name as the old name for later use
-			// Important when switching the dolphin to save the data of the old dolphin
-			this.oldDolphinSelect = this.dolphinSelect;
+			// Important when manually switching the dolphin to save the data of the old dolphin
+			if (calledFromConfirmRefresh) {
+				// Get the current index to get the previous dolphin in the dolphinList later on
+				const currentIndex = this.dolphinList.findIndex(
+					(dolphin) => dolphin.name === this.dolphinSelect[0] //takes the first value of this.dolphinSelect since there is anyway only one dolphin or no dolphin selected while we are here switching the dolphins
+				);
+
+				// Check if there is a previous dolphin in the list and the list is not at its end
+				if (currentIndex !== 0 && currentIndex < this.dolphinList.length) {
+					//if (currentIndex < this.dolphinList.length - 1) {
+					// Select the previous dolphin in the dolphinList
+					this.oldDolphinSelect = [this.dolphinList[currentIndex - 1].name];
+					//}
+				} else {
+					// No previous dolphin in the list
+					// Think about what to code here
+					this.oldDolphinSelect = this.dolphinSelect;
+				}
+			} else {
+				// If called from manually switching the dolphins
+				this.oldDolphinSelect = this.dolphinSelect;
+			}
 		},
 		//Method to switch the dolphin
-		async switchDolphin() {
+		async switchDolphin(calledFromConfirmRefresh = false) {
 			// Save the current data if the user switches the dolphin without clicking on the next button
-			await this.storeCheckedValues(true); //true is passed so the method knows it has been called from the switchDolphin method
+			// false is passed so the method knows it has been called from the switchDolphin method
+			// true if called from the confirmRefresh method
+			await this.storeCheckedValues(calledFromConfirmRefresh);
 			if (this.oldDolphinSelect.length !== 0) {
 				toast.success(this.$t('dataSavedTemporary'), {
 					autoClose: 2000,
 				});
 			}
+			console.log('switchDolphin called');
+			console.log('Dolphin in switchDolphin: ', this.dolphinSelect);
+			let dolphinSelect;
+			if (calledFromConfirmRefresh) {
+				// Find the index of the currently selected dolphin
+				const currentIndex = this.dolphinList.findIndex(
+					(dolphin) => dolphin.name === this.dolphinSelect[0] //takes the first value of this.dolphinSelect since there is anyway only one dolphin or no dolphin selected while we are here switching the dolphins
+				);
+				// Select the next dolphin in the dolphinList
+				dolphinSelect = [this.dolphinList[currentIndex + 1].name];
+			} else {
+				dolphinSelect = this.dolphinSelect;
+			}
+
 			// Reset checkboxes before filling them again with current data
-			// Reset checkboxes
 			for (let i = 0; i <= 8; i++) {
 				for (let j = 0; j < 3; j++) {
 					if (this.CheckboxArray[i][j] === true) {
@@ -1089,10 +1146,10 @@ export default {
 				k < evaluationHousingStore.requestBodiesHousing.length;
 				k++
 			) {
-				//k stands for the different dolphins. It iterates through the array of dolphins in requestBodiesHousing.json
+				// k stands for the different dolphins. It iterates through the array of dolphins in requestBodiesHousing.json
 				// Select the k-th requestBody which is equivalent to this.dolphinSelect
 				if (
-					this.dolphinSelect.includes(
+					dolphinSelect.includes(
 						evaluationHousingStore.requestBodiesHousing[k]['dolphin_name']
 					)
 				) {
