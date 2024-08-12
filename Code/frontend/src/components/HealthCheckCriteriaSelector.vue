@@ -1844,6 +1844,15 @@ export default {
 				}
 			}
 			// After everything has been uploaded, update the this.dolphinSelect
+			if (
+				this.dolphinSelect !== null &&
+				this.dolphinSelect !==
+					this.dolphinList[this.dolphinList.length - 1].name
+			) {
+				toast.success(this.$t('dataSavedTemporary'), {
+					autoClose: 3000,
+				});
+			}
 			this.dolphinSelect = newValue;
 
 			///////////////////////////////////////////////////////////////////////////

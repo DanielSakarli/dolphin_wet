@@ -1084,6 +1084,12 @@ export default {
 			// Save the current data if the user switches the dolphin without clicking on the next button
 			// false is passed so the method knows it has been called from the switchDolphin method
 			// true if called from the confirmRefresh method
+			console.log('newValue in switchDolphin: ', newValue);
+			if (newValue === 'all' || this.dolphinSelect.includes('all')) {
+				// If "All dolphins" is selected, select all dolphins
+				this.dolphinSelect = this.dolphinList.map((dolphin) => dolphin.name);
+				console.log('All dolphins selected: ', this.dolphinSelect);
+			}
 			await this.storeCheckedValues();
 
 			console.log('switchDolphin called');
@@ -1140,7 +1146,14 @@ export default {
 				}
 			}
 			// After everything has been uploaded, update the this.dolphinSelect
-			console.log('newValue: ', newValue);
+			if (
+				this.dolphinSelect.length !== 0 &&
+				newValue !== null //the case if it was the last dolphin in the dolphinList
+			) {
+				toast.success(this.$t('dataSavedTemporary'), {
+					autoClose: 3000,
+				});
+			}
 			this.dolphinSelect = newValue;
 
 			///////////////////////////////////////////////////////////////////////////
