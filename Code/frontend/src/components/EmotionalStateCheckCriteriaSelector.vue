@@ -9,8 +9,8 @@
 					:placeholder="firstplaceholder"
 					okText="OK"
 					:cancelText="firstcancelText"
-					v-model="dolphinSelect"
-					@ionChange="handleDolphinChange"
+					:modelValue="dolphinSelect"
+					@update:modelValue="switchDolphin"
 				>
 					<ion-select-option
 						v-for="dolphin in dolphinsStore.dolphinList"
@@ -422,6 +422,15 @@ import 'vue3-toastify/dist/index.css';
 
 const dolphinsStore = useDolphinsStore();
 const evaluationEmotionalStateStore = useEvaluationEmotionalStateStore();
+
+interface Dolphin {
+	dolphin_id: number;
+	name: string;
+	sex: number;
+	on_site: number;
+	year_of_birth: number;
+}
+
 let dataInBody; //Variable which gets saved in localstorage with either true or false, depending if data is in checkboxes or evaluationEmotionalStateStore
 const token = localStorage.getItem('token'); //Get current JWT token of the user
 console.log('Token accessed from localStorage: ', token);
@@ -469,7 +478,7 @@ export default {
 			download,
 			dolphinsStore: dolphinsStore,
 			dolphinSelect: null as string | null,
-			oldDolphinSelect: null as string | null,
+			dolphinList: dolphinsStore.dolphinList as Dolphin[],
 			criteria: null as string | null,
 			subcriteria: '',
 			firstlabel: this.$t('dolphin'),
@@ -533,29 +542,7 @@ export default {
 			localStorage.setItem('dataInBody', dataInBody.toString());
 		},
 		// Method to collect the checked checkboxes and give request body the scores
-		storeCheckedValues(calledFromSwitchDolphins = false) {
-			///////////////////////////////////////////////////////////////////////////
-			// This part checks from where the store method is called
-			// If it is called from the switchDolphin method, the data shall be saved
-			// for the previously selected dolphin!
-			let dolphinSelect;
-			if (calledFromSwitchDolphins === true) {
-				console.log('storeCheckedValues called from switchDolphin method');
-				if (this.oldDolphinSelect === undefined) {
-					// If there is no old dolphin select, then the CURRENT dolphin select is used
-					console.log('No old dolphin select found.');
-					dolphinSelect = this.dolphinSelect;
-				} else {
-					// If there is an old dolphin select, then the OLD dolphin select is used
-					console.log('Old dolphin select found:', this.oldDolphinSelect);
-					dolphinSelect = this.oldDolphinSelect;
-				}
-			} else {
-				console.log('storeCheckedValues called from next button click.');
-				dolphinSelect = this.dolphinSelect;
-			}
-			console.log('Current data saved for: ', dolphinSelect);
-			///////////////////////////////////////////////////////////////////////////
+		storeCheckedValues() {
 			for (
 				let k = 0;
 				k < evaluationEmotionalStateStore.requestBodiesEmotionalState.length;
@@ -563,8 +550,8 @@ export default {
 			) {
 				//k stands for the different dolphins. It iterates through the array of dolphins in requestBodiesEmotionalState.json
 				if (
-					dolphinSelect &&
-					dolphinSelect.includes(
+					this.dolphinSelect &&
+					this.dolphinSelect.includes(
 						evaluationEmotionalStateStore.requestBodiesEmotionalState[k][
 							'dolphin_name'
 						]
@@ -847,46 +834,11 @@ export default {
 			}
 		},
 		async confirmRefresh() {
-			const confirmed = true; //confirm(this.$t('savingDataNext'));
-			if (confirmed) {
-				this.storeCheckedValues();
-				console.log(evaluationEmotionalStateStore.requestBodiesEmotionalState);
-
-				// Doing the same dolphinSelect with the next criteria in the list:
-				switch (this.criteria) {
-					case 'firstCriteriaEmotionalState':
-						this.criteria = 'secondCriteriaEmotionalState';
-						toast.success(this.$t('dataSavedTemporary'), {
-							autoClose: 3000,
-						});
-						break;
-					case 'secondCriteriaEmotionalState':
-						this.criteria = 'thirdCriteriaEmotionalState';
-						toast.success(this.$t('dataSavedTemporary'), {
-							autoClose: 3000,
-						});
-						break;
-					case 'thirdCriteriaEmotionalState':
-						this.criteria = 'fourthCriteriaEmotionalState';
-						toast.success(this.$t('dataSavedTemporary'), {
-							autoClose: 3000,
-						});
-						break;
-					case 'fourthCriteriaEmotionalState':
-						// Do a toast pop up message that principle has ended
-						this.criteria = 'fourthCriteriaEmotionalState';
-						toast.success(this.$t('principleFinished'), {
-							autoClose: 5000,
-						});
-						break;
-					default:
-						this.criteria = 'firstCriteriaEmotionalState';
-				}
-				const targetUrl = `/detailEmotionalState`;
-				// No need to check if dataInBody true or false, because /detailEmotionalState doesn´t
-				// need to be protected from losing data
-				this.$router.push(targetUrl);
-			}
+			console.log(evaluationEmotionalStateStore.requestBodiesEmotionalState);
+			// null is the newValue of the dolphin. With confirmRefresh() just the next dolphin is selected
+			// true means that the switchDolphin method was called from the confirmRefresh method and not by
+			// manually selecting the dolphin in the ion-select option
+			await this.switchDolphin(null, true);
 		},
 		async handleCriteriaChange(event: any) {
 			await this.storeCheckedValues();
@@ -900,21 +852,51 @@ export default {
 		},
 		//Method to handle the change of the selected dolphins
 		async handleDolphinChange() {
-			console.log('Dolphin changed: ', this.dolphinSelect);
+			/*console.log('Dolphin changed: ', this.dolphinSelect);
 			await this.switchDolphin();
 			// Saves the current dolphin name as the old name for later use
 			// Important when switching the dolphin to save the data of the old dolphin
-			this.oldDolphinSelect = this.dolphinSelect;
+			this.oldDolphinSelect = this.dolphinSelect;*/
 		},
 		//Method to switch the dolphin
-		async switchDolphin() {
+		async switchDolphin(newValue: any, calledFromConfirmRefresh = false) {
 			// Save the current data if the user switches the dolphin without clicking on the next button
-			await this.storeCheckedValues(true); //true is passed so the method knows it has been called from the switchDolphin method
-			if (this.oldDolphinSelect !== null) {
+			// false is passed so the method knows it has been called from the switchDolphin method
+			// true if called from the confirmRefresh method
+			await this.storeCheckedValues();
+			/*if (this.oldDolphinSelect !== null) {
 				toast.success(this.$t('dataSavedTemporary'), {
 					autoClose: 2000,
 				});
+			}*/
+			console.log('switchDolphin called');
+			console.log('Dolphin in switchDolphin: ', this.dolphinSelect);
+
+			if (calledFromConfirmRefresh) {
+				// Find the index of the currently selected dolphin
+				const currentIndex = this.dolphinList.findIndex(
+					(dolphin) => dolphin.name === this.dolphinSelect //takes the first value of this.dolphinSelect since there is anyway only one dolphin or no dolphin selected while we are here switching the dolphins
+				);
+				if (currentIndex === -1) {
+					// If no dolphin is selected or the current selection is not found, no dolphin will be selected when clicking on confirmRefresh
+					newValue = null;
+				}
+				if (currentIndex < this.dolphinList.length - 1) {
+					// Select the next dolphin in the dolphinList, reassign newValue for this
+					newValue = this.dolphinList[currentIndex + 1].name;
+				} else {
+					// If it was the last dolphin, de-select or loop back to the first dolphin
+					newValue = null; // Optionally loop back to the first dolphin
+					toast.success(this.$t('principleFinished'), {
+						autoClose: 5000,
+					});
+				}
 			}
+			// After everything has been uploaded, update the this.dolphinSelect
+			this.dolphinSelect = newValue;
+
+			///////////////////////////////////////////////////////////////////////////
+
 			// Reset checkboxes before filling them again with current data
 			for (let i = 0; i <= 6; i++) {
 				for (let j = 0; j < 3; j++) {
