@@ -10,7 +10,7 @@
 					:cancelText="firstcancelText"
 					v-model="dolphinSelect"
 					multiple
-					@ionChange="handleDolphinChange(false)"
+					@ionChange="handleDolphinChange()"
 				>
 					<ion-select-option value="all">{{
 						$t('allDolphins')
@@ -1074,21 +1074,33 @@ export default {
 				const currentIndex = this.dolphinList.findIndex(
 					(dolphin) => dolphin.name === this.dolphinSelect[0] //takes the first value of this.dolphinSelect since there is anyway only one dolphin or no dolphin selected while we are here switching the dolphins
 				);
-
+				console.log('Current index in handleDolphinChange: ', currentIndex);
 				// Check if there is a previous dolphin in the list and the list is not at its end
 				if (currentIndex !== 0 && currentIndex < this.dolphinList.length) {
 					//if (currentIndex < this.dolphinList.length - 1) {
 					// Select the previous dolphin in the dolphinList
-					this.oldDolphinSelect = [this.dolphinList[currentIndex - 1].name];
+					this.oldDolphinSelect = [this.dolphinList[currentIndex].name];
 					//}
+					console.log(
+						'1 Old dolphin in handleDolphinChange: ',
+						this.oldDolphinSelect
+					);
 				} else {
 					// No previous dolphin in the list
 					// Think about what to code here
 					this.oldDolphinSelect = this.dolphinSelect;
+					console.log(
+						'2 Old dolphin in handleDolphinChange: ',
+						this.oldDolphinSelect
+					);
 				}
 			} else {
 				// If called from manually switching the dolphins
 				this.oldDolphinSelect = this.dolphinSelect;
+				console.log(
+					'3 Old dolphin in handleDolphinChange: ',
+					this.oldDolphinSelect
+				);
 			}
 		},
 		//Method to switch the dolphin
@@ -1112,6 +1124,8 @@ export default {
 				);
 				// Select the next dolphin in the dolphinList
 				dolphinSelect = [this.dolphinList[currentIndex + 1].name];
+				// set oldDolphinSelect to dolphinSelect since there is a clash if you combine switching dolphins with confirmRefresh and manual switching
+				//this.oldDolphinSelect = this.dolphinSelect;
 			} else {
 				dolphinSelect = this.dolphinSelect;
 			}
