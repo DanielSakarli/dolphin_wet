@@ -94,7 +94,7 @@ router.post('/login', async function(req, res, next) {
     let { token, roleName } = await UserService.login(username, password)
     console.log("Token set in login method: ", token);
     ///////TEST////////
-    res.setHeader('Set-Cookie', 'token=' + token + '; Secure; HttpOnly; SameSite=None; Path=/; Max-Age=3600');
+    res.setHeader('Set-Cookie', 'token=' + token + '; Secure; HttpOnly; SameSite=None; Path=/; Max-Age=21600'); //Cookie times out after 6 hours=21600 seconds
     ///////////////////
 
     // Try commenting out this line
