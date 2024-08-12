@@ -1087,7 +1087,6 @@ export default {
 					);
 				} else {
 					// No previous dolphin in the list
-					// Think about what to code here
 					this.oldDolphinSelect = this.dolphinSelect;
 					console.log(
 						'2 Old dolphin in handleDolphinChange: ',

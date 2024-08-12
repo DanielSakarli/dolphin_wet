@@ -12,13 +12,13 @@
 					:cancelText="firstcancelText"
 					v-model="dolphinSelect"
 					multiple
-					@ionChange="handleDolphinChange"
+					@ionChange="handleDolphinChange()"
 				>
 					<ion-select-option value="all">{{
 						$t('allDolphins')
 					}}</ion-select-option>
 					<ion-select-option
-						v-for="dolphin in dolphinsStore.dolphinList"
+						v-for="dolphin in dolphinList"
 						v-bind:key="dolphin.name"
 					>
 						{{ dolphin.name }}
@@ -504,6 +504,14 @@ import { Browser } from '@capacitor/browser';
 import 'vue3-toastify/dist/index.css';
 
 const dolphinsStore = useDolphinsStore();
+
+interface Dolphin {
+	dolphin_id: number;
+	name: string;
+	sex: number;
+	on_site: number;
+	year_of_birth: number;
+}
 //dolphinsStore.fill();
 const evaluationFeedingStore = useEvaluationFeedingStore();
 
@@ -558,6 +566,7 @@ export default {
 			dialog: false,
 			download,
 			dolphinsStore: dolphinsStore,
+			dolphinList: dolphinsStore.dolphinList as Dolphin[],
 			dolphinSelect: [] as string[], //null as string | null,
 			oldDolphinSelect: [] as string[], //null as string | null,
 			criteria: null as string | null,
@@ -618,6 +627,39 @@ export default {
 			}
 			this.isOpenReferenceArea = isOpen;
 		},
+		async confirmRefresh() {
+			// Upload photos if there are any in formData
+			await this.fileUpload();
+			console.log(evaluationFeedingStore.requestBodiesFeeding);
+			await this.handleDolphinChange(true);
+
+			// Switching between dolphins only makes sense if only one or
+			// no dolphin is currently selected
+			if (this.dolphinSelect.length === 1 || this.dolphinSelect.length === 0) {
+				console.log('Inside dolphin selector');
+				// Find the index of the currently selected dolphin
+				const currentIndex = this.dolphinList.findIndex(
+					(dolphin) => dolphin.name === this.dolphinSelect[0] //takes the first value of this.dolphinSelect since there is anyway only one dolphin or no dolphin selected while we are here switching the dolphins
+				);
+
+				if (currentIndex !== -1) {
+					// Check if there is a next dolphin in the list
+					if (currentIndex < this.dolphinList.length - 1) {
+						// Select the next dolphin in the dolphinList
+						this.dolphinSelect = [this.dolphinList[currentIndex + 1].name];
+					} else {
+						// If it was the last dolphin, de-select or loop back to the first dolphin
+						this.dolphinSelect = []; // Optionally loop back to the first dolphin
+						toast.success(this.$t('principleFinished'), {
+							autoClose: 5000,
+						});
+					}
+				} else {
+					// If no dolphin is selected or the current selection is not found, start from the first dolphin
+					this.dolphinSelect = [this.dolphinList[0].name];
+				}
+			}
+		},
 		async handleCriteriaChange(event: any) {
 			await this.storeCheckedValues();
 			if (this.criteria != null) {
@@ -629,43 +671,75 @@ export default {
 			console.log('Criteria changed: ', this.criteria);
 		},
 		//Method to handle the change of the selected dolphins
-		async handleDolphinChange() {
+		async handleDolphinChange(calledFromConfirmRefresh = false) {
 			console.log('Dolphin changed: ', this.dolphinSelect);
 			if (this.dolphinSelect.includes('all')) {
 				this.dolphinSelect = this.dolphinsStore.dolphinList.map(
 					(dolphin) => dolphin.name
 				);
 			}
-			await this.switchDolphin();
+			await this.switchDolphin(calledFromConfirmRefresh); //passes the boolean value to the switchDolphin method
 			// Saves the current dolphin name as the old name for later use
-			// Important when switching the dolphin to save the data of the old dolphin
-			this.oldDolphinSelect = this.dolphinSelect;
+			// Important when manually switching the dolphin to save the data of the old dolphin
+			if (calledFromConfirmRefresh) {
+				// Get the current index to get the previous dolphin in the dolphinList later on
+				const currentIndex = this.dolphinList.findIndex(
+					(dolphin) => dolphin.name === this.dolphinSelect[0] //takes the first value of this.dolphinSelect since there is anyway only one dolphin or no dolphin selected while we are here switching the dolphins
+				);
+				console.log('Current index in handleDolphinChange: ', currentIndex);
+				// Check if there is a previous dolphin in the list and the list is not at its end
+				if (currentIndex !== 0 && currentIndex < this.dolphinList.length) {
+					//if (currentIndex < this.dolphinList.length - 1) {
+					// Select the previous dolphin in the dolphinList
+					this.oldDolphinSelect = [this.dolphinList[currentIndex].name];
+					//}
+					console.log(
+						'1 Old dolphin in handleDolphinChange: ',
+						this.oldDolphinSelect
+					);
+				} else {
+					// No previous dolphin in the list
+					this.oldDolphinSelect = this.dolphinSelect;
+					console.log(
+						'2 Old dolphin in handleDolphinChange: ',
+						this.oldDolphinSelect
+					);
+				}
+			} else {
+				// If called from manually switching the dolphins
+				this.oldDolphinSelect = this.dolphinSelect;
+				console.log(
+					'3 Old dolphin in handleDolphinChange: ',
+					this.oldDolphinSelect
+				);
+			}
 		},
 		//Method to switch the dolphin
-		async switchDolphin() {
-			///////////////////////////////////////////////////////////////////////////
-			// This part ensures that the data is saved
-			// for the previously selected dolphin
-			let dolphinSelect;
-			if (this.oldDolphinSelect === undefined) {
-				// If there is no old dolphin select, then the CURRENT dolphin select is used
-				console.log('No old dolphin select found.');
-				dolphinSelect = this.dolphinSelect;
-			} else {
-				// If there is an old dolphin select, then the OLD dolphin select is used
-				console.log('Old dolphin select found:', this.oldDolphinSelect);
-				dolphinSelect = this.oldDolphinSelect;
-			}
-
-			console.log('Current data saved for: ', dolphinSelect);
-			///////////////////////////////////////////////////////////////////////////
+		async switchDolphin(calledFromConfirmRefresh = false) {
 			// Save the current data if the user switches the dolphin without clicking on the next button
+			// false is passed so the method knows it has been called from the switchDolphin method
+			// true if called from the confirmRefresh method
 			await this.fileUpload();
-			await this.storeCheckedValues(true); //true is passed so the method knows it has been called from the switchDolphin method
+			await this.storeCheckedValues(calledFromConfirmRefresh);
 			if (this.oldDolphinSelect.length !== 0) {
 				toast.success(this.$t('dataSavedTemporary'), {
 					autoClose: 2000,
 				});
+			}
+			console.log('switchDolphin called');
+			console.log('Dolphin in switchDolphin: ', this.dolphinSelect);
+			let dolphinSelect;
+			if (calledFromConfirmRefresh) {
+				// Find the index of the currently selected dolphin
+				const currentIndex = this.dolphinList.findIndex(
+					(dolphin) => dolphin.name === this.dolphinSelect[0] //takes the first value of this.dolphinSelect since there is anyway only one dolphin or no dolphin selected while we are here switching the dolphins
+				);
+				// Select the next dolphin in the dolphinList
+				dolphinSelect = [this.dolphinList[currentIndex + 1].name];
+				// set oldDolphinSelect to dolphinSelect since there is a clash if you combine switching dolphins with confirmRefresh and manual switching
+				//this.oldDolphinSelect = this.dolphinSelect;
+			} else {
+				dolphinSelect = this.dolphinSelect;
 			}
 
 			// Reset checkboxes before filling them again with current data
@@ -698,7 +772,8 @@ export default {
 				//k stands for the different dolphins. It iterates through the array of dolphins in requestBodiesFeeding.json
 				// Select the k-th requestBody which is equivalent to this.dolphinSelect
 				if (
-					this.dolphinSelect.includes(
+					dolphinSelect &&
+					dolphinSelect.includes(
 						evaluationFeedingStore.requestBodiesFeeding[k]['dolphin_name']
 					)
 				) {
@@ -905,14 +980,17 @@ export default {
 			//console.log('Dolphin selected: ', this.dolphinSelect);
 		},
 		// Method to collect the checked checkboxes and give request Body the scores
-		async storeCheckedValues(calledFromSwitchDolphins = false) {
+		async storeCheckedValues(calledFromConfirmRefresh = false) {
 			///////////////////////////////////////////////////////////////////////////
 			// This part checks from where the store method is called
 			// If it is called from the switchDolphin method, the data shall be saved
 			// for the previously selected dolphin!
 			let dolphinSelect;
-			if (calledFromSwitchDolphins === true) {
-				console.log('storeCheckedValues called from switchDolphin method');
+			if (calledFromConfirmRefresh === true) {
+				console.log('storeCheckedValues called from next button click.');
+				dolphinSelect = this.dolphinSelect;
+			} else {
+				console.log('storeCheckedValues called from dolphinSwitch method');
 				if (this.oldDolphinSelect === undefined) {
 					// If there is no old dolphin select, then the CURRENT dolphin select is used
 					console.log('No old dolphin select found.');
@@ -922,9 +1000,6 @@ export default {
 					console.log('Old dolphin select found:', this.oldDolphinSelect);
 					dolphinSelect = this.oldDolphinSelect;
 				}
-			} else {
-				console.log('storeCheckedValues called from next button click.');
-				dolphinSelect = this.dolphinSelect;
 			}
 			console.log('Current data saved for: ', dolphinSelect);
 			///////////////////////////////////////////////////////////////////////////
@@ -1217,7 +1292,7 @@ export default {
 				}
 			}
 		},
-		async confirmRefresh() {
+		/*async confirmRefresh() {
 			// Upload photos if there are any in formData
 			await this.fileUpload();
 			const confirmed = true; //confirm(this.$t('savingDataNext'));
@@ -1272,7 +1347,7 @@ export default {
 			//console.log(this.dolphinsStore.dolphinList);
 			//console.log(this.dolphins);
 			//console.log(evaluationFeedingStore.requestBodiesFeeding);
-		},
+		},*/
 		/*async showDolphins() {
 			await axios.get(this.urlDolphins)
 				.then ((response) => {
