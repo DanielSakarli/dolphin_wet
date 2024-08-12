@@ -8,11 +8,11 @@
 					:placeholder="firstplaceholder"
 					okText="OK"
 					:cancelText="firstcancelText"
-					v-model="dolphinSelect"
-					@ionChange="handleDolphinChange"
+					:modelValue="dolphinSelect"
+					@update:modelValue="switchDolphin"
 				>
 					<ion-select-option
-						v-for="dolphin in dolphinsStore.dolphinList"
+						v-for="dolphin in dolphinList"
 						v-bind:key="dolphin.name"
 					>
 						{{ dolphin.name }}
@@ -1000,6 +1000,14 @@ let dataInBody; //Variable which gets saved in localstorage with either true or 
 const dolphinsStore = useDolphinsStore();
 const evaluationHealthStore = useEvaluationHealthStore();
 
+interface Dolphin {
+	dolphin_id: number;
+	name: string;
+	sex: number;
+	on_site: number;
+	year_of_birth: number;
+}
+
 import {
 	IonItem,
 	IonList,
@@ -1066,6 +1074,7 @@ export default {
 			download,
 			dolphinsStore: dolphinsStore,
 			dolphinSelect: null as string | null,
+			dolphinList: dolphinsStore.dolphinList as Dolphin[],
 			oldDolphinSelect: null as string | null,
 			criteria: null as string | null,
 			subcriteria: '',
@@ -1083,7 +1092,6 @@ export default {
 			camera,
 			previewImageUrl: '',
 			lastPictureType: '',
-			dolphinList: [] as { name: string }[],
 			urlPost: baseUrl + '/api/good_health',
 			urlPostPhoto: baseUrl + '/api/photo',
 			urlPostVideo: baseUrl + '/api/video',
@@ -1323,28 +1331,28 @@ export default {
 				});
 		},
 		// Method to collect the checked checkboxes and give request body the scores
-		async storeCheckedValues(calledFromSwitchDolphins = false) {
+		async storeCheckedValues() {
 			///////////////////////////////////////////////////////////////////////////
 			// This part checks from where the store method is called
 			// If it is called from the switchDolphin method, the data shall be saved
 			// for the previously selected dolphin!
-			let dolphinSelect;
-			if (calledFromSwitchDolphins === true) {
-				console.log('storeCheckedValues called from switchDolphin method');
-				if (this.oldDolphinSelect === undefined) {
-					// If there is no old dolphin select, then the CURRENT dolphin select is used
-					console.log('No old dolphin select found.');
-					dolphinSelect = this.dolphinSelect;
-				} else {
+			/*let dolphinSelect;
+			if (calledFromConfirmRefresh === true) {
+				console.log('storeCheckedValues called from next button click.');
+				dolphinSelect = this.dolphinSelect;
+			} else {
+				console.log('storeCheckedValues called from dolphinSwitch method');
+				//if (this.oldDolphinSelect === undefined) {
+				// If there is no old dolphin select, then the CURRENT dolphin select is used
+				//console.log('No old dolphin select found.');
+				dolphinSelect = this.dolphinSelect;
+				/*} else {
 					// If there is an old dolphin select, then the OLD dolphin select is used
 					console.log('Old dolphin select found:', this.oldDolphinSelect);
 					dolphinSelect = this.oldDolphinSelect;
-				}
-			} else {
-				console.log('storeCheckedValues called from next button click.');
-				dolphinSelect = this.dolphinSelect;
-			}
-			console.log('Current data saved for: ', dolphinSelect);
+				}*/
+			//}
+			console.log('Current data saved for: ', this.dolphinSelect);
 			///////////////////////////////////////////////////////////////////////////
 			for (
 				let k = 0;
@@ -1353,8 +1361,8 @@ export default {
 			) {
 				//k stands for the different dolphins. It iterates through the array of dolphins in requestBodiesEmotionalState.json
 				if (
-					dolphinSelect &&
-					dolphinSelect.includes(
+					this.dolphinSelect &&
+					this.dolphinSelect.includes(
 						evaluationHealthStore.requestBodiesHealth[k]['dolphin_name']
 					)
 				) {
@@ -1713,123 +1721,37 @@ export default {
 			this.formData = []; //Reset after upload
 			this.formDataVideo = [];
 		},
-
-		/*
-	submitForm(e, test_date, test_name) {
-		// prevents the default behavior of the browser, which is to perform a full page reload.
-		// I have no idea wether you need this in ionic.
-		e.preventDefault();
-
-		// gets the form input html element.
-		const files = document.getElementById('files');
-
-		// !!! The code above is needed for plain HTML and JS,
-		// Maybe in Ionic you can also do it but I'm not sure...
-		// Please use corresponding methods in Ionic.
-
-		// create a new FormData object, you can learn more here
-		// https://developer.mozilla.org/en-US/docs/Web/API/FormData/FormData
-		const formData = new FormData();
-
-		// in case of multiple photos, use a loop here to add all photos.
-		// files.files: first files is the html element,
-		// second files is the name for that html element
-		// The html element is like:
-		// <input id="files" name="files" type="file" multiple />
-		for (let i = 0; i < files.files.length; i++) {
-			formData.append('files', files.files[i]);
-		}
-
-		// Give test_date and test_name for this picture!
-		formData.append('test_date', test_date);
-		formData.append('test_name', test_name);
-
-		axios
-			.post(baseUrl + '/api/photo', formData, {
-				headers: {
-					// !!! The content-type must be multipart/form-date
-					// otherwise errors arise
-					'Content-Type': 'multipart/form-data',
-				},
-			})
-			.then((response) => {
-				console.log(response);
-				if (response.status === 201) {
-					// do something after uploading successfully
-					console.log('success!');
-				}
-			})
-			.catch((error) => {
-				// error handling here
-				console.log(error);
-			});
-	},*/
-
-		//
-		// End of TEST for photo upload
-		////////////////////////////////////////////////////////////////////////
-
 		async confirmRefresh() {
-			const confirmed = true; //confirm(this.$t('savingDataNext'));
-			if (confirmed) {
-				// Upload photos if there are any in formData
-				//await this.photoUpload();
+			console.log(evaluationHealthStore.requestBodiesHealth);
+			await this.switchDolphin(null, true); //here the previous dolphin name is set as this.oldDolphinSelect
+			this.previewImageUrl = ''; //Reset the preview image
 
-				// Store the checked scoring values
-				this.storeCheckedValues();
-				console.log(evaluationHealthStore.requestBodiesHealth);
+			// Switching between dolphins only makes sense if a
+			// dolphin is currently selected
+			/*if (this.dolphinSelect) {
+				console.log('Inside dolphin selector');
+				// Find the index of the currently selected dolphin
+				const currentIndex = this.dolphinList.findIndex(
+					(dolphin) => dolphin.name === this.dolphinSelect
+				);
 
-				this.previewImageUrl = ''; //Reset the preview image
-
-				// Doing the same dolphinSelect with the next criteria in the list:
-				switch (this.criteria) {
-					case 'firstCriteriaHealth':
-						this.criteria = 'secondCriteriaHealth';
-						toast.success(this.$t('dataSavedTemporary'), {
-							autoClose: 3000,
-						});
-						break;
-					case 'secondCriteriaHealth':
-						this.criteria = 'thirdCriteriaHealth';
-						toast.success(this.$t('dataSavedTemporary'), {
-							autoClose: 3000,
-						});
-						break;
-					case 'thirdCriteriaHealth':
-						this.criteria = 'fourthCriteriaHealth';
-						toast.success(this.$t('dataSavedTemporary'), {
-							autoClose: 3000,
-						});
-						break;
-					case 'fourthCriteriaHealth':
-						this.criteria = 'fifthCriteriaHealth';
-						toast.success(this.$t('dataSavedTemporary'), {
-							autoClose: 3000,
-						});
-						break;
-					case 'fifthCriteriaHealth':
-						this.criteria = 'sixthCriteriaHealth';
-						toast.success(this.$t('dataSavedTemporary'), {
-							autoClose: 3000,
-						});
-						break;
-					case 'sixthCriteriaHealth':
-						// De-select the criteria selector, so that no ion-card is shown when principle is finished
-						// and do a toast pop up message that principle has ended
-						this.criteria = 'sixthCriteriaHealth';
+				if (currentIndex !== -1) {
+					// Check if there is a next dolphin in the list
+					if (currentIndex < this.dolphinList.length - 1) {
+						// Select the next dolphin in the dolphinList
+						this.dolphinSelect = this.dolphinList[currentIndex + 1].name;
+					} else {
+						// If it was the last dolphin, de-select or loop back to the first dolphin
+						this.dolphinSelect = null; // Optionally loop back to the first dolphin
 						toast.success(this.$t('principleFinished'), {
 							autoClose: 5000,
 						});
-						break;
-					default:
-						this.criteria = 'firstCriteriaHealth';
+					}
+				} else {
+					// If no dolphin is selected or the current selection is not found, start from the first dolphin
+					this.dolphinSelect = this.dolphinList[0].name;
 				}
-
-				//this.dolphinSelect = null;
-				//this.criteria = null;
-				const targetUrl = `/detailHealth`;
-				this.$router.push(targetUrl);
-			}
+			}*/
 		},
 		async handleCriteriaChange(event: any) {
 			await this.storeCheckedValues();
@@ -1842,41 +1764,89 @@ export default {
 			console.log('Criteria changed: ', this.criteria);
 		},
 		//Method to handle the change of the selected dolphins
-		async handleDolphinChange() {
+		async handleDolphinChange(newValue: any, calledFromConfirmRefresh = false) {
 			console.log('Dolphin changed: ', this.dolphinSelect);
-			await this.switchDolphin();
+			await this.switchDolphin(newValue, calledFromConfirmRefresh); //passes the boolean value to the switchDolphin method
 			// Saves the current dolphin name as the old name for later use
-			// Important when switching the dolphin to save the data of the old dolphin
-			this.oldDolphinSelect = this.dolphinSelect;
+			// Important when manually switching the dolphin to save the data of the old dolphin
+			/*if (calledFromConfirmRefresh) {
+				// Get the current index to get the previous dolphin in the dolphinList later on
+				const currentIndex = this.dolphinList.findIndex(
+					(dolphin) => dolphin.name === this.dolphinSelect
+				);
+				console.log('Current index in handleDolphinChange: ', currentIndex);
+				// Check if there is a previous dolphin in the list and the list is not at its end
+				if (currentIndex !== 0 && currentIndex < this.dolphinList.length) {
+					//if (currentIndex < this.dolphinList.length - 1) {
+					// Select the previous dolphin in the dolphinList
+					this.oldDolphinSelect = this.dolphinList[currentIndex].name;
+					//}
+					console.log(
+						'1 Old dolphin in handleDolphinChange: ',
+						this.oldDolphinSelect
+					);
+				} else {
+					// No previous dolphin in the list
+					this.oldDolphinSelect = this.dolphinSelect;
+					console.log(
+						'2 Old dolphin in handleDolphinChange: ',
+						this.oldDolphinSelect
+					);
+				}
+			} else {
+				// Manually update the value of dolphinSelect
+				//console.log('dolphin before update: ', this.dolphinSelect);
+				//this.dolphinSelect = newValue;
+				//console.log('dolphin after update: ', this.dolphinSelect);
+				// If called from manually switching the dolphins
+				/*this.oldDolphinSelect = this.dolphinSelect;
+				console.log(
+					'3 Old dolphin in handleDolphinChange: ',
+					this.oldDolphinSelect
+				);*/
+			//}
 		},
 		//Method to switch the dolphin
-		async switchDolphin() {
+		async switchDolphin(newValue: any, calledFromConfirmRefresh = false) {
 			// Save the current data if the user switches the dolphin without clicking on the next button
-			await this.storeCheckedValues(true); //true is passed so the method knows it has been called from the switchDolphin method
-
-			if (this.oldDolphinSelect !== null) {
+			// false is passed so the method knows it has been called from the switchDolphin method
+			// true if called from the confirmRefresh method
+			await this.storeCheckedValues();
+			/*if (this.oldDolphinSelect !== null) {
 				toast.success(this.$t('dataSavedTemporary'), {
 					autoClose: 2000,
 				});
-			}
-			///////////////////////////////////////////////////////////////////////////
-			// This part ensures that the data is saved
-			// for the previously selected dolphin
-			let dolphinSelect;
-			if (this.oldDolphinSelect === undefined) {
-				// If there is no old dolphin select, then the CURRENT dolphin select is used
-				console.log('No old dolphin select found.');
-				dolphinSelect = this.dolphinSelect;
-			} else {
-				// If there is an old dolphin select, then the OLD dolphin select is used
-				console.log('Old dolphin select found:', this.oldDolphinSelect);
-				dolphinSelect = this.oldDolphinSelect;
-			}
+			}*/
+			console.log('switchDolphin called');
+			console.log('Dolphin in switchDolphin: ', this.dolphinSelect);
+			//let dolphinSelect;
+			await this.photoUpload(this.dolphinSelect ?? ''); //this.dolphinSelect to save it for the current dolphin, not the next dolphin in the dolphinList
+			await this.videoUpload(this.dolphinSelect ?? '');
 
-			console.log('Current data saved for: ', dolphinSelect);
+			if (calledFromConfirmRefresh) {
+				// Find the index of the currently selected dolphin
+				const currentIndex = this.dolphinList.findIndex(
+					(dolphin) => dolphin.name === this.dolphinSelect //takes the first value of this.dolphinSelect since there is anyway only one dolphin or no dolphin selected while we are here switching the dolphins
+				);
+				if (currentIndex === -1) {
+					// If no dolphin is selected or the current selection is not found, no dolphin will be selected when clicking on confirmRefresh
+					newValue = null;
+				}
+				if (currentIndex < this.dolphinList.length - 1) {
+					// Select the next dolphin in the dolphinList, reassign newValue for this
+					newValue = this.dolphinList[currentIndex + 1].name;
+				} else {
+					// If it was the last dolphin, de-select or loop back to the first dolphin
+					newValue = null; // Optionally loop back to the first dolphin
+					toast.success(this.$t('principleFinished'), {
+						autoClose: 5000,
+					});
+				}
+			}
+			// After everything has been uploaded, update the this.dolphinSelect
+			this.dolphinSelect = newValue;
+
 			///////////////////////////////////////////////////////////////////////////
-			await this.photoUpload(dolphinSelect ?? '');
-			await this.videoUpload(dolphinSelect ?? '');
 
 			// Reset checkboxes before filling them again with current data
 			for (let i = 0; i <= 12; i++) {
@@ -1979,20 +1949,20 @@ export default {
 								evaluationHealthStore.requestBodiesHealth[k][
 									'records_external_disease'
 								];
-							console.log(
+							/*console.log(
 								'Records normal floatability value: ',
 								recordsNormalFloatability
-							);
+							);*/
 							if (normalFloatability !== null) {
 								// Assign the value of the body condition score to the checkbox array
 								const j = normalFloatability;
 								this.CheckboxArray[0][j] = true;
-								console.log('Normal floatability value: ', j);
+								//console.log('Normal floatability value: ', j);
 							}
 							if (recordsNormalFloatability !== null) {
 								const j = recordsNormalFloatability;
 								this.CheckboxArray[1][j] = true;
-								console.log('Records normal floatability value second: ', j);
+								//console.log('Records normal floatability value second: ', j);
 							}
 							if (inspectionEyeLesions !== null) {
 								const j = inspectionEyeLesions;
