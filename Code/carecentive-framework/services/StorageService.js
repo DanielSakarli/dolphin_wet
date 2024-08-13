@@ -48,6 +48,17 @@ class StorageService {
             throw err;
         }
     }
+    
+    static async resetStorage(userID) {
+        try {
+            const key = `session:${userID}`;
+            await redisClient.del(key);  // Deletes the key from Redis
+            console.log(`Data for userID ${userID} has been reset.`);
+        } catch (err) {
+            console.error('Error resetting session data in Redis:', err);
+            throw err;
+        }
+    }
 }
 
 module.exports = StorageService;

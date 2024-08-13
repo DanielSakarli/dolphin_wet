@@ -71,68 +71,137 @@ const storage = multer.diskStorage({
         //console.log(req.session.photo_path.eye_photo_path);
       }
       if(req.body.photo_type === 'teeth'){
-        console.log('I am here');
-        if(req.session.photo_path.teeth_photo_path === 'empty'){ //If empty, so session storage has just been initialized
+        //console.log('I am at eye: ' + req.session.photo_path.eye_photo_path);
+        
+        if(
+          !storageData ||
+          !storageData.photo_path.teeth_photo_path
+        ) {
+          //If null, the storage is still empty
           //First photo in the list
-          console.log('I am at teeth');
-          req.session.photo_path.teeth_photo_path = apiUrl + '/api/images/' + `${uniqueSuffix}${path.extname(
+          const teeth_photo_path = apiUrl + '/api/images/' + `${uniqueSuffix}${path.extname(
             file.originalname
           )}`;
+          const data = {
+            photo_path: {
+              teeth_photo_path: teeth_photo_path
+            },
+            dolphin_name: req.body.dolphin_name
+          };
+
+          await StorageService.setStorage(user_id, data);
+          console.log('Storage data: ', await StorageService.getStorage(user_id));
         } else {
           //Commaseparated list of photo paths if several photos to upload
-          req.session.photo_path.teeth_photo_path = req.session.photo_path.teeth_photo_path + ',' + apiUrl + '/api/images/' + `${uniqueSuffix}${path.extname(
+          console.log('First photo_path about to be extended by the next photo path', storageData.photo_path.teeth_photo_path);
+          storageData.photo_path.teeth_photo_path = storageData.photo_path.teeth_photo_path + ',' + apiUrl + '/api/images/' + `${uniqueSuffix}${path.extname(
             file.originalname
           )}`;
+          storageData.dolphin_name = req.body.dolphin_name;
+          console.log('Storage data right before it´s send to the setter method: ', storageData);
+          await StorageService.setStorage(user_id, storageData);
         }
-        console.log(req.session.photo_path.teeth_photo_path);
+        //console.log(req.session.photo_path.eye_photo_path);
       }
       if(req.body.photo_type === 'odontogramm'){
-        console.log('I am here');
-        if(req.session.photo_path.odontogramm_photo_path === 'empty'){ //If empty, so session storage has just been initialized
+        //console.log('I am at eye: ' + req.session.photo_path.eye_photo_path);
+        
+        if(
+          !storageData ||
+          !storageData.photo_path.odontogramm_photo_path
+        ) {
+          //If null, the storage is still empty
           //First photo in the list
-          console.log('I am at odontogramm');
-          req.session.photo_path.odontogramm_photo_path = apiUrl + '/api/images/' + `${uniqueSuffix}${path.extname(
+          const odontogramm_photo_path = apiUrl + '/api/images/' + `${uniqueSuffix}${path.extname(
             file.originalname
           )}`;
+          const data = {
+            photo_path: {
+              odontogramm_photo_path: odontogramm_photo_path
+            },
+            dolphin_name: req.body.dolphin_name
+          };
+
+          await StorageService.setStorage(user_id, data);
+          console.log('Storage data: ', await StorageService.getStorage(user_id));
         } else {
           //Commaseparated list of photo paths if several photos to upload
-          req.session.photo_path.odontogramm_photo_path = req.session.photo_path.odontogramm_photo_path + ',' + apiUrl + '/api/images/' + `${uniqueSuffix}${path.extname(
+          console.log('First photo_path about to be extended by the next photo path', storageData.photo_path.odontogramm_photo_path);
+          storageData.photo_path.odontogramm_photo_path = storageData.photo_path.odontogramm_photo_path + ',' + apiUrl + '/api/images/' + `${uniqueSuffix}${path.extname(
             file.originalname
           )}`;
+          storageData.dolphin_name = req.body.dolphin_name;
+          console.log('Storage data right before it´s send to the setter method: ', storageData);
+          await StorageService.setStorage(user_id, storageData);
         }
-        console.log(req.session.photo_path.odontogramm_photo_path);
+        //console.log(req.session.photo_path.eye_photo_path);
       }
       if(req.body.photo_type === 'marks'){
-        console.log('I am here: ' + req.session.photo_path.marks_photo_path);
-        if(req.session.photo_path.marks_photo_path === 'empty'){ //If empty, so session storage has just been initialized
+        //console.log('I am at eye: ' + req.session.photo_path.eye_photo_path);
+        
+        if(
+          !storageData ||
+          !storageData.photo_path.marks_photo_path
+        ) {
+          //If null, the storage is still empty
           //First photo in the list
-          console.log('I am at marks');
-          req.session.photo_path.marks_photo_path = apiUrl + '/api/images/' + `${uniqueSuffix}${path.extname(
+          const marks_photo_path = apiUrl + '/api/images/' + `${uniqueSuffix}${path.extname(
             file.originalname
           )}`;
+          const data = {
+            photo_path: {
+              marks_photo_path: marks_photo_path
+            },
+            dolphin_name: req.body.dolphin_name
+          };
+
+          await StorageService.setStorage(user_id, data);
+          console.log('Storage data: ', await StorageService.getStorage(user_id));
         } else {
           //Commaseparated list of photo paths if several photos to upload
-          req.session.photo_path.marks_photo_path = req.session.photo_path.marks_photo_path + ',' + apiUrl + '/api/images/' + `${uniqueSuffix}${path.extname(
+          console.log('First photo_path about to be extended by the next photo path', storageData.photo_path.marks_photo_path);
+          storageData.photo_path.marks_photo_path = storageData.photo_path.marks_photo_path + ',' + apiUrl + '/api/images/' + `${uniqueSuffix}${path.extname(
             file.originalname
           )}`;
+          storageData.dolphin_name = req.body.dolphin_name;
+          console.log('Storage data right before it´s send to the setter method: ', storageData);
+          await StorageService.setStorage(user_id, storageData);
         }
-        console.log(req.session.photo_path.marks_photo_path);
-    }
-    if(req.body.photo_type === 'silhouette'){
-      console.log('I am at silhouette: ' + req.session.photo_path.silhouette_photo_path);
-      if(req.session.photo_path.silhouette_photo_path === 'empty'){ //If empty, session storage has just been initialized
-        //First photo in the list
-        req.session.photo_path.silhouette_photo_path = apiUrl + '/api/images/' + `${uniqueSuffix}${path.extname(
-          file.originalname
-        )}`;
-      } else {
-        //Commaseparated list of photo paths if several photos to upload
-        req.session.photo_path.silhouette_photo_path = req.session.photo_path.silhouette_photo_path + ',' + apiUrl + '/api/images/' + `${uniqueSuffix}${path.extname(
-          file.originalname
-        )}`;
+        //console.log(req.session.photo_path.eye_photo_path);
       }
-      console.log(req.session.photo_path.silhouette_photo_path);
-    }
+      if(req.body.photo_type === 'silhouette'){
+        //console.log('I am at eye: ' + req.session.photo_path.eye_photo_path);
+        
+        if(
+          !storageData ||
+          !storageData.photo_path.silhouette_photo_path
+        ) {
+          //If null, the storage is still empty
+          //First photo in the list
+          const silhouette_photo_path = apiUrl + '/api/images/' + `${uniqueSuffix}${path.extname(
+            file.originalname
+          )}`;
+          const data = {
+            photo_path: {
+              silhouette_photo_path: silhouette_photo_path
+            },
+            dolphin_name: req.body.dolphin_name
+          };
+
+          await StorageService.setStorage(user_id, data);
+          console.log('Storage data: ', await StorageService.getStorage(user_id));
+        } else {
+          //Commaseparated list of photo paths if several photos to upload
+          console.log('First photo_path about to be extended by the next photo path', storageData.photo_path.silhouette_photo_path);
+          storageData.photo_path.silhouette_photo_path = storageData.photo_path.silhouette_photo_path + ',' + apiUrl + '/api/images/' + `${uniqueSuffix}${path.extname(
+            file.originalname
+          )}`;
+          storageData.dolphin_name = req.body.dolphin_name;
+          console.log('Storage data right before it´s send to the setter method: ', storageData);
+          await StorageService.setStorage(user_id, storageData);
+        }
+        //console.log(req.session.photo_path.eye_photo_path);
+      }
     currentIndex++; //increment the index to get the next photo filename
 	},
 });
@@ -157,9 +226,8 @@ async function uploadPhoto(req, res, next) {
     try {    
     console.log('currentIndex: ', currentIndex);
     currentIndex = 0; // Reset the index before each photo upload
-    // Reset the redis storage before uploading new photos for this user id
-    await StorageService.setStorage(req.authData.user_id, {});
     
+
     //console.log('Photo path accessed  from session storage: ' + photo_path.eye_photo_path.toString());
     //console.log(photo_type);
 
