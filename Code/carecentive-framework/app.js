@@ -101,6 +101,7 @@ const good_housing = require('./routes/good_housing');
 const behaviour = require('./routes/behabvior');
 const emotional_state = require('./routes/emotional_state');
 const csvWriter = require('./routes/csv_writer');
+const redis_storage = require('./routes/storage');
 //const uploadPhoto = require('./controllers/photoUpload');
 const uploadFile = require('./fileUpload');
 
@@ -247,6 +248,8 @@ app.use('/api/behaviour', behaviour);
 app.use('/api/emotional_state', emotional_state);
 app.post('/api/file', uploadFile);
 app.use('/api/export-csv', csvWriter);
+// Redis storage for file paths
+app.use('/api/redis_storage', redis_storage);
 // For example eye, teeth, odontogramm, or rake mark image files
 app.use('/api/images', express.static(path.join(__dirname,'uploads/images'))); //gets the images with the url http://localhost:3309/images/ + filename
 // Laboratory data files: e.g. food quality
