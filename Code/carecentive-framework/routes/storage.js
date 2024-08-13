@@ -6,7 +6,7 @@ const { query } = require('express-validator');
 /**
  * Controllers
  */
-const { setSessionStorage, getSessionStorage } = require('../controllers/storage');
+const { setSessionStorage, getSessionStorage, resetSessionStorage } = require('../controllers/storage');
 
 /**
  * Sets the Redis in-memory storage
