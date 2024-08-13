@@ -8,9 +8,8 @@ var cookieParser = require('cookie-parser');
 var httplogger = require('morgan');
 // Middleware for cross-origin policy
 const cors = require('cors');
-
 var app = express();
-
+const redisClient = require('./redisClient'); // By importing this file, the Redis client is set up, to have an in-memory storage used for file uploads
 
 setup.setup();
 const dotenv = require('dotenv');
@@ -174,6 +173,7 @@ app.use(function(req, res, next) {
 /**
  * Setup session storage
  */
+/*
 app.use(
     session({
         secret: 'secret',
@@ -216,6 +216,7 @@ app.post('/api/setup_session_storage', (req, res, next) => {
 		res.sendStatus(500);
 	}
 });
+*/
 ///////////////////////////////////////////////////
 
 /**
@@ -252,6 +253,9 @@ app.use('/api/images', express.static(path.join(__dirname,'uploads/images'))); /
 app.use('/api/files', express.static(path.join(__dirname,'uploads/files'))); //gets the files with the url http://localhost:3309/files/ + filename
 // Video files
 app.use('/api/videos', express.static(path.join(__dirname,'uploads/videos'))); //gets the videos with the url http://localhost:3309/videos/ + filename
+
+
+
 
 /**
  * Custom routes
