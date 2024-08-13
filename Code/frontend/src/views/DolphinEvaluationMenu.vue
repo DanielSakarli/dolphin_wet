@@ -328,11 +328,19 @@ export default {
 		// Fetch all dolphins when component is created
 		async fetchDolphins() {
 			try {
+				//////////////////////////////////////////////
+				// TESTING THE AUTHORIZATION HEADER
+				// Get the token from localStorage
+				const token = localStorage.getItem('token');
+
+				// Make the GET request with the Authorization header
 				await axios
-					.get(
-						baseUrl + '/api/dolphins', //'http://88395-17112.pph-server.de/api/dolphins'
-						{ withCredentials: true }
-					)
+					.get(baseUrl + '/api/dolphins', {
+						withCredentials: true,
+						headers: {
+							Authorization: `Bearer ${token}`, // Include the Authorization header
+						},
+					}) //////////////////////////////////////////////
 					.then((response) => {
 						if (localStorage.getItem('reload_data_button_pressed') === 'true') {
 							toast.success(this.$t('dolphinDataReloaded'), {

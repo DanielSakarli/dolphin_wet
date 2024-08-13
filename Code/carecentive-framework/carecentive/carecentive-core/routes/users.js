@@ -91,6 +91,25 @@ router.post('/login', async function(req, res, next) {
       return res.status(400).send("PASSWORD_NOT_PROVIDED.");
     }
 
+    // Login the user and get the token
+    let { token, roleName } = await UserService.login(username, password)
+    console.log("Token set in login method: ", token);
+
+    // Send the token and roleName to the client
+    return res.json({ token, roleName });
+    
+    /*console.log('Login Request:', req.body)
+    let username = req.body.username
+    let password = req.body.password
+
+    if(!username) {
+      return res.status(400).send("USERNAME_NOT_PROVIDED.");
+    }
+
+    if(!password) {
+      return res.status(400).send("PASSWORD_NOT_PROVIDED.");
+    }
+
     let { token, roleName } = await UserService.login(username, password)
     console.log("Token set in login method: ", token);
     ///////TEST////////
@@ -100,7 +119,7 @@ router.post('/login', async function(req, res, next) {
     // Try commenting out this line
     // res.cookie('token', token, { httpOnly:true });
     
-    return res.json({ token, roleName });
+    return res.json({ token, roleName });*/
   }
   catch (err) {
     console.log("Error during login method")

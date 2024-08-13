@@ -78,6 +78,22 @@ axios.interceptors.request.use(
 		if (!config.hideGlobalLoading) {
 			showLoading();
 		}
+
+		////////////////////////////////////////////
+		// Add the Authorization header to the config
+		// Retrieve the token from localStorage
+		const token = localStorage.getItem('token');
+		if (token) {
+			// Ensure headers are initialized
+			/*if (!config.headers) {
+				config.headers = {};
+			}*/
+			// Add the Authorization header to the config
+			(config.headers as any)['Authorization'] = `Bearer ${token}`;
+		}
+
+		////////////////////////////////////////////
+
 		return config;
 	},
 	(error) => {

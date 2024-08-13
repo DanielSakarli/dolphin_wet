@@ -7,9 +7,33 @@ const User = require('../models/User');
  */
 
 function authenticateToken(req, res, next) {
-  // const authHeader = req.headers.authorization;
+  // Extract the Authorization header from the request
+  const authHeader = req.headers.authorization;
 
-  token = req.cookies.token
+  // Check if the Authorization header is present and starts with 'Bearer '
+  if (authHeader && authHeader.startsWith('Bearer ')) {
+      // Extract the token from the Authorization header
+      const token = authHeader.split(' ')[1]; // Extract the token after 'Bearer '
+
+      // Verify the token using the secret key
+      jwt.verify(token, process.env.JWT_TOKEN_SECRET, (err, authData) => {
+          if (err) {
+              // If the token is invalid, respond with a 403 Forbidden status
+              return res.sendStatus(403);
+          }
+
+          // If the token is valid, attach the decoded data to the request object
+          req.authData = authData;
+
+          // Proceed to the next middleware or route handler
+          next();
+      });
+  } else {
+      // If no token is found, respond with a 401 Unauthorized status
+      res.sendStatus(401);
+  }
+
+  /*token = req.cookies.token
   console.log('This is the cookie in our authenticateToken() method: ', token);
   if (token) {
       jwt.verify(token, process.env.JWT_TOKEN_SECRET, (err, authData) => {
@@ -22,7 +46,7 @@ function authenticateToken(req, res, next) {
       });
   } else {
       res.sendStatus(401);
-  }
+  }*/
 };
 
 function parseButDoNotAuthenticateToken(req, res, next) {
