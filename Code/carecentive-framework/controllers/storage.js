@@ -12,6 +12,7 @@ async function setSessionStorage(req, res, next) {
             const { user_id } = req.authData;
 
             await StorageService.setStorage(user_id, data);
+            res.json({ message: `Storage has been set for user_id: ${user_id}` });
         } else {
             res.status(401).send('Unauthorized');
         }
@@ -28,7 +29,8 @@ async function setSessionStorage(req, res, next) {
 async function getSessionStorage(req, res, next) {
     try {
         if (isUserAuth) {
-
+            await StorageService.getStorage(user_id);
+            res.json({ message: `Got storage for user_id: ${user_id}` });
         } else {
             res.status(401).send('Unauthorized');
         }
@@ -48,6 +50,7 @@ async function resetSessionStorage(req, res, next) {
             const { user_id } = req.authData;
             
             await StorageService.resetStorage(user_id);
+            res.json({ message: `Storage has been reseted for user_id: ${user_id}` });
         } else {
             res.status(401).send('Unauthorized');
         }
