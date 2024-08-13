@@ -64,6 +64,8 @@ const storage = multer.diskStorage({
           storageData.photo_path.eye_photo_path = storageData.photo_path.eye_photo_path + ',' + apiUrl + '/api/images/' + `${uniqueSuffix}${path.extname(
             file.originalname
           )}`;
+          storageData.dolphin_name = req.body.dolphin_name;
+          console.log('Storage data right before it´s send to the setter method: ', storageData);
           await StorageService.setStorage(user_id, storageData);
         }
         //console.log(req.session.photo_path.eye_photo_path);
