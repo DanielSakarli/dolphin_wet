@@ -42,7 +42,7 @@ const storage = multer.diskStorage({
         
         if(
           !storageData ||
-          !storageData.eye_photo_path
+          !storageData.photo_path.eye_photo_path
         ) {
           //If null, the storage is still empty
           //First photo in the list
@@ -60,7 +60,8 @@ const storage = multer.diskStorage({
           console.log('Storage data: ', await StorageService.getStorage(user_id));
         } else {
           //Commaseparated list of photo paths if several photos to upload
-          storageData.eye_photo_path = storageData.eye_photo_path + ',' + apiUrl + '/api/images/' + `${uniqueSuffix}${path.extname(
+          console.log('First photo_path about to be extended by the next photo path', storageData.photo_path.eye_photo_path);
+          storageData.photo_path.eye_photo_path = storageData.photo_path.eye_photo_path + ',' + apiUrl + '/api/images/' + `${uniqueSuffix}${path.extname(
             file.originalname
           )}`;
           await StorageService.setStorage(user_id, storageData);
