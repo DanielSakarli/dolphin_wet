@@ -157,6 +157,9 @@ async function uploadPhoto(req, res, next) {
     try {    
     console.log('currentIndex: ', currentIndex);
     currentIndex = 0; // Reset the index before each photo upload
+    // Reset the redis storage before uploading new photos for this user id
+    await StorageService.setStorage(req.authData.user_id, {});
+    
     //console.log('Photo path accessed  from session storage: ' + photo_path.eye_photo_path.toString());
     //console.log(photo_type);
 
