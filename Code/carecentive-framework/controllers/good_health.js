@@ -49,7 +49,7 @@ async function setResult(req, res, next) {
 			// attach userID to test result in req.body
 			let test_result = req.body;
 			test_result = { user_id: userID, user_name: userName, ...test_result };
-
+			console.log('storageData in good_health.js: ' + storageData);
 			/*console.log('Photo path in req.session in good_health.js: ' + req.session.photo_path.eye_photo_path);
 			console.log('Photo path in req.session in good_health.js: ' + req.session.photo_path.teeth_photo_path);	
 			console.log('Photo path in req.session in good_health.js: ' + req.session.photo_path.odontogramm_photo_path);
@@ -64,7 +64,7 @@ async function setResult(req, res, next) {
 					// Check if the dolphin_name in the array is e.g. 'Dolly'
 					if (test_result.dolphin_name === storageData.dolphin_name) {
 						// Append eye_photo_path to the array
-						test_result.eye_photo_path = req.session.photo_path.eye_photo_path.toString();
+						test_result.eye_photo_path = storageData.photo_path.eye_photo_path.toString();
 						//fileData = fs.readFileSync(test_result.eye_photo_path);
 						//test_result.image = fileData;
 						//console.log(fileData);
@@ -116,7 +116,7 @@ async function setResult(req, res, next) {
 				}
 				if(storageData.photo_path.silhouette_photo_path)
 					{
-					console.log('Photo path in req.session in good_health.js: ' + storageData.photo_path.silhouette_photo_path);
+					console.log('Photo path in storageData in good_health.js: ' + storageData.photo_path.silhouette_photo_path);
 					
 					// Check if the dolphin_name in the array is e.g. 'Dolly'
 					if (test_result.dolphin_name === storageData.dolphin_name) {

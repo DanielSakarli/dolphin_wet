@@ -26,4 +26,13 @@ router.get(
     getSessionStorage
 );
 
+/**
+ * Resets the Redis in-memory storage
+ */
+router.delete(
+    '/',
+    authenticateTokenWithSwitch,
+    resetSessionStorage
+);
+
 module.exports = router;

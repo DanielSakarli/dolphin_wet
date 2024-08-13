@@ -10,7 +10,7 @@ async function setSessionStorage(req, res, next) {
 	try {
         if (isUserAuth) {
             const { user_id } = req.authData;
-            
+
             await StorageService.setStorage(user_id, data);
         } else {
             res.status(401).send('Unauthorized');
@@ -35,8 +35,29 @@ async function getSessionStorage(req, res, next) {
     } catch (error) {
         next(error);
     }
-}   
+}
+
+/**
+ * Controller of post request of /api/good_health.
+ * Loads the result into the database and response with the given result if it's valid.
+ * @returns {Object} The inserted test result
+ */
+async function resetSessionStorage(req, res, next) {
+	try {
+        if (isUserAuth) {
+            const { user_id } = req.authData;
+            
+            await StorageService.resetStorage(user_id);
+        } else {
+            res.status(401).send('Unauthorized');
+        }
+    } catch (error) {
+        next(error);
+    }
+}
+
 module.exports = {
     setSessionStorage,
-    getSessionStorage
+    getSessionStorage,
+    resetSessionStorage
 };
