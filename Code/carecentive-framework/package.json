@@ -47,6 +47,7 @@
 		"nodemon": "^2.0.22",
 		"objection": "^2.2.3",
 		"redis": "^4.7.0",
+		"redis-server": "^1.2.2",
 		"winston": "^3.3.3"
 	},
 	"devDependencies": {

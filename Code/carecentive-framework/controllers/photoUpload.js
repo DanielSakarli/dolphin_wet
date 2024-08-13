@@ -22,8 +22,8 @@ const storage = multer.diskStorage({
       const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1e9);
       //req.session.photo_type = req.body.photo_type; // Either 'eye', 'teeth', 'odontogramm', or 'marks'
       console.log('Reached filename in photoUpload.js');
-      storage = await StorageService.getStorage(user_id);
-      console.log('request session storage: ', storage);
+      let storageData = await StorageService.getStorage(user_id);
+      console.log('request session storage: ', storageData);
 
       //console.log('Photo type in req.session: ', StorageService.getStorage(user_id).photo_type);
       //req.session.dolphin_name = req.body.dolphin_name; // The name of the dolphin, so picture is later on assignable to a dolphin
@@ -41,8 +41,8 @@ const storage = multer.diskStorage({
         //console.log('I am at eye: ' + req.session.photo_path.eye_photo_path);
         
         if(
-          storage &&
-          storage.eye_photo_path
+          storageData &&
+          storageData.eye_photo_path
         ) {
           //If null, the storage is still empty
           //First photo in the list
@@ -59,12 +59,12 @@ const storage = multer.diskStorage({
           await StorageService.setStorage(user_id, data);
         } else {
           //Commaseparated list of photo paths if several photos to upload
-          storage.eye_photo_path = storage.eye_photo_path + ',' + apiUrl + '/api/images/' + `${uniqueSuffix}${path.extname(
+          storageData.eye_photo_path = storageData.eye_photo_path + ',' + apiUrl + '/api/images/' + `${uniqueSuffix}${path.extname(
             file.originalname
           )}`;
-          await StorageService.setStorage(user_id, storage);
+          await StorageService.setStorage(user_id, storageData);
         }
-        console.log(req.session.photo_path.eye_photo_path);
+        //console.log(req.session.photo_path.eye_photo_path);
       }
       if(req.body.photo_type === 'teeth'){
         console.log('I am here');
