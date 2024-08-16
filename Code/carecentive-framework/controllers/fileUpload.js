@@ -39,9 +39,14 @@ const storage = multer.diskStorage({
           ) {
             //If null, the storage is still empty
             //First file in the list
-            storageData.file_path = apiUrl + '/api/files/' + `${uniqueSuffix}${path.extname(
-            file.originalname
-          )}`;
+            const data = {
+              file_path: apiUrl + '/api/files/' + `${uniqueSuffix}${path.extname(
+                file.originalname
+              )}`,
+              dolphin_name: req.body.dolphin_name
+            };
+  
+            await StorageService.setStorage(user_id, data);
         } else {
           //Commaseparated list of paths if several files to upload
           storageData.file_path = storageData.file_path + ',' + apiUrl + '/api/files/' + `${uniqueSuffix}${path.extname(
