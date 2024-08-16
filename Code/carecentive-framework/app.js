@@ -103,7 +103,7 @@ const emotional_state = require('./routes/emotional_state');
 const csvWriter = require('./routes/csv_writer');
 const redis_storage = require('./routes/storage');
 //const uploadPhoto = require('./controllers/photoUpload');
-const uploadFile = require('./fileUpload');
+const uploadFile = require('./controllers/fileUpload');
 
 //const uploadPhotoPath = require('./photoUpload');
 

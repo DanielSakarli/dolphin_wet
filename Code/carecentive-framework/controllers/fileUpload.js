@@ -1,7 +1,7 @@
 const path = require('path');
 require('dotenv').config();
 const multer = require('multer');
-const StorageService = require('./services/StorageService');
+const StorageService = require('../services/StorageService');
 
 let currentIndex = 0;
 
@@ -105,4 +105,4 @@ await new Promise((resolve, reject) => {
   }
 }
 
-module.exports = uploadFile;
+module.exports = { uploadFile };
