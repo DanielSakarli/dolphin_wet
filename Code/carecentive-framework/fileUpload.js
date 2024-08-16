@@ -72,25 +72,37 @@ async function uploadFile(req, res, next) {
     //req.session.dolphin_name = '';
     currentIndex = 0; // Reset the index before each file upload
     
-
-    uploadMultiple(req, res, function (err) {
-      if (err instanceof multer.MulterError) {
-        // A Multer error occurred when uploading.
-        res.sendStatus(401); 
-      } else if (err) {
-        // An unknown error occurred when uploading.
-        res.sendStatus(500); 
-      } else {
-        // Everything went fine.
-
-        res.sendStatus(201); //picture uploaded successfully
-        }
-    })
-    } catch (error) {
-    console.error(error);
-    // An unknown error occurred
-    res.sendStatus(500);
+// Wrap uploadMultiple in a new Promise
+await new Promise((resolve, reject) => {
+  uploadMultiple(req, res, function (err) {
+    console.log('Reached photoUpload.js uploadMultiple');
+    if (err instanceof multer.MulterError) {
+      // A Multer error occurred when uploading.
+      console.log('Multer error: ', err);
+      reject({ status: 400, error: err });
+    } else if (err) {
+      // An unknown error occurred when uploading.
+      console.log('Unknown error: ', err);
+      reject({ status: 500, error: err });
+    } else {
+      // Everything went fine.
+      console.log('Photo uploaded successfully');
+      resolve({ status: 201 });
     }
+  });
+  })
+  .then(async result => {
+    
+    res.status(result.status).json();
+  })
+  .catch(err => {
+    res.status(err.status).json();
+  });
+  } catch (error) {
+  console.error(error);
+  // An unknown error occurred
+  next(error);//res.status(500); //res.sendStatus(500);
+  }
 }
 
-module.exports = uploadFile;
+module.exports = { uploadFile };
