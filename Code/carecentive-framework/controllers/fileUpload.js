@@ -16,7 +16,7 @@ const storage = multer.diskStorage({
     console.log('StorageData 1: ', storageData);
       const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1e9);
       
-      console.log(storageData.dolphin_name);
+      //console.log(storageData.dolphin_name);
       cb(
         null, // currently no error handling
         `${uniqueSuffix}${path.extname(
@@ -49,7 +49,6 @@ const storage = multer.diskStorage({
           )}`,
           dolphin_name: req.body.dolphin_name
         };
-        storageData.dolphin_name = req.body.dolphin_name;
       }
         await StorageService.setStorage(user_id, data);
         
