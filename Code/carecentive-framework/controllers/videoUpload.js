@@ -14,13 +14,7 @@ const storage = multer.diskStorage({
     let storageData = await StorageService.getStorage(user_id);
       
       const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1e9);
-      //storageData.dolphin_name = req.body.dolphin_name; // The name of the dolphin, so picture is later on assignable to a dolphin
-      if (req.body.dolphin_name.includes(',')) {
-        storageData.dolphin_name = req.body.dolphin_name.split(',');
-      } else {
-        storageData.dolphin_name = req.body.dolphin_name;
-      }
-      console.log('dolphin name saved in storage: ', storageData.dolphin_name);
+      
       cb(
         null, // currently no error handling
         `${uniqueSuffix}${path.extname(
@@ -31,22 +25,41 @@ const storage = multer.diskStorage({
       // Save path in session storage for later access in good_feeding.js to save the paths in the database
       const apiUrl = process.env.PHOTO_PATH; //process.env.MYSQL_HOST + ':' + process.env.HTTP_PORT;
       
-        console.log('I am here: ' + storageData.video_path);
+        console.log('I am here: ' + storageData);
         if(
           !storageData ||
           !storageData.video_path
         ) { //If null, the storage is still empty
           //First video in the list
-          storageData.video_path = apiUrl + '/api/videos/' + `${uniqueSuffix}${path.extname(
-            file.originalname
-          )}`;
+          //storageData.dolphin_name = req.body.dolphin_name; // The name of the dolphin, so picture is later on assignable to a dolphin
+      if (req.body.dolphin_name.includes(',')) {
+        data = {
+          video_path:  apiUrl + '/api/videos/' + `${uniqueSuffix}${path.extname(file.originalname)}`,
+          dolphin_name: req.body.dolphin_name.split(',')
+        };
+        
+      } else {
+        data = {
+          video_path:  apiUrl + '/api/videos/' + `${uniqueSuffix}${path.extname(file.originalname)}`,
+          dolphin_name: req.body.dolphin_name
+        };
+      }
+      await StorageService.setStorage(user_id, data); 
+         
+      } else {
+        if (req.body.dolphin_name.includes(',')) {
+          storageData.dolphin_name = req.body.dolphin_name.split(',');
         } else {
-          //Commaseparated list of paths if several video files to upload
-          storageData.video_path = storageData.video_path + ',' + apiUrl + '/api/videos/' + `${uniqueSuffix}${path.extname(
-            file.originalname
-          )}`;
+          storageData.dolphin_name = req.body.dolphin_name;
         }
+            //Commaseparated list of paths if several files to upload
+            storageData.video_path = storageData.video_path + ',' + apiUrl + '/api/videos/' + `${uniqueSuffix}${path.extname(
+              file.originalname
+            )}`;
+        console.log('Setter in fileUpload.js: ', storageData);
         await StorageService.setStorage(user_id, storageData);
+      }
+        
         console.log('Storage data: ', await StorageService.getStorage(user_id));
     currentIndex++; //increment the index to get the next filename
 	},

@@ -20,6 +20,7 @@ class StorageService {
                     silhouette_photo_path: newData.photo_path?.silhouette_photo_path || existingData.photo_path?.silhouette_photo_path || null
                 },
                 file_path: newData.file_path || existingData.file_path || null,
+                video_path: newData.video_path || existingData.video_path || null,
             };
 
            // Set the merged data back to Redis
