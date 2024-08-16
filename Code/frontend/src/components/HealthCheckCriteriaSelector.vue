@@ -1699,7 +1699,7 @@ export default {
 									// But only reset once in the end
 									if (
 										i ===
-										evaluationFeedingStore.requestBodiesFeeding.length - 1
+										evaluationHealthStore.requestBodiesHealth.length - 1
 									) {
 										this.resetData();
 									}
@@ -2184,6 +2184,7 @@ export default {
 
 					for (let i = 0; i < desiredFormData.length; i++) {
 						// Send the video to the server
+						console.log('VideoFormData length: ', desiredFormData.length);
 						await this.$axios
 							.post(this.urlPostVideo, desiredFormData[i], {
 								withCredentials: true,
