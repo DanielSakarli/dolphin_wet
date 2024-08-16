@@ -1,5 +1,6 @@
 const DolphinService = require('../services/DolphinService');
 const GoodFeedingService = require('../services/GoodFeedingService');
+const StorageService = require('../services/StorageService');
 const { validationResult } = require('express-validator');
 const { isUserAuth } = require('./authSwitch');
 
@@ -52,16 +53,20 @@ async function setResult(req, res, next) {
 		console.log("data returned", temp);
 		test_result = { ...test_result, ...temp}; 
 
+		// Get the redis storage data for this user_id if there is any
+		// null, if empty. Photos paths present, if not null and need to be saved
+		const storageData = await StorageService.getStorage(userID);
+
 		// Get the file paths from the session storage
-		if(req.session.file_path && req.session.file_path != '') {
+		if(storageData.file_path && storageData.file_path) {
 			//console.log('File path: ', req.session.file_path);
 			// attach userID to test result in req.body
 			test_result = { user_id: userID, user_name: userName, ...test_result };
 
 				// Check if the dolphin_name is in the array of strings 'req.session.dolphin_name'
-				if (req.session.dolphin_name.includes(test_result.dolphin_name)) {
+				if (storageData.dolphin_name.includes(test_result.dolphin_name)) {
 					// Append file_path to the array
-					test_result.file_path = req.session.file_path.toString();
+					test_result.file_path = storageData.file_path.toString();
 				}
 							
 				const insertedResult = await GoodFeedingService.loadTestResult(test_result, roleName);

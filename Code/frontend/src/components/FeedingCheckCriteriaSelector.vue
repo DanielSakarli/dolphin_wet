@@ -586,6 +586,7 @@ export default {
 			urlDolphins: baseUrl + '/api/dolphins', //'https://88395-17112.pph-server.de/api/dolphins', //the api route to get the dolphins
 			urlPost: baseUrl + '/api/good_feeding',
 			urlPostFile: baseUrl + '/api/file',
+			urlStorageDelete: baseUrl + '/api/redis_storage', //resets the backend redis storage data for the logged in user
 			body_condition_score_comments: '',
 			weight_measured_comments: '',
 			kcal_calculations_comments: '',
@@ -594,14 +595,14 @@ export default {
 			fish_variety_comments: '',
 			//formData: null as FormData | null,
 			formData: [] as FormData[],
-			setupSessionStorage: {
+			/*setupSessionStorage: {
 				photo_type: '',
 				eye_photo_path: '',
 				teeth_photo_path: '',
 				marks_photo_path: '',
 				file_path: '',
 				dolphin_name: '',
-			},
+			},*/
 			totalFileSize: 0,
 		};
 	},
@@ -901,14 +902,14 @@ export default {
 		},
 		handleFormSubmittedFile(files: File[]) {
 			if (files && this.dolphinSelect.length !== 0) {
-				this.setupSessionStorage = {
+				/*this.setupSessionStorage = {
 					photo_type: '',
 					eye_photo_path: '',
 					teeth_photo_path: '',
 					marks_photo_path: '',
 					file_path: '',
 					dolphin_name: '',
-				};
+				};*/
 				console.log('Form Data accessed in HealthCheckCriteriaSelector.vue:');
 				//this.formData = new FormData();
 				const newFormData = new FormData();
@@ -947,7 +948,7 @@ export default {
 		},
 		async fileUpload() {
 			// Initialize session storage
-			await this.$axios
+			/*await this.$axios
 				.post(baseUrl + '/api/setup_session_storage', null, {
 					withCredentials: true,
 					hideGlobalLoading: true,
@@ -957,10 +958,9 @@ export default {
 				})
 				.catch((error: any) => {
 					console.error('Error:', error);
-				});
+				});*/
 			// Check if there is a photo to upload
 			if (this.formData != null) {
-				// Setup the session storage
 				console.log('Form Data accessed in FeedingCheckCriteriaSelector.vue');
 
 				// Send the file to the server
@@ -1101,6 +1101,19 @@ export default {
 		async resetData() {
 			// Reset request body
 			evaluationFeedingStore.resetBodies();
+
+			// Reset the redis storage in backend for the current user
+			this.$axios
+				.delete(this.urlStorageDelete, {
+					withCredentials: true,
+					hideGlobalLoading: true,
+				})
+				.then((response: any) => {
+					console.log('Redis storage deleted. Response: ', response.data);
+				})
+				.catch((error: any) => {
+					console.log('Error: ', error);
+				});
 
 			// Reset checkboxes
 			for (let i = 0; i <= 4; i++) {

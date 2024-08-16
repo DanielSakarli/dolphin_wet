@@ -1095,6 +1095,7 @@ export default {
 			urlPost: baseUrl + '/api/good_health',
 			urlPostPhoto: baseUrl + '/api/photo',
 			urlPostVideo: baseUrl + '/api/video',
+			urlStorageDelete: baseUrl + '/api/redis_storage', //resets the backend redis storage data for the logged in user
 			normal_floatability_comments: '',
 			records_normal_floatability_comments: '',
 			inspection_eye_lesions_comments: '',
@@ -1111,7 +1112,7 @@ export default {
 
 			formData: [] as FormData[],
 			formDataVideo: [] as FormData[],
-			sessionStorage: {
+			/*sessionStorage: {
 				photo_type: '',
 				eye_photo_path: '',
 				teeth_photo_path: '',
@@ -1121,7 +1122,7 @@ export default {
 				file_path: '',
 				dolphin_name: '',
 				video_path: '',
-			},
+			},*/
 			totalFileSize: 0,
 		};
 	},
@@ -1158,6 +1159,19 @@ export default {
 			// Reset request body
 			evaluationHealthStore.resetBodies();
 
+			// Reset the redis storage in backend for the current user
+			this.$axios
+				.delete(this.urlStorageDelete, {
+					withCredentials: true,
+					hideGlobalLoading: true,
+				})
+				.then((response: any) => {
+					console.log('Redis storage deleted. Response: ', response.data);
+				})
+				.catch((error: any) => {
+					console.log('Error: ', error);
+				});
+
 			// Reset the checkboxes
 			for (let i = 0; i <= 12; i++) {
 				for (let j = 0; j < 3; j++) {
@@ -1188,7 +1202,7 @@ export default {
 		},
 		handleFormSubmittedVideo({ id, files }: { id: string; files: File[] }) {
 			if (files && this.dolphinSelect != '') {
-				this.sessionStorage = {
+				/*this.sessionStorage = {
 					photo_type: '',
 					eye_photo_path: '',
 					teeth_photo_path: '',
@@ -1198,7 +1212,7 @@ export default {
 					file_path: '',
 					video_path: '',
 					dolphin_name: '',
-				};
+				};*/
 				console.log('Form Data accessed in HealthCheckCriteriaSelector.vue:');
 				const newFormData = new FormData();
 				if (this.dolphinSelect != '') {
@@ -1256,7 +1270,7 @@ export default {
 		},
 		handleFormSubmittedPhoto({ id, files }: { id: string; files: File[] }) {
 			if (files && this.dolphinSelect != '') {
-				this.sessionStorage = {
+				/*this.sessionStorage = {
 					photo_type: '',
 					eye_photo_path: '',
 					teeth_photo_path: '',
@@ -1266,7 +1280,7 @@ export default {
 					file_path: '',
 					video_path: '',
 					dolphin_name: '',
-				};
+				};*/
 				console.log('Form Data accessed in HealthCheckCriteriaSelector.vue:');
 				const newFormData = new FormData();
 				if (this.dolphinSelect != '') {
@@ -1313,7 +1327,7 @@ export default {
 				}
 			}
 		},
-		async setupSessionStorage() {
+		/*async setupSessionStorage() {
 			// We have to send a req.body to set up the session storage in backend
 			// Even though the req.body is not being used in the backend. I don´t
 			// know why, just leave it there, otherwise req.session will not work
@@ -1329,7 +1343,7 @@ export default {
 				.catch((error: any) => {
 					console.error('Error:', error);
 				});
-		},
+		},*/
 		// Method to collect the checked checkboxes and give request body the scores
 		async storeCheckedValues() {
 			///////////////////////////////////////////////////////////////////////////
@@ -1651,7 +1665,7 @@ export default {
 						evaluationHealthStore.requestBodiesHealth[i]['dolphin_name']
 					);
 					// Setting up session storage
-					await this.setupSessionStorage();
+					// await this.setupSessionStorage();
 					await this.photoUpload(
 						evaluationHealthStore.requestBodiesHealth[i]['dolphin_name']
 					);
