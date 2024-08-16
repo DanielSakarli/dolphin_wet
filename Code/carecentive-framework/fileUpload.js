@@ -13,7 +13,7 @@ const storage = multer.diskStorage({
 	filename: async (req, file, cb) => {
     const user_id = req.authData.user_id;
     let storageData = await StorageService.getStorage(user_id);
-      
+    console.log('StorageData 1: ', storageData);
       const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1e9);
       //storageData.dolphin_name = req.body.dolphin_name; // The name of the dolphin, so picture is later on assignable to a dolphin
       if (req.body.dolphin_name.includes(',')) {
@@ -48,7 +48,7 @@ const storage = multer.diskStorage({
             file.originalname
           )}`;
         }
-        console.log('Sette in fileUpload.js: ', storageData);
+        console.log('Setter in fileUpload.js: ', storageData);
         await StorageService.setStorage(user_id, storageData);
         console.log('Saved storageData: ', await StorageService.getStorage(user_id));
     currentIndex++; //increment the index to get the next filename
@@ -66,7 +66,7 @@ const uploadMultiple = upload.array('files');
 
 async function uploadFile(req, res, next) {
     try {
-    //console.log(req.body);
+    console.log('Arrived in fileUpload.js');
     
     //req.session.file_path = ''; // Reset the path in session storage, so no duplicate paths
     //req.session.dolphin_name = '';
