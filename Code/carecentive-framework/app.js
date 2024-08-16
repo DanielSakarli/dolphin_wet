@@ -103,7 +103,7 @@ const emotional_state = require('./routes/emotional_state');
 const csvWriter = require('./routes/csv_writer');
 const redis_storage = require('./routes/storage');
 //const uploadPhoto = require('./controllers/photoUpload');
-const uploadFile = require('./controllers/fileUpload');
+const uploadFile = require('./routes/file_upload');
 
 //const uploadPhotoPath = require('./photoUpload');
 
@@ -246,7 +246,7 @@ app.use('/api/good_health', good_health);
 app.use('/api/good_housing', good_housing);
 app.use('/api/behaviour', behaviour);
 app.use('/api/emotional_state', emotional_state);
-app.post('/api/file', uploadFile);
+app.use('/api/file', uploadFile);
 app.use('/api/export-csv', csvWriter);
 // Redis storage for file paths
 app.use('/api/redis_storage', redis_storage);
