@@ -18,7 +18,8 @@ class StorageService {
                     odontogramm_photo_path: newData.photo_path?.odontogramm_photo_path || existingData.photo_path?.odontogramm_photo_path || null,
                     marks_photo_path: newData.photo_path?.marks_photo_path || existingData.photo_path?.marks_photo_path || null,
                     silhouette_photo_path: newData.photo_path?.silhouette_photo_path || existingData.photo_path?.silhouette_photo_path || null
-                }
+                },
+                file_path: newData.file_path || existingData.file_path || null,
             };
 
            // Set the merged data back to Redis
