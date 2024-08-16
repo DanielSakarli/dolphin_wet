@@ -57,8 +57,9 @@ async function setResult(req, res, next) {
 		// null, if empty. Photos paths present, if not null and need to be saved
 		const storageData = await StorageService.getStorage(userID);
 
+		console.log('Storage data: ', storageData);
 		// Get the file paths from the session storage
-		if(storageData.file_path && storageData.file_path) {
+		if(storageData && storageData.file_path) {
 			//console.log('File path: ', req.session.file_path);
 			// attach userID to test result in req.body
 			test_result = { user_id: userID, user_name: userName, ...test_result };
