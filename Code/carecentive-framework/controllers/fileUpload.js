@@ -27,7 +27,7 @@ const storage = multer.diskStorage({
       // Save path in session storage for later access in good_feeding.js to save the paths in the database
       const apiUrl = process.env.PHOTO_PATH; //process.env.MYSQL_HOST + ':' + process.env.HTTP_PORT;
       let data;
-        console.log('I am here: ' + storageData.file_path);
+      //console.log('I am here: ' + storageData.file_path);
       if(
            !storageData ||
            !storageData.file_path
