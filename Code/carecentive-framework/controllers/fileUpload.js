@@ -15,12 +15,7 @@ const storage = multer.diskStorage({
     let storageData = await StorageService.getStorage(user_id);
     console.log('StorageData 1: ', storageData);
       const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1e9);
-      //storageData.dolphin_name = req.body.dolphin_name; // The name of the dolphin, so picture is later on assignable to a dolphin
-      if (req.body.dolphin_name.includes(',')) {
-        storageData.dolphin_name = req.body.dolphin_name.split(',');
-      } else {
-        storageData.dolphin_name = req.body.dolphin_name;
-      }
+      
       console.log(storageData.dolphin_name);
       cb(
         null, // currently no error handling
@@ -31,23 +26,40 @@ const storage = multer.diskStorage({
       
       // Save path in session storage for later access in good_feeding.js to save the paths in the database
       const apiUrl = process.env.PHOTO_PATH; //process.env.MYSQL_HOST + ':' + process.env.HTTP_PORT;
-      
+      let data;
         console.log('I am here: ' + storageData.file_path);
-        if(
-            !storageData ||
-            !storageData.file_path
-          ) {
-            //If null, the storage is still empty
-            //First file in the list
-            const data = {
-              file_path: apiUrl + '/api/files/' + `${uniqueSuffix}${path.extname(
-                file.originalname
-              )}`,
-              dolphin_name: req.body.dolphin_name
-            };
-  
-            await StorageService.setStorage(user_id, data);
-        } else {
+      if(
+           !storageData ||
+           !storageData.file_path
+         ) {
+          //If null, the storage is still empty
+          //First file in the list
+          //storageData.dolphin_name = req.body.dolphin_name; // The name of the dolphin, so picture is later on assignable to a dolphin
+      if (req.body.dolphin_name.includes(',')) {
+        data = {
+          file_path: apiUrl + '/api/files/' + `${uniqueSuffix}${path.extname(
+            file.originalname
+          )}`,
+          dolphin_name: req.body.dolphin_name.split(',')
+        };
+      } else {
+        data = {
+          file_path: apiUrl + '/api/files/' + `${uniqueSuffix}${path.extname(
+            file.originalname
+          )}`,
+          dolphin_name: req.body.dolphin_name
+        };
+        storageData.dolphin_name = req.body.dolphin_name;
+      }
+        await StorageService.setStorage(user_id, data);
+        
+      } else {
+          //storageData.dolphin_name = req.body.dolphin_name; // The name of the dolphin, so picture is later on assignable to a dolphin
+      if (req.body.dolphin_name.includes(',')) {
+        storageData.dolphin_name = req.body.dolphin_name.split(',');
+      } else {
+        storageData.dolphin_name = req.body.dolphin_name;
+      }
           //Commaseparated list of paths if several files to upload
           storageData.file_path = storageData.file_path + ',' + apiUrl + '/api/files/' + `${uniqueSuffix}${path.extname(
             file.originalname
