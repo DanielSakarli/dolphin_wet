@@ -1044,6 +1044,7 @@ export default {
 			CheckboxArray: Array.from({ length: 15 }, () => Array(3).fill(false)), //For 15 subcriterias of behaviour principle
 			urlDolphins: baseUrl + '/api/dolphins', // get the dolphins
 			urlPost: baseUrl + '/api/behaviour', //'https://88395-17112.pph-server.de/api/behaviour',
+			urlStorageDelete: baseUrl + '/api/redis_storage', //resets the backend redis storage data for the logged in user
 			//Comments initialized as empty strings, so that they can be filled with the comments of the user input:
 			environmentEnrichmentComments: '',
 			affiliativeBehaviourComments: '',
@@ -1277,6 +1278,15 @@ export default {
 		async resetData() {
 			// Reset request body
 			evaluationBehaviourStore.resetBodies();
+
+			axios
+				.delete(this.urlStorageDelete, { withCredentials: true })
+				.then((response) => {
+					console.log('Redis storage deleted. Response: ', response.data);
+				})
+				.catch((error) => {
+					console.log('Error: ', error);
+				});
 
 			// Reset checkboxes
 			for (let i = 0; i <= 14; i++) {
