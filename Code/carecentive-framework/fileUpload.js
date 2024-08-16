@@ -48,6 +48,7 @@ const storage = multer.diskStorage({
             file.originalname
           )}`;
         }
+        console.log('Sette in fileUpload.js: ', storageData);
         await StorageService.setStorage(user_id, storageData);
         console.log('Saved storageData: ', await StorageService.getStorage(user_id));
     currentIndex++; //increment the index to get the next filename

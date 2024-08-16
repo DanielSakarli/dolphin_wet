@@ -964,7 +964,7 @@ export default {
 				console.log('Form Data accessed in FeedingCheckCriteriaSelector.vue');
 
 				// Send the file to the server
-				this.$axios
+				await this.$axios
 					.post(this.urlPostFile, this.formData, {
 						headers: {
 							'Content-Type': 'multipart/form-data',
@@ -973,7 +973,7 @@ export default {
 						hideGlobalLoading: true,
 					})
 					.then((response: any) => {
-						console.log('Response:', response.data);
+						console.log('File Upload Response:', response.data);
 					})
 					.catch((error: any) => {
 						console.error('Error:', error);
