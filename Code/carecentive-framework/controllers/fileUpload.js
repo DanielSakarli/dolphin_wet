@@ -37,16 +37,12 @@ const storage = multer.diskStorage({
           //storageData.dolphin_name = req.body.dolphin_name; // The name of the dolphin, so picture is later on assignable to a dolphin
       if (req.body.dolphin_name.includes(',')) {
         data = {
-          file_path: apiUrl + '/api/files/' + `${uniqueSuffix}${path.extname(
-            file.originalname
-          )}`,
+          file_path: apiUrl + '/api/files/' + `${uniqueSuffix}${path.extname(file.originalname)}`,
           dolphin_name: req.body.dolphin_name.split(',')
         };
       } else {
         data = {
-          file_path: apiUrl + '/api/files/' + `${uniqueSuffix}${path.extname(
-            file.originalname
-          )}`,
+          file_path: apiUrl + '/api/files/' + `${uniqueSuffix}${path.extname(file.originalname)}`,
           dolphin_name: req.body.dolphin_name
         };
       }
@@ -92,7 +88,7 @@ async function uploadFile(req, res, next) {
 // Wrap uploadMultiple in a new Promise
 await new Promise((resolve, reject) => {
   uploadMultiple(req, res, function (err) {
-    console.log('Reached photoUpload.js uploadMultiple');
+    console.log('Reached filepload.js uploadMultiple');
     if (err instanceof multer.MulterError) {
       // A Multer error occurred when uploading.
       console.log('Multer error: ', err);
@@ -103,7 +99,7 @@ await new Promise((resolve, reject) => {
       reject({ status: 500, error: err });
     } else {
       // Everything went fine.
-      console.log('Photo uploaded successfully');
+      console.log('File uploaded successfully');
       resolve({ status: 201 });
     }
   });

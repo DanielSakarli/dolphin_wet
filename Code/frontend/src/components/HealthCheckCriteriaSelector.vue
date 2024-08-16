@@ -1696,7 +1696,13 @@ export default {
 									localStorage.setItem('backButtonClicked', 'false');
 									this.$router.push(targetUrl);
 									//Reset data saved in checkboxes and comment strings. Doesn´t affect the request body
-									this.resetData();
+									// But only reset once in the end
+									if (
+										i ===
+										evaluationFeedingStore.requestBodiesFeeding.length - 1
+									) {
+										this.resetData();
+									}
 								}, 2000);
 
 								//evaluationHealthStore.resetBodies();

@@ -946,7 +946,7 @@ export default {
 				}
 			}
 		},
-		async fileUpload() {
+		async fileUpload(dolphin_name: string) {
 			// Initialize session storage
 			/*await this.$axios
 				.post(baseUrl + '/api/setup_session_storage', null, {
@@ -960,30 +960,57 @@ export default {
 					console.error('Error:', error);
 				});*/
 			// Check if there is a photo to upload
+
+			// This method is called for one dolphin at a time
+			// Check if there is a photo to upload
 			if (this.formData != null) {
-				console.log('Form Data accessed in FeedingCheckCriteriaSelector.vue');
+				// Find the FormData object with the desired dolphin_name
+				console.log('Length formData array: ', this.formData.length);
+				let desiredFormData = [];
+				for (let i = 0; i < this.formData.length; i++) {
+					if (this.formData[i].get('dolphin_name') === dolphin_name) {
+						if (desiredFormData.length === 0) {
+							//If desiredFormData doesn't exist yet, create a new array with the form data
+							desiredFormData[0] = this.formData[i];
+						} else {
+							//If desiredFormData already exists for this dolphin, push the new form data to the array desiredFormData
+							desiredFormData.push(this.formData[i]);
+							console.log('Found the desired form data: ', ...desiredFormData);
+						}
+					}
+				}
 
-				// Send the file to the server
-				await this.$axios
-					.post(this.urlPostFile, this.formData, {
-						headers: {
-							'Content-Type': 'multipart/form-data',
-						},
-						withCredentials: true,
-						hideGlobalLoading: true,
-					})
-					.then((response: any) => {
-						console.log('File Upload Response:', response.data);
-					})
-					.catch((error: any) => {
-						console.error('Error:', error);
-					});
+				//const desiredFormData = this.formData.find(formData => formData.get('dolphin_name') === dolphin_name);
 
-				//Reset the form data
-				this.formData = []; //null;
-				// Reset the total file size
-				this.totalFileSize = 0;
-				console.log('Resetted form data: ' + this.formData);
+				console.log('Desired form data:', desiredFormData);
+				if (desiredFormData.length != 0) {
+					console.log('Form Data accessed in HealthCheckCriteriaSelector.vue');
+					console.log(...desiredFormData);
+
+					for (let i = 0; i < desiredFormData.length; i++) {
+						// Send the file to the server
+						await this.$axios
+							.post(this.urlPostFile, desiredFormData[i], {
+								/*headers: {
+									'Content-Type': 'multipart/form-data',
+								},*/
+								withCredentials: true,
+								//hideGlobalLoading: true,
+							})
+							.then((response: any) => {
+								console.log('File Upload Response:', response.data);
+							})
+							.catch((error: any) => {
+								console.error('Error:', error);
+							});
+					}
+					//Reset the form data
+					this.formData = []; //null;
+					desiredFormData = [];
+					// Reset the total file size
+					this.totalFileSize = 0;
+					console.log('Resetted form data: ' + this.formData);
+				}
 			}
 		},
 		//Method uses boolean array. So no multiple checking for one test is possible. --> Every test can have one checked Checkbox
@@ -1235,7 +1262,6 @@ export default {
 			//const confirmed = confirm(this.$t('savingDataNext')); //Where is the variable savingDataNext initialized and what does it do?
 			const confirmed = true;
 			if (confirmed) {
-				await this.fileUpload();
 				//Check if the date of the test is the current date
 				await this.confirmTestDate();
 				//Store the checked values in the request body
@@ -1253,6 +1279,10 @@ export default {
 					/*for(const data in evaluationFeedingStore.requestBodiesFeeding[i]){
 						if(evaluationFeedingStore.requestBodiesFeeding[i].content(data)){}
 					}*/
+					await this.fileUpload(
+						evaluationFeedingStore.requestBodiesFeeding[i]['dolphin_name']
+					);
+
 					await this.$axios
 						.post(
 							this.urlPost,
@@ -1277,8 +1307,14 @@ export default {
 									localStorage.setItem('backButtonClicked', 'false');
 									this.$router.push(targetUrl);
 								}, 2000);
-								//Reset data saved in checkboxes and comment strings. Doesn´t affect the request body
-								this.resetData();
+								// Reset data saved in checkboxes and comment strings. Doesn´t affect the request body
+								// But only reset once in the end
+								if (
+									i ===
+									evaluationFeedingStore.requestBodiesFeeding.length - 1
+								) {
+									this.resetData();
+								}
 								// The fill method now resets the bodies
 								//evaluationFeedingStore.resetBodies();
 								evaluationFeedingStore.fill(dolphinsStore.dolphinList);
