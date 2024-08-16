@@ -105,4 +105,4 @@ await new Promise((resolve, reject) => {
   }
 }
 
-module.exports = { uploadFile };
+module.exports = uploadFile;
