@@ -56,20 +56,20 @@ class GoodFeedingService {
 			const location = roleName;
 			const modelName = `${location}GoodFeeding`;
 			const GoodFeeding = require(`../models/${modelName}`); // Get the respective model, depending on which zoo the user works at
-			console.log('Feeding model: ', modelName);
+			//console.log('Feeding model: ', modelName);
 			////////////////////////////////////////////////
 
 
 			//console.log("Date sent to backend: ", result.created_at);
 			if (result.created_at !== "") {
-				console.log("Results to be inserted: ", result)
+				//console.log("Results to be inserted: ", result)
 				const insertedResult = await GoodFeeding.query().insert({
 					dolphin_id,
 					...result,
 					created_at: new Date(result.created_at),
 				});
 			} else {
-				console.log("Results to be inserted: ", result)
+				//console.log("Results to be inserted: ", result)
 				const insertedResult = await GoodFeeding.query().insert({
 				dolphin_id,
 				...result,
@@ -89,12 +89,12 @@ class GoodFeedingService {
 	 */
 	static async bwosCalculation(test_result, roleName) {
 		try {
-		console.log('Arrived at bwos calc in service layer');
+		//console.log('Arrived at bwos calc in service layer');
 		// get the past data for the body weight oscillation calculation
 		const dataPast3Months = await GoodFeedingService.getTestResultNMonths(test_result.dolphin_name, 3, roleName);
 		const dataPast12Months = await GoodFeedingService.getTestResultNMonths(test_result.dolphin_name, 12, roleName);
-		console.log('Data past 3 months: ', dataPast3Months);
-		console.log('Data past 12 months: ', dataPast12Months);
+		//console.log('Data past 3 months: ', dataPast3Months);
+		//console.log('Data past 12 months: ', dataPast12Months);
 
 		// Helper function to extract valid weights
 		const extractValidWeights = (data) => {
@@ -115,8 +115,8 @@ class GoodFeedingService {
 		}
 
 		// Logging the extracted valid weights
-		console.log('Valid weights 3 months: ', validWeights3Months);
-		console.log('Valid weights 12 months: ', validWeights12Months);
+		//console.log('Valid weights 3 months: ', validWeights3Months);
+		//console.log('Valid weights 12 months: ', validWeights12Months);
 	
 		// Helper function to calculate weight statistics
 		const calculateWeightStats = (weights) => {
@@ -133,12 +133,12 @@ class GoodFeedingService {
 		const { max: maxWeight12Months, min: minWeight12Months, avg: avgWeight12Months } = calculateWeightStats(validWeights12Months);
 		
 		// Logging the calculated weight statistics
-		console.log('Max weight 3 months: ', maxWeight3Months);
+		/*console.log('Max weight 3 months: ', maxWeight3Months);
 		console.log('Min weight 3 months: ', minWeight3Months);
 		console.log('Avg weight 3 months: ', avgWeight3Months);
 		console.log('Max weight 12 months: ', maxWeight12Months);
 		console.log('Min weight 12 months: ', minWeight12Months);
-		console.log('Avg weight 12 months: ', avgWeight12Months);
+		console.log('Avg weight 12 months: ', avgWeight12Months);*/
 	
 		// Helper function to calculate body weight oscillation (BWO)
 		const calculateBWO = (max, min, avg) => {
@@ -155,21 +155,21 @@ class GoodFeedingService {
 		bwo12Months = parseFloat(bwo12Months.toFixed(2));
 
 		// Logging the calculated BWO
-		console.log("BWO 3 months: ", bwo3Months);
-		console.log("BWO 12 months: ", bwo12Months);
+		//console.log("BWO 3 months: ", bwo3Months);
+		//console.log("BWO 12 months: ", bwo12Months);
 	
 		// Calculate BWO score
 		const bwoScore = (bwo3Months <= 5 && bwo12Months <= 13) ? 0 : (bwo3Months > 5 && bwo12Months > 13) ? 2 : 0;
-		console.log('BWO score: ', bwoScore);
+		//console.log('BWO score: ', bwoScore);
 	
 		// Insert the BWO score into the test result
 		test_result = { ...test_result, bwo_score: bwoScore, bwo_3_months: bwo3Months, bwo_12_months: bwo12Months };
 	
 		// Final logs for clarity
-		console.log(`Average weight in the past 3 months: ${avgWeight3Months.toFixed(2)}`);
+		/*console.log(`Average weight in the past 3 months: ${avgWeight3Months.toFixed(2)}`);
 		console.log(`Maximum weight in the past 3 months: ${maxWeight3Months}`);
 		console.log(`Minimum weight in the past 3 months: ${minWeight3Months}`);
-		console.log(`Body weight oscillation score: ${bwoScore}`);
+		console.log(`Body weight oscillation score: ${bwoScore}`);*/
 		
 		return test_result;
 		

@@ -50,7 +50,7 @@ async function setResult(req, res, next) {
 
 		// Calculate the body weight oscillation
 		const temp = await GoodFeedingService.bwosCalculation(test_result, roleName);
-		console.log("data returned", temp);
+		//console.log("data returned", temp);
 		test_result = { ...test_result, ...temp}; 
 
 		// Get the redis storage data for this user_id if there is any
