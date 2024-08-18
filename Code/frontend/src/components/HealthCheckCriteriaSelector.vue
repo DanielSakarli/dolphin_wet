@@ -1840,8 +1840,8 @@ export default {
 			console.log('switchDolphin called');
 			console.log('Dolphin in switchDolphin: ', this.dolphinSelect);
 			//let dolphinSelect;
-			await this.photoUpload(this.dolphinSelect ?? ''); //this.dolphinSelect to save it for the current dolphin, not the next dolphin in the dolphinList
-			await this.videoUpload(this.dolphinSelect ?? '');
+			//await this.photoUpload(this.dolphinSelect ?? ''); //this.dolphinSelect to save it for the current dolphin, not the next dolphin in the dolphinList
+			//await this.videoUpload(this.dolphinSelect ?? '');
 
 			if (calledFromConfirmRefresh) {
 				// Find the index of the currently selected dolphin
@@ -2161,6 +2161,7 @@ export default {
 		async videoUpload(dolphin_name: string) {
 			// This method is called for one dolphin at a time
 			// Check if there is a video to upload
+			console.log('VideoUploadCalled');
 			if (this.formDataVideo != null) {
 				// Find the FormData object with the desired dolphin_name
 				console.log('Length formData array: ', this.formDataVideo.length);
@@ -2185,6 +2186,10 @@ export default {
 					for (let i = 0; i < desiredFormData.length; i++) {
 						// Send the video to the server
 						console.log('VideoFormData length: ', desiredFormData.length);
+						console.log(
+							'Sending the formData to the server: ',
+							desiredFormData
+						);
 						await this.$axios
 							.post(this.urlPostVideo, desiredFormData[i], {
 								withCredentials: true,

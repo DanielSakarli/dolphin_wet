@@ -630,7 +630,7 @@ export default {
 		},
 		async confirmRefresh() {
 			// Upload photos if there are any in formData
-			await this.fileUpload();
+			//await this.fileUpload();
 			console.log(evaluationFeedingStore.requestBodiesFeeding);
 			await this.switchDolphin(null, true);
 		},
