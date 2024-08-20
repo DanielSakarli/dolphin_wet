@@ -1,5 +1,6 @@
 //const Dolphins = require('../models/Dolphins');
 const { DolphinError } = require('../source/Errors');
+const { createModel } = require('../models/Dolphins');
 
 class DolphinDAO {
 	// Objection.js model of dolphin table in database.
@@ -8,10 +9,13 @@ class DolphinDAO {
 	constructor(roleName) {
 		if (roleName) {
 			console.log('role in dolphin dao: ', roleName);
-			const location = roleName;
+			/*const location = roleName;
 			const modelName = `${location}Dolphins`;
 			console.log('model name: ', modelName)
-			const Dolphins = require(`../models/${modelName}`); 
+			const Dolphins = require(`../models/${modelName}`);*/
+			const location = roleName.toLowerCase();
+			const Dolphins = createModel(location); // Get the respective model, depending on which zoo the user works at
+			 
 		this.#dataModel = Dolphins;
 		}
 	}

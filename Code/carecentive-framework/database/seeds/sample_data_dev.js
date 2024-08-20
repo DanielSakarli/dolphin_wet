@@ -5,21 +5,23 @@ const loadDummyGoodHealth = require('./dummy_good_health');
 const loadDummyGoodHousing = require('./dummy_good_housing');
 const loadDummyBehaviour = require('./dummy_behaviour');
 const loadDummyRole = require('./dummy_roles');
+const loadDummyRole2024_08_20 = require('./dummy_roles_2024_08_20');
 
 exports.seed = async function (knex) {
 	// Insert dummy roles.
-	await loadDummyRole();
+	//await loadDummyRole();
 	// Insert dummy users.
-	await loadDummyUser();
+	//await loadDummyUser();
 	// Insert dummy dolphins.
-	await loadDummyDolphins(knex);
+	//await loadDummyDolphins(knex);
 	// Insert dummy good_feeding data.
-	await loadDummyGoodFeeding(knex);
+	//await loadDummyGoodFeeding(knex);
 	// Insert dummy good_health data.
-	await loadDummyGoodHealth(knex);
+	//await loadDummyGoodHealth(knex);
 	// Insert dummy good_housing data.
-	await loadDummyGoodHousing(knex);
+	//await loadDummyGoodHousing(knex);
 	// Insert dummy behaviour data.
-	await loadDummyBehaviour(knex);
-	
+	//await loadDummyBehaviour(knex);
+	// Insert new dummy roles for the new zoos
+	await loadDummyRole2024_08_20();
 };
