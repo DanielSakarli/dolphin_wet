@@ -2,6 +2,7 @@ const DolphinDAO = require('../dao/dolphinDao');
 const { DolphinError } = require('../source/Errors');
 const { getLastNMonths } = require('../source/CustomSource');
 const { raw } = require('objection');
+const { createModel } = require('../models/GoodHealth');
 
 class GoodHealthService {
 	/**
@@ -58,9 +59,13 @@ class GoodHealthService {
 			//const roleName = user.roles[0].name;
 			if (roleName) {
 			console.log('role: ', roleName);
-			const location = roleName;
+			/*const location = roleName;
 			const modelName = `${location}GoodHealth`;
 			const GoodHealth = require(`../models/${modelName}`); // Get the respective model, depending on which zoo the user works at
+			*/
+			const location = roleName.toLowerCase();
+			const GoodHealth = createModel(location); // Get the respective model, depending on which zoo the user works at
+			
 			////////////////////////////////////////////////
 
 
@@ -100,9 +105,12 @@ class GoodHealthService {
 			//const roleName = user.roles[0].name;
 			if (roleName) {
 			console.log('role: ', roleName);
-			const location = roleName;
+			/*const location = roleName;
 			const modelName = `${location}GoodHealth`;
 			const GoodHealth = require(`../models/${modelName}`); // Get the respective model, depending on which zoo the user works at
+			*/
+			const location = roleName.toLowerCase();
+			const GoodHealth = createModel(location); // Get the respective model, depending on which zoo the user works at
 			////////////////////////////////////////////////
 
 			let result = await GoodHealth.query()
@@ -177,9 +185,12 @@ class GoodHealthService {
 			//const roleName = user.roles[0].name;
 			if (roleName) {
 			console.log('role: ', roleName);
-			const location = roleName;
+			/*const location = roleName;
 			const modelName = `${location}GoodHealth`;
 			const GoodHealth = require(`../models/${modelName}`); // Get the respective model, depending on which zoo the user works at
+			*/
+			const location = roleName.toLowerCase();
+			const GoodHealth = createModel(location); // Get the respective model, depending on which zoo the user works at
 			////////////////////////////////////////////////
 
 			let result = await GoodHealth.query()
@@ -259,9 +270,12 @@ class GoodHealthService {
 		//const roleName = user.roles[0].name;
 		if (roleName) {
 		console.log('role: ', roleName);
-		const location = roleName;
-		const modelName = `${location}GoodHealth`;
-		const GoodHealth = require(`../models/${modelName}`); // Get the respective model, depending on which zoo the user works at
+		/*const location = roleName;
+			const modelName = `${location}GoodHealth`;
+			const GoodHealth = require(`../models/${modelName}`); // Get the respective model, depending on which zoo the user works at
+			*/
+		//const location = roleName.toLowerCase();
+		//const GoodHealth = createModel(location); // Get the respective model, depending on which zoo the user works at
 		////////////////////////////////////////////////
 
 		// Gets the year and month numbers of last numMonths months
@@ -314,9 +328,12 @@ class GoodHealthService {
 			//const roleName = user.roles[0].name;
 			if (roleName) {
 			console.log('role: ', roleName);
-			const location = roleName;
+			/*const location = roleName;
 			const modelName = `${location}GoodHealth`;
 			const GoodHealth = require(`../models/${modelName}`); // Get the respective model, depending on which zoo the user works at
+			*/
+			const location = roleName.toLowerCase();
+			const GoodHealth = createModel(location); // Get the respective model, depending on which zoo the user works at
 			////////////////////////////////////////////////
 
 			let result = await GoodHealth.query();
@@ -346,9 +363,12 @@ class GoodHealthService {
 		//const roleName = user.roles[0].name;
 		if (roleName) {
 		console.log('role: ', roleName);
-		const location = roleName;
-		const modelName = `${location}GoodHealth`;
-		const GoodHealth = require(`../models/${modelName}`); // Get the respective model, depending on which zoo the user works at
+		/*const location = roleName;
+			const modelName = `${location}GoodHealth`;
+			const GoodHealth = require(`../models/${modelName}`); // Get the respective model, depending on which zoo the user works at
+			*/
+		//const location = roleName.toLowerCase();
+		//const GoodHealth = createModel(location); // Get the respective model, depending on which zoo the user works at
 		////////////////////////////////////////////////
 		
 		// Gets the year and month numbers of last numMonths months
@@ -404,9 +424,12 @@ class GoodHealthService {
 			//const roleName = user.roles[0].name;
 			if (roleName) {
 			console.log('role: ', roleName);
-			const location = roleName;
+			/*const location = roleName;
 			const modelName = `${location}GoodHealth`;
 			const GoodHealth = require(`../models/${modelName}`); // Get the respective model, depending on which zoo the user works at
+			*/
+			const location = roleName.toLowerCase();
+			const GoodHealth = createModel(location); // Get the respective model, depending on which zoo the user works at
 			////////////////////////////////////////////////
 
 			let result = await GoodHealth.query().where('dolphin_name', '=', name);

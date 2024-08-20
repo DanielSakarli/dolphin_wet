@@ -126,9 +126,8 @@
 											{{ feedingRecord.kcal_calculations_comments || 'N/A' }}
 										</p>
 										<p>
-											{{ $t('bloodHydration') }}: '{{
-												feedingRecord.blood_hydration
-											}}
+											{{ $t('bloodHydration') }}:
+											{{ feedingRecord.blood_hydration }}
 										</p>
 
 										<p>

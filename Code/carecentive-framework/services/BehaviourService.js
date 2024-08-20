@@ -3,6 +3,7 @@ const { DolphinError } = require('../source/Errors');
 const { raw } = require('objection');
 const { getLastNMonths } = require('../source/CustomSource');
 const User = require('../carecentive/carecentive-core/models/User');
+const { createModel } = require('../models/Behaviour');
 
 class BehaviourService {
 	/**
@@ -50,9 +51,13 @@ class BehaviourService {
 			//const roleName = user.roles[0].name;
 			if (roleName) {
 			console.log('role: ', roleName);
-			const location = roleName;
+			/*const location = roleName;
 			const modelName = `${location}Behaviour`;
 			const Behaviour = require(`../models/${modelName}`); // Get the respective model, depending on which zoo the user works at
+			*/
+			const location = roleName.toLowerCase();
+			const Behaviour = createModel(location); // Get the respective model, depending on which zoo the user works at
+			
 			////////////////////////////////////////////////
 			
 			// Inserts data into database.			
@@ -89,10 +94,13 @@ static async getTestResultWithDate(date, roleName) {
 		//const roleName = user.roles[0].name;
 		if (roleName) {
 		console.log('role: ', roleName);
-		const location = roleName;
-		const modelName = `${location}Behaviour`;
-		const Behaviour = require(`../models/${modelName}`); // Get the respective model, depending on which zoo the user works at
-		////////////////////////////////////////////////
+			/*const location = roleName;
+			const modelName = `${location}Behaviour`;
+			const Behaviour = require(`../models/${modelName}`); // Get the respective model, depending on which zoo the user works at
+			*/
+			const location = roleName.toLowerCase();
+			const Behaviour = createModel(location); // Get the respective model, depending on which zoo the user works at
+			////////////////////////////////////////////////
 
 			let result = await Behaviour.query().where(
 			raw(`DATE(created_at) = ?`, [date])
@@ -119,10 +127,13 @@ static async getAllTestResults(roleName) {
 		//const roleName = user.roles[0].name;
 		if (roleName) {
 		console.log('role: ', roleName);
-		const location = roleName;
-		const modelName = `${location}Behaviour`;
-		const Behaviour = require(`../models/${modelName}`); // Get the respective model, depending on which zoo the user works at
-		////////////////////////////////////////////////
+			/*const location = roleName;
+			const modelName = `${location}Behaviour`;
+			const Behaviour = require(`../models/${modelName}`); // Get the respective model, depending on which zoo the user works at
+			*/
+			const location = roleName.toLowerCase();
+			const Behaviour = createModel(location); // Get the respective model, depending on which zoo the user works at
+			////////////////////////////////////////////////
 
 
 		let result = await Behaviour.query();
@@ -151,10 +162,13 @@ static async getTestResultByDolphin(name, roleName) {
 		//const roleName = user.roles[0].name;
 		if (roleName) {
 		console.log('role: ', roleName);
-		const location = roleName;
-		const modelName = `${location}Behaviour`;
-		const Behaviour = require(`../models/${modelName}`); // Get the respective model, depending on which zoo the user works at
-		////////////////////////////////////////////////
+			/*const location = roleName;
+			const modelName = `${location}Behaviour`;
+			const Behaviour = require(`../models/${modelName}`); // Get the respective model, depending on which zoo the user works at
+			*/
+			const location = roleName.toLowerCase();
+			const Behaviour = createModel(location); // Get the respective model, depending on which zoo the user works at
+			////////////////////////////////////////////////
 		let result = await Behaviour.query().where('dolphin_name', '=', name);
 		// Sort the data according to 'created_at' date
 		result = await this.sortData(result);
@@ -181,10 +195,13 @@ static async getTestResultByDolphinAndMonth(name, year, month, roleName) {
 		//const roleName = user.roles[0].name;
 		if (roleName) {
 		console.log('role: ', roleName);
-		const location = roleName;
-		const modelName = `${location}Behaviour`;
-		const Behaviour = require(`../models/${modelName}`); // Get the respective model, depending on which zoo the user works at
-		////////////////////////////////////////////////
+			/*const location = roleName;
+			const modelName = `${location}Behaviour`;
+			const Behaviour = require(`../models/${modelName}`); // Get the respective model, depending on which zoo the user works at
+			*/
+			const location = roleName.toLowerCase();
+			const Behaviour = createModel(location); // Get the respective model, depending on which zoo the user works at
+			////////////////////////////////////////////////
 
 		let result = await Behaviour.query()
 			.where('dolphin_name', '=', name)
@@ -218,10 +235,13 @@ static async getTestResultByMonth(year, month, roleName) {
 		//const roleName = user.roles[0].name;
 		if (roleName) {
 		console.log('role: ', roleName);
-		const location = roleName;
-		const modelName = `${location}Behaviour`;
-		const Behaviour = require(`../models/${modelName}`); // Get the respective model, depending on which zoo the user works at
-		////////////////////////////////////////////////
+			/*const location = roleName;
+			const modelName = `${location}Behaviour`;
+			const Behaviour = require(`../models/${modelName}`); // Get the respective model, depending on which zoo the user works at
+			*/
+			const location = roleName.toLowerCase();
+			const Behaviour = createModel(location); // Get the respective model, depending on which zoo the user works at
+			////////////////////////////////////////////////
 		let result = await Behaviour.query()
 			.where(
 				raw( 
@@ -316,10 +336,13 @@ try {
 		//const roleName = user.roles[0].name;
 		if (roleName) {
 		console.log('role: ', roleName);
-		const location = roleName;
-		const modelName = `${location}Behaviour`;
-		const Behaviour = require(`../models/${modelName}`); // Get the respective model, depending on which zoo the user works at
-		////////////////////////////////////////////////
+			/*const location = roleName;
+			const modelName = `${location}Behaviour`;
+			const Behaviour = require(`../models/${modelName}`); // Get the respective model, depending on which zoo the user works at
+			*/
+			//const location = roleName.toLowerCase();
+			//const Behaviour = createModel(location); // Get the respective model, depending on which zoo the user works at
+			////////////////////////////////////////////////
 	//const myDolphinDAO = new DolphinDAO();
 	// if this dolphin is not in database,
 	// 404: not found.

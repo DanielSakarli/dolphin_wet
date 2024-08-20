@@ -3,17 +3,17 @@ const { Model } = require('objection');
 // Base class for dynamic table names
 class DynamicModel extends Model {
   static get tableName() {
-    return `${this.city}_appropriate_behaviour`; // table name pattern: city_good_behaviour
+    return `${this.city}_emotional_state`; // table name pattern: city_emotional_state
   }
 
   static get idColumn() {
-    return 'behaviour_record_id'; // primary key column name of the table
+    return 'emotional_state_record_id'; // primary key column name of the table
   }
 }
 
 // Function to generate a model for a specific city
 function createModel(city) {
-  return class BehaviourModel extends DynamicModel {
+  return class MentalModel extends DynamicModel {
     static city = city;
   };
 }
@@ -23,15 +23,16 @@ module.exports = {
 };
 
 
+
 /*const { Model } = require('objection');
 
 class GoodHealth extends Model {
 	static get tableName() {
-		return 'appropriate_behaviour';
+		return 'duisburg_emotional_state';
 	}
 
 	static get idColumn() {
-		return 'behaviour_record_id';
+		return 'emotional_state_record_id';
 	}
 }
 

@@ -2,6 +2,7 @@ const { DolphinError } = require('../source/Errors');
 const DolphinDAO = require('../dao/dolphinDao');
 const { raw } = require('objection');
 const { getLastNMonths } = require('../source/CustomSource');
+const { createModel } = require('../models/GoodHousing');
 //const User = require('../carecentive/carecentive-core/models/User');
 
 class GoodHousingService {
@@ -48,9 +49,13 @@ class GoodHousingService {
 		//const roleName = user.roles[0].name;
 		if (roleName) {
 		console.log('role: ', roleName);
-		const location = roleName;
+		/*const location = roleName;
 		const modelName = `${location}GoodHousing`;
 		const GoodHousing = require(`../models/${modelName}`); // Get the respective model, depending on which zoo the user works at
+		*/
+		const location = roleName.toLowerCase();
+		const GoodHousing = createModel(location); // Get the respective model, depending on which zoo the user works at
+			
 		////////////////////////////////////////////////
 
 			// Inserts data into database.			
@@ -90,9 +95,12 @@ class GoodHousingService {
 			//const roleName = user.roles[0].name;
 			if (roleName) {
 			console.log('role: ', roleName);
-			const location = roleName;
+			/*const location = roleName;
 			const modelName = `${location}GoodHousing`;
 			const GoodHousing = require(`../models/${modelName}`); // Get the respective model, depending on which zoo the user works at
+			*/
+			const location = roleName.toLowerCase();
+			const GoodHousing = createModel(location); // Get the respective model, depending on which zoo the user works at
 			////////////////////////////////////////////////
 
 			let result = await GoodHousing.query()
@@ -237,9 +245,12 @@ class GoodHousingService {
 			//const roleName = user.roles[0].name;
 			if (roleName) {
 			console.log('role: ', roleName);
-			const location = roleName;
+			/*const location = roleName;
 			const modelName = `${location}GoodHousing`;
 			const GoodHousing = require(`../models/${modelName}`); // Get the respective model, depending on which zoo the user works at
+			*/
+			const location = roleName.toLowerCase();
+			const GoodHousing = createModel(location); // Get the respective model, depending on which zoo the user works at
 			////////////////////////////////////////////////
 			let result = await GoodHousing.query().where('dolphin_name', '=', name);
 			// Sort the data according to 'created_at' date
@@ -266,9 +277,12 @@ class GoodHousingService {
 				//const roleName = user.roles[0].name;
 				if (roleName) {
 				console.log('role: ', roleName);
-				const location = roleName;
+				/*const location = roleName;
 				const modelName = `${location}GoodHousing`;
 				const GoodHousing = require(`../models/${modelName}`); // Get the respective model, depending on which zoo the user works at
+				*/
+				const location = roleName.toLowerCase();
+				const GoodHousing = createModel(location); // Get the respective model, depending on which zoo the user works at
 				////////////////////////////////////////////////
 				let result = await GoodHousing.query()
 					.where(
@@ -300,9 +314,12 @@ class GoodHousingService {
 			//const roleName = user.roles[0].name;
 			if (roleName) {
 			console.log('role: ', roleName);
-			const location = roleName;
+			/*const location = roleName;
 			const modelName = `${location}GoodHousing`;
 			const GoodHousing = require(`../models/${modelName}`); // Get the respective model, depending on which zoo the user works at
+			*/
+			const location = roleName.toLowerCase();
+			const GoodHousing = createModel(location); // Get the respective model, depending on which zoo the user works at
 			////////////////////////////////////////////////
 			let result = await GoodHousing.query();
 			// Sort the data according to 'created_at' date

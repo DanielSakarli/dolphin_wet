@@ -3,6 +3,7 @@ const { raw } = require('objection'); //What does the function raw do? It allows
 const { getLastNMonths } = require('../source/CustomSource');
 const DolphinDAO = require('../dao/dolphinDao');
 const { DolphinError } = require('../source/Errors');
+const { createModel } = require('../models/MentalState');
 //const e = require('express');
 
 class EmotionalStateService {
@@ -38,9 +39,13 @@ class EmotionalStateService {
 			//const roleName = user.roles[0].name;
 			if (roleName) {
 			console.log('role: ', roleName);
-			const location = roleName;
+			/*const location = roleName;
 			const modelName = `${location}EmotionalState`;
 			const EmotionalState = require(`../models/${modelName}`); // Get the respective model, depending on which zoo the user works at
+			*/
+			const location = roleName.toLowerCase();
+			const EmotionalState = createModel(location); // Get the respective model, depending on which zoo the user works at
+			
 			////////////////////////////////////////////////
 
 			console.log("Date sent to backend: ", result.created_at);
@@ -79,9 +84,12 @@ class EmotionalStateService {
 			//const roleName = user.roles[0].name;
 			if (roleName) {
 			console.log('role: ', roleName);
-			const location = roleName;
+			/*const location = roleName;
 			const modelName = `${location}EmotionalState`;
 			const EmotionalState = require(`../models/${modelName}`); // Get the respective model, depending on which zoo the user works at
+			*/
+			const location = roleName.toLowerCase();
+			const EmotionalState = createModel(location); // Get the respective model, depending on which zoo the user works at
 			////////////////////////////////////////////////
 
 				let result = await EmotionalState.query().where(
@@ -109,9 +117,12 @@ class EmotionalStateService {
 			//const roleName = user.roles[0].name;
 			if (roleName) {
 			console.log('role: ', roleName);
-			const location = roleName;
+			/*const location = roleName;
 			const modelName = `${location}EmotionalState`;
 			const EmotionalState = require(`../models/${modelName}`); // Get the respective model, depending on which zoo the user works at
+			*/
+			const location = roleName.toLowerCase();
+			const EmotionalState = createModel(location); // Get the respective model, depending on which zoo the user works at
 			////////////////////////////////////////////////
 
 
@@ -141,9 +152,12 @@ class EmotionalStateService {
 			//const roleName = user.roles[0].name;
 			if (roleName) {
 			console.log('role: ', roleName);
-			const location = roleName;
+			/*const location = roleName;
 			const modelName = `${location}EmotionalState`;
 			const EmotionalState = require(`../models/${modelName}`); // Get the respective model, depending on which zoo the user works at
+			*/
+			const location = roleName.toLowerCase();
+			const EmotionalState = createModel(location); // Get the respective model, depending on which zoo the user works at
 			////////////////////////////////////////////////
 			let result = await EmotionalState.query().where('dolphin_name', '=', name);
 			// Sort the data according to 'created_at' date
@@ -171,9 +185,12 @@ class EmotionalStateService {
 			//const roleName = user.roles[0].name;
 			if (roleName) {
 			console.log('role: ', roleName);
-			const location = roleName;
+			/*const location = roleName;
 			const modelName = `${location}EmotionalState`;
 			const EmotionalState = require(`../models/${modelName}`); // Get the respective model, depending on which zoo the user works at
+			*/
+			const location = roleName.toLowerCase();
+			const EmotionalState = createModel(location); // Get the respective model, depending on which zoo the user works at
 			////////////////////////////////////////////////
 
 			let result = await EmotionalState.query()
@@ -208,9 +225,12 @@ class EmotionalStateService {
 			//const roleName = user.roles[0].name;
 			if (roleName) {
 			console.log('role: ', roleName);
-			const location = roleName;
+			/*const location = roleName;
 			const modelName = `${location}EmotionalState`;
 			const EmotionalState = require(`../models/${modelName}`); // Get the respective model, depending on which zoo the user works at
+			*/
+			const location = roleName.toLowerCase();
+			const EmotionalState = createModel(location); // Get the respective model, depending on which zoo the user works at
 			////////////////////////////////////////////////
 			let result = await EmotionalState.query()
 				.where(
@@ -306,9 +326,12 @@ class EmotionalStateService {
 			//const roleName = user.roles[0].name;
 			if (roleName) {
 			console.log('role: ', roleName);
-			const location = roleName;
+			/*const location = roleName;
 			const modelName = `${location}EmotionalState`;
 			const EmotionalState = require(`../models/${modelName}`); // Get the respective model, depending on which zoo the user works at
+			*/
+			//const location = roleName.toLowerCase();
+			//const EmotionalState = createModel(location); // Get the respective model, depending on which zoo the user works at
 			////////////////////////////////////////////////
 		//const myDolphinDAO = new DolphinDAO();
 		// if this dolphin is not in database,
