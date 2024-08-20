@@ -58,7 +58,8 @@ class GoodFeedingService {
 			//const modelName = `${location}GoodFeeding`;
 			//const GoodFeeding = require(`../models/${modelName}`); // Get the respective model, depending on which zoo the user works at
 			//console.log('Feeding model: ', modelName);
-			const GoodFeeding = createModel(roleName); // Get the respective model, depending on which zoo the user works at
+			const location = roleName.toLowerCase();
+			const GoodFeeding = createModel(location); // Get the respective model, depending on which zoo the user works at
 			////////////////////////////////////////////////
 
 
@@ -195,7 +196,8 @@ class GoodFeedingService {
 			//const location = roleName;
 			//const modelName = `${location}GoodFeeding`;
 			//const GoodFeeding = require(`../models/${modelName}`); // Get the respective model, depending on which zoo the user works at
-			const GoodFeeding = createModel(roleName);
+			const location = roleName.toLowerCase();
+			const GoodFeeding = createModel(location);
 			////////////////////////////////////////////////
 
 				let result = await GoodFeeding.query().where(
@@ -227,7 +229,8 @@ class GoodFeedingService {
 			//const location = roleName;
 			//const modelName = `${location}GoodFeeding`;
 			//const GoodFeeding = require(`../models/${modelName}`); // Get the respective model, depending on which zoo the user works at
-			const GoodFeeding = createModel(roleName);
+			const location = roleName.toLowerCase();
+			const GoodFeeding = createModel(location);
 			////////////////////////////////////////////////
 
 			let result = await GoodFeeding.query();
@@ -260,7 +263,8 @@ class GoodFeedingService {
 			//const location = roleName;
 			//const modelName = `${location}GoodFeeding`;
 			//const GoodFeeding = require(`../models/${modelName}`); // Get the respective model, depending on which zoo the user works at
-			const GoodFeeding = createModel(roleName);
+			const location = roleName.toLowerCase();
+			const GoodFeeding = createModel(location);
 			////////////////////////////////////////////////
 			let result = await GoodFeeding.query().where('dolphin_name', '=', name);
 			// Sort the data according to 'created_at' date
@@ -292,7 +296,8 @@ class GoodFeedingService {
 			//const location = roleName;
 			//const modelName = `${location}GoodFeeding`;
 			//const GoodFeeding = require(`../models/${modelName}`); // Get the respective model, depending on which zoo the user works at
-			const GoodFeeding = createModel(roleName);
+			const location = roleName.toLowerCase();
+			const GoodFeeding = createModel(location);
 			////////////////////////////////////////////////
 
 			let result = await GoodFeeding.query()
@@ -332,7 +337,8 @@ class GoodFeedingService {
 			//const location = roleName;
 			//const modelName = `${location}GoodFeeding`;
 			//const GoodFeeding = require(`../models/${modelName}`); // Get the respective model, depending on which zoo the user works at
-			const GoodFeeding = createModel(roleName);
+			const location = roleName.toLowerCase();
+			const GoodFeeding = createModel(location);
 			////////////////////////////////////////////////
 			let result = await GoodFeeding.query()
 				.where(
@@ -435,7 +441,9 @@ class GoodFeedingService {
 			//const location = roleName;
 			//const modelName = `${location}GoodFeeding`;
 			//const GoodFeeding = require(`../models/${modelName}`); // Get the respective model, depending on which zoo the user works at
-			const GoodFeeding = createModel(roleName);
+			
+			//const location = roleName.toLowerCase();
+			//const GoodFeeding = createModel(location);
 			////////////////////////////////////////////////
 		//const myDolphinDAO = new DolphinDAO();
 		// if this dolphin is not in database,
