@@ -154,13 +154,13 @@ export const globalizationList = {
 		bodyConditionScoreComments: 'Body condition score Kommentare',
 		weightComments: 'Gewichts-Kommentare',
 		kcalCalculationComments: 'Kilokalorien-Kommentare',
-		bloodHydration: 'Blut-Hydratation',
-		bloodHydrationComments: 'Blut-Hydratatation Kommentare',
-		fishQuality: 'Nahrungsmittelqualität',
-		fishQualityComments: 'Nahrungsmittelqualität Kommentare',
+		bloodHydration: 'Blutwerte Hydratation',
+		bloodHydrationComments: 'Blutwerte Hydratation Kommentare',
+		fishQuality: 'Futterqualität',
+		fishQualityComments: 'Futterqualität Kommentare',
 		laboratoryDataFile: 'Labordaten-Datei',
-		fishVariety: 'Nahrungsmittelvielfalt',
-		fishVarietyComments: 'Nahrungsmittelvielfalt Kommentare',
+		fishVariety: 'Futtervariabilität',
+		fishVarietyComments: 'Futtervariabilität Kommentare',
 		bodyWeightOscillationScore: 'Gewichtsschwankungsscore',
 		bodyWeightOscillation3Months: 'Gewichtsschwankung der letzten 3 Monate [%]',
 		bodyWeightOscillation12Months:
@@ -173,8 +173,8 @@ export const globalizationList = {
 		foreignBodyIngestionComments: 'Verschlucken von Fremdkörpern Kommentare',
 		poolDesign: 'Becken Aufbau',
 		poolDesignComments: 'Becken Aufbau Kommentare',
-		forcedLoneliness: 'Erzwungene Einsamkeit',
-		forcedLonelinessComments: 'Erzwungene Einsamkeit Kommentare',
+		forcedLoneliness: 'Erzwungenes Alleinsein',
+		forcedLonelinessComments: 'Erzwungenes Alleinsein Kommentare',
 		waterQuality: 'Wasserqualität',
 		waterQualityComments: 'Wasserqualität Kommentare',
 		waterTemperature: 'Wassertemperatur',
@@ -197,8 +197,8 @@ export const globalizationList = {
 		recordsEyeLesions: 'Aufzeichnungen über Augenverletzungen',
 		recordsEyeLesionsComments:
 			'Aufzeichnungen über Augenverletzungen Kommentare',
-		mouthExam: 'Inspektion des Mauls',
-		mouthExamComments: 'Inspektion des Mauls Kommentare',
+		mouthExam: 'Inspektion der Mundhöhle',
+		mouthExamComments: 'Inspektion der MundhöhleKommentare',
 		recordsOralLesions: 'Aufzeichnungen über orale Läsionen',
 		recordsOralLesionsComments: 'Aufzeichnungen über orale Läsionen Kommentare',
 		recordsGastricAbnormality: 'Aufzeichnungen über Magen-Darm-Anomalien',
@@ -232,18 +232,19 @@ export const globalizationList = {
 		playBehaviourComments: 'Spielverhalten Kommentare',
 		socioSexualBehaviour: 'Sozio-sexuelles Verhalten',
 		socioSexualBehaviourComments: 'Sozio-sexuelles Verhalten Kommentare',
-		maternalBehaviour: 'Mütterliches Verhalten',
-		maternalBehaviourComments: 'Mütterliches Verhalten Kommentare',
-		displacementBehaviour: 'Verdrängungsverhalten',
-		displacementBehaviourComments: 'Verdrängungsverhalten Kommentare',
+		maternalBehaviour: 'Aufzuchtverhalten',
+		maternalBehaviourComments: 'Aufzuchtverhalten Kommentare',
+		displacementBehaviour: 'Übersprungverhalten',
+		displacementBehaviourComments: 'Übersprungverhalten Kommentare',
 		oralStereotypicBehaviour: 'Orales stereotypes Verhalten',
 		oralStereotypicBehaviourComments: 'Orales stereotypes Verhalten Kommentare',
-		repetitiveBodyMovement: 'Repetitive Bewegungen',
-		repetitiveBodyMovementComments: 'Repetitive Bewegungen Kommentare',
+		repetitiveBodyMovement: 'Repetitives Verhalten',
+		repetitiveBodyMovementComments: 'Repetitives Verhalten Kommentare',
 		selfGroomingBehaviour: 'Selbstpflegeverhalten',
 		selfGroomingBehaviourComments: 'Selbstpflegeverhalten Kommentare',
-		regurgitationReingestion: 'Spucken/Wiederverschlucken',
-		regurgitationReingestionComments: 'Spucken/Wiederverschlucken Kommentare',
+		regurgitationReingestion: 'Regurgitation/Wiederverschlucken',
+		regurgitationReingestionComments:
+			'Regurgitation (Erbrechen)/Wiederverschlucken Kommentare',
 		rakeMarks: 'Rake Marks',
 		rakeMarksComments: 'Rake Marks Kommentare',
 		displayingAggressiveBehaviour: 'Aggressives Verhalten zeigen',
@@ -254,20 +255,21 @@ export const globalizationList = {
 			'Aggressives Verhalten empfangen Kommentare',
 		socialIsolation: 'Soziale Isolation',
 		socialIsolationComments: 'Soziale Isolation Kommentare',
-		avoidancePoolAreas: 'Meiden von Beckenbereichen',
-		avoidancePoolAreasComments: 'Meiden von Beckenbereichen Kommentare',
-		willingnessToParticipate: 'Bereitschaft zur Teilnahme',
-		willingnessToParticipateComments: 'Bereitschaft zur Teilnahme Kommentare',
+		avoidingPoolAreas: 'Meiden von Beckenbereichen',
+		avoidingPoolAreasComments: 'Meiden von Beckenbereichen Kommentare',
+		willingnessToParticipate: 'Bereitschaft zur Teilnahme am Training',
+		willingnessToParticipateComments:
+			'Bereitschaft zur Teilnahme am Training Kommentare',
 		synchronousSwimming: 'Synchrones Schwimmen',
 		synchronousSwimmingComments: 'Synchrones Schwimmen Kommentare',
-		rubbingBehaviour: 'Reibe-Verhalten',
-		rubbingBehaviourComments: 'Reibe-Verhalten Kommentare',
+		rubbingBehaviour: 'Gegenseitiges Flipper reiben',
+		rubbingBehaviourComments: 'Gegenseitiges Flipper reiben Kommentare',
 		anticipatoryBehaviour: 'Erwartungsverhalten',
 		anticipatoryBehaviourComments: 'Erwartungsverhalten Kommentare',
 		fastSwimming: 'Schnelles Schwimmen',
 		fastSwimmingComments: 'Schnelles Schwimmen Kommentare',
-		tailSlapping: 'Schwanzschlagen',
-		tailSlappingComments: 'Schwanzschlagen Kommentare',
+		tailSlapping: 'Fluke schlagen',
+		tailSlappingComments: 'Fluke schlagen Kommentare',
 		choiceAndControl: 'Wahl und Kontrolle',
 		choiceAndControlComments: 'Wahl und Kontrolle Kommentare',
 
@@ -283,11 +285,10 @@ export const globalizationList = {
 		principleNutrition: 'Prinzip Ernährung',
 		principleEnvironment: 'Prinzip Becken/Gehege',
 		//General translations at evaluation pages
-		dataUploadSuccessfull:
-			'Daten erfolgreich hochgeladen. Sie können zur Homepage, indem Sie auf den Zurück-Knopf klicken.',
+		dataUploadSuccessfull: 'Daten erfolgreich hochgeladen.',
 		dataUploadFailed: 'Sicherung der Daten fehlgeschlagen!',
 		dataSavedTemporary:
-			"Temporär gespeichert. Klicken Sie am Ende 'Beende Prinzip'!",
+			"Temporär gespeichert. Klicken Sie am Ende 'Test beenden'!",
 		criteria: 'Kriterium',
 		selectCriteria: 'Kriterium auswählen',
 		subcriteria: 'Sub-Kriterium',
@@ -322,9 +323,9 @@ export const globalizationList = {
 			'Normale Reaktionen beider Augen auf visuelle Reize',
 		fifthSubCriteriaHealth:
 			'Aufzeichnungen über frühere Augenveränderungen/Unfälle/Krankheiten',
-		sixthSubCriteriaHealth: 'Direkte tierärztliche Untersuchung des Maules',
+		sixthSubCriteriaHealth: 'Direkte tierärztliche Untersuchung der Mundhöhle',
 		seventhSubCriteriaHealth:
-			'Aufzeichnungen über frühere Zahn- oder Maulverletzungen',
+			'Aufzeichnungen über frühere Zahnverletzungen bzw. Verletzungen in der Mundhöhle ',
 		eigthSubCriteriaHealth: 'Aufzeichnungen über frühere Magen-/Darmanomalien',
 		ninthSubCriteriaHealth:
 			'Direkte tierärztliche Untersuchung einschließlich visueller Beurteilung des Blaslochs und der Atmung',
@@ -349,9 +350,9 @@ export const globalizationList = {
 		score2Health5:
 			'Auftreten früherer Vorfälle in den Aufzeichnungen während der letzten 3 Monate',
 		score0Health6:
-			'Abwesenheit von oralen Läsionen oder schmerzhaften Bereichen im Maul (einschließlich der Zähne) beurteilt durch eine direkte tierärztliche Untersuchung',
+			'Abwesenheit von oralen Läsionen oder schmerzhaften Bereichen im/am Schnabel bzw. in der Mundhöhle (einschließlich der Zähne) beurteilt durch eine direkte tierärztliche Untersuchung',
 		score2Health6:
-			'Anwesenheit von oralen Läsionen oder schmerzhaften Bereichen im Maul (einschließlich der Zähne) beurteilt durch eine direkte tierärztliche Untersuchung',
+			'Anwesenheit von oralen Läsionen oder schmerzhaften Bereichen im/am Schnabel bzw. in der Mundhöhle (einschließlich der Zähne) beurteilt durch eine direkte tierärztliche Untersuchung',
 		score0Health7:
 			'Fehlen früherer Vorfälle in den Aufzeichnungen während der letzten 3 Monate',
 		score2Health7:
@@ -391,9 +392,9 @@ export const globalizationList = {
 		comments: 'Kommentare',
 		helperTextComments: 'Kommentare eingeben...',
 		buttonPrevious: 'Vorheriger',
-		buttonNext: 'Nächster Test',
-		buttonFinish: 'Beende Prinzip',
-		principleFinished: `Sie haben das Prinzip beendet! Bitte klicken Sie 'Beende Prinzip', um Ihre Daten zu speichern!`,
+		buttonNext: 'Nächster Delfin',
+		buttonFinish: 'Beende Tests',
+		principleFinished: `Sie haben das Prinzip beendet! Bitte klicken Sie 'Beende Prinzip', um Ihre Daten zu speichern! Überprüfen Sie zuvor, ob Sie bereits die Daten aller Delfine eingetragen haben.`,
 		savingDataNext: 'Möchten Sie die Daten speichern und fortfahren?',
 		//Translation UserManual Health
 		userManual: 'Benutzerhandbuch',
@@ -409,16 +410,16 @@ export const globalizationList = {
 		AbsenceOfEyeLesions5:
 			'Überprüfung mit dem Team von Trainern und Tierärzten, dass es in den letzten 3 Monaten keine früheren Augenverletzungen/Unfälle/Krankheiten (die das Sehvermögen beeinträchtigen oder nicht) gab.',
 		//Test Good mouth condition (teeth, tongue, mucosas)
-		GoodMouthCondition1: 'Direkte tierärztliche Untersuchung des Maules',
+		GoodMouthCondition1: 'Direkte tierärztliche Untersuchung der Mundhöhle',
 		GoodMouthCondition2:
-			'Fehlen von oralen Läsionen oder schmerzhaften Bereichen im Maul bei direkter Beurteilung (übermäßige Zahnabnutzung oder Frakturen mit freiliegender Pulpa, Schleimhautläsionen, abnorme Zubildungen, Farbveränderungen usw.).',
+			'Fehlen von oralen Läsionen oder schmerzhaften Bereichen am/im Schnabel bzw. in der Mundhöhle bei direkter Beurteilung (übermäßige Zahnabnutzung oder Frakturen mit freiliegender Pulpa, Schleimhautläsionen, abnorme Zubildungen, Farbveränderungen usw.).',
 		GoodMouthCondition3:
 			'Vorhandensein von abgenutzten, abgebrochenen, oder fehlenden Zähnen',
 		GoodMouthCondition4: 'Vorhandensein einer Gingivitis',
 		GoodMouthCondition5: 'Zunge - Vorhandensein von Verletzungen, Pilzläsionen',
 		GoodMouthCondition6: 'Schleimhäute',
 		GoodMouthCondition7:
-			'Aufzeichnungen über frühere Zahn- oder Maulverletzungen',
+			'Aufzeichnungen über frühere Zahnverletzungen oder Verletzungen in der Mundhöhle',
 		GoodMouthCondition8:
 			'Überprüfung mit dem Team von Trainern und Tierärzten, dass in den letzten 3 Monaten keine früheren Läsionen/Krankheiten/Verhaltensweisen aufgetreten sind, die die Mundgesundheit oder das damit verbundene Fressverhalten verändert haben oder auf eine solche Veränderung hindeuten.',
 
@@ -428,8 +429,8 @@ export const globalizationList = {
 		topicNutrition: 'Ernährung',
 		firstCriteriaNutrition: 'Fehlen von anhaltendem Hunger oder Durst',
 		secondCriteriaNutrition: 'Angemessene Ernährung',
-		thirdCriteriaNutrition: 'Angemessene Futtermittelqualität',
-		fourthCriteriaNutrition: 'Angemessene Futtermittelvielfalt',
+		thirdCriteriaNutrition: 'Angemessene Futterqualität',
+		fourthCriteriaNutrition: 'Angemessene Futtervielfalt',
 		// SubCriteria Nutrition
 		firstSubCriteriaNutrition: 'Body Condition Score (BCS)',
 		secondSubCriteriaNutrition: 'Gewichtsschwankungen im Laufe des Jahres',
@@ -459,11 +460,11 @@ export const globalizationList = {
 		score2Nutrition5:
 			'Nicht erfüllt nach Grundlage der EAAM Standards and Guidelines',
 		score0Nutrition6:
-			'Mindestens fünf Arten werden das ganze Jahr über gefüttert, die Ernährung jedes einzelnen Tieres wird an seine Ernährungsbedürfnisse und -vorlieben angepasst, die Menge des Futters variiert zwischen Fütterungen und ein Teil der Nahrung wird durch Enrichment verabreicht',
+			'Mindestens fünf verschiedene Fischarten (inkl. Tintenfisch) werden das ganze Jahr über gefüttert, die Ernährung jedes einzelnen Tieres wird an seine Ernährungsbedürfnisse und -vorlieben angepasst, die Menge des Futters variiert zwischen Fütterungen und ein Teil der Nahrung wird durch Enrichment verabreicht',
 		score1Nutrition6:
-			'Mindestens drei, aber nicht mehr als fünf Arten werden das ganze Jahr über gefüttert, die Ernährung jedes Einzelnen wird an seine Ernährungsbedürfnisse angepasst, aber die Menge des Futters, das die Delfine während jeder Fütterung erhalten, ist die gleiche, und bevorzugte Arten/Tiervorlieben werden vernachlässigt',
+			'Mindestens drei, aber nicht mehr als fünf verschiedene Fischarten (inkl. Tintenfisch)Arten werden das ganze Jahr über gefüttert, die Ernährung jedes Einzelnen wird an seine Ernährungsbedürfnisse angepasst, aber die Menge des Futters, das die Delfine während jeder Fütterung erhalten, ist die gleiche, und bevorzugte Arten/Tiervorlieben werden vernachlässigt',
 		score2Nutrition6:
-			'Nur drei oder weniger Futterarten werden das ganze Jahr über gefüttert, es gibt keine Abwechslung im Jahresverlauf, und die Ernährung ist nicht an individuelle Vorlieben/besondere Bedürfnisse angepasst',
+			'Nur drei oder weniger Fischarten (inkl. Tintenfisch) werden das ganze Jahr über gefüttert, es gibt keine Abwechslung im Jahresverlauf, und die Ernährung ist nicht an individuelle Vorlieben/besondere Bedürfnisse angepasst',
 		////// END OF NUTRITION ///////
 		///////////////////////////////
 
@@ -479,7 +480,7 @@ export const globalizationList = {
 		firstCriteriaBehaviour: 'Erkundungsverhalten',
 		secondCriteriaBehaviour:
 			'Affiliatives Verhalten, Spiel oder sozio-sexuelles Verhalten',
-		thirdCriteriaBehaviour: 'Mütterliches Verhalten in begründeten Fällen',
+		thirdCriteriaBehaviour: 'Mütterliches Verhalten sofern gerechtfertig',
 		fourthCriteriaBehaviour:
 			'Fehlen von sich wiederholenden abnormen Verhaltensweisen',
 		fifthCriteriaBehaviour:
@@ -500,10 +501,10 @@ export const globalizationList = {
 		seventhSubCriteriaBehaviour: 'Orales stereotypes Verhalten',
 		eighthSubCriteriaBehaviour: 'Repetitive Verhaltensweisen',
 		ninthSubCriteriaBehaviour:
-			'Häufiges, sich wiederholendes und intensives Verhalten bei der Selbsthygiene',
+			'Häufiges, sich wiederholendes und intensives Körperpflegeverhalten (Self-Grooming)',
 		tenthSubCriteriaBehaviour: 'Regurgitieren/Wiederverschlucken',
 		eleventhSubCriteriaBehaviour: 'Aggressives Verhalten empfangen',
-		twelfthSubCriteriaBehaviour: 'Rake marks (sozialbezogene Marken)',
+		twelfthSubCriteriaBehaviour: 'Rake marks (sozialbezogene Kratzer)',
 		thirteenthSubCriteriaBehaviour: 'Aggressives Verhalten zeigen',
 		fourteenthSubCriteriaBehaviour: 'Soziale Isolation',
 		fifteenthSubCriteriaBehaviour: 'Meiden von Beckenbereichen',
@@ -527,40 +528,40 @@ export const globalizationList = {
 		score2Behaviour4:
 			'Delfin zeigt während der Beobachtung keine sozio-sexuelle Interaktionen (Streicheln, usw.)',
 		score0Behaviour5:
-			'Angemessenes mütterliches Verhalten gegenüber dem Kalb (Echelonschwimmen, Säugen usw.)',
+			'Angemessenes Aufzuchtverhalten gegenüber dem Kalb (Echelonschwimmen, Säugen usw.)',
 		score2Behaviour5:
-			'Fehlen eines angemessenen mütterlichen Verhaltens gegenüber dem Kalb',
+			'Fehlen eines angemessenen Aufzuchterhaltens gegenüber dem Kalb',
 		score0Behaviour6:
-			'Delfin zeigt dieses Verhalten in den letzten 3 Monaten nach Befragung der Trainer nicht.',
+			'Delfin zeigt dieses Verhalten (Übersprungverhalten) in den letzten 3 Monaten nach Befragung der Trainer nicht.',
 		score2Behaviour6: 'Delfin zeigt das Verhalten',
 		score0Behaviour7:
-			'Delfin zeigt keine stereotypen oralen Verhaltensweisen (z. B. Kauen auf Gittern, Schläuchen und Spielzeug)',
+			'Delfin zeigt keine oralen stereotypen Verhaltensweisen (z. B. Kauen auf Gittern, Schläuchen und Spielzeug)',
 		score2Behaviour7: 'Delfin zeigt orales stereotypes Verhalten',
 		score0Behaviour8: 'Delfin zeigt dieses Verhalten nicht (z. B. Kreisen).',
 		score2Behaviour8: 'Delfin zeigt das Verhalten',
 		score0Behaviour9:
-			'Delfin zeigt keine häufige, wiederholte und intensive Selbstpflege',
+			'Delfin zeigt keine häufige, wiederholte und intensive Körperpflege (Reiben des Körpers an Kanten, Wänden etc.)',
 		score2Behaviour9:
-			'Delfin zeigt häufige, sich wiederholende und intensive Selbstpflege (z. B. exzessives Reiben des Hinterns)',
+			'Delfin zeigt häufige, sich wiederholende und intensive Körperpflege (Reiben des Körpers an Kanten, Wänden etc.)',
 		score0Behaviour10: 'Delfin regurgitiert nicht',
 		score2Behaviour10: 'Delfin regurgitiert',
 		score0Behaviour11:
-			'Delfin zeigt während der Beobachtung kein aggressives Verhalten (z. B. Beißen und Schlagen).',
+			'Delfin erfährt während der Beobachtung kein aggressives Verhalten (z. B. Beißen und Schlagen).',
 		score2Behaviour11:
-			'Delfin zeigt während der Beobachtung aggressives Verhalten (z. B. Beißen und Schlagen)',
+			'Delfin erfährt während der Beobachtung aggressives Verhalten (z. B. Beißen und Schlagen)',
 		score0Behaviour12: '0%-15% neue Wunden und < 30% alte Wunden',
 		score1Behaviour12: '15%-20% neue Wunden und > 30% alte Wunden',
 		score2Behaviour12: '>20% neue Wunden',
 		score0Behaviour13:
-			'Delfin zeigt während der Beobachtung kein aggressives Verhalten (z.B. Beißen und Schlagen).',
+			'Delfin zeigt gegenüber den anderen Tieren während der Beobachtung kein aggressives Verhalten (z.B. Beißen und Schlagen).',
 		score2Behaviour13:
-			'Delfin zeigt während der Beobachtung häufiges, wiederholtes und intensives aggressives Verhalten (z. B. Beißen und Schlagen)',
+			'Delfin zeigt gegenüber den anderen Tieren während der Beobachtung häufiges, wiederholtes und intensives aggressives Verhalten (z. B. Beißen und Schlagen)',
 		score0Behaviour14:
 			'Abwesenheit von sozialer Isolation während der letzten 3 Monate auf der Grundlage von Befragungen der Trainer',
 		score2Behaviour14:
 			'Die Anwesenheit anderer Tiere führte in den letzten 3 Monaten laut Befragung der Trainer dazu, dass bestimmte Beckenbereiche gemieden wurden.',
 		score0Behaviour15:
-			'Keine aktive Meidung bestimmter Beckenbereiche in den letzten drei Monaten',
+			'Kein aktives Meiden bestimmter Beckenbereiche in den letzten drei Monaten',
 		score2Behaviour15: 'Delfin meidet konsequent bestimmte Beckenbereiche',
 
 		////// END OF BEHAVIOUR ///////
@@ -576,7 +577,7 @@ export const globalizationList = {
 		thirdCriteriaEnvironment: 'Soziales Management',
 		fourthCriteriaEnvironment: 'Wasserqualität',
 		fifthCriteriaEnvironment: 'Temperatur',
-		sixthCriteriaEnvironment: 'Umgebungslicht',
+		sixthCriteriaEnvironment: 'Umgebungshelligkeit',
 		seventhCriteriaEnvironment: 'Umgebungslärm',
 		//SubCriteria
 		firstSubCriteriaEnvironment:
@@ -624,9 +625,9 @@ export const globalizationList = {
 		score2Environment8:
 			'Mindestens ein Kriterium ist gemäß Abschnitt 5 der EAAM Standards and Guidelines nicht erfüllt',
 		score0Environment9:
-			'Kein Lärm unter Wasser über der Hörschwelle von 40 dB für mehr als 1 Minute/Tag',
+			'Kein Lärm über der Hörschwelle von 40 dB für mehr als 1 Minute/Tag',
 		score2Environment9:
-			'Lärm unter Wasser über der Hörschwelle von 40 dB für mehr als 1 Minute/Tag',
+			'Lärm über der Hörschwelle von 40 dB für mehr als 1 Minute/Tag',
 		////// END OF ENVIRONMENT /////
 		///////////////////////////////
 
@@ -642,14 +643,14 @@ export const globalizationList = {
 		fourthCriteriaEmotionalState:
 			'Fähigkeiten zur Auswahl und Kontrolle der Umgebung',
 		//SubCriteria
-		firstSubCriteriaEmotionalState: 'Bereitschaft zur Teilnahme (WtP)',
+		firstSubCriteriaEmotionalState:
+			'Bereitschaft zur Teilnahme am Training (Willingness to Participate „WtP“)',
 		secondSubCriteriaEmotionalState:
 			'Langsames Synchronschwimmen, langsames Kontaktschwimmen, langsames Kreisschwimmen',
 		thirdSubCriteriaEmotionalState:
 			'Sanftes Körper-an-Körper-Reibungsverhalten',
-		fourthSubCriteriaEmotionalState: 'Antizipatorisches Verhalten',
-		fifthSubCriteriaEmotionalState:
-			'Hohe Häufigkeit von schnellem Schwimmverhalten',
+		fourthSubCriteriaEmotionalState: 'Erwartungsverhalten',
+		fifthSubCriteriaEmotionalState: 'Hohe Frequenz von schnellem Schwimmen',
 		sixthSubCriteriaEmotionalState:
 			'Intensives und wiederholtes Schlagen mit der Fluke',
 		seventhSubCriteriaEmotionalState:
@@ -667,18 +668,17 @@ export const globalizationList = {
 			'Delfin zeigt während der Beobachtung sanftes Körper-an-Körper-Reibungsverhalten',
 		score2EmotionalState3:
 			'Delfin zeigt während der Beobachtung kein sanftes Körper-an-Körper-Reibungsverhalten',
-		score0EmotionalState4:
-			'Delfin zeigt antizipatorisches Verhalten bei Beobachtungen',
+		score0EmotionalState4: 'Delfin zeigt Erwartungsverhalten bei Beobachtungen',
 		score2EmotionalState4:
-			'Delfin zeigt kein antizipatorisches Verhalten oder zeigt intensives und lang anhaltendes antizipatorisches Verhalten während der Beobachtung',
+			'Delfin zeigt kein Erwartungsverhalten oder zeigt intensives und langanhaltendes antizipatorisches Verhalten während der Beobachtung',
 		score0EmotionalState5:
-			'Delfin zeigt bei den Beobachtungen kein häufiges schnelles Schwimmverhalten',
+			'Delfin zeigt bei den Beobachtungen kein häufiges schnelles Schwimmen',
 		score2EmotionalState5:
-			'Delfin zeigt bei Beobachtungen häufig schnelles Schwimmverhalten',
+			'Delfin zeigt bei Beobachtungen häufig schnelles Schwimmen',
 		score0EmotionalState6:
-			'Delfin zeigt bei der Beobachtung kein intensives und sich wiederholendes Flukenschlagverhalten',
+			'Delfin zeigt bei der Beobachtung kein intensives und sich wiederholendes Flukeschlagen',
 		score2EmotionalState6:
-			'Delfin zeigt während der Beobachtung intensives und wiederholtes Flukenschlagen',
+			'Delfin zeigt während der Beobachtung intensives und wiederholtes Flukeschlagen',
 		score0EmotionalState7:
 			'Die Einrichtung fördert eine Politik oder ein Management, das Wahlmöglichkeiten und Kontrolle begünstigt und das Tier nicht zu irgendeiner Art von Teilnahme an regelmäßigen Aktivitäten zwingt, außer bei Bedarf zu medizinischen Zwecken; die Wahlmöglichkeiten werden auch bei anderen täglichen Pflegeaktivitäten wie Fütterung, Enrichment oder Gesellschaft anderer Delfine gefördert.',
 		score2EmotionalState7:
@@ -1077,9 +1077,9 @@ export const globalizationList = {
 		comments: 'Comments',
 		helperTextComments: 'Enter comments of test',
 		buttonPrevious: 'Previous',
-		buttonNext: 'Next Test',
+		buttonNext: 'Next Dolphin',
 		buttonFinish: 'Finish Principle',
-		principleFinished: `You have finished the principle! Please click on 'Finish Principle' to store your data!`,
+		principleFinished: `You have finished the principle! Please click on 'Finish Principle' to store your data! Check beforehand if you already entered the data for all dolphins.`,
 		savingDataNext: 'Would you like to save the data and continue?',
 		//Translation UserManual Health
 		userManual: 'User Manual',
@@ -1770,9 +1770,9 @@ export const globalizationList = {
 		comments: 'Comments',
 		helperTextComments: 'Enter comments of test',
 		buttonPrevious: 'Previous',
-		buttonNext: 'Next Test',
+		buttonNext: 'Next Dolphin',
 		buttonFinish: 'Finish Principle',
-		principleFinished: `You have finished the principle! Please click on 'Finish Principle' to store your data!`,
+		principleFinished: `You have finished the principle! Please click on 'Finish Principle' to store your data! Check beforehand if you already entered the data for all dolphins.`,
 		savingDataNext: 'Would you like to save the data and continue?',
 		//Translation UserManual Health
 		userManual: 'User Manual',
