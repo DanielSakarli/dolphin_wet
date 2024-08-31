@@ -143,6 +143,7 @@ const uploadFile = require('./routes/file_upload');
 //app.use(cors());
 const allowedOrigins = ['http://localhost:8100', 'https://localhost', 'capacitor://localhost'];
 
+/*
 const corsOptions = {
   origin: function (origin, callback) {
     if (allowedOrigins.includes(origin) || !origin) {
@@ -155,8 +156,26 @@ const corsOptions = {
   secure: true,
   httpOnly: false,
   sameSite: 'none',
+  allowedHeaders: ['Origin', 'X-Requested-With', 'Content-Type', 'Accept', 'Authorization'],
   name: 'cookie' //Try giving a name to the cookie
+};*/
+const corsOptions = {
+	origin: function (origin, callback) {
+	  if (allowedOrigins.includes(origin) || !origin) {
+		callback(null, true);
+	  } else {
+		callback(new Error('Not allowed by CORS'));
+	  }
+	},
+	credentials: true,
+	allowedHeaders: ['Origin', 'X-Requested-With', 'Content-Type', 'Accept', 'Authorization'],
+	methods: ['GET', 'POST', 'PATCH', 'OPTIONS'],
+	optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on status 204
 };
+  
+// Optionally, you can handle preflight requests manually if needed
+app.options('*', cors(corsOptions)); // Pre-flight requests handler
+
 app.use(cors(corsOptions));
 
 // Set headers because of server side CORS policy
