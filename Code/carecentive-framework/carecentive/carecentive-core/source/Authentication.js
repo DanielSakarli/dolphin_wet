@@ -9,7 +9,8 @@ const User = require('../models/User');
 function authenticateToken(req, res, next) {
   // Extract the Authorization header from the request
   const authHeader = req.headers.authorization;
-
+  console.log('This is the authHeader in our authenticateToken() method: ', authHeader);
+  console.log('This is the general req header in our authenticateToken() method: ', req.headers);
   // Check if the Authorization header is present and starts with 'Bearer '
   if (authHeader && authHeader.startsWith('Bearer ')) {
       // Extract the token from the Authorization header
