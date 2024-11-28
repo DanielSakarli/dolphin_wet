@@ -134,32 +134,73 @@ export default defineComponent({
 					});
 			});
 		},
+		async showAlertLogout() {
+			return new Promise((resolve, reject) => {
+				alertController
+					.create({
+						header: this.$t('confirmationHeader'),
+						message: this.$t('confirmationLogout'),
+						buttons: [
+							{
+								text: this.$t('stayLoggedIn'),
+								role: 'cancel',
+								cssClass: 'secondary',
+								handler: () => {
+									console.log('Cancel clicked');
+									reject();
+								},
+							},
+							{
+								text: this.$t('logout'),
+								handler: () => {
+									console.log('Confirm Okay App.vue');
+									localStorage.setItem('token', '');
+									localStorage.setItem('dataInBody', 'false');
+									localStorage.setItem('backButtonClicked', 'false');
+									// Call the log out method of the carecentive-framework, so that
+									// the token cookie gets deleted:
+									axios
+										.get(baseUrl + '/api/users/logout', {
+											withCredentials: true,
+										})
+										.then((response) => {
+											console.log('Response:', response.data);
+										})
+										.catch((error) => {
+											console.error('Error:', error.response.data);
+										});
+									this.$router.push('/home');
+									resolve(void 0);
+								},
+							},
+						],
+					})
+					.then((alert) => {
+						alert.present();
+					});
+			});
+		},
 		navigateTo(url: string, index: number) {
 			if (localStorage.getItem('dataInBody') === 'true') {
-				this.showAlert();
+				if (url === '/home') {
+					// Ask the user if he actually wanted to click on 'Logout'
+					this.showAlertLogout();
+				} else {
+					// Ask the user if he wanted to delete the data
+					this.showAlert();
+				}
 				//this.selectedIndex = index; // Use .value to access or modify the value of a ref
 			} else {
 				this.selectedIndex = index; // Use .value to access or modify the value of a ref
 				console.log('url: ', url);
 				console.log('index: ', index);
 				if (url === '/home') {
+					// Ask the user if he actually wanted to click on 'Logout'
+					this.showAlertLogout();
 					// Page needs a full reload when pressing on 'Logout' and
 					// then go to /home, but I don´t know why
-					this.$router.push(url); //.then(() => window.location.reload());
+					//this.$router.push(url); //.then(() => window.location.reload());
 					//Clear storages when user logs out
-					localStorage.setItem('token', '');
-					localStorage.setItem('dataInBody', 'false');
-					localStorage.setItem('backButtonClicked', 'false');
-					// Call the log out method of the carecentive-framework, so that
-					// the token cookie gets deleted:
-					axios
-						.get(baseUrl + '/api/users/logout', { withCredentials: true })
-						.then((response) => {
-							console.log('Response:', response.data);
-						})
-						.catch((error) => {
-							console.error('Error:', error.response.data);
-						});
 				} else {
 					//Otherwise a normal router.push(url) is sufficient
 					this.$router.push(url);

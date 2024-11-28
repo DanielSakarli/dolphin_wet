@@ -332,13 +332,15 @@ export default {
 				// TESTING THE AUTHORIZATION HEADER
 				// Get the token from localStorage
 				const token = localStorage.getItem('token');
-
+				console.log('Token:', token);
+				const bearer = `Bearer ${token}`;
+				console.log('Bearer included in request:', bearer);
 				// Make the GET request with the Authorization header
 				await axios
 					.get(baseUrl + '/api/dolphins', {
 						withCredentials: true,
 						headers: {
-							Authorization: `Bearer ${token}`, // Include the Authorization header
+							Authorization: bearer, // Include the Authorization header
 						},
 					}) //////////////////////////////////////////////
 					.then((response) => {

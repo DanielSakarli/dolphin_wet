@@ -15,6 +15,11 @@ const { isUserAuth } = require('./authSwitch');
 const User = require('../carecentive/carecentive-core/models/User');
 //const { tr } = require('vuetify/locale');
 
+function formatCreatedAt(dateString) {
+    const date = new Date(dateString);
+    // Convert to ISO string, remove milliseconds, and replace 'Z' with ' UTC'
+    return date.toISOString().split('.')[0] + ' UTC';
+}
 
 async function csvWriter(req, res, next) {
 	try {
@@ -83,6 +88,7 @@ async function csvWriter(req, res, next) {
 
             // Manually append the CSV headers after the header note
             const csvHeaders = [
+                'Created At',
                 'Feeding Record ID',
                 'User ID',
                 'User Name',
@@ -104,7 +110,6 @@ async function csvWriter(req, res, next) {
                 'Body Weight Oscillation past 3 months [%]',
                 'Body Weight Oscillation past 12 months [%]',
                 'File Path',
-                'Created At'
             ].join(',') + '\n';
             
             fs.appendFileSync(savePath, csvHeaders);
@@ -137,6 +142,7 @@ async function csvWriter(req, res, next) {
                 path: savePath,
                 append: true,
                 header: [
+                    { id: 'created_at', title: 'Created At' },
                     { id: 'feeding_record_id', title: 'Feeding Record ID' },
                     { id: 'user_id', title: 'User ID' },
                     { id: 'user_name', title: 'User Name' },
@@ -158,7 +164,6 @@ async function csvWriter(req, res, next) {
                     { id: 'bwo_3_months', title: 'Body Weight Oscillation past 3 months [%]' },
                     { id: 'bwo_12_months', title: 'Body Weight Oscillation past 12 months [%]' },
                     { id: 'file_path', title: 'File Path' },
-                    { id: 'created_at', title: 'Created At' },
                 ]
             });
 /*
@@ -238,6 +243,7 @@ async function csvWriter(req, res, next) {
 
         // Manually append the CSV headers after the header note
         const csvHeaders = [
+            'Created At',
             'Housing Record ID',
             'User ID',
             'User Name',
@@ -260,8 +266,7 @@ async function csvWriter(req, res, next) {
             'Reflecting Colours',
             'Reflecting Colours Comments',
             'Acoustic Comfort',
-            'Acoustic Comfort Comments',
-            'Created At'
+            'Acoustic Comfort Comments'
         ].join(',') + '\n';
         
         fs.appendFileSync(savePath, csvHeaders);
@@ -297,6 +302,7 @@ async function csvWriter(req, res, next) {
             path: savePath,
             append: true,
             header: [
+                { id: 'created_at', title: 'Created At' },
                 { id: 'housing_record_id', title: 'Housing Record ID' },
                 { id: 'user_id', title: 'User ID' },
                 { id: 'user_name', title: 'User Name' },
@@ -320,7 +326,6 @@ async function csvWriter(req, res, next) {
                 { id: 'reflecting_colours_comments', title: 'Reflecting Colours Comments' },
                 { id: 'acoustic_comfort', title: 'Acoustic Comfort' },
                 { id: 'acoustic_comfort_comments', title: 'Acoustic Comfort Comments' },
-                { id: 'created_at', title: 'Created At' },
             ]
         });
 	}
@@ -335,6 +340,7 @@ async function csvWriter(req, res, next) {
 
         // Manually append the CSV headers after the header note
         const csvHeaders = [
+            'Created At',
             'Health Record ID',
             'User ID',
             'User Name',
@@ -371,8 +377,7 @@ async function csvWriter(req, res, next) {
             'Odontogramm Photo Path',
             'Marks Photo Path',
             'Silhouette Photo Path',
-            'Video Path',
-            'Created At'
+            'Video Path'
         ].join(',') + '\n';
         
         fs.appendFileSync(savePath, csvHeaders);
@@ -408,6 +413,7 @@ async function csvWriter(req, res, next) {
             path: savePath,
             append: true,
             header: [
+                { id: 'created_at', title: 'Created At' },
                 { id: 'health_record_id', title: 'Health Record ID' },
                 { id: 'user_id', title: 'User ID' },
                 { id: 'user_name', title: 'User Name' },
@@ -445,7 +451,6 @@ async function csvWriter(req, res, next) {
                 { id: 'marks_photo_path', title: 'Marks Photo Path' },
                 { id: 'silhouette_photo_path', title: 'Silhouette Photo Path' },
                 { id: 'video_path', title: 'Video Path' },
-                { id: 'created_at', title: 'Created At' },
             ]
         });
 		}
@@ -459,6 +464,7 @@ async function csvWriter(req, res, next) {
 
         // Manually append the CSV headers after the header note
         const csvHeaders = [
+            'Created At',
             'Behaviour Record ID',
             'User ID',
             'User Name',
@@ -493,8 +499,7 @@ async function csvWriter(req, res, next) {
             'Social Isolation',
             'Social Isolation Comments',
             'Avoidance Pool Areas',
-            'Avoidance Pool Areas Comments',
-            'Created At'
+            'Avoidance Pool Areas Comments'
         ].join(',') + '\n';
         
         fs.appendFileSync(savePath, csvHeaders);
@@ -530,6 +535,7 @@ async function csvWriter(req, res, next) {
             path: savePath,
             append: true,
             header: [
+                { id: 'created_at', title: 'Created At' },
                 { id: 'behaviour_record_id', title: 'Behaviour Record ID' },
                 { id: 'user_id', title: 'User ID' },
                 { id: 'user_name', title: 'User Name' },
@@ -565,7 +571,6 @@ async function csvWriter(req, res, next) {
                 { id: 'social_isolation_comments', title: 'Social Isolation Comments' },
                 { id: 'avoidance_pool_areas', title: 'Avoidance Pool Areas' },
                 { id: 'avoidance_pool_areas_comments', title: 'Avoidance Pool Areas Comments' },
-                { id: 'created_at', title: 'Created At' },
             ]
         });
 			}
@@ -579,6 +584,7 @@ async function csvWriter(req, res, next) {
 
 			// Manually append the CSV headers after the header note
 			const csvHeaders = [
+				'Created At',
 				'Mental State Record ID',
 				'User ID',
 				'User Name',
@@ -598,7 +604,6 @@ async function csvWriter(req, res, next) {
 				'Tail Slapping Comments',
 				'Choice and Control',
 				'Choice and Control Comments',
-				'Created At'
 			].join(',') + '\n';
 			
 			fs.appendFileSync(savePath, csvHeaders);
@@ -634,6 +639,7 @@ async function csvWriter(req, res, next) {
 				path: savePath,
 				append: true,
 				header: [
+                    { id: 'created_at', title: 'Created At' },
 					{ id: 'emotional_state_record_id', title: 'Mental State Record ID' },
 					{ id: 'user_id', title: 'User ID' },
 					{ id: 'user_name', title: 'User Name' },
@@ -653,14 +659,19 @@ async function csvWriter(req, res, next) {
 					{ id: 'tail_slapping_comments', title: 'Tail Slapping Comments' },
 					{ id: 'choice_and_control', title: 'Choice and Control' },
 					{ id: 'choice_and_control_comments', title: 'Choice and Control Comments' },
-					{ id: 'created_at', title: 'Created At' },
 				]
 				});
 			}
 
 	data.sort((a, b) => a.created_at - b.created_at);
 	console.log('data: ', ...data);
-
+    
+    // Format the created_at field for each record
+    data = data.map(record => {
+        record.created_at = formatCreatedAt(record.created_at);
+        return record;
+    });
+    
 	csvWriter
 		.writeRecords(data)
 		.then(async () => {

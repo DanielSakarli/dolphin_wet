@@ -31,7 +31,9 @@ export const globalizationList = {
 		//alertController:
 		confirmationHeader: 'Bestätigung',
 		confirmationMessage: 'Wollen Sie wirklich die Daten löschen?',
+		confirmationLogout: 'Wollen Sie sich wirklich ausloggen?',
 		stayOnPage: 'Auf Seite bleiben',
+		stayLoggedIn: 'Eingeloogt bleiben',
 		loseData: 'Daten löschen',
 		dataCurrent: 'Sind die eingetragenen Daten aktuell?',
 		enterDate: 'Geben Sie das Datum ein',
@@ -58,6 +60,8 @@ export const globalizationList = {
 		fileSize: 'Gesamte Datei(en)größe: ',
 		eyePhotos: 'Laden Sie hier die Augenfotos hoch',
 		teethPhotos: 'Laden Sie hier die Zahnfotos hoch',
+		getOdontogramm: 'Laden Sie hier das Odontogramm Template herunter',
+		getOdontogrammText: 'Odontogramm',
 		odontogrammPhotos: 'Laden Sie hier die Odontogramme hoch',
 		rakeMarksPhotos: 'Laden Sie hier die Rake Marks Fotos hoch',
 		calfRemark: 'Nichts anklicken, falls Delfin kein Kalb hat!',
@@ -379,10 +383,10 @@ export const globalizationList = {
 			'Fehlen früherer Anzeichen/Krankheiten in den Aufzeichnungen während der letzten 3 Monate',
 		score2Health13:
 			'Frühere Anzeichen/Krankheiten in den Aufzeichnungen während der letzten 3 Monate',
-		rakeMarksScoringMale:
-			'Silhouette für männliche Delfine zum Einzeichnen der Rake Marks',
-		rakeMarksScoringFemale:
-			'Silhouette für weibliche Delfine zum Einzeichnen der Rake Marks',
+		rakeMarksScoring: 'Laden Sie hier Ihre Silhouetten hoch.',
+		rakeMarksScoringTitle:
+			'Silhouette für Delfine zum Einzeichnen der Rake Marks',
+
 		/////// END OF HEALTH /////////
 		///////////////////////////////
 
@@ -497,7 +501,7 @@ export const globalizationList = {
 		thirdSubCriteriaBehaviour: 'Spielverhalten',
 		fourthSubCriteriaBehaviour: 'Sozio-sexuelles Verhalten',
 		fifthSubCriteriaBehaviour: 'Mütterliches Verhalten',
-		sixthSubCriteriaBehaviour: 'Verdrängungsverhalten',
+		sixthSubCriteriaBehaviour: 'Übersprungshandlung',
 		seventhSubCriteriaBehaviour: 'Orales stereotypes Verhalten',
 		eighthSubCriteriaBehaviour: 'Repetitive Verhaltensweisen',
 		ninthSubCriteriaBehaviour:
@@ -718,7 +722,9 @@ export const globalizationList = {
 		//alertController:
 		confirmationHeader: 'Confirmation',
 		confirmationMessage: 'Are you sure that you want to delete the data?',
+		confirmationLogout: 'Are you sure that you want to log out?',
 		stayOnPage: 'Stay on page',
+		stayLoggedIn: 'Stay logged in',
 		loseData: 'Delete data',
 		dataCurrent: 'Is the data you entered current?',
 		enterDate: 'Enter the date',
@@ -746,6 +752,8 @@ export const globalizationList = {
 		fileSize: 'Total file size: ',
 		eyePhotos: 'Upload your eye photos here',
 		teethPhotos: 'Upload your teeth photos here',
+		getOdontogramm: 'Download the odontogramm template here',
+		getOdontogrammText: 'Get odontogramm',
 		odontogrammPhotos: 'Upload your odontogramm here',
 		rakeMarksPhotos: 'Upload your rake mark photos here',
 		calfRemark: 'Do not click any checkbox if the dolphin has no calf!',
@@ -1409,7 +1417,9 @@ export const globalizationList = {
 		//alertController:
 		confirmationHeader: 'Confirmation',
 		confirmationMessage: 'Are you sure that you want to delete the data?',
+		confirmationLogout: 'Are you sure that you want to log out?',
 		stayOnPage: 'Stay on page',
+		stayLoggedIn: 'Stay logged in',
 		loseData: 'Delete data',
 		dataCurrent: 'Is the data you entered current?',
 		enterDate: 'Enter the date',
@@ -1437,6 +1447,8 @@ export const globalizationList = {
 		fileSize: 'Total file size: ',
 		eyePhotos: 'Upload your eye photos here',
 		teethPhotos: 'Upload your teeth photos here',
+		getOdontogramm: 'Download the odontogramm template here',
+		getOdontogrammText: 'Get odontogramm',
 		odontogrammPhotos: 'Upload your odontogramm here',
 		rakeMarksPhotos: 'Upload your rake mark photos here',
 		calfRemark: 'Do not click any checkbox if the dolphin has no calf!',
@@ -1758,9 +1770,8 @@ export const globalizationList = {
 		score2Health13:
 			'Evidencia de signos o enfermedades previos en los registros durante los últimos 3 meses',
 		rakeMarksScoring: 'Sube tus dibujos de siluetas aquí',
-		rakeMarksScoringMale: 'Silueta para dibujar ‘rake marks’ en delfines macho',
-		rakeMarksScoringFemale:
-			'Silueta para dibujar ‘rake marks’ en delfines hembra',
+		rakeMarksScoringTitle: 'Silhouette for dolphins to draw the rake marks',
+
 		/////// END OF HEALTH /////////
 		///////////////////////////////
 

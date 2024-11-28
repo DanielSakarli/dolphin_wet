@@ -553,6 +553,23 @@
 			"
 		>
 			<ion-card-title class="card-title" style="margin-bottom: 15px">{{
+				$t('getOdontogramm')
+			}}</ion-card-title>
+			<ion-item>
+				<ion-button type="button" fill="clear" @click="getOdontogramm">
+					<ion-icon slot="start" :icon="download"></ion-icon>
+					{{ $t('getOdontogrammText') }}
+				</ion-button>
+			</ion-item>
+		</ion-card>
+		<ion-card
+			v-if="
+				dolphinSelect &&
+				dolphinSelect.length !== 0 &&
+				criteria === 'thirdCriteriaHealth'
+			"
+		>
+			<ion-card-title class="card-title" style="margin-bottom: 15px">{{
 				$t('odontogrammPhotos')
 			}}</ion-card-title>
 			<ion-item>

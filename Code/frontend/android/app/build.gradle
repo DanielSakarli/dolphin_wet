@@ -7,7 +7,7 @@ android {
         applicationId "com.dolphinwet.app"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion 34 //rootProject.ext.targetSdkVersion
-        versionCode 7
+        versionCode 8
         versionName "1.0.3"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         aaptOptions {
