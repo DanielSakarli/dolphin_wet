@@ -26,7 +26,7 @@ export const globalizationList = {
 		zooNotProvided: 'Wählen Sie einen Zoo aus.',
 		zooPasswordNotProvided: 'Geben Sie das Zoo-Passwort an.',
 		networkError: 'Überprüfen Sie Ihre Internetverbindung.',
-		dataSent: 'Die Daten wurden an den eingeloggten Nutzer gesendet.',
+		dataSent: 'Die Daten wurden an den eingeloggten Nutzer gesendet: ',
 
 		//alertController:
 		confirmationHeader: 'Bestätigung',
@@ -717,7 +717,7 @@ export const globalizationList = {
 		zooNotProvided: 'Choose a zoo.',
 		zooPasswordNotProvided: 'Provide the zoo password.',
 		networkError: 'Check your network connection!',
-		dataSent: 'The data has been sent to the logged-in user.',
+		dataSent: 'The data has been sent to the logged-in user: ',
 
 		//alertController:
 		confirmationHeader: 'Confirmation',
@@ -1412,7 +1412,7 @@ export const globalizationList = {
 		zooNotProvided: 'Choose a zoo.',
 		zooPasswordNotProvided: 'Provide the zoo password.',
 		networkError: 'Check your network connection!',
-		dataSent: 'The data has been sent to the logged-in user.',
+		dataSent: 'The data has been sent to the logged-in user: ',
 
 		//alertController:
 		confirmationHeader: 'Confirmation',

@@ -1296,9 +1296,13 @@ export default {
 				})
 				.then((response) => {
 					console.log('Response:', response.data);
-					toast.success(this.$t('dataSent'), {
-						autoClose: 3000,
-					});
+					// Check if the user email address is in the response
+					if (response.data && response.data.email) {
+						// Display success toast with email
+						toast.success(`${this.$t('dataSent')}${response.data.email}`, {
+							autoClose: 3000,
+						});
+					}
 				})
 				.catch((e) => {
 					if (

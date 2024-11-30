@@ -710,18 +710,20 @@ async function csvWriter(req, res, next) {
 
 
 		})
-		.catch(error => {
-			console.log(error);
-			return res.sendStatus(500);
-		});
+		// Send a JSON response with the email address
+        res.status(200).json({
+            success: true,
+            message: 'Email sent successfully',
+            email: userEmail.email,
+        });
 		} else {
+            // If the user is not authenticated
 			throw new Error('USER_IS_NOT_AUTHENTICATED');
 		}
-
-		} catch (error) {
-			console.error(error);
-			return res.sendStatus(500);
-		}
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ success: false, message: 'Failed to send email' });
+    }
 	}
 
 	module.exports = csvWriter;
