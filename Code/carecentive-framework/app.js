@@ -272,7 +272,14 @@ app.use('/api/redis_storage', redis_storage);
 // For example eye, teeth, odontogramm, or rake mark image files
 app.use('/api/images', express.static(path.join(__dirname,'uploads/images'))); //gets the images with the url http://localhost:3309/images/ + filename
 // Laboratory data files: e.g. food quality
-app.use('/api/files', express.static(path.join(__dirname,'uploads/files'))); //gets the files with the url http://localhost:3309/files/ + filename
+//app.use('/api/files', express.static(path.join(__dirname,'uploads/files'))); //gets the files with the url http://localhost:3309/files/ + filename
+app.use('/api/files', (req, res, next) => {
+    res.setHeader('Content-Disposition', 'attachment');
+    res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate'); // Optional: disable caching
+    res.setHeader('Pragma', 'no-cache');
+    res.setHeader('Expires', '0');
+    next();
+}, express.static(path.join(__dirname, 'uploads/files')));
 // Video files
 app.use('/api/videos', express.static(path.join(__dirname,'uploads/videos'))); //gets the videos with the url http://localhost:3309/videos/ + filename
 
